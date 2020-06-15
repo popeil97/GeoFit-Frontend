@@ -1,0 +1,37 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: fixed;
+top: 0;
+width: 100%;
+z-index: 1;">
+  <!-- Brand -->
+  <!-- <a class="navbar-brand" href="#">GeoFit</a>
+
+  <div class="navbar-header"> -->
+    <a class="navbar-brand" routerLink='/'>
+        <img src="assets/landing/GEOFITCLUB_Orange_Logo_Icon.png">GeoFit Club
+      </a>
+
+
+  <!-- Toggler/collapsibe Button -->
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button> -->
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" routerLink='/races'>Races</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink='/users'>Users</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
+      </li>
+
+
+    </ul>
+  </div>
+</nav>
+

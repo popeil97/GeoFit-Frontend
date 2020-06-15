@@ -1,0 +1,43 @@
+.single-stats{
+	color: black;
+  text-align: center;
+}
+
+.single-stats i{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top:10px;
+	padding-bottom:0px;
+	color: black;
+}
+
+.single-stats h2{
+  font-weight: bold;
+  font-size: 2.5vw;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top:0px;
+	padding-bottom:0px;
+	color: black;
+}
+
+.single-stats p{
+  font-size: 2.5vw;
+	color: black;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top:0px;
+	padding-bottom:10px;
+}
+
+.footer-container {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    opacity: 0.8;
+    z-index: 500;
+    width: 100%;
+    background-color: white;
+    color: white;
+    text-align: center;
+ }

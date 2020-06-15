@@ -1,0 +1,149 @@
+<!-- <app-map></app-map> -->
+<div>
+
+
+<mat-sidenav-container>
+  <mat-sidenav md-disable-backdrop='true' opened>Start</mat-sidenav>
+  <mat-sidenav-content>
+    <app-map></app-map>
+
+    <a class="btn btn-primary btn-customized open-menu" href="#" role="button">
+      <i class="fas fa-align-left"></i> <span>Menu</span>
+  </a>
+
+  <a class="btn btn-primary btn-customized activitiestoggle" data-toggle="modal" data-target="#activitiesModal" (click)="showModal('#activitiesModal')">
+      <span style="color:white">Import Activities</span>
+      <span class="badge badge-light"></span>
+    </a>
+
+<a class="btn btn-primary btn-customized leaderboardtoggle" data-toggle="modal" data-target="#leaderboardModal" (click)="showModal('#leaderboardModal')">
+    <span style="color:white">Leaderboard</span>
+  </a>
+
+<a class="btn btn-primary btn-customized inviteToggle" data-toggle="modal" data-target="#inviteModal" (click)="showModal('#inviteModal')">
+  <span style="color:white">Invite</span>
+</a>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+<!-- Wrapper -->
+
+    <!-- open sidebar menu -->
+
+</div>
+
+<div class="modal fade" id="activitiesModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Select Activities You'd Like to Apply Towards This Race</h4>
+        <button type="button" class="close" (click)="hideModal('#activitiesModal')">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <table class="actsTable table table-striped" id='activities_table'>
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col"></th>
+              <th scope="col"></th>
+
+            </tr>
+          </thead>
+          <tbody>
+              <tr class="activityRow" *ngFor="let act of activities">
+                  <td scope="row">{{act.name}}</td>
+                  <td>{{act.converted_dist}} {{ act.distance_type }}</td>
+                  <td>{{act.start_date}}</td>
+                </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="sendModal()" >Send</button>
+        <button type="button" class="btn btn-danger" (click)="hideModal('#activitiesModal')">Close</button>
+
+        <!-- this button is hidden, used to close from typescript -->
+        <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="leaderboardModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Leaderboard</h4>
+        <button type="button" class="close" (click)="hideModal('#leaderboardModal')">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="sendModal()" >Send</button>
+        <button type="button" class="btn btn-danger" (click)="hideModal('#leaderboardModal')">Close</button>
+
+        <!-- this button is hidden, used to close from typescript -->
+        <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="inviteModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Invite Followers!</h4>
+        <button type="button" class="close" (click)="hideModal('#inviteModal')">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <table class="table table-striped" id='invite_table'>
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col"></th>
+
+            </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let follower of followers">
+                  <td><img src="#" width="50px" height="50px"></td>
+                  <td scope="row">{{follower.first_name}} {{follower.last_name}}</td>
+                  <td></td>
+                  <td></td>
+                </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="sendModal()" >Send</button>
+        <button type="button" class="btn btn-danger" (click)="hideModal('#inviteModal')">Close</button>
+
+        <!-- this button is hidden, used to close from typescript -->
+        <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+
+<app-user-progress></app-user-progress>

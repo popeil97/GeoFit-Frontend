@@ -1,0 +1,144 @@
+<br>
+<br>
+<br>
+<br>
+<br>
+<div class="container">
+  <a type="button" class="btn btn-primary" style="float:right" href="#">Create Race</a>
+  <ul class="nav nav-pills">
+
+      <li class="nav-item">
+        <a class="nav-link active" id='races_user' onclick="toggle_pill('races_user')" href="#">Your Races <span class="badge badge-dark"></span></a>
+
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" id='races_invited' onclick="toggle_pill('races_invited')" href="#">Invited Races <span class="badge badge-dark"></span></a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" id='races_all' onclick="toggle_pill('races_all')" href="#">Public Races <span class="badge badge-dark"></span></a>
+      </li>
+  </ul>
+  <table class="table table-striped table-dark" style="display:none;" id='races_all_view'>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Distance</th>
+        <th scope="col">Start Loc</th>
+        <th scope="col">End Loc</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+
+            <td>
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-raceid="" data-name="" data-redirect="" >Join!</button>
+            </td>
+
+            <td>
+                <button type="button" class="btn btn-secondary" disabled>Joined</button>
+            </td>
+
+            <td>
+              <a href="#" type="button" class="btn btn-secondary">View</a>
+          </td>
+
+          </tr>
+    </tbody>
+  </table>
+
+
+  <table class="table table-striped table-dark" id='races_user_view'>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Distance</th>
+        <th scope="col">Start Loc</th>
+        <th scope="col">End Loc</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+            <td>
+                <a href="" type="button" class="btn btn-secondary">View</a>
+            </td>
+          </tr>
+    </tbody>
+  </table>
+
+  <table class="table table-striped table-dark" style="display:none;" id='races_invited_view'>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Distance</th>
+        <th scope="col">Start Loc</th>
+        <th scope="col">End Loc</th>
+        <th scope="col">Start Date</th>
+        <th scope="col">End Date</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+
+            <td>
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-raceid="" data-name="">Join!</button>
+            </td>
+
+
+            <td>
+              <a href="" type="button" class="btn btn-secondary">View</a>
+            </td>
+
+
+
+          </tr>
+    </tbody>
+  </table>
+</div>
+
+<p> Click 'Your Races' to View the races you have joined.</p>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" id='joinBtn'>Join</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
