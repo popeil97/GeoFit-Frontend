@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as bootstrap from "bootstrap";
+import { RaceService } from '../race.service';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 declare var $: any
 
 @Component({
@@ -11,12 +13,18 @@ export class RaceViewComponent implements OnInit {
 
   public followers:any[];
   public activities:any[];
+  private raceName:string;
+  private modalData:any;
 
-  constructor() { 
-    
+  constructor(private raceService:RaceService,private route: ActivatedRoute) { 
+    this.modalData = {};
   }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.raceName = params['params']['name'];
+    });
+
     this.followers = [{
       first_name:'Nathan',
       last_name:'Cunt'

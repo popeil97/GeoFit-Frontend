@@ -3,11 +3,11 @@
 
 
 <mat-sidenav-container>
-  <mat-sidenav md-disable-backdrop='true' opened>Start</mat-sidenav>
+  <mat-sidenav md-disable-backdrop='true' #menu mode="side">Start</mat-sidenav>
   <mat-sidenav-content>
     <app-map></app-map>
 
-    <a class="btn btn-primary btn-customized open-menu" href="#" role="button">
+    <a class="btn btn-primary btn-customized open-menu" role="button" (click)="menu.toggle()">
       <i class="fas fa-align-left"></i> <span>Menu</span>
   </a>
 

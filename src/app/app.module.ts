@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import * as bootstrap from 'bootstrap';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,8 @@ import { RaceMenuComponent } from './race-menu/race-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { PopUpService } from './pop-up.service';
+import { RaceService } from './race.service';
+import { RaceCreateComponent } from './race-create/race-create.component';
 
 
 @NgModule({
@@ -28,15 +31,18 @@ import { PopUpService } from './pop-up.service';
     RaceViewComponent,
     UserProgressComponent,
     RaceMenuComponent,
+    RaceCreateComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    HttpClientModule,
   ],
   providers: [
-    PopUpService
+    PopUpService,
+    RaceService,
   ],
   bootstrap: [AppComponent]
 })

@@ -4,7 +4,7 @@
 <br>
 <br>
 <div class="container">
-  <a type="button" class="btn btn-primary" style="float:right" href="#">Create Race</a>
+  <a type="button" class="btn btn-primary" style="float:right" routerLink='/create'>Create Race</a>
   <ul class="nav nav-pills">
 
       <li class="nav-item">
@@ -32,13 +32,13 @@
       </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row"></th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr *ngFor="let race of races">
+            <th scope="row">{{race.name}}</th>
+            <td>{{race.distance}} {{race.distance_type}}</td>
+            <td>{{race.start_loc}}</td>
+            <td>{{race.end_loc}}</td>
+            <td>{{race.start_date}}</td>
+            <td>{{race.end_date}}</td>
 
 
             <td>
@@ -70,16 +70,16 @@
       </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row"></th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+      <tr *ngFor="let race of races">
+        <th scope="row">{{race.name}}</th>
+        <td>{{race.distance}} {{race.distance_type}}</td>
+        <td>{{race.start_loc}}</td>
+        <td>{{race.end_loc}}</td>
+        <td>{{race.start_date}}</td>
+        <td>{{race.end_date}}</td>
 
             <td>
-                <a href="" type="button" class="btn btn-secondary">View</a>
+                <a type="button" class="btn btn-secondary" (click)="viewRace(race)">View</a>
             </td>
           </tr>
     </tbody>

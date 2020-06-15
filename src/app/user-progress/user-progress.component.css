@@ -31,7 +31,8 @@
 }
 
 .footer-container {
-    position: absolute;
+	position: absolute;
+	padding: 20px;
     left: 0;
     bottom: 0;
     opacity: 0.8;
