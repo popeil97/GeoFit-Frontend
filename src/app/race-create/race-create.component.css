@@ -617,10 +617,6 @@ mat-sidenav, mat-sidenav-content {
 
 mat-sidenav {
     background-color: #403D58;
-    opacity: 0.4;
+    opacity: 0.8;
     width: 300px;
-}
-
-.mat-drawer-backdrop.mat-drawer-shown {
-    background: none;
 }
