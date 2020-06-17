@@ -27,16 +27,8 @@ export class RaceService {
     //  {name: 'Race3', distance:37.4, distance_type: 'Mi', start_date: '06/11/2020', end_date: '07/11/2020', id:3, start_loc:'Ocala, FL', end_loc:'Gainesville, FL'},
     //  {name: 'Race4', distance:37.4, distance_type: 'Mi', start_date: '06/11/2020', end_date: '07/11/2020', id:4, start_loc:'Ocala, FL', end_loc:'Gainesville, FL'},
     // ];
-    var races;
 
-    this.http.get('http://localhost:8000/races/').subscribe(
-      data => {
-        console.log(data);
-      },
-      err => {
-        console.log("errors: ", err);
-      },
-    );
+    return this.http.get('http://localhost:8000/races/')
   }
 
   setRace(raceID:number) {
@@ -45,6 +37,11 @@ export class RaceService {
 
   getRace() {
     return this.selectedRaceID;
+  }
+
+  joinRace(race_id:number) {
+    console.log('service API attempt:',race_id);
+    return this.http.post('http://localhost:8000/api/join',{race_id:race_id});
   }
 
 

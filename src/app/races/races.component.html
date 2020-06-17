@@ -8,19 +8,18 @@
   <ul class="nav nav-pills">
 
       <li class="nav-item">
-        <a class="nav-link active" id='races_user' onclick="toggle_pill('races_user')" href="#">Your Races <span class="badge badge-dark"></span></a>
-
+        <a class="nav-link" [ngClass]="{'active':isUserRaces}" id='races_user' (click)="toggle_pill('user')">Your Races <span class="badge badge-dark"></span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" id='races_invited' onclick="toggle_pill('races_invited')" href="#">Invited Races <span class="badge badge-dark"></span></a>
+        <a class="nav-link" [ngClass]="{'active':isInvitedRaces}" id='races_invited' (click)="toggle_pill('invited')">Invited Races <span class="badge badge-dark"></span></a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" id='races_all' onclick="toggle_pill('races_all')" href="#">Public Races <span class="badge badge-dark"></span></a>
+        <a class="nav-link" [ngClass]="{'active':isPublicRaces}" id='races_all' (click)="toggle_pill('all')">Public Races <span class="badge badge-dark"></span></a>
       </li>
   </ul>
-  <table class="table table-striped table-dark" style="display:none;" id='races_all_view'>
+  <table class="table table-striped table-dark" id='races_all_view' *ngIf="isPublicRaces">
     <thead>
       <tr>
         <th scope="col">Name</th>
@@ -42,23 +41,15 @@
 
 
             <td>
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-raceid="" data-name="" data-redirect="" >Join!</button>
+                <button type="button" class="btn btn-secondary" (click)="joinRace(race)" data-toggle="modal" data-target="#exampleModal" data-raceid="" data-name="" data-redirect="" >Join!</button>
             </td>
-
-            <td>
-                <button type="button" class="btn btn-secondary" disabled>Joined</button>
-            </td>
-
-            <td>
-              <a href="#" type="button" class="btn btn-secondary">View</a>
-          </td>
 
           </tr>
     </tbody>
   </table>
 
 
-  <table class="table table-striped table-dark" id='races_user_view'>
+  <table class="table table-striped table-dark" id='races_user_view' *ngIf="isUserRaces">
     <thead>
       <tr>
         <th scope="col">Name</th>
@@ -70,7 +61,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let race of races">
+      <tr *ngFor="let race of userRaces">
         <th scope="row">{{race.name}}</th>
         <td>{{race.distance}} {{race.distance_type}}</td>
         <td>{{race.start_loc}}</td>
@@ -78,14 +69,14 @@
         <td>{{race.start_date}}</td>
         <td>{{race.end_date}}</td>
 
-            <td>
-                <a type="button" class="btn btn-secondary" (click)="viewRace(race)">View</a>
-            </td>
-          </tr>
+        <td>
+            <a type="button" class="btn btn-secondary" (click)="viewRace(race)">View</a>
+        </td>
+      </tr>
     </tbody>
   </table>
 
-  <table class="table table-striped table-dark" style="display:none;" id='races_invited_view'>
+  <table class="table table-striped table-dark" id='races_invited_view' *ngIf="isInvitedRaces">
     <thead>
       <tr>
         <th scope="col">Name</th>
@@ -97,23 +88,17 @@
       </tr>
     </thead>
     <tbody>
-        <tr>
-            <th scope="row"></th>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        <tr *ngFor="let race of racesInvited">
+          <th scope="row">{{race.name}}</th>
+          <td>{{race.distance}} {{race.distance_type}}</td>
+          <td>{{race.start_loc}}</td>
+          <td>{{race.end_loc}}</td>
+          <td>{{race.start_date}}</td>
+          <td>{{race.end_date}}</td>
 
             <td>
                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-raceid="" data-name="">Join!</button>
             </td>
-
-
-            <td>
-              <a href="" type="button" class="btn btn-secondary">View</a>
-            </td>
-
 
 
           </tr>
