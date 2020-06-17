@@ -17,7 +17,7 @@ export class RacesComponent implements OnInit {
   ngOnInit() {
     console.log('in races');
 
-    this.races = this.raceService.getRaces({});
+    this.raceService.getRaces({});
 
     console.log(this.races);
   }
