@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import * as bootstrap from 'bootstrap';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -18,6 +18,19 @@ import { MaterialModule } from './material/material.module';
 import { PopUpService } from './pop-up.service';
 import { RaceService } from './race.service';
 import { RaceCreateComponent } from './race-create/race-create.component';
+import { FormsModule } from '@angular/forms';
+import {UserService} from './users/users.service';
+import {TokenInterceptorService} from './users/tokeninterceptorservice';
+import { StravauthService } from './stravauth/stravauth.service';
+
+import {
+  HttpRequest,
+  HttpHandler,
+  HttpEvent,
+  HttpInterceptor
+} from '@angular/common/http';
+import { StravauthComponent } from './stravauth/stravauth.component';
+import { fromEventPattern } from 'rxjs';
 
 
 @NgModule({
@@ -32,6 +45,7 @@ import { RaceCreateComponent } from './race-create/race-create.component';
     UserProgressComponent,
     RaceMenuComponent,
     RaceCreateComponent,
+    StravauthComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,10 +53,14 @@ import { RaceCreateComponent } from './race-create/race-create.component';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [
     PopUpService,
     RaceService,
+    UserService,
+    {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
+    StravauthService,
   ],
   bootstrap: [AppComponent]
 })

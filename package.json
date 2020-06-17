@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
@@ -27,6 +27,7 @@
     "@types/leaflet": "^1.5.12",
     "bootstrap": "^4.5.0",
     "core-js": "^2.5.4",
+    "cors": "^2.8.5",
     "jquery": "^3.5.1",
     "leaflet": "^1.6.0",
     "popper.js": "^1.16.0",
