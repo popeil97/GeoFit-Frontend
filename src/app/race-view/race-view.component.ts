@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import * as bootstrap from "bootstrap";
 import { RaceService } from '../race.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Progress } from '../user-progress/user-progress.component';
+import { ActivitiesService } from '../activities.service';
 declare var $: any
 
 @Component({
@@ -14,15 +16,35 @@ export class RaceViewComponent implements OnInit {
   public followers:any[];
   public activities:any[];
   private raceName:string;
+  private raceID:number;
   private modalData:any;
+  public progress:Progress;
+  public actsToImport:number[] = [];
+  public loading:Boolean = false;
+  public coords:any;
 
-  constructor(private raceService:RaceService,private route: ActivatedRoute) { 
+  constructor(private raceService:RaceService,private activitiesService:ActivitiesService,private route: ActivatedRoute) { 
     this.modalData = {};
   }
 
   ngOnInit() {
+    this.loading = true;
     this.route.paramMap.subscribe(params => {
       this.raceName = params['params']['name'];
+      this.raceID = params['params']['id'];
+    });
+
+    this.raceService.getRace(this.raceID).subscribe(data => {
+      
+      let raceData = data as RaceData;
+      console.log('RACE DATA:',raceData);
+      this.progress = raceData.progress;
+      this.activities = raceData.activities;
+      this.coords = {coords:raceData.coords};
+
+      console.log('COORDS:',this.coords);
+
+      this.loading = false;
     });
 
     this.followers = [{
@@ -34,20 +56,7 @@ export class RaceViewComponent implements OnInit {
       last_name:'DonaHOE'
     }];
 
-    this.activities = [
-      {
-        name:'Act 1',
-        distance_type:'Mi',
-        converted_dist:23,
-        start_date:'06/11/2020'
-      },
-      {
-        name:'Act 2',
-        distance_type:'Mi',
-        converted_dist:27,
-        start_date:'06/12/2020'
-      }
-    ]
+    
   }
 
   showModal(id:string): void {
@@ -58,4 +67,31 @@ export class RaceViewComponent implements OnInit {
     ($(id) as any).modal('hide');
   }
 
+  importActs(): void {
+    console.log(this.actsToImport);
+    this.loading = true;
+    this.activitiesService.importActivities(this.actsToImport,this.raceID).then((res) => {
+      console.log(res);
+    })
+  }
+
+  addAct(act:any): void {
+    let actID = act.id;
+    let index = this.actsToImport.indexOf(actID);
+    if(index >= 0) {
+      this.actsToImport.splice(index,1);
+    }
+    else {
+      this.actsToImport.push(actID);
+    }
+
+    console.log(this.actsToImport);
+  }
+
+}
+
+interface RaceData {
+  progress:any;
+  activities:any;
+  coords:any;
 }

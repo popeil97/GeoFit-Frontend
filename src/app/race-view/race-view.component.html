@@ -1,11 +1,11 @@
 <!-- <app-map></app-map> -->
 <div>
 
-
+<app-loader [isActive]="loading"></app-loader>
 <mat-sidenav-container>
   <mat-sidenav md-disable-backdrop='true' #menu mode="side">Start</mat-sidenav>
   <mat-sidenav-content>
-    <app-map></app-map>
+    <app-map [coordinates]="coords"></app-map>
 
     <a class="btn btn-primary btn-customized open-menu" role="button" (click)="menu.toggle()">
       <i class="fas fa-align-left"></i> <span>Menu</span>
@@ -53,9 +53,9 @@
             </tr>
           </thead>
           <tbody>
-              <tr class="activityRow" *ngFor="let act of activities">
+              <tr class="activityRow" *ngFor="let act of activities" (click)="addAct(act)">
                   <td scope="row">{{act.name}}</td>
-                  <td>{{act.converted_dist}} {{ act.distance_type }}</td>
+                  <td>{{act.converted_dist}} {{ progress.distance_type }}</td>
                   <td>{{act.start_date}}</td>
                 </tr>
           </tbody>
@@ -64,7 +64,7 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="sendModal()" >Send</button>
+        <button type="button" class="btn btn-primary" (click)="importActs()" >Import</button>
         <button type="button" class="btn btn-danger" (click)="hideModal('#activitiesModal')">Close</button>
 
         <!-- this button is hidden, used to close from typescript -->
@@ -146,4 +146,4 @@
     
 
 
-<app-user-progress></app-user-progress>
+<app-user-progress [progress]="progress"></app-user-progress>

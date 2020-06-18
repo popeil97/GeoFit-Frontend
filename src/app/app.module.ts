@@ -32,6 +32,7 @@ import {
 } from '@angular/common/http';
 import { StravauthComponent } from './stravauth/stravauth.component';
 import { fromEventPattern } from 'rxjs';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
@@ -48,6 +49,7 @@ import { fromEventPattern } from 'rxjs';
     RaceCreateComponent,
     LeaderboardComponent,
     StravauthComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,

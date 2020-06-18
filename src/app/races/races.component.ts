@@ -19,6 +19,8 @@ export class RacesComponent implements OnInit {
   public isPublicRaces:Boolean;
   public joinedRacesIDs:number[];
 
+  public loading:Boolean = false;
+
   constructor(private raceService: RaceService, private router:Router) { }
 
   ngOnInit() {
@@ -45,19 +47,18 @@ export class RacesComponent implements OnInit {
 
     // set race in race service
 
-    this.raceService.setRace(race.id);
-
-    this.router.navigate(['/race',{name:race.name}]);
+    this.router.navigate(['/race',{name:race.name,id:race.id}]);
   }
 
   joinRace(race:any) {
+    this.loading = true;
     let race_id = race.id;
     console.log('attemptiong to join race:',race);
-    this.raceService.joinRace(race_id).subscribe(
-      data=> {
-        console.log('RECEIVED FROM JOIN:',data);
-      }
-    )
+    this.raceService.joinRace(race_id).then((res) => {
+      console.log('RES FROM JOIN:',res);
+      this.loading = false;
+      this.router.navigate(['/race',{name:race.name,id:race.id}]);
+    });
   }
 
   toggle_pill(pill_type:string) {
@@ -79,9 +80,6 @@ export class RacesComponent implements OnInit {
       this.isInvitedRaces = false;
     }
 
-    console.log('isPublicRaces:',this.isPublicRaces);
-    console.log('isInvitedRaces:',this.isInvitedRaces);
-    console.log('isUserRaces:',this.isUserRaces);
   }
 
 }

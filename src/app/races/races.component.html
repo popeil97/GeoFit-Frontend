@@ -3,6 +3,7 @@
 <br>
 <br>
 <br>
+<app-loader [isActive]="loading"></app-loader>
 <div class="container">
   <a type="button" class="btn btn-primary" style="float:right" routerLink='/create'>Create Race</a>
   <ul class="nav nav-pills">
@@ -41,7 +42,7 @@
 
 
             <td>
-                <button type="button" class="btn btn-secondary" (click)="joinRace(race)" data-toggle="modal" data-target="#exampleModal" data-raceid="" data-name="" data-redirect="" >Join!</button>
+                <button type="button" class="btn btn-secondary" (click)="joinRace(race)">Join!</button>
             </td>
 
           </tr>
@@ -97,8 +98,8 @@
           <td>{{race.end_date}}</td>
 
             <td>
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#exampleModal" data-raceid="" data-name="">Join!</button>
-            </td>
+              <button type="button" class="btn btn-secondary" (click)="joinRace(race)">Join!</button>
+          </td>
 
 
           </tr>
@@ -110,7 +111,7 @@
 
 
     <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -121,7 +122,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id='joinBtn'>Join</button>
+          <button type="button" class="btn btn-primary" id='joinBtn' (click)="joinRace(race)">Join</button>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import * as L from 'leaflet';
 import { PopUpService } from '../pop-up.service';
 import * as _ from 'lodash';
@@ -8,7 +8,7 @@ import * as _ from 'lodash';
   templateUrl: './map.component.html',
   styleUrls: ['./map.component.css']
 })
-export class MapComponent implements AfterViewInit {
+export class MapComponent implements AfterViewInit,OnChanges {
   @Input() coordinates;
   @Input() draw:Boolean;
   @Input() displayUsers:Boolean;
@@ -18,18 +18,31 @@ export class MapComponent implements AfterViewInit {
 
   constructor(private popupService:PopUpService) { }
 
-  ngAfterViewInit(): void {
-
-    
-    
-
-    this.initMap();
-
-    if(!this.coordinates) {
-      return;
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('changes:',changes);
+    for(const propName in changes) {
+      console.log(propName);
+      if(changes.hasOwnProperty(propName)) {
+        switch(propName) {
+          case 'coordinates':
+            console.log('COORDS CHANGED');
+            if(changes.coordinates.currentValue != undefined) {
+              this.applyCoordinates();
+            }
+        }
+      }
     }
+  }
+
+
+  ngAfterViewInit(): void {
+    this.initMap();
+  }
+
+  private applyCoordinates():void {
 
     console.log('GOT COORDINATES:',this.coordinates.coords);
+    console.log('MAP:',this.map);
 
     // doing this temporarily because Lat/Lon are reversed smh
     _.forEach(this.coordinates.coords,(coord) => {
@@ -68,10 +81,6 @@ export class MapComponent implements AfterViewInit {
       weight: 8,
       opacity: 0.65
     }).addTo(this.map);
-
-
-    
-    
   }
 
 
