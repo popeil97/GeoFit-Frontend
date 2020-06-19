@@ -618,9 +618,13 @@ mat-sidenav, mat-sidenav-content {
 mat-sidenav {
     background-color: #403D58;
     opacity: 1;
-    width: 300px;
+    width: 350px;
 }
 
 .mat-drawer-backdrop.mat-drawer-shown {
     background: none;
+}
+
+::ng-deep.mat-tab-link,  ::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
+  min-width: 97px!important;
 }
