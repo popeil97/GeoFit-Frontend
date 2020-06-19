@@ -29,7 +29,7 @@ export class RaceService {
 
   joinRace(race_id:number) {
     console.log('service API attempt:',race_id);
-    return this.http.post('http://localhost:8000/api/join',{race_id:race_id}).toPromise();
+    return this.http.post('http://localhost:8000/api/join/',{race_id:race_id}).toPromise();
   }
 
 

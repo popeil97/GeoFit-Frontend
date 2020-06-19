@@ -1,3 +1,11 @@
 <p>
   <img (click)="refreshFeed()" src="https://falconerelectronics.com/wp-content/uploads/2017/12/push-me-button.jpg">
 </p>
+<ul>
+  <li>Heya</li>
+  <li *ngFor="let activity of feedItems">
+    {{ activity.message }}
+  </li>
+</ul>
+
+
