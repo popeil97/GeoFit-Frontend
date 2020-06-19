@@ -34,18 +34,7 @@ export class RaceViewComponent implements OnInit {
       this.raceID = params['params']['id'];
     });
 
-    this.raceService.getRace(this.raceID).subscribe(data => {
-      
-      let raceData = data as RaceData;
-      console.log('RACE DATA:',raceData);
-      this.progress = raceData.progress;
-      this.activities = raceData.activities;
-      this.coords = {coords:raceData.coords};
-
-      console.log('COORDS:',this.coords);
-
-      this.loading = false;
-    });
+    this.getRaceState();
 
     this.followers = [{
       first_name:'Nathan',
@@ -72,10 +61,14 @@ export class RaceViewComponent implements OnInit {
     this.loading = true;
     this.activitiesService.importActivities(this.actsToImport,this.raceID).then((res) => {
       console.log(res);
-    })
+      this.getRaceState();
+      this.actsToImport = [];
+    });
+    this.loading = false;
   }
 
   addAct(act:any): void {
+    console.log('IN ADD');
     let actID = act.id;
     let index = this.actsToImport.indexOf(actID);
     if(index >= 0) {
@@ -86,6 +79,21 @@ export class RaceViewComponent implements OnInit {
     }
 
     console.log(this.actsToImport);
+  }
+
+  getRaceState(): void {
+    this.raceService.getRace(this.raceID).subscribe(data => {
+      
+      let raceData = data as RaceData;
+      console.log('RACE DATA:',raceData);
+      this.progress = raceData.progress;
+      this.activities = raceData.activities;
+      this.coords = {coords:raceData.coords};
+
+      console.log('COORDS:',this.coords);
+
+      this.loading = false;
+    });
   }
 
 }

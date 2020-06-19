@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Activity } from '../activities-menu/activities-menu.component';
 
 @Component({
   selector: 'app-race-menu',
@@ -6,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./race-menu.component.css']
 })
 export class RaceMenuComponent implements OnInit {
+  @Input() activities:Activity[];
+  @Input() socialFeed:any[];
+  @Input() leaderboard:any[];
+
+  @Output() importActs: EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 

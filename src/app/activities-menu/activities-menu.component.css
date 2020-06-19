@@ -1,0 +1,6 @@
+.activitiesTable {
+    width: 100%;
+    height: 50px;
+    position: sticky;
+    overflow-y: scroll;
+}

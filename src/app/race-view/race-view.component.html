@@ -3,7 +3,9 @@
 
 <app-loader [isActive]="loading"></app-loader>
 <mat-sidenav-container>
-  <mat-sidenav md-disable-backdrop='true' #menu mode="side">Start</mat-sidenav>
+  <mat-sidenav md-disable-backdrop='true' #menu mode="side">
+    <app-activities-menu [activities]="activities" (addAct)="addAct($event)" (importActs)="importActs($event)"></app-activities-menu>
+  </mat-sidenav>
   <mat-sidenav-content>
     <app-map [coordinates]="coords"></app-map>
 
