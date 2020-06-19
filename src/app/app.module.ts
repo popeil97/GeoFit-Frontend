@@ -23,6 +23,8 @@ import { FormsModule } from '@angular/forms';
 import {UserService} from './users/users.service';
 import {TokenInterceptorService} from './users/tokeninterceptorservice';
 import { StravauthService } from './stravauth/stravauth.service';
+import { RaceFeedService } from './race-feed/race-feed.service';
+import { RaceFeedComponent } from './race-feed/race-feed.component';
 
 import {
   HttpRequest,
@@ -50,6 +52,7 @@ import { LoaderComponent } from './loader/loader.component';
     LeaderboardComponent,
     StravauthComponent,
     LoaderComponent,
+    RaceFeedComponent,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +69,7 @@ import { LoaderComponent } from './loader/loader.component';
     UserService,
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
     StravauthService,
+    RaceFeedService,
   ],
   bootstrap: [AppComponent]
 })
