@@ -23,6 +23,8 @@ import { FormsModule } from '@angular/forms';
 import {UserService} from './users/users.service';
 import {TokenInterceptorService} from './users/tokeninterceptorservice';
 import { StravauthService } from './stravauth/stravauth.service';
+import { RaceFeedService } from './race-feed/race-feed.service';
+import { RaceFeedComponent } from './race-feed/race-feed.component';
 
 import {
   HttpRequest,
@@ -52,6 +54,7 @@ import { ActivitiesMenuComponent } from './activities-menu/activities-menu.compo
     StravauthComponent,
     LoaderComponent,
     ActivitiesMenuComponent,
+    RaceFeedComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +71,7 @@ import { ActivitiesMenuComponent } from './activities-menu/activities-menu.compo
     UserService,
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
     StravauthService,
+    RaceFeedService,
   ],
   bootstrap: [AppComponent]
 })
