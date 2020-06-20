@@ -1,15 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { RaceFeedService } from './race-feed.service';
-
-interface FeedObj {
-  user_id: number;
-  display_name: string;
-  joined: boolean;
-  traveled: boolean;
-  story: boolean;
-  distance: number;
-  message: string;
-}
 
 @Component({
   selector: 'app-race-feed',
@@ -17,8 +7,8 @@ interface FeedObj {
   styleUrls: ['./race-feed.component.css']
 })
 export class RaceFeedComponent implements OnInit {
-
-  public feedItems: Array<FeedObj>;
+  @Input() feedItems: Array<FeedObj>;
+  @Output() feedItemClicked = new EventEmitter;
 
   constructor(private _raceFeedService : RaceFeedService) { 
     this.feedItems = [];
@@ -27,15 +17,13 @@ export class RaceFeedComponent implements OnInit {
   ngOnInit() {
   }
 
-  public refreshFeed(refresh=false){
-    this._raceFeedService.refreshFeed(refresh).then(data => {
+  public refreshFeed(){
+    //Change false to true when using 'refresh' functionality
+    this._raceFeedService.refreshFeed(false).then(data => {
       var newFeedObjs: Array<FeedObj> = [];
-      var calcMessage = this.calculateMessage;
 
       Object.keys(data).map(function(feedItemIndex){
         let feedItem: FeedObj = data[feedItemIndex];
-        feedItem.message = calcMessage(feedItem);
-        console.log(feedItem);
         newFeedObjs.push(feedItem);
       });
 
@@ -44,22 +32,37 @@ export class RaceFeedComponent implements OnInit {
  
   }
 
-  public calculateMessage(item){
-    console.log(item);
-    let messageStrings: string[] = [];
+  public displayFeedItems(){
+    var table = <HTMLTableElement>document.getElementById('users_all_view');
+    var feedItemClicked = this.feedItemClicked;
 
-    if (item.joined){
-      messageStrings.push("joined the race");
-    }
-    if (item.traveled){
-      //Will need vars to store verb (ran/cycled) and units (miles/km)
-      messageStrings.push("traveled " + item.distance + " miles");
-    }
-    if (item.story){
-      messageStrings.push("uploaded a new story!");
+    for (let i = 0; i < this.feedItems.length; i++){
+      var row = table.insertRow(-1);
+      var row_user_id = this.feedItems[i].user_id.toString();
+
+      //Set ID of row so we can pan to user on click
+      row.setAttribute("data-userid", row_user_id);
+      row.addEventListener("click", function () {
+          feedItemClicked.emit(this.getAttribute("data-userid"));
+      })
+
     }
 
-    return item.display_name.toString() + " " + messageStrings.join(' and ');
   }
 
+}
+
+interface FeedObj {
+  user_id: number;
+  display_name: string;
+  profile_url:string
+  joined: boolean;
+  traveled: boolean;
+  story: boolean;
+  story_image:string;
+  story_text:string;
+  total_distance:number;
+  last_distance:number;
+  message: string;
+  created_ts:number;
 }

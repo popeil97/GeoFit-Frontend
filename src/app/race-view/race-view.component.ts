@@ -22,6 +22,7 @@ export class RaceViewComponent implements OnInit {
   public actsToImport:number[] = [];
   public loading:Boolean = false;
   public coords:any;
+  public all_user_data:Array<FeedObj>;
 
   constructor(private raceService:RaceService,private activitiesService:ActivitiesService,private route: ActivatedRoute) { 
     this.modalData = {};
@@ -89,8 +90,10 @@ export class RaceViewComponent implements OnInit {
       this.progress = raceData.progress;
       this.activities = raceData.activities;
       this.coords = {coords:raceData.coords};
+      this.all_user_data = raceData.users_data as Array<FeedObj>;
 
       console.log('COORDS:',this.coords);
+      console.log(this.all_user_data);
 
       this.loading = false;
     });
@@ -102,4 +105,20 @@ interface RaceData {
   progress:any;
   activities:any;
   coords:any;
+  users_data:any;
+}
+
+interface FeedObj {
+  user_id: number;
+  display_name: string;
+  profile_url:string
+  joined: boolean;
+  traveled: boolean;
+  story: boolean;
+  story_image:string;
+  story_text:string;
+  total_distance:number;
+  last_distance:number;
+  message: string;
+  created_ts:number;
 }
