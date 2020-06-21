@@ -610,6 +610,7 @@ mat-sidenav-container {
 mat-sidenav-content {
     height: 100%;
     width: 100%;
+    overflow-y: hidden;
 }
 
 mat-sidenav, mat-sidenav-content {
@@ -619,6 +620,7 @@ mat-sidenav {
     background-color: #403D58;
     opacity: 1;
     width: 350px;
+    overflow-y: hidden;
 }
 
 .mat-drawer-backdrop.mat-drawer-shown {
@@ -627,4 +629,8 @@ mat-sidenav {
 
 ::ng-deep.mat-tab-link,  ::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
   min-width: 97px!important;
+}
+
+.mat-tab-label {
+  color: white;
 }

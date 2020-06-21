@@ -14,6 +14,15 @@ export class ActivitiesService {
       race_id:race_id
     };
 
-    return this.http.post('http://localhost:8000/api/import',body).toPromise();
+    return this.http.post('http://localhost:8000/api/import/',body).toPromise();
   } 
+
+  uploadManualEntry(entry:any, race_id:number) {
+    let body = {
+      race_id: race_id,
+      manualEntry: entry
+    };
+
+    return this.http.post('http://localhost:8000/api/manual/',body).toPromise();
+  }
 }

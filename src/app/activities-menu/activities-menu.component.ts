@@ -8,9 +8,11 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ActivitiesMenuComponent implements OnInit {
 
   @Input() activities:Activity[] = [];
+  @Input() distance_unit:string;
   @Output() addAct: EventEmitter<any> = new EventEmitter();
   @Output() importActs: EventEmitter<void> = new EventEmitter();
-  private columns:string[] = ['Name','Distance','Date'];
+  private columns:string[] = ['Name','Distance'];
+  private selectedRows:number[] = [];
 
 
   constructor() { }
@@ -27,6 +29,18 @@ export class ActivitiesMenuComponent implements OnInit {
 
   importSelectedActs(): void {
     this.importActs.emit();
+  }
+
+  highlight(row:any): void {
+    let index = this.selectedRows.indexOf(row.id);
+    if(index >= 0) {
+      this.selectedRows.splice(index,1);
+    }
+    else {
+      this.selectedRows.push(row.id);
+    }
+
+    console.log(this.selectedRows);
   }
 
 }

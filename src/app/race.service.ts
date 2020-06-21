@@ -24,12 +24,12 @@ export class RaceService {
 
   getRace(race_id:number) {
     console.log(race_id)
-    return this.http.post('http://localhost:8000/api/race',{race_id:race_id});
+    return this.http.post('http://localhost:8000/api/race/',{race_id:race_id});
   }
 
   joinRace(race_id:number) {
     console.log('service API attempt:',race_id);
-    return this.http.post('http://localhost:8000/api/join',{race_id:race_id}).toPromise();
+    return this.http.post('http://localhost:8000/api/join/',{race_id:race_id}).toPromise();
   }
 
 

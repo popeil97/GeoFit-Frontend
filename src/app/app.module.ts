@@ -36,6 +36,7 @@ import { StravauthComponent } from './stravauth/stravauth.component';
 import { fromEventPattern } from 'rxjs';
 import { LoaderComponent } from './loader/loader.component';
 import { ActivitiesMenuComponent } from './activities-menu/activities-menu.component';
+import { ManualEntryComponent } from './manual-entry/manual-entry.component';
 
 
 @NgModule({
@@ -55,6 +56,7 @@ import { ActivitiesMenuComponent } from './activities-menu/activities-menu.compo
     LoaderComponent,
     ActivitiesMenuComponent,
     RaceFeedComponent,
+    ManualEntryComponent,
   ],
   imports: [
     BrowserModule,

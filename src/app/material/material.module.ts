@@ -6,6 +6,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatSelectModule} from '@angular/material/select'
 
 
 const MaterialComponents = [
@@ -16,6 +17,7 @@ const MaterialComponents = [
   MatAutocompleteModule,
   MatTableModule,
   MatTabsModule,
+  MatSelectModule,
 ];
 
 @NgModule({

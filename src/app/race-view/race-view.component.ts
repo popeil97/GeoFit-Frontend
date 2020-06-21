@@ -4,6 +4,7 @@ import { RaceService } from '../race.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Progress } from '../user-progress/user-progress.component';
 import { ActivitiesService } from '../activities.service';
+import { LeaderboardItem } from '../leaderboard/leaderboard.component';
 declare var $: any
 
 @Component({
@@ -18,10 +19,11 @@ export class RaceViewComponent implements OnInit {
   private raceName:string;
   private raceID:number;
   private modalData:any;
-  public progress:Progress;
+  public progress:Progress = {} as Progress;
   public actsToImport:number[] = [];
   public loading:Boolean = false;
   public coords:any;
+  public leaderboard:LeaderboardItem[];
 
   constructor(private raceService:RaceService,private activitiesService:ActivitiesService,private route: ActivatedRoute) { 
     this.modalData = {};
@@ -89,10 +91,18 @@ export class RaceViewComponent implements OnInit {
       this.progress = raceData.progress;
       this.activities = raceData.activities;
       this.coords = {coords:raceData.coords};
+      this.leaderboard = raceData.leaderboard;
 
       console.log('COORDS:',this.coords);
 
       this.loading = false;
+    });
+  }
+
+  uploadManualEntry(entry:any) {
+    this.activitiesService.uploadManualEntry(entry,this.raceID).then((resp) => {
+      console.log('RESP FROM MANUAL IMPORT:',resp);
+      this.getRaceState();
     });
   }
 
@@ -102,4 +112,5 @@ interface RaceData {
   progress:any;
   activities:any;
   coords:any;
+  leaderboard:any;
 }

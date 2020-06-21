@@ -1,0 +1,20 @@
+<div style="height: 50%;">
+    <table mat-table [dataSource]="leaderboard" class="leaderboardTable">
+      <ng-container matColumnDef="Rank" style="padding: 5px;">
+        <td mat-cell *matCellDef="let element"> {{element.rank}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="Name" style="padding: 10px;">
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="Distance" style="padding: 5px;">
+        <td mat-cell *matCellDef="let element"> {{element.total_distance}} </td>
+      </ng-container>
+    
+    
+      <!-- <tr mat-header-row *matHeaderRowDef="columns"></tr> -->
+      <tr mat-row *matRowDef="let myRowData; columns: columns"></tr>
+    </table>
+  
+  </div>

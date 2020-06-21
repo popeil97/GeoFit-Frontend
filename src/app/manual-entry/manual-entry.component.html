@@ -1,0 +1,49 @@
+<div class="container">
+  <form [formGroup]="manualEntryForm">
+    <div class="form-group" style="text-align: left; padding: 5px;">
+      <label name="Name">Name</label>
+      <input class="form-control" type="text" placeholder="Name" formControlName="name"/>
+      <br>
+      <div *ngIf="manualEntryForm.get('name').invalid && (manualEntryForm.get('name').dirty || manualEntryForm.get('name').touched)"
+    class="alert alert-danger">
+    
+    <div *ngIf="manualEntryForm.get('name').errors.required">
+       Name is required.
+    </div>
+    </div>
+    </div>
+
+    <div class="form-group" style="text-align: left; padding: 5px;">
+      <label name="distance">Distance</label>
+      <input class="form-control" type="text" placeholder="Distance" formControlName="distance"/>
+      <br>
+      <div *ngIf="manualEntryForm.get('distance').invalid && (manualEntryForm.get('distance').dirty || manualEntryForm.get('distance').touched)"
+    class="alert alert-danger">
+    
+    <div *ngIf="manualEntryForm.get('distance').errors.required">
+       Distance is required.
+    </div>
+    </div>
+    </div>
+
+    <div class="form-group">
+      <mat-label name="distanceType">Distance Units</mat-label>
+      <mat-select formControlName="distanceType">
+        <mat-option value="MI">Miles</mat-option>
+        <mat-option value="KM">Kilometers</mat-option>
+      </mat-select>
+      <br>
+      <div *ngIf="manualEntryForm.get('distanceType').invalid && (manualEntryForm.get('distanceType').dirty || manualEntryForm.get('distanceType').touched)"
+    class="alert alert-danger">
+    
+    <div *ngIf="manualEntryForm.get('distanceType').errors.required">
+       Distance Units is required.
+    </div>
+    </div>
+    </div>
+
+    <div style="padding: 5px; position: relative; float: left;">
+      <button class="btn btn-primary" mat-raised-button (click)="upload()">Import</button>
+    </div>
+  </form>
+</div>

@@ -3,14 +3,29 @@
 
 <app-loader [isActive]="loading"></app-loader>
 <mat-sidenav-container>
-  <mat-sidenav md-disable-backdrop='true' #menu mode="side">
+  <mat-sidenav md-disable-backdrop='true' #menu mode="side" style="overflow-y: hidden;">
     <mat-tab-group>
       <mat-tab label="Import">
-        <app-activities-menu [activities]="activities" (addAct)="addAct($event)" (importActs)="importActs($event)"></app-activities-menu>
+        <mat-tab-group>
+          <mat-tab label="API">
+            <app-activities-menu [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs($event)"></app-activities-menu>
+          </mat-tab>
+          <mat-tab label="Manual">
+            <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
+          </mat-tab>
+        </mat-tab-group>
+        
       </mat-tab>
       <mat-tab label="L">
-        <h1>Some more tab content</h1>
-        <p>...</p>
+        <mat-tab-group>
+          <mat-tab label="Distance">
+            <app-leaderboard [leaderboard]="leaderboard"></app-leaderboard>
+          </mat-tab>
+          <mat-tab label="Pace">
+
+          </mat-tab>
+        </mat-tab-group>
+        
       </mat-tab>
       <mat-tab label="Social">
         <h1>Some more tab content</h1>
