@@ -17,7 +17,7 @@ export class RaceFeedService {
   }
  
   // Uses http.post() to register user from REST API endpoint
-  public refreshFeed() {
-    return this.http.post('api/refresh-feed/', {refresh : false, race_id: 1}).toPromise();
+  public refreshFeed(refresh) {
+    return this.http.post('api/refresh-feed/', {refresh : refresh, race_id: 1}).toPromise();
   }
 }
