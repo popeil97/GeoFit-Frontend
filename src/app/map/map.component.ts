@@ -16,7 +16,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
   @Input() userData:any;
 
   private map;
-  private route;
+  private coordsRoute;
   private markersByUserID = {};
 
   constructor(private popupService:PopUpService) { }
@@ -32,11 +32,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
             console.log('COORDS CHANGED');
             if(changes.coordinates.currentValue != undefined) {
               this.applyCoordinates();
-              this.route = turf.lineString(this.coordinates.coords, { name: "route" });
-            }
-            
-          case 'userData':
-            if(changes.userData.currentValue != undefined) {
+              this.coordsRoute = turf.lineString(this.coordinates.coords, { name: "route" });
               this.plotUserPins();
             }
         }
@@ -47,9 +43,22 @@ export class MapComponent implements AfterViewInit,OnChanges {
     console.log(this.userData);
   }
 
-
   ngAfterViewInit(): void {
     this.initMap();
+  }
+
+  public panToUserMarker(user_id){
+    console.log("Clicked user id: ", user_id);
+
+    this.markersByUserID[user_id.toString()]['locMarker'].openPopup();
+
+    //Do this to simply pan to user pin
+    this.map.panTo(this.markersByUserID[user_id.toString()]['latLng']);
+
+    //Do this to pan *and* zoom
+    //var markerBounds = L.latLngBounds([markersByUserID[user_id.toString()]['latLng']]);
+    //var options = {'animate': true, 'easeLinearity': 0.1}
+    //mymap.fitBounds(markerBounds, options);
   }
 
   private applyCoordinates():void {
@@ -57,15 +66,21 @@ export class MapComponent implements AfterViewInit,OnChanges {
     console.log('GOT COORDINATES:',this.coordinates.coords);
     console.log('MAP:',this.map);
 
-    // doing this temporarily because Lat/Lon are reversed smh
+    //doing this temporarily because Lat/Lon are reversed smh
+    var temp_coords = [];
     _.forEach(this.coordinates.coords,(coord) => {
-      let temp = coord[0];
-      coord[0] = coord[1];
-      coord[1] = temp;
+      // let temp = coord[0];
+      // coord[0] = coord[1];
+      // coord[1] = temp;
+      temp_coords.push([coord[1], coord[0]]);
     });
 
-    let start_coord = this.coordinates.coords[0];
-    let end_coord = this.coordinates.coords[this.coordinates.coords.length-1];
+    // let start_coord = this.coordinates.coords[0];
+    // let end_coord = this.coordinates.coords[this.coordinates.coords.length-1];
+    let start_coord = temp_coords[0];
+    let end_coord = temp_coords[temp_coords.length-1];
+
+    console.log("start coord: ", start_coord);
 
     const lat = 29.651634;
     const lon = -82.324829;
@@ -89,7 +104,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     marker_end.bindPopup(this.popupService.makePopup({name:'End',state:'FL'}));
 
-    const line = L.polyline(this.coordinates.coords,{
+    const line = L.polyline(temp_coords,{
       color: "Blue",
       weight: 8,
       opacity: 0.65
@@ -97,17 +112,26 @@ export class MapComponent implements AfterViewInit,OnChanges {
   }
 
   private plotUserPins(){
+
+    //Remove all current user pins
+    for (var id in this.markersByUserID){
+      this.markersByUserID[id]['locMarker'].remove();
+    }
+    this.markersByUserID = {};
     
     // doing this temporarily because Lat/Lon are reversed smh
-    _.forEach(this.coordinates.coords,(coord) => {
-      let temp = coord[0];
-      coord[0] = coord[1];
-      coord[1] = temp;
-    });
+    // _.forEach(this.coordinates.coords,(coord) => {
+    //   let temp = coord[0];
+    //   coord[0] = coord[1];
+    //   coord[1] = temp;
+    // });
+
+    console.log("coords in plot: ", this.coordinates.coords);
+
+    console.log("this user_data: ", this.userData);
     
     for (var i = 0; i < this.userData.length; i++){
       var img_html = "<img src=\"" + this.userData[i].profile_url + "\";\"><div class=\"pin\"></div><div class=\"pulse\"></div>";
-        //var img_html = "<img src=\"" + all_user_stats[i].user_profile_url + "\"><div class=\"pin\"></div><div class=\"pulse\"></div>";
 
       var userIcon = L.divIcon({
         className: 'location-pin',
@@ -120,10 +144,15 @@ export class MapComponent implements AfterViewInit,OnChanges {
       var user_ran_miles = this.userData[i].total_distance;
       console.log("user ran miles: ", user_ran_miles);
 
-      var along_user = turf.along(this.route, user_ran_miles, {units: 'miles'});
+      var along_user = turf.along(this.coordsRoute, user_ran_miles, {units: 'miles'});
+      console.log("along user: ", along_user);
 
       var lng_user = along_user.geometry.coordinates[0];
       var lat_user = along_user.geometry.coordinates[1];
+
+      console.log("lnglat")
+      console.log(lng_user);
+      console.log(lat_user);
 
       var locMarker = L.geoJSON(along_user, {
         pointToLayer: function(feature, latlng) {
@@ -186,7 +215,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
       var userStoryCaption = this.userData[i].story_text;
 
       //Add story info to marker popup
-      if (userStoryImg != '' || userStoryCaption != ''){
+      if (userStoryImg || userStoryCaption){
           popupText += "<center>" +
                   "<a data-toggle=\"modal\" data-target=\"#storyModal\" data-userstatindex=\"" +
                   i +
@@ -215,6 +244,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
       //Retain markers in dict so we can pan to it upon select
       console.log(this.markersByUserID);
+      console.log("this user's id: ", this.userData[i].user);
       this.markersByUserID[this.userData[i].user_id.toString()] = {
           'locMarker' : locMarker,
           'latLng' : L.latLng(lat_user, lng_user)};

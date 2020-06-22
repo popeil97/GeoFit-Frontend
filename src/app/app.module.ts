@@ -25,6 +25,7 @@ import {TokenInterceptorService} from './users/tokeninterceptorservice';
 import { StravauthService } from './stravauth/stravauth.service';
 import { RaceFeedService } from './race-feed/race-feed.service';
 import { RaceFeedComponent } from './race-feed/race-feed.component';
+import { StoryService } from './story.service'
 
 import {
   HttpRequest,
@@ -78,6 +79,7 @@ import { RaceAboutComponent } from './race-about/race-about.component';
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
     StravauthService,
     RaceFeedService,
+    StoryService,
   ],
   bootstrap: [AppComponent]
 })
