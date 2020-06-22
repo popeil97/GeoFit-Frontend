@@ -28,7 +28,8 @@
         
       </mat-tab>
       <mat-tab label="Social">
-        <app-race-feed [feedItems]="all_user_data" (feedItemClicked)="panToUserMarker($event)"></app-race-feed>>
+        <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call-->
+        <app-race-feed (feedItemClicked)="panToUserMarker($event)"></app-race-feed>>
       </mat-tab>
     </mat-tab-group>
     

@@ -7,10 +7,13 @@ import { RaceFeedService } from './race-feed.service';
   styleUrls: ['./race-feed.component.css']
 })
 export class RaceFeedComponent implements OnInit {
-  @Input() feedItems: Array<FeedObj>;
+  //@Input() feedItems: Array<FeedObj>;
   @Output() feedItemClicked = new EventEmitter();
 
+  private feedItems: Array<FeedObj>;
+
   constructor(private _raceFeedService : RaceFeedService) { 
+    this.feedItems = [];
   }
 
   ngOnInit() {
@@ -22,16 +25,19 @@ export class RaceFeedComponent implements OnInit {
   //       switch(propName) {
   //         case 'feedItems':
   //           if(changes.feedItems.currentValue != undefined) { 
-  //             this.refreshFeed();
+  //             console.log("in ngonchanges");
+  //             this.displayFeedItems();
   //           }
   //       }
   //     }
   //   }
-    
   // }
 
   public refreshFeed(){
-    this._raceFeedService.refreshFeed(false).then(data => {
+    var displayItems = this.displayFeedItems;
+    var viewComponent = this;
+
+    this._raceFeedService.refreshFeed().then(data => {
       console.log("FEED DATA: ", data);
       var newFeedObjs: Array<FeedObj> = [];
 
@@ -40,22 +46,24 @@ export class RaceFeedComponent implements OnInit {
         newFeedObjs.push(feedItem);
       });
 
-      this.feedItems = newFeedObjs.concat(this.feedItems);
+      viewComponent.feedItems = newFeedObjs.concat(viewComponent.feedItems);
+      displayItems(viewComponent, newFeedObjs);
     });
 
     console.log("Feed items: ", this.feedItems);
  
     //Create table rows
-    this.displayFeedItems();
+    //this.displayFeedItems();
   }
 
-  public displayFeedItems(){
+  public displayFeedItems(viewComponent, objs){
     var table = <HTMLTableElement>document.getElementById('users_all_view');
-    var feedItemClicked = this.feedItemClicked;
 
-    for (let i = 0; i < this.feedItems.length; i++){
+    var feedItemClicked = viewComponent.feedItemClicked;
+
+    for (let i = 0; i < objs.length; i++){
       var row = table.insertRow(-1);
-      var row_user_id = this.feedItems[i].user_id.toString();
+      var row_user_id = objs[i].user_id.toString();
 
       //Set ID of row so we can pan to user on click
       row.setAttribute("data-userid", row_user_id);
@@ -65,8 +73,26 @@ export class RaceFeedComponent implements OnInit {
           console.log("after click");
       })
 
-      row.innerHTML = row.innerHTML = "<td style=\"table-layout: fixed;\"><img src=\"" + this.feedItems[i].profile_url + "\" width=\"50px\"></td> <td>" + this.feedItems[i].message + "</td>";
+      row.innerHTML = "<td style=\"table-layout: fixed;\"><img src=\"" + objs[i].profile_url + "\" width=\"50px\"></td> <td>" + objs[i].message;
 
+      var userStoryImg = objs[i].story_image;
+      var userStoryCaption = objs[i].story_text;
+      console.log("USER STORY URL: ", userStoryImg);
+
+      //Add story info to marker popup
+      if (userStoryImg || userStoryCaption){
+        row.innerHTML += "<div class=\"container\"><center>" +
+                  "<a data-toggle=\"modal\" data-target=\"#storyModal\" data-userstatindex=\"" +
+                  i +
+                  "\">" +
+                  "<br><img style=\"max-height:100px;\" src=\"" +
+                  userStoryImg +
+                  "\" style=\"max-width:150px;\"></a>" +
+                  "</center>" +
+                  "<center>" +
+                  userStoryCaption +
+                  "</center></div></td>";
+      }
     }
 
   }
