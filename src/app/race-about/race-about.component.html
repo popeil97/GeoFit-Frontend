@@ -1,0 +1,80 @@
+
+<div class="hero-image">
+  <div class="hero-text">
+      <h1>{{aboutData.name}}</h1>
+  </div>
+  
+</div>
+
+<br>
+
+<div class="container">
+  <button id="editBtn"class="btn btn-primary" style="float:right" (click)="toggleForm()">Edit</button>
+  <button id="editBtn"class="btn btn-primary" style="float:right" (click)="viewRace()">Go To Map!</button>
+</div>
+
+<br>
+<br>
+
+<div class="container" *ngIf="showForm">
+  <form [formGroup]="AboutForm">
+    <div class="form-group" style="text-align: left; padding: 5px;">
+      <label name="Name">Name</label>
+      <input class="form-control" type="text" placeholder="Name" formControlName="name"/>
+      <br>
+      <div *ngIf="AboutForm.get('name').invalid && (AboutForm.get('name').dirty || AboutForm.get('name').touched)"
+    class="alert alert-danger">
+    
+    <div *ngIf="AboutForm.get('name').errors.required">
+       Name is required.
+    </div>
+    </div>
+    </div>
+
+    <div class="form-group" style="text-align: left; padding: 5px;">
+      <label name="description">Description</label>
+      <textarea class="form-control" type="text" placeholder="Description" formControlName="description"></textarea>
+      <br>
+      <div *ngIf="AboutForm.get('description').invalid && (AboutForm.get('description').dirty || AboutForm.get('description').touched)"
+    class="alert alert-danger">
+    
+    <div *ngIf="AboutForm.get('description').errors.required">
+       Description is required.
+    </div>
+    </div>
+    </div>
+
+    <div style="padding: 5px; position: relative; float: left;">
+      <button class="btn btn-primary" mat-raised-button (click)="update()">Update</button>
+      <button class="btn btn-danger" mat-raised-button style="left: 5px;" (click)="toggleForm()">Cancel</button>
+    </div>
+  </form>
+</div>
+
+
+
+<div class="container" style="text-align: left;" id="raceView" *ngIf="!showForm">
+
+  <h2>
+    Race Coordinator
+  </h2>
+
+  <p>
+    {{aboutData.owner.first_name}} {{aboutData.owner.last_name}}
+  </p>
+
+  <h2>
+      Description
+  </h2>
+
+  <p>
+    {{aboutData.description}}
+  </p>
+
+</div>
+
+  <br>
+  <br>
+  <br>
+  
+  

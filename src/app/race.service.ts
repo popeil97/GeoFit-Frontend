@@ -32,5 +32,13 @@ export class RaceService {
     return this.http.post('http://localhost:8000/api/join/',{race_id:race_id}).toPromise();
   }
 
+  getRaceAbout(race_id:number) {
+    return this.http.post('http://localhost:8000/api/about/',{race_id:race_id}).toPromise();
+  }
+
+  updateRaceAbout(aboutForm:any,race_id:number) {
+    return this.http.post('http://localhost:8000/api/updateAbout/',{form:aboutForm,race_id:race_id}).toPromise();
+  }
+
 
 }

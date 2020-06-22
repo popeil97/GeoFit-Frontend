@@ -37,6 +37,8 @@ import { fromEventPattern } from 'rxjs';
 import { LoaderComponent } from './loader/loader.component';
 import { ActivitiesMenuComponent } from './activities-menu/activities-menu.component';
 import { ManualEntryComponent } from './manual-entry/manual-entry.component';
+import { UserPageComponent } from './user-page/user-page.component';
+import { RaceAboutComponent } from './race-about/race-about.component';
 
 
 @NgModule({
@@ -57,6 +59,8 @@ import { ManualEntryComponent } from './manual-entry/manual-entry.component';
     ActivitiesMenuComponent,
     RaceFeedComponent,
     ManualEntryComponent,
+    UserPageComponent,
+    RaceAboutComponent,
   ],
   imports: [
     BrowserModule,

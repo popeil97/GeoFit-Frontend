@@ -6,7 +6,7 @@
 <app-loader [isActive]="loading"></app-loader>
 <div class="container">
   <a type="button" class="btn btn-primary" style="float:right" routerLink='/create'>Create Race</a>
-  <ul class="nav nav-pills">
+  <!-- <ul class="nav nav-pills">
 
       <li class="nav-item">
         <a class="nav-link" [ngClass]="{'active':isUserRaces}" id='races_user' (click)="toggle_pill('user')">Your Races <span class="badge badge-dark"></span></a>
@@ -19,38 +19,64 @@
       <li class="nav-item">
         <a class="nav-link" [ngClass]="{'active':isPublicRaces}" id='races_all' (click)="toggle_pill('all')">Public Races <span class="badge badge-dark"></span></a>
       </li>
-  </ul>
-  <table class="table table-striped table-dark" id='races_all_view' *ngIf="isPublicRaces">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Distance</th>
-        <th scope="col">Start Loc</th>
-        <th scope="col">End Loc</th>
-        <th scope="col">Start Date</th>
-        <th scope="col">End Date</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let race of races">
-            <th scope="row">{{race.name}}</th>
-            <td>{{race.distance}} {{race.distance_type}}</td>
-            <td>{{race.start_loc}}</td>
-            <td>{{race.end_loc}}</td>
-            <td>{{race.start_date}}</td>
-            <td>{{race.end_date}}</td>
+  </ul> -->
+  <table mat-table
+       [dataSource]="races" multiTemplateDataRows
+       class="mat-elevation-z8">
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> Race </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="distance">
+    <th mat-header-cell *matHeaderCellDef> Distance </th>
+    <td mat-cell *matCellDef="let element"> {{element.distance}} {{element.distance_type}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="start_loc">
+    <th mat-header-cell *matHeaderCellDef> Start Loc </th>
+    <td mat-cell *matCellDef="let element"> {{element.start_loc}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="end_loc">
+    <th mat-header-cell *matHeaderCellDef> End Loc </th>
+    <td mat-cell *matCellDef="let element"> {{element.end_loc}} </td>
+  </ng-container>
+  
 
 
-            <td>
-                <button type="button" class="btn btn-secondary" (click)="joinRace(race)">Join!</button>
-            </td>
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+      <div class="example-element-detail"
+           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
-          </tr>
-    </tbody>
-  </table>
+           <img src="assets/trail.jpg" />
+           <br>
+        <div class="container example-element-description">
+          {{element.description}}
+        </div>
 
+        <div class="container" style="float: right;">
+          <button type="button" class="btn btn-secondary" style="float: right;" (click)="joinRace(element)">Join!</button>
+          <button type="button" class="btn btn-secondary" style="float: right;" (click)="viewAbout(element)">View</button>
+        </div>
+        
+      </div>
+      
+    </td>
+  </ng-container>
 
-  <table class="table table-striped table-dark" id='races_user_view' *ngIf="isUserRaces">
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+
+  <!-- <table class="table table-striped table-dark" id='races_user_view' *ngIf="isUserRaces">
     <thead>
       <tr>
         <th scope="col">Name</th>
@@ -104,10 +130,9 @@
 
           </tr>
     </tbody>
-  </table>
+  </table> -->
 </div>
 
-<p> Click 'Your Races' to View the races you have joined.</p>
 
 
     <!-- Modal -->

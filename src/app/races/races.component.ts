@@ -1,13 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RaceService } from '../race.service';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 
 @Component({
   selector: 'app-races',
   templateUrl: './races.component.html',
-  styleUrls: ['./races.component.css']
+  styleUrls: ['./races.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
+
 export class RacesComponent implements OnInit {
 
   public races:any[];
@@ -21,10 +30,18 @@ export class RacesComponent implements OnInit {
 
   public loading:Boolean = false;
 
+  dataSource = this.races;
+  private columnsToDisplay:string[] = ['name','distance', 'start_loc', 'end_loc'];
+  expandedElement: any | null;
+
   constructor(private raceService: RaceService, private router:Router) { }
 
   ngOnInit() {
     console.log('in races');
+
+    this.races=[{
+      name:'test'
+    }] as any[];
 
     this.raceService.getRaces({}).subscribe(
       data => {
@@ -61,6 +78,10 @@ export class RacesComponent implements OnInit {
     });
   }
 
+  viewAbout(race:any) {
+    this.router.navigate(['/about',{name:race.name,id:race.id}]);
+  }
+
   toggle_pill(pill_type:string) {
     if(pill_type == 'user') {
       this.isUserRaces = true;
@@ -83,3 +104,4 @@ export class RacesComponent implements OnInit {
   }
 
 }
+
