@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import * as bootstrap from "bootstrap";
 import { RaceService } from '../race.service';
+import { StoryService } from '../story.service'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Progress } from '../user-progress/user-progress.component';
 import { ActivitiesService } from '../activities.service';
 import { LeaderboardItem } from '../leaderboard/leaderboard.component';
+import { MapComponent } from '../map/map.component';
+import { RaceFeedComponent } from '../race-feed/race-feed.component';
 declare var $: any
 
 @Component({
@@ -13,6 +16,8 @@ declare var $: any
   styleUrls: ['./race-view.component.css']
 })
 export class RaceViewComponent implements OnInit {
+  @ViewChild(MapComponent) mapChild: MapComponent ; 
+  @ViewChild(RaceFeedComponent) feedChild: RaceFeedComponent;
 
   public followers:any[];
   public activities:any[];
@@ -26,7 +31,13 @@ export class RaceViewComponent implements OnInit {
   public leaderboard:LeaderboardItem[];
   public all_user_data:Array<FeedObj>;
 
-  constructor(private raceService:RaceService,private activitiesService:ActivitiesService,private route: ActivatedRoute) { 
+  private storyImage:string;
+  private storyText:string;
+
+  constructor(private raceService:RaceService,
+                  private activitiesService:ActivitiesService,
+                  private route: ActivatedRoute,
+                  private storyService: StoryService) { 
     this.modalData = {};
   }
 
@@ -48,10 +59,12 @@ export class RaceViewComponent implements OnInit {
       last_name:'DonaHOE'
     }];
 
-    
+    //Add listener to story image upload field
+    this.setStoryImageFieldListener();
   }
 
   showModal(id:string): void {
+    console.log(id);
     ($(id) as any).modal('show');
   }
 
@@ -96,7 +109,7 @@ export class RaceViewComponent implements OnInit {
       this.all_user_data = raceData.users_data as Array<FeedObj>;
 
       console.log('COORDS:',this.coords);
-      console.log(this.all_user_data);
+      console.log("ALL USER DATA", this.all_user_data);
 
       this.loading = false;
     });
@@ -107,6 +120,38 @@ export class RaceViewComponent implements OnInit {
       console.log('RESP FROM MANUAL IMPORT:',resp);
       this.getRaceState();
     });
+  }
+  panToUserMarker(user_id){
+    //Call map pan function
+    console.log("Clicked user id: ", user_id);
+    this.mapChild.panToUserMarker(user_id);
+  }
+
+  setStoryImageFieldListener(){
+    //LISTENS TO CHANGES IN IMAGE FILE UPLOAD
+    var setStoryImg = this.setStoryImage;
+    var viewComponent = this;
+
+    var storyImageField = <HTMLInputElement>document.getElementById("storyImage");
+    console.log("adding story event listener");
+    storyImageField.addEventListener('change', function() {
+      var file = this.files[0];
+      var reader: FileReader = new FileReader();
+      reader.onload = function(e) {
+          setStoryImg(viewComponent, reader.result);
+      }
+      reader.readAsDataURL(file);
+    }, false);
+
+  }
+
+  setStoryImage(viewComponent, img_data): void{
+    viewComponent.storyImage = img_data;
+  }
+
+  uploadStory(): void{
+    this.storyText = (<HTMLInputElement>document.getElementById("storyImageCaption")).value;
+    this.storyService.uploadStory(this.raceID, this.storyImage, this.storyText, false);
   }
 
 }

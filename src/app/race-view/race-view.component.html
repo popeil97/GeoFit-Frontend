@@ -28,7 +28,7 @@
         
       </mat-tab>
       <mat-tab label="Social">
-        <app-race-feed [feedItems]="all_user_data"></app-race-feed>>
+        <app-race-feed [feedItems]="all_user_data" (feedItemClicked)="panToUserMarker($event)"></app-race-feed>>
       </mat-tab>
     </mat-tab-group>
     
@@ -52,12 +52,48 @@
 <a class="btn btn-primary btn-customized inviteToggle" data-toggle="modal" data-target="#inviteModal" (click)="showModal('#inviteModal')">
   <span style="color:white">Invite</span>
 </a>
+
+<a class="btn btn-primary btn-customized inviteToggle" data-toggle="modal" data-target="#storyModal" (click)="showModal('#storyModal')">
+  <span style="color:white">Add a Story</span>
+</a>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <!-- Wrapper -->
 
     <!-- open sidebar menu -->
 
+</div>
+
+<div class="modal fade" id="storyModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Add a Story to your activity!</h4>
+        <button type="button" class="close" (click)="hideModal('#activitiesModal')">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <!---USER STORY UPLOAD--->
+        <h4>Stories appear above your pin for 48 hours after upload</h4>
+        <div class="container">
+          <label for="storyImageField">Upload an image!</label>
+          <input type="file" id="storyImage" name="storyImageField" accept="image/*">
+          <label for="storyImageCaptionField">Enter a caption (max length is 100 chars):</label>
+          <input type="text" id="storyImageCaption" name="storyImageCaptionField" maxlength="100">
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="uploadStory()" >Add Story</button>
+        <!-- this button is hidden, used to close from typescript -->
+        <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="modal fade" id="activitiesModal">

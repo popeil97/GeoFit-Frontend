@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { RaceFeedService } from './race-feed.service';
 
 @Component({
@@ -8,18 +8,31 @@ import { RaceFeedService } from './race-feed.service';
 })
 export class RaceFeedComponent implements OnInit {
   @Input() feedItems: Array<FeedObj>;
-  @Output() feedItemClicked = new EventEmitter;
+  @Output() feedItemClicked = new EventEmitter();
 
   constructor(private _raceFeedService : RaceFeedService) { 
-    this.feedItems = [];
   }
 
   ngOnInit() {
   }
 
+  // ngOnChanges(changes: SimpleChanges) {
+  //   for(const propName in changes) {
+  //     if(changes.hasOwnProperty(propName)) {
+  //       switch(propName) {
+  //         case 'feedItems':
+  //           if(changes.feedItems.currentValue != undefined) { 
+  //             this.refreshFeed();
+  //           }
+  //       }
+  //     }
+  //   }
+    
+  // }
+
   public refreshFeed(){
-    //Change false to true when using 'refresh' functionality
     this._raceFeedService.refreshFeed(false).then(data => {
+      console.log("FEED DATA: ", data);
       var newFeedObjs: Array<FeedObj> = [];
 
       Object.keys(data).map(function(feedItemIndex){
@@ -29,7 +42,11 @@ export class RaceFeedComponent implements OnInit {
 
       this.feedItems = newFeedObjs.concat(this.feedItems);
     });
+
+    console.log("Feed items: ", this.feedItems);
  
+    //Create table rows
+    this.displayFeedItems();
   }
 
   public displayFeedItems(){
@@ -43,8 +60,12 @@ export class RaceFeedComponent implements OnInit {
       //Set ID of row so we can pan to user on click
       row.setAttribute("data-userid", row_user_id);
       row.addEventListener("click", function () {
-          feedItemClicked.emit(this.getAttribute("data-userid"));
+          console.log("clicked!", row.getAttribute("data-userid"));
+          feedItemClicked.emit(row.getAttribute("data-userid"));
+          console.log("after click");
       })
+
+      row.innerHTML = row.innerHTML = "<td style=\"table-layout: fixed;\"><img src=\"" + this.feedItems[i].profile_url + "\" width=\"50px\"></td> <td>" + this.feedItems[i].message + "</td>";
 
     }
 
