@@ -15,6 +15,7 @@ export class RaceAboutComponent implements OnInit {
   private showForm: Boolean;
   private raceName:string;
   private raceID:number;
+  private uploadeUrl:any;
 
   constructor(private raceService:RaceService,private route: ActivatedRoute,private router:Router) { }
 
@@ -35,13 +36,13 @@ export class RaceAboutComponent implements OnInit {
       description: new FormControl('',[
         Validators.required
       ]),
-      picture: new FormControl('')
+      raceImage: new FormControl('')
     });
 
-    this.raceService.getRaceAbout(1).then((resp) => {
+    this.raceService.getRaceAbout(this.raceID).then((resp) => {
       console.log('RESP FROM SERVER:',resp);
       resp = resp as any;
-      this.aboutData = resp.about_info as AboutData;
+      this.aboutData = resp['about_info'] as AboutData;
 
       this.initializeForm();
     });
@@ -60,7 +61,7 @@ export class RaceAboutComponent implements OnInit {
       description: new FormControl(this.aboutData.description,[
         Validators.required
       ]),
-      picture: new FormControl('')
+      raceImage: new FormControl('')
     });
 
   }
@@ -78,14 +79,29 @@ export class RaceAboutComponent implements OnInit {
     console.log(this.AboutForm);
     let isValid: Boolean = this.AboutForm.valid;
 
-    console.log('IS VALID:',isValid);
+    formClean.raceImage = this.uploadeUrl;
+    console.log('IS VALID:',formClean);
+
+    
 
     if(isValid) {
       this.raceService.updateRaceAbout(formClean,this.raceID).then((resp) => {
-        this.aboutData = resp.about_info as AboutData;
+        this.aboutData = resp['about_info'] as AboutData;
         this.initializeForm();
         this.toggleForm();
       });
+    }
+  }
+
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.uploadeUrl = event.target.result;
+      }
     }
   }
 
