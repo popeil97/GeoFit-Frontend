@@ -93,7 +93,7 @@ export class RaceAboutComponent implements OnInit {
     }
   }
 
-  onSelectFile(event) {
+  onSelectFile(event:Event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
@@ -111,4 +111,9 @@ export interface AboutData {
   name:string;
   description:string;
   owner:any;
+  race_image:string;
+}
+
+interface Event {
+  target:any
 }
