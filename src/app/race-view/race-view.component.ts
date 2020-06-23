@@ -150,8 +150,16 @@ export class RaceViewComponent implements OnInit {
   }
 
   uploadStory(): void{
+    //This bool tells Django whether to add these fields to the user's last story
+    //or simply create a new story that has no activities
+    //False by default but implement mechanism for true in future
+    let withLastStory = false;
+
+    //Get text field input (image already uploaded via eventListener)
     this.storyText = (<HTMLInputElement>document.getElementById("storyImageCaption")).value;
-    this.storyService.uploadStory(this.raceID, this.storyImage, this.storyText, false);
+
+    //Upload story via service
+    this.storyService.uploadStory(this.raceID, this.storyImage, this.storyText, withLastStory);
   }
 
 }

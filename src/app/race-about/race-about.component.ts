@@ -100,7 +100,7 @@ export class RaceAboutComponent implements OnInit {
       reader.readAsDataURL(event.target.files[0]); // read file as data url
 
       reader.onload = (event) => { // called once readAsDataURL is completed
-        this.uploadeUrl = event.target.result;
+        this.uploadeUrl = reader.result;
       }
     }
   }

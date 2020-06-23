@@ -1,10 +1,14 @@
 <p>
-  <img (click)="refreshFeed()" src="https://falconerelectronics.com/wp-content/uploads/2017/12/push-me-button.jpg">
+  <img height="50px" (click)="refreshFeed()" src="https://falconerelectronics.com/wp-content/uploads/2017/12/push-me-button.jpg">
 </p>
 
 
 <table class="table table-striped table-dark" id='users_all_view'>
   <tbody>
+    <tr *ngFor = "let activity of feedItems" (click)="clickedOnFeedItem(activity)">
+        <td><img width="50px" src="{{ activity.profile_url }}"></td>
+        <td>{{ activity.message }}</td>
+    </tr>
   </tbody>
 </table>
 
