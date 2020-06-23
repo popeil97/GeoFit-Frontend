@@ -7,7 +7,7 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSelectModule} from '@angular/material/select'
-
+import {MatCardModule} from '@angular/material/card'
 
 const MaterialComponents = [
   MatButtonModule,
@@ -18,6 +18,7 @@ const MaterialComponents = [
   MatTableModule,
   MatTabsModule,
   MatSelectModule,
+  MatCardModule,
 ];
 
 @NgModule({

@@ -46,3 +46,11 @@ table {
   .example-element-description-attribution {
     opacity: 0.5;
   }
+
+  .example-card {
+    max-width: 300px;
+  }
+  
+  .example-header-image {
+    background-size: cover;
+  }

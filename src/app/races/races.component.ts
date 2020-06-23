@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RaceService } from '../race.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import * as _ from 'lodash';
 
 
 @Component({
@@ -47,8 +48,17 @@ export class RacesComponent implements OnInit {
       data => {
         this.racesData = data;
         console.log('RACE DATA:',this.racesData);
-        this.races = this.racesData.races;
-        this.userRaces = this.racesData.user_races;
+        this.races = _.filter(this.racesData.races,(race:any) => {
+          if(!race.joined) {
+            return race;
+          }
+        });
+        console.log('RACES:',this.races)
+        this.userRaces = _.filter(this.racesData.races,(race:any) => {
+          if(race.joined) {
+            return race;
+          }
+        });
         this.racesInvited = this.racesData.races_invited;
         this.joinedRacesIDs = this.racesData.user_race_ids;
       }

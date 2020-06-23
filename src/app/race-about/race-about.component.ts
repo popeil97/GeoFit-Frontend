@@ -93,7 +93,7 @@ export class RaceAboutComponent implements OnInit {
     }
   }
 
-  onSelectFile(event:Event) {
+  onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
