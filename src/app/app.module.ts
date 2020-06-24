@@ -40,6 +40,8 @@ import { ActivitiesMenuComponent } from './activities-menu/activities-menu.compo
 import { ManualEntryComponent } from './manual-entry/manual-entry.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { RaceAboutComponent } from './race-about/race-about.component';
+import { UserFollowComponent } from './user-follow/user-follow.component';
+import { StoryBtnComponent } from './story-btn/story-btn.component';
 
 
 @NgModule({
@@ -62,6 +64,8 @@ import { RaceAboutComponent } from './race-about/race-about.component';
     ManualEntryComponent,
     UserPageComponent,
     RaceAboutComponent,
+    UserFollowComponent,
+    StoryBtnComponent,
   ],
   imports: [
     BrowserModule,

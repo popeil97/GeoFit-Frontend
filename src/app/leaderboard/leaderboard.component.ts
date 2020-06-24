@@ -7,12 +7,14 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LeaderboardComponent implements OnInit {
 
-  private columns:string[] = ['Rank','Name','Distance'];
+  private columns:string[] = ['Rank','ProfilePic','Name','Distance','Follow'];
   @Input() leaderboard:LeaderboardItem[];
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
+
   }
 
 
@@ -20,6 +22,8 @@ export class LeaderboardComponent implements OnInit {
 
 export interface LeaderboardItem {
   rank: number,
+  name: string,
+  profile_url: string,
   total_distance:number;
   total_time:number;
 }
