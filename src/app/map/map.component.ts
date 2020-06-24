@@ -18,6 +18,9 @@ export class MapComponent implements AfterViewInit,OnChanges {
   private map;
   private coordsRoute;
   private markersByUserID = {};
+  private marker_start:any;
+  private marker_end:any;
+  private line:any;
 
   constructor(private popupService:PopUpService) { }
 
@@ -33,7 +36,10 @@ export class MapComponent implements AfterViewInit,OnChanges {
             if(changes.coordinates.currentValue != undefined) {
               this.applyCoordinates();
               this.coordsRoute = turf.lineString(this.coordinates.coords, { name: "route" });
-              this.plotUserPins();
+              if(this.displayUsers) {
+                this.plotUserPins();
+              }
+              
             }
         }
       }
@@ -44,7 +50,10 @@ export class MapComponent implements AfterViewInit,OnChanges {
   }
 
   ngAfterViewInit(): void {
-    this.initMap();
+    if(this.map == undefined) {
+      this.initMap();
+    }
+    
   }
 
   public panToUserMarker(user_id){
@@ -61,10 +70,24 @@ export class MapComponent implements AfterViewInit,OnChanges {
     //mymap.fitBounds(markerBounds, options);
   }
 
+  public clearMap(): void {
+    if(this.marker_start && this.marker_end && this.line) {
+      this.map.removeLayer(this.marker_start);
+      this.map.removeLayer(this.marker_end);
+      this.map.removeLayer(this.line);
+    }
+  }
+
   private applyCoordinates():void {
 
     console.log('GOT COORDINATES:',this.coordinates.coords);
     console.log('MAP:',this.map);
+    
+    
+
+    if(!this.map) {
+      this.initMap()
+    }
 
     //doing this temporarily because Lat/Lon are reversed smh
     var temp_coords = [];
@@ -80,11 +103,17 @@ export class MapComponent implements AfterViewInit,OnChanges {
     let start_coord = temp_coords[0];
     let end_coord = temp_coords[temp_coords.length-1];
 
+    let begin = new L.LatLng(start_coord[0], start_coord[1]);
+    let finish = new L.LatLng(end_coord[0], end_coord[1]);
+    let bounds = new L.LatLngBounds(begin, finish);
+
+    this.map.fitBounds(bounds, { padding: [15, 15] });
+
     console.log("start coord: ", start_coord);
 
     const lat = 29.651634;
     const lon = -82.324829;
-    const marker_start = L.marker(start_coord,{icon: L.icon({
+    this.marker_start = L.marker(start_coord,{icon: L.icon({
       iconSize: [ 25, 41 ],
       iconAnchor: [10, 40],
       popupAnchor: [18, -40],
@@ -92,9 +121,9 @@ export class MapComponent implements AfterViewInit,OnChanges {
       shadowUrl: 'leaflet/marker-shadow.png'
     })}).addTo(this.map);
 
-    marker_start.bindPopup(this.popupService.makePopup({name:'Start',state:'FL'}));
+    this.marker_start.bindPopup(this.popupService.makePopup({name:'Start',state:'FL'}));
 
-    const marker_end = L.marker(end_coord,{icon: L.icon({
+    this.marker_end = L.marker(end_coord,{icon: L.icon({
       iconSize: [ 25, 41 ],
       iconAnchor: [10, 40],
       popupAnchor: [18, -40],
@@ -102,9 +131,9 @@ export class MapComponent implements AfterViewInit,OnChanges {
       shadowUrl: 'leaflet/marker-shadow.png'
     })}).addTo(this.map);
 
-    marker_end.bindPopup(this.popupService.makePopup({name:'End',state:'FL'}));
+    this.marker_end.bindPopup(this.popupService.makePopup({name:'End',state:'FL'}));
 
-    const line = L.polyline(temp_coords,{
+    this.line = L.polyline(temp_coords,{
       color: "Blue",
       weight: 8,
       opacity: 0.65

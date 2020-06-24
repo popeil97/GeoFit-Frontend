@@ -40,5 +40,9 @@ export class RaceService {
     return this.http.post('http://localhost:8000/api/updateAbout/',{form:aboutForm,race_id:race_id}).toPromise();
   }
 
+  createRace(raceForm:any) {
+    return this.http.post('http://localhost:8000/api/create/',{form:raceForm}).toPromise();
+  }
+
 
 }

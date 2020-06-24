@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { CoordinatesService } from '../coordinates.service';
+import { MapComponent } from '../map/map.component';
+import { RaceService } from '../race.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-race-create',
@@ -9,11 +12,20 @@ import { CoordinatesService } from '../coordinates.service';
 })
 export class RaceCreateComponent implements OnInit {
 
+  @ViewChild(MapComponent) map:MapComponent;
+
   raceForm:FormGroup;
   options:any[];
   coords:any;
+  startOptions:MapBoxPlace[];
+  endOptions:MapBoxPlace[];
+  isPreviewMode:Boolean= false;
+  previewDistance:string;
 
-  constructor(private coordinateService:CoordinatesService) { 
+  selectedStartLoc:MapBoxPlace;
+  selectedEndLoc:MapBoxPlace;
+
+  constructor(private _coordinateService:CoordinatesService, private _raceService:RaceService, private router:Router) { 
     this.raceForm = new FormGroup({
       name: new FormControl('',[
         Validators.required,
@@ -46,18 +58,132 @@ export class RaceCreateComponent implements OnInit {
       }
     ];
 
-    this.coords = coordinateService.getCoordinates({},{});
   }
 
   ngOnInit() {
   }
 
-  preview() {
+  locationFilter(key:string) {
+    let query:string = this.raceForm.value[key];
+    console.log('QUERY:',query);
+
+    this._coordinateService.getLocation(query).then((resp:MapBoxPlaceResp) => {
+      console.log('LOCATION RESP:',resp);
+
+      if(key == 'startLoc') {
+        this.selectedStartLoc = null;
+        this.startOptions = resp.features;
+      }
+
+      else {
+        this.selectedEndLoc = null;
+        this.endOptions = resp.features;
+      }
+    })
+  }
+
+  selectOption(option:any, key:string) {
+    console.log('TEST:',option);
+    if(key == 'startLoc') {
+      this.selectedStartLoc = option;
+    }
+
+    else {
+      this.selectedEndLoc = option;
+    }
+  }
+
+  clearForm() {
+    this.selectedEndLoc = null;
+    this.selectedStartLoc = null;
+    this.raceForm.reset();
+  }
+
+  submitRaceForm() {
+    let formClean = this.raceForm.value as RaceForm;
     console.log(this.raceForm);
+    let isValid: Boolean = this.raceForm.valid;
+
+    if(isValid) {
+
+      formClean.start_lon = this.selectedStartLoc.center[0];
+      formClean.start_lat = this.selectedStartLoc.center[1];
+
+      formClean.end_lon = this.selectedEndLoc.center[0];
+      formClean.end_lat = this.selectedEndLoc.center[1];
+
+      console.log('CLEAN FORM:',formClean);
+
+      this._raceService.createRace(formClean).then((resp:FromResp) => {
+        console.log('CREATE RESP:',resp)
+
+        this.router.navigate(['/about',{name:resp.name,id:resp.race_id}]);
+      });
+
+      this.raceForm.reset();
+    }
   }
 
-  locationFilter(event) {
-    console.log(event);
-  }
+  preview() {
+    if(this.selectedStartLoc != null && this.selectedEndLoc != null) {
+      let start_coord:MapBoxCoord = this.selectedStartLoc.center;
+      let end_coord:MapBoxCoord = this.selectedEndLoc.center;
 
+      start_coord.lon = this.selectedStartLoc.center[0];
+      start_coord.lat = this.selectedStartLoc.center[1];
+
+      end_coord.lon = this.selectedEndLoc.center[0];
+      end_coord.lat = this.selectedEndLoc.center[1];
+
+      console.log(start_coord);
+      console.log(end_coord);
+
+      this._coordinateService.getCoordinates(start_coord,end_coord).then((resp:GraphHopperResp) => {
+        console.log('RESP:',resp);
+        this.map.clearMap();
+        this.coords = resp.coords;
+        this.isPreviewMode = true;
+        this.previewDistance = resp.distance.toString() + resp.dist_unit
+      })
+    }
+  }
+}
+
+interface MapBoxPlaceResp {
+  features: any[];
+}
+
+interface MapBoxPlace {
+  center:any;
+  place_name:string;
+}
+
+export interface MapBoxCoord {
+  lon:number;
+  lat:number;
+}
+
+interface GraphHopperResp {
+  coords:any[];
+  distance:number;
+  dist_unit:string;
+}
+
+interface RaceForm {
+  start_lon:number;
+  start_lat:number;
+  end_lon:number;
+  end_lat:number;
+  valid:Boolean;
+  name:string,
+  startDate:string;
+  endDate:string;
+  startLoc:string;
+  endLoc:string;
+  public:Boolean;
+}
+
+interface FromResp {
+  race_id:number;
+  name:string;
 }
