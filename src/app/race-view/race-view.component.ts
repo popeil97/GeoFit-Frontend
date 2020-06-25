@@ -16,7 +16,7 @@ declare var $: any
   styleUrls: ['./race-view.component.css']
 })
 export class RaceViewComponent implements OnInit {
-  @ViewChild(MapComponent) mapChild: MapComponent ; 
+  @ViewChild(MapComponent) mapChild: MapComponent ;
   @ViewChild(RaceFeedComponent) feedChild: RaceFeedComponent;
 
   public followers:any[];
@@ -37,7 +37,7 @@ export class RaceViewComponent implements OnInit {
   constructor(private raceService:RaceService,
                   private activitiesService:ActivitiesService,
                   private route: ActivatedRoute,
-                  private storyService: StoryService) { 
+                  private storyService: StoryService) {
     this.modalData = {};
   }
 
@@ -99,7 +99,7 @@ export class RaceViewComponent implements OnInit {
 
   getRaceState(): void {
     this.raceService.getRace(this.raceID).subscribe(data => {
-      
+
       let raceData = data as RaceData;
       console.log('RACE DATA:',raceData);
       this.progress = raceData.progress;
@@ -110,6 +110,7 @@ export class RaceViewComponent implements OnInit {
 
       console.log('COORDS:',this.coords);
       console.log("ALL USER DATA", this.all_user_data);
+      console.log("LEADERBOARD ITEMS: ", this.leaderboard);
 
       this.loading = false;
     });

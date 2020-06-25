@@ -13,9 +13,9 @@ export class UsersComponent implements OnInit {
    * An object representing the user for the login form
    */
   public user: any;
- 
+
   constructor(private _userService: UserService) { }
- 
+
   ngOnInit() {
     this.user = {
       username: '',
@@ -26,21 +26,21 @@ export class UsersComponent implements OnInit {
     if (localStorage.getItem('access_token')){
       this._userService.token = localStorage.getItem('access_token');
     }
-    
+
   }
 
   register() {
     this._userService.register({'username': this.user.username, 'password': this.user.password});
   }
- 
+
   login() {
     this._userService.login({'username': this.user.username, 'password': this.user.password});
   }
- 
+
   refreshToken() {
     this._userService.refreshToken();
   }
- 
+
   logout() {
     this._userService.logout();
   }
