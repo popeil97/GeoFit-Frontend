@@ -41,6 +41,7 @@ export class RaceService {
   }
 
   createRace(raceForm:any) {
+    console.log('SERVICE FILE:',raceForm)
     return this.http.post('http://localhost:8000/api/create/',{form:raceForm}).toPromise();
   }
 

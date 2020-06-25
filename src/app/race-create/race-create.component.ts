@@ -4,6 +4,7 @@ import { CoordinatesService } from '../coordinates.service';
 import { MapComponent } from '../map/map.component';
 import { RaceService } from '../race.service';
 import { Router } from '@angular/router';
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-race-create',
@@ -20,7 +21,9 @@ export class RaceCreateComponent implements OnInit {
   startOptions:MapBoxPlace[];
   endOptions:MapBoxPlace[];
   isPreviewMode:Boolean= false;
+  loading:Boolean = false;
   previewDistance:string;
+  uploadeUrl:any;
 
   selectedStartLoc:MapBoxPlace;
   selectedEndLoc:MapBoxPlace;
@@ -112,7 +115,7 @@ export class RaceCreateComponent implements OnInit {
       formClean.end_lon = this.selectedEndLoc.center[0];
       formClean.end_lat = this.selectedEndLoc.center[1];
 
-      console.log('CLEAN FORM:',formClean);
+      formClean.routeFile = this.uploadeUrl;
 
       this._raceService.createRace(formClean).then((resp:FromResp) => {
         console.log('CREATE RESP:',resp)
@@ -125,7 +128,9 @@ export class RaceCreateComponent implements OnInit {
   }
 
   preview() {
+    
     if(this.selectedStartLoc != null && this.selectedEndLoc != null) {
+      this.loading=true;
       let start_coord:MapBoxCoord = this.selectedStartLoc.center;
       let end_coord:MapBoxCoord = this.selectedEndLoc.center;
 
@@ -144,7 +149,24 @@ export class RaceCreateComponent implements OnInit {
         this.coords = resp.coords;
         this.isPreviewMode = true;
         this.previewDistance = resp.distance.toString() + resp.dist_unit
+        this.loading=false;
       })
+    }
+  }
+
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      let file = event.target.files[0];
+
+      console.log('FILE:',file);
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.uploadeUrl = file;
+      }
     }
   }
 }
@@ -181,6 +203,7 @@ interface RaceForm {
   startLoc:string;
   endLoc:string;
   public:Boolean;
+  routeFile:any;
 }
 
 interface FromResp {
