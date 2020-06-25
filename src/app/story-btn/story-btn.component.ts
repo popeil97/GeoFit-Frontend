@@ -10,11 +10,14 @@ export class StoryBtnComponent implements OnInit {
   // ID of story we like/unlike/delete
   @Input() storyID : number;
 
-  //Use of this button. Can be 'like' or 'delete'
+  // Use of this button. Can be 'like' or 'delete'
   @Input() use: string;
 
   // TRUE if user likes this story, else FALSE
   @Input() likes: boolean;
+
+  // Count of number of likes this story has
+  @Input() likesCount: number;
 
   constructor(private _storyService:StoryService) {
   }
@@ -24,12 +27,13 @@ export class StoryBtnComponent implements OnInit {
 
   changeLikeStatus(){
     if (this.likes){
-      console.log("unliking story ", this.storyID);
       this._storyService.changeLikeStatus(this.storyID);
+      this.likesCount -= 1;
     }
+
     else {
-      console.log("liking story ", this.storyID);
       this._storyService.changeLikeStatus(this.storyID);
+      this.likesCount += 1;
     }
 
     this.likes = !this.likes;

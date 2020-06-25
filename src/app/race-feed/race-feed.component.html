@@ -7,7 +7,14 @@
   <tbody>
     <tr *ngFor = "let activity of feedItems" (click)="clickedOnFeedItem(activity)">
         <td><img width="50px" src="{{ activity.profile_url }}"></td>
-        <td>{{ activity.message }}</td>
+        <td>{{ activity.message }}
+          <div *ngIf="activity.story">
+            <img width="100px" src="{{ activity.story_image }}">
+            <p>{{ activity.story_text }}</p>
+            <app-story-btn [use]="'like'" [storyID]=activity.story_id [likes]=activity.likes [likesCount]=activity.likes_count></app-story-btn>
+          </div>
+        </td>
+
     </tr>
   </tbody>
 </table>
