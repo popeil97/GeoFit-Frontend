@@ -37,6 +37,7 @@ export class RaceViewComponent implements OnInit {
   constructor(private raceService:RaceService,
                   private activitiesService:ActivitiesService,
                   private route: ActivatedRoute,
+                  private router:Router,
                   private storyService: StoryService) {
     this.modalData = {};
   }
@@ -70,6 +71,10 @@ export class RaceViewComponent implements OnInit {
 
   hideModal(id:string): void {
     ($(id) as any).modal('hide');
+  }
+
+  goToTeamForm(): void {
+    this.router.navigate(['/teams',{name:this.raceName,id:this.raceID}]);
   }
 
   importActs(): void {

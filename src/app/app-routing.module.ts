@@ -6,6 +6,7 @@ import { UsersComponent } from './users/users.component';
 import { RaceCreateComponent } from './race-create/race-create.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { RaceAboutComponent } from './race-about/race-about.component';
+import { TeamFormComponent } from './team-form/team-form.component';
 
 const routes: Routes = [
   {path: 'race', component:RaceViewComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'create', component:RaceCreateComponent},
   {path: 'profile',component:UserPageComponent},
   {path:'about',component:RaceAboutComponent},
+  {path:'teams',component:TeamFormComponent},
 ];
 
 @NgModule({

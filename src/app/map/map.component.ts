@@ -274,7 +274,9 @@ export class MapComponent implements AfterViewInit,OnChanges {
       //Retain markers in dict so we can pan to it upon select
       console.log(this.markersByUserID);
       console.log("this user's id: ", this.userData[i].user);
-      this.markersByUserID[this.userData[i].user_id.toString()] = {
+      //teams :P
+      let elementID = this.userData[i].user_id != null ? this.userData[i].user_id.toString() : this.userData[i].team_id.toString();
+      this.markersByUserID[elementID] = {
           'locMarker' : locMarker,
           'latLng' : L.latLng(lat_user, lng_user)};
       }

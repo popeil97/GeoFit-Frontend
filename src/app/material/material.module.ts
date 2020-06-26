@@ -8,6 +8,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSelectModule} from '@angular/material/select'
 import {MatCardModule} from '@angular/material/card'
+import { MatExpansionModule } from '@angular/material/expansion';
 
 const MaterialComponents = [
   MatButtonModule,
@@ -19,6 +20,7 @@ const MaterialComponents = [
   MatTabsModule,
   MatSelectModule,
   MatCardModule,
+  MatExpansionModule,
 ];
 
 @NgModule({

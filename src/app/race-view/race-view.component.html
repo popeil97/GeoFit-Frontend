@@ -12,6 +12,7 @@
           </mat-tab>
           <mat-tab label="Manual">
             <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
+            
           </mat-tab>
         </mat-tab-group>
         
@@ -44,6 +45,10 @@
 
 <a class="btn btn-primary btn-customized inviteToggle" data-toggle="modal" data-target="#storyModal" (click)="showModal('#storyModal')">
   <span style="color:white">Add a Story</span>
+</a>
+
+<a class="btn btn-primary btn-customized inviteToggle" (click)="goToTeamForm()">
+  <span style="color:white">Create Team</span>
 </a>
   </mat-sidenav-content>
 </mat-sidenav-container>
