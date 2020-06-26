@@ -1,0 +1,8 @@
+span {
+  font-weight: 500;
+}
+
+span:hover{
+  text-decoration:underline;
+  cursor:pointer;
+}

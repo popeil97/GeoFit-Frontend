@@ -7,7 +7,9 @@
   <tbody>
     <tr *ngFor = "let activity of feedItems" (click)="clickedOnFeedItem(activity)">
         <td><img width="50px" src="{{ activity.profile_url }}"></td>
-        <td>{{ activity.message }}
+        <td>
+          <app-user-profile-nav [username]=activity.display_name></app-user-profile-nav>
+          {{ activity.message }}
           <div *ngIf="activity.story">
             <img width="100px" src="{{ activity.story_image }}">
             <p>{{ activity.story_text }}</p>
