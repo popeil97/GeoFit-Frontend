@@ -12,9 +12,9 @@ export class RaceFeedComponent implements OnInit {
 
   private feedItems: Array<FeedObj>;
 
-  constructor(private _raceFeedService : RaceFeedService) { 
+  constructor(private _raceFeedService : RaceFeedService) {
     this.feedItems = [];
-    
+
   }
 
   ngOnInit() {
@@ -39,7 +39,7 @@ export class RaceFeedComponent implements OnInit {
     });
 
     console.log("Feed items: ", this.feedItems);
- 
+
   }
 
   // public displayFeedItems(viewComponent, objs){
@@ -89,16 +89,18 @@ export class RaceFeedComponent implements OnInit {
 }
 
 
-
 interface FeedObj {
   user_id: number;
   display_name: string;
   profile_url:string
   joined: boolean;
   traveled: boolean;
+  likes: boolean;
+  likes_count: number;
   story: boolean;
   story_image:string;
   story_text:string;
+  story_id:number;
   total_distance:number;
   last_distance:number;
   message: string;
