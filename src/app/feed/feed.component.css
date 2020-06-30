@@ -1,0 +1,15 @@
+.mat-row {
+  height: auto;
+}
+
+.mat-cell {
+  padding: 8px 8px 8px 0;
+}
+
+.mat-column-ProfilePic {
+  vertical-align: top;
+}
+
+.mat-column-Data {
+  justify-content: center;
+}

@@ -7,7 +7,9 @@ import { Progress } from '../user-progress/user-progress.component';
 import { ActivitiesService } from '../activities.service';
 import { LeaderboardItem } from '../leaderboard/leaderboard.component';
 import { MapComponent } from '../map/map.component';
-import { RaceFeedComponent } from '../race-feed/race-feed.component';
+import { FeedComponent } from '../feed/feed.component';
+import { StoryModalComponent } from '../story-modal/story-modal.component';
+
 declare var $: any
 
 @Component({
@@ -17,7 +19,8 @@ declare var $: any
 })
 export class RaceViewComponent implements OnInit {
   @ViewChild(MapComponent) mapChild: MapComponent ;
-  @ViewChild(RaceFeedComponent) feedChild: RaceFeedComponent;
+  @ViewChild(FeedComponent) feedChild: FeedComponent;
+  @ViewChild(StoryModalComponent) storyModal: StoryModalComponent;
 
   public followers:any[];
   public activities:any[];
@@ -68,6 +71,10 @@ export class RaceViewComponent implements OnInit {
   showModal(id:string): void {
     console.log(id);
     ($(id) as any).modal('show');
+  }
+
+  showStoryModal(id:string): void {
+    this.storyModal.showModal(id);
   }
 
   hideModal(id:string): void {

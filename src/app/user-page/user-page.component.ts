@@ -10,9 +10,7 @@ import { UserProfileService } from '../userprofile.service';
 export class UserPageComponent implements OnInit {
   private username;
 
-  private userData: any[];
-
-  private feedItems: FeedObj[];
+  private userData: UserData;
 
   constructor(private route:ActivatedRoute, private _userProfileService:UserProfileService) { }
 
@@ -41,12 +39,11 @@ export class UserPageComponent implements OnInit {
   // }
 
   getUserData(){
-    console.log(this.username);
+    var component = this;
+
     //Call a to-be-created service which gets user data, feed, statistics etc
     this._userProfileService.getUserProfile(this.username).then((data) => {
-      let userData = data as UserData;
-      console.log(userData);
-      this.feedItems = userData.feed;
+      component.userData = data as UserData;
     });
 
   }
@@ -54,23 +51,11 @@ export class UserPageComponent implements OnInit {
 }
 
 interface UserData {
-  feed:any;
-  email:any;
-  first_name:any;
-  last_name:any;
+  user_id:number;
+  profile_url:string;
+  email:string;
+  first_name:string;
+  last_name:string;
+  follows:boolean;
 }
 
-interface FeedObj {
-  user_id: number;
-  display_name: string;
-  profile_url:string
-  joined: boolean;
-  traveled: boolean;
-  story: boolean;
-  story_image:string;
-  story_text:string;
-  total_distance:number;
-  last_distance:number;
-  message: string;
-  created_ts:number;
-}
