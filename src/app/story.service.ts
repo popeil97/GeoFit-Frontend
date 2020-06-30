@@ -22,7 +22,6 @@ export class StoryService {
       return this.http.post('http://localhost:8000/api/story-upload/',{race_id: race_id,storyImg:img_data, storyText:text_data}).toPromise();
   }
 
-  //TODO: FLESH OUT THESE CALLS
   changeLikeStatus(storyID){
       return this.http.post('http://localhost:8000/api/story-like/',{user_story_id: storyID}).toPromise();
   }
@@ -33,6 +32,18 @@ export class StoryService {
 
   getStoryLikes(storyID){
       return this.http.post('http://localhost:8000/api/story-like-count/',{user_story_id: storyID}).toPromise();
+  }
+
+  getStoryModalData(storyID){
+      return this.http.post('http://localhost:8000/api/story-modal/',{story_id: storyID}).toPromise();
+  }
+
+  getComments(storyID){
+      return this.http.post('http://localhost:8000/api/story-comments/',{story_id: storyID}).toPromise();
+  }
+
+  postComment(storyID, formClean){
+      return this.http.post('http://localhost:8000/api/story-comment-post/', {form:formClean, story_id: storyID}).toPromise();
   }
 
 }

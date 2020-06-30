@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
- 
+
 @Injectable()
 export class RaceFeedService {
- 
+
   // http options used for making API calls
   private httpOptions: any;
 
@@ -15,7 +15,7 @@ export class RaceFeedService {
   public refresh_ts: any;
 
   // ID of race this service queries
-  public raceID: number;
+  public ID: number;
 
   constructor(private http: HttpClient) {
     this.httpOptions = {
@@ -24,14 +24,14 @@ export class RaceFeedService {
 
     this.refresh_ts = null;
   }
- 
+
   public refreshFeed() {
-    console.log("RACEID IN SERVICE: ", this.raceID);
-    var ret = this.http.post('api/refresh-feed/', {refresh : this.refresh_ts, race_id: this.raceID}).toPromise();
+    //Comment this out as we continue to explore ways to refresh feed
+    //this.refresh_ts = Math.round((new Date()).getTime() / 1000);
+    return this.http.post('api/refresh-feed/', {refresh : this.refresh_ts, race_id: this.ID}).toPromise();
+  }
 
-    //Update the refesh timestamp
-    this.refresh_ts = Math.round((new Date()).getTime() / 1000);
-
-    return ret;
+  public resetFeed(){
+    this.refresh_ts = null;
   }
 }

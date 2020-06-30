@@ -10,22 +10,22 @@
           <label name="Name">Name</label>
           <input class="form-control" type="text" placeholder="Name" formControlName="name"/>
         </div>
-  
+
         <div class="form-group" style="text-align: left; padding: 5px;">
           <label name="start_date">Start Date</label>
           <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #startDatePicker></mat-datepicker>
           <input class="form-control" [matDatepicker]="startDatePicker" formControlName="startDate">
-          
+
         </div>
-  
+
         <div class="form-group" style="text-align: left; padding: 5px;">
           <label name="end_date">End Date</label>
           <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #endDatePicker></mat-datepicker>
           <input class="form-control" [matDatepicker]="endDatePicker" formControlName="endDate">
         </div>
-  
+
         <div class="form-group" style="text-align: left; padding: 5px;">
           <label name="start_loc">Start Location</label>
           <input class="form-control" type="text" placeholder="Start Location" formControlName="startLoc" [matAutocomplete]="startLocAuto" (keyup)="locationFilter('startLoc')" />
@@ -35,7 +35,7 @@
             </mat-option>
           </mat-autocomplete>
         </div>
-  
+
         <div class="form-group" style="text-align: left; padding: 5px;">
           <label name="end_loc">End Location</label>
           <input class="form-control" type="text" placeholder="End Location" formControlName="endLoc" [matAutocomplete]="endLocAuto" (keyup)="locationFilter('endLoc')"/>
@@ -46,12 +46,12 @@
             </mat-option>
           </mat-autocomplete>
         </div>
-  
+
         <div class="form-group" style="text-align: left; padding: 5px;">
           <label name="route_file">Route File(optional)</label>
           <input type="file" formControlName="routeFile" (change)="onSelectFile($event)"/>
         </div>
-  
+
         <div class="form-group" style="text-align: left; padding: 5px; float: left;">
           <label name="public_check">Public</label>
           <input class="form-control" type="checkbox" formControlName="public" />
@@ -78,24 +78,23 @@
         <!-- <div class="form-group" style="padding: 5px; position: fixed; float: right;">
           <button class="btn btn-danger" mat-raised-button (click)="clearForm()">Clear</button>
         </div> -->
-        
+
       </form>
-      
-      
+
+
     </mat-sidenav>
     <mat-sidenav-content>
       <app-map [coordinates]="coords" [displayUsers]="false"></app-map>
-  
+
       <a class="btn btn-primary btn-customized open-menu" role="button" (click)="menu.toggle()">
         <i class="fas fa-align-left"></i> <span>Menu</span>
     </a>
-  
+
     </mat-sidenav-content>
   </mat-sidenav-container>
   <!-- Wrapper -->
-  
+
       <!-- open sidebar menu -->
-  
+
   </div>
-  
-  
+
