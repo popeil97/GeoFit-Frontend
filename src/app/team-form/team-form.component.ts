@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TeamService } from '../team.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-team-form',
@@ -14,8 +15,10 @@ export class TeamFormComponent implements OnInit {
   uploadedUrl:any;
   raceName:string;
   raceID:number;
+  followerOptions:any[];
+  followersInvited:any[] = [];
 
-  constructor(private _teamService:TeamService,private route: ActivatedRoute,private router:Router) { 
+  constructor(private _teamService:TeamService,private _userService:UsersService,private route: ActivatedRoute,private router:Router) { 
     this.teamForm = new FormGroup({
       name: new FormControl('',[
         Validators.required,
@@ -24,7 +27,8 @@ export class TeamFormComponent implements OnInit {
       teamImg: new FormControl(''),
       description: new FormControl('',[
         Validators.required
-      ])
+      ]),
+      invited: new FormControl('')
     });
   }
 
@@ -32,6 +36,11 @@ export class TeamFormComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.raceName = params['params']['name'];
       this.raceID = params['params']['id'];
+    });
+
+    this._userService.getFollowersAndFollowed().then((resp:FollowersResp) => {
+      console.log('RESP:',resp);
+      this.followerOptions = resp.follwers_and_followed;
     });
   }
 
@@ -41,12 +50,34 @@ export class TeamFormComponent implements OnInit {
       if(this.teamForm.valid) {
         formClean = this.teamForm.value;
         formClean.teamImg = this.uploadedUrl;
+        formClean.invited = this.followersInvited.map((follower) => follower.user_id);
 
         this._teamService.createTeam(formClean,this.raceID).then((resp:TeamFormResp) => {
           console.log('TEAM FORM RESP:',resp);
           this.router.navigate(['/race',{id:this.raceID,name:this.raceName}]);
         });
       }
+  }
+
+  addFollower(option:any) {
+
+    if(this.followersInvited.some(follower => follower.user_id == option.user_id)) {
+      return;
+    }
+
+    console.log('option:',option);
+    this.followersInvited.push(option);
+
+    console.log(this.teamForm.value);
+    this.teamForm.controls['invited'].setValue('');
+    console.log(this.teamForm.value);
+  }
+
+  removeFollower(id:number) {
+    this.followersInvited = this.followersInvited.filter((follower) => {
+      return follower.user_id != id;
+    });
+    console.log(this.followersInvited);
   }
 
   onSelectFile(event) {
@@ -67,8 +98,13 @@ export interface TeamForm {
   name:string,
   description:string,
   teamImg:any,
+  invited:any[]
 }
 
 interface TeamFormResp {
   success:Boolean;
+}
+
+interface FollowersResp {
+  follwers_and_followed:any[];
 }

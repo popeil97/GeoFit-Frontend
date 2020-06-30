@@ -30,6 +30,7 @@ export class RaceViewComponent implements OnInit {
   public coords:any;
   public leaderboard:LeaderboardItem[];
   public all_user_data:Array<FeedObj>;
+  public teams:any[];
 
   private storyImage:string;
   private storyText:string;
@@ -112,7 +113,12 @@ export class RaceViewComponent implements OnInit {
       this.coords = {coords:raceData.coords};
       this.leaderboard = raceData.leaderboard;
       this.all_user_data = raceData.users_data as Array<FeedObj>;
-
+      this.teams = raceData.users_data.filter((user_data) => {
+        if(user_data.isTeam) {
+          return user_data;
+        }
+      });
+      console.log('TEAMS:',this.teams);
       console.log('COORDS:',this.coords);
       console.log("ALL USER DATA", this.all_user_data);
       console.log("LEADERBOARD ITEMS: ", this.leaderboard);

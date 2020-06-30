@@ -25,6 +25,10 @@
           <mat-tab label="Pace">
 
           </mat-tab>
+
+          <mat-tab label="Teams">
+            <app-team-list [teams]="teams"></app-team-list>
+          </mat-tab>
         </mat-tab-group>
         
       </mat-tab>
@@ -33,6 +37,7 @@
         <app-race-feed [raceID]="raceID" (feedItemClicked)="panToUserMarker($event)"></app-race-feed>>
       </mat-tab>
     </mat-tab-group>
+    
     
   </mat-sidenav>
   <mat-sidenav-content>

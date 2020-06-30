@@ -45,6 +45,7 @@ import { StoryBtnComponent } from './story-btn/story-btn.component';
 import { TeamFormComponent } from './team-form/team-form.component';
 import { TeamListComponent } from './team-list/team-list.component';
 import { UserProfileNavComponent } from './user-profile-nav/user-profile-nav.component';
+import { NotificationComponent } from './notification/notification.component';
 
 
 @NgModule({
@@ -72,6 +73,7 @@ import { UserProfileNavComponent } from './user-profile-nav/user-profile-nav.com
     TeamFormComponent,
     TeamListComponent,
     UserProfileNavComponent,
+    NotificationComponent,
   ],
   imports: [
     BrowserModule,

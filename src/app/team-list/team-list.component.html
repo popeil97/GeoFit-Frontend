@@ -1,34 +1,23 @@
 <mat-accordion>
-  <mat-expansion-panel>
+  <mat-expansion-panel *ngFor="let team of teams">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        This is the expansion title
+        <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + team.profile_url + ')'}" style="position:relative; padding-top: 5px; float:left;"></div>
+        <div style="padding: 10px;">{{team.display_name}}</div>
       </mat-panel-title>
-      <mat-panel-description>
-        This is a summary of the content
+      <mat-panel-description style="padding:8px;">
+        {{team.total_distance}} {{team.distance_type}}
       </mat-panel-description>
     </mat-expansion-panel-header>
 
-    <p>This is the primary content of the panel.</p>
+    <mat-card *ngFor="let member of team.child_user_stats">
+      <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + member.profile_url + ')'}" style="position: relative; float:left;"></div>
+      <div style="padding-left: 50px;">{{member.display_name}}</div>
+      <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div>
+    </mat-card>
 
     <mat-action-row>
-      <button mat-button>Click me</button>
-    </mat-action-row>
-  </mat-expansion-panel>
-  <mat-expansion-panel>
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-        This is the expansion title
-      </mat-panel-title>
-      <mat-panel-description>
-        This is a summary of the content
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-
-    <p>This is the primary content of the panel.</p>
-
-    <mat-action-row>
-      <button mat-button>Click me</button>
+      <button mat-button (click)="joinRequest(team)">Request to Join</button>
     </mat-action-row>
   </mat-expansion-panel>
 <mat-accordion>

@@ -1,8 +1,5 @@
 <br>
-<br>
-<br>
-<br>
-<br>
+
 <app-loader [isActive]="loading"></app-loader>
 <div class="container">
   <a type="button" class="btn btn-primary" style="float:right" routerLink='/create'>Create Race</a>
@@ -93,62 +90,6 @@
     </mat-card>
   </div>
 </div>
-
-  <!-- <table class="table table-striped table-dark" id='races_user_view' *ngIf="isUserRaces">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Distance</th>
-        <th scope="col">Start Loc</th>
-        <th scope="col">End Loc</th>
-        <th scope="col">Start Date</th>
-        <th scope="col">End Date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let race of userRaces">
-        <th scope="row">{{race.name}}</th>
-        <td>{{race.distance}} {{race.distance_type}}</td>
-        <td>{{race.start_loc}}</td>
-        <td>{{race.end_loc}}</td>
-        <td>{{race.start_date}}</td>
-        <td>{{race.end_date}}</td>
-
-        <td>
-            <a type="button" class="btn btn-secondary" (click)="viewRace(race)">View</a>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <table class="table table-striped table-dark" id='races_invited_view' *ngIf="isInvitedRaces">
-    <thead>
-      <tr>
-        <th scope="col">Name</th>
-        <th scope="col">Distance</th>
-        <th scope="col">Start Loc</th>
-        <th scope="col">End Loc</th>
-        <th scope="col">Start Date</th>
-        <th scope="col">End Date</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let race of racesInvited">
-          <th scope="row">{{race.name}}</th>
-          <td>{{race.distance}} {{race.distance_type}}</td>
-          <td>{{race.start_loc}}</td>
-          <td>{{race.end_loc}}</td>
-          <td>{{race.start_date}}</td>
-          <td>{{race.end_date}}</td>
-
-            <td>
-              <button type="button" class="btn btn-secondary" (click)="joinRace(race)">Join!</button>
-          </td>
-
-
-          </tr>
-    </tbody>
-  </table> -->
 </div>
 
 
