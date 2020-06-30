@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from '../notifications.service';
-import 'rxjs/Rx';
+// import 'rxjs/Rx';
 import {Observable} from 'rxjs/Rx';
-import { switchMap } from 'rxjs/operators';
+// import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav',
