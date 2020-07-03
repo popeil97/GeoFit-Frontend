@@ -33,6 +33,8 @@ export class FeedComponent implements OnInit {
 
   private _feedService: any;
 
+  private initialized: boolean;
+
   private columns:string[] = ['ProfilePic','Data'];
 
   constructor(private _userProfileService: UserProfileService, private _raceFeedService: RaceFeedService) {
@@ -55,6 +57,30 @@ export class FeedComponent implements OnInit {
       this.resetFeed();
       this.refreshFeed();
     }
+
+    this.initialized = true;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    //Check if user or race ID changes between hops
+    //If yes, we need to update our feed service and pull new data
+
+    if (this.initialized){
+      for(const propName in changes) {
+        if(changes.hasOwnProperty(propName)) {
+
+          switch(propName) {
+            case 'ID':
+              if(changes.ID.currentValue != undefined) {
+                this._feedService.ID = this.ID;
+                this.resetFeed();
+                this.refreshFeed();
+              }
+          }
+        }
+      }
+    }
+
   }
 
   showStoryModal(storyID): void {
@@ -63,12 +89,9 @@ export class FeedComponent implements OnInit {
     //WE CAN EITHER EMIT STORY MODAL CLICK OUTPUT
     //OR CALL IT DIRECTLY TO THE CHILD MODAL
     if (!this.hasStoryModalChild){
-      console.log('hey');
-      console.log(this.hasStoryModalChild);
       this.storyItemClicked.emit(storyID);
     }
     else{
-      console.log(this.hasStoryModalChild);
       this.storyModalChild.showModal(storyID);
     }
   }

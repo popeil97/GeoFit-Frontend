@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserProfileService } from '../userprofile.service';
+
+declare var $: any;
 
 @Component({
   selector: 'app-user-profile-nav',
@@ -15,6 +17,11 @@ export class UserProfileNavComponent implements OnInit {
   }
 
   goToUserProfile(){
+    //Close modals etc to ensure website works as intended
+    if (document.getElementById('close-modal')){
+      document.getElementById('close-modal').click();
+    }
+
     this._userProfileService.goToUserProfile(this.username);
   }
 

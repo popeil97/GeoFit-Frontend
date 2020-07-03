@@ -1,9 +1,16 @@
 import { AfterViewInit, Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { UserProfileService } from '../userprofile.service';
-import * as L from 'leaflet';
+//import * as L from 'leaflet';
+//import * as markercluster from 'leaflet.markercluster';
 import { PopUpService } from '../pop-up.service';
+
+import 'leaflet';
+import 'leaflet.markercluster';
+const L = window['L'];
+
 import * as _ from 'lodash';
 import * as turf from '@turf/turf';
+import { ListKeyManager } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'app-map',
@@ -15,6 +22,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
   @Input() draw:Boolean;
   @Input() displayUsers:Boolean;
   @Input() userData:any;
+  @Input() followedIDs:any;
 
   private map;
   private coordsRoute;
@@ -40,7 +48,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
               this.applyCoordinates();
               this.coordsRoute = turf.lineString(this.coordinates.coords, { name: "route" });
               if(this.displayUsers) {
-                this.plotUserPins();
+                this.createUserPins();
               }
 
             }
@@ -121,17 +129,17 @@ export class MapComponent implements AfterViewInit,OnChanges {
       iconAnchor: [10, 40],
       popupAnchor: [18, -40],
       iconUrl: 'leaflet/marker-icon.png',
-      shadowUrl: 'leaflet/marker-shadow.png'
+      shadowUrl: 'leaflet/marker-shadow.png',
     })}).addTo(this.map);
 
     this.marker_start.bindPopup(this.popupService.makePopup({name:'Start',state:'FL'}));
 
     this.marker_end = L.marker(end_coord,{icon: L.icon({
-      iconSize: [ 25, 41 ],
+      iconSize: [ 38, 36 ],
       iconAnchor: [10, 40],
       popupAnchor: [18, -40],
-      iconUrl: 'leaflet/marker-icon.png',
-      shadowUrl: 'leaflet/marker-shadow.png'
+      iconUrl: 'http://localhost:8000/media/endflag.png',
+      shadowUrl: 'leaflet/marker-shadow.png',
     })}).addTo(this.map);
 
     this.marker_end.bindPopup(this.popupService.makePopup({name:'End',state:'FL'}));
@@ -143,14 +151,36 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }).addTo(this.map);
   }
 
-  private plotUserPins(){
-
+  public clearUserPins(){
     //Remove all current user pins
+    console.log(this.markersByUserID);
     for (var id in this.markersByUserID){
+      console.log("removing id ", id)
       this.markersByUserID[id]['locMarker'].remove();
+      //If this doesn't work, try
+      //this.map.removeLayer(this.markersByUserID[id]['locMarker']);
     }
-    this.markersByUserID = {};
+  }
 
+  public showPinsByID(IDs){
+    //Clear all pins
+    this.clearUserPins();
+
+    //Add user markers based on IDs argument
+    //If IDs null, add all users
+    for (var id in this.markersByUserID){
+      if (IDs == null || IDs.includes(parseInt(id))){
+        this.markersByUserID[id]['locMarker'].addTo(this.map);
+      }
+      else {
+        this.markersByUserID[id]['locMarker'].remove();
+        //If this doesn't work, try
+        //this.map.removeLayer(this.markersByUserID[id]['locMarker']);
+      }
+    }
+  }
+
+  private createUserPins(){
     // doing this temporarily because Lat/Lon are reversed smh
     // _.forEach(this.coordinates.coords,(coord) => {
     //   let temp = coord[0];
@@ -158,9 +188,42 @@ export class MapComponent implements AfterViewInit,OnChanges {
     //   coord[1] = temp;
     // });
 
-    console.log("coords in plot: ", this.coordinates.coords);
+    var maxMarkersInCluster = 4;
 
-    console.log("this user_data: ", this.userData);
+    var markerClusters = L.markerClusterGroup({
+      //disableClusteringAtZoom: 12, //12
+      maxClusterRadius: 20, //20
+      animateAddingMarkers: true,
+      iconCreateFunction: function(cluster){
+          var markers = cluster.getAllChildMarkers();
+          var markersInCluster = Math.min(maxMarkersInCluster, markers.length);
+
+          var inner_html = '';
+
+          for (let i = 0; i < markersInCluster; i++){
+            var img_class = 'pos' + (i).toString() + 'of' + markersInCluster.toString();
+
+            var content = markers[i]['options']['icon']['options']['html']
+            var regex = /<img.*?src=['"](.*?)['"]/;
+            var img_src = regex.exec(content)[1];
+
+            inner_html += "<img class=\"" + img_class + "\" src=\"" + img_src + "\">"
+          }
+
+          //Remember to add the pin to the cluster pin
+          inner_html += '<div class="pin"></div>';
+
+          var divClass = 'cluster-pin-' + markersInCluster.toString();
+
+          return L.divIcon({
+            className: divClass,
+            html: inner_html,
+            iconSize: [30, 30],
+            iconAnchor: [10, 33],
+            popupAnchor: [0, -62],
+          });
+        }
+    });
 
     for (var i = 0; i < this.userData.length; i++){
       var img_html = "<img src=\"" + this.userData[i].profile_url + "\";\"><div class=\"pin\"></div><div class=\"pulse\"></div>";
@@ -174,26 +237,20 @@ export class MapComponent implements AfterViewInit,OnChanges {
       });
 
       var user_ran_miles = this.userData[i].total_distance;
-      console.log("user ran miles: ", user_ran_miles);
 
       var along_user = turf.along(this.coordsRoute, user_ran_miles, {units: 'miles'});
-      console.log("along user: ", along_user);
 
       var lng_user = along_user.geometry.coordinates[0];
       var lat_user = along_user.geometry.coordinates[1];
-
-      console.log("lnglat")
-      console.log(lng_user);
-      console.log(lat_user);
 
       var locMarker = L.geoJSON(along_user, {
         pointToLayer: function(feature, latlng) {
           return L.marker(latlng, { icon: userIcon });
         }
       })
-        .addTo(this.map)
+        //.addTo(this.map)
 
-      console.log("added loc marker!");
+      markerClusters.addLayer(locMarker);
 
       //Create template popup text
       var popupText = "<center><b>" +
@@ -276,15 +333,18 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
       //Retain markers in dict so we can pan to it upon select
       console.log(this.markersByUserID);
-      console.log("this user's id: ", this.userData[i].user);
+
       //teams :P
-      let elementID = this.userData[i].user_id != null ? this.userData[i].user_id.toString() : this.userData[i].team_id.toString();
+      let elementID = this.userData[i].user_id
       this.markersByUserID[elementID] = {
           'locMarker' : locMarker,
-          'latLng' : L.latLng(lat_user, lng_user)};
-      }
-
+          'latLng' : L.latLng(lat_user, lng_user)
+      };
     }
+
+    //Add pin clusters to map
+    this.map.addLayer(markerClusters);
+  }
 
   private goToUserProfile(username:string){
     this._profileService.goToUserProfile(username);

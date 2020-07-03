@@ -17,33 +17,32 @@ export class UserPageComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.username = params['params']['username'];
+      this.getUserData();
+      console.log(this.username);
     });
 
-    this.getUserData();
   }
 
-  // ngOnChanges(changes: SimpleChanges) {
-  //   console.log('changes:',changes);
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('changes:',changes);
 
-  //   for(const propName in changes) {
-  //     if(changes.hasOwnProperty(propName)) {
+    for(const propName in changes) {
+      if(changes.hasOwnProperty(propName)) {
 
-  //       switch(propName) {
-  //         case 'username':
-  //           if(changes.username.currentValue != undefined) {
-  //             this.getUserData();
-  //           }
-  //       }
-  //     }
-  //   }
-  // }
+        switch(propName) {
+          case 'username':
+            if(changes.username.currentValue != undefined) {
+              this.getUserData();
+            }
+        }
+      }
+    }
+  }
 
   getUserData(){
-    var component = this;
-
     //Call a to-be-created service which gets user data, feed, statistics etc
     this._userProfileService.getUserProfile(this.username).then((data) => {
-      component.userData = data as UserData;
+      this.userData = data as UserData;
     });
 
   }

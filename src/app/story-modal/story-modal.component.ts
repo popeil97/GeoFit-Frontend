@@ -20,11 +20,7 @@ export class StoryModalComponent implements OnInit {
     console.log("querying with ID: ", storyID);
     this._storyService.getStoryModalData(storyID).then((data) => {
       this.storyItem = data as FeedObj;
-      console.log("new story item: ", this.storyItem);
-      console.log("Comments: ", this.storyItem.comments);
-      console.log($("#storyModal"));
       $("#storyModal").modal('show');
-      console.log("Showed");
     })
   }
 

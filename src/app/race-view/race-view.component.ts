@@ -18,7 +18,7 @@ declare var $: any
   styleUrls: ['./race-view.component.css']
 })
 export class RaceViewComponent implements OnInit {
-  @ViewChild(MapComponent) mapChild: MapComponent ;
+  @ViewChild(MapComponent) mapChild: MapComponent;
   @ViewChild(FeedComponent) feedChild: FeedComponent;
   @ViewChild(StoryModalComponent) storyModal: StoryModalComponent;
 
@@ -34,6 +34,7 @@ export class RaceViewComponent implements OnInit {
   public leaderboard:LeaderboardItem[];
   public all_user_data:Array<FeedObj>;
   public teams:any[];
+  public followedIDs:number[];
 
   private storyImage:string;
   private storyText:string;
@@ -120,6 +121,7 @@ export class RaceViewComponent implements OnInit {
       this.coords = {coords:raceData.coords};
       this.leaderboard = raceData.leaderboard;
       this.all_user_data = raceData.users_data as Array<FeedObj>;
+      this.followedIDs = raceData.followedIDs;
       this.teams = raceData.users_data.filter((user_data) => {
         if(user_data.isTeam) {
           return user_data;
@@ -129,6 +131,7 @@ export class RaceViewComponent implements OnInit {
       console.log('COORDS:',this.coords);
       console.log("ALL USER DATA", this.all_user_data);
       console.log("LEADERBOARD ITEMS: ", this.leaderboard);
+      console.log("FOLLOWER IDS", this.followedIDs);
 
       this.loading = false;
     });
@@ -181,6 +184,15 @@ export class RaceViewComponent implements OnInit {
     this.storyService.uploadStory(this.raceID, this.storyImage, this.storyText, withLastStory);
   }
 
+  clearUserPins(){
+    this.mapChild.clearUserPins();
+  }
+
+  showPinsByID(IDs){
+    //Pass null to show all pins
+    this.mapChild.showPinsByID(IDs);
+  }
+
 }
 
 interface RaceData {
@@ -189,6 +201,7 @@ interface RaceData {
   coords:any;
   leaderboard:any;
   users_data:any;
+  followedIDs:number[];
 }
 
 interface FeedObj {
