@@ -22,7 +22,28 @@
   </tbody>
 </table>----->
 
-<div class="table-container" >
+<div class="table-container">
+
+  <!---If we are in race view, display form to post new stories-->
+  <div *ngIf="use=='race'">
+    <table class="mat-table" >
+      <tr class="mat-row">
+        <ng-container matColumnDef="ProfilePic" style="padding: 10px;">
+          <td mat-cell>
+            <img width="50px" src="{{ progress.profile_url }}">
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Data" style="padding: 10px;">
+          <td mat-cell>
+            <app-user-profile-nav [username]=progress.username></app-user-profile-nav>
+            <app-story-form [raceID]="ID"></app-story-form>
+          </td>
+        </ng-container>
+      </tr>
+    </table>
+  </div>
+
+
   <table mat-table [dataSource]="feedItems" class="feedTable">
     <ng-container matColumnDef="ProfilePic" style="padding: 10px;">
       <td mat-cell *matCellDef="let element" (click)="clickedOnFeedItem(element)">
@@ -36,10 +57,13 @@
         {{ element.message }}
         <small>{{ element.created_ts }}</small>
         <br>
-        <br>
         <div class="center" *ngIf="element.story">
-          <img width="250px" src="{{ element.story_image }}" (click)="showStoryModal(element.story_id,true)">
-          <p>{{ element.story_text }}</p>
+          <div class="container" *ngIf="element.story_image">
+            <img width="250px" src="{{ element.story_image }}" (click)="showStoryModal(element.story_id,true)">
+          </div>
+          <div class="container" *ngIf="element.story_text">
+            <p>{{ element.story_text }}</p>
+          </div>
 
           <!---If parent component inputs TRUE, we have a story modal component as a child-->
           <div *ngIf="this.hasStoryModalChild">

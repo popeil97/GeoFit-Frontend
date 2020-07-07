@@ -27,6 +27,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
   private map;
   private coordsRoute;
   private markersByUserID = {};
+  private popUpsByMarkers = {};
   private marker_start:any;
   private marker_end:any;
   private line:any;
@@ -192,10 +193,12 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     var markerClusters = L.markerClusterGroup({
       //disableClusteringAtZoom: 12, //12
-      maxClusterRadius: 20, //20
+      maxClusterRadius: 25, //20
       animateAddingMarkers: true,
       iconCreateFunction: function(cluster){
           var markers = cluster.getAllChildMarkers();
+
+          //Maximum of 4 imgs per cluster (choose first 4 children)
           var markersInCluster = Math.min(maxMarkersInCluster, markers.length);
 
           var inner_html = '';
@@ -224,6 +227,9 @@ export class MapComponent implements AfterViewInit,OnChanges {
           });
         }
     });
+
+    //Add pin clusters to map
+    this.map.addLayer(markerClusters);
 
     for (var i = 0; i < this.userData.length; i++){
       var img_html = "<img src=\"" + this.userData[i].profile_url + "\";\"><div class=\"pin\"></div><div class=\"pulse\"></div>";
@@ -262,88 +268,61 @@ export class MapComponent implements AfterViewInit,OnChanges {
                       'miles' +
                       "</center>";
 
-      /*
-      //Display projected info if we are user
-      if (this.userData[i].user_id == my_user_id){
-        popupText +=
-          "<center>" +
-          "You are in " +
-          "<b>" +
-          locPart1 +
-          ", " +
-          state +
-          "</b>" +
-          "</center>";
+      // //Get story image and caption
+      // var userStoryImg = this.userData[i].story_image;
+      // var userStoryCaption = this.userData[i].story_text;
 
-          //Only show times to goal if not null
-          if (ttg != null){
-              popupText +=
-                  "<center>" +
-                  "You are expected to arrive in " +
-                  race_end +
-                  " on " +
-                  "<b>" +
-                  ttg +
-                  "</b>" +
-                  "</center>";
-          }
-          popupText +=
-          "<center>" +
-          "You are averaging " +
-          "<b>" +
-          mpd +
-          "</b>" +
-          " " +
-          distanceUnitsStr +
-          " per day" +
-          "</center>";
-      }
-      */
-      //Get story image and caption
-      var userStoryImg = this.userData[i].story_image;
-      var userStoryCaption = this.userData[i].story_text;
-
-      //Add story info to marker popup
-      if (userStoryImg || userStoryCaption){
-          popupText += "<center>" +
-                  "<a data-toggle=\"modal\" data-target=\"#storyModal\" data-userstatindex=\"" +
-                  i +
-                  "\">" +
-                  "<br><img src=\"" +
-                  userStoryImg +
-                  "\" style=\"max-width:150px;\"></a>" +
-                  "</center>" +
-                  "<center>" +
-                  userStoryCaption +
-                  "</center>";
-      }
-
-      /*
-      //Add text to popup, open if we are user
-      if (all_user_stats[i].user_id == my_user_id){
-        locMarker.bindPopup(popupText, {maxWidth: 200}).openPopup();
-      }
-      else{
-        locMarker.bindPopup(popupText, {maxWidth: 200});
-      }
-      */
+      // //Add story info to marker popup
+      // if (userStoryImg || userStoryCaption){
+      //     popupText += "<center>" +
+      //             "<a data-toggle=\"modal\" data-target=\"#storyModal\" data-userstatindex=\"" +
+      //             i +
+      //             "\">" +
+      //             "<br><img src=\"" +
+      //             userStoryImg +
+      //             "\" style=\"max-width:150px;\"></a>" +
+      //             "</center>" +
+      //             "<center>" +
+      //             userStoryCaption +
+      //             "</center>";
+      // }
 
       //Temp before we retrieve logged in user's ID
-      locMarker.bindPopup(popupText, {maxWidth: 200});
+      //locMarker.bindPopup(popupText, {maxWidth: 200});
+
+      //To work with markercluster, we store popUpText in dict and display onclick (see below)
+      this.popUpsByMarkers[locMarker['_leaflet_id'].toString()] = popupText;
 
       //Retain markers in dict so we can pan to it upon select
-      console.log(this.markersByUserID);
-
-      //teams :P
       let elementID = this.userData[i].user_id
       this.markersByUserID[elementID] = {
           'locMarker' : locMarker,
-          'latLng' : L.latLng(lat_user, lng_user)
+          'latLng' : L.latLng(lat_user, lng_user),
       };
+
     }
 
-    //Add pin clusters to map
-    this.map.addLayer(markerClusters);
+    //POPUPS (unfortunately ruined by markercluster, but fixed here)
+    var popUpsByMarkers = this.popUpsByMarkers;
+    markerClusters.on('click', function(ev) {
+      // Current marker is ev.layer
+
+      if (!ev.layer.getPopup()){
+        //Get popup content if it isn't binded
+        let popUpText = popUpsByMarkers[(ev.layer['_leaflet_id']+1).toString()]
+        //Display
+        ev.layer.bindPopup(popUpText, {maxWidth: 200}).openPopup();
+      }
+      else if (!ev.layer.getPopup()._isOpen){
+        //Open popup if it is already binded
+        ev.layer.getPopup().openPopup();
+      }
+      else {
+        //If popup open before click, close it
+        ev.layer.getPopup().closePopup();
+      }
+
+    });
   }
 
   private goToUserProfile(username:string){

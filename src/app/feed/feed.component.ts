@@ -2,6 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
 import { StoryModalComponent } from '../story-modal/story-modal.component';
 import { RaceFeedService } from './race-feed.service';
 import { UserProfileService } from '../userprofile.service';
+import { StoryFormComponent } from '../story-form/story-form.component';
+
+declare var $: any
 
 @Component({
   selector: 'app-feed',
@@ -15,11 +18,16 @@ export class FeedComponent implements OnInit {
 
   @ViewChild(StoryModalComponent) storyModalChild: StoryModalComponent;
 
+  @ViewChild(StoryFormComponent) storyFormComponent: StoryFormComponent;
+
   //ID of race or user
   @Input() ID:number;
 
   //Items on feed to display
   @Input() feedItems: Array<FeedObj>;
+
+  //Progress object of logged in user
+  @Input() progress: any;
 
   //Use of feed ('race' or 'user')
   @Input() use:string;
@@ -58,6 +66,7 @@ export class FeedComponent implements OnInit {
       this.refreshFeed();
     }
 
+    //this.storyFormComponent.setStoryImageFieldListener();
     this.initialized = true;
   }
 

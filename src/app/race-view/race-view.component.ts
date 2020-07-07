@@ -65,8 +65,6 @@ export class RaceViewComponent implements OnInit {
       last_name:'DonaHOE'
     }];
 
-    //Add listener to story image upload field
-    this.setStoryImageFieldListener();
   }
 
   showModal(id:string): void {
@@ -147,41 +145,6 @@ export class RaceViewComponent implements OnInit {
     //Call map pan function
     console.log("Clicked user id: ", user_id);
     this.mapChild.panToUserMarker(user_id);
-  }
-
-  setStoryImageFieldListener(){
-    //LISTENS TO CHANGES IN IMAGE FILE UPLOAD
-    var setStoryImg = this.setStoryImage;
-    var viewComponent = this;
-
-    var storyImageField = <HTMLInputElement>document.getElementById("storyImage");
-    console.log("adding story event listener");
-    storyImageField.addEventListener('change', function() {
-      var file = this.files[0];
-      var reader: FileReader = new FileReader();
-      reader.onload = function(e) {
-          setStoryImg(viewComponent, reader.result);
-      }
-      reader.readAsDataURL(file);
-    }, false);
-
-  }
-
-  setStoryImage(viewComponent, img_data): void{
-    viewComponent.storyImage = img_data;
-  }
-
-  uploadStory(): void{
-    //This bool tells Django whether to add these fields to the user's last story
-    //or simply create a new story that has no activities
-    //False by default but implement mechanism for true in future
-    let withLastStory = false;
-
-    //Get text field input (image already uploaded via eventListener)
-    this.storyText = (<HTMLInputElement>document.getElementById("storyImageCaption")).value;
-
-    //Upload story via service
-    this.storyService.uploadStory(this.raceID, this.storyImage, this.storyText, withLastStory);
   }
 
   clearUserPins(){

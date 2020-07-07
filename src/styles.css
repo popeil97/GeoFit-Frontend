@@ -96,13 +96,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   animation-delay: 1.1s;
 }
 
-.deg0 { transform: translate(23px); } /* 13px = half the width of the wrapper */
-.deg45 { transform: rotate(45deg) translate(23px) rotate(-45deg); }
-.deg135 { transform: rotate(135deg) translate(23px) rotate(-135deg); }
-.deg180 { transform: translate(-23px); }
-.deg225 { transform: rotate(225deg) translate(23px) rotate(-225deg); }
-.deg315 { transform: rotate(315deg) translate(23px) rotate(-315deg); }
-
 .pos0of2 { transform: rotate(45deg) translate(13px) rotate(-45deg); }
 .pos1of2 { transform: rotate(-135deg) translate(13px) rotate(135deg); }
 

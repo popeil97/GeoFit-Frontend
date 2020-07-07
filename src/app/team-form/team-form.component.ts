@@ -18,7 +18,7 @@ export class TeamFormComponent implements OnInit {
   followerOptions:any[];
   followersInvited:any[] = [];
 
-  constructor(private _teamService:TeamService,private _userService:UsersService,private route: ActivatedRoute,private router:Router) { 
+  constructor(private _teamService:TeamService,private _userService:UsersService,private route: ActivatedRoute,private router:Router) {
     this.teamForm = new FormGroup({
       name: new FormControl('',[
         Validators.required,
@@ -44,19 +44,19 @@ export class TeamFormComponent implements OnInit {
     });
   }
 
-    createTeam(): void {
-      let formClean:TeamForm;
+  createTeam(): void {
+    let formClean:TeamForm;
 
-      if(this.teamForm.valid) {
-        formClean = this.teamForm.value;
-        formClean.teamImg = this.uploadedUrl;
-        formClean.invited = this.followersInvited.map((follower) => follower.user_id);
+    if(this.teamForm.valid) {
+      formClean = this.teamForm.value;
+      formClean.teamImg = this.uploadedUrl;
+      formClean.invited = this.followersInvited.map((follower) => follower.user_id);
 
-        this._teamService.createTeam(formClean,this.raceID).then((resp:TeamFormResp) => {
-          console.log('TEAM FORM RESP:',resp);
-          this.router.navigate(['/race',{id:this.raceID,name:this.raceName}]);
-        });
-      }
+      this._teamService.createTeam(formClean,this.raceID).then((resp:TeamFormResp) => {
+        console.log('TEAM FORM RESP:',resp);
+        this.router.navigate(['/race',{id:this.raceID,name:this.raceName}]);
+      });
+    }
   }
 
   addFollower(option:any) {

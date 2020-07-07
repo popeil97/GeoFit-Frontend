@@ -36,7 +36,7 @@
         <button (click)="clearUserPins()">Clear User Pins!</button>
         <button (click)="showPinsByID(null)">Show User Pins!</button>
         <button (click)="showPinsByID(followedIDs)">Show Followers Only</button>
-        <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)"></app-feed>
+        <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
       </mat-tab>
     </mat-tab-group>
   </mat-sidenav>
@@ -48,9 +48,9 @@
   </a>
 
 
-<a class="btn btn-primary btn-customized inviteToggle" data-toggle="modal" data-target="#storyModal" (click)="showModal('#storyModal')">
+<!----<a class="btn btn-primary btn-customized inviteToggle" data-toggle="modal" data-target="#storyModal" (click)="showModal('#storyModal')">
   <span style="color:white">Add a Story</span>
-</a>
+</a>>---->
 
 <a class="btn btn-primary btn-customized inviteToggle" (click)="goToTeamForm()">
   <span style="color:white">Create Team</span>
@@ -66,19 +66,16 @@
 <!-----STORY MODAL-->
 <app-story-modal></app-story-modal>
 
-<div class="modal fade" id="storyModal">
+<!---<div class="modal fade" id="storyModal">
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Add a Story to your activity!</h4>
         <button type="button" class="close" (click)="hideModal('#activitiesModal')">&times;</button>
       </div>
 
-      <!-- Modal body -->
       <div class="modal-body">
-        <!---USER STORY UPLOAD--->
         <h4>Stories appear above your pin for 48 hours after upload</h4>
         <div class="container">
           <label for="storyImageField">Upload an image!</label>
@@ -88,15 +85,13 @@
         </div>
       </div>
 
-      <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="uploadStory()" >Add Story</button>
-        <!-- this button is hidden, used to close from typescript -->
         <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
       </div>
     </div>
   </div>
-</div>
+</div>--->
 
 <div class="modal fade" id="activitiesModal">
   <div class="modal-dialog">

@@ -25,6 +25,10 @@ export class UserProfileService {
     };
   }
 
+  updateProfile(formClean){
+    return this.http.post('http://localhost:8000/api/profile-update/', {'form': formClean}).toPromise();
+  }
+
   goToUserProfile(username:string) {
     this.router.navigate(['/profile',{username:username}]);
   }
