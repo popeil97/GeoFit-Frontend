@@ -10,6 +10,8 @@ import {Chart} from 'chart.js';
 export class UserStatsComponent implements OnInit {
   @Input() userID: number;
   private userStats: UserStats;
+  private chart : Chart;
+
   constructor(private _usersService:UsersService) { }
 
   ngOnInit() {
