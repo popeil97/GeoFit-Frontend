@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserProfileService } from '../userprofile.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile-form',
@@ -14,8 +15,9 @@ export class ProfileFormComponent implements OnInit {
   profilePicURL: any;
   distanceTypeOptions: any[];
 
-  constructor(private _userProfileService: UserProfileService) {
+  constructor(private _userProfileService: UserProfileService, private sanitizer:DomSanitizer) {
     this.distanceTypeOptions = ['Miles', 'Kilometres'];
+    this.profilePicURL = null;
 
     this.profileForm = new FormGroup({
       ProfilePic: new FormControl(''),
@@ -65,6 +67,19 @@ export class ProfileFormComponent implements OnInit {
     }
   }
 
+  uploadedProfPicSrc() {
+    //This allows base64 uploaded pics to be displayed
+    return this.sanitizer.bypassSecurityTrustResourceUrl(this.profilePicURL);
+  }
+
+  deleteProfilePic() {
+    //Clear field form
+    this.profileForm.get('ProfilePic').reset();
+
+    //Clear uploaded file
+    this.profilePicURL = null;
+  }
+
 }
 
 export interface ProfileForm {
@@ -74,5 +89,17 @@ export interface ProfileForm {
   About: string;
   Location: string;
   DistanceType: string;
+}
+
+interface UserData {
+  user_id:number;
+  profile_url:string;
+  email:string;
+  description: string;
+  location:string;
+  first_name:string;
+  last_name:string;
+  follows:boolean;
+  distance_type: string;
 }
 
