@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {UsersService} from '../users.service'
+import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { UserProfileService } from '../userprofile.service';
 
 @Component({
   selector: 'app-user-page',
@@ -7,11 +8,56 @@ import {UsersService} from '../users.service'
   styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent implements OnInit {
-
-  constructor() { }
+  private username;
+  private userData: UserData;
+  constructor(private route:ActivatedRoute, private _userProfileService:UserProfileService) { }
 
   ngOnInit() {
-  
+  	
+    //openTab();
+    this.route.paramMap.subscribe(params => {
+      this.username = params['params']['username'];
+    });
+
+    this.getUserData();
+
+
   }
 
+  // ngOnChanges(changes: SimpleChanges) {
+  //   console.log('changes:',changes);
+
+  //   for(const propName in changes) {
+  //     if(changes.hasOwnProperty(propName)) {
+
+  //       switch(propName) {
+  //         case 'username':
+  //           if(changes.username.currentValue != undefined) {
+  //             this.getUserData();
+  //           }
+  //       }
+  //     }
+  //   }
+  // }
+
+  getUserData(){
+    var component = this;
+
+    //Call a to-be-created service which gets user data, feed, statistics etc
+    this._userProfileService.getUserProfile(this.username).then((data) => {
+      component.userData = data as UserData;
+    });
+  }
+
+
 }
+
+interface UserData {
+  user_id:number;
+  profile_url:string;
+  email:string;
+  first_name:string;
+  last_name:string;
+  follows:boolean;
+}
+

@@ -1,5 +1,5 @@
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: fixed;
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: inherit;
 top: 0;
 width: 100%;
 z-index: 1;">
@@ -30,8 +30,35 @@ z-index: 1;">
         <a class="nav-link" routerLink='/profile'>Profile</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" routerLink='/teams'>Teams</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
       </li>
+
+      <!-- <li class="nav-item" style="float: right;">
+        <mat-icon style="padding-right: 5px;">circle_notifications</mat-icon>
+      </li> -->
+
+      <li class="nav-item dropdown" dropdown>
+        <!-- <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mat-icon style="padding-right: 5px;">circle_notifications</mat-icon><span class="caret"></span></a>
+        <div class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div> -->
+        <div class="dropdown">
+          <a class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <mat-icon style="padding-right: 5px;">circle_notifications</mat-icon><span class="caret"></span>
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div *ngFor="let not of notifications">
+              <app-notification [notification]="not"></app-notification>
+            </div>
+          </div>
+        </div>
+    </li>
 
 
     </ul>

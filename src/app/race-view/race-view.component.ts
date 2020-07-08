@@ -7,7 +7,9 @@ import { Progress } from '../user-progress/user-progress.component';
 import { ActivitiesService } from '../activities.service';
 import { LeaderboardItem } from '../leaderboard/leaderboard.component';
 import { MapComponent } from '../map/map.component';
-import { RaceFeedComponent } from '../race-feed/race-feed.component';
+import { FeedComponent } from '../feed/feed.component';
+import { StoryModalComponent } from '../story-modal/story-modal.component';
+
 declare var $: any
 
 @Component({
@@ -17,7 +19,8 @@ declare var $: any
 })
 export class RaceViewComponent implements OnInit {
   @ViewChild(MapComponent) mapChild: MapComponent ;
-  @ViewChild(RaceFeedComponent) feedChild: RaceFeedComponent;
+  @ViewChild(FeedComponent) feedChild: FeedComponent;
+  @ViewChild(StoryModalComponent) storyModal: StoryModalComponent;
 
   public followers:any[];
   public activities:any[];
@@ -30,6 +33,7 @@ export class RaceViewComponent implements OnInit {
   public coords:any;
   public leaderboard:LeaderboardItem[];
   public all_user_data:Array<FeedObj>;
+  public teams:any[];
 
   private storyImage:string;
   private storyText:string;
@@ -37,6 +41,7 @@ export class RaceViewComponent implements OnInit {
   constructor(private raceService:RaceService,
                   private activitiesService:ActivitiesService,
                   private route: ActivatedRoute,
+                  private router:Router,
                   private storyService: StoryService) {
     this.modalData = {};
   }
@@ -68,8 +73,16 @@ export class RaceViewComponent implements OnInit {
     ($(id) as any).modal('show');
   }
 
+  showStoryModal(id:string): void {
+    this.storyModal.showModal(id);
+  }
+
   hideModal(id:string): void {
     ($(id) as any).modal('hide');
+  }
+
+  goToTeamForm(): void {
+    this.router.navigate(['/teams',{name:this.raceName,id:this.raceID}]);
   }
 
   importActs(): void {
@@ -107,7 +120,12 @@ export class RaceViewComponent implements OnInit {
       this.coords = {coords:raceData.coords};
       this.leaderboard = raceData.leaderboard;
       this.all_user_data = raceData.users_data as Array<FeedObj>;
-
+      this.teams = raceData.users_data.filter((user_data) => {
+        if(user_data.isTeam) {
+          return user_data;
+        }
+      });
+      console.log('TEAMS:',this.teams);
       console.log('COORDS:',this.coords);
       console.log("ALL USER DATA", this.all_user_data);
       console.log("LEADERBOARD ITEMS: ", this.leaderboard);

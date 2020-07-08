@@ -23,8 +23,8 @@ import { FormsModule } from '@angular/forms';
 import {UserService} from './users/users.service';
 import {TokenInterceptorService} from './users/tokeninterceptorservice';
 import { StravauthService } from './stravauth/stravauth.service';
-import { RaceFeedService } from './race-feed/race-feed.service';
-import { RaceFeedComponent } from './race-feed/race-feed.component';
+import { RaceFeedService } from './feed/race-feed.service';
+import { FeedComponent } from './feed/feed.component';
 import { StoryService } from './story.service'
 
 import {
@@ -43,6 +43,13 @@ import { RaceAboutComponent } from './race-about/race-about.component';
 import { UserFollowComponent } from './user-follow/user-follow.component';
 import { StoryBtnComponent } from './story-btn/story-btn.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
+import { TeamFormComponent } from './team-form/team-form.component';
+import { TeamListComponent } from './team-list/team-list.component';
+import { UserProfileNavComponent } from './user-profile-nav/user-profile-nav.component';
+import { NotificationComponent } from './notification/notification.component';
+import { StoryModalComponent } from './story-modal/story-modal.component';
+import { CommentsComponent } from './comments/comments.component';
+import { CommentsFormComponent } from './comments-form/comments-form.component';
 
 
 @NgModule({
@@ -61,13 +68,20 @@ import { UserStatsComponent } from './user-stats/user-stats.component';
     StravauthComponent,
     LoaderComponent,
     ActivitiesMenuComponent,
-    RaceFeedComponent,
+    FeedComponent,
     ManualEntryComponent,
     UserPageComponent,
     RaceAboutComponent,
     UserFollowComponent,
     StoryBtnComponent,
     UserStatsComponent,
+    TeamFormComponent,
+    TeamListComponent,
+    UserProfileNavComponent,
+    NotificationComponent,
+    StoryModalComponent,
+    CommentsComponent,
+    CommentsFormComponent,
   ],
   imports: [
     BrowserModule,

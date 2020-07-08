@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { UserProfileService } from '../userprofile.service';
 import * as L from 'leaflet';
 import { PopUpService } from '../pop-up.service';
 import * as _ from 'lodash';
@@ -22,7 +23,9 @@ export class MapComponent implements AfterViewInit,OnChanges {
   private marker_end:any;
   private line:any;
 
-  constructor(private popupService:PopUpService) { }
+  constructor(private popupService:PopUpService, private _profileService:UserProfileService) {
+    Window["mapComponent"] = this;
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log('changes:',changes);
@@ -39,12 +42,12 @@ export class MapComponent implements AfterViewInit,OnChanges {
               if(this.displayUsers) {
                 this.plotUserPins();
               }
-              
+
             }
         }
       }
     }
-    
+
     console.log("USER DATA IN MAP COMPONENT");
     console.log(this.userData);
   }
@@ -53,7 +56,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     if(this.map == undefined) {
       this.initMap();
     }
-    
+
   }
 
   public panToUserMarker(user_id){
@@ -82,8 +85,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     console.log('GOT COORDINATES:',this.coordinates.coords);
     console.log('MAP:',this.map);
-    
-    
+
+
 
     if(!this.map) {
       this.initMap()
@@ -147,7 +150,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
       this.markersByUserID[id]['locMarker'].remove();
     }
     this.markersByUserID = {};
-    
+
     // doing this temporarily because Lat/Lon are reversed smh
     // _.forEach(this.coordinates.coords,(coord) => {
     //   let temp = coord[0];
@@ -158,7 +161,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     console.log("coords in plot: ", this.coordinates.coords);
 
     console.log("this user_data: ", this.userData);
-    
+
     for (var i = 0; i < this.userData.length; i++){
       var img_html = "<img src=\"" + this.userData[i].profile_url + "\";\"><div class=\"pin\"></div><div class=\"pulse\"></div>";
 
@@ -193,9 +196,9 @@ export class MapComponent implements AfterViewInit,OnChanges {
       console.log("added loc marker!");
 
       //Create template popup text
-      var popupText = "<center>" +
+      var popupText = "<center><b>" +
                       this.userData[i].display_name +
-                      "</center>" +
+                      "</b></center>" +
                       "<center>" +
                       user_ran_miles +
                       " " +
@@ -274,12 +277,18 @@ export class MapComponent implements AfterViewInit,OnChanges {
       //Retain markers in dict so we can pan to it upon select
       console.log(this.markersByUserID);
       console.log("this user's id: ", this.userData[i].user);
-      this.markersByUserID[this.userData[i].user_id.toString()] = {
+      //teams :P
+      let elementID = this.userData[i].user_id != null ? this.userData[i].user_id.toString() : this.userData[i].team_id.toString();
+      this.markersByUserID[elementID] = {
           'locMarker' : locMarker,
           'latLng' : L.latLng(lat_user, lng_user)};
       }
-      
+
     }
+
+  private goToUserProfile(username:string){
+    this._profileService.goToUserProfile(username);
+  }
 
 
   private initMap(): void {
@@ -296,5 +305,5 @@ export class MapComponent implements AfterViewInit,OnChanges {
     tiles.addTo(this.map);
   }
 
-  
+
 }

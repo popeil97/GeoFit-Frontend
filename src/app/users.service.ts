@@ -24,8 +24,8 @@ export class UsersService {
       return ret['followed_ids'], ret['follower_ids']
   }
 
-  getUserStats(race_id,user_id){
-      return this.http.post('http://localhost:8000/api/user-stats/',{race_id:race_id,user_id:user_id}).toPromise();
+  getUserStats(user_id){
+      return this.http.post('http://localhost:8000/api/user-stats/',{user_id:user_id}).toPromise();
   }
 
   followUserWithID(user_id){
@@ -34,6 +34,10 @@ export class UsersService {
 
   unfollowUserWithID(user_id){
       return this.http.post('http://localhost:8000/api/unfollow/',{follow_user_id: user_id}).toPromise();
+  }
+
+  getFollowersAndFollowed() {
+    return this.http.get('http://localhost:8000/api/get-followers-and-followed/').toPromise();
   }
 
   //FUTURE: Block users etc

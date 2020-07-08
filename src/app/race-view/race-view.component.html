@@ -12,9 +12,10 @@
           </mat-tab>
           <mat-tab label="Manual">
             <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
+
           </mat-tab>
         </mat-tab-group>
-        
+
       </mat-tab>
       <mat-tab label="L">
         <mat-tab-group>
@@ -24,15 +25,18 @@
           <mat-tab label="Pace">
 
           </mat-tab>
+
+          <mat-tab label="Teams">
+            <app-team-list [teams]="teams"></app-team-list>
+          </mat-tab>
         </mat-tab-group>
-        
+
       </mat-tab>
       <mat-tab label="Social">
         <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call-->
-        <app-race-feed [raceID]="raceID" (feedItemClicked)="panToUserMarker($event)"></app-race-feed>>
+        <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)"></app-feed>>
       </mat-tab>
     </mat-tab-group>
-    
   </mat-sidenav>
   <mat-sidenav-content>
     <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true"></app-map>
@@ -45,6 +49,10 @@
 <a class="btn btn-primary btn-customized inviteToggle" data-toggle="modal" data-target="#storyModal" (click)="showModal('#storyModal')">
   <span style="color:white">Add a Story</span>
 </a>
+
+<a class="btn btn-primary btn-customized inviteToggle" (click)="goToTeamForm()">
+  <span style="color:white">Create Team</span>
+</a>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <!-- Wrapper -->
@@ -52,6 +60,9 @@
     <!-- open sidebar menu -->
 
 </div>
+
+<!-----STORY MODAL-->
+<app-story-modal></app-story-modal>
 
 <div class="modal fade" id="storyModal">
   <div class="modal-dialog">
@@ -197,7 +208,7 @@
     </div>
   </div>
 </div>
-    
+
 
 
 <app-user-progress [progress]="progress"></app-user-progress>

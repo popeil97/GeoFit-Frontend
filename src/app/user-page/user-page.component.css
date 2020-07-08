@@ -6,7 +6,7 @@ html, body {
     flex-direction: column;
     background: #F1F3FA;
   }
-  body { 
+  body {
     overflow-x:hidden;
   }
   #mainNav {
@@ -17,16 +17,16 @@ html, body {
     color: #fed136;
     font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;
   }
-  
-  
+
+
   .content {
     flex: 1 0 auto;
   }
   .footer {
     flex-shrink: 0;
   }
-  
-  
+
+
   footer {
     text-align: center;
     background-color: white;
@@ -35,7 +35,7 @@ html, body {
     padding-left:22px;
     padding-right:31px;
   }
-  
+
   footer span.copyright {
     font-size: 90%;
     line-height: 40px;
@@ -43,7 +43,7 @@ html, body {
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color:blak;
   }
-  
+
   footer ul.quicklinks {
     font-size: 90%;
     line-height: 40px;
@@ -51,11 +51,11 @@ html, body {
     text-transform: none;
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
-  
+
   ul.social-buttons {
     margin-bottom: 0;
   }
-  
+
   ul.social-buttons li a {
     font-size: 20px;
     line-height: 40px;
@@ -70,33 +70,33 @@ html, body {
     outline: none;
     background-color: #212529;
   }
-  
+
   ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
     background-color: #fed136;
   }
   .content{
      margin-top:60px;
    }
-  
-  
+
+
   /* Profile container */
   .profile {
     margin: 20px 0;
   }
-  
+
   /* Profile sidebar */
   .profile-sidebar {
     padding: 20px 0 10px 0;
-    background:cyan;
+    /*background:cyan;*/
   }
 
   .about-sidebar {
     padding: 20px;
-    background:cyan;
+    /*background:cyan;*/
     min-height: 500;
     min-width: 500;
   }
-  
+
   .profile-userpic img {
     float: none;
     display:block;
@@ -107,32 +107,32 @@ html, body {
     -moz-border-radius: 50% !important;
     border-radius: 50% !important;
   }
-  
+
   .profile-usertitle {
     text-align: center;
     margin-top: 20px;
   }
-  
+
   .profile-usertitle-name {
     color: #5a7391;
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 7px;
   }
-  
+
   .profile-usertitle-job {
     text-transform: uppercase;
-    color: #5b9bd1;
+    /*color: #5b9bd1;*/
     font-size: 12px;
     font-weight: 600;
     margin-bottom: 15px;
   }
-  
+
   .profile-userbuttons {
     text-align: center;
     margin-top: 10px;
   }
-  
+
   .profile-userbuttons .btn {
     text-transform: uppercase;
     font-size: 11px;
@@ -140,54 +140,54 @@ html, body {
     padding: 6px 15px;
     margin-right: 5px;
   }
-  
+
   .profile-userbuttons .btn:last-child {
     margin-right: 0px;
   }
-      
+
   .profile-usermenu {
     margin-top: 30px;
   }
-  
+
   .profile-usermenu ul li {
     border-bottom: 1px solid #f0f4f7;
   }
-  
+
   .profile-usermenu ul li:last-child {
     border-bottom: none;
   }
-  
+
   .profile-usermenu ul li a {
-    color: #93a3b5;
+    /*color: #93a3b5;*/
     font-size: 14px;
     font-weight: 400;
   }
-  
+
   .profile-usermenu ul li a i {
     margin-right: 8px;
     font-size: 14px;
   }
-  
+
   .profile-usermenu ul li a:hover {
     background-color: #fafcfd;
-    color: #5b9bd1;
+    /*color: #5b9bd1;*/
   }
-  
+
   .profile-usermenu ul li.active {
     border-bottom: none;
   }
-  
+
   .profile-usermenu ul li.active a {
-    color: #5b9bd1;
+    /*color: #5b9bd1;*/
     background-color: #f6f9fb;
     border-left: 2px solid #5b9bd1;
     margin-left: -2px;
   }
-  
+
   /* Profile Content */
   .profile-content {
     padding: 20px;
-    background: cyan;
+    /*background: cyan;*/
     min-height: 200px;
   }
 
@@ -196,8 +196,9 @@ html, body {
     background: cyan;
     min-height: 400px;
   }
-  
+
   .nav>li {
       position: relative;
       display: block;
   }
+ 

@@ -1,0 +1,7 @@
+<mat-card class="dropdown-item">
+  <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + notification.from.profile_url + ')'}" style="position: relative; padding-top: 5px; float:left;"></div>
+  <div style="padding-left: 50px;">{{notification.message}}</div>
+  <!-- <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div> -->
+  <button mat-button>Accept</button>
+  <button mat-button>Decline</button>
+</mat-card>

@@ -1,0 +1,72 @@
+
+<div class="container">
+  <h2>Create Team</h2>
+
+  <form [formGroup]="teamForm">
+    <div class="form-group" style="text-align: left; padding: 5px;">
+      <label name="Name">Name</label>
+      <input class="form-control" type="text" placeholder="Name" formControlName="name"/>
+      <br>
+      <div *ngIf="teamForm.get('name').invalid && (teamForm.get('name').dirty || teamForm.get('name').touched)"
+    class="alert alert-danger">
+    
+    <div *ngIf="teamForm.get('name').errors.required">
+       Name is required.
+    </div>
+    </div>
+    </div>
+
+    <div class="form-group" style="text-align: left; padding: 5px;">
+      <label name="description">Description(Why should you be feared?)</label>
+      <textarea class="form-control" type="text" placeholder="Description" formControlName="description" style="height: 200px;"></textarea>
+      <br>
+      <div *ngIf="teamForm.get('description').invalid && (teamForm.get('description').dirty || teamForm.get('description').touched)"
+    class="alert alert-danger">
+    
+    <div *ngIf="teamForm.get('description').errors.required">
+       Description is required.
+    </div>
+    </div>
+    </div>
+
+    <div class="form-group" style="text-align: left; padding: 5px;">
+      <label name="end_loc">Invite People you Follow or Follow You!</label>
+      <input class="form-control" type="text" placeholder="Followers" formControlName="invited" [matAutocomplete]="endLocAuto"/>
+
+<!-- Can use mat card as panel -->
+      <mat-autocomplete #endLocAuto="matAutocomplete">
+        <mat-option *ngFor="let option of followerOptions" [value]="option.full_name" (click)="addFollower(option)">
+          <mat-card>
+            <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + option.profile_url + ')'}" style="position:absolute; padding:5px; float:left;"></div>
+            <div style="padding-left: 50px;">{{option.full_name}}</div>
+          </mat-card>
+        </mat-option>
+      </mat-autocomplete>
+      <br>
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let follower of followersInvited">
+          
+          {{follower.full_name}}
+          <mat-icon matChipRemove (click)="removeFollower(follower.user_id)">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+
+    <div class="form-group" style="text-align: left; padding: 5px;">
+      <label name="teamImg">Team Image</label>
+      <br>
+      <input type="file" formControlName="teamImg" (change)="onSelectFile($event)"/>
+    </div>
+
+    <div style="padding: 5px; position: relative; float: left;">
+      <button class="btn btn-primary" mat-raised-button (click)="createTeam()">Create</button>
+    </div>
+  </form>
+
+  
+
+
+</div>
+
+
+
