@@ -12,27 +12,39 @@
         <div class="profile-usertitle">
           <div class="profile-usertitle-name">
             {{ username }}
+            <app-user-follow [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
+            <button class="btn btn-primary btn-sm" (click)="toggleEditView()">
+              Edit
+            </button>
+
           </div>
           <div class="profile-usertitle-job">
             Developer
           </div>
         </div>
+
         <!-- END SIDEBAR USER TITLE -->
         <!-- SIDEBAR BUTTONS -->
-        <div class="profile-userbuttons">
-          <app-user-follow [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
-          <!----<button type="button" class="btn btn-danger btn-sm">Message</button>-->
+
+        <div class="profile-userbuttons" *ngIf="userData">
+          <!---<button class="btn btn-primary btn-sm" (click)="toggleEditView()">
+            Edit
+          </button>---->
+
         </div>
+
+
         <!-- END SIDEBAR BUTTONS -->
         <!-- SIDEBAR MENU -->
+
         <div class="profile-usermenu sidebar-sticky">
+
           <ul class="nav flex-column">
             <li class="active nav-item">
-              <a href="#" class="nav-link active" id="edit">
-                          <i class="fa fa-home"></i>
-                          Edit </a>
+
             </li>
           </ul>
+
         </div>
         <!-- END MENU -->
       </div>
@@ -51,22 +63,18 @@
         <button class="btn btn-primary" id="updateBtn">Update</button>
       </div>
 
-      <div class="profile-content" id="viewContent">
-        <h2>City</h2>
-        <p></p>
-
-        <h2>Country</h2>
-        <p></p>
-
-        <h2>Description</h2>
-        <p></p>
-
-        <h2>Distance Unit</h2>
-
+      <div class="profile-content" *ngIf="!showEdit">
+        <h1>STATS TO GO HERE</h1>
       </div>
+
+      <div class="profile-content" *ngIf="showEdit">
+        <app-profile-form (formUpdated)="profileUpdated($event)"></app-profile-form>
+      </div>
+
     </div>
   </div>
 </div>
+
 <div class="container">
   <div class="row profile">
     <div class="col-md-3">
@@ -74,24 +82,22 @@
       <br>
       <br>
       <br>
-      <div class="about-sidebar position-fixed">
+      <div class="about-sidebar position-fixed" *ngIf="!showEdit">
         <div class="profile-content" id="viewContent">
           <h2>City</h2>
           <p></p>
 
           <h2>Country</h2>
-          <p></p>
+          <p>{{ userData.location }}</p>
 
           <h2>Description</h2>
-          <p></p>
-
-          <h2>Distance Unit</h2>
-
+          <p>{{ userData.description }}</p>
         </div>
       </div>
     </div>
-    <div class="col-md-9">
 
-      <app-feed [use]="'user'" [ID]="username" [feedItems]="feedItems" [hasStoryModalChild]="true"></app-feed>
+    <div class="col-md-9" id="feedContent" *ngIf="!showEdit">
+      <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
     </div>
+
 </div>

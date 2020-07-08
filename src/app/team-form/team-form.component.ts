@@ -22,7 +22,7 @@ export class TeamFormComponent implements OnInit {
   errorMsg:string;
   showError:Boolean = false;
 
-  constructor(private _teamService:TeamService,private _userService:UsersService,private route: ActivatedRoute,private router:Router) { 
+  constructor(private _teamService:TeamService,private _userService:UsersService,private route: ActivatedRoute,private router:Router) {
     this.teamForm = new FormGroup({
       name: new FormControl('',[
         Validators.required,
@@ -48,8 +48,8 @@ export class TeamFormComponent implements OnInit {
     });
   }
 
-    createTeam(): void {
-      let formClean:TeamForm;
+  createTeam(): void {
+    let formClean:TeamForm;
 
       if(this.teamForm.valid) {
         this.showError = false;

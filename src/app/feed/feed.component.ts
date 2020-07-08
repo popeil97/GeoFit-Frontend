@@ -2,6 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
 import { StoryModalComponent } from '../story-modal/story-modal.component';
 import { RaceFeedService } from './race-feed.service';
 import { UserProfileService } from '../userprofile.service';
+import { StoryFormComponent } from '../story-form/story-form.component';
+
+declare var $: any
 
 @Component({
   selector: 'app-feed',
@@ -15,11 +18,16 @@ export class FeedComponent implements OnInit {
 
   @ViewChild(StoryModalComponent) storyModalChild: StoryModalComponent;
 
+  @ViewChild(StoryFormComponent) storyFormComponent: StoryFormComponent;
+
   //ID of race or user
   @Input() ID:number;
 
   //Items on feed to display
   @Input() feedItems: Array<FeedObj>;
+
+  //Progress object of logged in user
+  @Input() progress: any;
 
   //Use of feed ('race' or 'user')
   @Input() use:string;
@@ -32,6 +40,8 @@ export class FeedComponent implements OnInit {
   @Output() storyItemClicked = new EventEmitter();
 
   private _feedService: any;
+
+  private initialized: boolean;
 
   private columns:string[] = ['ProfilePic','Data'];
 
@@ -55,6 +65,31 @@ export class FeedComponent implements OnInit {
       this.resetFeed();
       this.refreshFeed();
     }
+
+    //this.storyFormComponent.setStoryImageFieldListener();
+    this.initialized = true;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    //Check if user or race ID changes between hops
+    //If yes, we need to update our feed service and pull new data
+
+    if (this.initialized){
+      for(const propName in changes) {
+        if(changes.hasOwnProperty(propName)) {
+
+          switch(propName) {
+            case 'ID':
+              if(changes.ID.currentValue != undefined) {
+                this._feedService.ID = this.ID;
+                this.resetFeed();
+                this.refreshFeed();
+              }
+          }
+        }
+      }
+    }
+
   }
 
   showStoryModal(storyID): void {
@@ -63,12 +98,9 @@ export class FeedComponent implements OnInit {
     //WE CAN EITHER EMIT STORY MODAL CLICK OUTPUT
     //OR CALL IT DIRECTLY TO THE CHILD MODAL
     if (!this.hasStoryModalChild){
-      console.log('hey');
-      console.log(this.hasStoryModalChild);
       this.storyItemClicked.emit(storyID);
     }
     else{
-      console.log(this.hasStoryModalChild);
       this.storyModalChild.showModal(storyID);
     }
   }

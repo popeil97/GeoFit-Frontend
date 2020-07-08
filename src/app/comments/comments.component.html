@@ -1,4 +1,4 @@
-<div class="table-container" >
+<div class="table-container" style="overflow-y: auto;max-height:60vh;">
   <table mat-table [dataSource]="comments" class="commentTable">
     <ng-container matColumnDef="ProfilePic" style="padding: 10px;">
       <td mat-cell *matCellDef="let element">
@@ -18,7 +18,6 @@
 
     <tr mat-row *matRowDef="let myRowData; columns: columns"></tr>
   </table>
-
-  <app-comments-form [storyID]="storyID" (commentPosted)="getNewCommentData()"></app-comments-form>
-
 </div>
+
+<app-comments-form [storyID]="storyID" (commentPosted)="getNewCommentData()"></app-comments-form>
