@@ -15,13 +15,10 @@ export class UserPageComponent implements OnInit {
 
   constructor(private route:ActivatedRoute, private _userProfileService:UserProfileService) { }
 
-  ngOnInit() {
   	
     //openTab();
 
   private showEdit: boolean;
-
-  constructor(private route:ActivatedRoute, private _userProfileService:UserProfileService) { }
 
   ngOnInit() {
     //Don't show edit page by default
