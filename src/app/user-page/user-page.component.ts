@@ -12,13 +12,13 @@ declare var $: any;
 export class UserPageComponent implements OnInit {
   private username;
   private userData: UserData;
-<<<<<<< HEAD
+
   constructor(private route:ActivatedRoute, private _userProfileService:UserProfileService) { }
 
   ngOnInit() {
   	
     //openTab();
-=======
+
   private showEdit: boolean;
 
   constructor(private route:ActivatedRoute, private _userProfileService:UserProfileService) { }
@@ -27,19 +27,15 @@ export class UserPageComponent implements OnInit {
     //Don't show edit page by default
     this.showEdit = false;
 
->>>>>>> 4723003eb2f605686f4a9ddd96592b21fccce748
     this.route.paramMap.subscribe(params => {
       this.username = params['params']['username'];
       this.getUserData();
       console.log(this.username);
     });
 
-<<<<<<< HEAD
     this.getUserData();
 
 
-=======
->>>>>>> 4723003eb2f605686f4a9ddd96592b21fccce748
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -65,8 +61,6 @@ export class UserPageComponent implements OnInit {
     });
   }
 
-<<<<<<< HEAD
-=======
   toggleEditView(): void{
     this.showEdit = !this.showEdit;
   }
@@ -78,7 +72,6 @@ export class UserPageComponent implements OnInit {
     //Switch back to main view
     this.toggleEditView();
   }
->>>>>>> 4723003eb2f605686f4a9ddd96592b21fccce748
 
 }
 
