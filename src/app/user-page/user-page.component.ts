@@ -11,8 +11,14 @@ declare var $: any;
 })
 export class UserPageComponent implements OnInit {
   private username;
-
   private userData: UserData;
+
+  constructor(private route:ActivatedRoute, private _userProfileService:UserProfileService) { }
+
+  ngOnInit() {
+  	
+    //openTab();
+
   private showEdit: boolean;
 
   constructor(private route:ActivatedRoute, private _userProfileService:UserProfileService) { }
@@ -26,6 +32,9 @@ export class UserPageComponent implements OnInit {
       this.getUserData();
       console.log(this.username);
     });
+
+    this.getUserData();
+
 
   }
 
@@ -50,7 +59,6 @@ export class UserPageComponent implements OnInit {
     this._userProfileService.getUserProfile(this.username).then((data) => {
       this.userData = data as UserData;
     });
-
   }
 
   toggleEditView(): void{

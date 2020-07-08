@@ -42,6 +42,7 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { RaceAboutComponent } from './race-about/race-about.component';
 import { UserFollowComponent } from './user-follow/user-follow.component';
 import { StoryBtnComponent } from './story-btn/story-btn.component';
+import { UserStatsComponent } from './user-stats/user-stats.component';
 import { TeamFormComponent } from './team-form/team-form.component';
 import { TeamListComponent } from './team-list/team-list.component';
 import { UserProfileNavComponent } from './user-profile-nav/user-profile-nav.component';
@@ -76,6 +77,7 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
     RaceAboutComponent,
     UserFollowComponent,
     StoryBtnComponent,
+    UserStatsComponent,
     TeamFormComponent,
     TeamListComponent,
     UserProfileNavComponent,
