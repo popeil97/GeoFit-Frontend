@@ -9,6 +9,7 @@ import { LeaderboardItem } from '../leaderboard/leaderboard.component';
 import { MapComponent } from '../map/map.component';
 import { FeedComponent } from '../feed/feed.component';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
+import { RaceSettings } from '../race-about/race-about.component';
 
 declare var $: any
 
@@ -18,7 +19,7 @@ declare var $: any
   styleUrls: ['./race-view.component.css']
 })
 export class RaceViewComponent implements OnInit {
-  @ViewChild(MapComponent) mapChild: MapComponent ;
+  @ViewChild(MapComponent) mapChild: MapComponent;
   @ViewChild(FeedComponent) feedChild: FeedComponent;
   @ViewChild(StoryModalComponent) storyModal: StoryModalComponent;
 
@@ -34,6 +35,11 @@ export class RaceViewComponent implements OnInit {
   public leaderboard:LeaderboardItem[];
   public all_user_data:Array<FeedObj>;
   public teams:any[];
+  public userRaceSettings:any;
+  public raceSettings:RaceSettings;
+  public showTeamForm:Boolean = false;
+  public userStat:any = {};
+  public followedIDs:number[];
 
   private storyImage:string;
   private storyText:string;
@@ -64,8 +70,10 @@ export class RaceViewComponent implements OnInit {
       last_name:'DonaHOE'
     }];
 
-    //Add listener to story image upload field
-    this.setStoryImageFieldListener();
+  }
+
+  toggleTeamForm() {
+    this.showTeamForm = !this.showTeamForm;
   }
 
   showModal(id:string): void {
@@ -120,15 +128,21 @@ export class RaceViewComponent implements OnInit {
       this.coords = {coords:raceData.coords};
       this.leaderboard = raceData.leaderboard;
       this.all_user_data = raceData.users_data as Array<FeedObj>;
+      this.followedIDs = raceData.followedIDs;
       this.teams = raceData.users_data.filter((user_data) => {
         if(user_data.isTeam) {
           return user_data;
         }
       });
+      this.userRaceSettings = raceData.settings;
+      this.raceSettings = raceData.race_settings;
+      this.userStat = raceData.user_stat;
       console.log('TEAMS:',this.teams);
       console.log('COORDS:',this.coords);
       console.log("ALL USER DATA", this.all_user_data);
       console.log("LEADERBOARD ITEMS: ", this.leaderboard);
+      console.log('USER SETTINGS:',this.userRaceSettings);
+      console.log("FOLLOWER IDS", this.followedIDs);
 
       this.loading = false;
     });
@@ -146,39 +160,13 @@ export class RaceViewComponent implements OnInit {
     this.mapChild.panToUserMarker(user_id);
   }
 
-  setStoryImageFieldListener(){
-    //LISTENS TO CHANGES IN IMAGE FILE UPLOAD
-    var setStoryImg = this.setStoryImage;
-    var viewComponent = this;
-
-    var storyImageField = <HTMLInputElement>document.getElementById("storyImage");
-    console.log("adding story event listener");
-    storyImageField.addEventListener('change', function() {
-      var file = this.files[0];
-      var reader: FileReader = new FileReader();
-      reader.onload = function(e) {
-          setStoryImg(viewComponent, reader.result);
-      }
-      reader.readAsDataURL(file);
-    }, false);
-
+  clearUserPins(){
+    this.mapChild.clearUserPins();
   }
 
-  setStoryImage(viewComponent, img_data): void{
-    viewComponent.storyImage = img_data;
-  }
-
-  uploadStory(): void{
-    //This bool tells Django whether to add these fields to the user's last story
-    //or simply create a new story that has no activities
-    //False by default but implement mechanism for true in future
-    let withLastStory = false;
-
-    //Get text field input (image already uploaded via eventListener)
-    this.storyText = (<HTMLInputElement>document.getElementById("storyImageCaption")).value;
-
-    //Upload story via service
-    this.storyService.uploadStory(this.raceID, this.storyImage, this.storyText, withLastStory);
+  showPinsByID(IDs){
+    //Pass null to show all pins
+    this.mapChild.showPinsByID(IDs);
   }
 
 }
@@ -189,6 +177,10 @@ interface RaceData {
   coords:any;
   leaderboard:any;
   users_data:any;
+  settings:any;
+  race_settings:RaceSettings;
+  user_stat:any;
+  followedIDs:number[];
 }
 
 interface FeedObj {

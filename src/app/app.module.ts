@@ -50,6 +50,9 @@ import { NotificationComponent } from './notification/notification.component';
 import { StoryModalComponent } from './story-modal/story-modal.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentsFormComponent } from './comments-form/comments-form.component';
+import { RaceSettingsComponent } from './race-settings/race-settings.component';
+import { StoryFormComponent } from './story-form/story-form.component';
+import { ProfileFormComponent } from './profile-form/profile-form.component';
 
 
 @NgModule({
@@ -82,6 +85,9 @@ import { CommentsFormComponent } from './comments-form/comments-form.component';
     StoryModalComponent,
     CommentsComponent,
     CommentsFormComponent,
+    RaceSettingsComponent,
+    StoryFormComponent,
+    ProfileFormComponent,
   ],
   imports: [
     BrowserModule,

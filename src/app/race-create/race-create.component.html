@@ -4,11 +4,20 @@
   <app-loader [isActive]="loading"></app-loader>
   <mat-sidenav-container>
     <mat-sidenav md-disable-backdrop='true' #menu mode="side">
-      <div class="container" style="background-color: black; padding: 20px; text-align: center; color: white;">Create Race Form</div>
       <form [formGroup]="raceForm">
         <div class="form-group" style="text-align: left; padding: 5px;">
           <label name="Name">Name</label>
           <input class="form-control" type="text" placeholder="Name" formControlName="name"/>
+        </div>
+
+        <div class="form-group" style="text-align: left; padding: 5px;">
+          <label name="start_loc">Start Location</label>
+          <input class="form-control" type="text" placeholder="Race Type" formControlName="raceType" [matAutocomplete]="raceTypeAuto" />
+          <mat-autocomplete #raceTypeAuto="matAutocomplete">
+            <mat-option *ngFor="let option of raceTypeOptions" [value]="option.name" (click)="selectRaceType(option)">
+              {{ option.name }}
+            </mat-option>
+          </mat-autocomplete>
         </div>
 
         <div class="form-group" style="text-align: left; padding: 5px;">
@@ -68,12 +77,13 @@
     class="alert alert-primary"> {{previewDistance}}</div>
 
         <div class="form-group" style="padding: 5px; position: relative;">
-          <button class="btn btn-primary" mat-raised-button (click)="submitRaceForm()">Submit</button>
+          <div style="position: relative;"><button class="btn btn-primary" style="padding-right: ;" mat-raised-button (click)="submitRaceForm()">Submit</button></div>
+          <div style="position: relative;"><button class="btn btn-primary" mat-raised-button (click)="preview()">Preview</button></div>
         </div>
 
-        <div class="form-group" style="padding: 5px; position: relative;">
-          <button class="btn btn-primary" mat-raised-button (click)="preview()">Preview</button>
-        </div>
+        <!-- <div class="form-group" style="padding: 5px; position: relative;">
+          
+        </div> -->
 
         <!-- <div class="form-group" style="padding: 5px; position: fixed; float: right;">
           <button class="btn btn-danger" mat-raised-button (click)="clearForm()">Clear</button>

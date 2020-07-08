@@ -40,6 +40,10 @@ export class UsersService {
     return this.http.get('http://localhost:8000/api/get-followers-and-followed/').toPromise();
   }
 
+  updateUserRaceSetting(form:any) {
+    return this.http.post('http://localhost:8000/api/user-race-setting-update/',{form:form}).toPromise();
+  }
+
   //FUTURE: Block users etc
 
 }

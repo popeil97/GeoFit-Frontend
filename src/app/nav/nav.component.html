@@ -53,9 +53,10 @@ z-index: 1;">
             <mat-icon style="padding-right: 5px;">circle_notifications</mat-icon><span class="caret"></span>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <div *ngFor="let not of notifications">
-              <app-notification [notification]="not"></app-notification>
-            </div>
+              <div *ngIf="notifications"><app-notification *ngFor="let not of notifications" (removeNotification)="removeNotification($event)" [notification]="not"></app-notification></div>
+              <mat-card *ngIf="!notifications">
+                <div style="padding-left: 50px;">No Notifications</div>
+              </mat-card>
           </div>
         </div>
     </li>

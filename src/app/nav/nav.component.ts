@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NotificationsService } from '../notifications.service';
-// import 'rxjs/Rx';
 import {Observable} from 'rxjs/Rx';
-// import { switchMap } from 'rxjs/operators';
+declare var $: any
 
 @Component({
   selector: 'app-nav',
@@ -15,6 +14,11 @@ export class NavComponent implements OnInit {
   public notifications:any[];
 
   ngOnInit() {
+    // copy pasta from stack overflow yahooooooo
+    $(document).on('click', '.dropdown-menu', function (e) {
+      e.stopPropagation();
+    });
+
     Observable.interval(5000) // make much larger in production
     .switchMap(() => this._notificationService.getNotifications())
     .subscribe((resp:NotificationResp) => {
@@ -23,6 +27,12 @@ export class NavComponent implements OnInit {
     });
   }
 
+
+  removeNotification(not_id:number) {
+    this.notifications = this.notifications.filter((notification) => {
+      return not_id != notification.not_id;
+    });
+  }
 
 }
 

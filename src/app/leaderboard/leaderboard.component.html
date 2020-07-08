@@ -1,4 +1,4 @@
-<div style="height: 50%;">
+<!-- <div style="height: 50%;">
     <table mat-table [dataSource]="leaderboard" class="leaderboardTable">
       <ng-container matColumnDef="Rank" style="padding: 5px;">
         <td mat-cell *matCellDef="let element"> {{element.rank}} </td>
@@ -23,8 +23,34 @@
         </td>
       </ng-container>
 
-      <!-- <tr mat-header-row *matHeaderRowDef="columns"></tr> -->
-      <tr mat-row *matRowDef="let myRowData; columns: columns"></tr>
     </table>
 
-  </div>
+  </div> -->
+
+
+  <mat-accordion>
+    <div *ngFor="let group of leaderboard; let i=index">
+      <mat-expansion-panel [disabled]="!group.isTeam">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <p style="padding-top: 10px; padding-right: 5px;">{{i+1}}</p>
+            <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + group.profile_url + ')'}" style="position:relative; padding-top: 5px; float:left;"></div>
+            <div style="padding: 10px;">{{group.display_name}}</div>
+          </mat-panel-title>
+          <mat-panel-description style="padding:8px; float: right;">
+            {{group.total_distance}} {{group.distance_type}}
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+    
+        <mat-card *ngFor="let member of group.child_user_stats">
+          <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + member.profile_url + ')'}" style="position: relative; float:left;"></div>
+          <div style="padding-left: 50px;">{{member.display_name}}</div>
+          <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div>
+        </mat-card>
+
+      </mat-expansion-panel>
+
+
+
+    </div>
+  <mat-accordion>

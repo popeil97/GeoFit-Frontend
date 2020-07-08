@@ -5,19 +5,31 @@
 <mat-sidenav-container>
   <mat-sidenav md-disable-backdrop='true' #menu mode="side" style="overflow-y: hidden;">
     <mat-tab-group>
-      <mat-tab label="Import">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>file_download</mat-icon>
+        </ng-template>
         <mat-tab-group>
-          <mat-tab label="API">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon>cloud_download</mat-icon>
+            </ng-template>
             <app-activities-menu [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs($event)"></app-activities-menu>
           </mat-tab>
-          <mat-tab label="Manual">
+          <mat-tab *ngIf="raceSettings.isManualEntry">
+            <ng-template mat-tab-label>
+              <mat-icon>add_circle_outline</mat-icon>
+            </ng-template>
             <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
-
           </mat-tab>
         </mat-tab-group>
 
       </mat-tab>
-      <mat-tab label="L">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>format_list_numbered_rtl</mat-icon>
+        </ng-template>
+        
         <mat-tab-group>
           <mat-tab label="Distance">
             <app-leaderboard [leaderboard]="leaderboard"></app-leaderboard>
@@ -27,32 +39,54 @@
           </mat-tab>
 
           <mat-tab label="Teams">
-            <app-team-list [teams]="teams"></app-team-list>
+            <button class="btn btn-primary" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">+ Team</button>
+            <button class="btn btn-danger" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm()" *ngIf="showTeamForm">Cancel</button>
+            <div *ngIf="!showTeamForm">
+              
+              <app-team-list [teams]="teams" [userStat]="userStat" (callback)="getRaceState($event)"></app-team-list>
+            </div>
+
+            <div *ngIf="showTeamForm">
+              <app-team-form (callback)="getRaceState($event)"></app-team-form>
+            </div>
           </mat-tab>
         </mat-tab-group>
 
       </mat-tab>
-      <mat-tab label="Social">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>group</mat-icon>
+        </ng-template>
         <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call-->
-        <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)"></app-feed>>
+        <button (click)="clearUserPins()">Clear User Pins!</button>
+        <button (click)="showPinsByID(null)">Show User Pins!</button>
+        <button (click)="showPinsByID(followedIDs)">Show Followers Only</button>
+        <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>settings</mat-icon>
+        </ng-template>
+        <app-race-settings [userSettings]="userRaceSettings"></app-race-settings>
       </mat-tab>
     </mat-tab-group>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true"></app-map>
+    <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
 
     <a class="btn btn-primary btn-customized open-menu" role="button" (click)="menu.toggle()">
       <i class="fas fa-align-left"></i> <span>Menu</span>
   </a>
 
 
-<a class="btn btn-primary btn-customized inviteToggle" data-toggle="modal" data-target="#storyModal" (click)="showModal('#storyModal')">
+<!----<a class="btn btn-primary btn-customized inviteToggle" data-toggle="modal" data-target="#storyModal" (click)="showModal('#storyModal')">
   <span style="color:white">Add a Story</span>
-</a>
+</a>>---->
 
 <a class="btn btn-primary btn-customized inviteToggle" (click)="goToTeamForm()">
   <span style="color:white">Create Team</span>
 </a>
+<app-user-progress [progress]="progress"></app-user-progress>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <!-- Wrapper -->
@@ -64,19 +98,16 @@
 <!-----STORY MODAL-->
 <app-story-modal></app-story-modal>
 
-<div class="modal fade" id="storyModal">
+<!---<div class="modal fade" id="storyModal">
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Add a Story to your activity!</h4>
         <button type="button" class="close" (click)="hideModal('#activitiesModal')">&times;</button>
       </div>
 
-      <!-- Modal body -->
       <div class="modal-body">
-        <!---USER STORY UPLOAD--->
         <h4>Stories appear above your pin for 48 hours after upload</h4>
         <div class="container">
           <label for="storyImageField">Upload an image!</label>
@@ -86,15 +117,13 @@
         </div>
       </div>
 
-      <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="uploadStory()" >Add Story</button>
-        <!-- this button is hidden, used to close from typescript -->
         <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
       </div>
     </div>
   </div>
-</div>
+</div>--->
 
 <div class="modal fade" id="activitiesModal">
   <div class="modal-dialog">
@@ -211,4 +240,4 @@
 
 
 
-<app-user-progress [progress]="progress"></app-user-progress>
+

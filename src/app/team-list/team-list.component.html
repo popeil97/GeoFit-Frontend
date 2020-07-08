@@ -17,7 +17,8 @@
     </mat-card>
 
     <mat-action-row>
-      <button mat-button (click)="joinRequest(team)">Request to Join</button>
+      <button mat-button (click)="joinRequest(team)" *ngIf="userStat.team_id == null">Request to Join</button>
+      <button mat-button (click)="quitTeam(team)" *ngIf="userStat.team_id == team.team_id">Quit</button>
     </mat-action-row>
   </mat-expansion-panel>
 <mat-accordion>

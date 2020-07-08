@@ -1,7 +1,30 @@
-.one {
-  float:left;
+.modal-dialog {
+  max-width: 70%;
+  width: auto !important;
 }
 
-.two {
-  float:right;
+/* Create two equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 50%;
+  padding: 10px;
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 800px) {
+  .column {
+    width: 100%;
+  }
+}
+
+#storyImg {
+  width:100%;
+  height:100%;
+  object-fit: contain;
+  vertical-align: middle;
+  top: 50%;
+  bottom: 0;
+  left:0;
+  right:0;
+  margin: auto;
 }

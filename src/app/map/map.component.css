@@ -5,17 +5,18 @@
     right: 0;
     bottom: 0;
   }
-  
-  .map-frame {
-    border: 2px solid black;
-    height: 100%;
-    width: 100%;
-  }
-  
-  #map {
-    height: 100%;
-    width: 100%;
-  }
+
+.map-frame {
+  border: 2px solid black;
+  height: 100%;
+  width: 100%;
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
+
 
 /* ***** Leaflet Icons ****
 .location-pin img {

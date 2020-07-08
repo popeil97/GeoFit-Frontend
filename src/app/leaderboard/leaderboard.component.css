@@ -4,3 +4,11 @@
     position: sticky;
     overflow-y: scroll;
 }
+
+.example-header-image {
+    background-size: cover;
+  }
+
+  ::ng-deep .mat-expansion-panel-header[aria-disabled=true] {
+    color: rgba(0,0,0,.87);
+}
