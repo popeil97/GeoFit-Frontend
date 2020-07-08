@@ -5,7 +5,7 @@ import {Chart} from 'chart.js';
 @Component({
   selector: 'app-user-stats',
   templateUrl: './user-stats.component.html',
-  styleUrls: ['./user-stats.component.css']
+  styleUrls: ['./user-stats.component.css'],
 })
 export class UserStatsComponent implements OnInit {
   @Input() userID: number;
@@ -14,7 +14,7 @@ export class UserStatsComponent implements OnInit {
 
   ngOnInit() {
   
-  this._usersService.getUserStats(3).then((res)=>{
+  this._usersService.getUserStats(this.userID).then((res)=>{
   	console.log("STATS: ", res);
     this.userStats = res as UserStats;
     //this.userStats.mycolors

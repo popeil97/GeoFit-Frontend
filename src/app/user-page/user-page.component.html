@@ -1,4 +1,3 @@
-
 <div class="container">
   <div class="row profile">
     <div class="col-md-3">
@@ -22,6 +21,27 @@
             Developer
           </div>
         </div>
+
+        <div class="container">
+  <div class="row profile">
+    <div class="col-md-3">
+      <div class="about-sidebar position-fixed" *ngIf="!showEdit">
+        <div class="profile-content" id="viewContent">
+          <h2>City</h2>
+          <p></p>
+
+          <h2>Country</h2>
+          <p>{{ userData.location }}</p>
+
+          <h2>Description</h2>
+          <p>{{ userData.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    
+    </div>
+</div>
 
         <!-- END SIDEBAR USER TITLE -->
         <!-- SIDEBAR BUTTONS -->
@@ -64,7 +84,13 @@
       </div>
 
       <div class="profile-content" *ngIf="!showEdit">
-        <h1>STATS TO GO HERE</h1>
+        <div class="profile-content" id="viewContent">
+        <!---app selector for stats here--->
+        <app-user-stats [userID]="userData.user_id"></app-user-stats>
+      </div>
+      <div class="col-md-9" id="feedContent" *ngIf="!showEdit">
+      <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
+    </div>
       </div>
 
       <div class="profile-content" *ngIf="showEdit">
@@ -75,29 +101,4 @@
   </div>
 </div>
 
-<div class="container">
-  <div class="row profile">
-    <div class="col-md-3">
-      <br>
-      <br>
-      <br>
-      <br>
-      <div class="about-sidebar position-fixed" *ngIf="!showEdit">
-        <div class="profile-content" id="viewContent">
-          <h2>City</h2>
-          <p></p>
 
-          <h2>Country</h2>
-          <p>{{ userData.location }}</p>
-
-          <h2>Description</h2>
-          <p>{{ userData.description }}</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-9" id="feedContent" *ngIf="!showEdit">
-      <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
-    </div>
-
-</div>

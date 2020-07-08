@@ -15,9 +15,6 @@ export class UserPageComponent implements OnInit {
 
   constructor(private route:ActivatedRoute, private _userProfileService:UserProfileService) { }
 
-  	
-    //openTab();
-
   private showEdit: boolean;
 
   ngOnInit() {
