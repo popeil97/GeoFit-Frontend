@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TeamService } from '../team.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,12 +11,16 @@ import { UsersService } from '../users.service';
 })
 export class TeamFormComponent implements OnInit {
 
+  @Output() callback:EventEmitter<any> = new EventEmitter();
+
   teamForm:FormGroup;
   uploadedUrl:any;
   raceName:string;
   raceID:number;
   followerOptions:any[];
   followersInvited:any[] = [];
+  errorMsg:string;
+  showError:Boolean = false;
 
   constructor(private _teamService:TeamService,private _userService:UsersService,private route: ActivatedRoute,private router:Router) { 
     this.teamForm = new FormGroup({
@@ -48,13 +52,22 @@ export class TeamFormComponent implements OnInit {
       let formClean:TeamForm;
 
       if(this.teamForm.valid) {
+        this.showError = false;
         formClean = this.teamForm.value;
         formClean.teamImg = this.uploadedUrl;
         formClean.invited = this.followersInvited.map((follower) => follower.user_id);
 
         this._teamService.createTeam(formClean,this.raceID).then((resp:TeamFormResp) => {
           console.log('TEAM FORM RESP:',resp);
-          this.router.navigate(['/race',{id:this.raceID,name:this.raceName}]);
+          // this.router.navigate(['/race',{id:this.raceID,name:this.raceName}]);
+
+          if(!resp.success) {
+            // display error message
+            this.showError = true;
+            this.errorMsg = resp.message;
+          }
+
+          this.callback.emit();
         });
       }
   }
@@ -103,6 +116,7 @@ export interface TeamForm {
 
 interface TeamFormResp {
   success:Boolean;
+  message:string;
 }
 
 interface FollowersResp {

@@ -28,6 +28,9 @@ export class RaceCreateComponent implements OnInit {
   selectedStartLoc:MapBoxPlace;
   selectedEndLoc:MapBoxPlace;
 
+  raceType:RaceTypes;
+  raceTypeOptions = [{name:'Run/Walk',type:RaceTypes.RUN_WALK},{name:'Ride',type:RaceTypes.RIDE}];
+
   constructor(private _coordinateService:CoordinatesService, private _raceService:RaceService, private router:Router) { 
     this.raceForm = new FormGroup({
       name: new FormControl('',[
@@ -47,6 +50,9 @@ export class RaceCreateComponent implements OnInit {
         Validators.required
       ]),
       public: new FormControl(false,[
+        Validators.required
+      ]),
+      raceType: new FormControl('',[
         Validators.required
       ]),
       routeFile: new FormControl('')
@@ -96,6 +102,11 @@ export class RaceCreateComponent implements OnInit {
     }
   }
 
+  selectRaceType(option:any) {
+    this.raceType = option.type;
+  }
+
+
   clearForm() {
     this.selectedEndLoc = null;
     this.selectedStartLoc = null;
@@ -114,6 +125,8 @@ export class RaceCreateComponent implements OnInit {
 
       formClean.end_lon = this.selectedEndLoc.center[0];
       formClean.end_lat = this.selectedEndLoc.center[1];
+
+      formClean.raceType = this.raceType;
 
       formClean.routeFile = this.uploadeUrl;
 
@@ -204,9 +217,15 @@ interface RaceForm {
   endLoc:string;
   public:Boolean;
   routeFile:any;
+  raceType:RaceTypes;
 }
 
 interface FromResp {
   race_id:number;
   name:string;
+}
+
+enum RaceTypes {
+  RUN_WALK=1,
+  RIDE=2,
 }

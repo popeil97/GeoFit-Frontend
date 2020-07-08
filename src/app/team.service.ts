@@ -23,4 +23,8 @@ export class TeamService {
   joinTeam(user_id:number,race_id:number,team_id:number) {
     return this.http.post('http://localhost:8000/api/join-team/',{user_id:user_id,race_id:race_id,team_id:team_id}).toPromise();
   }
+
+  quitTeam(race_id:number,team_id:number) {
+    return this.http.post('http://localhost:8000/api/quit-team/',{race_id:race_id,team_id:team_id}).toPromise();
+  }
 }

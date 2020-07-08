@@ -9,6 +9,7 @@ import { LeaderboardItem } from '../leaderboard/leaderboard.component';
 import { MapComponent } from '../map/map.component';
 import { FeedComponent } from '../feed/feed.component';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
+import { RaceSettings } from '../race-about/race-about.component';
 
 declare var $: any
 
@@ -34,6 +35,10 @@ export class RaceViewComponent implements OnInit {
   public leaderboard:LeaderboardItem[];
   public all_user_data:Array<FeedObj>;
   public teams:any[];
+  public userRaceSettings:any;
+  public raceSettings:RaceSettings;
+  public showTeamForm:Boolean = false;
+  public userStat:any = {};
 
   private storyImage:string;
   private storyText:string;
@@ -66,6 +71,10 @@ export class RaceViewComponent implements OnInit {
 
     //Add listener to story image upload field
     this.setStoryImageFieldListener();
+  }
+
+  toggleTeamForm() {
+    this.showTeamForm = !this.showTeamForm;
   }
 
   showModal(id:string): void {
@@ -125,10 +134,14 @@ export class RaceViewComponent implements OnInit {
           return user_data;
         }
       });
+      this.userRaceSettings = raceData.settings;
+      this.raceSettings = raceData.race_settings;
+      this.userStat = raceData.user_stat;
       console.log('TEAMS:',this.teams);
       console.log('COORDS:',this.coords);
       console.log("ALL USER DATA", this.all_user_data);
       console.log("LEADERBOARD ITEMS: ", this.leaderboard);
+      console.log('USER SETTINGS:',this.userRaceSettings);
 
       this.loading = false;
     });
@@ -189,6 +202,9 @@ interface RaceData {
   coords:any;
   leaderboard:any;
   users_data:any;
+  settings:any;
+  race_settings:RaceSettings;
+  user_stat:any;
 }
 
 interface FeedObj {

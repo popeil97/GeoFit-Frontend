@@ -1,0 +1,31 @@
+<div class="container" style="padding:10px;">
+  <div class="jumbotron">
+    <form [formGroup]="settingsForm">
+      <h3>Activities</h3>
+      <div class="form-group">
+        <mat-slide-toggle formControlName="isAutomaticImport">Automatic Activity Import</mat-slide-toggle>
+      </div>
+    </form>
+
+      <button mat-button class="btn btn-primary" (click)="apply()">Apply</button>
+      
+      <div>
+        <br>
+        <br>
+      <div *ngIf="successfulUpdate"
+    class="alert alert-primary">
+    
+    <div>
+       Successfully Applied
+    </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="jumbotron">
+    <h3>Social</h3>
+  </div>
+  
+</div>
+
+

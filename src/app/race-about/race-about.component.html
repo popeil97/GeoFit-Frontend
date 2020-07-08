@@ -9,8 +9,8 @@
 <br>
 
 <div class="container">
-  <button id="editBtn"class="btn btn-primary" style="float:right" (click)="toggleForm()">Edit</button>
-  <button id="editBtn"class="btn btn-primary" style="float:right" (click)="viewRace()">Go To Map!</button>
+  <button class="btn btn-primary" style="float:right" (click)="toggleForm()" *ngIf="isOwner">Edit</button>
+  <button class="btn btn-primary" style="float:right" (click)="viewRace()">Go To Map!</button>
 </div>
 
 <br>
@@ -49,10 +49,42 @@
       <input type="file" formControlName="raceImage" (change)="onSelectFile($event)"/>
     </div>
 
+    <div formGroupName="rules"> 
+      <div class="form-group">
+        <mat-slide-toggle formControlName="isManual">Allow Manual Entry</mat-slide-toggle>
+      </div>
+      <div class="form-group">
+        <mat-slide-toggle formControlName="allowTeams">Allow Teams</mat-slide-toggle>
+      </div>
+
+      <div class="form-group" style="text-align: left; padding: 5px;" *ngIf="AboutForm.get('rules').get('allowTeams').value == true">
+        <label>Max Team Size</label>
+        <input class="form-control" type="text" formControlName="maxTeamSize" [matAutocomplete]="maxTeamSizeAuto"/>
+  
+        <mat-autocomplete #maxTeamSizeAuto="matAutocomplete">
+          <mat-option *ngFor="let option of teamSizeOptions" [value]="option">
+            {{ option }}
+          </mat-option>
+        </mat-autocomplete>
+  
+        <div *ngIf="AboutForm.get('rules').get('maxTeamSize').invalid && (AboutForm.get('rules').get('maxTeamSize').dirty || AboutForm.get('rules').get('maxTeamSize').touched)"
+      class="alert alert-danger">
+      
+      <div *ngIf="AboutForm.get('rules').get('maxTeamSize').errors.max">
+         Max Team Size is 10
+      </div>
+      </div>
+      </div>
+    </div>
+
+    
+
     <div style="padding: 5px; position: relative; float: left;">
       <button class="btn btn-primary" mat-raised-button (click)="update()">Update</button>
       <button class="btn btn-danger" mat-raised-button style="left: 5px;" (click)="toggleForm()">Cancel</button>
     </div>
+
+    
   </form>
 </div>
 
@@ -74,6 +106,30 @@
 
   <p>
     {{aboutData.description}}
+  </p>
+
+  <h2>
+    Manual Entry Allowed?
+  </h2>
+
+  <p *ngIf="raceSettings.isManualEntry">
+    Yes
+  </p>
+
+  <p *ngIf="!raceSettings.isManualEntry">
+    No
+  </p>
+
+  <h2>
+    Teams Allowed?
+  </h2>
+
+  <p *ngIf="raceSettings.allowTeams">
+    Yes, max size: {{raceSettings.max_team_size}}
+  </p>
+
+  <p *ngIf="!raceSettings.allowTeams">
+    No
   </p>
 
 </div>

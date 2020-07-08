@@ -18,12 +18,18 @@ export class NavComponent implements OnInit {
     $(document).on('click', '.dropdown-menu', function (e) {
       e.stopPropagation();
     });
-    
+
     Observable.interval(5000) // make much larger in production
     .switchMap(() => this._notificationService.getNotifications())
     .subscribe((resp:NotificationResp) => {
       console.log(resp);
       this.notifications = resp.notifications;
+    });
+  }
+
+  removeNotification(not_id:number) {
+    this.notifications = this.notifications.filter((notification) => {
+      return not_id != notification.not_id;
     });
   }
 

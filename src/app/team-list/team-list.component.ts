@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NotificationType, NotificationsService } from '../notifications.service';
+import { TeamService } from '../team.service';
 
 @Component({
   selector: 'app-team-list',
@@ -8,8 +9,10 @@ import { NotificationType, NotificationsService } from '../notifications.service
 })
 export class TeamListComponent implements OnInit {
   @Input() teams:any[] = [];
+  @Input() userStat:any;
+  @Output() callback:EventEmitter<any> = new EventEmitter();
 
-  constructor(private _notificationService:NotificationsService) { }
+  constructor(private _notificationService:NotificationsService,private _teamService:TeamService) { }
 
   ngOnInit() {
     console.log('TEAMS COMPONENT:',this.teams);
@@ -24,6 +27,13 @@ export class TeamListComponent implements OnInit {
 
     this._notificationService.createNotification(form).then((resp) => {
       console.log('NOTIFICATION RESP:',resp);
+    });
+  }
+
+  quitTeam(team:any): void {
+    this._teamService.quitTeam(team.race_id,team.team_id).then((resp) => {
+      console.log('RESP FROM TEAM QUIT',resp);
+      this.callback.emit();
     });
   }
 

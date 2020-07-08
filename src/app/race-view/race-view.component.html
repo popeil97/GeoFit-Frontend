@@ -5,19 +5,31 @@
 <mat-sidenav-container>
   <mat-sidenav md-disable-backdrop='true' #menu mode="side" style="overflow-y: hidden;">
     <mat-tab-group>
-      <mat-tab label="Import">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>file_download</mat-icon>
+        </ng-template>
         <mat-tab-group>
-          <mat-tab label="API">
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon>cloud_download</mat-icon>
+            </ng-template>
             <app-activities-menu [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs($event)"></app-activities-menu>
           </mat-tab>
-          <mat-tab label="Manual">
+          <mat-tab *ngIf="raceSettings.isManualEntry">
+            <ng-template mat-tab-label>
+              <mat-icon>add_circle_outline</mat-icon>
+            </ng-template>
             <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
-
           </mat-tab>
         </mat-tab-group>
 
       </mat-tab>
-      <mat-tab label="L">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>format_list_numbered_rtl</mat-icon>
+        </ng-template>
+        
         <mat-tab-group>
           <mat-tab label="Distance">
             <app-leaderboard [leaderboard]="leaderboard"></app-leaderboard>
@@ -27,14 +39,32 @@
           </mat-tab>
 
           <mat-tab label="Teams">
-            <app-team-list [teams]="teams"></app-team-list>
+            <button class="btn btn-primary" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">+ Team</button>
+            <button class="btn btn-danger" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm()" *ngIf="showTeamForm">Cancel</button>
+            <div *ngIf="!showTeamForm">
+              
+              <app-team-list [teams]="teams" [userStat]="userStat" (callback)="getRaceState($event)"></app-team-list>
+            </div>
+
+            <div *ngIf="showTeamForm">
+              <app-team-form (callback)="getRaceState($event)"></app-team-form>
+            </div>
           </mat-tab>
         </mat-tab-group>
 
       </mat-tab>
-      <mat-tab label="Social">
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>group</mat-icon>
+        </ng-template>
         <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call-->
         <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)"></app-feed>>
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>settings</mat-icon>
+        </ng-template>
+        <app-race-settings [userSettings]="userRaceSettings"></app-race-settings>
       </mat-tab>
     </mat-tab-group>
   </mat-sidenav>
@@ -53,6 +83,7 @@
 <a class="btn btn-primary btn-customized inviteToggle" (click)="goToTeamForm()">
   <span style="color:white">Create Team</span>
 </a>
+<app-user-progress [progress]="progress"></app-user-progress>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <!-- Wrapper -->
@@ -211,4 +242,4 @@
 
 
 
-<app-user-progress [progress]="progress"></app-user-progress>
+

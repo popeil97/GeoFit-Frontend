@@ -12,10 +12,13 @@ export class RaceAboutComponent implements OnInit {
 
   public AboutForm: FormGroup;
   private aboutData:AboutData = {owner:{}} as AboutData;
+  private raceSettings:RaceSettings = {} as RaceSettings;
   private showForm: Boolean;
   private raceName:string;
   private raceID:number;
   private uploadeUrl:any;
+  private teamSizeOptions = [2,3,4,5,6,7,8,9,10];
+  private isOwner: Boolean;
 
   constructor(private raceService:RaceService,private route: ActivatedRoute,private router:Router) { }
 
@@ -28,24 +31,17 @@ export class RaceAboutComponent implements OnInit {
       this.raceID = params['params']['id'];
     });
 
-    this.AboutForm = new FormGroup({
-      name: new FormControl('',[
-        Validators.required,
-        Validators.maxLength(30)
-      ]),
-      description: new FormControl('',[
-        Validators.required
-      ]),
-      raceImage: new FormControl('')
-    });
-
     this.raceService.getRaceAbout(this.raceID).then((resp) => {
       console.log('RESP FROM SERVER:',resp);
       resp = resp as any;
       this.aboutData = resp['about_info'] as AboutData;
+      this.raceSettings = resp['race_settings'];
+      this.isOwner = resp['isOwner'];
 
       this.initializeForm();
     });
+
+    
   }
 
   toggleForm(): void {
@@ -61,7 +57,14 @@ export class RaceAboutComponent implements OnInit {
       description: new FormControl(this.aboutData.description,[
         Validators.required
       ]),
-      raceImage: new FormControl('')
+      raceImage: new FormControl(''),
+      rules: new FormGroup({
+        isManual: new FormControl(this.raceSettings.isManualEntry),
+        allowTeams: new FormControl(this.raceSettings.allowTeams),
+        maxTeamSize: new FormControl(this.raceSettings.max_team_size,[
+          Validators.max(10)
+        ])
+      })
     });
 
   }
@@ -80,6 +83,7 @@ export class RaceAboutComponent implements OnInit {
     let isValid: Boolean = this.AboutForm.valid;
 
     formClean.raceImage = this.uploadeUrl;
+    formClean.rules.race_id = this.raceSettings.race_id;
     console.log('IS VALID:',formClean);
 
     
@@ -87,6 +91,7 @@ export class RaceAboutComponent implements OnInit {
     if(isValid) {
       this.raceService.updateRaceAbout(formClean,this.raceID).then((resp) => {
         this.aboutData = resp['about_info'] as AboutData;
+        this.raceSettings = resp['race_settings'] as RaceSettings;
         this.initializeForm();
         this.toggleForm();
       });
@@ -116,4 +121,11 @@ export interface AboutData {
 
 interface Event {
   target:any
+}
+
+export interface RaceSettings {
+  isManualEntry:Boolean;
+  allowTeams:Boolean;
+  race_id:number;
+  max_team_size:number;
 }
