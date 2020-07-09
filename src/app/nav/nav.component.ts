@@ -27,6 +27,7 @@ export class NavComponent implements OnInit {
     });
   }
 
+
   removeNotification(not_id:number) {
     this.notifications = this.notifications.filter((notification) => {
       return not_id != notification.not_id;
