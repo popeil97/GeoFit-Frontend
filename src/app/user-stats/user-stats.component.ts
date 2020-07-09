@@ -10,13 +10,12 @@ import {Chart} from 'chart.js';
 export class UserStatsComponent implements OnInit {
   @Input() userID: number;
   private userStats: UserStats;
-  private chart : Chart;
-
+  private chart: Chart;
   constructor(private _usersService:UsersService) { }
 
   ngOnInit() {
-  
-  this._usersService.getUserStats(this.userID).then((res)=>{
+
+  this._usersService.getUserStats(3).then((res)=>{
   	console.log("STATS: ", res);
     this.userStats = res as UserStats;
     //this.userStats.mycolors
@@ -87,17 +86,29 @@ export class UserStatsComponent implements OnInit {
 }
 
 interface UserStats {
-  tot_activities:number;
-  tot_dist:number
-  tot_hrs:number
+  run_tot_activities:number;
+  run_tot_dist:number
+  run_tot_hrs:number
 
-  max_dist:number
-  max_time:number
-  max_pace:number
+  run_max_dist:number
+  run_max_time:number
+  run_max_pace:number
 
-  average_pace:number
-  average_dist:number
-  average_time:number
+  run_average_pace:number
+  run_average_dist:number
+  run_average_time:number
+
+  ride_tot_activities:number;
+  ride_tot_dist:number
+  ride_tot_hrs:number
+
+  ride_max_dist:number
+  ride_max_time:number
+  ride_max_pace:number
+
+  ride_average_pace:number
+  ride_average_dist:number
+  ride_average_time:number
 
   mydistances:any[];
   mydates:any[];
