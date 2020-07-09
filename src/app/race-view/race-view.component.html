@@ -40,14 +40,13 @@
 
           <mat-tab label="Teams">
             <button class="btn btn-primary" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">+ Team</button>
-            <button class="btn btn-danger" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm()" *ngIf="showTeamForm">Cancel</button>
-            <div *ngIf="!showTeamForm">
-              
-              <app-team-list [teams]="teams" [userStat]="userStat" (callback)="getRaceState($event)"></app-team-list>
+            <button class="btn btn-danger" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm('clear')" *ngIf="showTeamForm">Cancel</button>
+            <div *ngIf="!showTeamForm">   
+              <app-team-list [teams]="teams" [userStat]="userStat" (callback)="getRaceState($event)" (edit)="editTeamForm($event)"></app-team-list>
             </div>
 
             <div *ngIf="showTeamForm">
-              <app-team-form (callback)="getRaceState($event)"></app-team-form>
+              <app-team-form (callback)="getRaceState($event)" [teamEditForm]="teamEditForm"></app-team-form>
             </div>
           </mat-tab>
         </mat-tab-group>

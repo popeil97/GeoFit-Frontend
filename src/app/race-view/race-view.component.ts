@@ -10,6 +10,7 @@ import { MapComponent } from '../map/map.component';
 import { FeedComponent } from '../feed/feed.component';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
 import { RaceSettings } from '../race-about/race-about.component';
+import { TeamFormComponent } from '../team-form/team-form.component';
 
 declare var $: any
 
@@ -40,6 +41,10 @@ export class RaceViewComponent implements OnInit {
   public showTeamForm:Boolean = false;
   public userStat:any = {};
   public followedIDs:number[];
+  public teamEditForm:TeamEditBody = {
+    isEdit:false,
+    team_id:null
+  };
 
   private storyImage:string;
   private storyText:string;
@@ -72,8 +77,13 @@ export class RaceViewComponent implements OnInit {
 
   }
 
-  toggleTeamForm() {
+  toggleTeamForm(action?:string) {
     this.showTeamForm = !this.showTeamForm;
+    console.log('ACTION IS:',action);
+    if(action == 'clear') {
+      this.teamEditForm.isEdit = false;
+    }
+    
   }
 
   showModal(id:string): void {
@@ -91,6 +101,16 @@ export class RaceViewComponent implements OnInit {
 
   goToTeamForm(): void {
     this.router.navigate(['/teams',{name:this.raceName,id:this.raceID}]);
+  }
+
+  editTeamForm(team_id:number): void {
+    this.teamEditForm = {
+      team_id:team_id,
+      isEdit:true
+    } as TeamEditBody
+    console.log('TEAM BODY FORM:',this.teamEditForm);
+    this.toggleTeamForm();
+    // this.teamEditForm.isEdit = false;
   }
 
   importActs(): void {
@@ -196,4 +216,9 @@ interface FeedObj {
   last_distance:number;
   message: string;
   created_ts:number;
+}
+
+export interface TeamEditBody {
+  team_id:number;
+  isEdit:Boolean;
 }
