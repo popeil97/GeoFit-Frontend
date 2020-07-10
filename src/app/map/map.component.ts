@@ -6,6 +6,8 @@ import { PopUpService } from '../pop-up.service';
 
 import 'leaflet';
 import 'leaflet.markercluster';
+import 'leaflet.heat';
+
 const L = window['L'];
 
 import * as _ from 'lodash';
@@ -231,6 +233,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
     //Add pin clusters to map
     this.map.addLayer(markerClusters);
 
+    var heatArray = new Array(this.userData.length);
+
     for (var i = 0; i < this.userData.length; i++){
       var img_html = "<img src=\"" + this.userData[i].profile_url + "\";\"><div class=\"pin\"></div><div class=\"pulse\"></div>";
 
@@ -248,6 +252,11 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
       var lng_user = along_user.geometry.coordinates[0];
       var lat_user = along_user.geometry.coordinates[1];
+
+      heatArray[i] = [lat_user,lng_user,1]
+      heatArray[i+this.userData.length] = [lat_user,lng_user,1.0]
+
+
 
       var locMarker = L.geoJSON(along_user, {
         pointToLayer: function(feature, latlng) {
@@ -290,7 +299,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
       //Temp before we retrieve logged in user's ID
       //locMarker.bindPopup(popupText, {maxWidth: 200});
 
-      //To work with markercluster, we store popUpText in dict and display onclick (see below)
       this.popUpsByMarkers[locMarker['_leaflet_id'].toString()] = popupText;
 
       //Retain markers in dict so we can pan to it upon select
@@ -302,6 +310,11 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     }
 
+    heatArray = heatArray.map(function (p) { return [p[0], p[1]]; });
+
+      var heat = L.heatLayer(heatArray, {radius: 50},{minOpacity: 1.0}).addTo(this.map);
+      //To work with markercluster, we store popUpText in dict and display onclick (see below)
+      
     //POPUPS (unfortunately ruined by markercluster, but fixed here)
     var popUpsByMarkers = this.popUpsByMarkers;
     markerClusters.on('click', function(ev) {
@@ -342,6 +355,11 @@ export class MapComponent implements AfterViewInit,OnChanges {
     });
 
     tiles.addTo(this.map);
+
+    //An extract of address points from the LINZ bulk extract: http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde
+//Should be this data set: http://data.linz.govt.nz/#/layer/779-nz-street-address-electoral/
+
+    
   }
 
 
