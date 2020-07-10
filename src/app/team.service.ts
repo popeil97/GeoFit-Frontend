@@ -15,9 +15,9 @@ export class TeamService {
     }; 
   }
 
-  createTeam(teamForm:TeamForm,race_id:number) {
+  createTeam(teamForm:TeamForm,race_id:number,isUpdate:Boolean,team_id?:number) {
     console.log('SERVICE RACEID:',race_id);
-    return this.http.post('http://localhost:8000/api/create-team/',{team_form:teamForm,race_id:race_id}).toPromise();
+    return this.http.post('http://localhost:8000/api/create-team/',{team_form:teamForm,race_id:race_id,isUpdate:isUpdate,team_id:team_id}).toPromise();
   }
 
   joinTeam(user_id:number,race_id:number,team_id:number) {
@@ -26,5 +26,9 @@ export class TeamService {
 
   quitTeam(race_id:number,team_id:number) {
     return this.http.post('http://localhost:8000/api/quit-team/',{race_id:race_id,team_id:team_id}).toPromise();
+  }
+
+  getTeam(team_id:number) {
+    return this.http.post('http://localhost:8000/api/get-team/',{team_id:team_id}).toPromise();
   }
 }

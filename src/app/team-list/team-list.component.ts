@@ -11,6 +11,7 @@ export class TeamListComponent implements OnInit {
   @Input() teams:any[] = [];
   @Input() userStat:any;
   @Output() callback:EventEmitter<any> = new EventEmitter();
+  @Output() edit:EventEmitter<any> = new EventEmitter();
 
   constructor(private _notificationService:NotificationsService,private _teamService:TeamService) { }
 
@@ -35,6 +36,10 @@ export class TeamListComponent implements OnInit {
       console.log('RESP FROM TEAM QUIT',resp);
       this.callback.emit();
     });
+  }
+
+  editTeam(team:any) {
+    this.edit.emit(team.team_id);
   }
 
 }

@@ -84,23 +84,21 @@
       </div>
 
       <div class="profile-content" *ngIf="!showEdit">
-        <!---<app-user-stats [userID]="userData.user_id"></app-user-stats>-->
+        <div class="profile-content" id="viewContent">
+        <!---app selector for stats here--->
+        <app-user-stats [userID]="userData.user_id"></app-user-stats>
       </div>
-
-      <div class="profile-content">
-        <!----<app-user-stats *ngIf="!showEdit" [userID]="userData.user_id"></app-user-stats>---->
-        <app-profile-form *ngIf="showEdit" [userData]="userData" (formUpdated)="profileUpdated($event)"></app-profile-form>
-      </div>
-
       <div class="col-md-9" id="feedContent" *ngIf="!showEdit">
-        <!---<app-user-stats [userID]="userData.user_id"></app-user-stats>-->
-        <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
+      <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
+    </div>
+      </div>
+
+      <div class="profile-content" *ngIf="showEdit">
+        <app-profile-form (formUpdated)="profileUpdated($event)"></app-profile-form>
       </div>
 
     </div>
-
-
   </div>
-
-
 </div>
+
+

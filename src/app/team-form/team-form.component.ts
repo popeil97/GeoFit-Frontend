@@ -1,16 +1,17 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TeamService } from '../team.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../users.service';
+import { TeamEditBody } from '../race-view/race-view.component';
 
 @Component({
   selector: 'app-team-form',
   templateUrl: './team-form.component.html',
   styleUrls: ['./team-form.component.css']
 })
-export class TeamFormComponent implements OnInit {
-
+export class TeamFormComponent implements AfterViewInit,OnChanges {
+  @Input() teamEditForm:TeamEditBody;
   @Output() callback:EventEmitter<any> = new EventEmitter();
 
   teamForm:FormGroup;
@@ -35,6 +36,36 @@ export class TeamFormComponent implements OnInit {
       invited: new FormControl('')
     });
   }
+  ngAfterViewInit(): void {
+    return;
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log('changes:',changes);
+
+    for(const propName in changes) {
+      if(changes.hasOwnProperty(propName)) {
+
+        switch(propName) {
+          case 'teamEditForm':
+            console.log('IS_EDIT CHANGED');
+            if(changes.teamEditForm.currentValue != undefined) {
+              
+              if(this.teamEditForm.isEdit) {
+                // make API call to get team info and intitialize form
+                this.initForm();
+              }
+
+              // else do nothing
+              else {
+                this.teamForm.reset();
+              }
+
+            }
+        }
+      }
+    }
+
+  }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
@@ -48,6 +79,31 @@ export class TeamFormComponent implements OnInit {
     });
   }
 
+  initForm(): void {
+
+    let teamState:any = null;
+
+    this._teamService.getTeam(this.teamEditForm.team_id).then((resp:any) => {
+      teamState = resp.team;
+
+      console.log('TEAM STATE:',teamState);
+
+      this.teamForm = new FormGroup({
+        name: new FormControl(teamState.name,[
+          Validators.required,
+          Validators.maxLength(30)
+        ]),
+        teamImg: new FormControl(''),
+        description: new FormControl(teamState.description,[
+          Validators.required
+        ]),
+        invited: new FormControl('')
+      });
+    });
+
+    
+  }
+
   createTeam(): void {
     let formClean:TeamForm;
 
@@ -57,7 +113,7 @@ export class TeamFormComponent implements OnInit {
         formClean.teamImg = this.uploadedUrl;
         formClean.invited = this.followersInvited.map((follower) => follower.user_id);
 
-        this._teamService.createTeam(formClean,this.raceID).then((resp:TeamFormResp) => {
+        this._teamService.createTeam(formClean,this.raceID,false,null).then((resp:TeamFormResp) => {
           console.log('TEAM FORM RESP:',resp);
           // this.router.navigate(['/race',{id:this.raceID,name:this.raceName}]);
 
@@ -70,6 +126,33 @@ export class TeamFormComponent implements OnInit {
           this.callback.emit();
         });
       }
+  }
+
+  updateTeam() {
+    let team_id = this.teamEditForm.team_id;
+
+    let formClean:TeamForm;
+
+    if(this.teamForm.valid) {
+      this.showError = false;
+      formClean = this.teamForm.value;
+      formClean.teamImg = this.uploadedUrl;
+      formClean.invited = this.followersInvited.map((follower) => follower.user_id);
+
+      this._teamService.createTeam(formClean,this.raceID,true,team_id).then((resp:TeamFormResp) => {
+        console.log('TEAM FORM RESP:',resp);
+        // this.router.navigate(['/race',{id:this.raceID,name:this.raceName}]);
+
+        if(!resp.success) {
+          // display error message
+          this.showError = true;
+          this.errorMsg = resp.message;
+        }
+
+        this.callback.emit();
+      });
+    }
+
   }
 
   addFollower(option:any) {
