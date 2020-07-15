@@ -26,34 +26,14 @@ export class UserService {
   }
  
   // Uses http.post() to register user from REST API endpoint
-  public register(user) {
-    console.log(JSON.stringify(user));
-    this.http.post('http://localhost:8000/api/register/', JSON.stringify(user), this.httpOptions).subscribe(
-      data => {
-        console.log(data);
-      },
-      err => {
-        this.errors = err['error'];
-      }
-    );
+  public register(registerForm) {
+    console.log(registerForm);
+    return this.http.post('http://localhost:8000/api/register/', registerForm, this.httpOptions);
   }
 
   // Uses http.post() to get an auth token from djangorestframework-jwt endpoint
   public login(user) {
-    console.log(JSON.stringify(user));
-    this.http.post('http://localhost:8000/api/login/', JSON.stringify(user), this.httpOptions).subscribe(
-      data => {
-        console.log(data);
-        //this.updateData(data['token']);
-        localStorage.setItem('access_token', data['token']);
-        console.log(localStorage.getItem('access_token'));
-        localStorage.setItem('user', user);
-        this.token = data['token'];
-      },
-      err => {
-        this.errors = err['error'];
-      }
-    );
+    return this.http.post('http://localhost:8000/api/login/', JSON.stringify(user), this.httpOptions);
   }
  
   // Refreshes the JWT token, to extend the time the user is logged in

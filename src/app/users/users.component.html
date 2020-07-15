@@ -1,9 +1,21 @@
-<br>
+<div class="row" *ngIf="!isLoggedIn">
+  <app-register></app-register>
+  <app-login></app-login>
+</div>
+  
+<div class="row" *ngIf="isLoggedIn">
+  <div class="container">
+      <h1>Welcome!</h1>
+      <button (click)="logout()" class="btn btn-primary">Log Out</button>
+  </div>
+</div>
+
+<!-- <br>
 <br>
 <br>
 <br>
 
-<div class="row" *ngIf="!_userService.token">
+<div class="row" *ngIf="!isLoggedIn">
 
   <div class="container">
     <h2>Log In</h2>
@@ -30,7 +42,7 @@
 
 </div>
 
-<div class="row" *ngIf="_userService.token">
+<div class="row" *ngIf="isLoggedIn">
 
   <div class="container">
     <h2>Welcome back!</h2>
@@ -42,4 +54,6 @@
     <app-stravauth></app-stravauth>
   </div>
 
-</div>
+</div> -->
+
+

@@ -53,6 +53,8 @@ import { CommentsFormComponent } from './comments-form/comments-form.component';
 import { RaceSettingsComponent } from './race-settings/race-settings.component';
 import { StoryFormComponent } from './story-form/story-form.component';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 
 @NgModule({
@@ -88,6 +90,8 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
     RaceSettingsComponent,
     StoryFormComponent,
     ProfileFormComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
