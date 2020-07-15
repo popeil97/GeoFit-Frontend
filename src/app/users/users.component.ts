@@ -13,7 +13,7 @@ export class UsersComponent implements OnInit {
    * An object representing the user for the login form
    */
   public user: any;
-  public isLoggedIn: Boolean;
+  isLoggedIn: Boolean;
 
   constructor(private _userService: UserService) { }
 

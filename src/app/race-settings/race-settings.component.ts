@@ -10,7 +10,7 @@ import { UsersService } from '../users.service';
 export class RaceSettingsComponent implements AfterViewInit,OnChanges {
   @Input() userSettings:UserSettings = {} as UserSettings;
   settingsForm:FormGroup;
-  private successfulUpdate:Boolean = false;
+  successfulUpdate:Boolean = false;
 
   constructor(private _usersService:UsersService) { 
 

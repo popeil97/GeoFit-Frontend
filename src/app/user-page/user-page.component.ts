@@ -10,12 +10,12 @@ declare var $: any;
   styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent implements OnInit {
-  private username;
-  private userData: UserData;
+  username;
+  userData: UserData;
 
   constructor(private route:ActivatedRoute, private _userProfileService:UserProfileService) { }
 
-  private showEdit: boolean;
+  showEdit: boolean;
 
   ngOnInit() {
     //Don't show edit page by default

@@ -11,8 +11,8 @@ export class ActivitiesMenuComponent implements OnInit {
   @Input() distance_unit:string;
   @Output() addAct: EventEmitter<any> = new EventEmitter();
   @Output() importActs: EventEmitter<void> = new EventEmitter();
-  private columns:string[] = ['Name','Distance'];
-  private selectedRows:number[] = [];
+  columns:string[] = ['Name','Distance'];
+  selectedRows:number[] = [];
 
 
   constructor() { }

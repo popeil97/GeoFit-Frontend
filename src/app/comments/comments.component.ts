@@ -14,7 +14,7 @@ export class CommentsComponent implements OnInit {
   @Input() storyID: number;
 
   //Columns for tabulated comments
-  private columns:string[] = ['ProfilePic','Data'];
+  columns:string[] = ['ProfilePic','Data'];
 
   constructor(private _storyService: StoryService) { }
 
