@@ -15,7 +15,7 @@ export class UserStatsComponent implements OnInit {
 
   ngOnInit() {
 
-  this._usersService.getUserStats(3).then((res)=>{
+  this._usersService.getUserStats(this.userID).then((res)=>{
   	console.log("STATS: ", res);
     this.userStats = res as UserStats;
     //this.userStats.mycolors
