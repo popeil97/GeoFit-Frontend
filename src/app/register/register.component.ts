@@ -13,6 +13,7 @@ export class RegisterComponent implements OnInit {
     registerForm: FormGroup;
     loading = false;
     submitted = false;
+    errors: any = [];
 
     constructor(
         private formBuilder: FormBuilder,
@@ -43,9 +44,14 @@ export class RegisterComponent implements OnInit {
         this.loading = true;
 
         //Register and navigate to login
-        this._userService.register(this.registerForm.value).subscribe( data => {
-          this.router.navigate['/login'];
-        });
+        this._userService.register(this.registerForm.value).subscribe( 
+          data => {
+            this.router.navigate['/login'];
+          },
+          err => {
+            this.loading = false;
+            this.errors = err['error']
+          });
 
     }
 }
