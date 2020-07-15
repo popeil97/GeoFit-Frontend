@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from './users.service';
 import {throwError} from 'rxjs';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-users',
@@ -34,6 +35,7 @@ export class UsersComponent implements OnInit {
 
   }
 
+
   // register() {
   //   this._userService.register({'username': this.user.username, 'password': this.user.password});
   // }
@@ -52,4 +54,10 @@ export class UsersComponent implements OnInit {
     this.isLoggedIn = false;
   }
 
+
+
+
 }
+
+
+
