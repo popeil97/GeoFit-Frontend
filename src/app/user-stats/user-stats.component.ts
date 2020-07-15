@@ -15,7 +15,7 @@ export class UserStatsComponent implements OnInit {
 
   ngOnInit() {
 
-  this._usersService.getUserStats(3).then((res)=>{
+  this._usersService.getUserStats(this.userID).then((res)=>{
   	console.log("STATS: ", res);
     this.userStats = res as UserStats;
     //this.userStats.mycolors
@@ -89,15 +89,6 @@ interface UserStats {
   run_tot_activities:number;
   run_tot_dist:number
   run_tot_hrs:number
-
-  run_max_dist:number
-  run_max_time:number
-  run_max_pace:number
-
-  run_average_pace:number
-  run_average_dist:number
-  run_average_time:number
-
 
   run_max_dist:number
   run_max_time:number
