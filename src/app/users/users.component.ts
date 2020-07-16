@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from './users.service';
 import {throwError} from 'rxjs';
-import * as $ from 'jquery';
 
 @Component({
   selector: 'app-users',
@@ -14,7 +13,7 @@ export class UsersComponent implements OnInit {
    * An object representing the user for the login form
    */
   public user: any;
-  private isLoggedIn: Boolean;
+  public isLoggedIn: Boolean;
 
   constructor(private _userService: UserService) { }
 

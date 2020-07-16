@@ -1,29 +1,30 @@
+<section class="page-section" style="background-color: rgba(64, 61, 88,0.8);">
 <div class="container">
-    <h2>Register</h2>
+    <h2 class="text-white">Register</h2>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <label for="first_name">First Name</label>
+            <label for="first_name" ><p style="color:#fff">First Name</p></label>
             <input type="text" formControlName="first_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" />
             <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
                 <div *ngIf="f.first_name.errors.required">First Name is required</div>
             </div>
         </div>
         <div class="form-group">
-            <label for="last_name">Last Name</label>
+            <label for="last_name"><p style="color:#fff">Last Name</p></label>
             <input type="text" formControlName="last_name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" />
             <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
                 <div *ngIf="f.last_name.errors.required">Last Name is required</div>
             </div>
         </div>
         <div class="form-group">
-            <label for="username">Username</label>
+            <label for="username"><p style="color:#fff">Username</p></label>
             <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                 <div *ngIf="f.username.errors.required">Username is required</div>
             </div>
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
+            <label for="password"><p style="color:#fff">Password</p></label>
             <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                 <div *ngIf="f.password.errors.required">Password is required</div>
@@ -31,12 +32,13 @@
             </div>
         </div>
         <div class="form-group">
-            <button [disabled]="loading" class="btn btn-primary">Register</button>
+            <button [disabled]="loading" class="btn btn-primary" style="background-color:#16697A; border-color: #135e6e;">Register</button>
             <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-            <a routerLink="/login" class="btn btn-link">Cancel</a>
+            <a routerLink="/login" class="btn btn-link text-white" style="text-align:right;">Cancel</a>
         </div>
         <div class="container">
             <span *ngFor="let error of errors.non_field_errors">{{ error }}<br /></span>
         </div>
     </form>
 </div>
+</section>

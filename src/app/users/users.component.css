@@ -54,7 +54,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+article, aside, figcaption, figure, footer,b header, hgroup, main, nav, section {
   display: block;
 }
 
@@ -1118,8 +1118,12 @@ pre code {
   }
 
   .column-login{
-    width: 23%;
+    width: 30%;
     margin: 20px;
+  }
+  .column-login2{
+    width: 8%;
+    margin: 10px;
   }
 
   .col-md-6 {

@@ -32,9 +32,8 @@ z-index: 1;">
       <li class="nav-item">
         <a class="nav-link" routerLink='/teams'>Teams</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'logout' %}">Log Out</a>
-      </li>
+
+      
 
       <!-- <li class="nav-item" style="float: right;">
         <mat-icon style="padding-right: 5px;">circle_notifications</mat-icon>
@@ -50,7 +49,7 @@ z-index: 1;">
         </div> -->
         <div class="dropdown">
           <a class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <mat-icon style="padding-right: 5px;">circle_notifications</mat-icon><span class="caret"></span>
+            <mat-icon style="padding-right: 650px;">circle_notifications</mat-icon><span class="caret"></span>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <div *ngIf="notifications"><app-notification *ngFor="let not of notifications" (removeNotification)="removeNotification($event)" [notification]="not"></app-notification></div>
@@ -60,6 +59,16 @@ z-index: 1;">
           </div>
         </div>
     </li>
+
+    <div class="row" *ngIf="!isLoggedIn">
+        <app-login></app-login>
+    </div>
+    
+  <div class="row" *ngIf="isLoggedIn">
+    <div class="container">
+        <button (click)="logout()" class="btn btn-primary" style="background-color:#16697A; border-color: #135e6e;">Log Out</button>
+    </div>
+  </div>
 
 
     </ul>
