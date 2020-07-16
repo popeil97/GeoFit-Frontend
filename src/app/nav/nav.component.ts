@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {UserService} from '../users/users.service';
 import { NotificationsService } from '../notifications.service';
 import {Observable} from 'rxjs/Rx';
-import * as $ from 'jquery';
 
 declare var $: any
 
