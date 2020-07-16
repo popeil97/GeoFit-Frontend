@@ -14,7 +14,7 @@
             <ng-template mat-tab-label>
               <mat-icon>cloud_download</mat-icon>
             </ng-template>
-            <!-- <app-activities-menu [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs($event)"></app-activities-menu> -->
+            <app-activities-menu [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs($event)"></app-activities-menu>
           </mat-tab>
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
@@ -183,7 +183,13 @@
       </div>
 
       <!-- Modal footer -->
+      <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary" (click)="sendModal()" >Send</button>
+        <button type="button" class="btn btn-danger" (click)="hideModal('#leaderboardModal')">Close</button> -->
 
+        <!-- this button is hidden, used to close from typescript -->
+        <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
+      </div>
     </div>
   </div>
 </div>
@@ -221,8 +227,8 @@
 
       <!-- Modal footer -->
       <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-primary" (click)="sendModal()" >Send</button>
-        <button type="button" class="btn btn-danger" (click)="hideModal('#inviteModal')">Close</button> -->
+        <button type="button" class="btn btn-primary" (click)="sendModal()" >Send</button>
+        <button type="button" class="btn btn-danger" (click)="hideModal('#inviteModal')">Close</button>
 
         <!-- this button is hidden, used to close from typescript -->
         <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
