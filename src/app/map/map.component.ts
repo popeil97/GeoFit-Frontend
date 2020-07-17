@@ -9,6 +9,7 @@ import 'leaflet.markercluster';
 import 'leaflet.heat';
 
 const L = window['L'];
+var heat = window['heat']
 
 import * as _ from 'lodash';
 import * as turf from '@turf/turf';
@@ -154,7 +155,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }).addTo(this.map);
   }
 
-  public clearUserPins(){
+public clearUserPins(){
     //Remove all current user pins
     console.log(this.markersByUserID);
     for (var id in this.markersByUserID){
@@ -183,14 +184,162 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }
   }
 
-  private createUserPins(){
+ 
+  public createUserPins(){
     // doing this temporarily because Lat/Lon are reversed smh
     // _.forEach(this.coordinates.coords,(coord) => {
     //   let temp = coord[0];
     //   coord[0] = coord[1];
     //   coord[1] = temp;
     // });
+    this.clearUserPins();
+    heat.remove();
+    var maxMarkersInCluster = 4;
 
+    var markerClusters = L.markerClusterGroup({
+      //disableClusteringAtZoom: 12, //12
+      maxClusterRadius: 25, //20
+      animateAddingMarkers: true,
+      iconCreateFunction: function(cluster){
+          var markers = cluster.getAllChildMarkers();
+
+          //Maximum of 4 imgs per cluster (choose first 4 children)
+          var markersInCluster = Math.min(maxMarkersInCluster, markers.length);
+
+          var inner_html = '';
+
+          for (let i = 0; i < markersInCluster; i++){
+            var img_class = 'pos' + (i).toString() + 'of' + markersInCluster.toString();
+
+            var content = markers[i]['options']['icon']['options']['html']
+            var regex = /<img.*?src=['"](.*?)['"]/;
+            var img_src = regex.exec(content)[1];
+
+            inner_html += "<img class=\"" + img_class + "\" src=\"" + img_src + "\">"
+          }
+
+          //Remember to add the pin to the cluster pin
+          inner_html += '<div class="pin"></div>';
+
+          var divClass = 'cluster-pin-' + markersInCluster.toString();
+
+          return L.divIcon({
+            className: divClass,
+            html: inner_html,
+            iconSize: [30, 30],
+            iconAnchor: [10, 33],
+            popupAnchor: [0, -62],
+          });
+        }
+    });
+
+    //Add pin clusters to map
+    this.map.addLayer(markerClusters);
+
+    var heatArray = new Array(this.userData.length);
+
+    for (var i = 0; i < this.userData.length; i++){
+      var img_html = "<img src=\"" + this.userData[i].profile_url + "\";\"><div class=\"pin\"></div><div class=\"pulse\"></div>";
+
+      var userIcon = L.divIcon({
+        className: 'location-pin',
+        html: img_html,
+        iconSize: [30, 30],
+        iconAnchor: [10, 33],
+        popupAnchor: [0, -62],
+      });
+
+      var user_ran_miles = this.userData[i].total_distance;
+
+      var along_user = turf.along(this.coordsRoute, user_ran_miles, {units: 'miles'});
+
+      var lng_user = along_user.geometry.coordinates[0];
+      var lat_user = along_user.geometry.coordinates[1];
+
+      var locMarker = L.geoJSON(along_user, {
+        pointToLayer: function(feature, latlng) {
+          return L.marker(latlng, { icon: userIcon });
+        }
+      })
+        //.addTo(this.map)
+
+      markerClusters.addLayer(locMarker);
+
+      //Create template popup text
+      var popupText = "<center><b>" +
+                      this.userData[i].display_name +
+                      "</b></center>" +
+                      "<center>" +
+                      user_ran_miles +
+                      " " +
+                      'miles' +
+                      "</center>";
+
+      // //Get story image and caption
+      // var userStoryImg = this.userData[i].story_image;
+      // var userStoryCaption = this.userData[i].story_text;
+
+      // //Add story info to marker popup
+      // if (userStoryImg || userStoryCaption){
+      //     popupText += "<center>" +
+      //             "<a data-toggle=\"modal\" data-target=\"#storyModal\" data-userstatindex=\"" +
+      //             i +
+      //             "\">" +
+      //             "<br><img src=\"" +
+      //             userStoryImg +
+      //             "\" style=\"max-width:150px;\"></a>" +
+      //             "</center>" +
+      //             "<center>" +
+      //             userStoryCaption +
+      //             "</center>";
+      // }
+
+      //Temp before we retrieve logged in user's ID
+      //locMarker.bindPopup(popupText, {maxWidth: 200});
+
+      this.popUpsByMarkers[locMarker['_leaflet_id'].toString()] = popupText;
+
+      //Retain markers in dict so we can pan to it upon select
+      let elementID = this.userData[i].user_id
+      this.markersByUserID[elementID] = {
+          'locMarker' : locMarker,
+          'latLng' : L.latLng(lat_user, lng_user),
+      };
+
+    }
+      //To work with markercluster, we store popUpText in dict and display onclick (see below)
+      
+    //POPUPS (unfortunately ruined by markercluster, but fixed here)
+    var popUpsByMarkers = this.popUpsByMarkers;
+    markerClusters.on('click', function(ev) {
+      // Current marker is ev.layer
+
+      if (!ev.layer.getPopup()){
+        //Get popup content if it isn't binded
+        let popUpText = popUpsByMarkers[(ev.layer['_leaflet_id']+1).toString()]
+        //Display
+        ev.layer.bindPopup(popUpText, {maxWidth: 200}).openPopup();
+      }
+      else if (!ev.layer.getPopup()._isOpen){
+        //Open popup if it is already binded
+        ev.layer.getPopup().openPopup();
+      }
+      else {
+        //If popup open before click, close it
+        ev.layer.getPopup().closePopup();
+      }
+
+    });
+  }
+
+  public createUserHeatPins(){
+    // doing this temporarily because Lat/Lon are reversed smh
+    // _.forEach(this.coordinates.coords,(coord) => {
+    //   let temp = coord[0];
+    //   coord[0] = coord[1];
+    //   coord[1] = temp;
+    // });
+    this.clearUserPins();
     var maxMarkersInCluster = 4;
 
     var markerClusters = L.markerClusterGroup({
@@ -312,7 +461,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     heatArray = heatArray.map(function (p) { return [p[0], p[1]]; });
 
-      var heat = L.heatLayer(heatArray, {radius: 50},{minOpacity: 1.0}).addTo(this.map);
+    heat = L.heatLayer(heatArray, {radius: 50},{minOpacity: 1.0}).addTo(this.map);
       //To work with markercluster, we store popUpText in dict and display onclick (see below)
       
     //POPUPS (unfortunately ruined by markercluster, but fixed here)
@@ -337,6 +486,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     });
   }
+
+
 
   private goToUserProfile(username:string){
     this._profileService.goToUserProfile(username);

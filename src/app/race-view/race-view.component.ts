@@ -182,6 +182,7 @@ export class RaceViewComponent implements OnInit {
 
   clearUserPins(){
     this.mapChild.clearUserPins();
+    console.log('clearing pina');
   }
 
   showPinsByID(IDs){
@@ -189,6 +190,17 @@ export class RaceViewComponent implements OnInit {
     this.mapChild.showPinsByID(IDs);
   }
 
+  createUserPins(){
+    //Pass null to show all pins
+    this.mapChild.createUserPins();
+    console.log("creating new user pins...")
+  }
+
+  createUserHeatPins(){
+    //Pass null to show all pins
+    this.mapChild.createUserHeatPins();
+    console.log("Applying heat map...")
+  }
 }
 
 interface RaceData {
