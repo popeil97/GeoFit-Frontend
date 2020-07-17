@@ -63,14 +63,15 @@ export class RaceSettingsComponent implements OnInit, AfterViewInit,OnChanges {
         console.log('SETTINGS UPDATE:',resp);
         this.successfulUpdate = true;
 
-        if(resp.settings.heatMapOn == true)
-        {
-          this._raceview.createUserHeatPins();
-        }
-        else
-        {
-          this._raceview.createUserPins();
-        }
+        this._raceview.createUserPins();
+        //if(resp.settings.heatMapOn == true)
+        //{
+        //  this._raceview.createUserHeatPins();
+        //}
+        //else
+        //{
+        //  this._raceview.createUserPins();
+        //}
 
       });
 

@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "http://localhost:8000",
+      "target": "http://tucan-env.eba-fyj3qbp3.us-west-2.elasticbeanstalk.com/",
       "secure": false
     }
   }

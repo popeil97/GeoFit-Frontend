@@ -10,16 +10,16 @@ export class NotificationsService {
   constructor(private http:HttpClient) { }
 
   createNotification(form:any) {
-    return this.http.post('http://localhost:8000/api/notification-create/',{form:form}).toPromise();
+    return this.http.post('/api/notification-create/',{form:form}).toPromise();
   }
 
   // will poll for notifications, this is very bad, don't keep this for too long
   getNotifications() {
-    return this.http.get('http://localhost:8000/api/notification-get/');
+    return this.http.get('/api/notification-get/');
   }
 
   submitAction(not_id:number,action:NotifactionAction) {
-    return this.http.post('http://localhost:8000/api/notification-action/',{not_id:not_id,action:action}).toPromise();
+    return this.http.post('/api/notification-action/',{not_id:not_id,action:action}).toPromise();
   }
 }
 

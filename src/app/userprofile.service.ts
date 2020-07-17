@@ -26,7 +26,7 @@ export class UserProfileService {
   }
 
   updateProfile(formClean){
-    return this.http.post('http://localhost:8000/api/profile-update/', {'form': formClean}).toPromise();
+    return this.http.post('/api/profile-update/', {'form': formClean}).toPromise();
   }
 
   goToUserProfile(username:string) {
@@ -34,12 +34,12 @@ export class UserProfileService {
   }
 
   getUserProfile(username:string){
-    return this.http.post('http://localhost:8000/api/user-profile/',{'username':username}).toPromise();
+    return this.http.post('/api/user-profile/',{'username':username}).toPromise();
   }
 
   //Functions to refresh user feed
   public refreshFeed() {
-    return this.http.post('http://localhost:8000/api/user-feed/',{'username':this.ID}).toPromise();
+    return this.http.post('/api/user-feed/',{'username':this.ID}).toPromise();
   }
 
   public resetFeed(){

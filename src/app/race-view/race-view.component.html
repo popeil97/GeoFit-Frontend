@@ -16,12 +16,12 @@
             </ng-template>
             <app-activities-menu [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs($event)"></app-activities-menu>
           </mat-tab>
-          <mat-tab *ngIf="raceSettings.isManualEntry">
+          <!---<mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
               <mat-icon>add_circle_outline</mat-icon>
             </ng-template>
             <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
-          </mat-tab>
+          </mat-tab>--->
         </mat-tab-group>
 
       </mat-tab>

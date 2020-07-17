@@ -142,7 +142,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
       iconSize: [ 38, 36 ],
       iconAnchor: [10, 40],
       popupAnchor: [18, -40],
-      iconUrl: 'http://localhost:8000/media/endflag.png',
+      iconUrl: '/media/endflag.png',
       shadowUrl: 'leaflet/marker-shadow.png',
     })}).addTo(this.map);
 
@@ -193,7 +193,7 @@ public clearUserPins(){
     //   coord[1] = temp;
     // });
     this.clearUserPins();
-    heat.remove();
+    //heat.remove();
     var maxMarkersInCluster = 4;
 
     var markerClusters = L.markerClusterGroup({
