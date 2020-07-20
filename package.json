@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build:browser:prod": "ng build --prod",
-    "build:browser:serverless": "ng build --prod --base-href /production/",
+    "build:browser:serverless": "ng build --prod --base-href /dev/",
     "build:serverless": "npm run build:browser:serverless && npm run build:server:serverless",
     "build:prod": "npm run build:browser:prod && npm run build:server:prod",
     "server": "node local.js",
