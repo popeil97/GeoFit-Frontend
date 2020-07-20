@@ -208,7 +208,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/geofit/production/1595269512065-2020-07-20T18:25:12.065Z/geofit.zip"
+                "S3Key": "serverless/geofit/production/1595270368460-2020-07-20T18:39:28.460Z/geofit.zip"
               },
               "FunctionName": "geofit-production-api",
               "Handler": "s_api.handler",
@@ -226,14 +226,14 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersionO0jBNVik1eYQQGManWwCqTOzX3PX124CmdWAkqav6UM": {
+          "ApiLambdaVersionVSjzELsTfRy7iPJshNMz79b5hVZIkCqHhTZQXkG8Vno": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "d8X6Nm76NTDlQbc4w4T+55LMpLocfE56HduMEuL1elM="
+              "CodeSha256": "NOYsC0ZRsaZG/Q0eWpDWBizrN39RC0e8z4JSSreVVKU="
             }
           },
           "ApiGatewayRestApi": {
@@ -353,7 +353,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1595269429808": {
+          "ApiGatewayDeployment1595270282747": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -512,7 +512,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/geofit/production/1595269512065-2020-07-20T18:25:12.065Z/custom-resources.zip"
+                "S3Key": "serverless/geofit/production/1595270368460-2020-07-20T18:39:28.460Z/custom-resources.zip"
               },
               "FunctionName": "geofit-production-custom-resource-apigw-cw-role",
               "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -568,7 +568,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionO0jBNVik1eYQQGManWwCqTOzX3PX124CmdWAkqav6UM"
+              "Ref": "ApiLambdaVersionVSjzELsTfRy7iPJshNMz79b5hVZIkCqHhTZQXkG8Vno"
             }
           },
           "ServiceEndpoint": {
@@ -700,7 +700,7 @@
         "timeout": 10,
         "runtime": "nodejs10.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionO0jBNVik1eYQQGManWwCqTOzX3PX124CmdWAkqav6UM"
+        "versionLogicalId": "ApiLambdaVersionVSjzELsTfRy7iPJshNMz79b5hVZIkCqHhTZQXkG8Vno"
       }
     },
     "serviceFilename": "serverless.yml",
@@ -714,7 +714,7 @@
     "artifact": "C:\\Users\\NathanCinnamond\\Documents\\GeoFit-Frontend\\.serverless\\geofit.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/geofit/production/1595269512065-2020-07-20T18:25:12.065Z",
+    "artifactDirectoryName": "serverless/geofit/production/1595270368460-2020-07-20T18:39:28.460Z",
     "artifact": "geofit.zip"
   }
 }
