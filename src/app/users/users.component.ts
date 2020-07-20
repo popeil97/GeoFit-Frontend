@@ -13,7 +13,7 @@ export class UsersComponent implements OnInit {
    * An object representing the user for the login form
    */
   public user: any;
-  private isLoggedIn: Boolean;
+  isLoggedIn: Boolean;
 
   constructor(private _userService: UserService) { }
 
@@ -34,6 +34,7 @@ export class UsersComponent implements OnInit {
 
   }
 
+
   // register() {
   //   this._userService.register({'username': this.user.username, 'password': this.user.password});
   // }
@@ -52,4 +53,10 @@ export class UsersComponent implements OnInit {
     this.isLoggedIn = false;
   }
 
+
+
+
 }
+
+
+

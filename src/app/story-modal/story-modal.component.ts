@@ -9,7 +9,7 @@ declare var $: any;
   styleUrls: ['./story-modal.component.css']
 })
 export class StoryModalComponent implements OnInit {
-  private storyItem: FeedObj;
+  storyItem: FeedObj;
 
   constructor(private _storyService: StoryService) { }
 

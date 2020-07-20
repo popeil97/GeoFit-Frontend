@@ -21,9 +21,11 @@ export class TeamListComponent implements OnInit {
 
   joinRequest(team:any): void {
 
+    console.log('TEAM:',team);
+
     let form = {
       type:NotificationType.TEAM_JOIN,
-      context_id:team.user_id,
+      context_id:team.team_id,
     }
 
     this._notificationService.createNotification(form).then((resp) => {

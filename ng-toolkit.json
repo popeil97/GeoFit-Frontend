@@ -1,0 +1,15 @@
+{
+  "serverless": {
+    "provider": "aws",
+    "project": "GeoFit",
+    "skipInstall": false,
+    "directory": ".",
+    "lambdaTS": false,
+    "offline": false,
+    "clientProject": "GeoFit",
+    "serverless": {
+      "aws": {},
+      "gcloud": {}
+    }
+  }
+}

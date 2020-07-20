@@ -43,7 +43,7 @@ export class FeedComponent implements OnInit {
 
   private initialized: boolean;
 
-  private columns:string[] = ['ProfilePic','Data'];
+  columns:string[] = ['ProfilePic','Data'];
 
   constructor(private _userProfileService: UserProfileService, private _raceFeedService: RaceFeedService) {
   }

@@ -27,7 +27,7 @@ export class RaceViewComponent implements OnInit {
   public followers:any[];
   public activities:any[];
   private raceName:string;
-  private raceID:number;
+  raceID:number;
   private modalData:any;
   public progress:Progress = {} as Progress;
   public actsToImport:number[] = [];

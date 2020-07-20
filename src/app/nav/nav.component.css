@@ -23,3 +23,8 @@ a.navbar-brand {
     left: auto !important;
     right: 0px;
   }
+
+.right {
+  position: absolute;
+  right: 0;
+}

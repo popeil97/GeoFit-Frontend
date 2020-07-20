@@ -11,6 +11,7 @@
 <div class="container">
   <button class="btn btn-primary" style="float:right" (click)="toggleForm()" *ngIf="isOwner">Edit</button>
   <button class="btn btn-primary" style="float:right" (click)="viewRace()">Go To Map!</button>
+  <button type="button" class="btn btn-secondary" style="float: right;" (click)="joinRace()">Join!</button>
 </div>
 
 <br>
@@ -104,7 +105,7 @@
       Description
   </h2>
 
-  <p>
+  <p style="white-space: pre-line;">
     {{aboutData.description}}
   </p>
 

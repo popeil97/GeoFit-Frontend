@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from './../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,30 +20,30 @@ export class RaceService {
 
 
   getRaces(user:any) {
-    return this.http.get('http://localhost:8000/races/')
+    return this.http.get(environment.apiUrl + '/api/races/')
   }
 
   getRace(race_id:number) {
     console.log(race_id)
-    return this.http.post('http://localhost:8000/api/race/',{race_id:race_id});
+    return this.http.post(environment.apiUrl + '/api/race/',{race_id:race_id});
   }
 
   joinRace(race_id:number) {
     console.log('service API attempt:',race_id);
-    return this.http.post('http://localhost:8000/api/join/',{race_id:race_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/api/join/',{race_id:race_id}).toPromise();
   }
 
   getRaceAbout(race_id:number) {
-    return this.http.post('http://localhost:8000/api/about/',{race_id:race_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/api/about/',{race_id:race_id}).toPromise();
   }
 
   updateRaceAbout(aboutForm:any,race_id:number) {
-    return this.http.post('http://localhost:8000/api/updateAbout/',{form:aboutForm,race_id:race_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/api/updateAbout/',{form:aboutForm,race_id:race_id}).toPromise();
   }
 
   createRace(raceForm:any) {
     console.log('SERVICE FILE:',raceForm)
-    return this.http.post('http://localhost:8000/api/create/',{form:raceForm}).toPromise();
+    return this.http.post(environment.apiUrl + '/api/create/',{form:raceForm}).toPromise();
   }
 
 

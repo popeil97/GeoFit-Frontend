@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {UserService} from '../users/users.service';
@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   errors: any = [];
+
+  @Output() loggedInAsUsernameEvent = new EventEmitter();
 
   constructor(
       private formBuilder: FormBuilder,
@@ -49,6 +51,10 @@ export class LoginComponent implements OnInit {
       this._userService.login({'username': this.f.username.value, 'password': this.f.password.value}).subscribe(
         data => {
           localStorage.setItem('access_token', data['token']);
+          localStorage.setItem('loggedInUsername', this.f.username.value);
+
+          //Emit
+          this.loggedInAsUsernameEvent.emit(this.f.username.value);
 
           if (data['success']){
             this.router.navigate([this.returnUrl]);

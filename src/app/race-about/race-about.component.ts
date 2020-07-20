@@ -11,14 +11,14 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 export class RaceAboutComponent implements OnInit {
 
   public AboutForm: FormGroup;
-  private aboutData:AboutData = {owner:{}} as AboutData;
-  private raceSettings:RaceSettings = {} as RaceSettings;
-  private showForm: Boolean;
-  private raceName:string;
-  private raceID:number;
-  private uploadeUrl:any;
-  private teamSizeOptions = [2,3,4,5,6,7,8,9,10];
-  private isOwner: Boolean;
+  aboutData:AboutData = {owner:{}} as AboutData;
+  raceSettings:RaceSettings = {} as RaceSettings;
+  showForm: Boolean;
+  raceName:string;
+  raceID:number;
+  uploadeUrl:any;
+  teamSizeOptions = [2,3,4,5,6,7,8,9,10];
+  isOwner: Boolean;
 
   constructor(private raceService:RaceService,private route: ActivatedRoute,private router:Router) { }
 
@@ -69,12 +69,18 @@ export class RaceAboutComponent implements OnInit {
 
   }
 
-  viewRace(race:any) {
-    console.log('SELECTED RACE:',race);
-
+  viewRace() {
     // set race in race service
 
     this.router.navigate(['/race',{name:this.raceName,id:this.raceID}]);
+  }
+
+  joinRace() {
+    let race_id = this.raceID
+    this.raceService.joinRace(race_id).then((res) => {
+      console.log('RES FROM JOIN:',res);
+      this.router.navigate(['/race',{name:this.raceName,id:race_id}]);
+    });
   }
 
   update(): void {

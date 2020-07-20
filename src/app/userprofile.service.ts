@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { environment } from './../environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +28,7 @@ export class UserProfileService {
   }
 
   updateProfile(formClean){
-    return this.http.post('http://localhost:8000/api/profile-update/', {'form': formClean}).toPromise();
+    return this.http.post(environment.apiUrl + '/api/profile-update/', {'form': formClean}).toPromise();
   }
 
   goToUserProfile(username:string) {
@@ -34,12 +36,12 @@ export class UserProfileService {
   }
 
   getUserProfile(username:string){
-    return this.http.post('http://localhost:8000/api/user-profile/',{'username':username}).toPromise();
+    return this.http.post(environment.apiUrl + '/api/user-profile/',{'username':username}).toPromise();
   }
 
   //Functions to refresh user feed
   public refreshFeed() {
-    return this.http.post('http://localhost:8000/api/user-feed/',{'username':this.ID}).toPromise();
+    return this.http.post(environment.apiUrl + '/api/user-feed/',{'username':this.ID}).toPromise();
   }
 
   public resetFeed(){
