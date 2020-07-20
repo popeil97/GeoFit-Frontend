@@ -42,6 +42,45 @@
     </div>
     </div>
 
+    <div class="form-group">
+      <mat-label name="hours">Hours</mat-label>
+      <input matInput type="number" class="form-control">
+      <br>
+      <div *ngIf="manualEntryForm.get('hours').invalid && (manualEntryForm.get('hours').dirty || manualEntryForm.get('hours').touched)"
+    class="alert alert-danger">
+    
+    <div *ngIf="manualEntryForm.get('hours').errors.required">
+       Hours is required.
+    </div>
+    </div>
+    </div>
+
+    <div class="form-group">
+      <mat-label name="minutes">Minutes</mat-label>
+      <input matInput type="number" class="form-control">
+      <br>
+      <div *ngIf="manualEntryForm.get('minutes').invalid && (manualEntryForm.get('minutes').dirty || manualEntryForm.get('minutes').touched)"
+    class="alert alert-danger">
+    
+    <div *ngIf="manualEntryForm.get('minutes').errors.required">
+       Minutes is required.
+    </div>
+    </div>
+    </div>
+
+    <div class="form-group">
+      <mat-label name="seconds">seconds</mat-label>
+      <input matInput type="number" class="form-control">
+      <br>
+      <div *ngIf="manualEntryForm.get('seconds').invalid && (manualEntryForm.get('seconds').dirty || manualEntryForm.get('seconds').touched)"
+    class="alert alert-danger">
+    
+    <div *ngIf="manualEntryForm.get('seconds').errors.required">
+      Seconds is required.
+    </div>
+    </div>
+    </div>
+
     <div style="padding: 5px; position: relative; float: left;">
       <button class="btn btn-primary" mat-raised-button (click)="upload()">Import</button>
     </div>

@@ -24,6 +24,15 @@ export class ManualEntryComponent implements OnInit {
       ]),
       distanceType: new FormControl('',[
         Validators.required
+      ]),
+      hours: new FormControl('',[
+        Validators.required
+      ]),
+      minutes: new FormControl('',[
+        Validators.required
+      ]),
+      seconds: new FormControl('',[
+        Validators.required
       ])
     });
   }

@@ -12,6 +12,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatInputModule} from '@angular/material/input';
 
 
 const MaterialComponents = [
@@ -28,6 +29,7 @@ const MaterialComponents = [
   MatChipsModule,
   MatIconModule,
   MatSlideToggleModule,
+  MatInputModule,
 ];
 
 @NgModule({
