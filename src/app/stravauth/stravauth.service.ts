@@ -31,9 +31,11 @@ export class StravauthService {
         } 
       },
       err => {
+        console.log(err);
         this.errors = err['error'];
       }
     );
+    console.log("called authenticate()");
   }
 
   public getStravaInfo() {
