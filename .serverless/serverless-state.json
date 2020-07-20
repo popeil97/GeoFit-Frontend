@@ -208,7 +208,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/tucan-dev/dev/1595259377343-2020-07-20T15:36:17.343Z/tucan-dev.zip"
+                "S3Key": "serverless/tucan-dev/dev/1595265009352-2020-07-20T17:10:09.352Z/tucan-dev.zip"
               },
               "FunctionName": "tucan-dev-dev-api",
               "Handler": "s_api.handler",
@@ -226,14 +226,14 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersionXV67cNz9Ug4vUyLfACeydLGoKgzNZw9hSdEHdVuIFQ": {
+          "ApiLambdaVersionewHQa8eX4B5tGQw9buhVeCtP6sD2CcZcPpLtb6jsZts": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "Ss6vqZAaz9wvd56B6EjK9Is03ZZo7VrTZkmd/4R60nE="
+              "CodeSha256": "gdyHaXQcR8SCpzZOtksGl46/QdHXili9rZMJeoEJgb8="
             }
           },
           "ApiGatewayRestApi": {
@@ -353,7 +353,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1595259281073": {
+          "ApiGatewayDeployment1595264912675": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -512,7 +512,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/tucan-dev/dev/1595259377343-2020-07-20T15:36:17.343Z/custom-resources.zip"
+                "S3Key": "serverless/tucan-dev/dev/1595265009352-2020-07-20T17:10:09.352Z/custom-resources.zip"
               },
               "FunctionName": "tucan-dev-dev-custom-resource-apigw-cw-role",
               "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -568,7 +568,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionXV67cNz9Ug4vUyLfACeydLGoKgzNZw9hSdEHdVuIFQ"
+              "Ref": "ApiLambdaVersionewHQa8eX4B5tGQw9buhVeCtP6sD2CcZcPpLtb6jsZts"
             }
           },
           "ServiceEndpoint": {
@@ -700,7 +700,7 @@
         "timeout": 10,
         "runtime": "nodejs10.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionXV67cNz9Ug4vUyLfACeydLGoKgzNZw9hSdEHdVuIFQ"
+        "versionLogicalId": "ApiLambdaVersionewHQa8eX4B5tGQw9buhVeCtP6sD2CcZcPpLtb6jsZts"
       }
     },
     "serviceFilename": "serverless.yml",
@@ -714,7 +714,7 @@
     "artifact": "C:\\Users\\Alexander Popeil\\Desktop\\Projects\\GeoFit-frontend\\GeoFit\\.serverless\\tucan-dev.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/tucan-dev/dev/1595259377343-2020-07-20T15:36:17.343Z",
+    "artifactDirectoryName": "serverless/tucan-dev/dev/1595265009352-2020-07-20T17:10:09.352Z",
     "artifact": "tucan-dev.zip"
   }
 }
