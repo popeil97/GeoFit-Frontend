@@ -194,7 +194,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     var maxMarkersInCluster = 4;
 
     var markerClusters = L.markerClusterGroup({
-      //disableClusteringAtZoom: 12, //12
+      disableClusteringAtZoom: 1, //12
       maxClusterRadius: 25, //20
       animateAddingMarkers: true,
       iconCreateFunction: function(cluster){
@@ -351,7 +351,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      subdomains: ['a','b','c']
     });
 
     tiles.addTo(this.map);

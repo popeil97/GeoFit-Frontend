@@ -75,6 +75,14 @@ export class RaceAboutComponent implements OnInit {
     this.router.navigate(['/race',{name:this.raceName,id:this.raceID}]);
   }
 
+  joinRace() {
+    let race_id = this.raceID
+    this.raceService.joinRace(race_id).then((res) => {
+      console.log('RES FROM JOIN:',res);
+      this.router.navigate(['/race',{name:this.raceName,id:race_id}]);
+    });
+  }
+
   update(): void {
     let formClean = this.AboutForm.value as any;
     console.log(this.AboutForm);

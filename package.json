@@ -86,6 +86,7 @@
     "protractor": "~5.4.0",
     "serverless": "^1.60.0",
     "serverless-apigw-binary": "^0.4.4",
+    "serverless-domain-manager": "^4.2.0",
     "ts-loader": "^6.2.1",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",

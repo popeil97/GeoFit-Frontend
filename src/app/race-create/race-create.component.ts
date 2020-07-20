@@ -29,7 +29,7 @@ export class RaceCreateComponent implements OnInit {
   selectedEndLoc:MapBoxPlace;
 
   raceType:RaceTypes;
-  raceTypeOptions = [{name:'Run/Walk',type:RaceTypes.RUN_WALK},{name:'Ride',type:RaceTypes.RIDE}];
+  raceTypeOptions = [{name:'Run/Walk',type:RaceTypes.RUN_WALK},{name:'Ride',type:RaceTypes.RIDE},{name:'Any',type:RaceTypes.ANY}];
 
   constructor(private _coordinateService:CoordinatesService, private _raceService:RaceService, private router:Router) { 
     this.raceForm = new FormGroup({
@@ -228,4 +228,5 @@ interface FromResp {
 enum RaceTypes {
   RUN_WALK=1,
   RIDE=2,
+  ANY=3,
 }

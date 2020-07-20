@@ -13,7 +13,7 @@ provider:
   memorySize: 192
   timeout: 10
   stage: production
-  region: eu-central-1
+  region: us-west-2
 
 package:
   exclude:

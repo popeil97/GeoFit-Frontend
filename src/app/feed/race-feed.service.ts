@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { environment } from './../../environments/environment';
 
 @Injectable()
 export class RaceFeedService {
@@ -28,7 +29,7 @@ export class RaceFeedService {
   public refreshFeed() {
     //Comment this out as we continue to explore ways to refresh feed
     //this.refresh_ts = Math.round((new Date()).getTime() / 1000);
-    return this.http.post('api/refresh-feed/', {refresh : this.refresh_ts, race_id: this.ID}).toPromise();
+    return this.http.post(environment.apiUrl + '/api/refresh-feed/', {refresh : this.refresh_ts, race_id: this.ID}).toPromise();
   }
 
   public resetFeed(){

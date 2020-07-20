@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from './../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class ActivitiesService {
       race_id:race_id
     };
 
-    return this.http.post('http://localhost:8000/api/import/',body).toPromise();
+    return this.http.post(environment.apiUrl + '/api/import/',body).toPromise();
   } 
 
   uploadManualEntry(entry:any, race_id:number) {
@@ -23,6 +24,6 @@ export class ActivitiesService {
       manualEntry: entry
     };
 
-    return this.http.post('http://localhost:8000/api/manual/',body).toPromise();
+    return this.http.post(environment.apiUrl + '/api/manual/',body).toPromise();
   }
 }
