@@ -9,7 +9,7 @@ import { StravauthService } from './stravauth.service';
 export class StravauthComponent implements OnInit {
 
   //store strava user details for display
-  private stravaData: StravaData;
+  public stravaData: StravaData;
 
   constructor(private _stravauthService: StravauthService) { }
 
