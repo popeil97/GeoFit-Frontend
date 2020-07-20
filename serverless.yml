@@ -6,6 +6,7 @@ org: geofitclubteam
 plugins:
   - serverless-apigw-binary
   - serverless-api-compression
+  - serverless-domain-manager
 
 provider:
   name: aws
@@ -33,6 +34,11 @@ custom:
   apigwBinary:
     types:
       - '*/*'
+  customDomain:
+    domainName: dev.tucan.fitness
+    basePath: ''
+    stage: ${self:provider.stage}
+    createRoute53Record: true
 
 functions:
   api:

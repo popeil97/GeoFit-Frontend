@@ -45,6 +45,7 @@ export class RaceViewComponent implements OnInit {
     isEdit:false,
     team_id:null
   };
+  public isManualEntry:Boolean = false;
 
   private storyImage:string;
   private storyText:string;
@@ -156,6 +157,7 @@ export class RaceViewComponent implements OnInit {
       });
       this.userRaceSettings = raceData.settings;
       this.raceSettings = raceData.race_settings;
+      this.isManualEntry = this.raceSettings.isManualEntry;
       this.userStat = raceData.user_stat;
       console.log('TEAMS:',this.teams);
       console.log('COORDS:',this.coords);

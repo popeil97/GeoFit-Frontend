@@ -44,7 +44,7 @@
 
     <div class="form-group">
       <mat-label name="hours">Hours</mat-label>
-      <input matInput type="number" class="form-control">
+      <input matInput type="number" class="form-control" formControlName="hours">
       <br>
       <div *ngIf="manualEntryForm.get('hours').invalid && (manualEntryForm.get('hours').dirty || manualEntryForm.get('hours').touched)"
     class="alert alert-danger">
@@ -57,7 +57,7 @@
 
     <div class="form-group">
       <mat-label name="minutes">Minutes</mat-label>
-      <input matInput type="number" class="form-control">
+      <input matInput type="number" class="form-control" formControlName="minutes">
       <br>
       <div *ngIf="manualEntryForm.get('minutes').invalid && (manualEntryForm.get('minutes').dirty || manualEntryForm.get('minutes').touched)"
     class="alert alert-danger">
@@ -70,7 +70,7 @@
 
     <div class="form-group">
       <mat-label name="seconds">seconds</mat-label>
-      <input matInput type="number" class="form-control">
+      <input matInput type="number" class="form-control" formControlName="seconds">
       <br>
       <div *ngIf="manualEntryForm.get('seconds').invalid && (manualEntryForm.get('seconds').dirty || manualEntryForm.get('seconds').touched)"
     class="alert alert-danger">
