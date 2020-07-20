@@ -30,4 +30,12 @@ export class StravauthService {
       }
     );
   }
+
+  public getStravaInfo() {
+    return this.http.post('api/strava-status/', {}).toPromise();
+  }
+
+  public deauthorize() {
+    return this.http.post('api/strava-deauth/', {}).toPromise();
+  }
 }
