@@ -22,7 +22,7 @@ export class StravauthService {
  
   public authenticate() {
     //window.location.href='https://app.strava.com/oauth/authorize?client_id=49168&redirect_uri=http://localhost:8000/strava-login/&response_type=code&approval_prompt=auto&scope=write/';
-    this.http.get(environment.apiUrl + '/api/strava-login/', this.httpOptions).subscribe(
+    this.http.get(environment.apiUrl + '/api/strava-login/').subscribe(
       data => {
         console.log(data['url']);
         console.log("Going to this url....");
