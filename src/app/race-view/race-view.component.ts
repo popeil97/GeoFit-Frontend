@@ -189,6 +189,18 @@ export class RaceViewComponent implements OnInit {
     this.mapChild.showPinsByID(IDs);
   }
 
+  createUserPins(){
+    //Pass null to show all pins
+    this.mapChild.createUserPins(false);
+    console.log("creating new user pins...")
+  }
+
+  createUserHeatPins(){
+    //Pass null to show all pins
+    this.mapChild.createUserPins(true);
+    console.log("Applying heat map...")
+  }
+
 }
 
 interface RaceData {

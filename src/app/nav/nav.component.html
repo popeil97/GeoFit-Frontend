@@ -1,11 +1,9 @@
-
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: inherit;
 top: 0;
 width: 100%;
 z-index: 1;">
   <!-- Brand -->
   <!-- <a class="navbar-brand" href="#">GeoFit</a>
-
   <div class="navbar-header"> -->
     <a class="navbar-brand" routerLink='/'>
         <img src="assets/landing/GEOFITCLUB_Orange_Logo_Icon.png">GeoFit Club
@@ -26,8 +24,8 @@ z-index: 1;">
       <li class="nav-item">
         <a class="nav-link" routerLink='/users'>Users</a>
       </li>
-      <li class="nav-item" *ngIf="isLoggedIn">
-        <a class="nav-link" [routerLink]="['/profile', {username: _userService.username}]">Profile</a>
+      <li class="nav-item">
+        <a class="nav-link" routerLink='/profile'>Profile</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink='/teams'>Teams</a>
@@ -49,29 +47,30 @@ z-index: 1;">
         </div> -->
         <div class="dropdown">
           <a class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <mat-icon style="padding-right: 650px;">circle_notifications</mat-icon><span class="caret"></span>
+            <mat-icon style="padding-right: 10px;">circle_notifications</mat-icon><span class="caret"></span>
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <div *ngIf="notifications"><app-notification *ngFor="let not of notifications" (removeNotification)="removeNotification($event)" [notification]="not"></app-notification></div>
               <mat-card *ngIf="!notifications">
-                <div style="padding-left: 50px;">No Notifications</div>
+                <div style="padding-left: 10px;">No Notifications</div>
               </mat-card>
           </div>
         </div>
     </li>
 
-    <div class="row" *ngIf="!isLoggedIn">
-        <app-login (loggedInAsUsernameEvent)="setLoggedInUsername($event)"></app-login>
+    <li class="nav-item" style="padding-left: 650px;">
+      <div class="row" *ngIf="!isLoggedIn">
+          <app-login></app-login>
+      </div>
+      
+    <div class="row" *ngIf="isLoggedIn">
+      <div class="container">
+          <button (click)="logout()" class="btn btn-primary" style="background-color:#16697A; border-color: #135e6e;">Log Out</button>
+      </div>
     </div>
-    
-  <div class="row" *ngIf="isLoggedIn">
-    <div class="container">
-        <button (click)="logout()" class="btn btn-primary" style="background-color:#16697A; border-color: #135e6e;">Log Out</button>
-    </div>
-  </div>
+  </li>
 
 
     </ul>
   </div>
 </nav>
-

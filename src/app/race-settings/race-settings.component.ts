@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../users.service';
+import { RaceViewComponent } from '../race-view/race-view.component';
 
 @Component({
   selector: 'app-race-settings',
@@ -12,11 +13,14 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
   settingsForm:FormGroup;
   successfulUpdate:Boolean = false;
 
-  constructor(private _usersService:UsersService) { 
+  constructor(private _usersService:UsersService, private _raceview:RaceViewComponent) { 
 
     this.settingsForm = new FormGroup({
       isAutomaticImport: new FormControl('',[
-        Validators.required,
+        Validators.required, 
+      ]),
+      heatMapOn: new FormControl('',[
+        Validators.required, 
       ])
     });
     
@@ -57,14 +61,27 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
         this.successfulUpdate = true;
       });
 
+      if(this.settingsForm.value.heatMapOn == true)
+      {
+        this._raceview.createUserHeatPins();
+      }
+      else
+      {
+        this._raceview.createUserPins();
+      }
+
     }
   }
 
   initForm(): void {
-    console.log('value:',this.userSettings.isAutomaticImport);
+    console.log('Automatic import value:',this.userSettings.isAutomaticImport);
+    console.log('Heatmap value:',this.userSettings.heatMapOn);
     this.settingsForm = new FormGroup({
       isAutomaticImport: new FormControl(this.userSettings.isAutomaticImport,[
         Validators.required,
+      ]),
+      heatMapOn: new FormControl('',[
+        Validators.required, 
       ])
     });
     console.log('form value:',this.settingsForm);
@@ -74,5 +91,6 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
 
 interface UserSettings {
   isAutomaticImport:Boolean;
+  heatMapOn:Boolean;
   race_id:number;
 }

@@ -9,6 +9,7 @@ import 'leaflet.markercluster';
 import 'leaflet.heat';
 
 const L = window['L'];
+var heat = window['heat']
 
 import * as _ from 'lodash';
 import * as turf from '@turf/turf';
@@ -51,7 +52,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
               this.applyCoordinates();
               this.coordsRoute = turf.lineString(this.coordinates.coords, { name: "route" });
               if(this.displayUsers) {
-                this.createUserPins();
+                this.createUserPins(false);
               }
 
             }
@@ -154,7 +155,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }).addTo(this.map);
   }
 
-  public clearUserPins(){
+public clearUserPins(){
     //Remove all current user pins
     console.log(this.markersByUserID);
     for (var id in this.markersByUserID){
@@ -183,18 +184,21 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }
   }
 
-  private createUserPins(){
+ 
+
+
+  public createUserPins(heatMapOn){
     // doing this temporarily because Lat/Lon are reversed smh
     // _.forEach(this.coordinates.coords,(coord) => {
     //   let temp = coord[0];
     //   coord[0] = coord[1];
     //   coord[1] = temp;
     // });
-
+    this.clearUserPins();
     var maxMarkersInCluster = 4;
 
     var markerClusters = L.markerClusterGroup({
-      disableClusteringAtZoom: 1, //12
+      //disableClusteringAtZoom: 12, //12
       maxClusterRadius: 25, //20
       animateAddingMarkers: true,
       iconCreateFunction: function(cluster){
@@ -312,7 +316,25 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     heatArray = heatArray.map(function (p) { return [p[0], p[1]]; });
 
-      var heat = L.heatLayer(heatArray, {radius: 50},{minOpacity: 1.0}).addTo(this.map);
+    if(heatMapOn)
+    {
+      console.log("CREATING HEAT MAP PINS")
+      try{
+        heat.remove();
+      }
+      catch(ex){}
+      
+      heat = L.heatLayer(heatArray, {radius: 50},{minOpacity: 1.0}).addTo(this.map);
+    }
+    else
+    {
+      try{
+        heat.remove();
+      }
+      catch(ex){}
+      console.log("CREATING NON HEAT MAP PINS")
+    }
+    
       //To work with markercluster, we store popUpText in dict and display onclick (see below)
       
     //POPUPS (unfortunately ruined by markercluster, but fixed here)
@@ -338,6 +360,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
     });
   }
 
+
+
   private goToUserProfile(username:string){
     this._profileService.goToUserProfile(username);
   }
@@ -351,8 +375,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
-      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      subdomains: ['a','b','c']
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
     tiles.addTo(this.map);
