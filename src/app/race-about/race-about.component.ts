@@ -20,7 +20,7 @@ export class RaceAboutComponent implements OnInit {
   teamSizeOptions = [2,3,4,5,6,7,8,9,10];
   isOwner: Boolean;
 
-  constructor(private raceService:RaceService,private route: ActivatedRoute,private router:Router) { }
+  constructor(private raceService:RaceService, private route:ActivatedRoute, private router:Router) { }
 
   ngOnInit() {
 
