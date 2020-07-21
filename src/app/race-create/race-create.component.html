@@ -6,12 +6,12 @@
     <mat-sidenav md-disable-backdrop='true' #menu mode="side">
       <form [formGroup]="raceForm">
         <div class="form-group" style="text-align: left; padding: 5px;">
-          <label name="Name">Name</label>
+       <!--    <label name="Name">Name</label> -->
           <input class="form-control" type="text" placeholder="Name" formControlName="name"/>
         </div>
 
         <div class="form-group" style="text-align: left; padding: 5px;">
-          <label name="start_loc">Race Type</label>
+       <!--    <label name="start_loc"><input type='date' id='hasta' value='<?php echo date('Y-m-d');?>'></label>--> 
           <input class="form-control" type="text" placeholder="Race Type" formControlName="raceType" [matAutocomplete]="raceTypeAuto" />
           <mat-autocomplete #raceTypeAuto="matAutocomplete">
             <mat-option *ngFor="let option of raceTypeOptions" [value]="option.name" (click)="selectRaceType(option)">
@@ -21,22 +21,23 @@
         </div>
 
         <div class="form-group" style="text-align: left; padding: 5px;">
-          <label name="start_date">Start Date</label>
+          <!-- <label name="start_date">Start Date</label>-->
           <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #startDatePicker></mat-datepicker>
-          <input class="form-control" [matDatepicker]="startDatePicker" formControlName="startDate">
+          <input class="form-control" placeholder="Start Date" [matDatepicker]="startDatePicker" formControlName="startDate">
 
         </div>
 
         <div class="form-group" style="text-align: left; padding: 5px;">
-          <label name="end_date">End Date</label>
+        <!--   <label name="end_date">End Date</label>-->
           <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
           <mat-datepicker #endDatePicker></mat-datepicker>
-          <input class="form-control" [matDatepicker]="endDatePicker" formControlName="endDate">
+
+          <input class="form-control" placeholder="End Date" [matDatepicker]="endDatePicker" formControlName="endDate">
         </div>
 
         <div class="form-group" style="text-align: left; padding: 5px;">
-          <label name="start_loc">Start Location</label>
+       <!--    <label name="start_loc">Start Location</label>-->
           <input class="form-control" type="text" placeholder="Start Location" formControlName="startLoc" [matAutocomplete]="startLocAuto" (keyup)="locationFilter('startLoc')" />
           <mat-autocomplete #startLocAuto="matAutocomplete">
             <mat-option *ngFor="let option of startOptions" [value]="option.place_name" (click)="selectOption(option,'startLoc')">
@@ -46,7 +47,7 @@
         </div>
 
         <div class="form-group" style="text-align: left; padding: 5px;">
-          <label name="end_loc">End Location</label>
+       <!--    <label name="end_loc">End Location</label>-->
           <input class="form-control" type="text" placeholder="End Location" formControlName="endLoc" [matAutocomplete]="endLocAuto" (keyup)="locationFilter('endLoc')"/>
 
           <mat-autocomplete #endLocAuto="matAutocomplete">
@@ -76,10 +77,23 @@
         <div *ngIf="isPreviewMode" style="text-align: center; padding: 10px;"
     class="alert alert-primary"> {{previewDistance}}</div>
 
-        <div class="form-group" style="padding: 5px; position: relative;">
-          <div style="position: relative;"><button class="btn btn-primary" style="padding-right: ;" mat-raised-button (click)="submitRaceForm()">Submit</button></div>
-          <div style="position: relative;"><button class="btn btn-primary" mat-raised-button (click)="preview()">Preview</button></div>
+       <!-- <div class="form-group" style="padding: 5px; position: relative;"> -->
+
+        <div class="row">
+                
+
+                <div class="column-main">
+                  <div style="position: relative;"><button class="btn btn-primary" mat-raised-button (click)="preview()">Preview</button></div>
+                </div>
+
+                <div class="column-main">
+                  <div style="position: relative;"><button class="btn btn-primary" mat-raised-button (click)="submitRaceForm()">Submit</button></div>
+                </div>
+
         </div>
+          
+          
+       
 
         <!-- <div class="form-group" style="padding: 5px; position: relative;">
           
@@ -97,7 +111,7 @@
       <app-map [coordinates]="coords" [displayUsers]="false"></app-map>
 
       <a class="btn btn-primary btn-customized open-menu" role="button" (click)="menu.toggle()">
-        <i class="fas fa-align-left"></i> <span>Menu</span>
+        <i class="fas fa-align-left"></i> <span>Create</span>
     </a>
 
     </mat-sidenav-content>

@@ -111,8 +111,16 @@ a.navbar-brand {
 .wrapper { display: block; }
 
 /***** Cards *****/
-
-
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+.column-main{
+    width: 45%;
+    margin: 5px;
+  }
 /***** Loader *****/
 .loader-active {
 
