@@ -29,7 +29,7 @@ top: 0; width: 100%;z-index: 1;">
       -->
       <li class="nav-item">
         <div class="maincode">
-        <a class="dropdown-hide text-white" style="padding-left: 10px;" type="button" routerLink='/profile'><i class="material-icons">account_circle</i></a>
+        <a class="dropdown-hide text-white" style="padding-left: 10px;" type="button" [routerLink]="['/profile', {username: _userService.username}]"><i class="material-icons">account_circle</i></a>
         <span class="maintooltip">My Profile</span> <!-- UPDATED -->
       </div>
 
