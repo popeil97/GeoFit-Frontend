@@ -2,7 +2,7 @@
 
 <app-loader [isActive]="loading"></app-loader>
 <div class="container">
-  <a type="button" class="btn btn-primary" style="float:right" routerLink='/create'>Create Race</a>
+ <!-- <a type="button" class="btn btn-primary" style="float:right" routerLink='/create'>Create Race</a> -->
   <ul class="nav nav-pills">
 
       <li class="nav-item">
@@ -71,7 +71,7 @@
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
 
-<div class="row" *ngIf="isUserRaces">
+<div class="row" *ngIf="isUserRaces" >
   <div *ngFor="let race of userRaces" class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding-bottom: 5px;">
     <mat-card class="example-card" >
       <mat-card-header>
@@ -89,8 +89,27 @@
       </mat-card-actions>
     </mat-card>
   </div>
+
+  <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding-bottom: 5px;">
+    <mat-card class="example-card" >
+      <mat-card-header>
+        <mat-card-title style="float: left;">Create Race</mat-card-title>
+        <a class="dropdown-hide text-black" style="padding-left: 10px;" type="button" routerLink='/create'><i class="material-icons">add_circle</i></a>
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      </mat-card-header>
+      
+      
+      <mat-card-content>      
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  
 </div>
+
+
 </div>
+
 
 
 

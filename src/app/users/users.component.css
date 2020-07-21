@@ -1125,6 +1125,9 @@ pre code {
     width: 8%;
     margin: 10px;
   }
+  .column-login-ph{
+    height: 120px;
+  }
 
   .col-md-6 {
     flex: 0 0 50%;

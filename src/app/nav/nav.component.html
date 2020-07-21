@@ -1,12 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="position: inherit;
-top: 0;
-width: 100%;
-z-index: 1;">
+<nav class="navbar navbar-expand-lg text-white" style="background-color:#403d58;position: inherit;
+top: 0; width: 100%;z-index: 1;">
   <!-- Brand -->
   <!-- <a class="navbar-brand" href="#">GeoFit</a>
   <div class="navbar-header"> -->
-    <a class="navbar-brand" routerLink='/'>
-        <img src="assets/landing/GEOFITCLUB_Orange_Logo_Icon.png">GeoFit Club
+    <a class="navbar-brand text-white" routerLink='/'>
+       <!-- <img src="assets/landing/GEOFITCLUB_Orange_Logo_Icon.png"> -->Tucan
       </a>
 
 
@@ -19,17 +17,23 @@ z-index: 1;">
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
-        <a class="nav-link" routerLink='/races'>Races</a>
+        <a class="dropdown-hide text-white" style="padding-left: 10px;" type="button" routerLink='/races'><i class="material-icons">directions_run</i></a>
       </li>
+      <!-- 
       <li class="nav-item">
         <a class="nav-link" routerLink='/users'>Users</a>
       </li>
+      -->
       <li class="nav-item">
-        <a class="nav-link" routerLink='/profile'>Profile</a>
+        <a class="dropdown-hide text-white" style="padding-left: 10px;" type="button" routerLink='/profile'><i class="material-icons">account_circle</i></a>
+        
+
       </li>
+      <!-- 
       <li class="nav-item">
         <a class="nav-link" routerLink='/teams'>Teams</a>
       </li>
+      -->
 
       
 
@@ -47,7 +51,7 @@ z-index: 1;">
         </div> -->
         <div class="dropdown">
           <a class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <mat-icon style="padding-right: 10px;">circle_notifications</mat-icon><span class="caret"></span>
+            <mat-icon style="padding-right: 20px;padding-left: 10px;">circle_notifications</mat-icon><span class="caret"></span> 
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <div *ngIf="notifications"><app-notification *ngFor="let not of notifications" (removeNotification)="removeNotification($event)" [notification]="not"></app-notification></div>
@@ -58,14 +62,14 @@ z-index: 1;">
         </div>
     </li>
 
-    <li class="nav-item" style="padding-left: 650px;">
+    <li class="nav-item" style="padding-left: 950px;">
       <div class="row" *ngIf="!isLoggedIn">
           <app-login></app-login>
       </div>
       
     <div class="row" *ngIf="isLoggedIn">
       <div class="container">
-          <button (click)="logout()" class="btn btn-primary" style="background-color:#16697A; border-color: #135e6e;">Log Out</button>
+          <button (click)="logout()" class="btn btn-primary" style="background-color:#16697A; border-color: #135e6e; height: 32px;">Log Out</button>
       </div>
     </div>
   </li>
