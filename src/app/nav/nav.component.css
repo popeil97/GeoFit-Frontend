@@ -29,3 +29,23 @@ a.navbar-brand {
   right: 0;
 }
 
+.maincode:hover .maintooltip { /* NEW */
+    display: block;
+}
+
+
+.maintooltip {
+    display: none;
+    color: #403d58;
+    margin-left: 2px; /* moves the tooltip to the right */
+    margin-top: 12px; /* moves it down */
+    position: absolute;
+    padding:4px;
+    z-index: 1000;
+    background: #fafafa;
+    border-radius: 15px;
+}
+
+.maincode {
+    margin:1px;
+}
