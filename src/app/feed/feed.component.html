@@ -36,7 +36,7 @@
         <ng-container matColumnDef="Data" style="padding: 10px;">
           <td mat-cell>
             <app-user-profile-nav [username]=progress.username></app-user-profile-nav>
-            <app-story-form [raceID]="ID"></app-story-form>
+            <app-story-form [raceID]="ID" (storyPostedEvent)="newStoryPosted($event)"></app-story-form>
           </td>
         </ng-container>
       </tr>

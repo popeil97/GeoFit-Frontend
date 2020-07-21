@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StoryService } from '../story.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { StoryService } from '../story.service';
 })
 export class StoryFormComponent implements OnInit {
   @Input() raceID:number;
+
+  @Output() storyPostedEvent = new EventEmitter();
 
   private storyText: string;
 
@@ -49,7 +51,9 @@ export class StoryFormComponent implements OnInit {
     (<HTMLInputElement>document.getElementById("storyImageCaption")).value = '';
     this.storyText = null;
     this.storyImage = null;
-    console.log("Story image after delete:", this.storyImage);
+    
+    //Emit event to refresh feed
+    this.storyPostedEvent.emit();
   }
 
   // setStoryImageFieldListener(){
