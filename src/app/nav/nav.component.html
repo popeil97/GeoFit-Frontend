@@ -24,9 +24,9 @@ z-index: 1;">
       <li class="nav-item">
         <a class="nav-link" routerLink='/users'>Users</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink='/profile'>Profile</a>
-      </li>
+      <li class="nav-item" *ngIf="isLoggedIn">
+          <a class="nav-link" [routerLink]="['/profile', {username: _userService.username}]">Profile</a>
+        </li>
       <li class="nav-item">
         <a class="nav-link" routerLink='/teams'>Teams</a>
       </li>
