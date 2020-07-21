@@ -53,6 +53,8 @@ export class NavComponent implements OnInit {
 
   setLoggedInUsername(username: string){
     this._userService.username = username;
+
+    //Perform login actions
     this.isLoggedIn = true;
   }
 

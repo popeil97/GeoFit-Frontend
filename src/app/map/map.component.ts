@@ -142,7 +142,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
       iconSize: [ 38, 36 ],
       iconAnchor: [10, 40],
       popupAnchor: [18, -40],
-      iconUrl: 'http://localhost:8000/media/endflag.png',
+      iconUrl: 'https://tucan-prod-bucket.s3-us-west-2.amazonaws.com/media/endflag.png',
       shadowUrl: 'leaflet/marker-shadow.png',
     })}).addTo(this.map);
 

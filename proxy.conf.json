@@ -1,6 +1,6 @@
 {
     "/api": {
-      "target": "http://localhost:8000",
+      "target": "https://api.tucan.fitness",
       "secure": false
     }
   }
