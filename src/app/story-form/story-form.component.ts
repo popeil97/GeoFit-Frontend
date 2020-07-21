@@ -44,16 +44,18 @@ export class StoryFormComponent implements OnInit {
     this.storyText = (<HTMLInputElement>document.getElementById("storyImageCaption")).value;
 
     //Upload story via service
-    this.storyService.uploadStory(this.raceID, this.storyImage, this.storyText, withLastStory);
+    this.storyService.uploadStory(this.raceID, this.storyImage, this.storyText, withLastStory).then( data =>
+    {
+      //Emit event to refresh feed
+      this.storyPostedEvent.emit();
 
-    //Clear input fields
-    (<HTMLInputElement>document.getElementById("storyImage")).value = '';
-    (<HTMLInputElement>document.getElementById("storyImageCaption")).value = '';
-    this.storyText = null;
-    this.storyImage = null;
+      //Clear input fields
+      (<HTMLInputElement>document.getElementById("storyImage")).value = '';
+      (<HTMLInputElement>document.getElementById("storyImageCaption")).value = '';
+      this.storyText = null;
+      this.storyImage = null;
+    });
     
-    //Emit event to refresh feed
-    this.storyPostedEvent.emit();
   }
 
   // setStoryImageFieldListener(){
