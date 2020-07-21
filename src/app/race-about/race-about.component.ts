@@ -32,7 +32,7 @@ export class RaceAboutComponent implements OnInit {
     });
 
     this.raceService.getRaceAbout(this.raceID).then((resp) => {
-      console.log('RESP FROM SERVER:',resp);
+      console.log('RESP FROM ABOUT SERVER:',resp);
       resp = resp as any;
       this.aboutData = resp['about_info'] as AboutData;
       this.raceSettings = resp['race_settings'];

@@ -5,7 +5,37 @@
 
     <mat-card class="example-card" >
       <mat-card-header>
-        <mat-card-title>{{aboutData.name}}</mat-card-title>
+           <div *ngIf="aboutData.race_type == 1">
+              <mat-card-title>{{aboutData.name}}
+              <i class="material-icons" style="color:#16697a;">directions_run</i>
+            </mat-card-title>
+
+            </div>
+            <div *ngIf="aboutData.race_type == 2">
+              <mat-card-title>{{aboutData.name}}
+                  <i class="material-icons" style="color:#16697a;">directions_bike</i>
+                </mat-card-title>
+          </div>
+
+
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      </mat-card-header>
+      <mat-card-content>
+        <i class="material-icons">map</i><span id="txt1">From <b>{{ aboutData.start_loc }}</b> to <b>{{aboutData.end_loc}}</b> <i style="color:#16697a;">   {{ aboutData.distance }} {{ aboutData.distance_type }}</i></span>
+        <br><br>
+       <i class="material-icons">date_range</i><span id="txt1">From <b>{{ aboutData.start_date }}</b> to <b>{{ aboutData.end_date }}</b></span>   
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="joinRace()">JOIN</button>
+        <button mat-button (click)="viewRace()">VIEW MAP</button>
+      </mat-card-actions>
+    </mat-card>
+
+    <br>
+
+    <mat-card class="example-card" >
+      <mat-card-header>
+        <mat-card-title>Race Logistics</mat-card-title>
         <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
       </mat-card-header>
       <mat-card-content>
@@ -33,12 +63,9 @@
     </p>
       </mat-card-content>
       <mat-card-actions>
-        <button mat-button (click)="joinRace()">JOIN</button>
-        <button mat-button (click)="viewRace()">VIEW MAP</button>
         <button mat-button (click)="toggleForm()" *ngIf="isOwner">EDIT</button>
       </mat-card-actions>
     </mat-card>
-
    
     </div>
 
