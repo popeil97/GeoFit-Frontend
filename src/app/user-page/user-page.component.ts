@@ -27,7 +27,7 @@ export class UserPageComponent implements OnInit {
       console.log(this.username);
     });
 
-    this.getUserData();
+    //this.getUserData();
 
 
   }
@@ -79,5 +79,6 @@ interface UserData {
   last_name:string;
   follows:boolean;
   distance_type: string;
+  is_me: boolean;
 }
 

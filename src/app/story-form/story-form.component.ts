@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StoryService } from '../story.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { StoryService } from '../story.service';
 })
 export class StoryFormComponent implements OnInit {
   @Input() raceID:number;
+
+  @Output() storyPostedEvent = new EventEmitter();
 
   private storyText: string;
 
@@ -42,14 +44,18 @@ export class StoryFormComponent implements OnInit {
     this.storyText = (<HTMLInputElement>document.getElementById("storyImageCaption")).value;
 
     //Upload story via service
-    this.storyService.uploadStory(this.raceID, this.storyImage, this.storyText, withLastStory);
+    this.storyService.uploadStory(this.raceID, this.storyImage, this.storyText, withLastStory).then( data =>
+    {
+      //Emit event to refresh feed
+      this.storyPostedEvent.emit();
 
-    //Clear input fields
-    (<HTMLInputElement>document.getElementById("storyImage")).value = '';
-    (<HTMLInputElement>document.getElementById("storyImageCaption")).value = '';
-    this.storyText = null;
-    this.storyImage = null;
-    console.log("Story image after delete:", this.storyImage);
+      //Clear input fields
+      (<HTMLInputElement>document.getElementById("storyImage")).value = '';
+      (<HTMLInputElement>document.getElementById("storyImageCaption")).value = '';
+      this.storyText = null;
+      this.storyImage = null;
+    });
+    
   }
 
   // setStoryImageFieldListener(){

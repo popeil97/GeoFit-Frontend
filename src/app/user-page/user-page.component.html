@@ -11,14 +11,19 @@
         <div class="profile-usertitle">
           <div class="profile-usertitle-name">
             {{ username }}
-            <app-user-follow [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
-            <button class="btn btn-primary btn-sm" (click)="toggleEditView()">
-              Edit
-            </button>
+            
 
           </div>
           <div class="profile-usertitle-job">
-            Developer
+            <!---FOLLOW AND EDIT BUTTONS-->
+            <div *ngIf="!userData.is_me">
+              <app-user-follow [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
+            </div>
+            
+            <button *ngIf="userData.is_me" class="btn btn-primary btn-sm" (click)="toggleEditView()">
+              Edit
+            </button>
+
           </div>
         </div>
 
@@ -35,6 +40,14 @@
 
           <h2>Description</h2>
           <p>{{ userData.description }}</p>
+
+          <div *ngIf="userData.is_me">
+            <h2>Strava Authentication</h2>
+              <p>
+              <app-stravauth></app-stravauth>
+            </p>
+          </div>
+          
         </div>
       </div>
     </div>

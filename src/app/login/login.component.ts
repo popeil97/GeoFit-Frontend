@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {UserService} from '../users/users.service';
 
 import { first } from 'rxjs/operators';
+import { UserProfileService } from '../userprofile.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,6 +25,7 @@ export class LoginComponent implements OnInit {
       private route: ActivatedRoute,
       private router: Router,
       private _userService: UserService,
+      private _userProfileService: UserProfileService,
   ) {}
 
   ngOnInit() {
@@ -33,7 +35,7 @@ export class LoginComponent implements OnInit {
       });
 
       // get return url from route parameters or default to '/'
-      this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'races';
+      //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || 'races';
   }
 
   // convenience getter for easy access to form fields
@@ -57,7 +59,10 @@ export class LoginComponent implements OnInit {
           this.loggedInAsUsernameEvent.emit(this.f.username.value);
 
           if (data['success']){
-            this.router.navigate([this.returnUrl]);
+            //this.router.navigate([this.returnUrl]);
+            
+            //Route to our profile page for now
+            this._userProfileService.goToUserProfile(this.f.username.value);
           }
         },
         err => {
