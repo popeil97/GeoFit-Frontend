@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { RaceService } from '../race.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { MapComponent } from '../map/map.component';
 
 @Component({
   selector: 'app-race-about',
@@ -9,7 +10,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   styleUrls: ['./race-about.component.css']
 })
 export class RaceAboutComponent implements OnInit {
-
+  @ViewChild(MapComponent) mapChild: MapComponent;
   public AboutForm: FormGroup;
   aboutData:AboutData = {owner:{}} as AboutData;
   raceSettings:RaceSettings = {} as RaceSettings;
@@ -19,6 +20,11 @@ export class RaceAboutComponent implements OnInit {
   uploadeUrl:any;
   teamSizeOptions = [2,3,4,5,6,7,8,9,10];
   isOwner: Boolean;
+  public coords:any;
+  public all_user_data:Array<FeedObj>;
+  public followedIDs:number[];
+
+  public num_users:any;
 
   constructor(private raceService:RaceService, private route:ActivatedRoute, private router:Router) { }
 
@@ -30,6 +36,20 @@ export class RaceAboutComponent implements OnInit {
       this.raceName = params['params']['name'];
       this.raceID = params['params']['id'];
     });
+
+    this.raceService.getRace(this.raceID).subscribe(data => {
+
+      let raceData = data as RaceData;
+      console.log('RACE DATA:',raceData);
+      this.coords = {coords:raceData.coords};
+      this.all_user_data = raceData.users_data as Array<FeedObj>;
+      this.followedIDs = raceData.followedIDs;
+
+      console.log('COORDS:',this.coords);
+      console.log("ALL USER DATA", this.all_user_data);
+      console.log("FOLLOWER IDS", this.followedIDs);
+    });
+
 
     this.raceService.getRaceAbout(this.raceID).then((resp) => {
       console.log('RESP FROM ABOUT SERVER:',resp);
@@ -91,7 +111,7 @@ export class RaceAboutComponent implements OnInit {
     formClean.raceImage = this.uploadeUrl;
     formClean.rules.race_id = this.raceSettings.race_id;
     console.log('IS VALID:',formClean);
-
+    //this.coords = this._raceview.coords;
     
 
     if(isValid) {
@@ -134,4 +154,31 @@ export interface RaceSettings {
   allowTeams:Boolean;
   race_id:number;
   max_team_size:number;
+}
+
+interface RaceData {
+  progress:any;
+  activities:any;
+  coords:any;
+  leaderboard:any;
+  users_data:any;
+  settings:any;
+  race_settings:RaceSettings;
+  user_stat:any;
+  followedIDs:number[];
+}
+
+interface FeedObj {
+  user_id: number;
+  display_name: string;
+  profile_url:string
+  joined: boolean;
+  traveled: boolean;
+  story: boolean;
+  story_image:string;
+  story_text:string;
+  total_distance:number;
+  last_distance:number;
+  message: string;
+  created_ts:number;
 }

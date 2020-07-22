@@ -53,6 +53,8 @@
         </div>
 
         <div class="container" style="float: right;">
+
+
           <button type="button" class="btn btn-secondary" style="float: right;" (click)="joinRace(element)">Join!</button>
           <button type="button" class="btn btn-secondary" style="float: right;" (click)="viewAbout(element)">View</button>
         </div>
@@ -87,6 +89,11 @@
                 </mat-card-title>
           </div>
 
+          <div *ngIf="race.race_type == 3">
+              <mat-card-title>{{race.name}}
+              <i class="material-icons" style="color:#16697a;">directions_run</i><i class="material-icons" style="color:#16697a;">directions_bike</i>
+            </mat-card-title>
+          </div>
 
         <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
       </mat-card-header>
