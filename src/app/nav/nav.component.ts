@@ -14,7 +14,7 @@ declare var $: any
 export class NavComponent implements OnInit {
 
   constructor(private _notificationService:NotificationsService,
-              private _userService: UserService,
+              public _userService: UserService,
               private _userProfileService: UserProfileService) { }
 
   public notifications:any[];
@@ -53,6 +53,8 @@ export class NavComponent implements OnInit {
 
   setLoggedInUsername(username: string){
     this._userService.username = username;
+
+    //Perform login actions
     this.isLoggedIn = true;
   }
 

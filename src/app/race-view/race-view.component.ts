@@ -86,7 +86,7 @@ export class RaceViewComponent implements OnInit {
     }
     
   }
-
+  
   showModal(id:string): void {
     console.log(id);
     ($(id) as any).modal('show');
@@ -189,6 +189,18 @@ export class RaceViewComponent implements OnInit {
   showPinsByID(IDs){
     //Pass null to show all pins
     this.mapChild.showPinsByID(IDs);
+  }
+
+  createUserPins(){
+    //Pass null to show all pins
+    this.mapChild.createUserPins(false);
+    console.log("creating new user pins...")
+  }
+
+  createUserHeatPins(){
+    //Pass null to show all pins
+    this.mapChild.createUserPins(true);
+    console.log("Applying heat map...")
   }
 
 }

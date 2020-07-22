@@ -131,6 +131,11 @@ export class FeedComponent implements OnInit {
   clickedOnFeedItem(item){
     this.feedItemClicked.emit(item.user_id.toString());
   }
+
+  newStoryPosted(){
+    //Refresh feed on new story post
+    this.refreshFeed();
+  }
 }
 
 

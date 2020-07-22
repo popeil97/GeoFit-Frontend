@@ -11,7 +11,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 :root {
-  }--blue: #007bff;
+  }--blue: #16697a;
   --indigo: #6610f2;
   --purple: #6f42c1;
   --pink: #e83e8c;
@@ -1124,6 +1124,9 @@ pre code {
   .column-login2{
     width: 8%;
     margin: 10px;
+  }
+  .column-login-ph{
+    height: 120px;
   }
 
   .col-md-6 {

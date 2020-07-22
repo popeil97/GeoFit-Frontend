@@ -70,6 +70,8 @@ export class RaceCreateComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    
   }
 
   locationFilter(key:string) {
