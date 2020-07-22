@@ -1,36 +1,103 @@
 
 <div class="row">
- <div class="column-about">
-  <div class="container" style="text-align: left;" id="raceView" *ngIf="!showForm">
+   <div class="column-about1">
+    <div class="container" style="text-align: left;" id="raceView">
 
-    <mat-card class="example-card" >
+      <mat-card class="example-card" >
+        <mat-card-header>
+          <i class="material-icons" style="color:#000000;" type="button" routerLink='/races'>keyboard_backspace</i>
+          
+             <div *ngIf="aboutData.race_type == 1">
+                <mat-card-title>{{aboutData.name}}
+                <i class="material-icons" style="color:#16697a;">directions_run</i>
+              </mat-card-title>
+
+              </div>
+              <div *ngIf="aboutData.race_type == 2">
+                <mat-card-title>{{aboutData.name}}
+                    <i class="material-icons" style="color:#16697a;">directions_bike</i>
+                  </mat-card-title>
+            </div>
+            <div *ngIf="aboutData.race_type == 3">
+                <mat-card-title>{{aboutData.name}}
+                <i class="material-icons" style="color:#16697a;">directions_run</i><i class="material-icons" style="color:#16697a;">directions_bike</i>
+              </mat-card-title>
+            </div>
+
+
+          <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+        </mat-card-header>
+        <mat-card-content>
+          <i class="material-icons" style="color:#16697a;">map</i><span id="txt1">From <b>{{ aboutData.start_loc }}</b> to <b>{{aboutData.end_loc}}</b> <i style="color:#16697a;">   {{ aboutData.distance }} {{ aboutData.distance_type }}</i></span>
+         <i class="material-icons" style="color:#16697a;">date_range</i><span id="txt1">     From <b>{{ aboutData.start_date }}</b> to <b>{{ aboutData.end_date }}</b></span> 
+
+         <mat-card class="example-card" >
+        <mat-card-header>
+          <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+        </mat-card-header>
+        <mat-card-content>
+          <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
+          <br><br> <br><br> <br><br><br><br> <br><br> <br><br><br><br> <br><br> <br><br><br><br> <br><br> <br><br>
+        </mat-card-content>
+      </mat-card>
+
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button (click)="joinRace()">JOIN</button>
+          <button mat-button (click)="viewRace()">VIEW MAP</button>
+        </mat-card-actions>
+      </mat-card>
+
+      <br>
+
+
+
+
+    </div>
+  </div>
+
+
+
+  <div class="column-about">
+
+    <div class="container" *ngIf="!showForm">
+        <mat-card class="example-card " >
       <mat-card-header>
-        <mat-card-title>{{aboutData.name}}</mat-card-title>
+        <mat-card-title>Race Logistics <i class="material-icons" style="color:#16697a;">info</i></mat-card-title>
         <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
       </mat-card-header>
       <mat-card-content>
-        <h3 ><b>Race Coordinator</b></h3>
-        <p> {{aboutData.owner.first_name}} {{aboutData.owner.last_name}}</p>
-         <h3 ><b>Description</b></h3>
+        
+        <p>
+          <i class="material-icons" style="color:#16697a;">person</i><span id="txt1">{{aboutData.owner.first_name}} {{aboutData.owner.last_name}} </span>
+      </p>
         <p style="white-space: pre-line;">
-          {{aboutData.description}}
+           <i class="material-icons" style="color:#16697a;">description</i><span id="txt1">{{aboutData.description}} </span>
        </p>
-        <h3 ><b>Manual Entry Allowed?</b></h3>
         <p *ngIf="raceSettings.isManualEntry">
-        Yes
+
+        <b>Manual Entry</b> : Allowed
       </p>
 
       <p *ngIf="!raceSettings.isManualEntry">
-        No
+        <b>Manual Entry :</b> Not Allowed
       </p>
-       <h3 ><b>Teams Allowed?</b></h3>
         <p *ngIf="raceSettings.allowTeams">
-      Yes, max size: {{raceSettings.max_team_size}}
+          <b>Teams :</b> Allowed (max size: {{raceSettings.max_team_size}})
     </p>
 
     <p *ngIf="!raceSettings.allowTeams">
-      No
+      <b>Teams :</b> Not Allowed
     </p>
+    <mat-card class="example-card" >
+      <mat-card-header>
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      </mat-card-header>
+      <mat-card-content>
+        <img src={{aboutData.race_image}} alt="Race Image" style="width:100%;">   
+      </mat-card-content>
+    </mat-card>
+
       </mat-card-content>
       <mat-card-actions>
         <button mat-button (click)="joinRace()" *ngIf="!hasJoined">SIGN UP</button>
@@ -38,10 +105,9 @@
         <button mat-button (click)="toggleForm()" *ngIf="isOwner">EDIT</button>
       </mat-card-actions>
     </mat-card>
-
-   
     </div>
 
+   
     <div class="container" *ngIf="showForm">
   <form [formGroup]="AboutForm">
     <div class="form-group" style="text-align: left; padding: 5px;">
@@ -114,11 +180,8 @@
   </form>
 </div>
 
-
-  </div>
-
-  <div class="column-about1">
-      <img src={{aboutData.race_image}} alt="Race Image" style="width:100%;">       
+  
+          
     
   </div>
 

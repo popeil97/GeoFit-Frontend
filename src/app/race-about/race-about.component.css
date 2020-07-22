@@ -1,11 +1,11 @@
   .column-about{
     width: 33%;
-    margin: 15px;
+    margin: 1px;
   }
 
     .column-about1{
-    width: 50%;
-    margin: 15px;
+    width: 66%;
+    margin: 1px;
   }
 
   .row {
@@ -13,6 +13,27 @@
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+}
+
+.maincode:hover .maintooltip { /* NEW */
+    display: block;
+}
+
+
+.maintooltip {
+    display: none;
+    color: #403d58;
+    margin-left: 2px; /* moves the tooltip to the right */
+    margin-top: 12px; /* moves it down */
+    position: absolute;
+    padding:4px;
+    z-index: 1000;
+    background: #fafafa;
+    border-radius: 15px;
+}
+
+.maincode {
+    margin:1px;
 }
 
   .hero-image {
@@ -44,4 +65,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.material-icons{
+    display: inline-flex;
+    vertical-align: top;
 }
