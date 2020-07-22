@@ -2,12 +2,9 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { RaceService } from '../race.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-<<<<<<< HEAD
 import { UserService } from '../users/users.service';
 declare var $: any
-=======
 import { MapComponent } from '../map/map.component';
->>>>>>> 7cdc771b55f8df36632b8b988a495859c2a0330d
 
 @Component({
   selector: 'app-race-about',
