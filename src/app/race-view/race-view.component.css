@@ -28,6 +28,15 @@ img { max-width: 100%; }
   background: #32383e;
 }
 
+.center {
+  position: absolute;
+  float: left;
+  top: 1000px;
+  left: 16px;
+  text-align: center;
+  font-size: 18px;
+}
+
 .pin {
   width: 50px;
   height: 50px;

@@ -7,3 +7,15 @@
     width: 46%;
     margin: 8px;
   }
+
+.form-pretty{
+	background: rgba(0, 0, 0, 0.3);
+    border-style: hidden;
+	color:white;
+	  }
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(217, 212, 212);
+  opacity: 1; /* Firefox */
+}
+

@@ -31,3 +31,15 @@
   border-radius: 0.25rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
+
+.form-pretty{
+  background: rgba(0, 0, 0, 0.2);
+    border-style: hidden;
+  color:white;
+ 
+    }
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(217, 212, 212);
+  opacity: 1; /* Firefox */
+}
