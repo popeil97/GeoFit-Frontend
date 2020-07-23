@@ -33,7 +33,6 @@ export class ProfileFormComponent implements OnInit, OnChanges {
       ]),
       About: new FormControl(''),
       Location: new FormControl('',[
-        Validators.required,
         Validators.maxLength(30)
       ]),
       DistanceType: new FormControl(''),
@@ -73,7 +72,6 @@ export class ProfileFormComponent implements OnInit, OnChanges {
     console.log("User data: ", this.userData);
 
     this.profileForm.get('FirstName').setValue(this.userData.first_name);
-    console.log("Set first name to ", this.userData.first_name);
     this.profileForm.get('LastName').setValue(this.userData.last_name);
     this.profileForm.get('About').setValue(this.userData.description);
     this.profileForm.get('Location').setValue(this.userData.location);

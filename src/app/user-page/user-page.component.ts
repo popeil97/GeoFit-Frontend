@@ -52,6 +52,7 @@ export class UserPageComponent implements OnInit {
     //Call a to-be-created service which gets user data, feed, statistics etc
     this._userProfileService.getUserProfile(this.username).then((data) => {
       this.userData = data as UserData;
+      console.log("New user data: ", this.userData);
     });
   }
 
