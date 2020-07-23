@@ -178,6 +178,13 @@ export interface AboutData {
   description:string;
   owner:any;
   race_image:string;
+  race_type:any;
+  start_loc:any;
+  end_loc:any;
+  distance:any;
+  distance_type:any;
+  start_date:any;
+  end_date:any;
 }
 
 interface Event {
