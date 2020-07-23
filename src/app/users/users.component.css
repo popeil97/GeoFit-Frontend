@@ -2037,7 +2037,7 @@ pre code {
 }
 .form-control:focus {
   color: #495057;
-  background-color: #fff;
+  background-color: #000;
   border-color: #fbc2b3;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(244, 98, 58, 0.25);
@@ -10116,7 +10116,7 @@ hr.light {
 header.masthead {
   padding-top: 10rem;
   padding-bottom: calc(10rem - 4.5rem);
-  background: linear-gradient(to bottom, rgba(64, 61, 88, 0.25) 0%, rgba(256, 256, 256, 0.1) 100%), url("../../assets/landing/bg-masthead.jpg");
+  background: linear-gradient(to bottom, rgba(64, 61, 88, 0.1) 0%, rgba(256, 256, 256, 0.1) 100%), url("../../assets/landing/bg-masthead.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
