@@ -1,46 +1,30 @@
 <div class="container">
-  
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="row">
-        <div class="column-login">
         <div class="form-group">
-            <input type="text" formControlName="username"  class="form-control2 form-pretty" value="username" placeholder="Username" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+            <label for="username">Username</label>
+            <input type="text" formControlName="username" class="form-control form-pretty" placeholder="User ID" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
             <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
                 <div *ngIf="f.username.errors.required">Username is required</div>
             </div>
         </div>
-    </div>
-        <div class="column-login">
+        
         <div class="form-group">
-            <input type="password" formControlName="password" class="form-control2 form-pretty" value="password" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" class="form-control form-pretty" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                 <div *ngIf="f.password.errors.required">Password is required</div>
             </div>
         </div>
-    </div>
 
-        <div class="column-login">
         <div class="form-group">
-            
-
-                 <button [disabled]="loading" class="btn btn-primary" style="background-color:#16697A; border-color: #135e6e; height: 32px;">Login</button>
-
-
+            <button [disabled]="loading" class="btn btn-primary">Login</button>
             <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-
-            <div class="container">
-            <span *ngFor="let error of errors.non_field_errors" style="color:red; font-size:11px;">Invalid information<br /></span>
+            <a routerLink="/register" class="btn btn-link">Register</a>
         </div>
 
+        <div class="container">
+            <span *ngFor="let error of errors.non_field_errors">{{ error }}<br /></span>
         </div>
-         <!--   <div class="column-login">
-                <a routerLink="/register" class="btn btn-link">Register</a>
-            </div>
-        -->
-    </div>
 
-        
-        </div>
     </form>
-    
 </div>

@@ -3,7 +3,7 @@
 
 <app-loader [isActive]="loading"></app-loader>
 <mat-sidenav-container>
-  <mat-sidenav md-disable-backdrop='true' #menu mode="side" style="overflow-y: hidden;">
+  <mat-sidenav md-disable-backdrop='true' #menu mode="side"  style="overflow-y: hidden;"> <!--opened="true"-->
     <mat-tab-group>
       <mat-tab>
         <ng-template mat-tab-label>
@@ -56,10 +56,10 @@
         <ng-template mat-tab-label>
           <mat-icon>group</mat-icon>
         </ng-template>
-        <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call-->
+        <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call
         <button (click)="clearUserPins()">Clear User Pins!</button>
         <button (click)="showPinsByID(null)">Show User Pins!</button>
-        <button (click)="showPinsByID(followedIDs)">Show Followers Only</button>
+        <button (click)="showPinsByID(followedIDs)">Show Followers Only</button>-->
         <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
       </mat-tab>
       <mat-tab>
@@ -74,8 +74,13 @@
     <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
 
     
-    <a class="btn btn-primary btn-customized open-menu center" role="button" (click)="menu.toggle()">
-      <i class="fas fa-align-left"></i> <span><i class="material-icons" style="color:#16697a;vertical-align: middle;">keyboard_arrow_right</i></span>
+    <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()">
+      <div  *ngIf="changeArrow">
+      <i class="material-icons md-18" style="color:#16697a;">keyboard_arrow_left</i>
+    </div>
+      <div  *ngIf="!changeArrow">
+      <i class="material-icons md-18" style="color:#16697a;">keyboard_arrow_right</i>
+    </div>
       </a>
   
 

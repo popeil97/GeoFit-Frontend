@@ -39,6 +39,7 @@ export class RaceViewComponent implements OnInit {
   public userRaceSettings:any;
   public raceSettings:RaceSettings;
   public showTeamForm:Boolean = false;
+  public changeArrow:Boolean = false;
   public userStat:any = {};
   public followedIDs:number[];
   public teamEditForm:TeamEditBody = {
@@ -84,6 +85,11 @@ export class RaceViewComponent implements OnInit {
 
 
 
+  }
+
+  toggleNavButton(action?:string) {
+    this.changeArrow = !this.changeArrow;
+   
   }
 
   toggleTeamForm(action?:string) {

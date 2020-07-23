@@ -28,6 +28,20 @@ img { max-width: 100%; }
   background: #32383e;
 }
 
+.button-container {
+  position: absolute;
+    left: 0;
+    top: 47%;
+    width:25px;
+    height:30px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border: 2px solid #16697a;
+    opacity: 0.8;
+    z-index: 500;
+    background-color: white;
+ }
+
 .center {
   position: absolute;
   float: left;
@@ -289,7 +303,7 @@ position: fixed;
 
 .content { width: 100%; transition: all 0.3s; }
 
-.open-menu { position: relative; top: 10px; left: 10px; z-index: 997; box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.2); }
+.open-menu {z-index: 997; box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.2); }
 
 .open-menu.btn-customized,
 .open-menu.btn-customized:hover,

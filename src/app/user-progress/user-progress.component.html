@@ -1,46 +1,39 @@
 <footer class="footer-container">
 
+
+<mat-card class="example-card" >
+      <mat-card-header>
+              <mat-card-title> <!--{{userData.first_name}} {{userData.last_name}} Test-->
+            </mat-card-title>
+
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      </mat-card-header>
+      <mat-card-content>
+        <i class="material-icons"  style="color:#16697a;" >person_pin</i><span id="txt1" style="text-align:left;" ><b>Distance Traveled </b>{{progress.distance}} {{ progress.distance_type }}</span>
+        <br>
+        <i class="material-icons"  style="color:#16697a;">directions_run</i><span id="txt1" style="text-align:left;"><b>Distance Remaining </b>{{progress.distance_remaining}} {{ progress.distance_type }}</span>
+        <br>
+        <i class="material-icons"  style="color:#16697a;">access_time</i><span id="txt1" style="text-align:left;"><b>Average Pace </b> {{progress.pace}} </span>
+        <br>
+        <i class="material-icons" style="color:#16697a;">location_city</i><span id="txt1" style="text-align:left;"><b>Current City </b> N/A</span>
+        
+        <!--<p id="curr_city">-->
+
+        
+                  <!-- </div> -->   
+      </mat-card-content>
+
+    </mat-card>
+
+
+
+
+
             <!-- <div class="container">
               <div class="row"> -->
 
                       <!-- <div class="col"> -->
-                        <div class="stats-area section-adding">
-                          <!-- <div class="container"> -->
-                            <div class="row">
-
-                              <div class="col">
-                                <div class="single-stats">
-                                  <i class="fas fa-clock" style="font-size:25px"></i>
-                                  <h3 id="goal_distance">Distance Traveled</h3>
-                                  <p>{{progress.distance}} {{ progress.distance_type }}</p>
-                                </div>
-                              </div>
-                              <div class="col">
-                                <div class="single-stats">
-                                  <i class="fas fa-flag" style="font-size:25px"></i>
-                                  <h3>Distance Remaining</h3>
-                                  <p id="togo">{{progress.distance_remaining}} {{ progress.distance_type }}</p>
-                                </div>
-                              </div>
-                              <div class="col">
-                                <div class="single-stats">
-                                  <i class="fas fa-tachometer-alt" style="font-size:25px"></i>
-                                  <h3 id="goal_pace">Pace</h3>
-                                  <p>{{progress.pace}}</p>
-                                </div>
-                              </div>
-                              <div class="col">
-                                <div class="single-stats">
-                                  <i class="fas fa-map" style="font-size:25px"></i>
-                                  <h3>Current City</h3>
-                                  <p id="curr_city"></p>
-                                </div>
-                              </div>
-
-                        <!-- &copy; Bootstrap 4 Template with Sidebar Menu. Download it for free on <a href="https://azmind.com">AZMIND</a>. -->
-                      </div>
-                    </div>
-                  <!-- </div> -->
+                       
                 <!-- </div> -->
 
           </footer>

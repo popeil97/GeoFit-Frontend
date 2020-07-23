@@ -34,13 +34,11 @@
 .footer-container {
 	position: absolute;
 	padding: 20px;
-    left: 0;
-    bottom: 0;
+    right: 0;
+    top: 0;
     opacity: 0.8;
     z-index: 500;
-    width: 100%;
-    background-color: white;
+    width: 17%;
     color: white;
-    text-align: center;
     padding-bottom: 3.5rem;
  }
