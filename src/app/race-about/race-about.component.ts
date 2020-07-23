@@ -2,6 +2,8 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { RaceService } from '../race.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { UserService } from '../users/users.service';
+declare var $: any
 import { MapComponent } from '../map/map.component';
 
 @Component({
@@ -20,13 +22,14 @@ export class RaceAboutComponent implements OnInit {
   uploadeUrl:any;
   teamSizeOptions = [2,3,4,5,6,7,8,9,10];
   isOwner: Boolean;
+  hasJoined: Boolean;
   public coords:any;
   public all_user_data:Array<FeedObj>;
   public followedIDs:number[];
 
   public num_users:any;
 
-  constructor(private raceService:RaceService, private route:ActivatedRoute, private router:Router) { }
+  constructor(private raceService:RaceService, private route:ActivatedRoute, private router:Router, private _userService: UserService,) { }
 
   ngOnInit() {
 
@@ -57,6 +60,7 @@ export class RaceAboutComponent implements OnInit {
       this.aboutData = resp['about_info'] as AboutData;
       this.raceSettings = resp['race_settings'];
       this.isOwner = resp['isOwner'];
+      this.hasJoined = resp['hasJoined'];
 
       this.initializeForm();
     });
@@ -95,8 +99,39 @@ export class RaceAboutComponent implements OnInit {
     this.router.navigate(['/race',{name:this.raceName,id:this.raceID}]);
   }
 
+  
+  showModal(id:string): void {
+    console.log(id);
+    ($(id) as any).modal('show');
+  }
+
+  hideModal(id:string): void {
+    ($(id) as any).modal('hide');
+  }
+
+  confirmRegistration(user:any): void {
+    // login user
+    console.log('USER CONFIRMED:',user);
+    this._userService.login(user).subscribe(data => {
+      console.log(data);
+      localStorage.setItem('access_token', data['token']);
+      localStorage.setItem('loggedInUsername', user.username);
+      this.joinRace();
+      location.reload();
+    },
+    err => {
+
+    });
+  }
+
   joinRace() {
     let race_id = this.raceID
+
+    if(!localStorage.getItem('loggedInUsername')) {
+      // route to landing page
+      this.showModal('#registerModal');
+    }
+
     this.raceService.joinRace(race_id).then((res) => {
       console.log('RES FROM JOIN:',res);
       this.router.navigate(['/race',{name:this.raceName,id:race_id}]);
@@ -143,6 +178,13 @@ export interface AboutData {
   description:string;
   owner:any;
   race_image:string;
+  race_type:any;
+  start_loc:any;
+  end_loc:any;
+  distance:any;
+  distance_type:any;
+  start_date:any;
+  end_date:any;
 }
 
 interface Event {

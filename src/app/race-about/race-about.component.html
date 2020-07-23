@@ -100,6 +100,8 @@
 
       </mat-card-content>
       <mat-card-actions>
+        <button mat-button (click)="joinRace()" *ngIf="!hasJoined">SIGN UP</button>
+        <button mat-button (click)="viewRace()">VIEW MAP</button>
         <button mat-button (click)="toggleForm()" *ngIf="isOwner">EDIT</button>
       </mat-card-actions>
     </mat-card>
@@ -183,6 +185,27 @@
     
   </div>
 
+</div>
+
+
+<div class="modal fade" id="registerModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Please Register as a Tucan User First</h4>
+        <button type="button" class="close" (click)="hideModal('#registerModal')">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        <app-register (registerAlert)="confirmRegistration($event)"></app-register>
+      </div>
+
+
+    </div>
+  </div>
 </div>
 
 

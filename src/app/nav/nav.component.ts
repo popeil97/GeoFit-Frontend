@@ -14,7 +14,7 @@ declare var $: any
 export class NavComponent implements OnInit {
 
   constructor(private _notificationService:NotificationsService,
-              private _userService: UserService,
+              public _userService: UserService,
               private _userProfileService: UserProfileService) { }
 
   public notifications:any[];

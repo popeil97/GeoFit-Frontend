@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -14,6 +14,8 @@ export class RegisterComponent implements OnInit {
     loading = false;
     submitted = false;
     errors: any = [];
+
+    @Output() registerAlert: EventEmitter<any> = new EventEmitter();
 
     constructor(
         private formBuilder: FormBuilder,
@@ -46,6 +48,10 @@ export class RegisterComponent implements OnInit {
         //Register and navigate to login
         this._userService.register(this.registerForm.value).subscribe( 
           data => {
+            if(this.registerAlert) {
+              let form = this.registerForm.value
+              this.registerAlert.emit({username:form.username,password:form.password})
+            }
             this.router.navigate['/login'];
           },
           err => {

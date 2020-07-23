@@ -78,6 +78,14 @@ export class RaceViewComponent implements OnInit {
 
   }
 
+  configureLeaderboard(ranked:any[],unranked:any[]) {
+
+    return unranked.concat(ranked)
+
+
+
+  }
+
   toggleTeamForm(action?:string) {
     this.showTeamForm = !this.showTeamForm;
     console.log('ACTION IS:',action);
@@ -86,7 +94,7 @@ export class RaceViewComponent implements OnInit {
     }
     
   }
-
+  
   showModal(id:string): void {
     console.log(id);
     ($(id) as any).modal('show');
@@ -147,7 +155,7 @@ export class RaceViewComponent implements OnInit {
       this.progress = raceData.progress;
       this.activities = raceData.activities;
       this.coords = {coords:raceData.coords};
-      this.leaderboard = raceData.leaderboard;
+      this.leaderboard = this.configureLeaderboard(raceData.unranked_leaderboard,raceData.ranked_leaderboard);
       this.all_user_data = raceData.users_data as Array<FeedObj>;
       this.followedIDs = raceData.followedIDs;
       this.teams = raceData.users_data.filter((user_data) => {
@@ -215,6 +223,8 @@ interface RaceData {
   race_settings:RaceSettings;
   user_stat:any;
   followedIDs:number[];
+  unranked_leaderboard:any[];
+  ranked_leaderboard:any[];
 }
 
 interface FeedObj {
