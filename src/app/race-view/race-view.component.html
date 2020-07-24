@@ -2,11 +2,12 @@
 <div>
 
 <app-loader [isActive]="loading"></app-loader>
-<mat-sidenav-container>
-  <mat-sidenav md-disable-backdrop='true' #menu mode="side"  style="overflow-y: hidden;"> <!--opened="true"-->
+<mat-sidenav-container hasBackdrop="false">
+
+  <mat-sidenav md-disable-backdrop='true' #menu mode="over"  opened="true"  style="overflow-y: hidden;"> <!--opened="true"-->
     <mat-tab-group>
       <mat-tab>
-        <ng-template mat-tab-label>
+        <ng-template mat-tab-label style="background-color: rgba(256,256, 256,1);">
           <mat-icon>file_download</mat-icon>
         </ng-template>
         <mat-tab-group>
@@ -73,15 +74,22 @@
   <mat-sidenav-content>
     <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
 
-    
-    <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()">
-      <div  *ngIf="changeArrow">
-      <i class="material-icons md-18" style="color:#16697a;">keyboard_arrow_left</i>
-    </div>
-      <div  *ngIf="!changeArrow">
+    <div  *ngIf="changeArrow">
+    <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 0%;">
+        <br>
       <i class="material-icons md-18" style="color:#16697a;">keyboard_arrow_right</i>
+    </a>
     </div>
+
+
+      <div  *ngIf="!changeArrow">
+        <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 20.5%;">
+        <br>
+      <i class="material-icons md-18" style="color:#16697a; ">keyboard_arrow_left</i>
       </a>
+    </div>
+      x
+
   
 
 
@@ -131,17 +139,16 @@
   </div>
 </div>--->
 
+<!--
 <div class="modal fade" id="activitiesModal">
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Select Activities You'd Like to Apply Towards This Race</h4>
         <button type="button" class="close" (click)="hideModal('#activitiesModal')">&times;</button>
       </div>
 
-      <!-- Modal body -->
       <div class="modal-body">
         <table class="actsTable table table-striped" id='activities_table'>
           <thead>
@@ -155,19 +162,17 @@
           <tbody>
               <tr class="activityRow" *ngFor="let act of activities" (click)="addAct(act)">
                   <td scope="row">{{act.name}}</td>
-                  <td>{{act.converted_dist}} {{ progress.distance_type }}</td>
+                  <td>{{act.converted_dist}} {{ progress.distance_type }} {{test}}</td>
                   <td>{{act.start_date}}</td>
                 </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- Modal footer -->
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" (click)="importActs()" >Import</button>
         <button type="button" class="btn btn-danger" (click)="hideModal('#activitiesModal')">Close</button>
 
-        <!-- this button is hidden, used to close from typescript -->
         <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
       </div>
     </div>
@@ -178,23 +183,17 @@
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Leaderboard</h4>
         <button type="button" class="close" (click)="hideModal('#leaderboardModal')">&times;</button>
       </div>
 
-      <!-- Modal body -->
       <div class="modal-body">
         Modal body..
       </div>
 
-      <!-- Modal footer -->
       <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-primary" (click)="sendModal()" >Send</button>
-        <button type="button" class="btn btn-danger" (click)="hideModal('#leaderboardModal')">Close</button> -->
-
-        <!-- this button is hidden, used to close from typescript -->
+       
         <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
       </div>
     </div>
@@ -205,13 +204,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
 
-      <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">Invite Followers!</h4>
         <button type="button" class="close" (click)="hideModal('#inviteModal')">&times;</button>
       </div>
 
-      <!-- Modal body -->
       <div class="modal-body">
         <table class="table table-striped" id='invite_table'>
           <thead>
@@ -232,18 +229,14 @@
         </table>
       </div>
 
-      <!-- Modal footer -->
       <div class="modal-footer">
-        <!-- <button type="button" class="btn btn-primary" (click)="sendModal()" >Send</button>
         <button type="button" class="btn btn-danger" (click)="hideModal('#inviteModal')">Close</button> -->
 
-        <!-- this button is hidden, used to close from typescript -->
-        <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
+      <!--  <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
       </div>
     </div>
   </div>
-</div>
-
+</div> -->
 
 
 
