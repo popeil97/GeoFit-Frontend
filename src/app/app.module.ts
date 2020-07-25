@@ -55,6 +55,8 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { PaypalComponent } from './paypal/paypal.component';
+import { SignupComponent } from './signup/signup.component';
+import { SignupDialogContent } from './signup/signup.component';
 
 
 @NgModule({
@@ -92,6 +94,8 @@ import { PaypalComponent } from './paypal/paypal.component';
     LoginComponent,
     RegisterComponent,
     PaypalComponent,
+    SignupComponent,
+    SignupDialogContent,
   ],
   imports: [
     BrowserModule,
@@ -111,6 +115,7 @@ import { PaypalComponent } from './paypal/paypal.component';
     RaceFeedService,
     StoryService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents:[SignupDialogContent],
 })
 export class AppModule { }

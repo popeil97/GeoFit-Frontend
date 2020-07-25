@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Register for Race!</h2>
+<mat-dialog-content>
+  <mat-horizontal-stepper linear #stepper>
+    <mat-step [editable]="false">
+      <ng-template matStepLabel>Login/Register for Tucan</ng-template>
+      <app-register></app-register>
+    </mat-step>
+    <mat-step [editable]="false">
+      <ng-template matStepLabel>Pay Signup Fee</ng-template>
+      <app-paypal></app-paypal>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+</mat-dialog-actions>
