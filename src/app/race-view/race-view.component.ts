@@ -11,6 +11,7 @@ import { FeedComponent } from '../feed/feed.component';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
 import { RaceSettings } from '../race-about/race-about.component';
 import { TeamFormComponent } from '../team-form/team-form.component';
+import { AuthService } from '../auth.service';
 
 declare var $: any
 
@@ -55,7 +56,8 @@ export class RaceViewComponent implements OnInit {
                   private activitiesService:ActivitiesService,
                   private route: ActivatedRoute,
                   private router:Router,
-                  private storyService: StoryService) {
+                  private storyService: StoryService,
+                  private _authService: AuthService) {
     this.modalData = {};
   }
 

@@ -2,7 +2,7 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { RaceService } from '../race.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { UserService } from '../users/users.service';
+import { AuthService } from '../auth.service';
 declare var $: any
 import { MapComponent } from '../map/map.component';
 
@@ -29,7 +29,10 @@ export class RaceAboutComponent implements OnInit {
 
   public num_users:any;
 
-  constructor(private raceService:RaceService, private route:ActivatedRoute, private router:Router, private _userService: UserService,) { }
+  constructor(private raceService:RaceService, 
+              private route:ActivatedRoute, 
+              private router:Router, 
+              private _authService: AuthService,) { }
 
   ngOnInit() {
 
@@ -112,7 +115,7 @@ export class RaceAboutComponent implements OnInit {
   confirmRegistration(user:any): void {
     // login user
     console.log('USER CONFIRMED:',user);
-    this._userService.login(user).subscribe(data => {
+    this._authService.login(user).subscribe(data => {
       console.log(data);
       localStorage.setItem('access_token', data['token']);
       localStorage.setItem('loggedInUsername', user.username);

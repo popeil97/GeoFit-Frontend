@@ -43,7 +43,7 @@
 
         </mat-card-content>
         <mat-card-actions>
-          <button mat-button (click)="joinRace()">JOIN</button>
+          <button mat-button *ngIf="this._authService.token" (click)="joinRace()">JOIN</button>
           <button mat-button (click)="viewRace()">VIEW MAP</button>
         </mat-card-actions>
       </mat-card>

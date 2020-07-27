@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { StoryService } from '../story.service';
+import { AuthService } from '../auth.service';
 
 declare var $: any;
 
@@ -11,7 +12,8 @@ declare var $: any;
 export class StoryModalComponent implements OnInit {
   storyItem: FeedObj;
 
-  constructor(private _storyService: StoryService) { }
+  constructor(private _storyService: StoryService,
+              private _authService: AuthService) { }
 
   ngOnInit() {
   }

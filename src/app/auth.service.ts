@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { environment } from './../../environments/environment';
+import { environment } from './../environments/environment';
 
  
 @Injectable()
-export class UserService {
+export class AuthService {
  
   // http options used for making API calls
   private httpOptions: any;
@@ -71,6 +71,7 @@ export class UserService {
  
   private updateData(token) {
     this.token = token;
+    console.log("Set token to ", this.token);
     this.errors = [];
  
     // decode the token to read the username and expiration timestamp

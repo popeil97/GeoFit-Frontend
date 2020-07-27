@@ -3,6 +3,7 @@ import { StoryModalComponent } from '../story-modal/story-modal.component';
 import { RaceFeedService } from './race-feed.service';
 import { UserProfileService } from '../userprofile.service';
 import { StoryFormComponent } from '../story-form/story-form.component';
+import { AuthService } from '../auth.service';
 
 declare var $: any
 
@@ -44,7 +45,9 @@ export class FeedComponent implements OnInit {
 
   columns:string[] = ['ProfilePic','Data'];
 
-  constructor(private _userProfileService: UserProfileService, private _raceFeedService: RaceFeedService) {
+  constructor(private _userProfileService: UserProfileService, 
+              private _raceFeedService: RaceFeedService,
+              private _authService: AuthService) {
   }
 
   ngOnInit() {

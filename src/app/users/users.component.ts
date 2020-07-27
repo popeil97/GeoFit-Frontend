@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from './users.service';
+import {AuthService} from '../auth.service';
 import {throwError} from 'rxjs';
 
 @Component({
@@ -13,9 +13,8 @@ export class UsersComponent implements OnInit {
    * An object representing the user for the login form
    */
   public user: any;
-  isLoggedIn: Boolean;
 
-  constructor(private _userService: UserService) { }
+  constructor(private _authService: AuthService) { }
 
   ngOnInit() {
     this.user = {
@@ -25,32 +24,13 @@ export class UsersComponent implements OnInit {
 
     //If we already store a JWT locally, set it in memory
     if (localStorage.getItem('access_token')){
-      this._userService.token = localStorage.getItem('access_token');
-    }
-
-    if (this._userService.token){
-      this.isLoggedIn = true;
+      this._authService.token = localStorage.getItem('access_token');
     }
 
   }
 
-
-  // register() {
-  //   this._userService.register({'username': this.user.username, 'password': this.user.password});
-  // }
-
-  // login() {
-  //   this._userService.login({'username': this.user.username, 'password': this.user.password});
-  //   this.isLoggedIn = true;
-  // }
-
-  // refreshToken() {
-  //   this._userService.refreshToken();
-  // }
-
   logout() {
-    this._userService.logout();
-    this.isLoggedIn = false;
+    this._authService.logout();
   }
 
 

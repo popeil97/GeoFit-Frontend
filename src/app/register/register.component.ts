@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { UserService } from '../users/users.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
-        private _userService: UserService,
+        private _authService: AuthService,
     ) {}
 
     ngOnInit() {
@@ -46,7 +46,7 @@ export class RegisterComponent implements OnInit {
         this.loading = true;
 
         //Register and navigate to login
-        this._userService.register(this.registerForm.value).subscribe( 
+        this._authService.register(this.registerForm.value).subscribe( 
           data => {
             if(this.registerAlert) {
               let form = this.registerForm.value
