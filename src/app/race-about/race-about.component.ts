@@ -35,7 +35,7 @@ export class RaceAboutComponent implements OnInit {
   constructor(private raceService:RaceService, 
               private route:ActivatedRoute, 
               private router:Router, 
-              private _authService: AuthService,) { }
+              public _authService: AuthService,) { }
 
   ngOnInit() {
 
