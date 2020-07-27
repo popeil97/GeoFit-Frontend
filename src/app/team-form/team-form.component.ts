@@ -23,7 +23,11 @@ export class TeamFormComponent implements AfterViewInit,OnChanges {
   errorMsg:string;
   showError:Boolean = false;
 
-  constructor(private _teamService:TeamService,private _userService:UsersService,private route: ActivatedRoute,private router:Router) {
+  constructor(private _teamService:TeamService,
+              private _userService:UsersService,
+              private route: ActivatedRoute,
+              private router:Router) {
+                
     this.teamForm = new FormGroup({
       name: new FormControl('',[
         Validators.required,

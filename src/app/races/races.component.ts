@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RaceService } from '../race.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import * as _ from 'lodash';
+import { AuthService } from '../auth.service';
 
 
 @Component({
@@ -35,7 +36,9 @@ export class RacesComponent implements OnInit {
   private columnsToDisplay:string[] = ['name','distance', 'start_loc', 'end_loc'];
   expandedElement: any | null;
 
-  constructor(private raceService: RaceService, private router:Router) { }
+  constructor(private raceService: RaceService, 
+              private router:Router,
+              private _authService: AuthService) { }
 
   ngOnInit() {
     console.log('in races');

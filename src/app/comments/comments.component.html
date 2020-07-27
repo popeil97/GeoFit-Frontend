@@ -20,4 +20,4 @@
   </table>
 </div>
 
-<app-comments-form [storyID]="storyID" (commentPosted)="getNewCommentData()"></app-comments-form>
+<app-comments-form *ngIf="this._authService.token" [storyID]="storyID" (commentPosted)="getNewCommentData()"></app-comments-form>

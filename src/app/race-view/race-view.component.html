@@ -6,7 +6,7 @@
 
   <mat-sidenav md-disable-backdrop='true' #menu mode="over"  opened="true"  style="overflow-y: hidden;"> <!--opened="true"-->
     <mat-tab-group>
-      <mat-tab>
+      <mat-tab *ngIf="this.progress && this._authService.token">
         <ng-template mat-tab-label style="background-color: rgba(256,256, 256,1);">
           <mat-icon>file_download</mat-icon>
         </ng-template>
@@ -15,7 +15,7 @@
             <ng-template mat-tab-label>
               <mat-icon>cloud_download</mat-icon>
             </ng-template>
-            <app-activities-menu [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu>
+            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu>
           </mat-tab>
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
@@ -88,7 +88,7 @@
       <i class="material-icons md-18" style="color:#16697a; ">keyboard_arrow_left</i>
       </a>
     </div>
-      x
+      
 
   
 
@@ -100,7 +100,7 @@
 <!----<a class="btn btn-primary btn-customized inviteToggle" (click)="goToTeamForm()">
   <span style="color:white">Create Team</span>
 </a>--->
-<app-user-progress [progress]="progress"></app-user-progress>
+<app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress>
   </mat-sidenav-content>
 </mat-sidenav-container>
 <!-- Wrapper -->
@@ -111,132 +111,6 @@
 
 <!-----STORY MODAL-->
 <app-story-modal></app-story-modal>
-
-<!---<div class="modal fade" id="storyModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h4 class="modal-title">Add a Story to your activity!</h4>
-        <button type="button" class="close" (click)="hideModal('#activitiesModal')">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <h4>Stories appear above your pin for 48 hours after upload</h4>
-        <div class="container">
-          <label for="storyImageField">Upload an image!</label>
-          <input type="file" id="storyImage" name="storyImageField" accept="image/*">
-          <label for="storyImageCaptionField">Enter a caption (max length is 100 chars):</label>
-          <input type="text" id="storyImageCaption" name="storyImageCaptionField" maxlength="100">
-        </div>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="uploadStory()" >Add Story</button>
-        <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
-      </div>
-    </div>
-  </div>
-</div>--->
-
-<!--
-<div class="modal fade" id="activitiesModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h4 class="modal-title">Select Activities You'd Like to Apply Towards This Race</h4>
-        <button type="button" class="close" (click)="hideModal('#activitiesModal')">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <table class="actsTable table table-striped" id='activities_table'>
-          <thead>
-            <tr>
-              <th scope="col"></th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-
-            </tr>
-          </thead>
-          <tbody>
-              <tr class="activityRow" *ngFor="let act of activities" (click)="addAct(act)">
-                  <td scope="row">{{act.name}}</td>
-                  <td>{{act.converted_dist}} {{ progress.distance_type }} {{test}}</td>
-                  <td>{{act.start_date}}</td>
-                </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" (click)="importActs()" >Import</button>
-        <button type="button" class="btn btn-danger" (click)="hideModal('#activitiesModal')">Close</button>
-
-        <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="leaderboardModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h4 class="modal-title">Leaderboard</h4>
-        <button type="button" class="close" (click)="hideModal('#leaderboardModal')">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        Modal body..
-      </div>
-
-      <div class="modal-footer">
-       
-        <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="inviteModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <div class="modal-header">
-        <h4 class="modal-title">Invite Followers!</h4>
-        <button type="button" class="close" (click)="hideModal('#inviteModal')">&times;</button>
-      </div>
-
-      <div class="modal-body">
-        <table class="table table-striped" id='invite_table'>
-          <thead>
-            <tr>
-              <th scope="col"></th>
-              <th scope="col"></th>
-
-            </tr>
-          </thead>
-          <tbody>
-              <tr *ngFor="let follower of followers">
-                  <td><img src="#" width="50px" height="50px"></td>
-                  <td scope="row">{{follower.first_name}} {{follower.last_name}}</td>
-                  <td></td>
-                  <td></td>
-                </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" (click)="hideModal('#inviteModal')">Close</button> -->
-
-      <!--  <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>
-      </div>
-    </div>
-  </div>
-</div> -->
 
 
 

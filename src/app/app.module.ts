@@ -20,7 +20,7 @@ import { RaceService } from './race.service';
 import { RaceCreateComponent } from './race-create/race-create.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { FormsModule } from '@angular/forms';
-import {UserService} from './users/users.service';
+import { AuthService} from './auth.service';
 import {TokenInterceptorService} from './users/tokeninterceptorservice';
 import { StravauthService } from './stravauth/stravauth.service';
 import { RaceFeedService } from './feed/race-feed.service';
@@ -109,7 +109,7 @@ import { SignupDialogContent } from './signup/signup.component';
   providers: [
     PopUpService,
     RaceService,
-    UserService,
+    AuthService,
     {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptorService, multi: true},
     StravauthService,
     RaceFeedService,

@@ -3,6 +3,7 @@ import { StoryModalComponent } from '../story-modal/story-modal.component';
 import { RaceFeedService } from './race-feed.service';
 import { UserProfileService } from '../userprofile.service';
 import { StoryFormComponent } from '../story-form/story-form.component';
+import { AuthService } from '../auth.service';
 
 declare var $: any
 
@@ -40,12 +41,13 @@ export class FeedComponent implements OnInit {
   @Output() storyItemClicked = new EventEmitter();
 
   private _feedService: any;
-
   private initialized: boolean;
 
   columns:string[] = ['ProfilePic','Data'];
 
-  constructor(private _userProfileService: UserProfileService, private _raceFeedService: RaceFeedService) {
+  constructor(private _userProfileService: UserProfileService, 
+              private _raceFeedService: RaceFeedService,
+              public _authService: AuthService) {
   }
 
   ngOnInit() {
@@ -111,9 +113,11 @@ export class FeedComponent implements OnInit {
     this._feedService.refreshFeed().then(data => {
       console.log("FEED DATA: ", data);
       var newFeedObjs: Array<FeedObj> = [];
+      var get_created_ts = this.get_created_ts;
 
       Object.keys(data).map(function(feedItemIndex){
         let feedItem: FeedObj = data[feedItemIndex];
+        feedItem.created_ts = get_created_ts(feedItem.created_ts);
         newFeedObjs.push(feedItem);
       });
 
@@ -121,6 +125,25 @@ export class FeedComponent implements OnInit {
       //Continue to explore ways to refresh feed. In meantime, get all feed objs every time
       viewComponent.feedItems = newFeedObjs;
     });
+  }
+
+  public get_created_ts(timestamp){
+    var date = new Date();
+    var ts = date.getTime() / 1000;
+    var secondsPerMinute = 60;
+    var secondsPerHour = secondsPerMinute * 60;
+
+    //Calculate how to display the timestamp of the activity
+    //If ts is within an hour, show number of minutes since activity
+    //If ts is over an hour, round to nearest hour
+    var displayTime;
+    if ((ts - timestamp) < secondsPerHour) {
+        displayTime = Math.round((ts - timestamp) / secondsPerMinute) + "m";
+    }
+    else {
+        displayTime = Math.round((ts - timestamp) / secondsPerHour) + "h";
+    }
+    return displayTime;
   }
 
   public resetFeed(){

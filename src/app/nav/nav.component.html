@@ -29,7 +29,7 @@ top: 0; width: 100%;z-index: 1;">
       -->
       <li class="nav-item">
         <div class="maincode">
-        <a class="dropdown-hide text-white" style="padding-left: 10px;" type="button" [routerLink]="['/profile', {username: _userService.username}]"><i class="material-icons">account_circle</i></a>
+        <a class="dropdown-hide text-white" style="padding-left: 10px;" type="button" [routerLink]="['/profile', {username: this._authService.username}]"><i class="material-icons">account_circle</i></a>
         <span class="maintooltip">My Profile</span> <!-- UPDATED -->
       </div>
 
@@ -77,17 +77,13 @@ top: 0; width: 100%;z-index: 1;">
 
     
     <li class="nav-item" style="padding-left: 950px;">
-      <div class="row" *ngIf="!isLoggedIn">
-          <app-login (loggedInAsUsernameEvent)="setLoggedInUsername($event)"></app-login>
-      </div>
       
-    <div class="row" *ngIf="isLoggedIn">
+    <div class="row" *ngIf="this._authService.token">
       <div class="container">
           <button (click)="logout()" class="btn btn-primary" style="background-color:#16697A; border-color: #135e6e; height: 32px;">Log Out</button>
       </div>
     </div>
-  </li>
-
+   </li>
 
 
     </ul>

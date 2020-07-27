@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {UserService} from '../users/users.service';
+import { AuthService } from '../auth.service';
 
 import { first } from 'rxjs/operators';
 import { UserProfileService } from '../userprofile.service';
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private router: Router,
-      private _userService: UserService,
+      private _authService: AuthService,
       private _userProfileService: UserProfileService,
   ) {}
 
@@ -50,10 +50,11 @@ export class LoginComponent implements OnInit {
       }
 
       this.loading = true;
-      this._userService.login({'username': this.f.username.value, 'password': this.f.password.value}).subscribe(
+      this._authService.login({'username': this.f.username.value, 'password': this.f.password.value}).subscribe(
         data => {
           localStorage.setItem('access_token', data['token']);
           localStorage.setItem('loggedInUsername', this.f.username.value);
+          this._authService.username = this.f.username.value;
 
           //Emit
           this.loggedInAsUsernameEvent.emit(this.f.username.value);

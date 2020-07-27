@@ -2,7 +2,8 @@ import { Component, OnInit, Inject, ViewChild, Output, EventEmitter, Input } fro
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
-import { UserService } from '../users/users.service';
+import { AuthService } from '../auth.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 interface DialogData {
   price:string,
@@ -17,16 +18,18 @@ interface DialogData {
 })
 export class SignupComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private _userService: UserService) { }
+  constructor(public dialog: MatDialog, private _authService: AuthService,private route:ActivatedRoute, 
+    private router:Router) { }
 
   @Output() signupCallback: EventEmitter<any> = new EventEmitter();
-  @Input() isLoggedIn: Boolean;
   @Input() price: any;
   @Input() race_id: number;
+  @Input() hasPaid: Boolean = false;
 
   openDialog() {
+
     console.log('PRICE FORM PARENT:',this.price)
-    if(!(this.price == null || this.price == undefined)) {
+    if(!(this.price == null || this.price == undefined) && !this.hasPaid) {
       this.price = this.price.toString();
       console.log('price after tostring:',this.price)
     }
@@ -35,7 +38,7 @@ export class SignupComponent implements OnInit {
       this.price = null;
     }
 
-    const dialogRef = this.dialog.open(SignupDialogContent,{disableClose: true, data:{price:this.price,isLoggedIn:this._userService.isLoggedIn(),race_id:this.race_id} as MatDialogConfig});
+    const dialogRef = this.dialog.open(SignupDialogContent,{disableClose: true, data:{price:this.price,isLoggedIn:this._authService.isLoggedIn(),race_id:this.race_id} as MatDialogConfig});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -44,6 +47,10 @@ export class SignupComponent implements OnInit {
         this.signupCallback.emit();
       }
     });
+  }
+
+  closeDialog() {
+    this.dialog.closeAll();
   }
 
   ngOnInit() {

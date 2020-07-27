@@ -14,7 +14,7 @@
             
 
           </div>
-          <div class="profile-usertitle-job">
+          <div *ngIf="this._authService.token" class="profile-usertitle-job">
             <!---FOLLOW AND EDIT BUTTONS-->
             <div *ngIf="!userData.is_me">
               <app-user-follow [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>

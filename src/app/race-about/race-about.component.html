@@ -107,7 +107,7 @@
 
      </mat-card-content>
      <mat-card-actions>
-       <app-signup [price]="raceSettings.price" [race_id]="raceID" (signupCallback)="joinRace($event)"></app-signup>
+       <app-signup [price]="raceSettings.price" [race_id]="raceID" (signupCallback)="joinRace($event)" [hasPaid]="hasPaid" (click)="trySignup()"></app-signup>
        <button mat-button (click)="toggleForm()" *ngIf="isOwner">EDIT</button>
      </mat-card-actions>
    </mat-card>

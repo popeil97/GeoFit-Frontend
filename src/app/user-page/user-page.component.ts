@@ -1,6 +1,7 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { UserProfileService } from '../userprofile.service';
+import { AuthService } from '../auth.service';
 
 declare var $: any;
 
@@ -13,7 +14,9 @@ export class UserPageComponent implements OnInit {
   username;
   userData: UserData;
 
-  constructor(private route:ActivatedRoute, private _userProfileService:UserProfileService) { }
+  constructor(private route:ActivatedRoute, 
+              private _userProfileService:UserProfileService,
+              public _authService: AuthService) { }
 
   showEdit: boolean;
 

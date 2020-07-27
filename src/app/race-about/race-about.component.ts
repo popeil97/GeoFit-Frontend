@@ -2,9 +2,10 @@ import { Component, OnInit,ViewChild } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { RaceService } from '../race.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { UserService } from '../users/users.service';
+import { AuthService } from '../auth.service';
 declare var $: any
 import { MapComponent } from '../map/map.component';
+import { SignupComponent } from '../signup/signup.component';
 
 @Component({
   selector: 'app-race-about',
@@ -13,6 +14,7 @@ import { MapComponent } from '../map/map.component';
 })
 export class RaceAboutComponent implements OnInit {
   @ViewChild(MapComponent) mapChild: MapComponent;
+  @ViewChild(SignupComponent) signupChild: SignupComponent;
   public AboutForm: FormGroup;
   aboutData:AboutData = {owner:{}} as AboutData;
   raceSettings:RaceSettings = {} as RaceSettings;
@@ -26,10 +28,14 @@ export class RaceAboutComponent implements OnInit {
   public coords:any;
   public all_user_data:Array<FeedObj>;
   public followedIDs:number[];
+  hasPaid:Boolean;
 
   public num_users:any;
 
-  constructor(private raceService:RaceService, private route:ActivatedRoute, private router:Router, public _userService: UserService,) { }
+  constructor(private raceService:RaceService, 
+              private route:ActivatedRoute, 
+              private router:Router, 
+              private _authService: AuthService,) { }
 
   ngOnInit() {
 
@@ -61,11 +67,19 @@ export class RaceAboutComponent implements OnInit {
       this.raceSettings = resp['race_settings'];
       this.isOwner = resp['isOwner'];
       this.hasJoined = resp['hasJoined'];
+      this.hasPaid = resp['hasPaid'];
 
       this.initializeForm();
     });
 
     
+  }
+
+  trySignup(): void {
+    if(!this._authService.isLoggedIn()) {
+      this.signupChild.closeDialog();
+      this.router.navigate(['/register',{params:JSON.stringify({redirectParams: {name:this.raceName,id:this.raceID}, redirectUrl:'/about'})}]);
+    }
   }
 
   toggleForm(): void {
@@ -114,7 +128,7 @@ export class RaceAboutComponent implements OnInit {
   confirmRegistration(user:any): void {
     // login user
     console.log('USER CONFIRMED:',user);
-    this._userService.login(user).subscribe(data => {
+    this._authService.login(user).subscribe(data => {
       console.log(data);
       localStorage.setItem('access_token', data['token']);
       localStorage.setItem('loggedInUsername', user.username);

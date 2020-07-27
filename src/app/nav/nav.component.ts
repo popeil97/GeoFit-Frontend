@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../users/users.service';
+import { AuthService } from '../auth.service';
 import { NotificationsService } from '../notifications.service';
 import {Observable} from 'rxjs/Rx';
 import { UserProfileService } from '../userprofile.service';
@@ -14,11 +14,10 @@ declare var $: any
 export class NavComponent implements OnInit {
 
   constructor(private _notificationService:NotificationsService,
-              public _userService: UserService,
+              public _authService: AuthService,
               private _userProfileService: UserProfileService) { }
 
   public notifications:any[];
-  public isLoggedIn: Boolean;
 
   ngOnInit() {
     // copy pasta from stack overflow yahooooooo
@@ -34,28 +33,21 @@ export class NavComponent implements OnInit {
     });
 
     if (localStorage.getItem('access_token')){
-      this._userService.token = localStorage.getItem('access_token');
+      this._authService.token = localStorage.getItem('access_token');
     }
 
     if (localStorage.getItem('loggedInUsername')){
-      this._userService.username = localStorage.getItem('loggedInUsername');
-    }
-
-    if (this._userService.token){
-      this.isLoggedIn = true;
+      this._authService.username = localStorage.getItem('loggedInUsername');
     }
 
   }
 
   goToMyProfile(){
-    this._userProfileService.goToUserProfile(this._userService.username);
+    this._userProfileService.goToUserProfile(this._authService.username);
   }
 
   setLoggedInUsername(username: string){
-    this._userService.username = username;
-
-    //Perform login actions
-    this.isLoggedIn = true;
+    this._authService.username = username;
   }
 
 
@@ -66,8 +58,7 @@ export class NavComponent implements OnInit {
   }
 
   logout() {
-    this._userService.logout();
-    this.isLoggedIn = false;
+    this._authService.logout();
   }
 
 }

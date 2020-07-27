@@ -11,6 +11,7 @@ import { FeedComponent } from '../feed/feed.component';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
 import { RaceSettings } from '../race-about/race-about.component';
 import { TeamFormComponent } from '../team-form/team-form.component';
+import { AuthService } from '../auth.service';
 
 declare var $: any
 
@@ -55,7 +56,8 @@ export class RaceViewComponent implements OnInit {
                   private activitiesService:ActivitiesService,
                   private route: ActivatedRoute,
                   private router:Router,
-                  private storyService: StoryService) {
+                  private storyService: StoryService,
+                  public _authService: AuthService) {
     this.modalData = {};
   }
 
@@ -158,21 +160,27 @@ export class RaceViewComponent implements OnInit {
 
       let raceData = data as RaceData;
       console.log('RACE DATA:',raceData);
+
       this.progress = raceData.progress;
       this.activities = raceData.activities;
       this.coords = {coords:raceData.coords};
+
       this.leaderboard = this.configureLeaderboard(raceData.unranked_leaderboard,raceData.ranked_leaderboard);
+      
       this.all_user_data = raceData.users_data as Array<FeedObj>;
       this.followedIDs = raceData.followedIDs;
+
       this.teams = raceData.users_data.filter((user_data) => {
         if(user_data.isTeam) {
           return user_data;
         }
       });
+
       this.userRaceSettings = raceData.settings;
       this.raceSettings = raceData.race_settings;
       this.isManualEntry = this.raceSettings.isManualEntry;
       this.userStat = raceData.user_stat;
+
       console.log('TEAMS:',this.teams);
       console.log('COORDS:',this.coords);
       console.log("ALL USER DATA", this.all_user_data);

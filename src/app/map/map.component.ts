@@ -30,6 +30,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
   private map;
   private coordsRoute;
   private markersByUserID = {};
+  private markerClusters:any;
   private popUpsByMarkers = {};
   private marker_start:any;
   private marker_end:any;
@@ -77,12 +78,12 @@ export class MapComponent implements AfterViewInit,OnChanges {
     this.markersByUserID[user_id.toString()]['locMarker'].openPopup();
 
     //Do this to simply pan to user pin
-    this.map.panTo(this.markersByUserID[user_id.toString()]['latLng']);
+    //this.map.panTo(this.markersByUserID[user_id.toString()]['latLng']);
 
     //Do this to pan *and* zoom
-    //var markerBounds = L.latLngBounds([markersByUserID[user_id.toString()]['latLng']]);
-    //var options = {'animate': true, 'easeLinearity': 0.1}
-    //mymap.fitBounds(markerBounds, options);
+    var markerBounds = L.latLngBounds([this.markersByUserID[user_id.toString()]['latLng']]);
+    var options = {'maxZoom': 8, 'animate': true, 'easeLinearity': 0.1}
+    this.map.fitBounds(markerBounds, options);
   }
 
   public clearMap(): void {
@@ -97,8 +98,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     console.log('GOT COORDINATES:',this.coordinates.coords);
     console.log('MAP:',this.map);
-
-
 
     if(!this.map) {
       this.initMap()
@@ -157,16 +156,16 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
 public clearUserPins(){
     //Remove all current user pins
-    console.log(this.markersByUserID);
-    for (var id in this.markersByUserID){
-      console.log("removing id ", id)
-      this.markersByUserID[id]['locMarker'].remove();
-      //If this doesn't work, try
-      //this.map.removeLayer(this.markersByUserID[id]['locMarker']);
+    //Currently no working method to remove pins by ID
+    //but this will be resolved
+    if (this.markerClusters){
+      this.map.removeLayer(this.markerClusters);
     }
   }
 
   public showPinsByID(IDs){
+    /////////METHOD NOT WORKING//////////
+
     //Clear all pins
     this.clearUserPins();
 
@@ -188,18 +187,15 @@ public clearUserPins(){
 
 
   public createUserPins(heatMapOn){
-    // doing this temporarily because Lat/Lon are reversed smh
-    // _.forEach(this.coordinates.coords,(coord) => {
-    //   let temp = coord[0];
-    //   coord[0] = coord[1];
-    //   coord[1] = temp;
-    // });
+    //Clear all user pins
     this.clearUserPins();
+
+    //Set max number of markers in a cluster
     var maxMarkersInCluster = 4;
 
-    var markerClusters = L.markerClusterGroup({
+    this.markerClusters = L.markerClusterGroup({
       //disableClusteringAtZoom: 12, //12
-      maxClusterRadius: 25, //20
+      maxClusterRadius: 20, //20
       animateAddingMarkers: true,
       iconCreateFunction: function(cluster){
           var markers = cluster.getAllChildMarkers();
@@ -234,8 +230,9 @@ public clearUserPins(){
         }
     });
 
-    //Add pin clusters to map
-    this.map.addLayer(markerClusters);
+    
+
+    console.log("This.markerClusters before adding all new pins ", this.markerClusters);
 
     var heatArray = new Array(this.userData.length);
 
@@ -260,8 +257,6 @@ public clearUserPins(){
       heatArray[i] = [lat_user,lng_user,1]
       heatArray[i+this.userData.length] = [lat_user,lng_user,1.0]
 
-
-
       var locMarker = L.geoJSON(along_user, {
         pointToLayer: function(feature, latlng) {
           return L.marker(latlng, { icon: userIcon });
@@ -269,7 +264,7 @@ public clearUserPins(){
       })
         //.addTo(this.map)
 
-      markerClusters.addLayer(locMarker);
+      this.markerClusters.addLayer(locMarker);
 
       //Create template popup text
       var popupText = "<center><b>" +
@@ -281,38 +276,26 @@ public clearUserPins(){
                       'miles' +
                       "</center>";
 
-      // //Get story image and caption
-      // var userStoryImg = this.userData[i].story_image;
-      // var userStoryCaption = this.userData[i].story_text;
-
-      // //Add story info to marker popup
-      // if (userStoryImg || userStoryCaption){
-      //     popupText += "<center>" +
-      //             "<a data-toggle=\"modal\" data-target=\"#storyModal\" data-userstatindex=\"" +
-      //             i +
-      //             "\">" +
-      //             "<br><img src=\"" +
-      //             userStoryImg +
-      //             "\" style=\"max-width:150px;\"></a>" +
-      //             "</center>" +
-      //             "<center>" +
-      //             userStoryCaption +
-      //             "</center>";
-      // }
-
-      //Temp before we retrieve logged in user's ID
-      //locMarker.bindPopup(popupText, {maxWidth: 200});
-
       this.popUpsByMarkers[locMarker['_leaflet_id'].toString()] = popupText;
 
-      //Retain markers in dict so we can pan to it upon select
+      //Get user ID of this race stat
       let elementID = this.userData[i].user_id
+
+      //Retain markers in dict so we can pan to it upon select
       this.markersByUserID[elementID] = {
           'locMarker' : locMarker,
           'latLng' : L.latLng(lat_user, lng_user),
       };
 
+      //If this pin is current user, pan and zoom to it
+      if (this.userData[i].isMe){
+        this.panToUserMarker(elementID);
+      }
+
     }
+
+    //Add pin clusters to map
+    this.map.addLayer(this.markerClusters);
 
     heatArray = heatArray.map(function (p) { return [p[0], p[1]]; });
 
@@ -335,11 +318,11 @@ public clearUserPins(){
       console.log("CREATING NON HEAT MAP PINS")
     }
     
-      //To work with markercluster, we store popUpText in dict and display onclick (see below)
+    //To work with markercluster, we store popUpText in dict and display onclick (see below)
       
     //POPUPS (unfortunately ruined by markercluster, but fixed here)
     var popUpsByMarkers = this.popUpsByMarkers;
-    markerClusters.on('click', function(ev) {
+    this.markerClusters.on('click', function(ev) {
       // Current marker is ev.layer
 
       if (!ev.layer.getPopup()){
@@ -358,6 +341,7 @@ public clearUserPins(){
       }
 
     });
+
   }
 
 
@@ -369,8 +353,8 @@ public clearUserPins(){
 
   private initMap(): void {
     this.map = L.map('map', {
-      center: [ 39.8282, -98.5795 ],
-      zoom: 3
+      //center: [ 39.8282, -98.5795 ],
+      //zoom: 3
     });
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
