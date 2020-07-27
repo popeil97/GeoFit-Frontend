@@ -32,8 +32,44 @@
     <div *ngFor="let group of leaderboard; let i=index">
       <mat-expansion-panel [disabled]="!group.isTeam">
         <mat-expansion-panel-header>
+          <div class="column-lb-small">
+            <p><b>{{i+1}}</b></p>
+          </div>
+          <div class="column-lb-small">
+            <img src="{{group.profile_url}}" width="30" height="30">
+          </div>
+          <div class="column-lb1">
+            <p>{{group.display_name}}</p>
+          </div>
+          <div class="column-lb2">
+            <p style="display:inline;color:#16697a;">{{group.total_distance}}</p><p style="font-size: 8px;display:inline; color:#16697a;">{{group.distance_type}}</p>
+          </div>
+       </mat-expansion-panel-header>
+
+       <mat-card *ngFor="let member of group.child_user_stats">
+        <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + member.profile_url + ')'}" style="position: relative; float:left;"></div>
+        <div style="padding-left: 50px;">{{member.display_name}}</div>
+        <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div>
+      </mat-card>
+
+      </mat-expansion-panel>
+
+
+
+    </div>
+  <mat-accordion>
+
+
+
+  <!-- 
+ <mat-accordion>
+    <div *ngFor="let group of leaderboard; let i=index">
+      <mat-expansion-panel [disabled]="!group.isTeam">
+        <mat-expansion-panel-header>
           <mat-panel-title>
+            <div class="column-lb-small">
             <p style="padding-top: 10px; padding-right: 5px;">{{i+1}}</p>
+          </div>
             <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + group.profile_url + ')'}" style="position:relative; padding-top: 5px; float:left;"></div>
             <div style="padding: 10px;">{{group.display_name}}</div>
           </mat-panel-title>
@@ -54,3 +90,6 @@
 
     </div>
   <mat-accordion>
+
+
+  -->

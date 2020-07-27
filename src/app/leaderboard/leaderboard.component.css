@@ -12,3 +12,23 @@
   ::ng-deep .mat-expansion-panel-header[aria-disabled=true] {
     color: rgba(0,0,0,.87);
 }
+
+.column-lb1{
+    width: 55%;
+    margin: 2px;
+  }
+  .column-lb2{
+    width: 15%;
+    margin: 2px;
+  }
+  .column-lb-small{
+    width: 12%;
+    margin: 2px;
+  }
+
+  .row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}

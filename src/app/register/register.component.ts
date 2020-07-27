@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { UserService } from '../users/users.service';
+import { SignupCallbackStruct } from '../signup/signup.component';
 
 @Component({
   selector: 'app-register',
@@ -50,13 +51,14 @@ export class RegisterComponent implements OnInit {
           data => {
             if(this.registerAlert) {
               let form = this.registerForm.value
-              this.registerAlert.emit({username:form.username,password:form.password})
+              this.registerAlert.emit({ data:{username:form.username,password:form.password}, success:true, type:"REGISTER" } as SignupCallbackStruct)
             }
             this.router.navigate['/login'];
           },
           err => {
             this.loading = false;
             this.errors = err['error']
+            this.registerAlert.emit({ data:{}, success:false, type:"REGISTER" } as SignupCallbackStruct)
           });
 
     }

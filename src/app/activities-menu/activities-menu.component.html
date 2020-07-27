@@ -1,5 +1,4 @@
-
-<div class="table-container" style="height: 40%;">
+<div class="table-container">
   <table mat-table [dataSource]="activities" class="activitiesTable">
     <ng-container matColumnDef="Name" style="padding: 5px;">
       <td mat-cell *matCellDef="let element" (click)="add(element)"> {{element.name}} </td>
@@ -19,3 +18,7 @@
 <div style="padding: 5px; position: relative; float: left;">
   <button class="btn btn-primary" mat-raised-button (click)="importSelectedActs()">Import</button>
 </div>
+<br>
+<br>
+<br>
+<br><br><br>

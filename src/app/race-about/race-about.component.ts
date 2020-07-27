@@ -29,7 +29,7 @@ export class RaceAboutComponent implements OnInit {
 
   public num_users:any;
 
-  constructor(private raceService:RaceService, private route:ActivatedRoute, private router:Router, private _userService: UserService,) { }
+  constructor(private raceService:RaceService, private route:ActivatedRoute, private router:Router, public _userService: UserService,) { }
 
   ngOnInit() {
 
@@ -87,7 +87,9 @@ export class RaceAboutComponent implements OnInit {
         allowTeams: new FormControl(this.raceSettings.allowTeams),
         maxTeamSize: new FormControl(this.raceSettings.max_team_size,[
           Validators.max(10)
-        ])
+        ]),
+        paymentRequired: new FormControl(this.raceSettings.paymentRequired),
+        price: new FormControl(this.raceSettings.price),
       })
     });
 
@@ -147,6 +149,10 @@ export class RaceAboutComponent implements OnInit {
     formClean.rules.race_id = this.raceSettings.race_id;
     console.log('IS VALID:',formClean);
     //this.coords = this._raceview.coords;
+
+    if(!formClean.rules.paymentRequired) {
+      formClean.rules.price = null;
+    }
     
 
     if(isValid) {
@@ -196,6 +202,8 @@ export interface RaceSettings {
   allowTeams:Boolean;
   race_id:number;
   max_team_size:number;
+  paymentRequired: Boolean,
+  price:any,
 }
 
 interface RaceData {

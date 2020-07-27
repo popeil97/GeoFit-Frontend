@@ -37,6 +37,14 @@ export class UserService {
   public login(user) {
     return this.http.post(environment.apiUrl + '/api/login/', JSON.stringify(user), this.httpOptions);
   }
+
+  public isLoggedIn(): Boolean {
+    if(localStorage.getItem('loggedInUsername') && localStorage.getItem('access_token')) {
+      return true;
+    }
+
+    return false;
+  }
  
   // Refreshes the JWT token, to extend the time the user is logged in
   public refreshToken() {
