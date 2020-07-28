@@ -95,13 +95,10 @@ import { UserStatsComponent } from './user-stats/user-stats.component';
     ProfileFormComponent,
     LoginComponent,
     RegisterComponent,
-<<<<<<< HEAD
     PaypalComponent,
     SignupComponent,
     SignupDialogContent,
-=======
     UserStatsComponent,
->>>>>>> dev-prettify
   ],
   imports: [
     BrowserModule,
