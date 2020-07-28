@@ -1,9 +1,9 @@
-<nav class="navbar navbar-expand-lg text-white" style="background-color:#403d58;position: inherit;
-top: 0; width: 100%;z-index: 1;">
+<div *ngIf="!isPurple">
+<nav class="navbar navbar-expand-lg roboto-white" style="top: 0; width: 100%;z-index: 10000000;">
   <!-- Brand -->
   <!-- <a class="navbar-brand" href="#">GeoFit</a>
   <div class="navbar-header"> -->
-    <a class="navbar-brand text-white" routerLink='/'>
+    <a class="navbar-brand roboto-white" routerLink='/' (click)="purpleFalse()" >
        <!-- <img src="assets/landing/GEOFITCLUB_Orange_Logo_Icon.png"> -->Tucan
       </a>
 
@@ -18,7 +18,7 @@ top: 0; width: 100%;z-index: 1;">
     <ul class="navbar-nav">
       <li class="nav-item">
         
-        <div class="maincode"><a class="dropdown-hide text-white " style="padding-left: 10px;" type="button" routerLink='/races'><i class="material-icons">run_circle</i></a>
+        <div class="maincode"><a class="dropdown-hide roboto-white" style="padding-left: 10px;" type="button" (click)="purpleTrue()" routerLink='/races'><i class="material-icons">run_circle</i></a>
     <span class="maintooltip">Races</span> <!-- UPDATED -->
 </div>
       </li>
@@ -29,7 +29,7 @@ top: 0; width: 100%;z-index: 1;">
       -->
       <li class="nav-item">
         <div class="maincode">
-        <a class="dropdown-hide text-white" style="padding-left: 10px;" type="button" [routerLink]="['/profile', {username: this._authService.username}]"><i class="material-icons">account_circle</i></a>
+        <a class="dropdown-hide roboto-white" style="padding-left: 10px;" type="button" (click)="purpleTrue()" [routerLink]="['/profile', {username: this._authService.username}]"><i class="material-icons">account_circle</i></a>
         <span class="maintooltip">My Profile</span> <!-- UPDATED -->
       </div>
 
@@ -58,7 +58,7 @@ top: 0; width: 100%;z-index: 1;">
         <div class="maincode">
         <div class="dropdown">
 
-          <a class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="dropdown-toggle" type="button" (click)="purpleTrue()" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <mat-icon style="padding-right: 20px;padding-left: 10px;">circle_notifications</mat-icon><span class="caret"></span> 
           </a>
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -80,7 +80,7 @@ top: 0; width: 100%;z-index: 1;">
       
     <div class="row" *ngIf="this._authService.token">
       <div class="container">
-          <button (click)="logout()" class="btn btn-primary" style="background-color:#16697A; border-color: #135e6e; height: 32px;">Log Out</button>
+          <button (click)="logout()" class="btn btn-primary" style="background-color:#2C007E; border-color: #2C007E;">Log Out {{_authService.username}}</button>
       </div>
     </div>
    </li>
@@ -89,3 +89,98 @@ top: 0; width: 100%;z-index: 1;">
     </ul>
   </div>
 </nav>
+</div>
+
+
+<div *ngIf="isPurple">
+<nav class="navbar navbar-expand-lg roboto-purple" style="top: 0; width: 100%;z-index: 10000000;">
+  <!-- Brand -->
+  <!-- <a class="navbar-brand" href="#">GeoFit</a>
+  <div class="navbar-header"> -->
+    <a class="navbar-brand roboto-purple" routerLink='/' (click)="purpleFalse()" >
+       <!-- <img src="assets/landing/GEOFITCLUB_Orange_Logo_Icon.png"> -->Tucan
+      </a>
+
+
+  <!-- Toggler/collapsibe Button -->
+  <!-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button> -->
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        
+        <div class="maincode"><a class="dropdown-hide roboto-purple" style="padding-left: 10px;" type="button" (click)="purpleTrue()" routerLink='/races'><i class="material-icons">run_circle</i></a>
+    <span class="maintooltip">Races</span> <!-- UPDATED -->
+</div>
+      </li>
+      <!-- 
+      <li class="nav-item">
+        <a class="nav-link" routerLink='/users'>Users</a>
+      </li>
+      -->
+      <li class="nav-item">
+        <div class="maincode">
+        <a class="dropdown-hide roboto-purple" style="padding-left: 10px;" type="button" (click)="purpleTrue()" [routerLink]="['/profile', {username: this._authService.username}]"><i class="material-icons">account_circle</i></a>
+        <span class="maintooltip">My Profile</span> <!-- UPDATED -->
+      </div>
+
+      </li>
+
+      <!-- 
+      <li class="nav-item">
+        <a class="nav-link" routerLink='/teams'>Teams</a>
+      </li>
+      -->
+
+      
+
+      <!-- <li class="nav-item" style="float: right;">
+        <mat-icon style="padding-right: 5px;">circle_notifications</mat-icon>
+      </li> -->
+
+      <li class="nav-item dropdown" dropdown>
+        <!-- <a dropdownToggle type="button" class="nav-link dropdown-toggle waves-light" mdbWavesEffect>
+          <mat-icon style="padding-right: 5px;">circle_notifications</mat-icon><span class="caret"></span></a>
+        <div class="dropdown-menu dropdown dropdown-primary" role="menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+        </div> -->
+        <div class="maincode">
+        <div class="dropdown">
+
+          <a class="dropdown-toggle" type="button" (click)="purpleTrue()" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <mat-icon style="padding-right: 20px;padding-left: 10px;">circle_notifications</mat-icon><span class="caret"></span> 
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <div *ngIf="notifications"><app-notification *ngFor="let not of notifications" (removeNotification)="removeNotification($event)" [notification]="not"></app-notification></div>
+              <mat-card *ngIf="!notifications">
+                <div style="padding-left: 10px;">No Notifications</div>
+              </mat-card>
+          </div>
+        </div>
+        <span class="maintooltip">Notifications</span> <!-- UPDATED -->
+      </div>
+
+      
+
+    </li>
+
+    
+    <li class="nav-item" style="padding-left: 950px;">
+      
+    <div class="row" *ngIf="this._authService.token">
+      <div class="container">
+          <button (click)="logout()" class="btn btn-primary" style="background-color:#2C007E; border-color: #2C007E;">Log Out {{_authService.username}}</button>
+      </div>
+    </div>
+   </li>
+
+
+    </ul>
+  </div>
+</nav>
+</div>

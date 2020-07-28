@@ -1117,6 +1117,11 @@ pre code {
     width: 25%;
   }
 
+  .column-map{
+    float: center;
+    width: 49%;
+  }
+
   .column-login{
     width: 30%;
     margin: 20px;
@@ -1127,6 +1132,20 @@ pre code {
   }
   .column-login-ph{
     height: 120px;
+  }
+
+  .column-features{
+    width: 19%;
+    margin: 2px;
+  }
+  .column-contact{
+    width: 49%;
+    margin: 2px;
+  }
+
+  .column-team{
+    width: 24%;
+    margin: 2px;
   }
 
   .col-md-6 {
@@ -6115,7 +6134,11 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #403D58 !important;
+  background-color: #EFFAF7 !important;
+}
+
+.bg-primary2 {
+  background-color: #F6BF78 !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
@@ -6185,7 +6208,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #16697A !important;
+  background-color: #2C007E !important;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,
@@ -7701,6 +7724,17 @@ button.bg-dark:focus {
   padding-bottom: 0.25rem !important;
 }
 
+.roboto-white
+{
+  font-family: "Roboto";
+  color:#effaf7;
+}
+
+.roboto-purple
+{
+  font-family: "Roboto";
+  color:#2C007E;
+}
 .pl-1,
 .px-1 {
   padding-left: 0.25rem !important;
@@ -10114,20 +10148,14 @@ hr.light {
 }
 
 header.masthead {
-  padding-top: 10rem;
-  padding-bottom: calc(10rem - 4.5rem);
-  background: linear-gradient(to bottom, rgba(64, 61, 88, 0.1) 0%, rgba(256, 256, 256, 0.1) 50%), url("../../assets/landing/bg-masthead.jpg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-size: cover;
+  
 }
 header.masthead h1 {
   font-size: 2.25rem;
 }
 @media (min-width: 992px) {
   header.masthead {
-    height: 100vh;
+    height: 90vh;
     min-height: 40rem;
     padding-top: 4.5rem;
     padding-bottom: 0;
@@ -10183,4 +10211,52 @@ header.masthead h1 {
 
 .text-white-75 {
   color: rgba(64, 61, 88, 0.9);
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: absolute;
+  top: 0;
+  z-index:1;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.split2 {
+  height: 100%;
+  width: 50%;
+ position: fixed;
+}
+
+.left {
+  left: 0;
+  background: #2C007E;
+
+}
+
+.right {
+  right: 0;
+  background-color: #EFFAF7;
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.centered1 {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+
+.centered img {
+  width: 150px;
+  border-radius: 50%;
 }

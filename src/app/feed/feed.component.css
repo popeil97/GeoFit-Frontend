@@ -13,3 +13,7 @@
 .mat-column-Data {
   justify-content: center;
 }
+
+div.ex3 {
+  overflow: auto;
+}

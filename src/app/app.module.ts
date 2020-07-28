@@ -57,6 +57,7 @@ import { RegisterComponent } from './register/register.component';
 import { PaypalComponent } from './paypal/paypal.component';
 import { SignupComponent } from './signup/signup.component';
 import { SignupDialogContent } from './signup/signup.component';
+import { UserStatsComponent } from './user-stats/user-stats.component';
 
 
 @NgModule({
@@ -96,6 +97,7 @@ import { SignupDialogContent } from './signup/signup.component';
     PaypalComponent,
     SignupComponent,
     SignupDialogContent,
+    UserStatsComponent,
   ],
   imports: [
     BrowserModule,

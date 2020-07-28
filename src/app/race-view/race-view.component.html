@@ -75,17 +75,17 @@
     <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
 
     <div  *ngIf="changeArrow">
-    <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 0%;">
+    <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 0px;">
         <br>
-      <i class="material-icons md-18" style="color:#16697a;">keyboard_arrow_right</i>
+      <i class="material-icons md-18" style="color:#2C007E;">keyboard_arrow_right</i>
     </a>
     </div>
 
 
       <div  *ngIf="!changeArrow">
-        <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 20.5%;">
+        <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 350px;">
         <br>
-      <i class="material-icons md-18" style="color:#16697a; ">keyboard_arrow_left</i>
+      <i class="material-icons md-18" style="color:#2C007E; ">keyboard_arrow_left</i>
       </a>
     </div>
       

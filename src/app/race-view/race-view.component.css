@@ -622,7 +622,7 @@ a.btn-customized-4.btn-customized-light.btn.btn-primary:not(:disabled):not(.disa
 
 mat-sidenav-container {
     position: fixed;
-    top: 6.5%;
+    top: 0;
     left: 0;
     height: 100%;
     width: 100%;
@@ -639,7 +639,9 @@ mat-sidenav, mat-sidenav-content {
 }
 
 mat-sidenav {
-    background-color: rgba(221, 232, 235, 0.83);
+    background-color: rgba(239, 250, 247, 0.83);
+    top: 5%;
+    bottom:1%;
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
     opacity: 1;

@@ -56,6 +56,16 @@ export class UserPageComponent implements OnInit {
     this._userProfileService.getUserProfile(this.username).then((data) => {
       this.userData = data as UserData;
       console.log("New user data: ", this.userData);
+
+      if (this.userData.location =="")
+      {
+        this.userData.location = "N/A";
+      }
+
+      if (this.userData.description =="")
+      {
+        this.userData.description = "N/A";
+      }
     });
   }
 
