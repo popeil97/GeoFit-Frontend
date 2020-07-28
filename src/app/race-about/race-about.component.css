@@ -8,6 +8,11 @@
     margin: 1px;
   }
 
+  .column-map{
+    width: 49%;
+    margin: 1px;
+  }
+
   .row {
   display: flex;
   flex-wrap: wrap;
