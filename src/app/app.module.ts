@@ -54,7 +54,6 @@ import { StoryFormComponent } from './story-form/story-form.component';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-<<<<<<< HEAD
 import { PaypalComponent } from './paypal/paypal.component';
 import { SignupComponent } from './signup/signup.component';
 import { SignupDialogContent } from './signup/signup.component';
