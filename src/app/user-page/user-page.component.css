@@ -18,6 +18,29 @@ html, body {
     font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;
   }
 
+  .column-31{
+    width: 18%;
+    margin: 5px;
+  }
+  .column-32{
+    width: 78%;
+    margin: 5px;
+  }
+  .column-33{
+    width: 39%;
+    margin: 5px;
+  }
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+img {
+  border-radius: 50%;
+}
 
   .content {
     flex: 1 0 auto;
@@ -25,7 +48,6 @@ html, body {
   .footer {
     flex-shrink: 0;
   }
-
 
   footer {
     text-align: center;

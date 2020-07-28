@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../auth.service';
 import {throwError} from 'rxjs';
+import $ from "jquery";
 
 @Component({
   selector: 'app-users',
@@ -34,6 +35,12 @@ export class UsersComponent implements OnInit {
   }
 
 
+/**
+* Template Name: Mamba - v2.3.0
+* Template URL: https://bootstrapmade.com/mamba-one-page-bootstrap-template-free/
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
 
 
 }

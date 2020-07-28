@@ -54,6 +54,7 @@ import { StoryFormComponent } from './story-form/story-form.component';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { UserStatsComponent } from './user-stats/user-stats.component';
 
 
 @NgModule({
@@ -90,6 +91,7 @@ import { RegisterComponent } from './register/register.component';
     ProfileFormComponent,
     LoginComponent,
     RegisterComponent,
+    UserStatsComponent,
   ],
   imports: [
     BrowserModule,

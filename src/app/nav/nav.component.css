@@ -9,6 +9,17 @@ a.navbar-brand {
 
 .navbar ul li a {border-bottom:none;}
 
+.roboto-white
+{
+  font-family: "Roboto";
+  color:#effaf7;
+}
+
+.roboto-purple
+{
+  font-family: "Roboto";
+  color:#2C007E;
+}
 
 .navbar-nav {position: relative;
 }
