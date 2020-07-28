@@ -20,10 +20,9 @@ export class PaypalComponent implements AfterViewChecked {
   constructor(public _paymentsService:PaymentsService) {
 
     this.paypalConfig = {
-      env:'sandbox',
+      env:'production',
       client: {
-        sandbox: 'AUbDVWGPpLKeW9t1DEjnv1rn8FJuzFutXamd9jX5iPFjh9PevctsO44etAeEJSiwQhktCY1ymdlEPP7C',
-        production: 'prod key'
+        production: 'AVba2GjPpLOlgOhlvLMS_QkprWXngKj8OWezQ_HgyRq9y5UMVZ6Fw2OG1k-tnetFMoziXymTzaTOM_8G'
       },
       commit:true,
       createOrder: (data,actions) => {
@@ -57,6 +56,10 @@ export class PaypalComponent implements AfterViewChecked {
           }
   
         });
+      },
+
+      onError: (err) => {
+        console.log('ERROR IN PAYPAL:',err);
       }
     }
 
@@ -84,7 +87,7 @@ export class PaypalComponent implements AfterViewChecked {
     this.addScript = true;
     return new Promise((resolve,reject) => {
       let script_tag = document.createElement('script');
-      script_tag.src = "https://www.paypal.com/sdk/js?client-id=AUbDVWGPpLKeW9t1DEjnv1rn8FJuzFutXamd9jX5iPFjh9PevctsO44etAeEJSiwQhktCY1ymdlEPP7C"
+      script_tag.src = "https://www.paypal.com/sdk/js?client-id=AVba2GjPpLOlgOhlvLMS_QkprWXngKj8OWezQ_HgyRq9y5UMVZ6Fw2OG1k-tnetFMoziXymTzaTOM_8G"
       script_tag.onload = resolve;
       document.body.appendChild(script_tag);
     })
