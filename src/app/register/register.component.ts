@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
+import {ErrorStateMatcher} from '@angular/material/core';
 
 @Component({
   selector: 'app-register',

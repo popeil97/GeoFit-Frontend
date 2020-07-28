@@ -26,6 +26,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
   @Input() displayUsers:Boolean;
   @Input() userData:any;
   @Input() followedIDs:any;
+  @Input() zoom:Boolean;
 
   private map;
   private coordsRoute;
@@ -84,6 +85,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     var markerBounds = L.latLngBounds([this.markersByUserID[user_id.toString()]['latLng']]);
     var options = {'maxZoom': 8, 'animate': true, 'easeLinearity': 0.1}
     this.map.fitBounds(markerBounds, options);
+
   }
 
   public clearMap(): void {
@@ -147,6 +149,11 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     this.marker_end.bindPopup(this.popupService.makePopup({name:'End',state:'FL'}));
 
+    if(this.zoom)
+    {
+      this.map.setView([45, -100], 3);
+    }
+    
     this.line = L.polyline(temp_coords,{
       color: "Blue",
       weight: 8,

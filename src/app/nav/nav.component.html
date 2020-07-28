@@ -80,7 +80,7 @@
       
     <div class="row" *ngIf="this._authService.token">
       <div class="container">
-          <button (click)="logout()" class="btn btn-primary" style="background-color:#16697A; border-color: #135e6e; height: 32px;">Log Out</button>
+          <button (click)="logout()" class="btn btn-primary" style="background-color:#2C007E; border-color: #2C007E;">Log Out {{_authService.username}}</button>
       </div>
     </div>
    </li>
@@ -174,7 +174,7 @@
       
     <div class="row" *ngIf="this._authService.token">
       <div class="container">
-          <button (click)="logout()" class="btn btn-primary" style="background-color:#16697A; border-color: #135e6e; height: 32px;">Log Out</button>
+          <button (click)="logout()" class="btn btn-primary" style="background-color:#2C007E; border-color: #2C007E;">Log Out {{_authService.username}}</button>
       </div>
     </div>
    </li>
