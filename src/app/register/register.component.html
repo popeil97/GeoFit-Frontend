@@ -1,24 +1,19 @@
 <section class="page-section">
 <div class="container">
-    <h2 class="text-white text-center">Create a New Account</h2>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
         <div class="row">
-        <div class="column-login">
         <div class="form-group">
             <input type="text" formControlName="first_name" placeholder="First Name" class="form-control form-pretty" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" />
             <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
                 <div *ngIf="f.first_name.errors.required">First Name is required</div>
             </div>
         </div>
-        </div>
 
-        <div class="column-login">
         <div class="form-group">
             <input type="text" formControlName="last_name" placeholder="Last Name" class="form-control form-pretty" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" />
             <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
                 <div *ngIf="f.last_name.errors.required">Last Name is required</div>
             </div>
-        </div>
         </div>
         </div>
 

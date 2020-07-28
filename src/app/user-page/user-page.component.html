@@ -1,119 +1,83 @@
 <div class="container">
-  <div class="row profile">
-    <div class="col-md-3">
-      <div class="profile-sidebar position-fixed">
-        <!-- SIDEBAR USERPIC -->
-        <div class="profile-userpic">
-          <img style="max-width:256px;" src="{{userData.profile_url}}" class="img-responsive" alt="">
-        </div>
-        <!-- END SIDEBAR USERPIC -->
-        <!-- SIDEBAR USER TITLE -->
-        <div class="profile-usertitle">
-          <div class="profile-usertitle-name">
-            {{ username }}
-            
+  <div class="row">
+    <div class="column-31" *ngIf="!showEdit">
+        <mat-card class="example-card">
+            <mat-card-header>
+            <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}});
+  background-size: cover;"></div> -->
+              <mat-card-title *ngIf="userData.is_me">About Me</mat-card-title>
+              <mat-card-title *ngIf="!userData.is_me">About {{userData.first_name}}</mat-card-title>
+              <mat-card-subtitle>{{userData.first_name}} {{userData.last_name}}</mat-card-subtitle> <br>
+            </mat-card-header>
+            <mat-card-content>
+             <img style="width:150px;height:150px;" src="{{userData.profile_url}}" class="img-responsive" alt="">
+          <p> <span class="material-icons">location_city </span> {{ userData.location }}</p>
 
-          </div>
-          <div *ngIf="this._authService.token" class="profile-usertitle-job">
-            <!---FOLLOW AND EDIT BUTTONS-->
-            <div *ngIf="!userData.is_me">
-              <app-user-follow [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
-            </div>
-            
-            <button *ngIf="userData.is_me" class="btn btn-primary btn-sm" (click)="toggleEditView()">
-              Edit
-            </button>
-
-          </div>
-        </div>
-
-        <div class="container">
-  <div class="row profile">
-    <div class="col-md-3">
-      <div class="about-sidebar position-fixed" *ngIf="!showEdit">
-        <div class="profile-content" id="viewContent">
-          <h2>City</h2>
-          <p></p>
-
-          <h2>Country</h2>
-          <p>{{ userData.location }}</p>
-
-          <h2>Description</h2>
-          <p>{{ userData.description }}</p>
+          <p><span class="material-icons">description</span> {{ userData.description }}</p>
 
           <div *ngIf="userData.is_me">
-            <h2>Strava Authentication</h2>
+              <b>Strava Authentication</b>
               <p>
               <app-stravauth></app-stravauth>
             </p>
           </div>
-          
-        </div>
-      </div>
-    </div>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-button *ngIf="this._authService.token && userData.is_me" (click)="toggleEditView()">EDIT</button>
+              <button mat-button *ngIf="this._authService.token && !userData.is_me" (click)="toggleEditView()">FOLLOW</button>
+            </mat-card-actions>
+          </mat-card>
 
+  </div>
 
-    </div>
-</div>
-
-        <!-- END SIDEBAR USER TITLE -->
-        <!-- SIDEBAR BUTTONS -->
-
-        <div class="profile-userbuttons" *ngIf="userData">
-          <!---<button class="btn btn-primary btn-sm" (click)="toggleEditView()">
-            Edit
-          </button>---->
-
-        </div>
-
-
-        <!-- END SIDEBAR BUTTONS -->
-        <!-- SIDEBAR MENU -->
-
-        <div class="profile-usermenu sidebar-sticky">
-
-          <ul class="nav flex-column">
-            <li class="active nav-item">
-
-            </li>
-          </ul>
-
-        </div>
-        <!-- END MENU -->
-      </div>
-    </div>
-    <div class="col-md-9">
-      <div class="profile-content" id="formContent" hidden>
-        <!-- <h2>City</h2>
-        <p>{{user_profile.city}}</p>
-
-        <h2>Country</h2>
-        <p>{{user_profile.country}}</p> -->
-
-        <h2>Edit Profile</h2>
-
-        <button class="btn btn-danger" id="cancel">Cancel</button>
-        <button class="btn btn-primary" id="updateBtn">Update</button>
-      </div>
-
-      <div class="profile-content" *ngIf="!showEdit">
-        <!-- <app-user-stats [userID]="userData.user_id"></app-user-stats> -->
-      </div>
-
-      <div class="profile-content">
-        <!----<app-user-stats *ngIf="!showEdit" [userID]="userData.user_id"></app-user-stats>---->
-        <app-profile-form *ngIf="showEdit" [userData]="userData" (formUpdated)="profileUpdated($event)"></app-profile-form>
-      </div>
-
-      <div class="col-md-9" id="feedContent" *ngIf="!showEdit">
+  <div class="column-32" id="feedContent" *ngIf="!showEdit">
         <!---<app-user-stats [userID]="userData.user_id"></app-user-stats>-->
-        <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
-      </div>
+        
+         <mat-card class="example-card">
+            <mat-card-header>
+            <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}});
+  background-size: cover;"></div> -->
+              <mat-card-title *ngIf="userData.is_me">My Stats</mat-card-title>
+              <mat-card-title *ngIf="!userData.is_me">{{userData.first_name}}'s Stats</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
 
-    </div>
+             <app-user-stats [userID]="userData.user_id"></app-user-stats>
+
+            </mat-card-content>
+          </mat-card>
+
+           <br>
+        
+        <mat-card class="example-card">
+          <mat-card-header>
+            <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}});
+  background-size: cover;"></div> -->
+              <mat-card-title *ngIf="userData.is_me">My Feed</mat-card-title>
+              <mat-card-title *ngIf="!userData.is_me">{{userData.first_name}}'s Feed</mat-card-title>
+            </mat-card-header>
+            
+          <div style="max-height: 230px;overflow: auto;">
+            
+            <mat-card-content>
+
+             <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
+
+            </mat-card-content>
+            </div>
+          </mat-card>
+        
+
+     
 
 
   </div>
 
+  </div>
+
+ <div class="profile-content">
+        <!----<app-user-stats *ngIf="!showEdit" [userID]="userData.user_id"></app-user-stats>---->
+        <app-profile-form *ngIf="showEdit" [userData]="userData" (formUpdated)="profileUpdated($event)"></app-profile-form>
+      </div>
 
 </div>

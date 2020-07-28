@@ -18,6 +18,8 @@ export class NavComponent implements OnInit {
               private _userProfileService: UserProfileService) { }
 
   public notifications:any[];
+  public isPurple:Boolean = false;
+
 
   ngOnInit() {
     // copy pasta from stack overflow yahooooooo
@@ -59,6 +61,16 @@ export class NavComponent implements OnInit {
 
   logout() {
     this._authService.logout();
+  }
+
+  purpleTrue(action?:string) {
+    this.isPurple = true;
+   
+  }
+
+  purpleFalse(action?:string) {
+    this.isPurple = false;
+   
   }
 
 }

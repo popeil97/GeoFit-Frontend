@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   submitted = false;
   returnUrl: string;
   errors: any = [];
+  public registerMe:Boolean = false;
 
   @Output() loggedInAsUsernameEvent = new EventEmitter();
 
@@ -71,5 +72,10 @@ export class LoginComponent implements OnInit {
           this.errors = err['error']
         }
       );
+  }
+
+  toggleRegister(action?:string) {
+    this.registerMe = !this.registerMe;
+   
   }
 }
