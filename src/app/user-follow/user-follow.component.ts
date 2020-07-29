@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewContainerRef, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { UsersService } from '../users.service'
 
 @Component({
@@ -13,10 +13,17 @@ export class UserFollowComponent implements OnInit {
   // TRUE if we follow them, FALSE if we do not follow them
   @Input() follows: boolean;
 
-  constructor(private _userService:UsersService) {
+  @Output() followStatusChanged: EventEmitter<void> = new EventEmitter();
+
+  constructor(private _userService:UsersService,
+              public cdRef: ChangeDetectorRef) {
   }
 
   ngOnInit() {
+  }
+
+  ngAfterViewInit() {
+    this.cdRef.detectChanges();
   }
 
   changeLikeStatus(){
@@ -32,6 +39,7 @@ export class UserFollowComponent implements OnInit {
     }
 
     this.follows = !this.follows;
+    this.followStatusChanged.emit();
   }
 
 }

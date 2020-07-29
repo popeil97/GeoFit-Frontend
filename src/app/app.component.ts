@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewContainerRef} from '@angular/core';
 import {AuthService} from './auth.service';
 import {throwError} from 'rxjs';
  
@@ -8,6 +8,6 @@ import {throwError} from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
- 
+  constructor(public viewRef: ViewContainerRef) { }
  
 }

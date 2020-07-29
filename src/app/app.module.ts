@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import * as bootstrap from 'bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -59,6 +59,9 @@ import { SignupComponent } from './signup/signup.component';
 import { SignupDialogContent } from './signup/signup.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
 
+import { createCustomElement } from '@angular/elements';
+import { PopupComponent } from './popup/popup.component';
+
 
 @NgModule({
   declarations: [
@@ -98,6 +101,7 @@ import { UserStatsComponent } from './user-stats/user-stats.component';
     SignupComponent,
     SignupDialogContent,
     UserStatsComponent,
+    PopupComponent,
   ],
   imports: [
     BrowserModule,
@@ -107,6 +111,9 @@ import { UserStatsComponent } from './user-stats/user-stats.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+  ],
+  exports: [
+    PopupComponent,
   ],
   providers: [
     PopUpService,
@@ -118,6 +125,14 @@ import { UserStatsComponent } from './user-stats/user-stats.component';
     StoryService,
   ],
   bootstrap: [AppComponent],
-  entryComponents:[SignupDialogContent],
+  entryComponents:[SignupDialogContent, PopupComponent],
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(private injector: Injector) {
+    //We do this to create Angular components in the HTML domain for 
+    //leaflet to bind to pin popups
+    const PopupElement = createCustomElement(PopupComponent, {injector});
+    // Register the custom element with the browser.
+    customElements.define('popup-element', PopupElement);
+  }
+}
