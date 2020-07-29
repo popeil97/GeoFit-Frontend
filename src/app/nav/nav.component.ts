@@ -13,13 +13,15 @@ declare var $: any
 })
 export class NavComponent implements OnInit {
 
+
+
   constructor(private _notificationService:NotificationsService,
               public _authService: AuthService,
               private _userProfileService: UserProfileService) { }
 
   public notifications:any[];
   public isPurple:Boolean = false;
-
+  public path:any;
 
   ngOnInit() {
     // copy pasta from stack overflow yahooooooo
@@ -41,7 +43,16 @@ export class NavComponent implements OnInit {
     if (localStorage.getItem('loggedInUsername')){
       this._authService.username = localStorage.getItem('loggedInUsername');
     }
+    this.path=window.location.pathname;
 
+    if(this.path == "/")
+    {
+      this.isPurple = false;
+    }
+    else
+    {
+      this.isPurple = true;
+    }
   }
 
   goToMyProfile(){
@@ -71,6 +82,10 @@ export class NavComponent implements OnInit {
   purpleFalse(action?:string) {
     this.isPurple = false;
    
+  }
+
+  getPath(action?:string){
+    this.path = window.location.pathname;
   }
 
 }

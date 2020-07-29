@@ -1117,6 +1117,11 @@ pre code {
     width: 25%;
   }
 
+  .column-map{
+    float: center;
+    width: 49%;
+  }
+
   .column-login{
     width: 30%;
     margin: 20px;
@@ -1127,6 +1132,20 @@ pre code {
   }
   .column-login-ph{
     height: 120px;
+  }
+
+  .column-features{
+    width: 19%;
+    margin: 2px;
+  }
+  .column-contact{
+    width: 49%;
+    margin: 2px;
+  }
+
+  .column-team{
+    width: 24%;
+    margin: 2px;
   }
 
   .col-md-6 {
@@ -6115,7 +6134,11 @@ a.close.disabled {
 }
 
 .bg-primary {
-  background-color: #403D58 !important;
+  background-color: #EFFAF7 !important;
+}
+
+.bg-primary2 {
+  background-color: #F6BF78 !important;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
@@ -6185,7 +6208,7 @@ button.bg-light:focus {
 }
 
 .bg-dark {
-  background-color: #16697A !important;
+  background-color: #2C007E !important;
 }
 
 a.bg-dark:hover, a.bg-dark:focus,
@@ -10125,18 +10148,14 @@ hr.light {
 }
 
 header.masthead {
-  padding-top: 10rem;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
-  background-size: cover;
+  
 }
 header.masthead h1 {
   font-size: 2.25rem;
 }
 @media (min-width: 992px) {
   header.masthead {
-    height: 100vh;
+    height: 90vh;
     min-height: 40rem;
     padding-top: 4.5rem;
     padding-bottom: 0;
@@ -10228,6 +10247,14 @@ header.masthead h1 {
   transform: translate(-50%, -50%);
   text-align: center;
 }
+
+.centered1 {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
 
 .centered img {
   width: 150px;
