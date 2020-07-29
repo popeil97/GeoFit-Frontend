@@ -36,7 +36,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
   private coordsRoute;
   private markersByUserID = {};
   private markerClusters:any;
-  private popUpsByMarkers = {};
   private layerIDsToUserIndices = {};
   private myMarker: any;
   private marker_start:any;
@@ -184,20 +183,6 @@ public clearUserPins(){
       }
     }
   }
- 
-  // public appendPopupComponentRef(user_id, el: HTMLElement, viewRef: ViewContainerRef): void {
-  //   const factory: ComponentFactory<UserFollowComponent> = this.componentFactoryResolver.resolveComponentFactory(UserFollowComponent);
-  //   viewRef.clear();
-  //   const componentRef = this.viewRef.createComponent(factory);
-
-  //   //Add user_id to follow button
-  //   componentRef.userID = user_id;
-  //   componentRef.follows = false;
-  //   this.changeDetector.detectChanges();
-  //   this.renderer.appendChild(el, componentRef.location.nativeElement);
-  //   console.log(componentRef.location.nativeElement);
-  
-  // }
 
   public createUserPins(heatMapOn){
     //Clear all user pins
@@ -275,22 +260,6 @@ public clearUserPins(){
       //Get user ID of this race stat
       let elementID = this.userData[i].user_id
 
-      //Create template popup text
-      var popupText = "<center><b>" +
-                      this.userData[i].display_name +
-                      "</b></center>" +
-                      "<center>" +
-                      user_ran_miles +
-                      " " +
-                      'miles' +
-                      "</center>";
-
-      //Store popup info to retrieve later when marker is clicked
-      this.popUpsByMarkers[locMarker['_leaflet_id'].toString()] = popupText;
-      
-      //Bind popup text to this marker and add to cluster layer
-      locMarker.bindPopup(popupText, {maxWidth: 200}).openPopup();
-
       this.markerClusters.addLayer(locMarker);
 
       //Update mapping of leaflet marker IDs to index in userData
@@ -315,7 +284,8 @@ public clearUserPins(){
     //Add pin clusters to map
     this.map.addLayer(this.markerClusters);
 
-    //Slightly hacky way of opening popup of *our* marker before binding
+    //Bind everybody's Popupcomponent to their Popup
+    //If popup is ours, we open it up by default
     let thisComponent = this;
     this.markerClusters.eachLayer(function(layer) {
       let tempUserDataIndex = thisComponent.layerIDsToUserIndices[layer._leaflet_id.toString()];
@@ -335,6 +305,19 @@ public clearUserPins(){
       }
     })
 
+    //Handle marker onclick events (open popups)
+    this.markerClusters.on('click', function(ev) {
+      if (!ev.layer.getPopup()._isOpen){
+        //Open popup if it is already binded
+        ev.layer.getPopup().openPopup();
+      }
+
+      else {
+        //If popup open before click, close it
+        ev.layer.getPopup().closePopup();
+      }
+
+    });
 
 
     heatArray = heatArray.map(function (p) { return [p[0], p[1]]; });
@@ -357,41 +340,8 @@ public clearUserPins(){
       catch(ex){}
       console.log("CREATING NON HEAT MAP PINS")
     }
-    
-    //To work with markercluster, we store popUpText in dict and display onclick (see below)
-      
-    //POPUPS (unfortunately ruined by markercluster, but fixed here)
-    //var popUpsByMarkers = this.popUpsByMarkers;
-    this.markerClusters.on('click', function(ev) {
-      // Current marker is ev.layer
-      //if (!ev.layer.getPopup()){
-        //Get popup content if it isn't binded
-        //let popUpText = popUpsByMarkers[(ev.layer['_leaflet_id']+1).toString()]
-
-        //Display
-        //ev.layer.bindPopup(popUpText, {maxWidth: 200}).openPopup();
-      //}
-      console.log(ev.layer);
-      if (!ev.layer.getPopup()._isOpen){
-        //Open popup if it is already binded
-        ev.layer.getPopup().openPopup();
-      }
-
-      else {
-        //If popup open before click, close it
-        ev.layer.getPopup().closePopup();
-      }
-
-    });
 
   }
-
-
-
-  private goToUserProfile(username:string){
-    this._profileService.goToUserProfile(username);
-  }
-
 
   private initMap(): void {
     this.map = L.map('map', {

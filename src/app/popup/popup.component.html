@@ -1,15 +1,15 @@
-<div *ngIf="this.userData">
-  <p>
-    <strong>
+<div *ngIf="this.userData" style="margin:auto;">
+  <p style="margin:0 auto;">
+    <b>
       <app-user-profile-nav [username]=userData.display_name></app-user-profile-nav>
-    </strong>
+    </b>
   </p>
 
-  <p>
+  <p style="margin:0 auto;text-align: center;">
     {{ this.userData.total_distance }} {{ this.userData.distance_type }}
   </p>
     
-  <p *ngIf="!this.userData.isMe">
+  <p *ngIf="!this.userData.isMe" style="margin:0 auto;text-align: center;">
     <app-user-follow [userID]="this.userData.user_id" [follows]="this.userData.follows" (followStatusChanged)="followStatusChanged($event)"></app-user-follow>
   </p>
 </div>
