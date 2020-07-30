@@ -4,22 +4,23 @@
 
      <mat-card class="example-card" >
        <mat-card-header>
-         <i class="material-icons" style="color:#000000;" type="button" routerLink='/races'>keyboard_backspace</i>
+         <i class="material-icons" style="color:#2C00A5;" type="button" routerLink='/races'>keyboard_backspace</i>
          
             <div *ngIf="aboutData.race_type == 1">
                <mat-card-title>{{aboutData.name}}
-               <i class="material-icons" style="color:#16697a;">directions_run</i>
+               <i class="material-icons" style="color:#BC164D;">directions_run</i>
+               <app-signup [price]="raceSettings.price" style="color:#2C00A5;" [race_id]="raceID" (signupCallback)="joinRace($event)" [hasPaid]="hasPaid" (click)="trySignup()"></app-signup>
              </mat-card-title>
 
              </div>
              <div *ngIf="aboutData.race_type == 2">
                <mat-card-title>{{aboutData.name}}
-                   <i class="material-icons" style="color:#16697a;">directions_bike</i>
+                   <i class="material-icons" style="color:#BC164D;">directions_bike</i>
                  </mat-card-title>
            </div>
            <div *ngIf="aboutData.race_type == 3">
                <mat-card-title>{{aboutData.name}}
-               <i class="material-icons" style="color:#16697a;">directions_run</i><i class="material-icons" style="color:#16697a;">directions_bike</i>
+               <i class="material-icons" style="color:#BC164D;">directions_run</i><i class="material-icons" style="color:#BC164D;">directions_bike</i>
              </mat-card-title>
            </div>
 
@@ -27,13 +28,13 @@
          <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
        </mat-card-header>
        <mat-card-content>
-         <i class="material-icons" style="color:#16697a;">map</i><span id="txt1">From <b>{{ aboutData.start_loc }}</b> to <b>{{aboutData.end_loc}}</b> <i style="color:#16697a;">   {{ aboutData.distance }} {{ aboutData.distance_type }}</i></span>
-        <i class="material-icons" style="color:#16697a;">date_range</i><span id="txt1">     From <b>{{ aboutData.start_date }}</b> to <b>{{ aboutData.end_date }}</b></span> 
+         <i class="material-icons" style="color:#BC164D">map</i><span id="txt1">From <b>{{ aboutData.start_loc }}</b> to <b>{{aboutData.end_loc}}</b> <i style="color:#BC164D;">   {{ aboutData.distance }} {{ aboutData.distance_type }}</i></span>
+        <i class="material-icons" style="color:#BC164D;">date_range</i><span id="txt1">     From <b>{{ aboutData.start_date }}</b> to <b>{{ aboutData.end_date }}</b></span> 
 
         <div class="row">
           <div class="column-map">
 
-            <mat-card class="example-card" >
+            <mat-card class="example-card" style="border-top-right-radius:0px;border-bottom-right-radius:0px;" >
        <mat-card-header>
          <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
        </mat-card-header>
@@ -53,9 +54,10 @@
          <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
        </mat-card-header>
        <mat-card-content>
-        <div style="max-height: 480px;overflow: auto;">
+        <div style="max-height: 480px;overflow: auto; border-top-left-radius:0px;border-bottom-left-radius:0px;">
+         <h4 style="text-align:center;"><b>Live Leaderboard</b></h4>
          <app-leaderboard [leaderboard]="leaderboard"></app-leaderboard>
-         <br><br> <br><br> <br><br><br><br> <br><br> <br><br><br><br> <br><br> <br><br><br><br> <br><br> <br><br>
+         
        </div>
        </mat-card-content>
      </mat-card>
@@ -68,7 +70,7 @@
         
        </mat-card-content>
        <mat-card-actions>
-         <button mat-button (click)="joinRace()" *ngIf="this._authService.token">JOIN</button>
+    <!--     <button mat-button (click)="joinRace()" *ngIf="this._authService.token">JOIN</button> -->
          <button mat-button (click)="viewRace()">VIEW MAP</button>
        </mat-card-actions>
      </mat-card>
@@ -88,16 +90,16 @@
    <div class="container" *ngIf="!showForm">
        <mat-card class="example-card " >
      <mat-card-header>
-       <mat-card-title>Race Logistics <i class="material-icons" style="color:#16697a;">info</i></mat-card-title>
+       <mat-card-title>Race Logistics <i class="material-icons" style="color:#BC164D;">info</i></mat-card-title>
        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
      </mat-card-header>
      <mat-card-content>
        
        <p>
-         <i class="material-icons" style="color:#16697a;">person</i><span id="txt1">{{aboutData.owner.first_name}} {{aboutData.owner.last_name}} </span>
+         <i class="material-icons" style="color:#BC164D;">person</i><span id="txt1">{{aboutData.owner.first_name}} {{aboutData.owner.last_name}} </span>
      </p>
        <p style="white-space: pre-line;">
-          <i class="material-icons" style="color:#16697a;">description</i><span id="txt1">{{aboutData.description}} </span>
+          <i class="material-icons" style="color:#BC164D;">description</i><span id="txt1">{{aboutData.description}} </span>
       </p>
        <p *ngIf="raceSettings.isManualEntry">
 

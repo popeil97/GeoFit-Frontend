@@ -154,8 +154,16 @@ export class MapComponent implements AfterViewInit,OnChanges {
       this.map.setView([45, -100], 3);
     }
     
+    if(this.zoom)
+    {
+      var color = "#BC164D";
+    }
+    else
+    {
+      var color = "blue";
+    }
     this.line = L.polyline(temp_coords,{
-      color: "Blue",
+      color: color,
       weight: 8,
       opacity: 0.65
     }).addTo(this.map);
