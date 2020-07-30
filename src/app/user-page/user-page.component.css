@@ -17,11 +17,26 @@ html, body {
     color: #fed136;
     font-family: 'Kaushan Script', 'Helvetica Neue', Helvetica, Arial, cursive;
   }
-
+.mt-4,
+.my-4 {
+  margin-top: 1.5rem !important;
+}
   .column-31{
     width: 18%;
     margin: 5px;
   }
+  .centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+hr.divider {
+  max-width: 3.25rem;
+  border-width: 0.2rem;
+  border-color: #f4623a;
+}
   .column-32{
     width: 78%;
     margin: 5px;
@@ -30,6 +45,20 @@ html, body {
     width: 39%;
     margin: 5px;
   }
+  .column-43{
+    width: 28%;
+    margin: 5px;
+  }
+  .column-44{
+    width: 40%;
+    margin: 5px;
+  }
+
+  .roboto-purple
+{
+  font-family: "Roboto";
+  color:#2C007E;
+}
 
 .row {
   display: flex;

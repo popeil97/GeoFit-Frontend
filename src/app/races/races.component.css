@@ -2,10 +2,31 @@ table {
     width: 100%;
   }
   
+.nav-link.active{
+background-color: #2C00A5;
+}
   tr.example-detail-row {
     height: 0;
   }
   
+  
+  .roboto-white
+{
+  font-family: "Roboto";
+  color:#effaf7;
+}
+
+.roboto-purple
+{
+  font-family: "Roboto";
+  color:#2C007E;
+}
+
+.roboto-black
+{
+  font-family: "Roboto";
+}
+
   tr.example-element-row:not(.example-expanded-row):hover {
     background: whitesmoke;
   }

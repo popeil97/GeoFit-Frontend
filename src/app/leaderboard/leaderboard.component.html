@@ -31,7 +31,7 @@
   <mat-accordion>
     <div *ngFor="let group of leaderboard; let i=index">
 
-      <div *ngIf="i%2==0">
+      <div *ngIf="i%2==0 && !group.isTeam">
       <mat-expansion-panel [disabled]="!group.isTeam" style="background-color:#EFFAF7;">
         <mat-expansion-panel-header>
           <div class="column-lb-small">
@@ -71,7 +71,7 @@
       </mat-expansion-panel>
     </div>
 
-    <div *ngIf="i%2==1">
+    <div *ngIf="i%2==1 && !group.isTeam">
       <mat-expansion-panel [disabled]="!group.isTeam">
         <mat-expansion-panel-header>
           <div class="column-lb-small">
@@ -112,7 +112,7 @@
     </div>
 
     </div>
-  <mat-accordion>
+  </mat-accordion>
 
 
 

@@ -69,6 +69,9 @@ export class UserPageComponent implements OnInit {
     });
   }
 
+  logout() {
+    this._authService.logout();
+  }
   toggleEditView(): void{
     this.showEdit = !this.showEdit;
   }

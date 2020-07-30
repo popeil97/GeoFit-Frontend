@@ -15,6 +15,8 @@
             <ng-template mat-tab-label>
               <mat-icon>cloud_download</mat-icon>
             </ng-template>
+            <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
             <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu>
           </mat-tab>
           <mat-tab *ngIf="raceSettings.isManualEntry">
@@ -35,20 +37,12 @@
           <mat-tab label="Distance">
             <app-leaderboard [leaderboard]="leaderboard"></app-leaderboard>
           </mat-tab>
-          <mat-tab label="Pace">
+        <!--  <mat-tab label="Pace">
 
-          </mat-tab>
+          </mat-tab> -->
 
           <mat-tab label="Teams">
-            <button class="btn btn-primary" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">+ Team</button>
-            <button class="btn btn-danger" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm('clear')" *ngIf="showTeamForm">Cancel</button>
-            <div *ngIf="!showTeamForm">   
-              <app-team-list [teams]="teams" [userStat]="userStat" (callback)="getRaceState($event)" (edit)="editTeamForm($event)"></app-team-list>
-            </div>
-
-            <div *ngIf="showTeamForm">
-              <app-team-form (callback)="getRaceState($event)" [teamEditForm]="teamEditForm"></app-team-form>
-            </div>
+            
           </mat-tab>
         </mat-tab-group>
 
@@ -68,6 +62,15 @@
           <mat-icon>settings</mat-icon>
         </ng-template>
         <app-race-settings [userSettings]="userRaceSettings"></app-race-settings>
+        <button class="btn btn-primary" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">+ Team</button>
+            <button class="btn btn-danger" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm('clear')" *ngIf="showTeamForm">Cancel</button>
+            <div *ngIf="!showTeamForm">   
+              <app-team-list [teams]="teams" [userStat]="userStat" (callback)="getRaceState($event)" (edit)="editTeamForm($event)"></app-team-list>
+            </div>
+
+            <div *ngIf="showTeamForm">
+              <app-team-form (callback)="getRaceState($event)" [teamEditForm]="teamEditForm"></app-team-form>
+            </div>
       </mat-tab>
     </mat-tab-group>
   </mat-sidenav>
@@ -100,7 +103,7 @@
 <!----<a class="btn btn-primary btn-customized inviteToggle" (click)="goToTeamForm()">
   <span style="color:white">Create Team</span>
 </a>--->
-<app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress>
+
   </mat-sidenav-content>
 </mat-sidenav-container>
 <!-- Wrapper -->

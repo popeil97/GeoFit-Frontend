@@ -33,8 +33,8 @@ export class UserStatsComponent implements OnInit {
     for (i = 0; i < mycolors.length; i++)
     {
       if(mycolors[i] == 1){
-        colorArray[i] = 'rgba(22, 105, 122,0.2)';
-        colorBorder[i] = 'rgba(22, 105, 122,1)';
+        colorArray[i] = 'rgba(44, 0, 165,0.2)';
+        colorBorder[i] = 'rgba(44, 0, 165,1)';
       } //run
       else{//(mycolors[i] == 2){
         colorArray[i] = 'rgba(54, 162, 235,0.2)';

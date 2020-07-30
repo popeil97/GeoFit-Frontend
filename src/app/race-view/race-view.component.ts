@@ -82,7 +82,8 @@ export class RaceViewComponent implements OnInit {
   }
 
   configureLeaderboard(ranked:any[],unranked:any[]) {
-
+    
+    console.log("RANKE BOARD:",unranked.concat(ranked));
     return unranked.concat(ranked)
 
 
