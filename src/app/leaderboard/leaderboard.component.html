@@ -30,10 +30,26 @@
 
   <mat-accordion>
     <div *ngFor="let group of leaderboard; let i=index">
-      <mat-expansion-panel [disabled]="!group.isTeam">
+
+      <div *ngIf="i%2==0">
+      <mat-expansion-panel [disabled]="!group.isTeam" style="background-color:#EFFAF7;">
         <mat-expansion-panel-header>
           <div class="column-lb-small">
-            <p><b>{{i+1}}</b></p>
+            <div *ngIf="i<3">
+              <div *ngIf="i==0">
+                 <img src="https://image.flaticon.com/icons/svg/2997/2997149.svg" width="25" height="25">
+              </div>
+              <div *ngIf="i==1">
+                 <img src="https://image.flaticon.com/icons/svg/2996/2996977.svg" width="25" height="25">
+              </div>
+              <div *ngIf="i==2">
+                 <img src="https://image.flaticon.com/icons/svg/2997/2997180.svg" width="25" height="25">
+              </div>
+             
+            </div>
+            <div *ngIf="i>2">
+              <p><b>{{i+1}}</b></p>
+            </div>          
           </div>
           <div class="column-lb-small">
             <img src="{{group.profile_url}}" width="30" height="30">
@@ -42,7 +58,7 @@
             <p>{{group.display_name}}</p>
           </div>
           <div class="column-lb2">
-            <p style="display:inline;color:#16697a;">{{group.total_distance}}</p><p style="font-size: 8px;display:inline; color:#16697a;">{{group.distance_type}}</p>
+            <p style="display:inline;color:#2C007E;">{{group.total_distance}}</p><p style="font-size: 8px;display:inline; color:#16697a;">{{group.distance_type}}</p>
           </div>
        </mat-expansion-panel-header>
 
@@ -53,11 +69,50 @@
       </mat-card>
 
       </mat-expansion-panel>
+    </div>
 
+    <div *ngIf="i%2==1">
+      <mat-expansion-panel [disabled]="!group.isTeam">
+        <mat-expansion-panel-header>
+          <div class="column-lb-small">
+            <div *ngIf="i<3">
+              <div *ngIf="i==0">
+                 <img src="https://image.flaticon.com/icons/svg/2997/2997149.svg" width="25" height="25">
+              </div>
+              <div *ngIf="i==1">
+                 <img src="https://image.flaticon.com/icons/svg/2996/2996977.svg" width="25" height="25">
+              </div>
+              <div *ngIf="i==2">
+                 <img src="https://image.flaticon.com/icons/svg/2997/2997180.svg" width="25" height="25">
+              </div>
+             
+            </div>
+            <div *ngIf="i>2">
+              <p><b>{{i+1}}</b></p>
+            </div>          
+          </div>
+          <div class="column-lb-small">
+            <img src="{{group.profile_url}}" width="30" height="30">
+          </div>
+          <div class="column-lb1">
+            <p>{{group.display_name}}</p>
+          </div>
+          <div class="column-lb2">
+            <p style="display:inline;color:#2C007E;">{{group.total_distance}}</p><p style="font-size: 8px;display:inline; color:#16697a;">{{group.distance_type}}</p>
+          </div>
+       </mat-expansion-panel-header>
 
+       <mat-card *ngFor="let member of group.child_user_stats">
+        <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + member.profile_url + ')'}" style="position: relative; float:left;"></div>
+        <div style="padding-left: 50px;">{{member.display_name}}</div>
+        <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div>
+      </mat-card>
+
+      </mat-expansion-panel>
+    </div>
 
     </div>
-  <mat-accordion>
+  </mat-accordion>
 
 
 

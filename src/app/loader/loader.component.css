@@ -3,8 +3,8 @@
 
     position: fixed;
       border: 16px solid #cccccc; /* Light grey */
-      border-top: 16px solid #f35b3f; /* Blue */
-        border-bottom: 16px solid #f35b3f;
+      border-top: 16px solid #2C007E; /* Blue */
+        border-bottom: 16px solid #2C007E;
       border-radius: 50%;
       width: 100px;
       height: 100px;

@@ -1,8 +1,10 @@
-import { AfterViewInit, Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef, ComponentFactory, ComponentFactoryResolver, RendererFactory2, ViewContainerRef, ApplicationRef } from '@angular/core';
+import { NgElement, WithProperties } from '@angular/elements';
 import { UserProfileService } from '../userprofile.service';
 //import * as L from 'leaflet';
 //import * as markercluster from 'leaflet.markercluster';
 import { PopUpService } from '../pop-up.service';
+import { UserFollowComponent } from '../user-follow/user-follow.component';
 
 import 'leaflet';
 import 'leaflet.markercluster';
@@ -14,6 +16,8 @@ var heat = window['heat']
 import * as _ from 'lodash';
 import * as turf from '@turf/turf';
 import { ListKeyManager } from '@angular/cdk/a11y';
+import { AppComponent } from '../app.component';
+import { PopupComponent } from '../popup/popup.component';
 
 @Component({
   selector: 'app-map',
@@ -32,27 +36,27 @@ export class MapComponent implements AfterViewInit,OnChanges {
   private coordsRoute;
   private markersByUserID = {};
   private markerClusters:any;
-  private popUpsByMarkers = {};
+  private layerIDsToUserIndices = {};
+  private myMarker: any;
   private marker_start:any;
   private marker_end:any;
   private line:any;
+  private myUserID:number;
 
-  constructor(private popupService:PopUpService, private _profileService:UserProfileService) {
+  constructor(private popupService:PopUpService, 
+              private _profileService:UserProfileService,) {
     Window["mapComponent"] = this;
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('changes:',changes);
-
     for(const propName in changes) {
       if(changes.hasOwnProperty(propName)) {
-
         switch(propName) {
           case 'coordinates':
-            console.log('COORDS CHANGED');
             if(changes.coordinates.currentValue != undefined) {
               this.applyCoordinates();
               this.coordsRoute = turf.lineString(this.coordinates.coords, { name: "route" });
+              
               if(this.displayUsers) {
                 this.createUserPins(false);
               }
@@ -70,20 +74,15 @@ export class MapComponent implements AfterViewInit,OnChanges {
     if(this.map == undefined) {
       this.initMap();
     }
-
   }
 
-  public panToUserMarker(user_id){
-    console.log("Clicked user id: ", user_id);
-
-    this.markersByUserID[user_id.toString()]['locMarker'].openPopup();
-
+  public panToUserMarker(user_id, showPopUp=true){
     //Do this to simply pan to user pin
     //this.map.panTo(this.markersByUserID[user_id.toString()]['latLng']);
 
     //Do this to pan *and* zoom
     var markerBounds = L.latLngBounds([this.markersByUserID[user_id.toString()]['latLng']]);
-    var options = {'maxZoom': 8, 'animate': true, 'easeLinearity': 0.1}
+    var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
     this.map.fitBounds(markerBounds, options);
 
   }
@@ -98,9 +97,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
   private applyCoordinates():void {
 
-    console.log('GOT COORDINATES:',this.coordinates.coords);
-    console.log('MAP:',this.map);
-
     if(!this.map) {
       this.initMap()
     }
@@ -114,8 +110,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
       temp_coords.push([coord[1], coord[0]]);
     });
 
-    // let start_coord = this.coordinates.coords[0];
-    // let end_coord = this.coordinates.coords[this.coordinates.coords.length-1];
     let start_coord = temp_coords[0];
     let end_coord = temp_coords[temp_coords.length-1];
 
@@ -154,8 +148,16 @@ export class MapComponent implements AfterViewInit,OnChanges {
       this.map.setView([45, -100], 3);
     }
     
+    if(this.zoom)
+    {
+      var color = "#BC164D";
+    }
+    else
+    {
+      var color = "blue";
+    }
     this.line = L.polyline(temp_coords,{
-      color: "Blue",
+      color: color,
       weight: 8,
       opacity: 0.65
     }).addTo(this.map);
@@ -164,7 +166,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
 public clearUserPins(){
     //Remove all current user pins
     //Currently no working method to remove pins by ID
-    //but this will be resolved
+    //but this will be resolved perhaps with .forEach(layer)
     if (this.markerClusters){
       this.map.removeLayer(this.markerClusters);
     }
@@ -189,9 +191,6 @@ public clearUserPins(){
       }
     }
   }
-
- 
-
 
   public createUserPins(heatMapOn){
     //Clear all user pins
@@ -237,10 +236,6 @@ public clearUserPins(){
         }
     });
 
-    
-
-    console.log("This.markerClusters before adding all new pins ", this.markerClusters);
-
     var heatArray = new Array(this.userData.length);
 
     for (var i = 0; i < this.userData.length; i++){
@@ -269,24 +264,15 @@ public clearUserPins(){
           return L.marker(latlng, { icon: userIcon });
         }
       })
-        //.addTo(this.map)
-
-      this.markerClusters.addLayer(locMarker);
-
-      //Create template popup text
-      var popupText = "<center><b>" +
-                      this.userData[i].display_name +
-                      "</b></center>" +
-                      "<center>" +
-                      user_ran_miles +
-                      " " +
-                      'miles' +
-                      "</center>";
-
-      this.popUpsByMarkers[locMarker['_leaflet_id'].toString()] = popupText;
 
       //Get user ID of this race stat
       let elementID = this.userData[i].user_id
+
+      this.markerClusters.addLayer(locMarker);
+
+      //Update mapping of leaflet marker IDs to index in userData
+      let user_leaflet_id = Object.keys(locMarker._layers)[0].toString()
+      this.layerIDsToUserIndices[user_leaflet_id] = i;
 
       //Retain markers in dict so we can pan to it upon select
       this.markersByUserID[elementID] = {
@@ -296,13 +282,51 @@ public clearUserPins(){
 
       //If this pin is current user, pan and zoom to it
       if (this.userData[i].isMe){
+        this.myMarker = this.markersByUserID[elementID]['locMarker'];
         this.panToUserMarker(elementID);
+        this.myUserID = elementID;
       }
 
     }
 
     //Add pin clusters to map
     this.map.addLayer(this.markerClusters);
+
+    //Bind everybody's Popupcomponent to their Popup
+    //If popup is ours, we open it up by default
+    let thisComponent = this;
+    this.markerClusters.eachLayer(function(layer) {
+      let tempUserDataIndex = thisComponent.layerIDsToUserIndices[layer._leaflet_id.toString()];
+      let tempUserData = thisComponent.userData[tempUserDataIndex];
+
+      layer.bindPopup( layer => { const popupEl: NgElement & WithProperties<PopupComponent> = document.createElement('popup-element') as any;
+                                      popupEl.userData = tempUserData;
+                                      document.body.appendChild(popupEl);
+                                      return popupEl}, {
+                                        'autoClose': false,
+                                      })
+
+      if (layer._leaflet_id == Object.keys(thisComponent.myMarker._layers)[0]){
+        thisComponent.markerClusters.zoomToShowLayer(layer, function() {
+          layer.openPopup();
+        });
+      }
+    })
+
+    //Handle marker onclick events (open popups)
+    this.markerClusters.on('click', function(ev) {
+      if (!ev.layer.getPopup()._isOpen){
+        //Open popup if it is already binded
+        ev.layer.getPopup().openPopup();
+      }
+
+      else {
+        //If popup open before click, close it
+        ev.layer.getPopup().closePopup();
+      }
+
+    });
+
 
     heatArray = heatArray.map(function (p) { return [p[0], p[1]]; });
 
@@ -324,52 +348,20 @@ public clearUserPins(){
       catch(ex){}
       console.log("CREATING NON HEAT MAP PINS")
     }
-    
-    //To work with markercluster, we store popUpText in dict and display onclick (see below)
-      
-    //POPUPS (unfortunately ruined by markercluster, but fixed here)
-    var popUpsByMarkers = this.popUpsByMarkers;
-    this.markerClusters.on('click', function(ev) {
-      // Current marker is ev.layer
-
-      if (!ev.layer.getPopup()){
-        //Get popup content if it isn't binded
-        let popUpText = popUpsByMarkers[(ev.layer['_leaflet_id']+1).toString()]
-        //Display
-        ev.layer.bindPopup(popUpText, {maxWidth: 200}).openPopup();
-      }
-      else if (!ev.layer.getPopup()._isOpen){
-        //Open popup if it is already binded
-        ev.layer.getPopup().openPopup();
-      }
-      else {
-        //If popup open before click, close it
-        ev.layer.getPopup().closePopup();
-      }
-
-    });
 
   }
-
-
-
-  private goToUserProfile(username:string){
-    this._profileService.goToUserProfile(username);
-  }
-
 
   private initMap(): void {
-    this.map = L.map('map', {
-      //center: [ 39.8282, -98.5795 ],
-      //zoom: 3
-    });
+    this.map = L.map('map', { zoomControl: false });
 
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    const tiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
     tiles.addTo(this.map);
+
+    new L.Control.Zoom({ position: "topright" }).addTo(this.map);
 
     //An extract of address points from the LINZ bulk extract: http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde
 //Should be this data set: http://data.linz.govt.nz/#/layer/779-nz-street-address-electoral/

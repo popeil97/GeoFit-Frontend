@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injector } from '@angular/core';
 import * as bootstrap from 'bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -60,6 +60,11 @@ import { SignupDialogContent } from './signup/signup.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
 import { SwagComponent, SwagDialogContent } from './swag/swag.component';
 
+import { createCustomElement } from '@angular/elements';
+import { PopupComponent } from './popup/popup.component';
+import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
+import { ShippingAddressFormComponent } from './shipping-address-form/shipping-address-form.component';
+
 
 @NgModule({
   declarations: [
@@ -101,6 +106,9 @@ import { SwagComponent, SwagDialogContent } from './swag/swag.component';
     UserStatsComponent,
     SwagComponent,
     SwagDialogContent,
+    PopupComponent,
+    ShippingAddressComponent,
+    ShippingAddressFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -110,6 +118,9 @@ import { SwagComponent, SwagDialogContent } from './swag/swag.component';
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+  ],
+  exports: [
+    PopupComponent,
   ],
   providers: [
     PopUpService,
@@ -121,6 +132,14 @@ import { SwagComponent, SwagDialogContent } from './swag/swag.component';
     StoryService,
   ],
   bootstrap: [AppComponent],
-  entryComponents:[SignupDialogContent,SwagDialogContent],
+  entryComponents:[SignupDialogContent,PopupComponent,SwagDialogContent],
 })
-export class AppModule { }
+export class AppModule { 
+  constructor(private injector: Injector) {
+    //We do this to create Angular components in the HTML domain for 
+    //leaflet to bind to pin popups
+    const PopupElement = createCustomElement(PopupComponent, {injector});
+    // Register the custom element with the browser.
+    customElements.define('popup-element', PopupElement);
+  }
+}

@@ -1,7 +1,35 @@
+<!--<div class="container" *ngIf="!this._authService.token">
+  <div class="row">
+    <div class="column-43">
+    </div>
+
+    <div class="column-44">
+      <div class="centered">
+      <mat-card class="example-card roboto-purple rounded-card">
+                <mat-card-header> 
+                    
+                  <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+         <!--       </mat-card-header>
+                <mat-card-content>
+                    <h3 class="text-uppercase roboto-purple"><b>Log in to view profiles</b></h3>
+                        <hr class="divider my-4" />
+                    
+                  <app-login></app-login>
+                </mat-card-content>
+              </mat-card>
+            </div>
+    </div>
+
+    <div class="column-43">
+    </div>
+
+  </div>
+</div> -->
+
 <div class="container">
   <div class="row">
     <div class="column-31" *ngIf="!showEdit">
-        <mat-card class="example-card">
+        <mat-card class="example-card" >
             <mat-card-header>
             <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}});
   background-size: cover;"></div> -->
@@ -11,9 +39,9 @@
             </mat-card-header>
             <mat-card-content>
              <img style="width:150px;height:150px;" src="{{userData.profile_url}}" class="img-responsive" alt="">
-          <p> <span class="material-icons">location_city </span> {{ userData.location }}</p>
+          <p> <span class="material-icons" style="color:#BC164D;">location_city </span> {{ userData.location }}</p>
 
-          <p><span class="material-icons">description</span> {{ userData.description }}</p>
+          <p><span class="material-icons" style="color:#BC164D;">description</span> {{ userData.description }}</p>
 
           <div *ngIf="userData.is_me">
               <b>Strava Authentication</b>

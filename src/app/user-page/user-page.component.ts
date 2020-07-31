@@ -16,7 +16,7 @@ export class UserPageComponent implements OnInit {
 
   constructor(private route:ActivatedRoute, 
               private _userProfileService:UserProfileService,
-              public _authService: AuthService) { }
+              public _authService: AuthService,) { }
 
   showEdit: boolean;
 
@@ -69,6 +69,9 @@ export class UserPageComponent implements OnInit {
     });
   }
 
+  logout() {
+    this._authService.logout();
+  }
   toggleEditView(): void{
     this.showEdit = !this.showEdit;
   }

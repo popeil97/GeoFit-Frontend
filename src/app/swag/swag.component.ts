@@ -39,6 +39,7 @@ export class SwagComponent implements OnInit {
   @Input() isOwner: Boolean = false;
   swagForm: FormGroup;
   isEdit:Boolean = false;
+  uploadedUrl:any;
   swagModelForm: SwagForm = {} as SwagForm;
 
   ngOnInit() {
@@ -60,7 +61,8 @@ export class SwagComponent implements OnInit {
       ]),
       price: new FormControl(this.swagModelForm.price,[
         Validators.required
-      ])
+      ]),
+      merchImg: new FormControl(''),
     });
   }
 
@@ -92,6 +94,7 @@ export class SwagComponent implements OnInit {
       let cleanForm = this.swagForm.value;
       // call swag service to update model
       // then call function to get new about data
+      cleanForm.merchImg = this.uploadedUrl;
       console.log('CLEAN:',cleanForm);
 
       this._swagService.updateSwagForm(this.race_id,cleanForm).then((resp:any) => {
@@ -100,6 +103,18 @@ export class SwagComponent implements OnInit {
         this.initForm();
         this.toggleForm()
       });
+    }
+  }
+
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.uploadedUrl = reader.result;
+      }
     }
   }
 
@@ -115,6 +130,7 @@ export class SwagComponent implements OnInit {
 export class SwagDialogContent {
   price:string;
   race_id:number;
+  
   paymentType = PaymentType.SWAG;
   @ViewChild('stepper') private stepper: MatStepper;
   paymentForm = new FormGroup({
@@ -143,11 +159,15 @@ export class SwagDialogContent {
       if(callbackResp.type == 'PAYMENT') {
         console.log('PAYMENT DATA:',data);
         this.paymentForm.controls['complete'].setValue(true);
+        this.stepper.next();
       }
-
-
-      this.stepper.next();
+      
     }
+  }
+
+  shippingConfirmed() {
+    this.shippingForm.controls['complete'].setValue(true);
+    this.stepper.next()
   }
 
 }

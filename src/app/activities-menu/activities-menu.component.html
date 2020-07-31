@@ -1,4 +1,5 @@
 <div class="table-container">
+
   <table mat-table [dataSource]="activities" class="activitiesTable">
     <ng-container matColumnDef="Name" style="padding: 5px;">
       <td mat-cell *matCellDef="let element" (click)="add(element)"> {{element.name}} </td>
@@ -12,12 +13,18 @@
     <tr mat-row *matRowDef="let myRowData; columns: columns" [ngClass]="{'highlight': selectedRows.includes(myRowData.id)}" (click)=highlight(myRowData)></tr>
   </table>
 
-  
+<div *ngIf="activities.length < 1">
+  <b><p style="text-align:center;font-family:Roboto; color:#2C007E;"><b>No new activities to import</b></p></b>
+</div>
+
+  <div *ngIf="activities.length > 0">
+    <div style="padding: 5px; position: relative; text-align:center;">
+    <button class="btn btn-primary" style="background-color:#2C00A5;" mat-raised-button (click)="importSelectedActs()">Import</button>
+    </div>
+  </div>
 </div>
 <br>
-<div style="padding: 5px; position: relative; float: left;">
-  <button class="btn btn-primary" mat-raised-button (click)="importSelectedActs()">Import</button>
-</div>
+
 <br>
 <br>
 <br>

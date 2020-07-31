@@ -32,15 +32,12 @@
 
 
 .footer-container {
-	position: absolute;
-	padding: 20px;
-    right: 0;
+	position: sticky;
+    left: 0;
     top: 0;
-    opacity: 0.83;
     z-index: 500;
-    width: 19%;
+    width: 100%;
     color: #EFFAF7;
-    padding-bottom: 3.5rem;
  }
 
  

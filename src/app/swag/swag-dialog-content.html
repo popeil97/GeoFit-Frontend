@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Buy a T-Shirt!</h2>
+<h2 mat-dialog-title>Buy Some Swag!</h2>
 <mat-dialog-content>
   <mat-horizontal-stepper [linear]="true" #stepper>
     <mat-step [editable]="false" [stepControl]="paymentForm">
@@ -7,12 +7,12 @@
     </mat-step>
     <mat-step [editable]="false" [stepControl]="shippingForm">
       <ng-template matStepLabel aria-disabled="true">Shipping Info</ng-template>
-      
+      <app-shipping-address-form (addressChanged)="shippingConfirmed()"></app-shipping-address-form>
     </mat-step>
     <mat-step [attr.disabled]="stepper.selectedIndex != 2">
       <ng-template matStepLabel aria-disabled="true">Done</ng-template>
-      <h2 style="text-align: center;">You are Registered!</h2>
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial style="float: center;">Complete Registration</button>
+      <h2 style="text-align: center;">Your payment is complete and has been recorded</h2>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial style="float: center;">Complete</button>
     </mat-step>
   </mat-horizontal-stepper>
 </mat-dialog-content>

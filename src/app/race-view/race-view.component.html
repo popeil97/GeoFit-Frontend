@@ -4,23 +4,39 @@
 <app-loader [isActive]="loading"></app-loader>
 <mat-sidenav-container hasBackdrop="false">
 
-  <mat-sidenav md-disable-backdrop='true' #menu mode="over"  opened="true"  style="overflow-y: hidden;"> <!--opened="true"-->
+  <mat-sidenav class="no-v-scroll" md-disable-backdrop='true' #menu mode="over"  opened="true"> <!--opened="true"-->
+    <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress>
+
+    <div style="overflow-y: auto;">
+
     <mat-tab-group>
       <mat-tab *ngIf="this.progress && this._authService.token">
         <ng-template mat-tab-label style="background-color: rgba(256,256, 256,1);">
           <mat-icon>file_download</mat-icon>
         </ng-template>
+
+        <div *ngIf="!raceSettings.isManualEntry">
+        <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
+            <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
+            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu>
+        </div>
+
         <mat-tab-group>
-          <mat-tab>
+          <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
               <mat-icon>cloud_download</mat-icon>
             </ng-template>
+            <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
+             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
             <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu>
           </mat-tab>
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
               <mat-icon>add_circle_outline</mat-icon>
             </ng-template>
+             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Add Activity</b></h3></b>
             <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
           </mat-tab>
         </mat-tab-group>
@@ -31,16 +47,44 @@
           <mat-icon>format_list_numbered_rtl</mat-icon>
         </ng-template>
         
-        <mat-tab-group>
+        <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Leaderboard</b></h3></b>
+        <app-leaderboard [leaderboard]="leaderboard"></app-leaderboard>
+
+      <!--  <mat-tab-group>
           <mat-tab label="Distance">
             <app-leaderboard [leaderboard]="leaderboard"></app-leaderboard>
           </mat-tab>
-          <mat-tab label="Pace">
+        <!--  <mat-tab label="Pace">
 
-          </mat-tab>
+          </mat-tab> -->
 
-          <mat-tab label="Teams">
-            <button class="btn btn-primary" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">+ Team</button>
+        <!--  <mat-tab label="Teams">
+            
+          </mat-tab> -->
+     <!--   </mat-tab-group> -->
+
+      </mat-tab>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>emoji_people</mat-icon>
+        </ng-template>
+        <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call
+        <button (click)="clearUserPins()">Clear User Pins!</button>
+        <button (click)="showPinsByID(null)">Show User Pins!</button>
+        <button (click)="showPinsByID(followedIDs)">Show Followers Only</button>-->
+        <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Activity Feed</b></h3></b>
+        <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
+      </mat-tab>
+        <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>group</mat-icon>
+        </ng-template>
+        <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call
+        <button (click)="clearUserPins()">Clear User Pins!</button>
+        <button (click)="showPinsByID(null)">Show User Pins!</button>
+        <button (click)="showPinsByID(followedIDs)">Show Followers Only</button>-->
+        <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Teams</b></h3></b>
+        <button class="btn btn-primary" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">+ Team</button>
             <button class="btn btn-danger" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm('clear')" *ngIf="showTeamForm">Cancel</button>
             <div *ngIf="!showTeamForm">   
               <app-team-list [teams]="teams" [userStat]="userStat" (callback)="getRaceState($event)" (edit)="editTeamForm($event)"></app-team-list>
@@ -49,28 +93,21 @@
             <div *ngIf="showTeamForm">
               <app-team-form (callback)="getRaceState($event)" [teamEditForm]="teamEditForm"></app-team-form>
             </div>
-          </mat-tab>
-        </mat-tab-group>
+      </mat-tab>
+      <mat-tab>
 
-      </mat-tab>
-      <mat-tab>
-        <ng-template mat-tab-label>
-          <mat-icon>group</mat-icon>
-        </ng-template>
-        <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call
-        <button (click)="clearUserPins()">Clear User Pins!</button>
-        <button (click)="showPinsByID(null)">Show User Pins!</button>
-        <button (click)="showPinsByID(followedIDs)">Show Followers Only</button>-->
-        <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
-      </mat-tab>
-      <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon>settings</mat-icon>
         </ng-template>
+        <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Race Settings</b></h3></b>
         <app-race-settings [userSettings]="userRaceSettings"></app-race-settings>
+        
       </mat-tab>
     </mat-tab-group>
+  </div>
   </mat-sidenav>
+
+   
   <mat-sidenav-content>
     <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
 
@@ -100,7 +137,7 @@
 <!----<a class="btn btn-primary btn-customized inviteToggle" (click)="goToTeamForm()">
   <span style="color:white">Create Team</span>
 </a>--->
-<app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress>
+
   </mat-sidenav-content>
 </mat-sidenav-container>
 <!-- Wrapper -->

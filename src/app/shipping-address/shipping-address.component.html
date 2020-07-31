@@ -1,0 +1,59 @@
+<div class="container">
+  <table mat-table
+        [dataSource]="userAddresses" multiTemplateDataRows
+        class="mat-elevation-z8"
+        *ngIf="userAddresses.length > 0">
+
+    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+
+    <ng-container matColumnDef="address">
+      <th mat-header-cell *matHeaderCellDef>Address</th>
+      <td mat-cell *matCellDef="let element">{{element.address1}} {{element.address2}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="city-state">
+      <th mat-header-cell *matHeaderCellDef>City/State</th>
+      <td mat-cell *matCellDef="let element">{{element.city}}, {{element.state}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="zip">
+      <th mat-header-cell *matHeaderCellDef>Zip</th>
+      <td mat-cell *matCellDef="let element"> {{element.zip4}} {{element.zip5 }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="buttons">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+          <button class="btn btn-danger btn-sm" mat-raised-button (click)="deleteAddress(element.id)">Remove</button>
+      </td>
+    </ng-container>
+  </table>
+
+  <br>
+  <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding-bottom: 20px;">
+      <mat-card class="example-card" >
+        <mat-card-header>
+          <mat-card-title style="float: left;">Add Shipping Address</mat-card-title>
+          <a class="dropdown-hide text-black" style="padding-left: 10px;color:#2C007E;" type="button" (click)="toggleAddressForm()"><i class="material-icons">add_circle</i></a>
+          <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+        </mat-card-header>
+        
+        
+        <mat-card-content>      
+        </mat-card-content>
+      </mat-card>
+
+      <br>
+
+      <div *ngIf="showAddressForm">
+          <app-shipping-address-form (addressChanged)="addressChanged()"></app-shipping-address-form>
+        </div>
+    </div>
+
+    
+</div>

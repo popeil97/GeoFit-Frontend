@@ -18,7 +18,7 @@ declare var $: any
 @Component({
   selector: 'app-race-view',
   templateUrl: './race-view.component.html',
-  styleUrls: ['./race-view.component.css']
+  styleUrls: ['./race-view.component.css'],
 })
 export class RaceViewComponent implements OnInit {
   @ViewChild(MapComponent) mapChild: MapComponent;
@@ -82,7 +82,8 @@ export class RaceViewComponent implements OnInit {
   }
 
   configureLeaderboard(ranked:any[],unranked:any[]) {
-
+    
+    console.log("RANKE BOARD:",unranked.concat(ranked));
     return unranked.concat(ranked)
 
 
