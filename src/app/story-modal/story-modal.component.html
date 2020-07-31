@@ -1,5 +1,5 @@
 <!-- The Modal -->
-<div class="modal fade" id="storyModal">
+<div class="modal fade" id="storyModal" style="width:1200px;">
   <div class="modal-dialog">
     <div class="modal-content" >
 
@@ -14,8 +14,8 @@
           <app-user-profile-nav [username]=storyItem.display_name></app-user-profile-nav>
 
           <button type="button" class="close" (click)="hideModal()">&times;</button>
-
-          {{ storyItem.story_text }}
+          <br><br>
+          <b style="color:#2C00A5;">Status : </b>{{ storyItem.story_text }}
 
           <br>
           <app-story-btn *ngIf="this._authService.token" [use]="'like'" [storyID]=storyItem.story_id [likes]=storyItem.likes [likesCount]=storyItem.likes_count></app-story-btn>

@@ -628,6 +628,21 @@ mat-sidenav-container {
     width: 100%;
     
 }
+.progress-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 200px;
+    
+}
+
+.no-v-scroll {
+  height: 100%;
+  overflow-y: hidden; 
+  display: flex; 
+  flex-direction: column;
+}
 
 mat-sidenav-content {
     height: 100%;
@@ -641,13 +656,15 @@ mat-sidenav, mat-sidenav-content {
 mat-sidenav {
     background-color: rgba(239, 250, 247, 0.83);
     top: 5%;
-    bottom:1%;
+    bottom:3%;
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
     opacity: 1;
     width: 350px;
     overflow-y: hidden;
 }
+
+
 
 .mat-drawer-backdrop.mat-drawer-shown {
     background: none;
@@ -656,6 +673,7 @@ mat-sidenav {
 ::ng-deep.mat-tab-link,  ::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
   min-width: 75px!important;
 }
+
 
 .mat-tab-label {
   color: white;

@@ -352,17 +352,16 @@ public clearUserPins(){
   }
 
   private initMap(): void {
-    this.map = L.map('map', {
-      //center: [ 39.8282, -98.5795 ],
-      //zoom: 3
-    });
+    this.map = L.map('map', { zoomControl: false });
 
-    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    const tiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
     tiles.addTo(this.map);
+
+    new L.Control.Zoom({ position: "topright" }).addTo(this.map);
 
     //An extract of address points from the LINZ bulk extract: http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde
 //Should be this data set: http://data.linz.govt.nz/#/layer/779-nz-street-address-electoral/

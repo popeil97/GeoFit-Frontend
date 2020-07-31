@@ -56,13 +56,18 @@ export class UserStatsComponent implements OnInit {
         }]
     },
     options: {
-        scales: {
+       scales: {
+            xAxes: [{
+               gridLines: {
+                  display: false
+               }
+            }],
             yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
+               gridLines: {
+                  display: false
+               }
             }]
-        }
+       }
     }
 });
   }
