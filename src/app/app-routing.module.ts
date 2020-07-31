@@ -8,6 +8,7 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { RaceAboutComponent } from './race-about/race-about.component';
 import { TeamFormComponent } from './team-form/team-form.component';
 import { RegisterComponent } from './register/register.component';
+import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 
 const routes: Routes = [
   {path: 'race', component:RaceViewComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path:'about',component:RaceAboutComponent},
   {path:'teams',component:TeamFormComponent},
   {path: 'register', component:RegisterComponent},
+  {path: 'shipping', component:ShippingAddressComponent },
 ];
 
 @NgModule({

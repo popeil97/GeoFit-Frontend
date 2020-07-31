@@ -61,6 +61,8 @@ import { UserStatsComponent } from './user-stats/user-stats.component';
 
 import { createCustomElement } from '@angular/elements';
 import { PopupComponent } from './popup/popup.component';
+import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
+import { ShippingAddressFormComponent } from './shipping-address-form/shipping-address-form.component';
 
 
 @NgModule({
@@ -102,6 +104,8 @@ import { PopupComponent } from './popup/popup.component';
     SignupDialogContent,
     UserStatsComponent,
     PopupComponent,
+    ShippingAddressComponent,
+    ShippingAddressFormComponent,
   ],
   imports: [
     BrowserModule,

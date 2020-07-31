@@ -1,0 +1,108 @@
+<div class="container" *ngIf="!showPendingAddress">
+
+    <form [formGroup]="addressForm">
+  
+      <div class="form-group" style="text-align: left;">
+        <label name="address1">Address Line 1</label>
+        <input class="form-control" type="text" placeholder="Address Line 1" formControlName="address1">
+        <br>
+        <div *ngIf="addressForm.get('address1').invalid && (addressForm.get('address1').dirty || addressForm.get('address1').touched)"
+          class="alert alert-danger">
+  
+          <div *ngIf="addressForm.get('address1').errors.requied">
+            Address Line 1 is required.
+          </div>
+  
+        </div>
+      </div>
+  
+      <div class="form-group" style="text-align: left;">
+          <label name="address2">Address Line 2</label>
+          <input class="form-control" type="text" placeholder="Address Line 2" formControlName="address2">
+          <br>
+          <div *ngIf="addressForm.get('address2').invalid && (addressForm.get('address2').dirty || addressForm.get('address2').touched)"
+            class="alert alert-danger">
+    
+            <div *ngIf="addressForm.get('address2').errors.requied">
+              Address Line 1 is required.
+            </div>
+    
+          </div>
+        </div>
+  
+        <div class="form-group" style="text-align: left;">
+            <label name="city">City</label>
+            <input class="form-control" type="text" placeholder="City" formControlName="city">
+            <br>
+            <div *ngIf="addressForm.get('city').invalid && (addressForm.get('city').dirty || addressForm.get('city').touched)"
+              class="alert alert-danger">
+      
+              <div *ngIf="addressForm.get('city').errors.requied">
+                City is required.
+              </div>
+      
+            </div>
+      </div>
+  
+      <div class="form-group" style="text-align: left;">
+        <label name="state">State</label>
+        <select class="form-control" formControlName="state">
+          <option *ngFor="let typeOption of stateOptions" [value]="typeOption">
+            {{ typeOption }}
+          </option>
+        </select>
+      </div>
+
+      <div class="form-group" style="text-align: left;">
+          <label name="zip4">Zip4</label>
+          <input class="form-control" type="text" placeholder="Zip4" formControlName="zip4">
+          <br>
+          <div *ngIf="addressForm.get('zip4').invalid && (addressForm.get('zip4').dirty || addressForm.get('zip4').touched)"
+            class="alert alert-danger">
+    
+            <div *ngIf="addressForm.get('zip4').errors.requied">
+              Zip4 is required.
+            </div>
+    
+          </div>
+      </div>
+
+      <div class="form-group" style="text-align: left;">
+          <label name="zip5">Zip5</label>
+          <input class="form-control" type="text" placeholder="Zip5" formControlName="zip5">
+          <br>
+          <div *ngIf="addressForm.get('zip5').invalid && (addressForm.get('zip5').dirty || addressForm.get('zip5').touched)"
+            class="alert alert-danger">
+    
+            <div *ngIf="addressForm.get('zip5').errors.requied">
+              Zip5 is required.
+            </div>
+    
+          </div>
+      </div>
+  
+      <div style="padding: 5px; position: relative; float: left;">
+        <button class="btn btn-primary" mat-raised-button (click)="validateAddress()">Submit</button>
+      </div>
+  
+    </form>
+</div>
+
+<div class="container" *ngIf="showPendingAddress">
+  <p>
+    Please confirm your address by clicking Confirm below.
+  </p>
+
+  <p *ngIf=pendingAddress.Address1>{{ pendingAddress.Address1 }}</p>
+  <p *ngIf=pendingAddress.Address2>{{ pendingAddress.Address2 }}</p>
+  <p *ngIf=pendingAddress.City>{{ pendingAddress.City }}</p>
+  <p *ngIf=pendingAddress.State>{{ pendingAddress.State }}</p>
+  <p *ngIf=pendingAddress.Zip4>{{ pendingAddress.Zip4 }}</p>
+  <p *ngIf=pendingAddress.Zip5>{{ pendingAddress.Zip5 }}</p>
+
+  <div style="padding: 5px; position: relative; float: left;">
+      <button class="btn btn-primary" mat-raised-button (click)="submitConfirmedAddress()">Confirm</button>
+  </div>
+
+</div>
+  
