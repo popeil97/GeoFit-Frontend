@@ -58,6 +58,7 @@ import { PaypalComponent } from './paypal/paypal.component';
 import { SignupComponent } from './signup/signup.component';
 import { SignupDialogContent } from './signup/signup.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
+import { SwagComponent, SwagDialogContent } from './swag/swag.component';
 
 
 @NgModule({
@@ -98,6 +99,8 @@ import { UserStatsComponent } from './user-stats/user-stats.component';
     SignupComponent,
     SignupDialogContent,
     UserStatsComponent,
+    SwagComponent,
+    SwagDialogContent,
   ],
   imports: [
     BrowserModule,
@@ -118,6 +121,6 @@ import { UserStatsComponent } from './user-stats/user-stats.component';
     StoryService,
   ],
   bootstrap: [AppComponent],
-  entryComponents:[SignupDialogContent],
+  entryComponents:[SignupDialogContent,SwagDialogContent],
 })
 export class AppModule { }

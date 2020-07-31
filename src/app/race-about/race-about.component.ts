@@ -29,6 +29,7 @@ export class RaceAboutComponent implements OnInit {
   public all_user_data:Array<FeedObj>;
   public followedIDs:number[];
   hasPaid:Boolean;
+  hasMerch:Boolean;
 
   public num_users:any;
 
@@ -68,6 +69,7 @@ export class RaceAboutComponent implements OnInit {
       this.isOwner = resp['isOwner'];
       this.hasJoined = resp['hasJoined'];
       this.hasPaid = resp['hasPaid'];
+      this.hasMerch = this.raceSettings.has_swag;
 
       this.initializeForm();
     });
@@ -104,6 +106,7 @@ export class RaceAboutComponent implements OnInit {
         ]),
         paymentRequired: new FormControl(this.raceSettings.paymentRequired),
         price: new FormControl(this.raceSettings.price),
+        hasSwag: new FormControl(this.raceSettings.has_swag),
       })
     });
 
@@ -173,6 +176,7 @@ export class RaceAboutComponent implements OnInit {
       this.raceService.updateRaceAbout(formClean,this.raceID).then((resp) => {
         this.aboutData = resp['about_info'] as AboutData;
         this.raceSettings = resp['race_settings'] as RaceSettings;
+        this.hasMerch = this.raceSettings.has_swag;
         this.initializeForm();
         this.toggleForm();
       });
@@ -218,6 +222,7 @@ export interface RaceSettings {
   max_team_size:number;
   paymentRequired: Boolean,
   price:any,
+  has_swag:Boolean,
 }
 
 interface RaceData {

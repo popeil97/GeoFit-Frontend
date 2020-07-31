@@ -29,4 +29,11 @@ export interface Payment {
   race_id:number;
   payment_id:string,
   status:string;
+  payment_type:PaymentType;
+}
+
+export enum PaymentType {
+  ENTRY=1,
+  SWAG=2,
+  DONATION=3,
 }

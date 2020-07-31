@@ -4,8 +4,10 @@ import { MatStepper } from '@angular/material/stepper';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { PaymentType } from '../payments.service';
 
-interface DialogData {
+
+interface SignupDialogData {
   price:string,
   isLoggedIn:Boolean,
   race_id:number,
@@ -64,7 +66,7 @@ export class SignupComponent implements OnInit {
   templateUrl: 'signup-dialog-content.html',
 })
 export class SignupDialogContent {
-
+  paymentType = PaymentType.ENTRY;
   isLoggedIn:Boolean;
   price:any;
   isSuccess:Boolean = false;
@@ -86,7 +88,7 @@ export class SignupDialogContent {
 
   constructor(
     public dialogRef: MatDialogRef<SignupDialogContent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { 
+    @Inject(MAT_DIALOG_DATA) public data: SignupDialogData) { 
       this.isLoggedIn = data.isLoggedIn;
       this.price = data.price;
       this.race_id = data.race_id;

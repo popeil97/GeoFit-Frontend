@@ -178,6 +178,10 @@
       <mat-slide-toggle formControlName="paymentRequired">Require Entry Fee</mat-slide-toggle>
     </div>
 
+    <div class="form-group">
+      <mat-slide-toggle formControlName="hasSwag">Add Merchandise Widget</mat-slide-toggle>
+    </div>
+
     <div class="form-group" style="text-align: left; padding: 5px;" *ngIf="AboutForm.get('rules').get('paymentRequired').value == true">
       <label>Entry Fee</label>
       <input class="form-control" type="text" formControlName="price"/>
@@ -199,6 +203,8 @@
          
    
  </div>
+
+ <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag>
 
 </div>
 

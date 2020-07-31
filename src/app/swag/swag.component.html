@@ -1,0 +1,75 @@
+<mat-card class="example-card" *ngIf="!isEdit">
+  <mat-card-header>
+    {{swagModelForm.title}}
+  </mat-card-header>
+  <mat-card-content>
+    <!-- <img src={{aboutData.race_image}} alt="Race Image" style="width:100%;">    -->
+    <div class="container">
+      <p>{{swagModelForm.description}}</p>
+    </div>
+
+    <div class="container">
+      <p>{{swagModelForm.price}}</p>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button mat-button (click)="openDialog()">BUY</button>
+    <button mat-button (click)="toggleForm()" *ngIf="isOwner">EDIT</button>
+  </mat-card-actions>
+</mat-card>
+
+<div class="container" *ngIf="isEdit">
+  <form [formGroup]="swagForm">
+    <div class="form-group" style="text-align: left; padding: 5px;">
+      <label name="Name">Title</label>
+      <input class="form-control" type="text" placeholder="Title" formControlName="title"/>
+      <br>
+      <div *ngIf="swagForm.get('title').invalid && (swagForm.get('title').dirty || swagForm.get('title').touched)"
+    class="alert alert-danger">
+    
+    <div *ngIf="swagForm.get('title').errors.required">
+       Title is required.
+    </div>
+    </div>
+    </div>
+ 
+    <div class="form-group" style="text-align: left; padding: 5px;">
+      <label name="description">Description</label>
+      <textarea class="form-control" type="text" placeholder="Description" formControlName="description"></textarea>
+      <br>
+      <div *ngIf="swagForm.get('description').invalid && (swagForm.get('description').dirty || swagForm.get('description').touched)"
+    class="alert alert-danger">
+    
+    <div *ngIf="swagForm.get('description').errors.required">
+       Description is required.
+    </div>
+    </div>
+    </div>
+
+    <div class="form-group" style="text-align: left; padding: 5px;">
+      <label name="description">Price</label>
+      <input class="form-control" type="text" formControlName="price"/>
+      <br>
+      <div *ngIf="swagForm.get('price').invalid && (swagForm.get('price').dirty || swagForm.get('price').touched)"
+    class="alert alert-danger">
+    
+    <div *ngIf="swagForm.get('price').errors.required">
+       Price is required.
+    </div>
+    </div>
+    </div>
+ 
+    <!-- <div class="form-group" style="text-align: left; padding: 5px;">
+      <label name="raceImage">Race Image</label>
+      <input type="file" formControlName="raceImage" (change)="onSelectFile($event)"/>
+    </div> -->
+
+    <div style="padding: 5px; position: relative; float: left;">
+      <button class="btn btn-primary" mat-raised-button (click)="update()">Update</button>
+      <button class="btn btn-danger" mat-raised-button style="left: 5px;" (click)="toggleForm()">Cancel</button>
+    </div>
+
+
+  </form>
+</div>

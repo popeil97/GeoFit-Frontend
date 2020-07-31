@@ -1,6 +1,6 @@
 import { Component, AfterViewChecked, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
 import { SignupCallbackStruct } from '../signup/signup.component';
-import { PaymentsService, Payment } from '../payments.service';
+import { PaymentsService, Payment, PaymentType } from '../payments.service';
 declare let paypal: any;
 
 @Component({
@@ -15,18 +15,20 @@ export class PaypalComponent implements AfterViewChecked {
   @Output() transactionAlert: EventEmitter<any> = new EventEmitter();
   @Input() price:string;
   @Input() race_id: number;
-  paypalConfig:any
+  @Input() paymentType: PaymentType;
+  paypalConfig:any;
 
   constructor(public _paymentsService:PaymentsService) {
 
     this.paypalConfig = {
       env:'production',
       client: {
-        production: 'AVba2GjPpLOlgOhlvLMS_QkprWXngKj8OWezQ_HgyRq9y5UMVZ6Fw2OG1k-tnetFMoziXymTzaTOM_8G'
+        production: 'AQTMOSPwrQ-akqB85-nh8HKgQajoyuXC-AebVOzbqpeQYkXNLCqvV_Y5Bx6NasZxra8GGT_VU4n4M4xy'
       },
       commit:true,
       createOrder: (data,actions) => {
         this.loading = true;
+        console.log('PAYMENT TYPE:',this.paymentType);
         return actions.order.create({
           purchase_units: [{
             amount: { value: this.price, currency:'USD' }
@@ -46,6 +48,7 @@ export class PaypalComponent implements AfterViewChecked {
             payment.currency = details.purchase_units[0].amount.currency_code;
             payment.payment_id = details.id;
             payment.race_id = Number(this.race_id);
+            payment.payment_type = this.paymentType;
             console.log('PAYMENT OBJ:',payment);
             this.savePayment(payment);
             this.transactionAlert.emit({data:{},success:true,type:'PAYMENT'} as SignupCallbackStruct);
@@ -87,7 +90,7 @@ export class PaypalComponent implements AfterViewChecked {
     this.addScript = true;
     return new Promise((resolve,reject) => {
       let script_tag = document.createElement('script');
-      script_tag.src = "https://www.paypal.com/sdk/js?client-id=AVba2GjPpLOlgOhlvLMS_QkprWXngKj8OWezQ_HgyRq9y5UMVZ6Fw2OG1k-tnetFMoziXymTzaTOM_8G"
+      script_tag.src = "https://www.paypal.com/sdk/js?client-id=AQTMOSPwrQ-akqB85-nh8HKgQajoyuXC-AebVOzbqpeQYkXNLCqvV_Y5Bx6NasZxra8GGT_VU4n4M4xy"
       script_tag.onload = resolve;
       document.body.appendChild(script_tag);
     })
