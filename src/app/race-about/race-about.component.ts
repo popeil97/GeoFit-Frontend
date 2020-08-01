@@ -51,19 +51,14 @@ export class RaceAboutComponent implements OnInit {
     this.raceService.getRace(this.raceID).subscribe(data => {
 
       let raceData = data as RaceData;
-      console.log('RACE DATA:',raceData);
-      this.coords = {coords:raceData.coords};
+      this.coords = raceData.coords;
       this.all_user_data = raceData.users_data as Array<FeedObj>;
       this.followedIDs = raceData.followedIDs;
       this.leaderboard = this.configureLeaderboard(raceData.unranked_leaderboard,raceData.ranked_leaderboard);
-      console.log('COORDS:',this.coords);
-      console.log("ALL USER DATA", this.all_user_data);
-      console.log("FOLLOWER IDS", this.followedIDs);
     });
 
 
     this.raceService.getRaceAbout(this.raceID).then((resp) => {
-      console.log('RESP FROM ABOUT SERVER:',resp);
       resp = resp as any;
       this.aboutData = resp['about_info'] as AboutData;
       this.raceSettings = resp['race_settings'];
