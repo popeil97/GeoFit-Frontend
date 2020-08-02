@@ -27,6 +27,7 @@ export class RaceViewComponent implements OnInit {
 
   public followers:any[];
   public activities:any[];
+  public num_activities:any;
   private raceName:string;
   raceID:number;
   private modalData:any;
@@ -164,7 +165,7 @@ export class RaceViewComponent implements OnInit {
 
       this.progress = raceData.progress;
       this.activities = raceData.activities;
-      this.coords = {coords:raceData.coords};
+      this.coords = raceData.coords;
 
       this.leaderboard = this.configureLeaderboard(raceData.unranked_leaderboard,raceData.ranked_leaderboard);
       

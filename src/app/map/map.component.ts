@@ -33,7 +33,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
   @Input() zoom:Boolean;
 
   private map;
-  private coordsRoute;
+  private coordsRoutes:any[];
   private markersByUserID = {};
   private markerClusters:any;
   private layerIDsToUserIndices = {};
@@ -45,6 +45,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
   constructor(private popupService:PopUpService, 
               private _profileService:UserProfileService,) {
+    this.coordsRoutes = [];
     Window["mapComponent"] = this;
   }
 
@@ -55,7 +56,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
           case 'coordinates':
             if(changes.coordinates.currentValue != undefined) {
               this.applyCoordinates();
-              this.coordsRoute = turf.lineString(this.coordinates.coords, { name: "route" });
               
               if(this.displayUsers) {
                 this.createUserPins(false);
@@ -101,17 +101,32 @@ export class MapComponent implements AfterViewInit,OnChanges {
       this.initMap()
     }
 
-    //doing this temporarily because Lat/Lon are reversed smh
+    console.log(this.coordinates);
+
+    //ugly but neccessary way of adding start pins and paths to map
+    var temp_routes = [];
     var temp_coords = [];
-    _.forEach(this.coordinates.coords,(coord) => {
-      // let temp = coord[0];
-      // coord[0] = coord[1];
-      // coord[1] = temp;
-      temp_coords.push([coord[1], coord[0]]);
+    var temp_routes_flipped = [];
+    var temp_coords_flipped = [];
+
+    _.forEach(this.coordinates,(route) => {
+      temp_coords = [];
+      temp_coords_flipped = [];
+
+      _.forEach(route.coords, (coord) => {
+        temp_coords.push([coord[0], coord[1]]);
+        temp_coords_flipped.push([coord[1], coord[0]]);
+      })
+
+      temp_routes.push(temp_coords);
+      temp_routes_flipped.push(temp_coords_flipped);
     });
 
-    let start_coord = temp_coords[0];
-    let end_coord = temp_coords[temp_coords.length-1];
+    console.log(temp_routes_flipped);
+
+    let start_coord = temp_routes_flipped[0][0];
+    let final_route = temp_routes_flipped[temp_routes_flipped.length-1];
+    let end_coord = final_route[final_route.length-1];
 
     let begin = new L.LatLng(start_coord[0], start_coord[1]);
     let finish = new L.LatLng(end_coord[0], end_coord[1]);
@@ -156,11 +171,24 @@ export class MapComponent implements AfterViewInit,OnChanges {
     {
       var color = "blue";
     }
-    this.line = L.polyline(temp_coords,{
-      color: color,
-      weight: 8,
-      opacity: 0.65
-    }).addTo(this.map);
+
+    //Add each path to map independently
+    _.forEach(temp_routes_flipped,(route) => {
+      this.line = L.polyline(route,{
+        color: color,
+        weight: 8,
+        opacity: 0.65
+      }).addTo(this.map);
+    });
+
+    //We store coordinates in their original order 
+    //so we can work out user progression along route later
+    let count = 1;
+    _.forEach(temp_routes, (route) => {
+      let name = 'route' + count.toString();
+      this.coordsRoutes.push(turf.lineString(route, { name: name }));
+      count += 1;
+    })
   }
 
 public clearUserPins(){
@@ -186,8 +214,6 @@ public clearUserPins(){
       }
       else {
         this.markersByUserID[id]['locMarker'].remove();
-        //If this doesn't work, try
-        //this.map.removeLayer(this.markersByUserID[id]['locMarker']);
       }
     }
   }
@@ -249,9 +275,10 @@ public clearUserPins(){
         popupAnchor: [0, -62],
       });
 
-      var user_ran_miles = this.userData[i].total_distance;
+      var user_rel_miles = parseInt(this.userData[i].rel_distance);
+      var user_route_idx = this.userData[i].route_idx;
 
-      var along_user = turf.along(this.coordsRoute, user_ran_miles, {units: 'miles'});
+      var along_user = turf.along(this.coordsRoutes[user_route_idx], user_rel_miles, {units: 'miles'});
 
       var lng_user = along_user.geometry.coordinates[0];
       var lat_user = along_user.geometry.coordinates[1];
@@ -354,7 +381,7 @@ public clearUserPins(){
   private initMap(): void {
     this.map = L.map('map', { zoomControl: false });
 
-    const tiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+    const tiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
