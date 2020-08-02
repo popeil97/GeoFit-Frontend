@@ -14,10 +14,6 @@ export class PaymentsService {
     }; 
   }
 
-  test() {
-    console.log('HI FROM SERVICE');
-  }
-
   confirmPayment(payment:Payment) {
     return this.http.post(environment.apiUrl + '/api/payment-confirmed/',{payment:payment}).toPromise();
   }

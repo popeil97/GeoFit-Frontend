@@ -27,7 +27,7 @@ export class PaypalComponent implements AfterViewChecked {
       },
       commit:true,
       createOrder: (data,actions) => {
-        this.loading = true;
+        
         console.log('PAYMENT TYPE:',this.paymentType);
         return actions.order.create({
           purchase_units: [{
@@ -50,8 +50,12 @@ export class PaypalComponent implements AfterViewChecked {
             payment.race_id = Number(this.race_id);
             payment.payment_type = this.paymentType;
             console.log('PAYMENT OBJ:',payment);
-            this.savePayment(payment);
-            this.transactionAlert.emit({data:{},success:true,type:'PAYMENT'} as SignupCallbackStruct);
+            let payment_id=this.savePayment(payment).then((resp) => {
+              console.log('CONFIRMED FROM SERVER:',resp);
+              let payment_id = resp['id'];
+              this.transactionAlert.emit({data:{payment_id:payment_id},success:true,type:'PAYMENT'} as SignupCallbackStruct);
+            });
+            
           }
   
           else {
@@ -70,11 +74,10 @@ export class PaypalComponent implements AfterViewChecked {
   }
 
   
-  savePayment(payment:Payment): void {
+  savePayment(payment:Payment) {
+    this.loading = true;
     console.log('SERVICE:',this._paymentsService)
-    this._paymentsService.confirmPayment(payment).then((resp) => {
-      console.log('CONFIRMED FROM SERVER:',resp);
-    });
+    return this._paymentsService.confirmPayment(payment)
   }
   
 

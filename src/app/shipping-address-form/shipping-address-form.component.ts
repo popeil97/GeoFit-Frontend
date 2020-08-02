@@ -81,7 +81,7 @@ export class ShippingAddressFormComponent implements OnInit {
       console.log(response);
       console.log(response);
       if (response['created'] == true){
-        this.addressChanged.emit()
+        this.addressChanged.emit(response['id'])
       }
       else{
         //handle errors

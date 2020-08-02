@@ -5,6 +5,7 @@ import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { SwagService } from '../swag.service';
 import { PaymentType } from '../payments.service';
 import { SignupCallbackStruct } from '../signup/signup.component';
+import { Order, OrderService } from '../order.service';
 
 interface SwagDialogData {
   price:string,
@@ -130,6 +131,8 @@ export class SwagComponent implements OnInit {
 export class SwagDialogContent {
   price:string;
   race_id:number;
+  sizes:string[] = ['XXS','XS','S','M','L','XL','XXL'];
+  completeOrder:Order = {} as Order
   
   paymentType = PaymentType.SWAG;
   @ViewChild('stepper') private stepper: MatStepper;
@@ -145,11 +148,18 @@ export class SwagDialogContent {
     ])
   });
 
+  sizeForm = new FormGroup({
+    size: new FormControl('',[
+      Validators.required
+    ])
+  })
+
 
   constructor(public dialogRef: MatDialogRef<SwagDialogContent>,
-    @Inject(MAT_DIALOG_DATA) public data: SwagDialogData) {
+    @Inject(MAT_DIALOG_DATA) public data: SwagDialogData, private _orderService:OrderService) {
       this.price = data.price;
       this.race_id = data.race_id;
+      this.completeOrder.race_id = this.race_id;
   }
 
   stepCallback(callbackResp:SignupCallbackStruct) {
@@ -158,6 +168,7 @@ export class SwagDialogContent {
 
       if(callbackResp.type == 'PAYMENT') {
         console.log('PAYMENT DATA:',data);
+        this.completeOrder.payment_id = data.payment_id;
         this.paymentForm.controls['complete'].setValue(true);
         this.stepper.next();
       }
@@ -165,9 +176,24 @@ export class SwagDialogContent {
     }
   }
 
-  shippingConfirmed() {
+  shippingConfirmed(id:number) {
     this.shippingForm.controls['complete'].setValue(true);
-    this.stepper.next()
+    this.completeOrder.shipping_id = id;
+    // this is last step so submit
+    this._orderService.submitOrder(this.completeOrder).then((resp) => {
+      this.stepper.next();
+      console.log('ORDER:',this.completeOrder);
+    })
+    
+  }
+
+  selectSize(size:string) {
+    this.sizeForm.controls['size'].setValue(size);
+  }
+
+  confirmSize() {
+    this.completeOrder.details = this.sizeForm.value.size
+    this.stepper.next();
   }
 
 }

@@ -17,7 +17,7 @@ export class RaceAboutComponent implements OnInit {
   @ViewChild(MapComponent) mapChild: MapComponent;
   @ViewChild(SignupComponent) signupChild: SignupComponent;
   public AboutForm: FormGroup;
-  aboutData:AboutData = {owner:{}} as AboutData;
+  aboutData:AboutData;
   raceSettings:RaceSettings = {} as RaceSettings;
   showForm: Boolean;
   raceName:string;
@@ -32,6 +32,7 @@ export class RaceAboutComponent implements OnInit {
   public followedIDs:number[];
   hasPaid:Boolean;
   hasMerch:Boolean;
+  popup:Boolean;
 
   public num_users:any;
 
@@ -40,6 +41,14 @@ export class RaceAboutComponent implements OnInit {
               private router:Router, 
               public _authService: AuthService,) { }
 
+  ngAfterViewInit(): void {
+    while(!this.aboutData);
+    if(this.popup) {
+      console.log('in here');
+      this.signupChild.openDialog();
+    }
+  }
+
   ngOnInit() {
 
     this.showForm = false;
@@ -47,6 +56,11 @@ export class RaceAboutComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.raceName = params['params']['name'];
       this.raceID = params['params']['id'];
+      this.popup = params['params']['popup'];
+
+      console.log('POPUP:',this.popup);
+
+      
     });
 
     this.raceService.getRace(this.raceID).subscribe(data => {
@@ -77,12 +91,14 @@ export class RaceAboutComponent implements OnInit {
     });
 
     
+
+    
   }
 
   trySignup(): void {
     if(!this._authService.isLoggedIn()) {
       this.signupChild.closeDialog();
-      this.router.navigate(['/register',{params:JSON.stringify({redirectParams: {name:this.raceName,id:this.raceID}, redirectUrl:'/about'})}]);
+      this.router.navigate(['/register',{params:JSON.stringify({redirectParams: {name:this.raceName,id:this.raceID,popup:true}, redirectUrl:'/about'})}]);
     }
   }
 
