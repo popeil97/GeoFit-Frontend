@@ -90,48 +90,26 @@
    <div class="container" *ngIf="!showForm">
        <mat-card class="example-card " >
      <mat-card-header>
-       <mat-card-title>Race Logistics <i class="material-icons" style="color:#BC164D;">info</i></mat-card-title>
+       <mat-card-title>Race About<i class="material-icons" style="color:#BC164D;">info</i></mat-card-title>
        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
      </mat-card-header>
-     <mat-card-content>
-       
-       <p>
-         <i class="material-icons" style="color:#BC164D;">person</i><span id="txt1">{{aboutData.owner.first_name}} {{aboutData.owner.last_name}} </span>
-     </p>
-       <p style="white-space: pre-line;">
-          <i class="material-icons" style="color:#BC164D;">description</i><span id="txt1">{{aboutData.description}} </span>
-      </p>
-       <p *ngIf="raceSettings.isManualEntry">
+     <mat-card-content >
+      <div style="overflow-y: scroll;height: 348px;background-color:#EFFAF7;">
+      It is hard to comprehend how drastically things have changed this year in the world and, on a more personal level, for our family.  We can’t imagine what Adam would say about life during COVID-19, but we believe that he would have drawn strength, as we have, from the different ways we are using technology to stay connected despite physical distances.  
+<br><br>
+We’d like to now take this one step further (yes, pun intended) by holding a virtual race in honor of Adam - sMiles for Adam.  Tucan Fitness has generously helped us create a virtual 100 mile challenge in which each of us can participate in whichever way - running, walking and/or biking - and at whatever level we want.  Do it outside, on a treadmill and/or on a stationary bike as you binge watch even more Netflix (or rebroadcasts of past sporting events!). The challenge will begin on August 16th and end on September 18th, which this year falls on Adam’s Hebrew birthday, כ״ט אלול - erev Rosh Hashanah. 
+<br><br>
+While each participant will run, walk or bike in their own neighborhood or home, our shared virtual route will start in Jerusalem and continue in New Jersey.  Each stop on the virtual route was part of Adam’s life. One stop on the route is The Jewish Center in Princeton, New Jersey, where Adam was honored to serve as Rabbi for 14½ years, and 100% of every participant dollar will benefit the synagogue’s Rabbi Adam Feldman Memorial Fund. The virtual route will end at Citizens Bank Park in Philadelphia, where Adam’s beloved Phillies play.  You can participate on your own or form a group of up to 5 participants and you’ll be able to track your progress and others on the route. You will also be able to upload photos of your activities, which we would love to see!
+<br><br>
+Participants are invited to complete as many or as few miles as they wish. The key is that this will bring us together to honor Adam and help connect us when we cannot gather together in person. 
+<br><br>
+Fondly and with sMiles,<br>
+Sara Bucholtz and Talia, Dena & Ilan Feldman         
+<br><br>
+August 4, 2020 / י״ד אב תש״פ 
+</div>
 
-       <b>Manual Entry</b> : Allowed
-     </p>
-
-     <p *ngIf="!raceSettings.isManualEntry">
-       <b>Manual Entry :</b> Not Allowed
-     </p>
-       <p *ngIf="raceSettings.allowTeams">
-         <b>Teams :</b> Allowed (max size: {{raceSettings.max_team_size}})
-   </p>
-
-   <p *ngIf="!raceSettings.allowTeams">
-     <b>Teams :</b> Not Allowed
-   </p>
-
-   <p *ngIf="raceSettings.paymentRequired">
-    <b>Entry Fee :</b> ${{raceSettings.price}}
-  </p>
-
-  <p *ngIf="!raceSettings.paymentRequired">
-    <b>Entry Fee :</b> FREE
-  </p>
-   <mat-card class="example-card" >
-     <mat-card-header>
-       <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-     </mat-card-header>
-     <mat-card-content>
-       <img src={{aboutData.race_image}} alt="Race Image" style="width:100%;">   
-     </mat-card-content>
-   </mat-card>
+  <img src="../../assets/landing/sMILES.png" alt="Race Image" style="width:40%;" class="center">   
 
      </mat-card-content>
      <mat-card-actions>
