@@ -7,7 +7,6 @@ declare var $: any
 import { MapComponent } from '../map/map.component';
 import { SignupComponent } from '../signup/signup.component';
 import { LeaderboardItem } from '../leaderboard/leaderboard.component';
-import { CountdownModule } from 'ngx-countdown';
 
 @Component({
   selector: 'app-race-about',

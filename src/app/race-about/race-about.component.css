@@ -29,6 +29,21 @@
     display: block;
 }
 
+.button {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+  background: #2C007E;
+  border-radius: 4px;
+  font-weight: normal;
+  text-transform: uppercase;
+  transition: all 0.2s ease-in-out;
+  width:90px;
+}
+.glow-button:hover {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 0 5px 15px rgba(145, 92, 182, .7);
+}
 
 .maintooltip {
     display: none;
