@@ -3,10 +3,11 @@
         <br>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
-            <label for="username">User ID *</label>
-            <input type="text" formControlName="username" class="form-control" placeholder="User ID" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
-            <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
-                <div *ngIf="f.username.errors.required">Username is required</div>
+            <label for="email">Email *</label>
+            <input type="text" formControlName="email" class="form-control" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email address is required</div>
+                <div *ngIf="f.email.errors?.pattern" class="text-danger">Please provide a valid email address</div>
             </div>
         </div>
         
