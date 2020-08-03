@@ -40,6 +40,7 @@ export class RegisterComponent implements OnInit {
           console.log('INPUTS:',inputs);
           this.redirectParams = inputs['redirectParams'];
           this.redirectUrl = inputs['redirectUrl']
+          
         }
         
       });
@@ -90,10 +91,12 @@ export class RegisterComponent implements OnInit {
                 this._authService.username = data['username'];
 
                 if(this.redirectParams) {
+                  console.log('params here')
                   this.router.navigate([this.redirectUrl,this.redirectParams])
                 }
                 else {
-                  this.router.navigate['/login'];
+                  console.log('not here')
+                  this.router.navigate(['/login']);
                 }
               },
             err => {

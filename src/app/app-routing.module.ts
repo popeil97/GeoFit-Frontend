@@ -10,6 +10,7 @@ import { TeamFormComponent } from './team-form/team-form.component';
 import { RegisterComponent } from './register/register.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { SmilesComponent } from './smiles/smiles.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {path: 'race', component:RaceViewComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'register', component:RegisterComponent},
   {path: 'shipping', component:ShippingAddressComponent },
   {path: 'smiles', component:SmilesComponent },
+  {path: 'login', component:LoginComponent },
 ];
 
 @NgModule({
