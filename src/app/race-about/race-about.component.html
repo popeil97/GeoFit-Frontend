@@ -113,7 +113,9 @@ August 4, 2020 / י״ד אב תש״פ
 
      </mat-card-content>
      <mat-card-actions>
-       <app-signup [price]="raceSettings.price" [race_id]="raceID" (signupCallback)="signupCallback($event)" [hasPaid]="hasPaid"  (click)="trySignup()"></app-signup>
+      <div class="button glow-button">
+       <app-signup [price]="raceSettings.price" [race_id]="raceID" (signupCallback)="signupCallback($event)" [hasPaid]="hasPaid" (click)="trySignup()"></app-signup>
+     </div>
        <button mat-button (click)="toggleForm()" *ngIf="isOwner">EDIT</button>
      </mat-card-actions>
    </mat-card>
