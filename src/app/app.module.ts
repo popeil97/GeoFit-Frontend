@@ -58,6 +58,7 @@ import { PaypalComponent } from './paypal/paypal.component';
 import { SignupComponent } from './signup/signup.component';
 import { SignupDialogContent } from './signup/signup.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
+import { SwagComponent, SwagDialogContent } from './swag/swag.component';
 
 import { createCustomElement } from '@angular/elements';
 import { PopupComponent } from './popup/popup.component';
@@ -103,6 +104,8 @@ import { ShippingAddressFormComponent } from './shipping-address-form/shipping-a
     SignupComponent,
     SignupDialogContent,
     UserStatsComponent,
+    SwagComponent,
+    SwagDialogContent,
     PopupComponent,
     ShippingAddressComponent,
     ShippingAddressFormComponent,
@@ -129,7 +132,7 @@ import { ShippingAddressFormComponent } from './shipping-address-form/shipping-a
     StoryService,
   ],
   bootstrap: [AppComponent],
-  entryComponents:[SignupDialogContent, PopupComponent],
+  entryComponents:[SignupDialogContent,PopupComponent,SwagDialogContent],
 })
 export class AppModule { 
   constructor(private injector: Injector) {

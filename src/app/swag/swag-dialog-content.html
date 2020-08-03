@@ -1,0 +1,34 @@
+<h2 mat-dialog-title>Buy Some Swag!</h2>
+<mat-dialog-content>
+  <mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step [editable]="false" [stepControl]="sizeForm">
+      <ng-template matStepLabel aria-disabled="true">Pick a Size</ng-template>
+      <div class="form-group" style="text-align: left; padding: 5px;">
+        <!--    <label name="start_loc"><input type='date' id='hasta' value='<?php echo date('Y-m-d');?>'></label>--> 
+           <input class="form-control" type="text" placeholder="Size" [matAutocomplete]="sizeTypeAuto" />
+           <mat-autocomplete #sizeTypeAuto="matAutocomplete">
+             <mat-option *ngFor="let option of sizes" [value]="option" (click)="selectSize(option)">
+               {{ option }}
+             </mat-option>
+           </mat-autocomplete>
+         </div>
+         <button mat-button (click)="confirmSize()" class="btn btn-primary">Confirm</button>
+    </mat-step>
+    <mat-step [editable]="false" [stepControl]="paymentForm">
+      <ng-template matStepLabel aria-disabled="true">Payment</ng-template>
+      <app-paypal (transactionAlert)="stepCallback($event)" [price]="price" [race_id]="race_id" [paymentType]="paymentType"></app-paypal>
+    </mat-step>
+    <mat-step [editable]="false" [stepControl]="shippingForm">
+      <ng-template matStepLabel aria-disabled="true">Shipping Info</ng-template>
+      <app-shipping-address-form (addressChanged)="shippingConfirmed($event)"></app-shipping-address-form>
+    </mat-step>
+    <mat-step [attr.disabled]="stepper.selectedIndex != 2">
+      <ng-template matStepLabel aria-disabled="true">Done</ng-template>
+      <h2 style="text-align: center;">Your payment is complete and has been recorded</h2>
+      <button mat-button [mat-dialog-close]="true" cdkFocusInitial style="float: center;">Complete</button>
+    </mat-step>
+  </mat-horizontal-stepper>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+</mat-dialog-actions>

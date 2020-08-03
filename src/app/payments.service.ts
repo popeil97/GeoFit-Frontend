@@ -14,10 +14,6 @@ export class PaymentsService {
     }; 
   }
 
-  test() {
-    console.log('HI FROM SERVICE');
-  }
-
   confirmPayment(payment:Payment) {
     return this.http.post(environment.apiUrl + '/api/payment-confirmed/',{payment:payment}).toPromise();
   }
@@ -29,4 +25,11 @@ export interface Payment {
   race_id:number;
   payment_id:string,
   status:string;
+  payment_type:PaymentType;
+}
+
+export enum PaymentType {
+  ENTRY=1,
+  SWAG=2,
+  DONATION=3,
 }

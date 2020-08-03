@@ -1,13 +1,9 @@
 <h2 mat-dialog-title>Register for Race!</h2>
 <mat-dialog-content>
   <mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step [editable]="false" [stepControl]="registerLoginform" *ngIf="!isLoggedIn">
-      <ng-template matStepLabel aria-disabled="true">Login/Register for Tucan</ng-template>
-      <app-register (registerAlert)="stepCallback($event)"></app-register>
-    </mat-step>
     <mat-step [editable]="false" [stepControl]="paymentForm" *ngIf="needsPayment">
       <ng-template matStepLabel aria-disabled="true">Pay Signup Fee</ng-template>
-      <app-paypal (transactionAlert)="stepCallback($event)" [price]="price" [race_id]="race_id"></app-paypal>
+      <app-paypal (transactionAlert)="stepCallback($event)" [price]="price" [race_id]="race_id" [paymentType]="paymentType"></app-paypal>
     </mat-step>
     <mat-step [attr.disabled]="stepper.selectedIndex != 2">
       <ng-template matStepLabel aria-disabled="true">Done</ng-template>

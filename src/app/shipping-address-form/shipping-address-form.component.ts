@@ -79,8 +79,9 @@ export class ShippingAddressFormComponent implements OnInit {
   submitConfirmedAddress(): void{
     this._shippingService.submitAddress(this.pendingAddress).then(response => {
       console.log(response);
+      console.log(response);
       if (response['created'] == true){
-        this.addressChanged.emit()
+        this.addressChanged.emit(response['id'])
       }
       else{
         //handle errors

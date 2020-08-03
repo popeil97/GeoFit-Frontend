@@ -17,7 +17,7 @@ export class RaceAboutComponent implements OnInit {
   @ViewChild(MapComponent) mapChild: MapComponent;
   @ViewChild(SignupComponent) signupChild: SignupComponent;
   public AboutForm: FormGroup;
-  aboutData:AboutData = {owner:{}} as AboutData;
+  aboutData:AboutData;
   raceSettings:RaceSettings = {} as RaceSettings;
   showForm: Boolean;
   raceName:string;
@@ -31,6 +31,8 @@ export class RaceAboutComponent implements OnInit {
   public all_user_data:Array<FeedObj>;
   public followedIDs:number[];
   hasPaid:Boolean;
+  hasMerch:Boolean;
+  popup:Boolean;
 
   public num_users:any;
 
@@ -39,6 +41,14 @@ export class RaceAboutComponent implements OnInit {
               private router:Router, 
               public _authService: AuthService,) { }
 
+  ngAfterViewInit(): void {
+    while(!this.aboutData);
+    if(this.popup) {
+      console.log('in here');
+      this.signupChild.openDialog();
+    }
+  }
+
   ngOnInit() {
 
     this.showForm = false;
@@ -46,6 +56,11 @@ export class RaceAboutComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.raceName = params['params']['name'];
       this.raceID = params['params']['id'];
+      this.popup = params['params']['popup'];
+
+      console.log('POPUP:',this.popup);
+
+      
     });
 
     this.raceService.getRace(this.raceID).subscribe(data => {
@@ -65,9 +80,12 @@ export class RaceAboutComponent implements OnInit {
       this.isOwner = resp['isOwner'];
       this.hasJoined = resp['hasJoined'];
       this.hasPaid = resp['hasPaid'];
+      this.hasMerch = this.raceSettings.has_swag;
 
       this.initializeForm();
     });
+
+    
 
     
   }
@@ -75,7 +93,7 @@ export class RaceAboutComponent implements OnInit {
   trySignup(): void {
     if(!this._authService.isLoggedIn()) {
       this.signupChild.closeDialog();
-      this.router.navigate(['/register',{params:JSON.stringify({redirectParams: {name:this.raceName,id:this.raceID}, redirectUrl:'/about'})}]);
+      this.router.navigate(['/register',{params:JSON.stringify({redirectParams: {name:this.raceName,id:this.raceID,popup:true}, redirectUrl:'/about'})}]);
     }
   }
 
@@ -111,6 +129,7 @@ export class RaceAboutComponent implements OnInit {
         ]),
         paymentRequired: new FormControl(this.raceSettings.paymentRequired),
         price: new FormControl(this.raceSettings.price),
+        hasSwag: new FormControl(this.raceSettings.has_swag),
       })
     });
 
@@ -180,6 +199,7 @@ export class RaceAboutComponent implements OnInit {
       this.raceService.updateRaceAbout(formClean,this.raceID).then((resp) => {
         this.aboutData = resp['about_info'] as AboutData;
         this.raceSettings = resp['race_settings'] as RaceSettings;
+        this.hasMerch = this.raceSettings.has_swag;
         this.initializeForm();
         this.toggleForm();
       });
@@ -225,6 +245,7 @@ export interface RaceSettings {
   max_team_size:number;
   paymentRequired: Boolean,
   price:any,
+  has_swag:Boolean,
 }
 
 interface RaceData {

@@ -5,6 +5,7 @@ import { first } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 import {ErrorStateMatcher} from '@angular/material/core';
 import * as moment from 'moment';
+import { MustMatch } from './_helpers/must-match.validator';
 
 @Component({
   selector: 'app-register',
@@ -50,8 +51,11 @@ export class RegisterComponent implements OnInit {
           gender: ['', Validators.required],
           email: ['', [Validators.required,
                         Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
-          password: ['', [Validators.required, Validators.minLength(6)]]
-      });
+          password: ['', [Validators.required, Validators.minLength(6)]],
+          confirmPassword: ['', Validators.required]
+        }, {
+            validator: MustMatch('password', 'confirmPassword')
+        });
     }
 
     // convenience getter for easy access to form fields
