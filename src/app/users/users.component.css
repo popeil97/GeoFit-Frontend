@@ -10231,7 +10231,8 @@ header.masthead h1 {
 
 .left {
   left: 0;
-  background: #2C007E;
+  background-image: url("../../assets/landing/cart.png");
+  
 
 }
 
@@ -10246,9 +10247,9 @@ header.masthead h1 {
 }
 .right {
   right: 0;
-
+  background: #2C007E;
   
-    background-image: url("../../assets/landing/cart.png");
+    
   
 }
 
