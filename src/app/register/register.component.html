@@ -23,7 +23,7 @@
         
         <div class="form-group">
             <select class="form-control" formControlName="gender">
-                <option value="" label=" -Gender- " selected ></option>
+                <option value="" label=" -Gender *- " selected ></option>
                 <option *ngFor="let typeOption of genderOptions" [value]="typeOption">
                 {{ typeOption }}
                 </option>
