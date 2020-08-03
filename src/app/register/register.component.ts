@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 import {ErrorStateMatcher} from '@angular/material/core';
+import * as moment from 'moment';
 import { MustMatch } from './_helpers/must-match.validator';
 
 @Component({
@@ -19,13 +20,16 @@ export class RegisterComponent implements OnInit {
 
     redirectParams: any = null;
     redirectUrl:string;
+    genderOptions:any[];
 
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
         private route:ActivatedRoute,
         private _authService: AuthService,
-    ) {}
+    ) {
+      this.genderOptions = ['Male', 'Female', 'Non-binary'];
+    }
 
     ngOnInit() {
 
@@ -43,7 +47,10 @@ export class RegisterComponent implements OnInit {
       this.registerForm = this.formBuilder.group({
           first_name: ['', Validators.required],
           last_name: ['', Validators.required],
-          username: ['', Validators.required],
+          date_of_birth: ['', Validators.required],
+          gender: ['', Validators.required],
+          email: ['', [Validators.required,
+                        Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
           password: ['', [Validators.required, Validators.minLength(6)]],
           confirmPassword: ['', Validators.required]
         }, {
@@ -64,23 +71,27 @@ export class RegisterComponent implements OnInit {
 
         this.loading = true;
 
+        //Convert date field to Django-compatible format (YYYY-MM-DD)
+        const momentDate = new Date(this.registerForm.value.date_of_birth);
+        const formattedDate = moment(momentDate).format("YYYY-MM-DD");
+        this.registerForm.value.date_of_birth = formattedDate;
+
         //Register and navigate to login
         this._authService.register(this.registerForm.value).subscribe( 
           data => {
             let form = this.registerForm.value
-            this._authService.login({username:form.username,password:form.password}).subscribe(
+            this._authService.login({email:form.email,password:form.password}).subscribe(
               
               data => {
                 console.log('LOGIN RESP:',data);
 
                 localStorage.setItem('access_token', data['token']);
-                localStorage.setItem('loggedInUsername', form.username);
-                this._authService.username = form.username;
+                localStorage.setItem('loggedInUsername', data['username']);
+                this._authService.username = data['username'];
 
                 if(this.redirectParams) {
                   this.router.navigate([this.redirectUrl,this.redirectParams])
                 }
-    
                 else {
                   this.router.navigate['/login'];
                 }

@@ -146,7 +146,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
       shadowUrl: 'leaflet/marker-shadow.png',
     })}).addTo(this.map);
 
-    this.marker_start.bindPopup(this.popupService.makePopup({name:'Start',state:'FL'}));
+    this.marker_start.bindPopup(this.popupService.makePopup({name:'Start',state:'Jerusalem'}));
 
     this.marker_end = L.marker(end_coord,{icon: L.icon({
       iconSize: [ 38, 36 ],
@@ -156,7 +156,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
       shadowUrl: 'leaflet/marker-shadow.png',
     })}).addTo(this.map);
 
-    this.marker_end.bindPopup(this.popupService.makePopup({name:'End',state:'FL'}));
+    this.marker_end.bindPopup(this.popupService.makePopup({name:'End',state:'Philadelphia'}));
 
     if(this.zoom)
     {
@@ -381,7 +381,14 @@ public clearUserPins(){
   private initMap(): void {
     this.map = L.map('map', { zoomControl: false });
 
-    const tiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png', {
+    // const tiles = L.tileLayer('https://tiles.stadiamaps.com/tiles/outdoors/{z}/{x}/{y}{r}.png', {
+    //   maxZoom: 19,
+    //   attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    // });
+
+    // tiles.addTo(this.map);
+
+    const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });

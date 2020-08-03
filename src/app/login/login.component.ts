@@ -31,7 +31,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
       this.loginForm = this.formBuilder.group({
-          username: ['', Validators.required],
+        email: ['', [Validators.required,
+          Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
           password: ['', Validators.required]
       });
 
@@ -51,20 +52,20 @@ export class LoginComponent implements OnInit {
       }
 
       this.loading = true;
-      this._authService.login({'username': this.f.username.value, 'password': this.f.password.value}).subscribe(
+      this._authService.login({'email': this.f.email.value, 'password': this.f.password.value}).subscribe(
         data => {
           localStorage.setItem('access_token', data['token']);
-          localStorage.setItem('loggedInUsername', this.f.username.value);
-          this._authService.username = this.f.username.value;
+          localStorage.setItem('loggedInUsername', data['username']);
+          this._authService.username = data['username'];
 
           //Emit
-          this.loggedInAsUsernameEvent.emit(this.f.username.value);
+          this.loggedInAsUsernameEvent.emit(data['username']);
 
           if (data['success']){
             //this.router.navigate([this.returnUrl]);
             
             //Route to our profile page for now
-            this._userProfileService.goToUserProfile(this.f.username.value);
+            this._userProfileService.goToUserProfile(data['username']);
           }
         },
         err => {
