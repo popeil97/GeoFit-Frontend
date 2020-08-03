@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../auth.service';
 import {ErrorStateMatcher} from '@angular/material/core';
+import { MustMatch } from './_helpers/must-match.validator';
 
 @Component({
   selector: 'app-register',
@@ -43,8 +44,11 @@ export class RegisterComponent implements OnInit {
           first_name: ['', Validators.required],
           last_name: ['', Validators.required],
           username: ['', Validators.required],
-          password: ['', [Validators.required, Validators.minLength(6)]]
-      });
+          password: ['', [Validators.required, Validators.minLength(6)]],
+          confirmPassword: ['', Validators.required]
+        }, {
+            validator: MustMatch('password', 'confirmPassword')
+        });
     }
 
     // convenience getter for easy access to form fields
