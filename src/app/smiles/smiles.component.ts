@@ -10,6 +10,7 @@ export class SmilesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    window.location.replace('https://dev.tucan.fitness');
   }
 
 }

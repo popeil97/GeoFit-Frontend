@@ -192,7 +192,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tucan-dev/dev/1596410193694-2020-08-02T23:16:33.694Z/tucan-dev.zip"
+          "S3Key": "serverless/tucan-dev/dev/1596433163933-2020-08-03T05:39:23.933Z/tucan-dev.zip"
         },
         "FunctionName": "tucan-dev-dev-api",
         "Handler": "s_api.handler",
@@ -210,14 +210,14 @@
         "ApiLogGroup"
       ]
     },
-    "ApiLambdaVersion6BfMJTPj9qeSS6CRaXgvuw9RjrsJMR5nPcrCrImqlI": {
+    "ApiLambdaVersionfoH3fdGwXLLDb9IlRQrDUen9zbzEPuJsoTw1SjeEQ0": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "+1UqU9NykVsQaW9Mmq834a5tuGg98JK8NllGH6dA+Hk="
+        "CodeSha256": "xhMeuVYAnKiK3mXHloH570Z9gwjGIWaEI2HHk9LaIJU="
       }
     },
     "ApiGatewayRestApi": {
@@ -337,7 +337,7 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1596410093856": {
+    "ApiGatewayDeployment1596433065612": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -496,7 +496,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tucan-dev/dev/1596410193694-2020-08-02T23:16:33.694Z/custom-resources.zip"
+          "S3Key": "serverless/tucan-dev/dev/1596433163933-2020-08-03T05:39:23.933Z/custom-resources.zip"
         },
         "FunctionName": "tucan-dev-dev-custom-resource-apigw-cw-role",
         "Handler": "apiGatewayCloudWatchRole/handler.handler",
@@ -552,7 +552,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersion6BfMJTPj9qeSS6CRaXgvuw9RjrsJMR5nPcrCrImqlI"
+        "Ref": "ApiLambdaVersionfoH3fdGwXLLDb9IlRQrDUen9zbzEPuJsoTw1SjeEQ0"
       }
     },
     "ServiceEndpoint": {
