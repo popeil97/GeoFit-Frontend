@@ -5,12 +5,15 @@ import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentType } from '../payments.service';
+import { AboutData } from '../race-about/race-about.component';
 
 
 interface SignupDialogData {
   price:string,
   isLoggedIn:Boolean,
   race_id:number,
+  aboutData:AboutData,
+  hasStarted:Boolean,
 }
 
 @Component({
@@ -27,6 +30,8 @@ export class SignupComponent implements OnInit {
   @Input() price: any;
   @Input() race_id: number;
   @Input() hasPaid: Boolean = false;
+  @Input() aboutData: AboutData = {} as AboutData;
+  @Input() hasStarted:Boolean;
 
   openDialog() {
 
@@ -40,7 +45,7 @@ export class SignupComponent implements OnInit {
       this.price = null;
     }
 
-    const dialogRef = this.dialog.open(SignupDialogContent,{disableClose: true, data:{price:this.price,isLoggedIn:this._authService.isLoggedIn(),race_id:this.race_id} as MatDialogConfig});
+    const dialogRef = this.dialog.open(SignupDialogContent,{disableClose: true, data:{price:this.price,isLoggedIn:this._authService.isLoggedIn(),race_id:this.race_id,aboutData:this.aboutData,hasStarted:this.hasStarted} as MatDialogConfig});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -72,7 +77,9 @@ export class SignupDialogContent {
   isSuccess:Boolean = false;
   needsPayment:Boolean = false;
   race_id:number;
-  @ViewChild('stepper') private stepper: MatStepper;
+  hasStarted:Boolean;
+  aboutData:AboutData;
+  @ViewChild('stepper') public stepper: MatStepper;
 
   registerLoginform: FormGroup = new FormGroup({
     complete: new FormControl('',[
@@ -92,11 +99,15 @@ export class SignupDialogContent {
       this.isLoggedIn = data.isLoggedIn;
       this.price = data.price;
       this.race_id = data.race_id;
+      this.hasStarted = data.hasStarted;
+      this.aboutData = data.aboutData;
       if(this.price != null && this.price != undefined) {
         this.needsPayment = true;
       }
       console.log('PRICE:',this.price)
       console.log('NEEDS PAYMENT:',this.needsPayment);
+      console.log('ABOUT DATA FROM CHILD:',data.aboutData);
+      console.log('hasStarted:',this.hasStarted);
     }
 
   // onNoClick(): void {

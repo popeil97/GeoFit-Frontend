@@ -8,10 +8,20 @@
     <mat-step [attr.disabled]="stepper.selectedIndex != 2">
       <ng-template matStepLabel aria-disabled="true">Done</ng-template>
       <h2 style="text-align: center;">You are Registered!</h2>
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial style="float: center;">Complete Registration</button>
+      <div *ngIf="!hasStarted">
+        <h3>The Race does not start until {{aboutData.start_date}} come by then and join the race!</h3>
+        <h3>In the meantime, download strava on your mobile device so you're prepared for race day!</h3>
+      </div>
+
+      <div *ngIf="hasStarted">
+        <h3>You're Ready to join the race!</h3>
+      </div>
+      
+      
     </mat-step>
   </mat-horizontal-stepper>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close *ngIf="stepper.selectedIndex != 1">Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial style="float: center;" class="btn btn-success" *ngIf="stepper.selectedIndex == 1">Complete Registration</button>
 </mat-dialog-actions>

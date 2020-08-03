@@ -35,6 +35,7 @@ export class RaceAboutComponent implements OnInit {
   hasPaid:Boolean;
   hasMerch:Boolean;
   popup:Boolean;
+  hasStarted:Boolean;
 
   public num_users:any;
 
@@ -83,6 +84,7 @@ export class RaceAboutComponent implements OnInit {
       this.isOwner = resp['isOwner'];
       this.hasJoined = resp['hasJoined'];
       this.hasPaid = resp['hasPaid'];
+      this.hasStarted = resp['hasStarted'];
       this.hasMerch = this.raceSettings.has_swag;
 
       this.initializeForm();

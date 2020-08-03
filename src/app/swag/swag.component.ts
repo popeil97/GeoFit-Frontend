@@ -138,7 +138,7 @@ export class SwagDialogContent {
   imageUrl:any;
   
   paymentType = PaymentType.SWAG;
-  @ViewChild('stepper') private stepper: MatStepper;
+  @ViewChild('stepper') public stepper: MatStepper;
   paymentForm = new FormGroup({
     complete: new FormControl('',[
       Validators.required

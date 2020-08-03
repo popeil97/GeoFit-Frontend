@@ -46,5 +46,6 @@
   </mat-horizontal-stepper>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button mat-dialog-close *ngIf="stepper.selectedIndex != 3">Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial style="float: center;" class="btn btn-success" *ngIf="stepper.selectedIndex == 3">Complete Registration</button>
 </mat-dialog-actions>
