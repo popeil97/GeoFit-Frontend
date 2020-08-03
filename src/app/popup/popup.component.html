@@ -1,7 +1,7 @@
 <div *ngIf="this.userData" style="margin:auto;">
   <p style="margin:0 auto;">
     <b>
-      <app-user-profile-nav [username]=userData.display_name></app-user-profile-nav>
+      <app-user-profile-nav [username]=userData.username [displayName]=userData.username></app-user-profile-nav>
     </b>
   </p>
 

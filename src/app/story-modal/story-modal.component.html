@@ -11,7 +11,7 @@
 
         <div class="column">
           <img width="50px" src="{{ storyItem.profile_url }}">
-          <app-user-profile-nav [username]=storyItem.display_name></app-user-profile-nav>
+          <app-user-profile-nav [username]=storyItem.username [displayName]=storyItem.display_name></app-user-profile-nav>
 
           <button type="button" class="close" (click)="hideModal()">&times;</button>
           <br><br>

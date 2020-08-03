@@ -283,6 +283,7 @@ interface RaceData {
 interface FeedObj {
   user_id: number;
   display_name: string;
+  username: string;
   profile_url:string
   joined: boolean;
   traveled: boolean;

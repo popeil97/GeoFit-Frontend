@@ -10,6 +10,7 @@ declare var $: any;
 })
 export class UserProfileNavComponent implements OnInit {
   @Input() username: string;
+  @Input() displayName: string;
 
   constructor(private _userProfileService: UserProfileService) { }
 

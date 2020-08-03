@@ -37,6 +37,7 @@ export class CommentsComponent implements OnInit {
 
 interface Comment {
   display_name:string;
+  username: string;
   profile_url:string;
   message:string;
   created_ts:number;

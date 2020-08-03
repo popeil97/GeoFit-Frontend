@@ -39,6 +39,7 @@ export class StoryModalComponent implements OnInit {
 interface FeedObj {
   user_id: number;
   display_name: string;
+  username: string;
   profile_url:string
   joined: boolean;
   traveled: boolean;
@@ -58,6 +59,7 @@ interface FeedObj {
 
 interface Comment {
   display_name:string;
+  username: string;
   profile_url:string;
   body:string;
   created_ts:number;
