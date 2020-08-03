@@ -59,7 +59,7 @@
     "ApiLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/tucan-dev-dev-api"
+        "LogGroupName": "/aws/lambda/geofit-production-api"
       }
     },
     "IamRoleLambdaExecution": {
@@ -87,8 +87,8 @@
               "Fn::Join": [
                 "-",
                 [
-                  "tucan-dev",
-                  "dev",
+                  "geofit",
+                  "production",
                   "lambda"
                 ]
               ]
@@ -104,7 +104,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/tucan-dev-dev*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/geofit-production*:*"
                     }
                   ]
                 },
@@ -115,7 +115,7 @@
                   ],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/tucan-dev-dev*:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/geofit-production*:*:*"
                     }
                   ]
                 }
@@ -128,8 +128,8 @@
           "Fn::Join": [
             "-",
             [
-              "tucan-dev",
-              "dev",
+              "geofit",
+              "production",
               {
                 "Ref": "AWS::Region"
               },
@@ -192,9 +192,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tucan-dev/dev/1596433163933-2020-08-03T05:39:23.933Z/tucan-dev.zip"
+          "S3Key": "serverless/geofit/production/1596466002650-2020-08-03T14:46:42.650Z/geofit.zip"
         },
-        "FunctionName": "tucan-dev-dev-api",
+        "FunctionName": "geofit-production-api",
         "Handler": "s_api.handler",
         "MemorySize": 192,
         "Role": {
@@ -210,20 +210,20 @@
         "ApiLogGroup"
       ]
     },
-    "ApiLambdaVersionfoH3fdGwXLLDb9IlRQrDUen9zbzEPuJsoTw1SjeEQ0": {
+    "ApiLambdaVersiont57TRzeh7xb2TeYvbcrqZ5NMIj7txHpJwEdXedUA": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "ApiLambdaFunction"
         },
-        "CodeSha256": "xhMeuVYAnKiK3mXHloH570Z9gwjGIWaEI2HHk9LaIJU="
+        "CodeSha256": "AsMuOVYkZiH8yUla4usAWpVDmcIOk/+bDnYqf/YcIT0="
       }
     },
     "ApiGatewayRestApi": {
       "Type": "AWS::ApiGateway::RestApi",
       "Properties": {
-        "Name": "dev-tucan-dev",
+        "Name": "production-geofit",
         "EndpointConfiguration": {
           "Types": [
             "EDGE"
@@ -337,13 +337,13 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1596433065612": {
+    "ApiGatewayDeployment1596465901948": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         },
-        "StageName": "dev"
+        "StageName": "production"
       },
       "DependsOn": [
         "ApiGatewayMethodProxyVarAny",
@@ -390,7 +390,7 @@
     "ApiGatewayLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/api-gateway/tucan-dev-dev"
+        "LogGroupName": "/aws/api-gateway/geofit-production"
       }
     },
     "CustomApiGatewayAccountCloudWatchRole": {
@@ -430,8 +430,8 @@
               "Fn::Join": [
                 "-",
                 [
-                  "dev",
-                  "tucan-dev",
+                  "production",
+                  "geofit",
                   "custom-resources-lambda"
                 ]
               ]
@@ -496,9 +496,9 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/tucan-dev/dev/1596433163933-2020-08-03T05:39:23.933Z/custom-resources.zip"
+          "S3Key": "serverless/geofit/production/1596466002650-2020-08-03T14:46:42.650Z/custom-resources.zip"
         },
-        "FunctionName": "tucan-dev-dev-custom-resource-apigw-cw-role",
+        "FunctionName": "geofit-production-custom-resource-apigw-cw-role",
         "Handler": "apiGatewayCloudWatchRole/handler.handler",
         "MemorySize": 1024,
         "Runtime": "nodejs12.x",
@@ -517,7 +517,7 @@
     "CloudWatchLogsSubscriptionFilterApiLogGroup": {
       "Type": "AWS::Logs::SubscriptionFilter",
       "Properties": {
-        "DestinationArn": "arn:aws:logs:us-west-2:802587217904:destination:Yj7x6jv0jvqQ0sv0RJ#GCBtDLbtRZ45hgs8PD#tucan-dev#dev",
+        "DestinationArn": "arn:aws:logs:us-west-2:802587217904:destination:Yj7x6jv0jvqQ0sv0RJ#hYjXHsG4XfJp6VfDMB#geofit#production",
         "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
         "LogGroupName": {
           "Ref": "ApiLogGroup"
@@ -527,7 +527,7 @@
     "CloudWatchLogsSubscriptionFilterApiGatewayLogGroup": {
       "Type": "AWS::Logs::SubscriptionFilter",
       "Properties": {
-        "DestinationArn": "arn:aws:logs:us-west-2:802587217904:destination:Yj7x6jv0jvqQ0sv0RJ#GCBtDLbtRZ45hgs8PD#tucan-dev#dev",
+        "DestinationArn": "arn:aws:logs:us-west-2:802587217904:destination:Yj7x6jv0jvqQ0sv0RJ#hYjXHsG4XfJp6VfDMB#geofit#production",
         "FilterPattern": "\"SLS_ACCESS_LOG\"",
         "LogGroupName": {
           "Ref": "ApiGatewayLogGroup"
@@ -552,7 +552,7 @@
     "ApiLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "ApiLambdaVersionfoH3fdGwXLLDb9IlRQrDUen9zbzEPuJsoTw1SjeEQ0"
+        "Ref": "ApiLambdaVersiont57TRzeh7xb2TeYvbcrqZ5NMIj7txHpJwEdXedUA"
       }
     },
     "ServiceEndpoint": {
@@ -573,7 +573,7 @@
             {
               "Ref": "AWS::URLSuffix"
             },
-            "/dev"
+            "/production"
           ]
         ]
       }
