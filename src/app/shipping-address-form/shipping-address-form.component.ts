@@ -41,9 +41,6 @@ export class ShippingAddressFormComponent implements OnInit {
         Validators.maxLength(20)
       ]),
       state: new FormControl(''),
-      zip4: new FormControl('', [
-        Validators.maxLength(4)
-      ]),
       zip5: new FormControl('', [
         Validators.maxLength(5)
       ]),

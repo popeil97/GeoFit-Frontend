@@ -5,6 +5,14 @@
       <ng-template matStepLabel aria-disabled="true">Pick a Size</ng-template>
       <div class="form-group" style="text-align: left; padding: 5px;">
         <!--    <label name="start_loc"><input type='date' id='hasta' value='<?php echo date('Y-m-d');?>'></label>--> 
+        <mat-card class="example-card" >
+          <mat-card-header>
+            <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+          </mat-card-header>
+          <mat-card-content>
+            <img src={{imageUrl}} style="width:100%; position: relative;">   
+          </mat-card-content>
+        </mat-card>
            <input class="form-control" type="text" placeholder="Size" [matAutocomplete]="sizeTypeAuto" />
            <mat-autocomplete #sizeTypeAuto="matAutocomplete">
              <mat-option *ngFor="let option of sizes" [value]="option" (click)="selectSize(option)">
@@ -16,7 +24,15 @@
     </mat-step>
     <mat-step [editable]="false" [stepControl]="paymentForm">
       <ng-template matStepLabel aria-disabled="true">Payment</ng-template>
-      <app-paypal (transactionAlert)="stepCallback($event)" [price]="price" [race_id]="race_id" [paymentType]="paymentType"></app-paypal>
+      <mat-card class="example-card" >
+        <mat-card-header>
+          <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+        </mat-card-header>
+        <mat-card-content>
+          <app-paypal (transactionAlert)="stepCallback($event)" [price]="price" [race_id]="race_id" [paymentType]="paymentType" style="position: relative; width: 100%;"></app-paypal>   
+        </mat-card-content>
+      </mat-card>
+      
     </mat-step>
     <mat-step [editable]="false" [stepControl]="shippingForm">
       <ng-template matStepLabel aria-disabled="true">Shipping Info</ng-template>

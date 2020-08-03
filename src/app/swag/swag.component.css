@@ -2,3 +2,8 @@
     display: inline-flex;
     vertical-align: top;
 }
+
+.center {
+    width: 10%;
+    height: 10%;
+  }

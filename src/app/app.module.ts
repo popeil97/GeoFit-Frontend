@@ -64,6 +64,7 @@ import { createCustomElement } from '@angular/elements';
 import { PopupComponent } from './popup/popup.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { ShippingAddressFormComponent } from './shipping-address-form/shipping-address-form.component';
+import { SmilesComponent } from './smiles/smiles.component';
 
 
 @NgModule({
@@ -109,6 +110,7 @@ import { ShippingAddressFormComponent } from './shipping-address-form/shipping-a
     PopupComponent,
     ShippingAddressComponent,
     ShippingAddressFormComponent,
+    SmilesComponent,
   ],
   imports: [
     BrowserModule,

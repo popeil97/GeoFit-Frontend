@@ -7,7 +7,7 @@ declare var $: any
 import { MapComponent } from '../map/map.component';
 import { SignupComponent } from '../signup/signup.component';
 import { LeaderboardItem } from '../leaderboard/leaderboard.component';
-import { CountdownModule } from 'ngx-countdown';
+import { SwagComponent } from '../swag/swag.component';
 
 @Component({
   selector: 'app-race-about',
@@ -17,6 +17,7 @@ import { CountdownModule } from 'ngx-countdown';
 export class RaceAboutComponent implements OnInit {
   @ViewChild(MapComponent) mapChild: MapComponent;
   @ViewChild(SignupComponent) signupChild: SignupComponent;
+  @ViewChild(SwagComponent) swagChild: SwagComponent;
   public AboutForm: FormGroup;
   aboutData:AboutData;
   raceSettings:RaceSettings = {} as RaceSettings;
@@ -76,6 +77,7 @@ export class RaceAboutComponent implements OnInit {
 
     this.raceService.getRaceAbout(this.raceID).then((resp) => {
       resp = resp as any;
+      console.log('RESP FROM SERVER:',resp);
       this.aboutData = resp['about_info'] as AboutData;
       this.raceSettings = resp['race_settings'];
       this.isOwner = resp['isOwner'];
@@ -177,8 +179,21 @@ export class RaceAboutComponent implements OnInit {
 
     this.raceService.joinRace(race_id).then((res) => {
       console.log('RES FROM JOIN:',res);
-      this.router.navigate(['/race',{name:this.raceName,id:race_id}]);
+      // this.router.navigate(['/race',{name:this.raceName,id:race_id}]);
     });
+  }
+
+  signupCallback() {
+    // prompt for swag
+    // then join race
+
+    console.log('IN CALL BACK')
+
+    if(this.hasMerch) {
+      this.swagChild.openDialog();
+    }
+
+    this.joinRace();
   }
 
   update(): void {

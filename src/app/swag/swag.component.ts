@@ -10,12 +10,14 @@ import { Order, OrderService } from '../order.service';
 interface SwagDialogData {
   price:string,
   race_id:number,
+  imageUrl:any,
 }
 
 interface SwagForm {
   title:string,
   description:string,
   price:string,
+  image:any,
 }
 
 interface SwagStepCallbackData {
@@ -69,7 +71,7 @@ export class SwagComponent implements OnInit {
 
   openDialog() {
 
-    const dialogRef = this.dialog.open(SwagDialogContent,{disableClose: true, data:{price:this.swagModelForm.price,race_id:this.race_id} as MatDialogConfig});
+    const dialogRef = this.dialog.open(SwagDialogContent,{disableClose: true, data:{price:this.swagModelForm.price,race_id:this.race_id,imageUrl:this.swagModelForm.image} as MatDialogConfig});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -133,6 +135,7 @@ export class SwagDialogContent {
   race_id:number;
   sizes:string[] = ['XXS','XS','S','M','L','XL','XXL'];
   completeOrder:Order = {} as Order
+  imageUrl:any;
   
   paymentType = PaymentType.SWAG;
   @ViewChild('stepper') private stepper: MatStepper;
@@ -160,6 +163,7 @@ export class SwagDialogContent {
       this.price = data.price;
       this.race_id = data.race_id;
       this.completeOrder.race_id = this.race_id;
+      this.imageUrl = data.imageUrl;
   }
 
   stepCallback(callbackResp:SignupCallbackStruct) {

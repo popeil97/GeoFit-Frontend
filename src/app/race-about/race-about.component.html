@@ -9,7 +9,7 @@
             <div *ngIf="aboutData.race_type == 1">
                <mat-card-title>{{aboutData.name}}
                <i class="material-icons" style="color:#BC164D;">directions_run</i>
-               <app-signup [price]="raceSettings.price" style="color:#2C00A5;" [race_id]="raceID" (signupCallback)="joinRace($event)" [hasPaid]="hasPaid" (click)="trySignup()"></app-signup>
+               <app-signup [price]="raceSettings.price" style="color:#2C00A5;" [race_id]="raceID" (signupCallback)="signupCallback($event)" [hasPaid]="hasPaid" (click)="trySignup()"></app-signup>
              </mat-card-title>
 
              </div>
@@ -113,7 +113,7 @@ August 4, 2020 / י״ד אב תש״פ
 
      </mat-card-content>
      <mat-card-actions>
-       <app-signup [price]="raceSettings.price" [race_id]="raceID" (signupCallback)="joinRace($event)" [hasPaid]="hasPaid" (click)="trySignup()"></app-signup>
+       <app-signup [price]="raceSettings.price" [race_id]="raceID" (signupCallback)="signupCallback($event)" [hasPaid]="hasPaid"  (click)="trySignup()"></app-signup>
        <button mat-button (click)="toggleForm()" *ngIf="isOwner">EDIT</button>
      </mat-card-actions>
    </mat-card>
