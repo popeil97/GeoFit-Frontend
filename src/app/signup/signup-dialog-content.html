@@ -5,15 +5,17 @@
       <ng-template matStepLabel aria-disabled="true">Pay Signup Fee</ng-template>
       <app-paypal (transactionAlert)="stepCallback($event)" [price]="price" [race_id]="race_id" [paymentType]="paymentType"></app-paypal>
     </mat-step>
-    <mat-step [attr.disabled]="stepper.selectedIndex != 2">
+    <mat-step [attr.disabled]="stepper.selectedIndex != 2" >
       <ng-template matStepLabel aria-disabled="true">Done</ng-template>
       <h2 style="text-align: center;">You are Registered!</h2>
-      <div *ngIf="!hasStarted">
-        <h3>The Race does not start until {{aboutData.start_date}} come by then and join the race!</h3>
+      <div *ngIf="!hasStarted" style="text-align:center;">
+        <h3>The Race does not start until 8/16, 12:01 AM, come by then and join the race!</h3>
+        <span class="material-icons">sentiment_very_satisfied</span>
         <h3>In the meantime, download strava on your mobile device so you're prepared for race day!</h3>
+        <h3>Also, you can go to your profile (Located in the top left <span class="material-icons">account_circle</span>) and change your picture and info.</h3>
       </div>
 
-      <div *ngIf="hasStarted">
+      <div *ngIf="hasStarted" style="text-align:center;">
         <h3>You're Ready to join the race!</h3>
       </div>
       
