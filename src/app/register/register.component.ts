@@ -91,23 +91,24 @@ export class RegisterComponent implements OnInit {
                 this._authService.username = data['username'];
 
                 if(this.redirectParams) {
-                  console.log('params here')
                   this.router.navigate([this.redirectUrl,this.redirectParams])
                 }
                 else {
-                  console.log('not here')
                   this.router.navigate(['/login']);
                 }
               },
             err => {
               this.loading = false;
-              this.errors = err['error']
+              this.errors = err['error'];
+              console.log(this.errors);
             });
             
           },
           err => {
+            console.log(err);
             this.loading = false;
-            this.errors = err['error']
+            this.errors = err['error'];
+            console.log(this.errors);
           });
 
     }
