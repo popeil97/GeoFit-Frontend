@@ -71,7 +71,9 @@
        </mat-card-content>
        <mat-card-actions>
     <!--     <button mat-button (click)="joinRace()" *ngIf="this._authService.token">JOIN</button> -->
-         <button mat-button (click)="viewRace()">VIEW MAP</button>
+    <!--  <div class="button glow-button"> -->
+         <button mat-button (click)="viewRace()" >VIEW MAP</button>
+     <!--  </div> -->
        </mat-card-actions>
      </mat-card>
 
@@ -94,7 +96,7 @@
        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
      </mat-card-header>
      <mat-card-content >
-      <div style="overflow-y: scroll;height: 348px;background-color:#EFFAF7;">
+      <div style="overflow-y: scroll;height: 295px;background-color:#EFFAF7;" *ngIf="!hasJoined">
       It is hard to comprehend how drastically things have changed this year in the world and, on a more personal level, for our family.  We can’t imagine what Adam would say about life during COVID-19, but we believe that he would have drawn strength, as we have, from the different ways we are using technology to stay connected despite physical distances.  
 <br><br>
 We’d like to now take this one step further (yes, pun intended) by holding a virtual race in honor of Adam - sMiles for Adam.  Tucan Fitness has generously helped us create a virtual 100 mile challenge in which each of us can participate in whichever way - running, walking and/or biking - and at whatever level we want.  Do it outside, on a treadmill and/or on a stationary bike as you binge watch even more Netflix (or rebroadcasts of past sporting events!). The challenge will begin on August 16th and end on September 18th, which this year falls on Adam’s Hebrew birthday, כ״ט אלול - erev Rosh Hashanah. 
@@ -109,11 +111,35 @@ Sara Bucholtz and Talia, Dena & Ilan Feldman
 August 4, 2020 / י״ד אב תש״פ 
 </div>
 
-  <img src="../../assets/landing/sMILES.png" alt="Race Image" style="width:40%;" class="center">   
+<div style="overflow-y: scroll;height: 328px;background-color:#EFFAF7;" *ngIf="hasJoined">
+      It is hard to comprehend how drastically things have changed this year in the world and, on a more personal level, for our family.  We can’t imagine what Adam would say about life during COVID-19, but we believe that he would have drawn strength, as we have, from the different ways we are using technology to stay connected despite physical distances.  
+<br><br>
+We’d like to now take this one step further (yes, pun intended) by holding a virtual race in honor of Adam - sMiles for Adam.  Tucan Fitness has generously helped us create a virtual 100 mile challenge in which each of us can participate in whichever way - running, walking and/or biking - and at whatever level we want.  Do it outside, on a treadmill and/or on a stationary bike as you binge watch even more Netflix (or rebroadcasts of past sporting events!). The challenge will begin on August 16th and end on September 18th, which this year falls on Adam’s Hebrew birthday, כ״ט אלול - erev Rosh Hashanah. 
+<br><br>
+While each participant will run, walk or bike in their own neighborhood or home, our shared virtual route will start in Jerusalem and continue in New Jersey.  Each stop on the virtual route was part of Adam’s life. One stop on the route is The Jewish Center in Princeton, New Jersey, where Adam was honored to serve as Rabbi for 14½ years, and 100% of every participant dollar will benefit the synagogue’s Rabbi Adam Feldman Memorial Fund. The virtual route will end at Citizens Bank Park in Philadelphia, where Adam’s beloved Phillies play.  You can participate on your own or form a group of up to 5 participants and you’ll be able to track your progress and others on the route. You will also be able to upload photos of your activities, which we would love to see!
+<br><br>
+Participants are invited to complete as many or as few miles as they wish. The key is that this will bring us together to honor Adam and help connect us when we cannot gather together in person. 
+<br><br>
+Fondly and with sMiles,<br>
+Sara Bucholtz and Talia, Dena & Ilan Feldman         
+<br><br>
+August 4, 2020 / י״ד אב תש״פ 
+</div>
+
+<div class="row">
+  <div class="column-merch">
+    <br>
+     <img src="../../assets/landing/sMILES.png" alt="Race Image" style="width:80%;" class="center">
+  </div>
+  <div class="column-merch">
+    <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"  style="padding-left: 10%;"></app-swag>
+  </div>
+</div>
+    
 
      </mat-card-content>
      <mat-card-actions>
-      <div class="button glow-button">
+      <div class="button glow-button" *ngIf="!hasJoined">
        <app-signup [price]="raceSettings.price" [race_id]="raceID" (signupCallback)="signupCallback($event)" [hasPaid]="hasPaid" (click)="trySignup()"></app-signup>
      </div>
        <button mat-button (click)="toggleForm()" *ngIf="isOwner">EDIT</button>
@@ -215,9 +241,7 @@ August 4, 2020 / י״ד אב תש״פ
 
 </div>
 
-<div class="column-about">
-  <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"  style="padding-left: 10%;"></app-swag>
-</div>
+
 
 
 <div class="modal fade" id="registerModal">
@@ -242,25 +266,6 @@ August 4, 2020 / י״ד אב תש״פ
 
 
 
-
-
-
-
-
-
- <br>
- <br>
- <br>
-
-
-
-
-
-
-
-
-  <br>
-  <br>
   <br>
 
 
