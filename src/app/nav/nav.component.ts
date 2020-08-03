@@ -29,7 +29,7 @@ export class NavComponent implements OnInit {
       e.stopPropagation();
     });
 
-    Observable.interval(5000) // make much larger in production
+    Observable.interval(120000) // make much larger in production
     .switchMap(() => this._notificationService.getNotifications())
     .subscribe((resp:NotificationResp) => {
       console.log(resp);
