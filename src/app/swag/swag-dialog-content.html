@@ -1,18 +1,13 @@
 <h2 mat-dialog-title>Buy Some Swag!</h2>
-<mat-dialog-content>
+<mat-dialog-content style="width:650px;"  class="center1">
   <mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step [editable]="false" [stepControl]="sizeForm">
+    <mat-step [editable]="true" [stepControl]="sizeForm">
       <ng-template matStepLabel aria-disabled="true">Pick a Size</ng-template>
-      <div class="form-group" style="text-align: left; padding: 5px;">
+      <div class="form-group" style="padding: 5px;">
         <!--    <label name="start_loc"><input type='date' id='hasta' value='<?php echo date('Y-m-d');?>'></label>--> 
-        <mat-card class="example-card" >
-          <mat-card-header>
-            <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-          </mat-card-header>
-          <mat-card-content>
-            <img src={{imageUrl}} style="width:100%; position: relative;">   
-          </mat-card-content>
-        </mat-card>
+
+            <img src="../../assets/landing/shirts.jpeg" alt="Shirts Image" style="width:100%;" class="center1">
+
            <input class="form-control" type="text" placeholder="Size" [matAutocomplete]="sizeTypeAuto" />
            <mat-autocomplete #sizeTypeAuto="matAutocomplete">
              <mat-option *ngFor="let option of sizes" [value]="option" (click)="selectSize(option)">
@@ -20,7 +15,9 @@
              </mat-option>
            </mat-autocomplete>
          </div>
-         <button mat-button (click)="confirmSize()" class="btn btn-primary">Confirm</button>
+         <div class="center1">
+         <button mat-button (click)="confirmSize()" class="btn btn-primary" style="background-color: #2C00A5;">Confirm</button>
+       </div>
     </mat-step>
     <mat-step [editable]="false" [stepControl]="paymentForm">
       <ng-template matStepLabel aria-disabled="true">Payment</ng-template>
@@ -41,7 +38,6 @@
     <mat-step [attr.disabled]="stepper.selectedIndex != 2">
       <ng-template matStepLabel aria-disabled="true">Done</ng-template>
       <h2 style="text-align: center;">Your payment is complete and has been recorded</h2>
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial style="float: center;">Complete</button>
     </mat-step>
   </mat-horizontal-stepper>
 </mat-dialog-content>

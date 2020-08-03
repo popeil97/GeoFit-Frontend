@@ -133,7 +133,7 @@ export class SwagComponent implements OnInit {
 export class SwagDialogContent {
   price:string;
   race_id:number;
-  sizes:string[] = ['XXS','XS','S','M','L','XL','XXL'];
+  sizes:string[] = ['S','M','L','XL','2XL','3XL'];
   completeOrder:Order = {} as Order
   imageUrl:any;
   

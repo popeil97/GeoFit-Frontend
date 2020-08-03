@@ -68,7 +68,7 @@
       </div>
   
       <div style="padding: 5px; position: relative; float: left;">
-        <button class="btn btn-primary" mat-raised-button (click)="validateAddress()">Submit</button>
+        <button class="btn btn-primary" mat-raised-button (click)="validateAddress()" style="background-color: #2C00A5;">Submit</button>
       </div>
   
     </form>
@@ -87,7 +87,7 @@
   <p *ngIf=pendingAddress.Zip5>{{ pendingAddress.Zip5 }}</p>
 
   <div style="padding: 5px; position: relative; float: left;">
-      <button class="btn btn-primary" mat-raised-button (click)="submitConfirmedAddress()">Confirm</button>
+      <button class="btn btn-primary" mat-raised-button (click)="submitConfirmedAddress()" style="background-color: #2C00A5">Confirm</button>
   </div>
 
 </div>

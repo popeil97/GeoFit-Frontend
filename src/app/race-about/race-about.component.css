@@ -13,6 +13,12 @@
     margin: 1px;
   }
 
+  .column-merch{
+    width: 49%;
+    margin: 1px;
+  }
+
+
   .column-map{
     width: 49%;
     margin: 1px;
@@ -33,7 +39,7 @@
   text-decoration: none;
   color: rgba(255, 255, 255, 1);
   box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
-  background: #2C007E;
+  background: #2C00A5;
   border-radius: 4px;
   font-weight: normal;
   text-transform: uppercase;
