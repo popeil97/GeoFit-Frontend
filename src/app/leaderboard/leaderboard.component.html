@@ -62,6 +62,9 @@
           <div class="column-lb2">
             <p style="display:inline;color:#2C007E;">{{group.total_distance}}</p><p style="font-size: 8px;display:inline; color:#16697a;">{{group.distance_type}}</p>
           </div>
+          <div class="column-lb3">
+            <app-user-follow [userID]=group.user_id [follows]=group.follows></app-user-follow>
+          </div>
        </mat-expansion-panel-header>
 
        <mat-card *ngFor="let member of group.child_user_stats">
@@ -103,6 +106,9 @@
           </div>
           <div class="column-lb2">
             <p style="display:inline;color:#2C007E;">{{group.total_distance}}</p><p style="font-size: 8px;display:inline; color:#16697a;">{{group.distance_type}}</p>
+          </div>
+          <div class="column-lb3">
+            <app-user-follow [userID]=group.user_id [follows]=group.follows></app-user-follow>
           </div>
        </mat-expansion-panel-header>
 
