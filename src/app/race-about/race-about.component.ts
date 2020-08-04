@@ -54,6 +54,10 @@ export class RaceAboutComponent implements OnInit {
 
   ngOnInit() {
 
+    if (typeof window.orientation !== 'undefined') { 
+      alert("While we work quickly to optimize for mobile, this website is best viewed on a Mac or PC web browser. If you have questions or need help e-mail admin@tucan.fitness");
+     }
+
     this.showForm = false;
 
     this.route.paramMap.subscribe(params => {

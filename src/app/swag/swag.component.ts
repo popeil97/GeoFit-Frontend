@@ -6,6 +6,8 @@ import { SwagService } from '../swag.service';
 import { PaymentType } from '../payments.service';
 import { SignupCallbackStruct } from '../signup/signup.component';
 import { Order, OrderService } from '../order.service';
+import { AuthService } from '../auth.service';
+import { Router } from '@angular/router';
 
 interface SwagDialogData {
   price:string,
@@ -33,13 +35,14 @@ interface SwagStepCallbackData {
 })
 export class SwagComponent implements OnInit {
 
-  constructor(public dialog: MatDialog,private _swagService:SwagService) { }
+  constructor(public dialog: MatDialog,private _swagService:SwagService,private _authService: AuthService,private router:Router) { }
 
   @Output() signupCallback: EventEmitter<any> = new EventEmitter();
   @Input() price: any;
   @Input() race_id: number;
   @Input() hasPaid: Boolean = false;
   @Input() isOwner: Boolean = false;
+  @Input() raceName: string;
   swagForm: FormGroup;
   isEdit:Boolean = false;
   uploadedUrl:any;
@@ -71,6 +74,11 @@ export class SwagComponent implements OnInit {
 
   openDialog() {
 
+
+    if(!this._authService.isLoggedIn()) {
+      this.router.navigate(['/register',{params:JSON.stringify({redirectParams: {name:this.raceName,id:this.race_id}, redirectUrl:'/about'})}]);
+      return;
+    }
     const dialogRef = this.dialog.open(SwagDialogContent,{disableClose: true, data:{price:this.swagModelForm.price,race_id:this.race_id,imageUrl:this.swagModelForm.image} as MatDialogConfig});
 
     dialogRef.afterClosed().subscribe(result => {
