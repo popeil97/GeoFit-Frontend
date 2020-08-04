@@ -34,6 +34,7 @@
     </mat-step>
     <mat-step [editable]="false" [stepControl]="shippingForm">
       <ng-template matStepLabel aria-disabled="true">Shipping Info</ng-template>
+      <h3><b>The shirt will ship to the address you enter, continental US only</b></h3>
       <app-shipping-address-form (addressChanged)="shippingConfirmed($event)"></app-shipping-address-form>
     </mat-step>
     <mat-step [attr.disabled]="stepper.selectedIndex != 2">

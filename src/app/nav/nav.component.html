@@ -87,6 +87,15 @@
     </div>
    </li>
 
+   <li class="nav-item" style="right:30px;">
+      
+    <div class="row" *ngIf="!this._authService.isLoggedIn()">
+      <div class="container">
+          <button (click)="login()" class="btn btn-primary" style="background-color:#2C007E; border-color: #2C007E;font-size:10px;padding:1px;">Log In </button>
+      </div>
+    </div>
+   </li>
+
 
     </ul>
   </div>

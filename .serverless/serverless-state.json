@@ -1,11 +1,11 @@
 {
   "service": {
-    "service": "tucan-dev",
+    "service": "geofit",
     "serviceObject": {
-      "name": "tucan-dev"
+      "name": "geofit"
     },
     "provider": {
-      "stage": "dev",
+      "stage": "production",
       "variableSyntax": "\\${([^{}]+?)}",
       "name": "aws",
       "runtime": "nodejs10.x",
@@ -75,7 +75,7 @@
           "ApiLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/tucan-dev-dev-api"
+              "LogGroupName": "/aws/lambda/geofit-production-api"
             }
           },
           "IamRoleLambdaExecution": {
@@ -103,8 +103,8 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "tucan-dev",
-                        "dev",
+                        "geofit",
+                        "production",
                         "lambda"
                       ]
                     ]
@@ -120,7 +120,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/tucan-dev-dev*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/geofit-production*:*"
                           }
                         ]
                       },
@@ -131,7 +131,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/tucan-dev-dev*:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/geofit-production*:*:*"
                           }
                         ]
                       }
@@ -144,8 +144,8 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "tucan-dev",
-                    "dev",
+                    "geofit",
+                    "production",
                     {
                       "Ref": "AWS::Region"
                     },
@@ -208,9 +208,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/tucan-dev/dev/1596519109412-2020-08-04T05:31:49.412Z/tucan-dev.zip"
+                "S3Key": "serverless/geofit/production/1596545120073-2020-08-04T12:45:20.073Z/geofit.zip"
               },
-              "FunctionName": "tucan-dev-dev-api",
+              "FunctionName": "geofit-production-api",
               "Handler": "s_api.handler",
               "MemorySize": 192,
               "Role": {
@@ -226,20 +226,20 @@
               "ApiLogGroup"
             ]
           },
-          "ApiLambdaVersioncugi9rL5kgQIiHXFJc5FKIzVZF2UlFwielWvcrcxcM": {
+          "ApiLambdaVersionZ4zkcg8Vu54HFSLJH0F0me4HZlxqa8qR1YrsiN9HOaM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "ENxUs0jhUFT7r8mMuzy/2Ox7Gcyibhoux+3dlfsWSL8="
+              "CodeSha256": "Y6T/3DPUneBc+UasVjIcr+CdmXPHhvgE3An/2yTc77s="
             }
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "dev-tucan-dev",
+              "Name": "production-geofit",
               "EndpointConfiguration": {
                 "Types": [
                   "EDGE"
@@ -353,13 +353,13 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1596519006518": {
+          "ApiGatewayDeployment1596545020608": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               },
-              "StageName": "dev"
+              "StageName": "production"
             },
             "DependsOn": [
               "ApiGatewayMethodProxyVarAny",
@@ -406,7 +406,7 @@
           "ApiGatewayLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/api-gateway/tucan-dev-dev"
+              "LogGroupName": "/aws/api-gateway/geofit-production"
             }
           },
           "CustomApiGatewayAccountCloudWatchRole": {
@@ -446,8 +446,8 @@
                     "Fn::Join": [
                       "-",
                       [
-                        "dev",
-                        "tucan-dev",
+                        "production",
+                        "geofit",
                         "custom-resources-lambda"
                       ]
                     ]
@@ -512,9 +512,9 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/tucan-dev/dev/1596519109412-2020-08-04T05:31:49.412Z/custom-resources.zip"
+                "S3Key": "serverless/geofit/production/1596545120073-2020-08-04T12:45:20.073Z/custom-resources.zip"
               },
-              "FunctionName": "tucan-dev-dev-custom-resource-apigw-cw-role",
+              "FunctionName": "geofit-production-custom-resource-apigw-cw-role",
               "Handler": "apiGatewayCloudWatchRole/handler.handler",
               "MemorySize": 1024,
               "Runtime": "nodejs12.x",
@@ -533,7 +533,7 @@
           "CloudWatchLogsSubscriptionFilterApiLogGroup": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
-              "DestinationArn": "arn:aws:logs:us-west-2:802587217904:destination:Yj7x6jv0jvqQ0sv0RJ#GCBtDLbtRZ45hgs8PD#tucan-dev#dev",
+              "DestinationArn": "arn:aws:logs:us-west-2:802587217904:destination:Yj7x6jv0jvqQ0sv0RJ#hYjXHsG4XfJp6VfDMB#geofit#production",
               "FilterPattern": "?\"REPORT RequestId: \" ?\"SERVERLESS_ENTERPRISE\"",
               "LogGroupName": {
                 "Ref": "ApiLogGroup"
@@ -543,7 +543,7 @@
           "CloudWatchLogsSubscriptionFilterApiGatewayLogGroup": {
             "Type": "AWS::Logs::SubscriptionFilter",
             "Properties": {
-              "DestinationArn": "arn:aws:logs:us-west-2:802587217904:destination:Yj7x6jv0jvqQ0sv0RJ#GCBtDLbtRZ45hgs8PD#tucan-dev#dev",
+              "DestinationArn": "arn:aws:logs:us-west-2:802587217904:destination:Yj7x6jv0jvqQ0sv0RJ#hYjXHsG4XfJp6VfDMB#geofit#production",
               "FilterPattern": "\"SLS_ACCESS_LOG\"",
               "LogGroupName": {
                 "Ref": "ApiGatewayLogGroup"
@@ -568,7 +568,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersioncugi9rL5kgQIiHXFJc5FKIzVZF2UlFwielWvcrcxcM"
+              "Ref": "ApiLambdaVersionZ4zkcg8Vu54HFSLJH0F0me4HZlxqa8qR1YrsiN9HOaM"
             }
           },
           "ServiceEndpoint": {
@@ -589,7 +589,7 @@
                   {
                     "Ref": "AWS::URLSuffix"
                   },
-                  "/dev"
+                  "/production"
                 ]
               ]
             }
@@ -674,13 +674,13 @@
       "contentCompression": 1024,
       "apigwBinary": {
         "types": [
-          "*/*"
+          "/"
         ]
       },
       "customDomain": {
-        "domainName": "dev.tucan.fitness",
+        "domainName": "tucan.fitness",
         "basePath": "",
-        "stage": "dev",
+        "stage": "production",
         "createRoute53Record": true
       }
     },
@@ -701,27 +701,27 @@
             "http": "ANY /"
           }
         ],
-        "name": "tucan-dev-dev-api",
+        "name": "geofit-production-api",
         "package": {},
         "memory": 192,
         "timeout": 10,
         "runtime": "nodejs10.x",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersioncugi9rL5kgQIiHXFJc5FKIzVZF2UlFwielWvcrcxcM"
+        "versionLogicalId": "ApiLambdaVersionZ4zkcg8Vu54HFSLJH0F0me4HZlxqa8qR1YrsiN9HOaM"
       }
     },
     "serviceFilename": "serverless.yml",
-    "app": "tucan-dev",
+    "app": "geofit-frontend",
     "org": "geofitclubteam",
     "layers": {},
     "isDashboardMonitoringPreconfigured": true,
     "isDashboardAppPreconfigured": true,
-    "appUid": "GCBtDLbtRZ45hgs8PD",
+    "appUid": "hYjXHsG4XfJp6VfDMB",
     "orgUid": "Yj7x6jv0jvqQ0sv0RJ",
-    "artifact": "C:\\Users\\Alexander Popeil\\Desktop\\Projects\\GeoFit-frontend\\GeoFit\\.serverless\\tucan-dev.zip"
+    "artifact": "C:\\Users\\Alexander Popeil\\Desktop\\Projects\\GeoFit-frontend\\GeoFit\\.serverless\\geofit.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/tucan-dev/dev/1596519109412-2020-08-04T05:31:49.412Z",
-    "artifact": "tucan-dev.zip"
+    "artifactDirectoryName": "serverless/geofit/production/1596545120073-2020-08-04T12:45:20.073Z",
+    "artifact": "geofit.zip"
   }
 }

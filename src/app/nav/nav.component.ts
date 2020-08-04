@@ -3,6 +3,7 @@ import { AuthService } from '../auth.service';
 import { NotificationsService } from '../notifications.service';
 import {Observable} from 'rxjs/Rx';
 import { UserProfileService } from '../userprofile.service';
+import { Router } from '@angular/router';
 
 declare var $: any
 
@@ -17,7 +18,8 @@ export class NavComponent implements OnInit {
 
   constructor(private _notificationService:NotificationsService,
               public _authService: AuthService,
-              private _userProfileService: UserProfileService) { }
+              private _userProfileService: UserProfileService,
+              private router:Router,) { }
 
   public notifications:any[];
   public isPurple:Boolean = false;
@@ -72,6 +74,10 @@ export class NavComponent implements OnInit {
 
   logout() {
     this._authService.logout();
+  }
+
+  login() {
+    this.router.navigate(['/login'])
   }
 
   purpleTrue(action?:string) {
