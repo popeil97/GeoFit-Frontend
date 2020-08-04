@@ -44,7 +44,7 @@
        </mat-card-header>
        <mat-card-content>
          <i class="material-icons" style="color:#BC164D">map</i><span id="txt1">From <b>{{ aboutData.start_loc }}</b> to <b>{{aboutData.end_loc}}</b> <i style="color:#BC164D;">   {{ aboutData.distance }} {{ aboutData.distance_type }}</i></span>
-        <i class="material-icons" style="color:#BC164D;">date_range</i><span id="txt1">     From <b> 8/16, 12:01 AM </b> to <b> 9/18, 5:00 PM (EST)</b></span> 
+        <i class="material-icons" style="color:#BC164D;">date_range</i><span id="txt1">     From <b> 8/16, 12:01 AM </b> to <b> 9/18, 5:00 PM (EST)</b> <i style="font-size:10px; color:#BC164D;"> Need help? Email admin@tucan.fitness </i></span> 
 
         <div class="row">
           <div class="column-map">
@@ -99,10 +99,12 @@
    <div class="container" *ngIf="!showForm">
        <mat-card class="example-card " style="height:670px;">
      <mat-card-header>
-       <mat-card-title>About Race <img src="../../assets/landing/sMILES.png" alt="Race Image" style="width:20%;" class="center"></mat-card-title>
+       <mat-card-title>About Race</mat-card-title>
        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+
      </mat-card-header>
      <mat-card-content >
+       <img src="../../assets/landing/adam.jpeg" alt="Adam" style="width:100%;" class="center">
       <div style="overflow-y: scroll;height: 300px;background-color:#EFFAF7;">
       Tucan Fitness has generously helped us create a virtual 100 mile challenge in honor of Adam. The challenge will begin on August 16th and end on September 18th, which this year falls on Adam’s Hebrew birthday, כ״ט אלול - erev Rosh Hashanah. Everyone can participate in whichever way - running, walking, biking, swimming, etc. - and at whatever level they want. Do it outside, on a treadmill and/or on a stationary bike as you binge watch even more Netflix. The key is that this will bring us together to honor Adam and help connect us when we cannot gather together in person.
       <br><br>
@@ -123,17 +125,15 @@
 <div class="row">
 
   <div class="column-merch">
-    <br>
-    <img src="../../assets/landing/adam.jpeg" alt="Adam" style="width:100%;" class="center">
+    
 
-     
+     <img src="../../assets/landing/sMILES.png" alt="Race Image" style="width:80%;" class="center">
 
 
 
      
   </div>
   <div class="column-merch">
-    <br>
     <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"  style="padding-left: 10%;width:80%;"></app-swag>
   </div>
 </div>
