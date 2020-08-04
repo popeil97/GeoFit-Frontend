@@ -92,7 +92,6 @@ export class RegisterComponent implements OnInit {
             this._authService.login({email:form.email,password:form.password}).subscribe(
               
               data => {
-                console.log('LOGIN RESP:',data);
 
                 localStorage.setItem('access_token', data['token']);
                 localStorage.setItem('loggedInUsername', data['username']);

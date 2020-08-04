@@ -17,6 +17,7 @@ export class PaypalComponent implements AfterViewChecked {
   @Input() race_id: number;
   @Input() paymentType: PaymentType;
   paypalConfig:any;
+  paymentError:Boolean;
 
   constructor(public _paymentsService:PaymentsService) {
 
@@ -41,6 +42,7 @@ export class PaypalComponent implements AfterViewChecked {
           console.log('PAYMENT AUTH:',details)
           let compStr = "COMPLETED";
           this.loading = false;
+          
           if(details.status.localeCompare("COMPLETED") == 0) {
             let payment:Payment = {} as Payment
             payment.status = details.status;
@@ -54,6 +56,7 @@ export class PaypalComponent implements AfterViewChecked {
               console.log('CONFIRMED FROM SERVER:',resp);
               let payment_id = resp['id'];
               this.transactionAlert.emit({data:{payment_id:payment_id},success:true,type:'PAYMENT'} as SignupCallbackStruct);
+              
             });
             
           }
@@ -67,6 +70,7 @@ export class PaypalComponent implements AfterViewChecked {
 
       onError: (err) => {
         console.log('ERROR IN PAYPAL:',err);
+        this.paymentError = true;
       }
     }
 
