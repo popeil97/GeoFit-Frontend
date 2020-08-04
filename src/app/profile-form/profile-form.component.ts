@@ -84,7 +84,9 @@ export class ProfileFormComponent implements OnInit, OnChanges {
       formClean = this.profileForm.value;
 
       //Resize image to handle large files
-      formClean.ProfilePic = this.resizeImage(this.profilePicURL);
+      if (this.profilePicURL){
+        formClean.ProfilePic = this.resizeImage(this.profilePicURL);
+      }
 
       //call service to update form
       this._userProfileService.updateProfile(formClean).then((data) => {
