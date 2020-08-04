@@ -9,10 +9,9 @@
       <ng-template matStepLabel aria-disabled="true">Done</ng-template>
       <h2 style="text-align: center;">You are Registered!</h2>
       <div *ngIf="!hasStarted" style="text-align:center;">
-        <h3>The Race does not start until 8/16, 12:01 AM, come by then and join the race!</h3>
-        <span class="material-icons">sentiment_very_satisfied</span>
-        <h3>In the meantime, download strava on your mobile device so you're prepared for race day!</h3>
-        <h3>Also, you can go to your profile (Located in the top left <span class="material-icons">account_circle</span>) and change your picture and info.</h3>
+        <h3 style="color:#BC164D;">The race does not start until 8/16, 12:01 AM, come by then and join the race!  <span class="material-icons">sentiment_very_satisfied</span></h3>
+       
+        <h3>In the meantime, download Strava on your mobile device so you're prepared for race day! <br> You can go to your profile (Located in the top left <span class="material-icons">account_circle</span>) to connect Strava and/or change your picture and info.</h3>
       </div>
 
       <div *ngIf="hasStarted" style="text-align:center;">
