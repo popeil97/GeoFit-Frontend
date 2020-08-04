@@ -65,6 +65,7 @@ import { PopupComponent } from './popup/popup.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { ShippingAddressFormComponent } from './shipping-address-form/shipping-address-form.component';
 import { SmilesComponent } from './smiles/smiles.component';
+import { TermsOfServiceComponent, TermsOfServiceDialogContent } from './terms-of-service/terms-of-service.component';
 
 
 @NgModule({
@@ -111,6 +112,8 @@ import { SmilesComponent } from './smiles/smiles.component';
     ShippingAddressComponent,
     ShippingAddressFormComponent,
     SmilesComponent,
+    TermsOfServiceComponent,
+    TermsOfServiceDialogContent,
   ],
   imports: [
     BrowserModule,
@@ -134,7 +137,7 @@ import { SmilesComponent } from './smiles/smiles.component';
     StoryService,
   ],
   bootstrap: [AppComponent],
-  entryComponents:[SignupDialogContent,PopupComponent,SwagDialogContent],
+  entryComponents:[SignupDialogContent,PopupComponent,SwagDialogContent,TermsOfServiceDialogContent],
 })
 export class AppModule { 
   constructor(private injector: Injector) {

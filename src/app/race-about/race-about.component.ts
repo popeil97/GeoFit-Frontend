@@ -46,7 +46,7 @@ export class RaceAboutComponent implements OnInit {
 
   ngAfterViewInit(): void {
     while(!this.aboutData);
-    if(this.popup) {
+    if(this.popup && this._authService.isLoggedIn()) {
       console.log('in here');
       this.signupChild.openDialog();
     }

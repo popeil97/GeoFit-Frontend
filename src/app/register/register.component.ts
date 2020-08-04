@@ -6,6 +6,7 @@ import { AuthService } from '../auth.service';
 import {ErrorStateMatcher} from '@angular/material/core';
 import * as moment from 'moment';
 import { MustMatch } from './_helpers/must-match.validator';
+import { UserProfileService } from '../userprofile.service';
 
 @Component({
   selector: 'app-register',
@@ -22,11 +23,14 @@ export class RegisterComponent implements OnInit {
     redirectUrl:string;
     genderOptions:any[];
 
+    acceptedTerms:Boolean = true;
+
     constructor(
         private formBuilder: FormBuilder,
         private router: Router,
         private route:ActivatedRoute,
         private _authService: AuthService,
+        private _userProfileService:UserProfileService,
     ) {
       this.genderOptions = ['Male', 'Female', 'Non-binary'];
     }
@@ -52,11 +56,14 @@ export class RegisterComponent implements OnInit {
           gender: ['', Validators.required],
           email: ['', [Validators.required,
                         Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]],
+          terms_of_service: [false, [Validators.requiredTrue]],
           password: ['', [Validators.required, Validators.minLength(6)]],
           confirmPassword: ['', Validators.required]
         }, {
             validator: MustMatch('password', 'confirmPassword')
-        });
+        },
+        
+        );
     }
 
     // convenience getter for easy access to form fields
@@ -64,7 +71,8 @@ export class RegisterComponent implements OnInit {
 
     onSubmit() {
         this.submitted = true;
-
+        this.acceptedTerms = this.registerForm.value.terms_of_service;
+        console.log('REEE',this.acceptedTerms);
         // stop here if form is invalid
         if (this.registerForm.invalid) {
             return;
@@ -94,7 +102,7 @@ export class RegisterComponent implements OnInit {
                   this.router.navigate([this.redirectUrl,this.redirectParams])
                 }
                 else {
-                  this.router.navigate(['/login']);
+                  this._userProfileService.goToUserProfile(data['username']);
                 }
               },
             err => {
