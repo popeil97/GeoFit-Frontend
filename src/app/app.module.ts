@@ -66,6 +66,8 @@ import { ShippingAddressComponent } from './shipping-address/shipping-address.co
 import { ShippingAddressFormComponent } from './shipping-address-form/shipping-address-form.component';
 import { SmilesComponent } from './smiles/smiles.component';
 import { TermsOfServiceComponent, TermsOfServiceDialogContent } from './terms-of-service/terms-of-service.component';
+import { PasswordRequestComponent } from './password-request/password-request.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
 
 
 @NgModule({
@@ -114,6 +116,8 @@ import { TermsOfServiceComponent, TermsOfServiceDialogContent } from './terms-of
     SmilesComponent,
     TermsOfServiceComponent,
     TermsOfServiceDialogContent,
+    PasswordRequestComponent,
+    PasswordChangeComponent,
   ],
   imports: [
     BrowserModule,

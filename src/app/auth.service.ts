@@ -88,5 +88,15 @@ export class AuthService {
     this.token_expires = new Date(token_decoded.exp * 1000);
     this.username = token_decoded.username;
   }
+
+  public requestPassword(email: string){
+    return this.http.post(environment.apiUrl + '/api/password-request/', JSON.stringify({'email': email}), this.httpOptions);
+  }
+
+  public changePassword(password: string, slug: string){
+    console.log(password);
+    console.log(slug);
+    return this.http.post(environment.apiUrl + '/api/password-change/', JSON.stringify({'password': password, 'slug': slug}), this.httpOptions);
+  }
  
 }

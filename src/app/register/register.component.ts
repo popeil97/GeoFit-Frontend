@@ -98,7 +98,7 @@ export class RegisterComponent implements OnInit {
                 this._authService.username = data['username'];
 
                 if(this.redirectParams) {
-                  this.router.navigate([this.redirectUrl,this.redirectParams])
+                  this.router.navigate([this.redirectUrl,this.redirectParams]);
                 }
                 else {
                   this._userProfileService.goToUserProfile(data['username']);

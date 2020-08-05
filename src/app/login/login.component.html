@@ -17,6 +17,9 @@
             <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                 <div *ngIf="f.password.errors.required">Password is required</div>
             </div>
+            <div align="left">
+                <a routerLink="/password-request">Forgot password?</a>
+            </div>
         </div>
         <br><br><br>
         <div class="form-group">
