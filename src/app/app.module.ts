@@ -25,7 +25,8 @@ import {TokenInterceptorService} from './users/tokeninterceptorservice';
 import { StravauthService } from './stravauth/stravauth.service';
 import { RaceFeedService } from './feed/race-feed.service';
 import { FeedComponent } from './feed/feed.component';
-import { StoryService } from './story.service'
+import { StoryService } from './story.service';
+import { ImageService } from './image.service';
 
 import {
   HttpRequest,
@@ -139,6 +140,7 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
     StravauthService,
     RaceFeedService,
     StoryService,
+    ImageService,
   ],
   bootstrap: [AppComponent],
   entryComponents:[SignupDialogContent,PopupComponent,SwagDialogContent,TermsOfServiceDialogContent],

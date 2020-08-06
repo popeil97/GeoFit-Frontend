@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StoryService } from '../story.service';
+import { ImageService } from '../image.service';
 
 @Component({
   selector: 'app-story-form',
@@ -15,7 +16,8 @@ export class StoryFormComponent implements OnInit {
 
   private storyImage:any;
 
-  constructor(private storyService: StoryService) { }
+  constructor(private storyService: StoryService,
+              private _imageService: ImageService) { }
 
   ngOnInit() {
   }
@@ -40,6 +42,11 @@ export class StoryFormComponent implements OnInit {
     console.log("Story image: ", this.storyImage);
     let withLastStory = false;
 
+    //Resize story images if one dim > 1000px
+    if (this.storyImage){
+      this.storyImage = this._imageService.resizeImage(this.storyImage, 1000, 1000);
+    }
+
     //Get text field input (image already uploaded via eventListener)
     this.storyText = (<HTMLInputElement>document.getElementById("storyImageCaption")).value;
 
@@ -57,28 +64,5 @@ export class StoryFormComponent implements OnInit {
     });
     
   }
-
-  // setStoryImageFieldListener(){
-  //   //LISTENS TO CHANGES IN IMAGE FILE UPLOAD
-  //   var setStoryImg = this.setStoryImage;
-  //   var viewComponent = this;
-
-  //   var storyImageField = <HTMLInputElement>document.getElementById("storyImage");
-
-  //   console.log("adding story event listener: ", storyImageField);
-
-  //   storyImageField.addEventListener('change', function() {
-  //     console.log("thanks for the picture!");
-  //     var file = this.files[0];
-  //     var reader: FileReader = new FileReader();
-  //     reader.onload = function(e) {
-  //         setStoryImg(viewComponent, reader.result);
-  //     }
-  //     reader.readAsDataURL(file);
-  //   }, false);
-
-  //   console.log("added story event listener");
-
-  // }
 
 }
