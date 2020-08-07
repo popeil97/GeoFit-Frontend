@@ -36,6 +36,7 @@ export class RaceViewComponent implements OnInit {
   public loading:Boolean = false;
   public coords:any;
   public leaderboard:LeaderboardItem[];
+  public teamLeaderboard:LeaderboardItem[]
   public all_user_data:Array<FeedObj>;
   public teams:any[];
   public userRaceSettings:any;
@@ -86,8 +87,6 @@ export class RaceViewComponent implements OnInit {
     
     console.log("RANKE BOARD:",unranked.concat(ranked));
     return unranked.concat(ranked)
-
-
 
   }
 
@@ -159,7 +158,7 @@ export class RaceViewComponent implements OnInit {
 
   getRaceState(): void {
     this.raceService.getRace(this.raceID).subscribe(data => {
-
+      this.showTeamForm=false;
       let raceData = data as RaceData;
       console.log('RACE DATA:',raceData);
 
@@ -170,6 +169,9 @@ export class RaceViewComponent implements OnInit {
       this.coords = raceData.coords;
 
       this.leaderboard = this.configureLeaderboard(raceData.unranked_leaderboard,raceData.ranked_leaderboard);
+      this.teamLeaderboard = this.configureLeaderboard(raceData.unranked_team_leaderboard,raceData.ranked_team_leaderboard);
+
+      console.log('TEAMS LEADERBOARD:',this.teamLeaderboard);
       
       this.all_user_data = raceData.users_data as Array<FeedObj>;
       this.followedIDs = raceData.followedIDs;
@@ -243,6 +245,8 @@ interface RaceData {
   followedIDs:number[];
   unranked_leaderboard:any[];
   ranked_leaderboard:any[];
+  unranked_team_leaderboard:any[];
+  ranked_team_leaderboard:any[];
 }
 
 interface FeedObj {

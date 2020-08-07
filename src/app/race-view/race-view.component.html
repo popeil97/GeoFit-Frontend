@@ -77,20 +77,24 @@
         </ng-template>
         
         <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Leaderboard</b></h3></b>
-        <app-leaderboard [leaderboard]="leaderboard"></app-leaderboard>
+        
 
-      <!--  <mat-tab-group>
-          <mat-tab label="Distance">
-            <app-leaderboard [leaderboard]="leaderboard"></app-leaderboard>
+      <mat-tab-group>
+          
+        <mat-tab label="Teams">
+          <ng-template mat-tab-label>
+            <mat-icon>directions_run</mat-icon>
+          </ng-template>
+          <app-leaderboard [leaderboard]="leaderboard"  [allowFollow]="false"></app-leaderboard>
           </mat-tab>
-        <!--  <mat-tab label="Pace">
-
-          </mat-tab> -->
-
-        <!--  <mat-tab label="Teams">
-            
-          </mat-tab> -->
-     <!--   </mat-tab-group> -->
+          
+          <mat-tab label="not teams">
+            <ng-template mat-tab-label>
+              <mat-icon>group</mat-icon>
+            </ng-template>
+            <app-leaderboard [leaderboard]="teamLeaderboard" [allowFollow]="false"></app-leaderboard>
+          </mat-tab>
+     </mat-tab-group>
 
       </mat-tab>
         <mat-tab>
