@@ -83,6 +83,8 @@ export class RaceViewComponent implements OnInit {
 
   }
 
+  
+
   configureLeaderboard(ranked:any[],unranked:any[]) {
     
     console.log("RANKE BOARD:",unranked.concat(ranked));
@@ -198,6 +200,14 @@ export class RaceViewComponent implements OnInit {
     });
   }
 
+  USA(action?:string) {
+  console.log("USA");
+  this.mapChild.panToUSA();
+  }
+
+  Israel(action?:string) {
+  this.mapChild.panToIsrael();
+  }
   uploadManualEntry(entry:any) {
     this.activitiesService.uploadManualEntry(entry,this.raceID).then((resp) => {
       console.log('RESP FROM MANUAL IMPORT:',resp);

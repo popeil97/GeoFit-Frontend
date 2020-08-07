@@ -1,6 +1,7 @@
 import { Component, OnChanges, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserProfileService } from '../userprofile.service';
+import { ImageService } from '../image.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -17,7 +18,9 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   profilePicURL: any;
   distanceTypeOptions: any[];
 
-  constructor(private _userProfileService: UserProfileService, private sanitizer:DomSanitizer) {
+  constructor(private _userProfileService: UserProfileService, 
+              private sanitizer:DomSanitizer,
+              private _imageService: ImageService) {
     this.distanceTypeOptions = ['Mi', 'KM'];
     this.profilePicURL = null;
 
@@ -60,15 +63,6 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   }
 
   populateForm(): void {
-    // this.profileForm.setValue({
-    //   ProfilePic: '',
-    //   FirstName: this.userData.first_name,
-    //   LastName: this.userData.last_name,
-    //   About: this.userData.description,
-    //   Location: this.userData.location,
-    //   DistanceType: this.userData.distance_type,
-    // });
-
     console.log("User data: ", this.userData);
 
     this.profileForm.get('FirstName').setValue(this.userData.first_name);
@@ -85,7 +79,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
 
       //Resize image to handle large files
       if (this.profilePicURL){
-        formClean.ProfilePic = this.resizeImage(this.profilePicURL);
+        formClean.ProfilePic = this._imageService.resizeImage(this.profilePicURL, 350, 350);
       }
 
       //call service to update form
@@ -110,33 +104,6 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   uploadedProfPicSrc() {
     //This allows base64 uploaded pics to be displayed
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.profilePicURL);
-  }
-
-  resizeImage(base64Str) {
-    var img = new Image();
-    img.src = base64Str;
-    var canvas = document.createElement('canvas');
-    var MAX_WIDTH = 350;
-    var MAX_HEIGHT = 350;
-    var width = img.width;
-    var height = img.height;
-
-    if (width > height) {
-      if (width > MAX_WIDTH) {
-        height *= MAX_WIDTH / width;
-        width = MAX_WIDTH;
-      }
-    } else {
-      if (height > MAX_HEIGHT) {
-        width *= MAX_HEIGHT / height;
-        height = MAX_HEIGHT;
-      }
-    }
-    canvas.width = width;
-    canvas.height = height;
-    var ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0, width, height);
-    return canvas.toDataURL();
   }
 
   deleteProfilePic() {

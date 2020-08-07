@@ -25,7 +25,8 @@ import {TokenInterceptorService} from './users/tokeninterceptorservice';
 import { StravauthService } from './stravauth/stravauth.service';
 import { RaceFeedService } from './feed/race-feed.service';
 import { FeedComponent } from './feed/feed.component';
-import { StoryService } from './story.service'
+import { StoryService } from './story.service';
+import { ImageService } from './image.service';
 
 import {
   HttpRequest,
@@ -66,6 +67,9 @@ import { ShippingAddressComponent } from './shipping-address/shipping-address.co
 import { ShippingAddressFormComponent } from './shipping-address-form/shipping-address-form.component';
 import { SmilesComponent } from './smiles/smiles.component';
 import { TermsOfServiceComponent, TermsOfServiceDialogContent } from './terms-of-service/terms-of-service.component';
+import { PasswordRequestComponent } from './password-request/password-request.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
+import { JumpToComponent } from './jump-to/jump-to.component';
 
 
 @NgModule({
@@ -114,6 +118,9 @@ import { TermsOfServiceComponent, TermsOfServiceDialogContent } from './terms-of
     SmilesComponent,
     TermsOfServiceComponent,
     TermsOfServiceDialogContent,
+    PasswordRequestComponent,
+    PasswordChangeComponent,
+    JumpToComponent,
   ],
   imports: [
     BrowserModule,
@@ -135,6 +142,7 @@ import { TermsOfServiceComponent, TermsOfServiceDialogContent } from './terms-of
     StravauthService,
     RaceFeedService,
     StoryService,
+    ImageService,
   ],
   bootstrap: [AppComponent],
   entryComponents:[SignupDialogContent,PopupComponent,SwagDialogContent,TermsOfServiceDialogContent],

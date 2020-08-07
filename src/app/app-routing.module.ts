@@ -11,6 +11,8 @@ import { RegisterComponent } from './register/register.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { SmilesComponent } from './smiles/smiles.component';
 import { LoginComponent } from './login/login.component';
+import { PasswordRequestComponent } from './password-request/password-request.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
 
 const routes: Routes = [
   {path: 'race', component:RaceViewComponent},
@@ -24,6 +26,8 @@ const routes: Routes = [
   {path: 'shipping', component:ShippingAddressComponent },
   {path: 'smiles', component:SmilesComponent },
   {path: 'login', component:LoginComponent },
+  {path: 'password-request', component:PasswordRequestComponent},
+  {path: 'password-change', component:PasswordChangeComponent},
 ];
 
 @NgModule({

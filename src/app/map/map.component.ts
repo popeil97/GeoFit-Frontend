@@ -32,7 +32,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
   @Input() followedIDs:any;
   @Input() zoom:Boolean;
 
-  private map;
+  public map;
   private coordsRoutes:any[];
   private markersByUserID = {};
   private markerClusters:any;
@@ -82,6 +82,35 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     //Do this to pan *and* zoom
     var markerBounds = L.latLngBounds([this.markersByUserID[user_id.toString()]['latLng']]);
+    var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
+    this.map.fitBounds(markerBounds, options);
+
+  }
+
+
+  public panToUSA(){
+    //Do this to simply pan to user pin
+    //this.map.panTo(this.markersByUserID[user_id.toString()]['latLng']);
+
+    //Do this to pan *and* zoom
+    var corner1 = L.latLng(40.4, -73.7);
+    var corner2 = L.latLng(39.79, -75.5);
+    var markerBounds = L.latLngBounds(corner1,corner2);
+    var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
+    this.map.fitBounds(markerBounds, options);
+
+  }
+
+  public panToIsrael(){
+    //Do this to simply pan to user pin
+    //this.map.panTo(this.markersByUserID[user_id.toString()]['latLng']);
+
+    //Do this to pan *and* zoom
+    var corner1 = L.latLng(31.8,35.3);
+    var corner2 = L.latLng(31.76, 35.18);
+
+    
+    var markerBounds = L.latLngBounds(corner1,corner2);
     var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
     this.map.fitBounds(markerBounds, options);
 

@@ -30,9 +30,6 @@ export class UserPageComponent implements OnInit {
       console.log(this.username);
     });
 
-    //this.getUserData();
-
-
   }
 
   ngOnChanges(changes: SimpleChanges) {
