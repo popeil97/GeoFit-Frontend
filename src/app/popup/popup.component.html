@@ -1,9 +1,9 @@
 <div *ngIf="this.userData" style="margin:auto;">
-  <p style="margin:0 auto;">
+  <b style="margin:0 auto;">
     <b>
       <app-user-profile-nav [username]=userData.username [displayName]=userData.display_name></app-user-profile-nav>
     </b>
-  </p>
+  </b>
 
   <p style="margin:0 auto;text-align: center;">
     {{ this.userData.total_distance }} {{ this.userData.distance_type }}

@@ -2,7 +2,7 @@
 
   <!---If we are in race view AND we are authenticated, display form to post new stories-->
   <div *ngIf="use=='race' && this._authService.token && this.progress">
-    <table class="mat-table" >
+    <table class="mat-table" style="background-color:rgba(44, 0, 126,0.08);">
       <tr class="mat-row">
         <ng-container matColumnDef="ProfilePic" style="padding: 10px;">
           <td mat-cell>

@@ -1,8 +1,7 @@
 <!-- <app-map></app-map> -->
 <div>
-
 <app-loader [isActive]="loading"></app-loader>
-<mat-sidenav-container hasBackdrop="false" style="overflow: hidden; overflow-x:hidden; ">
+<mat-sidenav-container hasBackdrop="false" S>
 
   <mat-sidenav  md-disable-backdrop='true' #menu mode="over"  opened="true"> <!--opened="true"-->
      <div class="sidenav-scroll">
@@ -17,6 +16,14 @@
       <div class="column-split2">
 
          <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress>
+         <div class="row">
+          <div class="column">
+            <a class="btn" style="background-color:#2C007E;color:#FFFFFF;font-size:10px;" (click)="USA()">Jump to USA</a>
+          </div>
+          <div class="column">
+            <a class="btn" style="background-color:#2C007E;color:#FFFFFF;font-size:10px;"(click)="Israel()">Jump to Israel</a>
+          </div>
+        </div>
       </div>
      </div>
    
@@ -32,6 +39,7 @@
         <button (click)="showPinsByID(null)">Show User Pins!</button>
         <button (click)="showPinsByID(followedIDs)">Show Followers Only</button>-->
         <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Activity Feed</b></h3></b>
+
         <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
       </mat-tab>
 
@@ -48,7 +56,8 @@
             <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu>
         </div>
 
-        <mat-tab-group>
+        <div *ngIf="num_activities==0">
+        <mat-tab-group [selectedIndex]="2">
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
               <mat-icon>cloud_download</mat-icon>
@@ -66,6 +75,28 @@
             <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
           </mat-tab>
         </mat-tab-group>
+      </div>
+
+      <div *ngIf="num_activities>0">
+        <mat-tab-group [selectedIndex]="1">
+          <mat-tab *ngIf="raceSettings.isManualEntry">
+            <ng-template mat-tab-label>
+              <mat-icon>cloud_download</mat-icon>
+            </ng-template>
+            <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
+             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
+            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu>
+          </mat-tab>
+          <mat-tab *ngIf="raceSettings.isManualEntry">
+            <ng-template mat-tab-label>
+              <mat-icon>add_circle_outline</mat-icon>
+            </ng-template>
+             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Add Activity</b></h3></b>
+            <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
 
       </mat-tab>
 
@@ -128,7 +159,6 @@
    
   <mat-sidenav-content>
     <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
-
     <div  *ngIf="changeArrow">
     <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 0px;">
         <br>

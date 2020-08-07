@@ -9,11 +9,7 @@
             </mat-card-header>
             <mat-card-content>
               <br>
-              <div  *ngIf="userStats.mydistances.length == 0">
-                <h3>No activities</h3>
-                Make sure you follow instructions to either manually add activities on the map page, or integrate with Strava.
-              </div>
-              <div  *ngIf="userStats.mydistances.length > 0">
+              <div>
              <canvas id="lineCharts"></canvas>
            </div>
              <br>

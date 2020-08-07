@@ -69,6 +69,7 @@ import { SmilesComponent } from './smiles/smiles.component';
 import { TermsOfServiceComponent, TermsOfServiceDialogContent } from './terms-of-service/terms-of-service.component';
 import { PasswordRequestComponent } from './password-request/password-request.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
+import { JumpToComponent } from './jump-to/jump-to.component';
 
 
 @NgModule({
@@ -119,6 +120,7 @@ import { PasswordChangeComponent } from './password-change/password-change.compo
     TermsOfServiceDialogContent,
     PasswordRequestComponent,
     PasswordChangeComponent,
+    JumpToComponent,
   ],
   imports: [
     BrowserModule,
