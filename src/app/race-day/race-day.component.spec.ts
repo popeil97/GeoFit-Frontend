@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JumpToComponent } from './jump-to.component';
+import { RaceDayComponent } from './race-day.component';
 
-describe('JumpToComponent', () => {
-  let component: JumpToComponent;
-  let fixture: ComponentFixture<JumpToComponent>;
+describe('RaceDayComponent', () => {
+  let component: RaceDayComponent;
+  let fixture: ComponentFixture<RaceDayComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JumpToComponent ]
+      declarations: [ RaceDayComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JumpToComponent);
+    fixture = TestBed.createComponent(RaceDayComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
