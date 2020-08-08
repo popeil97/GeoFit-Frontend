@@ -50,8 +50,6 @@
         </ng-template>
 
         <div *ngIf="!raceSettings.isManualEntry">
-        <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
             <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu>
         </div>
