@@ -20,8 +20,17 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
         Validators.required, 
       ]),
       heatMapOn: new FormControl('',[
-        Validators.required, 
-      ])
+        Validators.required,
+      ]),
+      followerPinsOnly: new FormControl(false, [
+        Validators.required,
+      ]),
+      malePinsOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      femalePinsOn: new FormControl(true, [
+        Validators.required,
+      ]),
     });
     
   }
@@ -61,14 +70,17 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
         this.successfulUpdate = true;
       });
 
-      if(this.settingsForm.value.heatMapOn == true)
-      {
-        this._raceview.createUserHeatPins();
-      }
-      else
-      {
-        this._raceview.createUserPins();
-      }
+      // if(this.settingsForm.value.heatMapOn == true)
+      // {
+      //   this._raceview.createUserHeatPins();
+      // }
+      // else
+      // {
+      //   this._raceview.createUserPins();
+      // }
+
+      let all = !this.settingsForm.value.followerPinsOnly && this.settingsForm.value.malePinsOn && this.settingsForm.value.femalePinsOn;
+      this._raceview.showPinsFromSettings(all, this.settingsForm.value.followerPinsOnly, this.settingsForm.value.malePinsOn, this.settingsForm.value.femalePinsOn);
 
     }
   }
@@ -80,9 +92,18 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
       isAutomaticImport: new FormControl(this.userSettings.isAutomaticImport,[
         Validators.required,
       ]),
-      heatMapOn: new FormControl('',[
-        Validators.required, 
-      ])
+      heatMapOn: new FormControl(false,[
+        Validators.required,
+      ]),
+      followerPinsOnly: new FormControl(false, [
+        Validators.required,
+      ]),
+      malePinsOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      femalePinsOn: new FormControl(true, [
+        Validators.required,
+      ]),
     });
     console.log('form value:',this.settingsForm);
   }
@@ -92,5 +113,6 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
 interface UserSettings {
   isAutomaticImport:Boolean;
   heatMapOn:Boolean;
+  followerPinsOnly:Boolean;
   race_id:number;
 }

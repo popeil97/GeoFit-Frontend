@@ -243,6 +243,20 @@ export class RaceViewComponent implements OnInit {
     console.log("Applying heat map...")
   }
 
+  showFollowedPins(){
+    this.mapChild.showFollowedPins();
+    console.log("Showing only follower pins");
+  }
+
+  showAllPins(){
+    this.mapChild.showAllPins();
+    console.log("Showing all pins");
+  }
+
+  showPinsFromSettings(all: boolean, followed: boolean, male: boolean, female: boolean){
+    this.mapChild.showPinsFromSettings(all, followed, male, female);
+  }
+
 }
 
 interface RaceData {

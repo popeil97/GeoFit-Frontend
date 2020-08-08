@@ -43,6 +43,10 @@ export class MapComponent implements AfterViewInit,OnChanges {
   private line:any;
   private myUserID:number;
 
+  //Store user IDs of male and female pins
+  private maleIDs: number[];
+  private femaleIDs: number[];
+
   constructor(private popupService:PopUpService, 
               private _profileService:UserProfileService,) {
     this.coordsRoutes = [];
@@ -220,31 +224,113 @@ export class MapComponent implements AfterViewInit,OnChanges {
     })
   }
 
-public clearUserPins(){
+  public showFollowedPins(){
+    this.showPinsByID(this.followedIDs);
+  }
+
+  private union_arrays (x, y) {
+    var obj = {};
+    for (var i = x.length-1; i >= 0; -- i)
+       obj[x[i]] = x[i];
+    for (var i = y.length-1; i >= 0; -- i)
+       obj[y[i]] = y[i];
+    var res = []
+    for (var k in obj) {
+      if (obj.hasOwnProperty(k))  // <-- optional
+        res.push(obj[k]);
+    }
+    return res;
+  }
+
+  public showPinsFromSettings(all: boolean, followed: boolean, male: boolean, female: boolean){
+    console.log("all: ", all);
+    console.log("followed: ", followed);
+    console.log("male: ", male);
+    console.log("female: ", female);
+    if (all){
+      this.showAllPins();
+      return;
+    }
+    
+    let unionIDs = [];
+    let maleIDs = [];
+    let femaleIDs = [];
+    
+    //We do this so if both M and F are checked, people of all gender
+    //are displayed
+    if (!male || !female){
+      if (male){
+        maleIDs = this.getIDsByGender('Male');
+      }
+      if (female){
+        femaleIDs = this.getIDsByGender('Female');
+      }
+      
+      unionIDs = maleIDs.concat(femaleIDs);
+    }
+
+    //Limit to only users we follow
+    if (followed){
+      if (unionIDs.length){
+        console.log("Getting intersection of ", unionIDs, " and ", this.followedIDs);
+        unionIDs = unionIDs.filter(value => this.followedIDs.includes(value))
+      }
+      else {
+        unionIDs = this.followedIDs;
+      }
+    }
+    console.log("Final show IDs: ", unionIDs);
+    this.showPinsByID(unionIDs);
+  }
+
+  public showAllPins(){
+    this.showPinsByID(null);
+  }
+
+  public getIDsByGender(gender: string){
+    console.log("Looking for ", gender);
+    let IDs = [];
+    for (let i = 0; i < this.userData.length; i++){
+      if (this.userData[i].gender == gender){
+        console.log("User is ", this.userData[i].gender, " so we add them.");
+        IDs.push(this.userData[i].user_id);
+      }
+      else {
+        console.log("User is ", this.userData[i].gender, " so we don't add them.");
+      }
+    }
+
+    return IDs;
+  }
+
+  public clearUserPins(){
     //Remove all current user pins
-    //Currently no working method to remove pins by ID
-    //but this will be resolved perhaps with .forEach(layer)
     if (this.markerClusters){
       this.map.removeLayer(this.markerClusters);
     }
   }
 
   public showPinsByID(IDs){
-    /////////METHOD NOT WORKING//////////
-
     //Clear all pins
     this.clearUserPins();
 
-    //Add user markers based on IDs argument
-    //If IDs null, add all users
-    for (var id in this.markersByUserID){
-      if (IDs == null || IDs.includes(parseInt(id))){
-        this.markersByUserID[id]['locMarker'].addTo(this.map);
+    let viewComponent = this;
+
+    this.markerClusters.eachLayer(function(layer) {
+      let tempUserDataIndex = viewComponent.layerIDsToUserIndices[layer._leaflet_id.toString()];
+      let tempUserData = viewComponent.userData[tempUserDataIndex];
+      let pinUserID = tempUserData.user_id;
+
+      //console.log("Followed IDS: ", viewComponent.followedIDs);
+      //console.log("This pin user ID: ", pinUserID);
+
+      if (IDs == null || IDs.includes(parseInt(pinUserID))){
+        layer.addTo(viewComponent.map);
       }
       else {
-        this.markersByUserID[id]['locMarker'].remove();
+        layer.remove();
       }
-    }
+    });
   }
 
   public createUserPins(heatMapOn){

@@ -12,6 +12,17 @@
         <mat-slide-toggle formControlName="heatMapOn">Heat Map On</mat-slide-toggle>
       </div>
 
+      <h3>Show Follower Pins Only</h3>
+      <div class="form-group">
+        <mat-slide-toggle formControlName="followerPinsOnly">Follower Pins On</mat-slide-toggle>
+      </div>
+      
+      <h3>Toggle Pins by Gender</h3>
+      <div class="form-group">
+        <mat-slide-toggle formControlName="malePinsOn">Male Pins On</mat-slide-toggle>
+        <mat-slide-toggle formControlName="femalePinsOn">Female Pins On</mat-slide-toggle>
+      </div>
+
     </form>
 
       <button mat-button class="btn btn-primary" (click)="apply()">Apply</button>
