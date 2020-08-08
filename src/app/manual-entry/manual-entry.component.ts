@@ -35,6 +35,8 @@ export class ManualEntryComponent implements OnInit {
         Validators.required
       ])
     });
+
+    this.manualEntryForm.get('distanceType').setValue('MI');
   }
 
   upload(): void {

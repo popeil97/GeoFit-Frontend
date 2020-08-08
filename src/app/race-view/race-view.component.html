@@ -29,10 +29,12 @@
    
 
 
-    <mat-tab-group>
+    <mat-tab-group class='tab-subtitled'>
       <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon>emoji_people</mat-icon>
+          <div style="font-size:10px;">Social</div>
+          
         </ng-template>
         <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call
         <button (click)="clearUserPins()">Clear User Pins!</button>
@@ -46,6 +48,7 @@
       <mat-tab *ngIf="this.progress && this._authService.token">
         <ng-template mat-tab-label style="background-color: rgba(256,256, 256,1);">
           <mat-icon>file_download </mat-icon>
+          <div style="font-size:10px;">Import</div>
           <div *ngIf="num_activities>0" style="background-color: #F6BF78; border-radius: 5px;padding-left:4px;padding-right:4px;">{{num_activities}} </div>
         </ng-template>
 
@@ -55,10 +58,11 @@
         </div>
 
         <div *ngIf="num_activities==0">
-        <mat-tab-group [selectedIndex]="2">
+        <mat-tab-group [selectedIndex]="2" class='tab-subtitled'>
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
               <mat-icon>cloud_download</mat-icon>
+              <div style="font-size:10px;">Strava</div>
             </ng-template>
             <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
@@ -68,6 +72,7 @@
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
               <mat-icon>add_circle_outline</mat-icon>
+              <div style="font-size:10px;">Manual</div>
             </ng-template>
              <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Add Activity</b></h3></b>
             <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
@@ -76,10 +81,12 @@
       </div>
 
       <div *ngIf="num_activities>0">
-        <mat-tab-group [selectedIndex]="1">
+        <mat-tab-group [selectedIndex]="1" class='tab-subtitled'>
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
+
               <mat-icon>cloud_download</mat-icon>
+              <div style="font-size:10px;">Strava</div>
             </ng-template>
             <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
@@ -89,6 +96,7 @@
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
               <mat-icon>add_circle_outline</mat-icon>
+              <div style="font-size:10px;">Manual</div>
             </ng-template>
              <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Add Activity</b></h3></b>
             <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
@@ -103,24 +111,29 @@
             <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon>format_list_numbered_rtl</mat-icon>
+          <div style="font-size:10px;">Leaderboard</div>
         </ng-template>
         
-        <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Leaderboard</b></h3></b>
+        
         
 
-      <mat-tab-group>
+      <mat-tab-group class='tab-subtitled'>
           
         <mat-tab label="Teams">
           <ng-template mat-tab-label>
             <mat-icon>directions_run</mat-icon>
+            <div style="font-size:10px;">Individuals</div>
           </ng-template>
-          <app-leaderboard [leaderboard]="leaderboard"  [allowFollow]="false"></app-leaderboard>
+          <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Leaderboard</b></h3></b>
+          <app-leaderboard [leaderboard]="leaderboard"  [allowFollow]="true"></app-leaderboard>
           </mat-tab>
           
           <mat-tab label="not teams">
             <ng-template mat-tab-label>
               <mat-icon>group</mat-icon>
+              <div style="font-size:10px;">Teams</div>
             </ng-template>
+            <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Teams Leaderboard</b></h3></b>
             <app-leaderboard [leaderboard]="teamLeaderboard" [allowFollow]="false"></app-leaderboard>
           </mat-tab>
      </mat-tab-group>
@@ -129,6 +142,7 @@
         <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon>group</mat-icon>
+          <div style="font-size:10px;">Teams</div>
         </ng-template>
         <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call
         <button (click)="clearUserPins()">Clear User Pins!</button>
@@ -149,6 +163,7 @@
 
         <ng-template mat-tab-label>
           <mat-icon>settings</mat-icon>
+          <div style="font-size:10px;">Settings</div>
         </ng-template>
         <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Race Settings</b></h3></b>
         <app-race-settings [userSettings]="userRaceSettings"></app-race-settings>
