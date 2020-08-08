@@ -107,17 +107,28 @@ export class FeedComponent implements OnInit {
     }
   }
 
-  public refreshFeed(){
+  public refreshFeed(openStoryIDComments=null){
     var viewComponent = this;
 
     this._feedService.refreshFeed().then(data => {
-      console.log("FEED DATA: ", data);
       var newFeedObjs: Array<FeedObj> = [];
       var get_created_ts = this.get_created_ts;
 
       Object.keys(data).map(function(feedItemIndex){
         let feedItem: FeedObj = data[feedItemIndex];
+
+        //Initialize time since posts
         feedItem.created_ts = get_created_ts(feedItem.created_ts);
+
+        //By default don't open comment fields
+        //Unless we have just posted a comment
+        if (feedItem.story_id == openStoryIDComments){
+          feedItem.show_comments = true;
+        }
+        else {
+          feedItem.show_comments = false;
+        }
+
         newFeedObjs.push(feedItem);
       });
 
@@ -159,6 +170,12 @@ export class FeedComponent implements OnInit {
     //Refresh feed on new story post
     this.refreshFeed();
   }
+
+  newCommentPosted(storyID){
+    //Feed items after comment posted
+    console.log(this.feedItems);
+    this.refreshFeed(storyID);
+  }
 }
 
 
@@ -181,9 +198,11 @@ interface FeedObj {
   created_ts:number;
   is_mine:boolean;
   comments: Comment[];
+  show_comments: boolean;
 }
 
 interface Comment {
+  username: string;
   display_name:string;
   profile_url:string;
   message:string;

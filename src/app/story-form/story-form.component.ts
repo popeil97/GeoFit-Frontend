@@ -35,9 +35,6 @@ export class StoryFormComponent implements OnInit {
   }
 
   uploadStory(): void{
-    //This bool tells Django whether to add these fields to the user's last story
-    //or simply create a new story that has no activities
-    //False by default but implement mechanism for true in future
     console.log("uploading story");
     console.log("Story image: ", this.storyImage);
     let withLastStory = false;

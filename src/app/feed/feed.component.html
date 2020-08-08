@@ -46,7 +46,14 @@
             <app-story-modal></app-story-modal>
           </div>
 
-          <app-story-btn *ngIf="this._authService.token" [use]="'like'" [storyID]=element.story_id [likes]=element.likes [likesCount]=element.likes_count></app-story-btn>
+          <div class="container" style="display:flex;">
+            <app-story-btn *ngIf="this._authService.token" [use]="'like'" [storyID]=element.story_id [likes]=element.likes [likesCount]=element.likes_count></app-story-btn>
+            <button class="btn btn-sm" (click)="element.show_comments=!element.show_comments">{{ element.comments.length }} Comments</button>
+          </div>
+
+          <div *ngIf="element.show_comments">
+            <app-comments [comments]="element.comments" [storyID]="element.story_id" (commentPosted)="newCommentPosted($event)"></app-comments>
+          </div>
         </div>
       </td>
     </ng-container>

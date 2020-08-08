@@ -1,4 +1,4 @@
-<div class="table-container" style="overflow-y: auto;max-height:60vh;">
+<div class="table-container" *ngIf="comments" style="overflow-y: auto;max-height:60vh;">
   <table mat-table [dataSource]="comments" class="commentTable">
     <ng-container matColumnDef="ProfilePic" style="padding: 10px;">
       <td mat-cell *matCellDef="let element">
@@ -9,7 +9,7 @@
     <ng-container matColumnDef="Data" style="padding: 10px;">
       <td mat-cell *matCellDef="let element">
 
-        <app-user-profile-nav [username]=element.display_name></app-user-profile-nav>
+        <app-user-profile-nav [displayName]="element.display_name" [username]=element.username></app-user-profile-nav>
         {{ element.body }}
         <small>{{ element.created_ts }}</small>
 
@@ -19,4 +19,4 @@
     <tr mat-row *matRowDef="let myRowData; columns: columns"></tr>
   </table>
 </div>
-<app-comments-form *ngIf="this._authService.token" [storyID]="storyID" (commentPosted)="getNewCommentData()"></app-comments-form>
+<app-comments-form *ngIf="this._authService.token" [storyID]="storyID" (commentPosted)="newCommentPosted()"></app-comments-form>

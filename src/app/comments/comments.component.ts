@@ -14,6 +14,9 @@ export class CommentsComponent implements OnInit {
   //ID of Story
   @Input() storyID: number;
 
+  //When new comment posted
+  @Output() commentPosted: EventEmitter<number> = new EventEmitter();
+
   //Columns for tabulated comments
   columns:string[] = ['ProfilePic','Data'];
 
@@ -29,8 +32,15 @@ export class CommentsComponent implements OnInit {
     //call story service and update Comments data
     this._storyService.getComments(this.storyID).then((data) => {
       let commentData = data as Comment[];
+      console.log("Comment data: ", commentData);
       this.comments = commentData;
     })
+  }
+
+  newCommentPosted(){
+    //this.getNewCommentData();
+    
+    this.commentPosted.emit(this.storyID);
   }
 
 }
