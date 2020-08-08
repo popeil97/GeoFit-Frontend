@@ -655,6 +655,20 @@ mat-sidenav-container {
     width: 100%;
     
 }
+.lab ::ng-deep.mat-tab-label{
+  height:58px;
+  padding: 0 5px;
+}
+.tab-subtitled ::ng-deep.mat-tab-label .mat-tab-label-content {
+  flex-wrap: wrap!important;
+}
+
+.tab-subtitled ::ng-deep.mat-tab-label .mat-tab-label-content span{
+  display: flex!important;
+  flex: 1 0 100%!important;
+  justify-content: center!important;
+}
+
 .sidenav-scroll {
   overflow:hidden;
   }

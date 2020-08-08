@@ -6,7 +6,7 @@
     </ng-container>
   
     <ng-container matColumnDef="Distance" style="padding: 10px;">
-      <td mat-cell *matCellDef="let element"> {{element.converted_dist}} {{distance_unit}} </td>
+      <td mat-cell *matCellDef="let element" (click)="add(element)"> {{element.converted_dist}} {{distance_unit}} </td>
     </ng-container>
   
     <!-- <tr mat-header-row *matHeaderRowDef="columns"></tr> -->

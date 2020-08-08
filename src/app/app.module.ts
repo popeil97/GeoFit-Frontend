@@ -69,7 +69,7 @@ import { SmilesComponent } from './smiles/smiles.component';
 import { TermsOfServiceComponent, TermsOfServiceDialogContent } from './terms-of-service/terms-of-service.component';
 import { PasswordRequestComponent } from './password-request/password-request.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
-import { JumpToComponent } from './jump-to/jump-to.component';
+import { RaceDayComponent, RaceDayDialogContent} from './race-day/race-day.component';
 
 
 @NgModule({
@@ -120,7 +120,8 @@ import { JumpToComponent } from './jump-to/jump-to.component';
     TermsOfServiceDialogContent,
     PasswordRequestComponent,
     PasswordChangeComponent,
-    JumpToComponent,
+    RaceDayComponent,
+    RaceDayDialogContent
   ],
   imports: [
     BrowserModule,
@@ -145,7 +146,7 @@ import { JumpToComponent } from './jump-to/jump-to.component';
     ImageService,
   ],
   bootstrap: [AppComponent],
-  entryComponents:[SignupDialogContent,PopupComponent,SwagDialogContent,TermsOfServiceDialogContent],
+  entryComponents:[SignupDialogContent,PopupComponent,SwagDialogContent,TermsOfServiceDialogContent,RaceDayDialogContent],
 })
 export class AppModule { 
   constructor(private injector: Injector) {

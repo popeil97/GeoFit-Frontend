@@ -134,12 +134,14 @@ export class RaceViewComponent implements OnInit {
   }
 
   importActs(): void {
-    console.log(this.actsToImport);
+    console.log('GONNA IMPORT THIS SHIT:',this.actsToImport);
     this.loading = true;
     this.activitiesService.importActivities(this.actsToImport,this.raceID).then((res) => {
       console.log(res);
-      this.getRaceState();
       this.actsToImport = [];
+      console.log('BEFORE GETRACESTATE:',this.actsToImport);
+      this.getRaceState();
+      console.log('AFTER GETRACESTATE:',this.actsToImport);
     });
     this.loading = false;
   }
