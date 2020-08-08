@@ -47,9 +47,9 @@
 
       <mat-tab *ngIf="this.progress && this._authService.token">
         <ng-template mat-tab-label style="background-color: rgba(256,256, 256,1);">
-          <mat-icon>file_download </mat-icon>
-          <div style="font-size:10px;">Import</div>
-          <div *ngIf="num_activities>0" style="background-color: #F6BF78; border-radius: 5px;padding-left:4px;padding-right:4px;">{{num_activities}} </div>
+          <mat-icon>file_download </mat-icon> <div *ngIf="num_activities>0" style="background-color: #F6BF78; border-radius: 5px;padding-left:2px;padding-right:2px;">{{num_activities}} </div>
+          <div style="font-size:10px;">Import </div>
+          
         </ng-template>
 
         <div *ngIf="!raceSettings.isManualEntry">
@@ -58,7 +58,7 @@
         </div>
 
         <div *ngIf="num_activities==0">
-        <mat-tab-group [selectedIndex]="2" class='tab-subtitled'>
+        <mat-tab-group [selectedIndex]="0" class='tab-subtitled'>
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
               <mat-icon>cloud_download</mat-icon>

@@ -1,28 +1,31 @@
-<!-- <h2 mat-dialog-title>Welcome to Race Day!</h2>
+<h2 mat-dialog-title>Welcome to Race Day!</h2>
 <mat-dialog-content class="mat-typography">
   
-<mat-horizontal-stepper [linear]="!isLinear" #stepper>
-  <mat-step [stepControl]="firstFormGroup">
-    <form [formGroup]="firstFormGroup">
-      <ng-template matStepLabel>Upload picture</ng-template>
-      <b> Upload a profile picture </b> so family and friend can see you on the map
+<mat-horizontal-stepper [linear]="false" #stepper>
+  <mat-step [stepControl]>
+    <form [formGroup]>
+      <ng-template matStepLabel>Update Your Info</ng-template>
+      <b> Update your info, including uploading a profile picture </b> so family and friends can find you on the map
+      <app-profile-form [userData]="userData" (formUpdated)="profileUpdated($event)"></app-profile-form>
       <div>
         <button mat-button matStepperNext>Next</button>
       </div>
     </form>
   </mat-step>
 
-  <mat-step [stepControl]="thirdFormGroup">
-    <form [formGroup]="thirdFormGroup">
+  <mat-step [stepControl]>
+    <form [formGroup]>
       <ng-template matStepLabel>Race Knowledge</ng-template>
       <b> Know how you're going to enter your fitness activities</b> <br>
       We recommend using Strava because it will track your exercise and automatically integrate with our platform. Click through the two options for more information. You can use one or both!
+
+      Note: this information will also be available on your profile later.
 
       <mat-accordion>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Option 1: Manual Entry
+        Option 1: Use Strava
       </mat-panel-title>
       <mat-panel-description>
       </mat-panel-description>
@@ -30,19 +33,18 @@
      
     </mat-expansion-panel-header>
 
-     <img src="../../assets/landing/manual-1.png" alt="pic1" style="width:300px;">
-      <img src="../../assets/landing/manual-2.PNG" alt="pic2" style="width:300px;">
-      <img src="../../assets/landing/manual-3.PNG" alt="pic3" style="width:100px;">
-
+     
+    <app-strava-instructions></app-strava-instructions>
   </mat-expansion-panel>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Option 2: Use Strava
+        Option 2: Manual Entry
       </mat-panel-title>
       <mat-panel-description>
       </mat-panel-description>
     </mat-expansion-panel-header>
+    <app-manual-instructions></app-manual-instructions>
   </mat-expansion-panel>
 </mat-accordion>
 
@@ -69,4 +71,4 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Close</button>
-</mat-dialog-actions> -->
+</mat-dialog-actions>

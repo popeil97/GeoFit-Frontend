@@ -1,0 +1,114 @@
+<div >
+	Strava has a few more steps to setup, but ultimately will be simpler as it tracks your fitness activities for you. These first few steps require using your phone.
+	<mat-vertical-stepper [linear]="false" #stepper>
+  <mat-step [stepControl]> 
+    <form [formGroup]>
+      <ng-template matStepLabel>Download Strava</ng-template>
+      On your phone, start by downloading Strava from the App/Android store.<br>
+      <img src="../../assets/landing/strava-1.JPG" alt="pic1" style="width:300px;">
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]>
+    <form [formGroup]>
+      <ng-template matStepLabel>Create an Account</ng-template>
+      Create an account on Strava using your email or Facebook.<br>
+      <img src="../../assets/landing/strava-2.JPG" alt="pic1" style="width:300px;">
+    </form>
+  </mat-step>
+
+
+
+  <mat-step>
+    <ng-template matStepLabel>Track your activities on Strava</ng-template>
+    The next time you go for a run, walk or bike ride, use Strava on your phone. Each time you do a fitness activity, you must follow these steps.
+
+    <mat-vertical-stepper [linear]="fale" #stepper>
+  <mat-step [stepControl]> 
+    <form [formGroup]>
+      <ng-template matStepLabel>Begin recording</ng-template>
+      Before your fitness activitiy, press the record button. <br>
+   	<img src="../../assets/landing/strava-3.JPG" alt="pic1" style="width:300px;">
+    </form>
+  </mat-step>
+
+ <mat-step [stepControl]> 
+    <form [formGroup]>
+      <ng-template matStepLabel>Set activity type</ng-template>
+
+   	 Then, pick the type of activity you want to do by pressing the middle button.<br>
+   	<img src="../../assets/landing/strava-4.JPG" alt="pic1" style="width:300px;"><br>
+   	A popup will come up as follows.<br>
+   	<img src="../../assets/landing/strava-5.JPG" alt="pic1" style="width:300px;">
+    </form>
+  </mat-step>
+   
+    <mat-step [stepControl]> 
+    <form [formGroup]>
+      <ng-template matStepLabel>Start</ng-template>
+      When you're ready to exercise, press
+   	<img src="../../assets/landing/start.png" alt="pic1" style="width:50px;">. During your fitness activity, keep your phone on you, but you don't need to use it during.
+    </form>
+  </mat-step>
+
+
+  <mat-step [stepControl]> 
+    <form [formGroup]>
+      <ng-template matStepLabel>Stop</ng-template>
+      After your fitness activity, press 
+   	<img src="../../assets/landing/strava-6.JPG" alt="pic1" style="width:50px;">
+   	then 
+   	<img src="../../assets/landing/strava-7.JPG" alt="pic1" style="width:50px;">
+   	Finally, to save your activity press 
+   	<img src="../../assets/landing/strava-8.JPG" alt="pic1" style="width:180px;">
+    </form>
+  </mat-step>
+</mat-vertical-stepper>
+
+
+  </mat-step>
+
+    <mat-step>
+    <ng-template matStepLabel>Connect your account to Tucan</ng-template>
+   	In the meantime, connect your Strava account to Tucan by pressing this button and authorizing Tucan to access your account : <app-stravauth></app-stravauth>
+
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Import on Tucan</ng-template>
+   	After you log activities on Strava, they will show up on Tucan.
+
+   	<mat-vertical-stepper>
+   		<mat-step [stepControl]> 
+    <form [formGroup]>
+      <ng-template matStepLabel>Navigate to the import menu on the map page</ng-template>
+      After your fitness activity, press the Import icon on the left navigational bar.<br>
+   	<img src="../../assets/landing/strava-l1.PNG" alt="pic1" style="width:300px;">
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]> 
+    <form [formGroup]>
+      <ng-template matStepLabel>See your Strava activities</ng-template>
+      Your eligible Strava activity will show up in the list of activities. If your activitiy is not there, wait an hour before checking again. Sometimes it can take a while to get from Strava.<br>
+   	<img src="../../assets/landing/strava-l2.PNG" alt="pic1" style="width:300px;">
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]> 
+    <form [formGroup]>
+      <ng-template matStepLabel>Import your activity</ng-template>
+      Click the activity you would like to apply, and it will turn blue. <br>
+   	<img src="../../assets/landing/strava-l3.PNG" alt="pic1" style="width:300px;"><br>
+   	 Add the activity to your progress by pressing the <img src="../../assets/landing/manual-3.PNG" alt="pic3" style="width:60px;"> button at the bottom. Your pin then will move on the map.
+    </form>
+  </mat-step>
+
+</mat-vertical-stepper>
+
+  </mat-step>
+</mat-vertical-stepper>
+
+</div>
+
+

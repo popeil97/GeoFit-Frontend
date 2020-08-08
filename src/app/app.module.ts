@@ -70,6 +70,9 @@ import { TermsOfServiceComponent, TermsOfServiceDialogContent } from './terms-of
 import { PasswordRequestComponent } from './password-request/password-request.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { RaceDayComponent, RaceDayDialogContent} from './race-day/race-day.component';
+import { StravaInstructionsComponent } from './strava-instructions/strava-instructions.component';
+import { ManualInstructionsComponent } from './manual-instructions/manual-instructions.component';
+import { ProfilePicComponent } from './profile-pic/profile-pic.component';
 
 
 @NgModule({
@@ -121,7 +124,10 @@ import { RaceDayComponent, RaceDayDialogContent} from './race-day/race-day.compo
     PasswordRequestComponent,
     PasswordChangeComponent,
     RaceDayComponent,
-    RaceDayDialogContent
+    RaceDayDialogContent,
+    StravaInstructionsComponent,
+    ManualInstructionsComponent,
+    ProfilePicComponent
   ],
   imports: [
     BrowserModule,
