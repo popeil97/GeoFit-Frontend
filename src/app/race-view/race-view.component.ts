@@ -228,7 +228,7 @@ export class RaceViewComponent implements OnInit {
 
   showPinsByID(IDs){
     //Pass null to show all pins
-    this.mapChild.showPinsByID(IDs);
+    this.mapChild.showPinsByID(IDs, false);
   }
 
   createUserPins(){
@@ -243,18 +243,13 @@ export class RaceViewComponent implements OnInit {
     console.log("Applying heat map...")
   }
 
-  showFollowedPins(){
-    this.mapChild.showFollowedPins();
-    console.log("Showing only follower pins");
-  }
-
   showAllPins(){
     this.mapChild.showAllPins();
     console.log("Showing all pins");
   }
 
-  showPinsFromSettings(all: boolean, followed: boolean, male: boolean, female: boolean){
-    this.mapChild.showPinsFromSettings(all, followed, male, female);
+  showPinsFromSettings(settings: PinSettings){
+    this.mapChild.showPinsFromSettings(settings);
   }
 
 }
@@ -294,4 +289,13 @@ interface FeedObj {
 export interface TeamEditBody {
   team_id:number;
   isEdit:Boolean;
+}
+
+interface PinSettings {
+  followerPinsOnly: boolean;
+  malePinsOn: boolean;
+  femalePinsOn: boolean;
+  allAgesOn: boolean;
+  minAge: number;
+  maxAge: number;
 }

@@ -93,10 +93,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
 
   public panToUSA(){
-    //Do this to simply pan to user pin
-    //this.map.panTo(this.markersByUserID[user_id.toString()]['latLng']);
-
-    //Do this to pan *and* zoom
     var corner1 = L.latLng(40.4, -73.7);
     var corner2 = L.latLng(39.79, -75.5);
     var markerBounds = L.latLngBounds(corner1,corner2);
@@ -106,13 +102,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
   }
 
   public panToIsrael(){
-    //Do this to simply pan to user pin
-    //this.map.panTo(this.markersByUserID[user_id.toString()]['latLng']);
-
-    //Do this to pan *and* zoom
     var corner1 = L.latLng(31.8,35.3);
     var corner2 = L.latLng(31.76, 35.18);
-
     
     var markerBounds = L.latLngBounds(corner1,corner2);
     var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
@@ -224,10 +215,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
     })
   }
 
-  public showFollowedPins(){
-    this.showPinsByID(this.followedIDs);
-  }
-
   private union_arrays (x, y) {
     var obj = {};
     for (var i = x.length-1; i >= 0; -- i)
@@ -242,13 +229,14 @@ export class MapComponent implements AfterViewInit,OnChanges {
     return res;
   }
 
-  public showPinsFromSettings(all: boolean, followed: boolean, male: boolean, female: boolean){
-    console.log("all: ", all);
-    console.log("followed: ", followed);
-    console.log("male: ", male);
-    console.log("female: ", female);
-    if (all){
-      this.showAllPins();
+  public showPinsFromSettings(settings: PinSettings){
+    console.log("PIN SETTINGS ", settings);
+    if (settings.allAgesOn && settings.malePinsOn && settings.femalePinsOn && !settings.followerPinsOnly){
+      //this.showAllPins();
+
+      //Temp fix to clustering not working after pin filtering
+      //Just redo the whole pin creation process
+      this.createUserPins(false);
       return;
     }
     
@@ -256,13 +244,13 @@ export class MapComponent implements AfterViewInit,OnChanges {
     let maleIDs = [];
     let femaleIDs = [];
     
-    //We do this so if both M and F are checked, people of all gender
+    //We do this so if both M and F are checked, people of all genders
     //are displayed
-    if (!male || !female){
-      if (male){
+    if (!settings.malePinsOn || !settings.femalePinsOn){
+      if (settings.malePinsOn){
         maleIDs = this.getIDsByGender('Male');
       }
-      if (female){
+      if (settings.femalePinsOn){
         femaleIDs = this.getIDsByGender('Female');
       }
       
@@ -270,33 +258,52 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }
 
     //Limit to only users we follow
-    if (followed){
+    if (settings.followerPinsOnly){
       if (unionIDs.length){
-        console.log("Getting intersection of ", unionIDs, " and ", this.followedIDs);
-        unionIDs = unionIDs.filter(value => this.followedIDs.includes(value))
+        unionIDs = unionIDs.filter(value => this.followedIDs.includes(value));
       }
       else {
         unionIDs = this.followedIDs;
       }
     }
+
+    console.log("IDs before age filter: ", unionIDs);
+
+    //Limit by age group
+    if (!settings.allAgesOn){
+      let ageIDs = this.getIDsInAgeRange(settings.minAge, settings.maxAge);
+      if (unionIDs.length){
+        unionIDs = unionIDs.filter(value => ageIDs.includes(value));
+      }
+      else {
+        unionIDs = ageIDs;
+      }
+    }
+
     console.log("Final show IDs: ", unionIDs);
-    this.showPinsByID(unionIDs);
+    this.showPinsByID(unionIDs, false);
   }
 
   public showAllPins(){
-    this.showPinsByID(null);
+    this.showPinsByID(null, true);
+  }
+
+  public getIDsInAgeRange(minAge: number, maxAge: number){
+    let IDs = [];
+    for (let i = 0; i < this.userData.length; i++){
+      if (this.userData[i].age >= minAge && this.userData[i].age <= maxAge){
+        IDs.push(this.userData[i].user_id);
+      }
+    }
+
+    return IDs;
   }
 
   public getIDsByGender(gender: string){
-    console.log("Looking for ", gender);
     let IDs = [];
     for (let i = 0; i < this.userData.length; i++){
       if (this.userData[i].gender == gender){
-        console.log("User is ", this.userData[i].gender, " so we add them.");
         IDs.push(this.userData[i].user_id);
-      }
-      else {
-        console.log("User is ", this.userData[i].gender, " so we don't add them.");
       }
     }
 
@@ -310,21 +317,20 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }
   }
 
-  public showPinsByID(IDs){
+  public showPinsByID(IDs, showAll: boolean){
     //Clear all pins
     this.clearUserPins();
 
     let viewComponent = this;
+
+    this.map.removeLayer(this.markerClusters);
 
     this.markerClusters.eachLayer(function(layer) {
       let tempUserDataIndex = viewComponent.layerIDsToUserIndices[layer._leaflet_id.toString()];
       let tempUserData = viewComponent.userData[tempUserDataIndex];
       let pinUserID = tempUserData.user_id;
 
-      //console.log("Followed IDS: ", viewComponent.followedIDs);
-      //console.log("This pin user ID: ", pinUserID);
-
-      if (IDs == null || IDs.includes(parseInt(pinUserID))){
+      if (showAll == true || IDs.includes(parseInt(pinUserID))){
         layer.addTo(viewComponent.map);
       }
       else {
@@ -519,4 +525,13 @@ export class MapComponent implements AfterViewInit,OnChanges {
   }
 
 
+}
+
+interface PinSettings {
+  followerPinsOnly: boolean;
+  malePinsOn: boolean;
+  femalePinsOn: boolean;
+  allAgesOn: boolean;
+  minAge: number;
+  maxAge: number;
 }

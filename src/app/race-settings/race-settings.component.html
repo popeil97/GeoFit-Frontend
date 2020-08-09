@@ -11,16 +11,29 @@
       <div class="form-group">
         <mat-slide-toggle formControlName="heatMapOn">Heat Map On</mat-slide-toggle>
       </div>
-
-      <h3>Show Follower Pins Only</h3>
-      <div class="form-group">
-        <mat-slide-toggle formControlName="followerPinsOnly">Follower Pins On</mat-slide-toggle>
-      </div>
       
       <h3>Toggle Pins by Gender</h3>
       <div class="form-group">
         <mat-slide-toggle formControlName="malePinsOn">Male Pins On</mat-slide-toggle>
         <mat-slide-toggle formControlName="femalePinsOn">Female Pins On</mat-slide-toggle>
+      </div>
+
+      <h3>Toggle Pins by Age</h3>
+      <div class="form-group">
+        <mat-slide-toggle formControlName="allAgesOn">Show All Ages</mat-slide-toggle>
+        <br>
+        <p>
+          <label for="minAge">Min Age: </label>
+          <input type="number" id="minAge" formControlName="minAge" style="width: 3em">
+
+          <label for="maxAge">Max Age: </label>
+          <input type="number" id="maxAge" formControlName="maxAge" style="width: 3em">
+        </p>
+      </div>
+
+      <h3>Show Follower Pins Only</h3>
+      <div class="form-group">
+        <mat-slide-toggle formControlName="followerPinsOnly">Follower Pins On</mat-slide-toggle>
       </div>
 
     </form>

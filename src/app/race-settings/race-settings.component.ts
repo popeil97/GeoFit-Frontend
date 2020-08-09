@@ -31,6 +31,11 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
       femalePinsOn: new FormControl(true, [
         Validators.required,
       ]),
+      allAgesOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      minAge: new FormControl(0, []),
+      maxAge: new FormControl(99, []),
     });
     
   }
@@ -48,6 +53,18 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
         }
       }
     }
+
+    this.settingsForm.get('allAgesOn').valueChanges
+      .subscribe(value => {
+          if (value == true) {
+            this.settingsForm.get('minAge').disable();
+            this.settingsForm.get('maxAge').disable();
+          }
+          else {
+            this.settingsForm.get('minAge').enable();
+            this.settingsForm.get('maxAge').enable();
+          }
+      });
     
   }
   ngAfterViewInit(): void {
@@ -79,8 +96,13 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
       //   this._raceview.createUserPins();
       // }
 
-      let all = !this.settingsForm.value.followerPinsOnly && this.settingsForm.value.malePinsOn && this.settingsForm.value.femalePinsOn;
-      this._raceview.showPinsFromSettings(all, this.settingsForm.value.followerPinsOnly, this.settingsForm.value.malePinsOn, this.settingsForm.value.femalePinsOn);
+      let pinSettings = this.settingsForm.value as PinSettings;
+      //let all = !this.settingsForm.value.followerPinsOnly && this.settingsForm.value.malePinsOn && this.settingsForm.value.femalePinsOn;
+
+      // this._raceview.showPinsFromSettings(all, this.settingsForm.value.followerPinsOnly, this.settingsForm.value.malePinsOn, 
+      //   this.settingsForm.value.femalePinsOn, this.settingsForm.value.allAgesOn, this.settingsForm.value.minAge, 
+      //   this.settingsForm.value.maxAge);
+      this._raceview.showPinsFromSettings(pinSettings);
 
     }
   }
@@ -104,7 +126,17 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
       femalePinsOn: new FormControl(true, [
         Validators.required,
       ]),
+      allAgesOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      minAge: new FormControl(0, []),
+      maxAge: new FormControl(99, []),
     });
+
+    //Disable age control by default
+    this.settingsForm.get('minAge').disable();
+    this.settingsForm.get('maxAge').disable();
+
     console.log('form value:',this.settingsForm);
   }
 
@@ -113,6 +145,14 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
 interface UserSettings {
   isAutomaticImport:Boolean;
   heatMapOn:Boolean;
-  followerPinsOnly:Boolean;
   race_id:number;
+}
+
+interface PinSettings {
+  followerPinsOnly: boolean;
+  malePinsOn: boolean;
+  femalePinsOn: boolean;
+  allAgesOn: boolean;
+  minAge: number;
+  maxAge: number;
 }

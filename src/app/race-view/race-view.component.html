@@ -26,7 +26,6 @@
         </div>
       </div>
      </div>
-   
 
 
     <mat-tab-group class='tab-subtitled'>
@@ -36,10 +35,7 @@
           <div style="font-size:10px;">Social</div>
           
         </ng-template>
-        <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call
-        <button (click)="clearUserPins()">Clear User Pins!</button>
-        <button (click)="showPinsByID(null)">Show User Pins!</button>
-        <button (click)="showPinsByID(followedIDs)">Show Followers Only</button>-->
+        
         <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Activity Feed</b></h3></b>
 
         <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
@@ -144,10 +140,7 @@
           <mat-icon>group</mat-icon>
           <div style="font-size:10px;">Teams</div>
         </ng-template>
-        <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call
-        <button (click)="clearUserPins()">Clear User Pins!</button>
-        <button (click)="showPinsByID(null)">Show User Pins!</button>
-        <button (click)="showPinsByID(followedIDs)">Show Followers Only</button>-->
+
         <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Teams</b></h3></b>
         <button class="btn btn-primary" style="width: 100%; text-align: center; background-color:#2C00A5;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">+ Team</button>
             <button class="btn btn-danger" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm('clear')" *ngIf="showTeamForm">Cancel</button>
