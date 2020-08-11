@@ -11,7 +11,7 @@
 
         <app-user-profile-nav [displayName]="element.display_name" [username]=element.username></app-user-profile-nav>
         {{ element.body }}
-        <small>{{ element.created_ts }}</small>
+        <small>{{ this.get_created_ts(element.created_ts) }}</small>
 
       </td>
     </ng-container>
