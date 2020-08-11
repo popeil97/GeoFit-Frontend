@@ -1,9 +1,11 @@
 <div *ngIf="use=='like'">
-  <button type="button" class="btn btn-success btn-sm" (click)="changeLikeStatus()" style="width:55px;max-width: 55px;background-color:#2C00A5;border-color:#2C00A5;">
-    <span class="ui-button-text"  >{{likes ? 'Unlike' : 'Like'}}</span>
-  </button>
-  <span *ngIf="likesCount != 1">{{ likesCount }} Likes</span>
-  <span *ngIf="likesCount == 1">{{ likesCount }} Like</span>
+  <div role="button" (click)="changeLikeStatus()">
+    <span *ngIf="likes"  ><i class="material-icons">favorite</i> </span>
+    <span *ngIf="!likes"  ><i class="material-icons">favorite_border</i> </span>
+    <span *ngIf="likesCount != 1">{{ likesCount }}</span>
+  <span *ngIf="likesCount == 1">{{ likesCount }}</span>
+  </div>
+  
 </div>
 
 <button *ngIf="use=='delete'" type="button" class="btn btn-danger btn-sm" (click)="deleteStory()" style="background-color:#F6BF78;border-color:#F6BF78;">

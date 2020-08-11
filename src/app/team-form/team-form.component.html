@@ -2,8 +2,7 @@
 <div class="container">
   <form [formGroup]="teamForm">
     <div class="form-group" style="text-align: left; padding: 5px;">
-      <label name="Name">Name</label>
-      <input class="form-control" type="text" placeholder="Name" formControlName="name"/>
+      <input class="form-control" type="text" placeholder="Team Name" formControlName="name"/>
       <br>
       <div *ngIf="teamForm.get('name').invalid && (teamForm.get('name').dirty || teamForm.get('name').touched)"
     class="alert alert-danger">
@@ -15,8 +14,7 @@
     </div>
 
     <div class="form-group" style="text-align: left; padding: 5px;">
-      <label name="description">Description(Why should you be feared?)</label>
-      <textarea class="form-control" type="text" placeholder="Description" formControlName="description" style="height: 200px;"></textarea>
+      <textarea class="form-control" type="text" placeholder="Description(Why should you be feared?)" formControlName="description"></textarea>
       <br>
       <div *ngIf="teamForm.get('description').invalid && (teamForm.get('description').dirty || teamForm.get('description').touched)"
     class="alert alert-danger">
@@ -29,7 +27,7 @@
 
     <div class="form-group" style="text-align: left; padding: 5px;">
       <label name="end_loc">Invite People you Follow or Follow You!</label>
-      <input class="form-control" type="text" placeholder="Followers" formControlName="invited" [matAutocomplete]="endLocAuto"/>
+      <input class="form-control" type="text" placeholder="Start typing a name..." formControlName="invited" [matAutocomplete]="endLocAuto"/>
 
 <!-- Can use mat card as panel -->
       <mat-autocomplete #endLocAuto="matAutocomplete">
@@ -50,7 +48,7 @@
       </mat-chip-list>
     </div>
 
-    <div class="form-group" style="text-align: left; padding: 5px;">
+    <div class="form-group" style="text-align: left; ">
       <label name="teamImg">Team Image</label>
       <br>
       <input type="file" formControlName="teamImg" (change)="onSelectFile($event)"/>
@@ -60,14 +58,16 @@
       {{errorMsg}}
     </div>
 
-    <div style="padding: 5px; position: relative; float: left;" *ngIf="!teamEditForm.isEdit">
+    <div style="position: relative; float: left;" *ngIf="!teamEditForm.isEdit">
       <button class="btn btn-primary" style="background-color: #2C00A5;" mat-raised-button (click)="createTeam()">Create</button>
     </div>
 
-    <div style="padding: 5px; position: relative; float: left;" *ngIf="teamEditForm.isEdit">
+    <div style="position: relative; float: left;" *ngIf="teamEditForm.isEdit">
       <button class="btn btn-primary" style="background-color: #2C00A5;" mat-raised-button (click)="updateTeam()">Update</button>
     </div>
   </form>
+  <br>
+
 
   
 

@@ -75,6 +75,7 @@ import { ManualInstructionsComponent} from './manual-instructions/manual-instruc
 import { ProfilePicComponent } from './profile-pic/profile-pic.component';
 import { FaqHelpComponent,FaqHelpDialogContent } from './faq-help/faq-help.component';
 import { ContactHelpComponent,ContactHelpDialogContent } from './contact-help/contact-help.component';
+import { TeamInstructionsComponent } from './team-instructions/team-instructions.component';
 
 
 @NgModule({
@@ -133,7 +134,8 @@ import { ContactHelpComponent,ContactHelpDialogContent } from './contact-help/co
     FaqHelpComponent,
     FaqHelpDialogContent,
     ContactHelpComponent,
-    ContactHelpDialogContent
+    ContactHelpDialogContent,
+    TeamInstructionsComponent
       ],
   imports: [
     BrowserModule,

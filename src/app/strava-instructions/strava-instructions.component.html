@@ -75,14 +75,14 @@
   </mat-step>
 
   <mat-step>
-    <ng-template matStepLabel>Import on Tucan</ng-template>
+    <ng-template matStepLabel>Add your Strava activities on Tucan</ng-template>
    	After you log activities on Strava, they will show up on Tucan.
 
    	<mat-vertical-stepper>
    		<mat-step [stepControl]> 
     <form [formGroup]>
-      <ng-template matStepLabel>Navigate to the import menu on the map page</ng-template>
-      After your fitness activity, press the Import icon on the left navigational bar.<br>
+      <ng-template matStepLabel>Navigate to the "add activity" menu on the map page</ng-template>
+      After your fitness activity, press the "Add activity" icon on the left navigational bar.<br>
    	<img src="../../assets/landing/strava-l1.PNG" alt="pic1" style="width:300px;">
     </form>
   </mat-step>
@@ -97,12 +97,14 @@
 
   <mat-step [stepControl]> 
     <form [formGroup]>
-      <ng-template matStepLabel>Import your activity</ng-template>
+      <ng-template matStepLabel>Add your activity</ng-template>
       Click the activity you would like to apply, and it will turn blue. <br>
    	<img src="../../assets/landing/strava-l3.PNG" alt="pic1" style="width:300px;"><br>
    	 Add the activity to your progress by pressing the <img src="../../assets/landing/manual-3.PNG" alt="pic3" style="width:60px;"> button at the bottom. Your pin then will move on the map.
     </form>
   </mat-step>
+
+  Note: don't like importing your activities each time? Go to the settings tab, and toggle "Automatic Activity Import" so that all future actvities will be directly applied from Strava.
 
 </mat-vertical-stepper>
 

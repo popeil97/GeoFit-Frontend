@@ -1,8 +1,8 @@
-<div class="container" style="padding:1px;">
+<div class="container" >
     <form [formGroup]="settingsForm">
 
       <h3>Activities</h3>
-      <div class="form-group">
+      <div class="form-group" style="padding-left:25px;">
         <mat-slide-toggle formControlName="isAutomaticImport">Automatic Activity Import</mat-slide-toggle>
       </div>
 
@@ -13,13 +13,13 @@
       
       <h3>Toggle Pins by Gender</h3>
       <div class="form-group">
-        <mat-slide-toggle formControlName="malePinsOn">Male Pins On</mat-slide-toggle>
-        <mat-slide-toggle formControlName="femalePinsOn">Female Pins On</mat-slide-toggle>
+        <mat-slide-toggle formControlName="malePinsOn" style="padding-left:25px;">Male Pins On</mat-slide-toggle>
+        <mat-slide-toggle formControlName="femalePinsOn" style="padding-left:10px;">Female Pins On</mat-slide-toggle>
       </div>
 
       <h3>Toggle Pins by Age</h3>
-      <div class="form-group">
-        <mat-slide-toggle formControlName="allAgesOn">Show All Ages</mat-slide-toggle>
+      <div class="form-group" style="padding-left:25px;">
+        <mat-slide-toggle formControlName="allAgesOn" >Show All Ages</mat-slide-toggle>
         <br>
         <p>
           <label for="minAge">Min Age: </label>
@@ -32,12 +32,12 @@
 
       <h3>Show Follower Pins Only</h3>
       <div class="form-group">
-        <mat-slide-toggle formControlName="followerPinsOnly">Follower Pins On</mat-slide-toggle>
+        <mat-slide-toggle formControlName="followerPinsOnly" style="padding-left:25px;">Follower Pins On</mat-slide-toggle>
       </div>
 
     </form>
 
-      <button mat-button class="btn btn-primary" (click)="apply()">Apply</button>
+      <button mat-button class="btn btn-primary" (click)="apply()" style="background-color:#2C007E">Apply</button>
       
       <div>
         <br>
@@ -51,6 +51,5 @@
     </div>
   </div>
 
-<div style="font-size:11px;"><span class="material-icons" style="color:#BC164D;">help</span> <b style="color:#2C007E">Need help? </b><b>Email us:</b> admin@tucan.fitness </div>
   </div>
 

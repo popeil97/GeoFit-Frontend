@@ -703,11 +703,11 @@ mat-sidenav, mat-sidenav-content {
 mat-sidenav {
     background-color: rgba(239, 250, 247, 0.83);
     top: 6%;
-    bottom:1%;
+
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;
     opacity: 1;
-    width: 350px;
+    width:400px;
     overflow: hidden;
 }
 

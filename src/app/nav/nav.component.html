@@ -1,5 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="top: 0; height: 5%;width: 100%;z-index: 10000000;background:rgba(256,256,256,0.7);">
-  <a class="navbar-brand" href="#"><img src= "../../assets/landing/tucan_purple-02.png" width="48" height="20"></a>
+  <a class="navbar-brand" href="#" *ngIf="!this._authService.isLoggedIn()"><img src= "../../assets/landing/tucan_purple-02.png" width="48" height="20"></a>
+   <a class="navbar-brand" *ngIf="this._authService.isLoggedIn()"><img src= "../../assets/landing/tucan_purple-02.png" width="48" height="20"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
