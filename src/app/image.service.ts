@@ -19,6 +19,10 @@ export class ImageService {
     var width = img.width;
     var height = img.height;
 
+    if (width < MAX_WIDTH && height < MAX_HEIGHT){
+      return base64Str;
+    }
+
     if (width > height) {
       if (width > MAX_WIDTH) {
         height *= MAX_WIDTH / width;

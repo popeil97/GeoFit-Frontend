@@ -50,6 +50,7 @@ export class RaceViewComponent implements OnInit {
     team_id:null
   };
   public isManualEntry:Boolean = false;
+  public followerFeedOnly: Boolean = false;
 
   private storyImage:string;
   private storyText:string;

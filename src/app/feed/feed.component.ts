@@ -4,6 +4,7 @@ import { RaceFeedService } from './race-feed.service';
 import { UserProfileService } from '../userprofile.service';
 import { StoryFormComponent } from '../story-form/story-form.component';
 import { AuthService } from '../auth.service';
+import { MatTableDataSource } from '@angular/material/table';
 
 declare var $: any
 
@@ -37,11 +38,16 @@ export class FeedComponent implements OnInit {
   //If false, we emit when a story modal should be activated via storyItemClicked()
   @Input() hasStoryModalChild:boolean;
 
+  //If true, only show feed items of people user follows
+  @Input() followOnly:boolean;
+
   @Output() feedItemClicked = new EventEmitter();
   @Output() storyItemClicked = new EventEmitter();
 
   private _feedService: any;
   private initialized: boolean;
+  
+  public dataSource: any;
 
   columns:string[] = ['ProfilePic','Data'];
 
@@ -199,6 +205,7 @@ interface FeedObj {
   is_mine:boolean;
   comments: Comment[];
   show_comments: boolean;
+  follows: boolean;
 }
 
 interface Comment {
