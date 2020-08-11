@@ -41,6 +41,9 @@ export class FeedComponent implements OnInit {
   //If true, only show feed items of people user follows
   @Input() followOnly:boolean;
 
+  //If true, only show Stories (texts and images) in feed
+  @Input() storyOnly:boolean;
+
   @Output() feedItemClicked = new EventEmitter();
   @Output() storyItemClicked = new EventEmitter();
 

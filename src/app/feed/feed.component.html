@@ -22,13 +22,13 @@
 
   <table mat-table [dataSource]="feedItems" class="feedTable">
     <ng-container matColumnDef="ProfilePic" style="padding: 10px;">
-      <td mat-cell *matCellDef="let element" (click)="clickedOnFeedItem(element)" [hidden]="followOnly && !element.follows">
+      <td mat-cell *matCellDef="let element" (click)="clickedOnFeedItem(element)" [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">
         <img width="50px" src="{{ element.profile_url }}">
       </td>
     </ng-container>
 
     <ng-container matColumnDef="Data" style="padding: 10px;">
-      <td mat-cell *matCellDef="let element" [hidden]="followOnly && !element.follows">
+      <td mat-cell *matCellDef="let element" [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">
         <app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav>
         {{ element.message }}
         <small>{{ element.created_ts }}</small>
