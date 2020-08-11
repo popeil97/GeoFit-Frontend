@@ -51,6 +51,10 @@ export class RaceViewComponent implements OnInit {
   };
   public isManualEntry:Boolean = false;
 
+  //Filters for activity feed
+  public storyFeedOnly: Boolean = false;
+  public followerFeedOnly: Boolean = false;
+
   private storyImage:string;
   private storyText:string;
 

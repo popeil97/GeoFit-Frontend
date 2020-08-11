@@ -65,13 +65,15 @@ export class LoginComponent implements OnInit {
             //this.router.navigate([this.returnUrl]);
             
             //Route to our profile page for now
-            this._userProfileService.goToUserProfile(data['username']);
+            //this._userProfileService.goToUserProfile(data['username']);
+
+            this.continueAsMe();
           }
         },
         err => {
           this.loading = false;
           console.log(err);
-          this.errors = err['error']
+          this.errors = err['error'];
         }
       );
   }
@@ -79,5 +81,9 @@ export class LoginComponent implements OnInit {
   toggleRegister(action?:string) {
     this.registerMe = !this.registerMe;
    
+  }
+
+  public continueAsMe(){
+    this.router.navigate(['/races']);
   }
 }
