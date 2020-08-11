@@ -21,13 +21,14 @@
       <div class="form-group">
         <mat-slide-toggle formControlName="allAgesOn">Show All Ages</mat-slide-toggle>
         <br>
-        <p>
-          <label for="minAge">Min Age: </label>
-          <input type="number" id="minAge" formControlName="minAge" style="width: 3em">
-
-          <label for="maxAge">Max Age: </label>
-          <input type="number" id="maxAge" formControlName="maxAge" style="width: 3em">
-        </p>
+        <div style="display: inline-block">
+          <select class="form-control" formControlName="ageRange" style="display: inline-block">
+            <option class="dropdown-placeholder" style="display: none" value="-1">Select Age</option>
+            <option *ngFor="let ageRange of ageRangeOptions" [value]="ageRange">
+              {{ ageRange }}
+            </option>
+          </select>
+        </div>
       </div>
 
       <h3>Show Follower Pins Only</h3>
