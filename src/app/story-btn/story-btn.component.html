@@ -1,7 +1,7 @@
 <div *ngIf="use=='like'">
   <div role="button" (click)="changeLikeStatus()">
-    <span *ngIf="likes"  ><i class="material-icons">favorite</i> </span>
-    <span *ngIf="!likes"  ><i class="material-icons">favorite_border</i> </span>
+    <span *ngIf="likes"  ><i class="material-icons" style="color:#BC164D">favorite</i> </span>
+    <span *ngIf="!likes"  ><i class="material-icons" style="color:#BC164D">favorite_border</i> </span>
     <span *ngIf="likesCount != 1">{{ likesCount }}</span>
   <span *ngIf="likesCount == 1">{{ likesCount }}</span>
   </div>

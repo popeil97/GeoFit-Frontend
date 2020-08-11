@@ -48,9 +48,9 @@
 
         </div>
 
-        <div class="container" style="display:flex;">
+        <div class="container" style="display:flex;align-content: right;right:0;">
           <app-story-btn *ngIf="this._authService.token" [use]="'like'" [storyID]=element.story_id [likes]=element.likes [likesCount]=element.likes_count></app-story-btn>
-          <button class="btn btn-sm" (click)="element.show_comments=!element.show_comments"> <i class="material-icons">comment</i> {{ element.comments.length }}</button>
+          <div role="button" (click)="element.show_comments=!element.show_comments"> <i class="material-icons" style="color:#BC164D">comment</i> {{ element.comments.length }} <i style = "color:#2C00A5;" *ngIf="element.comments.length>0">View comments</i>  <i style = "color:#2C00A5;" *ngIf="element.comments.length==0">Add comment</i></div>
         </div>
 
         <div *ngIf="element.show_comments">
