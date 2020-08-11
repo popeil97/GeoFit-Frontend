@@ -62,6 +62,9 @@ export class RaceDayComponent implements OnInit {
 
 export class RaceDayDialogContent {
 
+  public userData:any;
+  public profileUpdated:any;
+
 
   constructor(public dialogRef: MatDialogRef<RaceDayDialogContent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {

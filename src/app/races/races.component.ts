@@ -38,7 +38,7 @@ export class RacesComponent implements OnInit {
 
   constructor(private raceService: RaceService, 
               private router:Router,
-              private _authService: AuthService,private _userProfileService: UserProfileService) { }
+              public _authService: AuthService,private _userProfileService: UserProfileService) { }
 
   ngOnInit() {
     console.log('in races');
