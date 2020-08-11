@@ -39,9 +39,10 @@
             </mat-card-header>
             <mat-card-content>
              <img style="width:150px;height:150px;" src="{{userData.profile_url}}" class="img-responsive" alt="">
-          <p> <span class="material-icons" style="color:#BC164D;">location_city </span> {{ userData.location }}</p>
+             
+          <p> <span class="material-icons" style="color:#BC164D;">location_on </span> {{ userData.location }}</p>
 
-          <p><span class="material-icons" style="color:#BC164D;">description</span> {{ userData.description }}</p>
+          <p><span class="material-icons" style="color:#BC164D;">textsms</span> {{ userData.description }}</p>
 
           <div *ngIf="userData.is_me">
               <b>Strava Authentication</b>
@@ -85,7 +86,7 @@
               <mat-card-title *ngIf="!userData.is_me">{{userData.first_name}}'s Feed</mat-card-title>
             </mat-card-header>
             
-          <div style="max-height: 230px;overflow: auto;">
+          <div style="max-height:60vh;overflow: auto;">
             
             <mat-card-content>
 
@@ -103,7 +104,7 @@
 
   </div>
 
- <div class="profile-content">
+ <div>
         <!----<app-user-stats *ngIf="!showEdit" [userID]="userData.user_id"></app-user-stats>---->
         <app-profile-form *ngIf="showEdit" [userData]="userData" (formUpdated)="profileUpdated($event)"></app-profile-form>
       </div>

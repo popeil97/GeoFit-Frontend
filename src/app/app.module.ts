@@ -71,8 +71,10 @@ import { PasswordRequestComponent } from './password-request/password-request.co
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { RaceDayComponent, RaceDayDialogContent} from './race-day/race-day.component';
 import { StravaInstructionsComponent } from './strava-instructions/strava-instructions.component';
-import { ManualInstructionsComponent } from './manual-instructions/manual-instructions.component';
+import { ManualInstructionsComponent} from './manual-instructions/manual-instructions.component';
 import { ProfilePicComponent } from './profile-pic/profile-pic.component';
+import { FaqHelpComponent,FaqHelpDialogContent } from './faq-help/faq-help.component';
+import { ContactHelpComponent,ContactHelpDialogContent } from './contact-help/contact-help.component';
 
 
 @NgModule({
@@ -127,8 +129,12 @@ import { ProfilePicComponent } from './profile-pic/profile-pic.component';
     RaceDayDialogContent,
     StravaInstructionsComponent,
     ManualInstructionsComponent,
-    ProfilePicComponent
-  ],
+    ProfilePicComponent,
+    FaqHelpComponent,
+    FaqHelpDialogContent,
+    ContactHelpComponent,
+    ContactHelpDialogContent
+      ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -152,7 +158,7 @@ import { ProfilePicComponent } from './profile-pic/profile-pic.component';
     ImageService,
   ],
   bootstrap: [AppComponent],
-  entryComponents:[SignupDialogContent,PopupComponent,SwagDialogContent,TermsOfServiceDialogContent,RaceDayDialogContent],
+  entryComponents:[SignupDialogContent,PopupComponent,SwagDialogContent,TermsOfServiceDialogContent,RaceDayDialogContent, FaqHelpDialogContent,ContactHelpDialogContent], 
 })
 export class AppModule { 
   constructor(private injector: Injector) {

@@ -1,7 +1,7 @@
 <!-- <app-map></app-map> -->
 <div>
 <app-loader [isActive]="loading"></app-loader>
-<mat-sidenav-container hasBackdrop="false" S>
+<mat-sidenav-container hasBackdrop="false">
 
   <mat-sidenav  md-disable-backdrop='true' #menu mode="over"  opened="true"> <!--opened="true"-->
      <div class="sidenav-scroll">
@@ -43,8 +43,8 @@
 
       <mat-tab *ngIf="this.progress && this._authService.token">
         <ng-template mat-tab-label style="background-color: rgba(256,256, 256,1);">
-          <mat-icon>file_download </mat-icon> <div *ngIf="num_activities>0" style="background-color: #F6BF78; border-radius: 5px;padding-left:2px;padding-right:2px;">{{num_activities}} </div>
-          <div style="font-size:10px;">Import </div>
+          <mat-icon>add_circle_outline </mat-icon> <div *ngIf="num_activities>0" style="background-color: #F6BF78; border-radius: 5px;padding-left:2px;padding-right:2px;">{{num_activities}} </div>
+          <div style="font-size:10px;">Add Activity </div>
           
         </ng-template>
 
@@ -54,7 +54,7 @@
         </div>
 
         <div *ngIf="num_activities==0">
-        <mat-tab-group [selectedIndex]="0" class='tab-subtitled'>
+        <mat-tab-group [selectedIndex]="1" class='tab-subtitled'>
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
               <mat-icon>cloud_download</mat-icon>
@@ -77,7 +77,7 @@
       </div>
 
       <div *ngIf="num_activities>0">
-        <mat-tab-group [selectedIndex]="1" class='tab-subtitled'>
+        <mat-tab-group [selectedIndex]="0" class='tab-subtitled'>
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
 
@@ -142,7 +142,7 @@
         </ng-template>
 
         <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Teams</b></h3></b>
-        <button class="btn btn-primary" style="width: 100%; text-align: center; background-color:#2C00A5;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">+ Team</button>
+        <button class="btn btn-primary" style="width: 100%; text-align: center; background-color:#2C00A5;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">Add Team</button>
             <button class="btn btn-danger" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm('clear')" *ngIf="showTeamForm">Cancel</button>
             <div *ngIf="!showTeamForm">   
               <app-team-list [teams]="teams" [userStat]="userStat" (callback)="getRaceState($event)" (edit)="editTeamForm($event)"></app-team-list>

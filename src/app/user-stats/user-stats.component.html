@@ -10,6 +10,9 @@
             <mat-card-content>
               <br>
               <div>
+                <div *ngIf="userStats.run_tot_activities == 0 && userStats.ride_tot_activities==0">
+                  You have no running or cycling activities. Add activities on the map page by manually entering them, or by connecting with Strava.
+                </div>
              <canvas id="lineCharts"></canvas>
            </div>
              <br>

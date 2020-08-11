@@ -680,7 +680,7 @@ mat-sidenav-container {
 
 ::ng-deep .mat-tab-body-wrapper
 {
-   height: 520px;
+   height: 90vh;
 }
 .progress-container {
     position: fixed;
@@ -702,7 +702,7 @@ mat-sidenav, mat-sidenav-content {
 
 mat-sidenav {
     background-color: rgba(239, 250, 247, 0.83);
-    top: 5%;
+    top: 6%;
     bottom:1%;
     border-top-right-radius: 16px;
     border-bottom-right-radius: 16px;

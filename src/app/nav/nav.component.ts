@@ -11,9 +11,12 @@ declare var $: any
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
+
+
 export class NavComponent implements OnInit {
 
-
+userData: UserData;
+picURL:any;
 
   constructor(private _notificationService:NotificationsService,
               public _authService: AuthService,
@@ -24,6 +27,7 @@ export class NavComponent implements OnInit {
   public path:any;
 
   ngOnInit() {
+    
     // copy pasta from stack overflow yahooooooo
     $(document).on('click', '.dropdown-menu', function (e) {
       e.stopPropagation();
@@ -42,6 +46,7 @@ export class NavComponent implements OnInit {
 
     if (localStorage.getItem('loggedInUsername')){
       this._authService.username = localStorage.getItem('loggedInUsername');
+      this.getUserPic();
     }
     this.path=window.location.pathname;
 
@@ -53,6 +58,14 @@ export class NavComponent implements OnInit {
     {
       this.isPurple = true;
     }
+  }
+
+   getUserPic(){
+    //Call a to-be-created service which gets user data, feed, statistics etc
+    this._userProfileService.getUserProfile(this._authService.username).then((data) => {
+      this.userData = data as UserData;
+      this.picURL = this.userData.profile_url;
+    });
   }
 
   goToMyProfile(){
@@ -95,3 +108,17 @@ export class NavComponent implements OnInit {
 interface NotificationResp {
   notifications:any[];
 }
+
+interface UserData {
+  user_id:number;
+  profile_url:string;
+  email:string;
+  description: string;
+  location:string;
+  first_name:string;
+  last_name:string;
+  follows:boolean;
+  distance_type: string;
+  is_me: boolean;
+}
+

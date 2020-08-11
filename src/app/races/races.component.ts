@@ -4,7 +4,7 @@ import { RaceService } from '../race.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import * as _ from 'lodash';
 import { AuthService } from '../auth.service';
-
+import { UserProfileService } from '../userprofile.service';
 
 @Component({
   selector: 'app-races',
@@ -20,7 +20,7 @@ import { AuthService } from '../auth.service';
 })
 
 export class RacesComponent implements OnInit {
-
+  userData: UserData;
   public races:any[];
   public userRaces:any[];
   public racesInvited:any[];
@@ -38,7 +38,7 @@ export class RacesComponent implements OnInit {
 
   constructor(private raceService: RaceService, 
               private router:Router,
-              private _authService: AuthService) { }
+              private _authService: AuthService,private _userProfileService: UserProfileService) { }
 
   ngOnInit() {
     console.log('in races');
@@ -70,6 +70,24 @@ export class RacesComponent implements OnInit {
     // this.races = this.racesData.races;
 
     console.log('CONTR:',this.racesData);
+
+    if (localStorage.getItem('loggedInUsername')){
+      this._authService.username = localStorage.getItem('loggedInUsername');
+
+      this._userProfileService.getUserProfile(this._authService.username).then((data) => {
+      this.userData = data as UserData;
+
+       if (this.userData.location =="")
+      {
+        this.userData.location = "N/A";
+      }
+
+      if (this.userData.description =="")
+      {
+        this.userData.description = "N/A";
+      }
+    });
+    }
   }
 
   viewRace(race:any) {
@@ -117,5 +135,18 @@ export class RacesComponent implements OnInit {
   }
   
 
+}
+
+interface UserData {
+  user_id:number;
+  profile_url:string;
+  email:string;
+  description: string;
+  location:string;
+  first_name:string;
+  last_name:string;
+  follows:boolean;
+  distance_type: string;
+  is_me: boolean;
 }
 
