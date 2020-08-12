@@ -13,6 +13,8 @@ import { UserProfileService } from '../userprofile.service'
 })
 export class StravaInstructionsComponent implements OnInit {
 
+  public fale:any;
+
   constructor() { }
 
   ngOnInit() {

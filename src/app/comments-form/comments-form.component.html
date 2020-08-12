@@ -1,8 +1,6 @@
 <form [formGroup]="commentForm">
-  <div class="form-group" style="text-align: left; padding: 5px;">
+  <div class="form-group" style="text-align: left; padding: 5px;display: inline-block">
     <input class="form-control" type="text" placeholder="Write a comment.." formControlName="body"/>
-  </div>
-  <div class="form-group" style="padding: 5px; position: relative;">
-    <button class="btn btn-primary" style="display:none;" mat-raised-button (click)="submitCommentForm()">Submit</button>
+    <button class="btn btn-small" mat-raised-button (click)="submitCommentForm()">Post</button>
   </div>
 </form>
