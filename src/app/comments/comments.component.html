@@ -6,12 +6,12 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="Data" style="padding: 10px;">
+    <ng-container matColumnDef="Data" style="padding: 2px;">
       <td mat-cell *matCellDef="let element">
 
         <app-user-profile-nav [displayName]="element.display_name" [username]=element.username></app-user-profile-nav>
         {{ element.body }}
-        <small>{{ element.created_ts }}</small>
+        <small>{{ this.get_created_ts(element.created_ts) }}</small>
 
       </td>
     </ng-container>

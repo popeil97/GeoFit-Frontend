@@ -127,7 +127,7 @@ export class FeedComponent implements OnInit {
         let feedItem: FeedObj = data[feedItemIndex];
 
         //Initialize time since posts
-        feedItem.created_ts = get_created_ts(feedItem.created_ts);
+        //feedItem.created_ts = get_created_ts(feedItem.created_ts);
 
         //By default don't open comment fields
         //Unless we have just posted a comment
@@ -152,16 +152,20 @@ export class FeedComponent implements OnInit {
     var ts = date.getTime() / 1000;
     var secondsPerMinute = 60;
     var secondsPerHour = secondsPerMinute * 60;
+    var secondsPerDay = secondsPerHour * 24;
 
     //Calculate how to display the timestamp of the activity
     //If ts is within an hour, show number of minutes since activity
     //If ts is over an hour, round to nearest hour
     var displayTime;
     if ((ts - timestamp) < secondsPerHour) {
-        displayTime = Math.round((ts - timestamp) / secondsPerMinute) + "m";
+      displayTime = Math.round((ts - timestamp) / secondsPerMinute) + "m";
+    }
+    else if ((ts - timestamp) < secondsPerDay) {
+      displayTime = Math.round((ts - timestamp) / secondsPerHour) + "h";
     }
     else {
-        displayTime = Math.round((ts - timestamp) / secondsPerHour) + "h";
+      displayTime = Math.round((ts - timestamp) / secondsPerDay) + "d";
     }
     return displayTime;
   }

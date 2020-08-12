@@ -18,10 +18,10 @@
          <app-user-progress *ngIf="this._authService.isLoggedIn() && this.progress" [progress]="progress"></app-user-progress>
          <div class="row">
           <div class="column">
-            <a class="btn" style="background-color:#2C007E;color:#FFFFFF;font-size:10px;" (click)="USA()">Jump to USA</a>
+            <a class="btn btn-mobile2" style="background-color:#2C007E;color:#FFFFFF;" (click)="USA()">Jump to USA</a>
           </div>
           <div class="column">
-            <a class="btn" style="background-color:#2C007E;color:#FFFFFF;font-size:10px;"(click)="Israel()">Jump to Israel</a>
+            <a class="btn btn-mobile2" style="background-color:#2C007E;color:#FFFFFF;"(click)="Israel()">Jump to Israel</a>
           </div>
         </div>
       </div>
@@ -32,7 +32,7 @@
       <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon>emoji_people</mat-icon>
-          <div style="font-size:10px;">Social</div>
+          <div class="tabs1">Social</div>
           
         </ng-template>
         
@@ -51,7 +51,7 @@
       <mat-tab *ngIf="this.progress && this._authService.isLoggedIn()">
         <ng-template mat-tab-label style="background-color: rgba(256,256, 256,1);">
           <mat-icon>add_circle_outline </mat-icon> <div *ngIf="num_activities>0" style="background-color: #F6BF78; border-radius: 5px;padding-left:2px;padding-right:2px;">{{num_activities}} </div>
-          <div style="font-size:10px;">Add Activity </div>
+          <div class="tabs1">Add Activity </div>
           
         </ng-template>
 
@@ -65,7 +65,7 @@
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
               <mat-icon>cloud_download</mat-icon>
-              <div style="font-size:10px;">Strava</div>
+              <div class="tabs1">Strava</div>
             </ng-template>
             <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
@@ -75,7 +75,7 @@
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
               <mat-icon>add_circle_outline</mat-icon>
-              <div style="font-size:10px;">Manual</div>
+              <div class="tabs1">Manual</div>
             </ng-template>
              <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Add Activity</b></h3></b>
             <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
@@ -114,7 +114,7 @@
             <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon>format_list_numbered_rtl</mat-icon>
-          <div style="font-size:10px;">Leaderboard</div>
+          <div class="tabs1">Leaderboard</div>
         </ng-template>
         
         
@@ -125,7 +125,7 @@
         <mat-tab label="Teams">
           <ng-template mat-tab-label>
             <mat-icon>directions_run</mat-icon>
-            <div style="font-size:10px;">Individuals</div>
+            <div class="tabs1">Individuals</div>
           </ng-template>
           <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Leaderboard</b></h3></b>
           <app-leaderboard [leaderboard]="leaderboard"  [allowFollow]="true"></app-leaderboard>
@@ -134,7 +134,7 @@
           <mat-tab label="not teams">
             <ng-template mat-tab-label>
               <mat-icon>group</mat-icon>
-              <div style="font-size:10px;">Teams</div>
+              <div class="tabs1">Teams</div>
             </ng-template>
             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Teams Leaderboard</b></h3></b>
             <app-leaderboard [leaderboard]="teamLeaderboard" [allowFollow]="false"></app-leaderboard>
@@ -145,11 +145,11 @@
         <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon>group</mat-icon>
-          <div style="font-size:10px;">Teams</div>
+          <div class="tabs1">Teams</div>
         </ng-template>
 
         <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Teams</b></h3></b>
-        <button class="btn btn-primary" style="width: 100%; text-align: center; background-color:#2C00A5;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">Add Team</button>
+        <button class="btn btn-primary btn-mobile" style="width: 100%; text-align: center; background-color:#2C00A5;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">Add Team</button>
             <button class="btn btn-danger" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm('clear')" *ngIf="showTeamForm">Cancel</button>
             <div *ngIf="!showTeamForm">   
               <app-team-list [teams]="teams" [userStat]="userStat" (callback)="getRaceState($event)" (edit)="editTeamForm($event)"></app-team-list>
@@ -163,7 +163,7 @@
 
         <ng-template mat-tab-label>
           <mat-icon>settings</mat-icon>
-          <div style="font-size:10px;">Settings</div>
+          <div class="tabs1">Settings</div>
         </ng-template>
         <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Race Settings</b></h3></b>
         <app-race-settings [userSettings]="userRaceSettings"></app-race-settings>
@@ -185,7 +185,7 @@
 
 
       <div  *ngIf="!changeArrow">
-        <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 400px;">
+        <a class="button-container btn-left" role="button" (click)="menu.toggle()" (click)="toggleNavButton()">
         <br>
       <i class="material-icons md-18" style="color:#2C007E; ">keyboard_arrow_left</i>
       </a>
