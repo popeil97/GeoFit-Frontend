@@ -15,7 +15,7 @@
       </div>
       <div class="column-split2">
 
-         <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress>
+         <app-user-progress *ngIf="this._authService.isLoggedIn() && this.progress" [progress]="progress"></app-user-progress>
          <div class="row">
           <div class="column">
             <a class="btn" style="background-color:#2C007E;color:#FFFFFF;font-size:10px;" (click)="USA()">Jump to USA</a>
@@ -48,7 +48,7 @@
         <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
       </mat-tab>
 
-      <mat-tab *ngIf="this.progress && this._authService.token">
+      <mat-tab *ngIf="this.progress && this._authService.isLoggedIn()">
         <ng-template mat-tab-label style="background-color: rgba(256,256, 256,1);">
           <mat-icon>add_circle_outline </mat-icon> <div *ngIf="num_activities>0" style="background-color: #F6BF78; border-radius: 5px;padding-left:2px;padding-right:2px;">{{num_activities}} </div>
           <div style="font-size:10px;">Add Activity </div>

@@ -10,6 +10,15 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
+    <mat-card>
+      <mat-panel-title>
+        Description
+      </mat-panel-title>
+      <mat-panel-description style="padding:8px;">
+        {{team.description}}
+      </mat-panel-description>
+    </mat-card>
+
     <mat-card *ngFor="let member of team.child_user_stats">
       <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + member.profile_url + ')'}" style="position: relative; float:left;"></div>
       <div style="padding-left: 50px;">{{member.display_name}}</div>
