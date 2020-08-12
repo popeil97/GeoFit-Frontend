@@ -31,6 +31,7 @@ export class RaceViewComponent implements OnInit {
   private raceName:string;
   raceID:number;
   private modalData:any;
+
   public progress:Progress = {} as Progress;
   public actsToImport:number[] = [];
   public loading:Boolean = false;
@@ -41,6 +42,8 @@ export class RaceViewComponent implements OnInit {
   public teams:any[];
   public userRaceSettings:any;
   public raceSettings:RaceSettings;
+  public routePins:any[];
+
   public showTeamForm:Boolean = false;
   public changeArrow:Boolean = false;
   public userStat:any = {};
@@ -194,6 +197,7 @@ export class RaceViewComponent implements OnInit {
       this.raceSettings = raceData.race_settings;
       this.isManualEntry = this.raceSettings.isManualEntry;
       this.userStat = raceData.user_stat;
+      this.routePins = raceData.route_pins;
 
       console.log('TEAMS:',this.teams);
       console.log('COORDS:',this.coords);
@@ -201,7 +205,7 @@ export class RaceViewComponent implements OnInit {
       console.log("LEADERBOARD ITEMS: ", this.leaderboard);
       console.log('USER SETTINGS:',this.userRaceSettings);
       console.log("FOLLOWER IDS", this.followedIDs);
-
+      console.log("ROUTE PINS ", this.routePins);
       this.loading = false;
     });
   }
@@ -272,6 +276,7 @@ interface RaceData {
   ranked_leaderboard:any[];
   unranked_team_leaderboard:any[];
   ranked_team_leaderboard:any[];
+  route_pins:any[];
 }
 
 interface FeedObj {

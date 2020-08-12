@@ -175,7 +175,7 @@
 
    
   <mat-sidenav-content>
-    <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
+    <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true" [followedIDs]="followedIDs" [routePins]="routePins"></app-map>
     <div  *ngIf="changeArrow">
     <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 0px;">
         <br>

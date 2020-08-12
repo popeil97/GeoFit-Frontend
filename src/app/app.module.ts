@@ -76,7 +76,9 @@ import { ProfilePicComponent } from './profile-pic/profile-pic.component';
 import { FaqHelpComponent,FaqHelpDialogContent } from './faq-help/faq-help.component';
 import { ContactHelpComponent,ContactHelpDialogContent } from './contact-help/contact-help.component';
 import { TeamInstructionsComponent } from './team-instructions/team-instructions.component';
+import { RoutePinDialogComponent } from './route-pin-dialog/route-pin-dialog.component';
 
+import { OwlModule } from 'ngx-owl-carousel';
 
 @NgModule({
   declarations: [
@@ -135,7 +137,8 @@ import { TeamInstructionsComponent } from './team-instructions/team-instructions
     FaqHelpDialogContent,
     ContactHelpComponent,
     ContactHelpDialogContent,
-    TeamInstructionsComponent
+    TeamInstructionsComponent,
+    RoutePinDialogComponent
       ],
   imports: [
     BrowserModule,
@@ -145,6 +148,7 @@ import { TeamInstructionsComponent } from './team-instructions/team-instructions
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    OwlModule,
   ],
   exports: [
     PopupComponent,
@@ -160,7 +164,13 @@ import { TeamInstructionsComponent } from './team-instructions/team-instructions
     ImageService,
   ],
   bootstrap: [AppComponent],
-  entryComponents:[SignupDialogContent,PopupComponent,SwagDialogContent,TermsOfServiceDialogContent,RaceDayDialogContent, FaqHelpDialogContent,ContactHelpDialogContent], 
+  entryComponents:[SignupDialogContent,
+                  PopupComponent,
+                  SwagDialogContent,
+                  TermsOfServiceDialogContent,
+                  RaceDayDialogContent, 
+                  FaqHelpDialogContent,ContactHelpDialogContent,
+                  RoutePinDialogComponent], 
 })
 export class AppModule { 
   constructor(private injector: Injector) {
