@@ -184,7 +184,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     if(this.zoom)
     {
-      this.map.setView([45, -100], 3);
+      this.map.setView([45, -100], 4);
     }
     
     if(this.zoom)

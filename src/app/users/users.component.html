@@ -31,30 +31,38 @@
           <div class="centered">
             <img src= "../../assets/landing/tucan_main.png" style="border-radius:0%;">
             <hr class="divider my-4" />
-            <p class="roboto-purple">Join our community, log fitness activities on your favorite app, and achieve your fitness goals!</p>
-            <a class="btn btn-primary btn-xl js-scroll-trigger pink" href="#about">Find Out More</a>
+            <p class="roboto-purple">Join our community, log fitness activities on your favorite app, and achieve your fitness goals for a good cause!</p>
+
+            <div class="row">
+                <div class="column-map">
+                    <a class="btn text-uppercase pink" style="border-radius:25px;width:180px;background-color:#2C007E;color:#EFFAF7;" routerLink='/races'>Login/Register</a>
+                </div>
+                <div class="column-map2">
+                  <a class="btn text-uppercase pink" style="border-radius:25px;width:180px;background-color:#2C007E;color:#EFFAF7;" href="#services">Find Out More</a>
+                </div>
+            </div>
+            
+
           </div>
         </div>
 
         <div class="split right">            
-          <div class="centered">
-             <mat-card class="example-card roboto-purple rounded-card" style="height:592px;">
+             <mat-card class="example-card roboto-purple rounded-card" style="width: 100%;
+  height: 100%;
+  box-sizing: border-box;">
                 <mat-card-header> 
                     
                   <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
                 </mat-card-header>
                 <mat-card-content>
-                    <h3 class="text-uppercase roboto-purple">Sign in</h3>
-                        <hr class="divider my-4" />
-                
-                  <app-login></app-login>
+                    <app-map [coordinates]="coords" [zoom]="true" ></app-map>
                 </mat-card-content>
               </mat-card>
           </div>
-        </div>
 
         </header>
 
+<!--
         <section class="page-section bg-primary"  id="about">
             <div class="container">
                             
@@ -64,7 +72,7 @@
                             <mat-card-header> 
                                 
                               <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-                            </mat-card-header>
+                  <!--          </mat-card-header>
                             <mat-card-content>
                             <app-map [coordinates]="coords" [zoom]="true" ></app-map>
                                 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
@@ -77,7 +85,7 @@
                             <mat-card-header> 
                                 
                               <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-                            </mat-card-header>
+                 <!--           </mat-card-header>
                             <mat-card-content>
 
                                 <h3 class="text-uppercase roboto-purple">ABOUT US</h3>
@@ -93,81 +101,39 @@
 
                 
             </div>
-        </section>
+        </section> -->
 
         <section class="page-section bg-dark" id="services">
             <div class="container">
                 <h1 class="text-uppercase roboto-white">Features</h1>
                 <hr class="divider my-4">
                 <div class="row">
-                        <div class="column-features text-center">
-                             <mat-card class="example-card roboto-purple" style="border-radius:15px;">
-                                <mat-card-header> 
-                                    
-                                  <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-                                </mat-card-header>
-                                <mat-card-content style="text-align: center;">
+                        <div class="column-features" style="text-align: left;">
+  
                                     <img src= "../../assets/landing/1.JPG" width="190" height="190">
-                                    <h5 class="roboto-purple">Immersive</h5>
-                                    <p class="text-muted mb-0">Visualize your progress across a virtual route</p>
-                               </mat-card-content>
-                              </mat-card>
+                                    <h3 class="text-uppercase roboto-white">Community</h3>
+                                    <p class="roboto-white">Community knows no physicality or designated space. Nothing but blue skies around</p>
                         </div>
 
-                        <div class="column-features text-center">
-                             <mat-card class="example-card roboto-purple" style="border-radius:15px;">
-                                <mat-card-header> 
-                                    
-                                  <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-                                </mat-card-header>
-                                <mat-card-content style="text-align: center;">
-                                    <img src= "../../assets/landing/2.JPG" width="190" height="190">
-                                    <h5 class="roboto-purple">Gamified</h5>
-                                    <p class="text-muted mb-0">Push forward to #1! Or ahead of the person ahead of you!</p>
-                               </mat-card-content>
-                              </mat-card>
+                       <div class="column-features" style="text-align: left;">
+  
+                                    <img src= "../../assets/landing/1.JPG" width="190" height="190">
+                                    <h3 class="text-uppercase roboto-white">Achievement</h3>
+                                    <p class="roboto-white">Push forward to #1 as you fulfill your personal and communal fitness goals</p>
                         </div>
 
-                        <div class="column-features text-center">
-                             <mat-card class="example-card roboto-purple" style="border-radius:15px;">
-                                <mat-card-header> 
-                                    
-                                  <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-                                </mat-card-header>
-                                <mat-card-content style="text-align: center;">
-                                    <img src= "../../assets/landing/im3.jpg" width="190" height="190">
-                                    <h5 class="roboto-purple">Engaging</h5>
-                                    <p class="text-muted mb-0">Share your experience through status updates </p>
-                               </mat-card-content>
-                              </mat-card>
+                       <div class="column-features" style="text-align: left;">
+  
+                                    <img src= "../../assets/landing/1.JPG" width="190" height="190">
+                                    <h3 class="text-uppercase roboto-white">Adventure</h3>
+                                    <p class="roboto-white">Be on the immersive digital frontier of fitness and community</p>
                         </div>
 
-                        <div class="column-features text-center">
-                             <mat-card class="example-card roboto-purple" style="border-radius:15px;">
-                                <mat-card-header> 
-                                    
-                                  <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-                                </mat-card-header>
-                                <mat-card-content style="text-align: center;">
-                                    <img src= "../../assets/landing/im4.PNG" width="190" height="190">
-                                    <h5 class="roboto-purple">Together</h5>
-                                    <p class="text-muted mb-0">Run all over the world on the same route, together!</p>
-                               </mat-card-content>
-                              </mat-card>
-                        </div>
-
-                        <div class="column-features text-center">
-                             <mat-card class="example-card roboto-purple" style="border-radius:15px;">
-                                <mat-card-header> 
-                                    
-                                  <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-                                </mat-card-header>
-                                <mat-card-content style="text-align: center;">
-                                    <img src= "../../assets/landing/5.JPG" width="190" height="190">
-                                    <h5 class="roboto-purple">Personalized</h5>
-                                    <p class="text-muted mb-0">Visualize your individual stats and accomplishments</p>
-                               </mat-card-content>
-                              </mat-card>
+                        <div class="column-features" style="text-align: left;">
+  
+                                    <img src= "../../assets/landing/1.JPG" width="190" height="190">
+                                    <h3 class="text-uppercase roboto-white">Greater Good</h3>
+                                    <p class="roboto-white">Raise money for a cause you care about and support your peers</p>
                         </div>
                         
 
@@ -186,7 +152,7 @@
                     
                                     <img src= "../../assets/landing/billy.jpeg" width="120" height="120" style="border-radius:50%;">
                                     <h5 class="roboto-purple">Billy Grenis</h5>
-                                    <p class="text-muted mb-0">CEO, marathon runner</p>
+                                    <p class="roboto-purple">CEO, marathon runner</p>
                                      <a class="btn" href="https://www.linkedin.com/in/grenis/" target="_blank"><img src= "https://image.flaticon.com/icons/svg/1384/1384046.svg" width="20" height="20"></a>
                                
                         </div>
@@ -195,7 +161,7 @@
                     
                                     <img src= "../../assets/landing/nathan.JPG" width="120" height="120" style="border-radius:50%;">
                                     <h5 class="roboto-purple">Nathan Cinnamond</h5>
-                                    <p class="text-muted mb-0">Engineer, avid runner</p>
+                                    <p class="roboto-purple">Engineer, avid runner</p>
                                     <a class="btn" href="https://www.linkedin.com/in/nathancinnamond/" target="_blank"><img src= "https://image.flaticon.com/icons/svg/1384/1384046.svg" width="20" height="20"></a>
                                
                         </div>
@@ -203,7 +169,7 @@
                     
                                     <img src= "../../assets/landing/katie.jpg" width="120" height="120" style="border-radius:50%;">
                                     <h5 class="roboto-purple">Katie Donahoe</h5>
-                                    <p class="text-muted mb-0">Engineer, daily walker</p>
+                                    <p class="roboto-purple">Engineer, daily walker</p>
                                     <a class="btn" href="https://www.linkedin.com/in/katie-donahoe-90a241121/" target="_blank"><img src= "https://image.flaticon.com/icons/svg/1384/1384046.svg" width="20" height="20"></a>
                                
                         </div>
@@ -212,7 +178,7 @@
                     
                                     <img src= "../../assets/landing/alex.JPG" width="120" height="120" style="border-radius:50%;">
                                     <h5 class="roboto-purple">Alex Popeil</h5>
-                                    <p class="text-muted mb-0">Engineer, likes to code </p>
+                                    <p class="roboto-purple">Engineer, likes to code </p>
                                     <a class="btn" href="https://www.linkedin.com/in/alexander-popeil-b4440410b/" target="_blank"><img src= "https://image.flaticon.com/icons/svg/1384/1384046.svg" width="20" height="20"></a>
                                
                         </div>
