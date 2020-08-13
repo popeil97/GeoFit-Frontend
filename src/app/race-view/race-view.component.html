@@ -15,7 +15,7 @@
       </div>
       <div class="column-split2">
 
-         <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress>
+         <app-user-progress *ngIf="this._authService.isLoggedIn() && this.progress" [progress]="progress"></app-user-progress>
          <div class="row">
           <div class="column">
             <a class="btn btn-mobile2" style="background-color:#2C007E;color:#FFFFFF;" (click)="USA()">Jump to USA</a>
@@ -48,7 +48,7 @@
         <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
       </mat-tab>
 
-      <mat-tab *ngIf="this.progress && this._authService.token">
+      <mat-tab *ngIf="this.progress && this._authService.isLoggedIn()">
         <ng-template mat-tab-label style="background-color: rgba(256,256, 256,1);">
           <mat-icon>add_circle_outline </mat-icon> <div *ngIf="num_activities>0" style="background-color: #F6BF78; border-radius: 5px;padding-left:2px;padding-right:2px;">{{num_activities}} </div>
           <div class="tabs1">Add Activity </div>
@@ -175,7 +175,7 @@
 
    
   <mat-sidenav-content>
-    <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
+    <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true" [followedIDs]="followedIDs" [routePins]="routePins"></app-map>
     <div  *ngIf="changeArrow">
     <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 0px;">
         <br>

@@ -1,10 +1,12 @@
 import { AfterViewInit, Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef, ComponentFactory, ComponentFactoryResolver, RendererFactory2, ViewContainerRef, ApplicationRef } from '@angular/core';
 import { NgElement, WithProperties } from '@angular/elements';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { UserProfileService } from '../userprofile.service';
 //import * as L from 'leaflet';
 //import * as markercluster from 'leaflet.markercluster';
 import { PopUpService } from '../pop-up.service';
 import { UserFollowComponent } from '../user-follow/user-follow.component';
+import { RoutePinDialogComponent } from '../route-pin-dialog/route-pin-dialog.component';
 
 import 'leaflet';
 import 'leaflet.markercluster';
@@ -29,6 +31,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
   @Input() draw:Boolean;
   @Input() displayUsers:Boolean;
   @Input() userData:any;
+  @Input() routePins:RoutePins[];
   @Input() followedIDs:any;
   @Input() zoom:Boolean;
 
@@ -36,6 +39,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
   private coordsRoutes:any[];
   private markersByUserID = {};
   private markerClusters:any;
+  private routePinMarkers:any;
   private layerIDsToUserIndices = {};
   private myMarker: any;
   private marker_start:any;
@@ -47,10 +51,20 @@ export class MapComponent implements AfterViewInit,OnChanges {
   private maleIDs: number[];
   private femaleIDs: number[];
 
+  //We extend the Marker class to set our own 'routePinIndex' option
+  private routePinMarker = L.Marker.extend({
+    options: {
+      routePinIndex: 0,
+    }
+  });
+
   constructor(private popupService:PopUpService, 
-              private _profileService:UserProfileService,) {
+              private _profileService:UserProfileService,
+              public dialog: MatDialog) {
     this.coordsRoutes = [];
     Window["mapComponent"] = this;
+
+    
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -65,13 +79,15 @@ export class MapComponent implements AfterViewInit,OnChanges {
                 this.createUserPins(false);
               }
 
+              if(this.routePins){
+                this.createRoutePins();
+              }
+
             }
         }
       }
     }
 
-    console.log("USER DATA IN MAP COMPONENT");
-    console.log(this.userData);
   }
 
   ngAfterViewInit(): void {
@@ -125,8 +141,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
       this.initMap()
     }
 
-    console.log(this.coordinates);
-
     //ugly but neccessary way of adding start pins and paths to map
     var temp_routes = [];
     var temp_coords = [];
@@ -146,8 +160,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
       temp_routes_flipped.push(temp_coords_flipped);
     });
 
-    console.log(temp_routes_flipped);
-
     let start_coord = temp_routes_flipped[0][0];
     let final_route = temp_routes_flipped[temp_routes_flipped.length-1];
     let end_coord = final_route[final_route.length-1];
@@ -157,8 +169,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
     let bounds = new L.LatLngBounds(begin, finish);
 
     this.map.fitBounds(bounds, { padding: [15, 15] });
-
-    console.log("start coord: ", start_coord);
 
     const lat = 29.651634;
     const lon = -82.324829;
@@ -230,7 +240,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
   }
 
   public showPinsFromSettings(settings: PinSettings){
-    console.log("PIN SETTINGS ", settings);
     if (settings.allAgesOn && settings.malePinsOn && settings.femalePinsOn && !settings.followerPinsOnly){
       //this.showAllPins();
 
@@ -267,8 +276,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
       }
     }
 
-    console.log("IDs before age filter: ", unionIDs);
-
     //Limit by age group
     if (!settings.allAgesOn){
       let ageIDs = this.getIDsInAgeRange(settings.minAge, settings.maxAge);
@@ -280,7 +287,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
       }
     }
 
-    console.log("Final show IDs: ", unionIDs);
     this.showPinsByID(unionIDs, false);
   }
 
@@ -414,7 +420,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
       })
 
       //Get user ID of this race stat
-      let elementID = this.userData[i].user_id
+      let elementID = this.userData[i].user_id;
 
       this.markerClusters.addLayer(locMarker);
 
@@ -480,7 +486,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     if(heatMapOn)
     {
-      console.log("CREATING HEAT MAP PINS")
       try{
         heat.remove();
       }
@@ -494,9 +499,51 @@ export class MapComponent implements AfterViewInit,OnChanges {
         heat.remove();
       }
       catch(ex){}
-      console.log("CREATING NON HEAT MAP PINS")
     }
 
+  }
+
+  private openRoutePinDialogueWithIndex(index: number, thisComponent: any){
+    console.log("In dialogue function");
+    let dialogRef = thisComponent.dialog.open(RoutePinDialogComponent, {
+      data: { 
+        'description': thisComponent.routePins[index].description,
+        'image_urls': thisComponent.routePins[index].image_urls,
+      },
+    });
+  }
+
+  private createRoutePins(){
+    this.routePinMarkers = new L.featureGroup();
+
+    for (let i = 0; i < this.routePins.length; i++){
+      var img_html = "<img src=\"" + this.routePins[i].image_urls[0] + "\";\">";
+      var userIcon = L.divIcon({
+        className: 'route-pin',
+        html: img_html,
+        iconSize: [30, 30],
+        iconAnchor: [10, 33],
+        popupAnchor: [0, -62],
+      });  
+
+      var latlng = new L.LatLng(this.routePins[i].lat, this.routePins[i].lon);
+
+      var routeMarker = new this.routePinMarker(latlng, { 
+        icon: userIcon,
+        routePinIndex: i });
+
+      this.routePinMarkers.addLayer(routeMarker);
+    }
+
+    this.routePinMarkers.addTo(this.map);
+
+    //Handle marker onclick events (open popups)
+    let thisComponent = this;
+    this.routePinMarkers.on('click', function(ev) {
+      console.log("Thanks for clicking on marker ", ev.layer.options.routePinIndex);
+      thisComponent.openRoutePinDialogueWithIndex(ev.layer.options.routePinIndex, thisComponent);
+    });
+    
   }
 
   private initMap(): void {
@@ -534,4 +581,12 @@ interface PinSettings {
   allAgesOn: boolean;
   minAge: number;
   maxAge: number;
+}
+
+interface RoutePins {
+  title: string;
+  desciption: string;
+  lon: number;
+  lat: number;
+  image_urls: string[];
 }
