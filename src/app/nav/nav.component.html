@@ -33,15 +33,20 @@
         </a>
       </li>
 
-   <li class="nav-item" style="right:30px;">
-      
-    <div class="row" *ngIf="!this._authService.isLoggedIn()">
-      <div class="container">
-          <button (click)="login()" class="btn btn-primary" style="background-color:#2C007E; border-color: #2C007E;font-size:10px;padding:1px;">Log In </button>
-      </div>
-    </div>
-   </li>
-
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="material-icons roboto-purple">help</i> Help
+        </a>
+         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item"><app-faq-help></app-faq-help></a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item"><app-terms-of-service></app-terms-of-service></a>
+              <div class="dropdown-divider"></div>
+          <!--    <a class="dropdown-item"><button mat-button [routerLink]="['/']" type='button'>About Us</button></a>
+              <div class="dropdown-divider"></div> -->
+              <a class="dropdown-item"><app-contact-help></app-contact-help></a>
+          </div>
+      </li>
 
     </ul>
 
