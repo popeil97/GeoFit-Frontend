@@ -123,7 +123,6 @@ export class SignupDialogContent {
     if(success) {
       console.log('STEPPER INDEX:',this.stepper.selectedIndex);
       if(type == 'REGISTER') {
-        
         this.registerLoginform.controls['complete'].setValue(true);
         console.log('COMPLETE REGISTER',this.registerLoginform);
       }
@@ -131,6 +130,9 @@ export class SignupDialogContent {
         this.paymentForm.controls['complete'].setValue(true);
       }
       this.stepper.next();
+      if(this.stepper._steps.length - 1 == this.stepper.selectedIndex) {
+        this.stepCallback.emit();
+      }
     }
   }
 
