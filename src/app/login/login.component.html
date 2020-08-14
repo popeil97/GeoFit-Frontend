@@ -2,7 +2,7 @@
     <div *ngIf="!registerMe">
         <br><br><br>
 
-        <div *ngIf="!this._authService.token">
+        <div *ngIf="!this._authService.isLoggedIn()">
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label for="email">Email *</label>
@@ -37,7 +37,7 @@
             </form>
         </div>
 
-        <div *ngIf="this._authService.token">
+        <div *ngIf="this._authService.isLoggedIn()">
             <br><br><br>
             <button (click)="continueAsMe()" class="btn btn-primary" style="background-color:#2C007E; border:#2C007E;">Continue as {{ this._authService.username }}</button>
             <br><br><br>

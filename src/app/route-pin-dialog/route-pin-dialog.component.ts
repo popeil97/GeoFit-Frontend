@@ -7,9 +7,9 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular
   styleUrls: ['./route-pin-dialog.component.css']
 })
 export class RoutePinDialogComponent implements OnInit {
-  private description: string;
-  private image_urls: string;
-  private carouselOptions:any;
+  description: string;
+  image_urls: string;
+  carouselOptions:any;
 
   constructor(public dialogRef: MatDialogRef<RoutePinDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: any) { 

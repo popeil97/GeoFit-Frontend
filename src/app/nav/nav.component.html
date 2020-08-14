@@ -25,16 +25,10 @@
       
 
     </div>
-      <li class="nav-item dropdown" *ngIf="this._authService.isLoggedIn()">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="material-icons roboto-purple">circle_notifications</i> Notifications
+      <li class="nav-item" *ngIf="this._authService.isLoggedIn()">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="showNotifications()">
+          <mat-icon class="roboto-purple" matBadge="{{notifications.length}}" matBadgeColor="warn">circle_notifications</mat-icon> Notifications
         </a>
-         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <div *ngIf="notifications"><app-notification *ngFor="let not of notifications" (removeNotification)="removeNotification($event)" [notification]="not"></app-notification></div>
-              <mat-card *ngIf="!notifications">
-                <div style="padding-left: 10px;">No Notifications</div>
-              </mat-card>
-          </div>
       </li>
 
       <li class="nav-item dropdown">

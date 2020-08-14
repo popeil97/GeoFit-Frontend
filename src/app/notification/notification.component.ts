@@ -39,15 +39,15 @@ export class NotificationComponent implements OnInit {
   }
 
   showButton(name:string,type:NotificationType): Boolean {
-    if(name=='Accept' && type == NotificationType.TEAM_JOIN) {
+    if(name=='Accept' && (type == NotificationType.TEAM_JOIN || type == NotificationType.FOLLOW_REQUEST)) {
       return true;
     }
 
-    else if(name=='Decline' && type == NotificationType.TEAM_JOIN) {
+    else if(name=='Decline' && (type == NotificationType.TEAM_JOIN || type == NotificationType.FOLLOW_REQUEST)) {
       return true;
     }
 
-    else if(name == 'Hide' && type != NotificationType.TEAM_JOIN) {
+    else if(name == 'Hide' && (type != NotificationType.TEAM_JOIN && type != NotificationType.FOLLOW_REQUEST)) {
       return true;
     }
   }
