@@ -24,7 +24,7 @@
   font-feature-settings: 'liga';
 }
 
-@media only screen and (max-width:1092px) {
+@media only screen and (max-width:1024px) {
 .btn-mobile
    {
     font-size:50px;padding:15px;
