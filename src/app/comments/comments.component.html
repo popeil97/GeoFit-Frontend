@@ -19,4 +19,4 @@
     <tr mat-row *matRowDef="let myRowData; columns: columns"></tr>
   </table>
 </div>
-<app-comments-form *ngIf="this._authService.token" [storyID]="storyID" (commentPosted)="newCommentPosted()"></app-comments-form>
+<app-comments-form *ngIf="this._authService.isLoggedIn()" [storyID]="storyID" (commentPosted)="newCommentPosted()"></app-comments-form>

@@ -1,7 +1,7 @@
 <div class="table-container ex3" style="overflow:hidden;">
 
   <!---If we are in race view AND we are authenticated, display form to post new stories-->
-  <div *ngIf="use=='race' && this._authService.token && this.progress">
+  <div *ngIf="use=='race' && this._authService.isLoggedIn() && this.progress">
     <table class="mat-table" style="background-color:rgba(44, 0, 126,0.08);">
       <tr class="mat-row">
         <ng-container matColumnDef="ProfilePic" style="padding: 10px;">
@@ -49,7 +49,7 @@
         </div>
 
         <div class="container" style="display:flex;align-content: right;right:0;">
-          <app-story-btn *ngIf="this._authService.token" [use]="'like'" [storyID]=element.story_id [likes]=element.likes [likesCount]=element.likes_count></app-story-btn>
+          <app-story-btn *ngIf="this._authService.isLoggedIn()" [use]="'like'" [storyID]=element.story_id [likes]=element.likes [likesCount]=element.likes_count></app-story-btn>
           <div role="button" (click)="element.show_comments=!element.show_comments"> <i class="material-icons" style="color:#BC164D">comment</i> {{ element.comments.length }} 
             <i style = "color:#2C00A5;" *ngIf="element.comments.length>0 && !element.show_comments">View comments</i> 
             <i style = "color:#2C00A5;" *ngIf="element.comments.length>0 && element.show_comments">Collapse comments</i>

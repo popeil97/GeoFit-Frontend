@@ -3,6 +3,8 @@ import { AuthService } from '../auth.service';
 import { NotificationsService } from '../notifications.service';
 import {Observable} from 'rxjs/Rx';
 import { UserProfileService } from '../userprofile.service';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { NotificationPanelComponent } from '../notification-panel/notification-panel.component';
 
 declare var $: any
 
@@ -20,9 +22,10 @@ picURL:any;
 
   constructor(private _notificationService:NotificationsService,
               public _authService: AuthService,
-              private _userProfileService: UserProfileService) { }
+              private _userProfileService: UserProfileService,
+              private _bottomSheet: MatBottomSheet) { }
 
-  public notifications:any[];
+  public notifications:any[] = [];
   public isPurple:Boolean = false;
   public path:any;
 
@@ -33,11 +36,17 @@ picURL:any;
       e.stopPropagation();
     });
 
-    Observable.interval(120000) // make much larger in production
+    this._notificationService.getNotifications().subscribe((resp:NotificationResp) => {
+      console.log(resp);
+      this.notifications = resp.notifications;
+    })
+
+    Observable.interval(60000) // make much larger in production
     .switchMap(() => this._notificationService.getNotifications())
     .subscribe((resp:NotificationResp) => {
       console.log(resp);
       this.notifications = resp.notifications;
+      console.log(this.notifications);
     });
 
     if (localStorage.getItem('access_token')){
@@ -81,6 +90,11 @@ picURL:any;
     this.notifications = this.notifications.filter((notification) => {
       return not_id != notification.not_id;
     });
+  }
+
+  showNotifications(): void {
+    console.log('openming')
+    this._bottomSheet.open(NotificationPanelComponent,{data:{notifications:this.notifications}});
   }
 
   logout() {
