@@ -27,7 +27,9 @@
     </div>
       <li class="nav-item" *ngIf="this._authService.isLoggedIn()">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="showNotifications()">
-          <mat-icon class="roboto-purple" matBadge="{{notifications.length}}" matBadgeColor="warn">circle_notifications</mat-icon> Notifications
+          <mat-icon *ngIf="notifications.length>0" class="roboto-purple" matBadge="{{notifications.length}}" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below">circle_notifications</mat-icon> 
+           <mat-icon *ngIf="notifications.length==0" class="roboto-purple" >circle_notifications</mat-icon>
+          Notifications
         </a>
       </li>
 
@@ -37,6 +39,8 @@
         </a>
          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <a class="dropdown-item"><app-faq-help></app-faq-help></a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item"><app-terms-of-service></app-terms-of-service></a>
               <div class="dropdown-divider"></div>
           <!--    <a class="dropdown-item"><button mat-button [routerLink]="['/']" type='button'>About Us</button></a>
               <div class="dropdown-divider"></div> -->

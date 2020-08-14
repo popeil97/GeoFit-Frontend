@@ -50,13 +50,18 @@
 
       <mat-tab *ngIf="this.progress && this._authService.isLoggedIn()">
         <ng-template mat-tab-label style="background-color: rgba(256,256, 256,1);">
-          <mat-icon>add_circle_outline </mat-icon> <div *ngIf="num_activities>0" style="background-color: #F6BF78; border-radius: 5px;padding-left:2px;padding-right:2px;">{{num_activities}} </div>
+        <!--  <mat-icon>add_circle_outline </mat-icon> <div *ngIf="num_activities>0" style="background-color: #F6BF78; border-radius: 5px;padding-left:2px;padding-right:2px;">{{num_activities}} </div> -->
+
+          <mat-icon *ngIf="num_activities>0"  matBadge="{{num_activities}}" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below">add_circle_outline</mat-icon> 
+           <mat-icon *ngIf="num_activities==0" >add_circle_outline</mat-icon>
+
           <div class="tabs1">Add Activity </div>
           
         </ng-template>
 
         <div *ngIf="!raceSettings.isManualEntry">
             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
+            <h4 *ngIf="userRaceSettings.isAutomaticImport" style="text-align:center;font-family:Roboto; color:#2C007E;"> You have auto import turned on!</h4>
             <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu><br><br><br><br><br><br>
         </div>
 
@@ -70,6 +75,7 @@
             <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
              <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
+             <h4 *ngIf="userRaceSettings.isAutomaticImport" style="text-align:center;font-family:Roboto; color:#2C007E;"> You have auto import turned on!</h4>
             <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu><br><br><br><br><br><br>
           </mat-tab>
           <mat-tab *ngIf="raceSettings.isManualEntry">
@@ -94,6 +100,7 @@
             <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
              <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
+             <h4 *ngIf="userRaceSettings.isAutomaticImport" style="text-align:center;font-family:Roboto; color:#2C007E;"> You have auto import turned on!</h4>
             <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu><br><br><br><br><br><br>
           </mat-tab>
           <mat-tab *ngIf="raceSettings.isManualEntry">
