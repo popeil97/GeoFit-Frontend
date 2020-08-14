@@ -49,7 +49,7 @@
         </div>
 
         <div class="container" style="display:flex;align-content: right;right:0;">
-          <app-story-btn *ngIf="this._authService.token" [use]="'like'" [storyID]=element.story_id [likes]=element.likes [likesCount]=element.likes_count></app-story-btn>
+          <app-story-btn *ngIf="this._authService.token" [use]="'like'" [storyID]=element.story_id [likes]=element.likes [likesCount]=element.likes_count [likesUsers]=element.likes_users></app-story-btn>
           <div role="button" (click)="element.show_comments=!element.show_comments"> <i class="material-icons" style="color:#BC164D">comment</i> {{ element.comments.length }} 
             <i style = "color:#2C00A5;" *ngIf="element.comments.length>0 && !element.show_comments">View comments</i> 
             <i style = "color:#2C00A5;" *ngIf="element.comments.length>0 && element.show_comments">Collapse comments</i>

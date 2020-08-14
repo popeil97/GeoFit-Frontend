@@ -1,9 +1,7 @@
-<div *ngIf="this.userData" style="margin:auto;">
-  <b style="margin:0 auto;">
-    <b>
-      <app-user-profile-nav [username]=userData.username [displayName]=userData.display_name></app-user-profile-nav>
-    </b>
-  </b>
+<div *ngIf="!this.userData.isTeam" style="margin:auto;">
+  <p style="margin:0 auto;">
+      <app-user-profile-nav [username]=userData.username [displayName]=userData.display_name [style.font-weight]="700"></app-user-profile-nav>
+  </p>
 
   <p style="margin:0 auto;text-align: center;">
     {{ this.userData.total_distance }} {{ this.userData.distance_type }}
@@ -12,4 +10,19 @@
   <p *ngIf="!this.userData.isMe" style="margin:0 auto;text-align: center;">
     <app-user-follow [userID]="this.userData.user_id" [follows]="this.userData.follows" (followStatusChanged)="followStatusChanged($event)"></app-user-follow>
   </p>
+</div>
+
+<div *ngIf="this.userData.isTeam" style="margin:auto;">
+  <p style="margin:0 auto;font-weight:700;">
+      {{ userData.display_name }}
+  </p>
+
+  <p style="margin:0 auto;text-align: center;" *ngFor="let user of this.userData.child_user_stats">
+      <app-user-profile-nav [username]=user.username [displayName]=user.display_name></app-user-profile-nav>
+  </p>
+
+  <p style="margin:0 auto;text-align: center;">
+    {{ this.userData.total_distance }} {{ this.userData.distance_type }}
+  </p>
+    
 </div>

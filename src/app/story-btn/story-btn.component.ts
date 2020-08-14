@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { StoryService } from '../story.service'
+import { StoryService } from '../story.service';
+import {MatTooltipModule} from '@angular/material';
 
 @Component({
   selector: 'app-story-btn',
@@ -19,10 +20,17 @@ export class StoryBtnComponent implements OnInit {
   // Count of number of likes this story has
   @Input() likesCount: number;
 
+  // List of users that like this story
+  @Input() likesUsers: string[];
+
+  private likesUsersString:string;
+
   constructor(private _storyService:StoryService) {
+
   }
 
   ngOnInit() {
+    this.likesUsersString = this.likesUsers.join(', ');
   }
 
   changeLikeStatus(){
