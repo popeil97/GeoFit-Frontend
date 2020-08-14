@@ -80,6 +80,7 @@ import { RoutePinDialogComponent } from './route-pin-dialog/route-pin-dialog.com
 
 import { OwlModule } from 'ngx-owl-carousel';
 import { NotificationPanelComponent } from './notification-panel/notification-panel.component';
+import { SnackbarComponent } from './snackbar/snackbar.component';
 
 
 @NgModule({
@@ -141,7 +142,8 @@ import { NotificationPanelComponent } from './notification-panel/notification-pa
     ContactHelpDialogContent,
     TeamInstructionsComponent,
     RoutePinDialogComponent,
-    NotificationPanelComponent
+    NotificationPanelComponent,
+    SnackbarComponent
       ],
   imports: [
     BrowserModule,
@@ -174,7 +176,8 @@ import { NotificationPanelComponent } from './notification-panel/notification-pa
                   RaceDayDialogContent, 
                   FaqHelpDialogContent,ContactHelpDialogContent,
                   RoutePinDialogComponent,
-                  NotificationPanelComponent], 
+                  NotificationPanelComponent,
+                  SnackbarComponent,], 
 })
 export class AppModule { 
   constructor(private injector: Injector) {

@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { NotificationType, NotificationsService } from '../notifications.service';
 import { TeamService } from '../team.service';
+import {MatSnackBar} from '@angular/material/snack-bar'
+import { SnackbarComponent } from '../snackbar/snackbar.component';
 
 @Component({
   selector: 'app-team-list',
@@ -13,7 +15,7 @@ export class TeamListComponent implements OnInit {
   @Output() callback:EventEmitter<any> = new EventEmitter();
   @Output() edit:EventEmitter<any> = new EventEmitter();
 
-  constructor(private _notificationService:NotificationsService,private _teamService:TeamService) { }
+  constructor(private _notificationService:NotificationsService,private _teamService:TeamService,private _snackbar:MatSnackBar) { }
 
   ngOnInit() {
     console.log('TEAMS COMPONENT:',this.teams);
@@ -30,6 +32,8 @@ export class TeamListComponent implements OnInit {
 
     this._notificationService.createNotification(form).then((resp) => {
       console.log('NOTIFICATION RESP:',resp);
+      this._snackbar.openFromComponent(SnackbarComponent,{duration: 5000,horizontalPosition: 'center',
+        verticalPosition: 'bottom',data:{message:"Request has been sent"}})
     });
   }
 
@@ -45,3 +49,5 @@ export class TeamListComponent implements OnInit {
   }
 
 }
+
+
