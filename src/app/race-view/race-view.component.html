@@ -45,7 +45,7 @@
           <input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/>
         </div>
 
-        <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
+        <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed> <br><br><br><br><br><br>
       </mat-tab>
 
       <mat-tab *ngIf="this.progress && this._authService.isLoggedIn()">
@@ -57,7 +57,7 @@
 
         <div *ngIf="!raceSettings.isManualEntry">
             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
-            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu>
+            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu><br><br><br><br><br><br>
         </div>
 
         <div *ngIf="num_activities==0">
@@ -70,7 +70,7 @@
             <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
              <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
-            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu>
+            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu><br><br><br><br><br><br>
           </mat-tab>
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
@@ -94,7 +94,7 @@
             <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
              <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
-            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu>
+            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu><br><br><br><br><br><br>
           </mat-tab>
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
@@ -128,7 +128,7 @@
             <div class="tabs1">Individuals</div>
           </ng-template>
           <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Leaderboard</b></h3></b>
-          <app-leaderboard [leaderboard]="leaderboard"  [allowFollow]="true"></app-leaderboard>
+          <app-leaderboard [leaderboard]="leaderboard"  [allowFollow]="true"></app-leaderboard><br><br><br><br><br><br>
           </mat-tab>
           
           <mat-tab label="not teams">
@@ -137,7 +137,7 @@
               <div class="tabs1">Teams</div>
             </ng-template>
             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Teams Leaderboard</b></h3></b>
-            <app-leaderboard [leaderboard]="teamLeaderboard" [allowFollow]="false"></app-leaderboard>
+            <app-leaderboard [leaderboard]="teamLeaderboard" [allowFollow]="false"></app-leaderboard><br><br><br><br><br><br>
           </mat-tab>
      </mat-tab-group>
 
@@ -156,7 +156,7 @@
             </div>
 
             <div *ngIf="showTeamForm">
-              <app-team-form (callback)="getRaceState($event)" [teamEditForm]="teamEditForm"></app-team-form>
+              <app-team-form (callback)="getRaceState($event)" [teamEditForm]="teamEditForm"></app-team-form><br><br><br><br><br><br>
             </div>
       </mat-tab>
       <mat-tab>

@@ -55,8 +55,11 @@
             <img src="{{group.profile_url}}" width="30" height="30">
           </div>
           <div class="column-lb1">
-            <p>
+            <p *ngIf="allowFollow">
               <app-user-profile-nav [username]="group.username" [displayName]="group.display_name"></app-user-profile-nav>
+            </p>
+            <p *ngIf="!allowFollow">
+              {{group.display_name}}
             </p>
           </div>
           <div class="column-lb2">
@@ -100,8 +103,11 @@
             <img src="{{group.profile_url}}" width="30" height="30">
           </div>
           <div class="column-lb1">
-            <p>
+            <p *ngIf="allowFollow">
               <app-user-profile-nav [username]="group.username" [displayName]="group.display_name"></app-user-profile-nav>
+            </p>
+            <p *ngIf="!allowFollow">
+              {{group.display_name}}
             </p>
           </div>
           <div class="column-lb2">
