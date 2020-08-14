@@ -435,7 +435,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
       };
 
       //If this pin is current user, pan and zoom to it
-      if (this.userData[i].isMe){
+      if (this.isMe(this.userData[i])){
         this.myMarker = this.markersByUserID[elementID]['locMarker'];
         this.panToUserMarker(elementID);
         this.myUserID = elementID;
@@ -501,6 +501,21 @@ export class MapComponent implements AfterViewInit,OnChanges {
       catch(ex){}
     }
 
+  }
+
+  private isMe(userData: any){
+    if (userData.isMe){
+      return true;
+    }
+    else if (userData.child_user_stats){
+      for (let i = 0; i < userData.child_user_stats.length; i++){
+        if (userData.child_user_stats[i].isMe){
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 
   private openRoutePinDialogueWithIndex(index: number, thisComponent: any){
