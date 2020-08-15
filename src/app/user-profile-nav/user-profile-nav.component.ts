@@ -12,6 +12,8 @@ export class UserProfileNavComponent implements OnInit {
   @Input() username: string;
   @Input() displayName: string;
 
+  @Output() clickedOn: EventEmitter<void> = new EventEmitter();
+
   constructor(private _userProfileService: UserProfileService) { }
 
   ngOnInit() {
@@ -23,7 +25,10 @@ export class UserProfileNavComponent implements OnInit {
       document.getElementById('close-modal').click();
     }
 
+    this.clickedOn.emit();
+
     this._userProfileService.goToUserProfile(this.username);
+
   }
 
 }
