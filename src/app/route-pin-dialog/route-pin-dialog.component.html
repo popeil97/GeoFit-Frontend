@@ -1,9 +1,9 @@
-<h2 mat-dialog-title>Route Pin Title</h2>
+<h2 mat-dialog-title>{{ this.title }}</h2>
 <mat-dialog-content>
 
   <owl-carousel [options]="carouselOptions" [carouselClasses]="['owl-theme', 'row', 'sliding']">
     <div class="item" *ngFor="let image of image_urls;let i= index">
-      <img class="slide-image" src="{{image}}" >
+      <img class="slide-image" src="{{image}}" style="object-fit:contain;max-height:400px">
     </div>
   </owl-carousel>
 

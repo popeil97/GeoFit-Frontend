@@ -13,23 +13,24 @@ import { UserProfileService } from '../userprofile.service';
 })
 export class RaceDayComponent implements OnInit {
   username;
-  userData: UserData;
+  @Input() userData:any;
+  
 
   constructor(public dialog: MatDialog, private _authService: AuthService,private route:ActivatedRoute, 
     private router:Router, private _userProfileService:UserProfileService) { }
 
   ngOnInit() {
+    
     this.route.paramMap.subscribe(params => {
       this.username = params['params']['username'];
       this.getUserData();
       console.log("USER",this.username);
+      console.log("USERDATA race-day", this.userData);
     });
+    this.openDialog();
   }
   getUserData(){
     //Call a to-be-created service which gets user data, feed, statistics etc
-    this._userProfileService.getUserProfile(this.username).then((data) => {
-      this.userData = data as UserData;
-      console.log("New user data2: ", this.userData);
 
       if (this.userData.location =="")
       {
@@ -40,7 +41,7 @@ export class RaceDayComponent implements OnInit {
       {
         this.userData.description = "N/A";
       }
-    });
+
   }
 
   profileUpdated($event) {
@@ -49,8 +50,12 @@ export class RaceDayComponent implements OnInit {
   }
   openDialog() {
 
-    const dialogRef = this.dialog.open(RaceDayDialogContent,{disableClose: false, data:{} as MatDialogConfig});
+     const dialogConfig = new MatDialogConfig();
+       dialogConfig.data = {
+        userData: this.userData
+    };
 
+    this.dialog.open(RaceDayDialogContent, dialogConfig);
   }
 
 }
@@ -60,14 +65,25 @@ export class RaceDayComponent implements OnInit {
   templateUrl: './race-day-dialog-content.html',
 })
 
-export class RaceDayDialogContent {
+export class RaceDayDialogContent implements OnInit{
 
+  public profileUpdated:boolean;
   public userData:any;
-  public profileUpdated:any;
-
 
   constructor(public dialogRef: MatDialogRef<RaceDayDialogContent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
+
+  }
+
+  ngOnInit() {
+        this.profileUpdated = false;
+        this.userData = this.data.userData;
+    }
+
+    updateProfile($event) {
+    //Get new data
+    console.log("PROFILE UPDATED!!!!!!!!!!!!");
+    this.profileUpdated = true;
 
   }
 

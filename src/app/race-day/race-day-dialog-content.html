@@ -6,10 +6,12 @@
     <form [formGroup]>
       <ng-template matStepLabel>Update Your Info</ng-template>
       <b> Update your info, including uploading a profile picture </b> so family and friends can find you on the map
-      <app-profile-form [userData]="userData" (formUpdated)="profileUpdated($event)"></app-profile-form>
-      <div>
+      <app-profile-form [userData]="userData" (formUpdated)="updateProfile($event)"></app-profile-form> 
+
+      <div *ngIf="this.profileUpdated"><br> Your info has been updated</div>
+    <!--  <div>
         <button mat-button matStepperNext>Next</button>
-      </div>
+      </div> -->
     </form>
   </mat-step>
 
@@ -46,24 +48,95 @@
     </mat-expansion-panel-header>
     <app-manual-instructions></app-manual-instructions>
   </mat-expansion-panel>
+
 </mat-accordion>
 
+<br>
+ <b> Other FAQs </b> : these FAQs can also be found anytime under the "help" button on the top navbar!
 
+<mat-accordion>
+   <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        How do I make a team?
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+ 
+     
+    </mat-expansion-panel-header>
+
+     
+    <app-team-instructions></app-team-instructions>
+  </mat-expansion-panel>
+
+
+
+   <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Can my Strava activities be automatically imported?
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+ 
+     
+    </mat-expansion-panel-header>
+
+     
+    Yes! First navigate to the settings tab.<br>
+    <img src="../../assets/landing/settings.png" alt="pic1" style="width:300px;"> <br>
+
+    Toggle <img src="../../assets/landing/settings-3.PNG" alt="pic1" style="width:160px;"> then click <img src="../../assets/landing/settings-2.png" alt="pic1" style="width:70px;">. This will automatically import all FUTURE activities (but not current ones).
+
+  </mat-expansion-panel>
+
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Help, my strava activities aren't showing up!
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+ 
+     
+    </mat-expansion-panel-header>
+
+     
+    Strava sometimes takes a while to send activities to us, especially biking activities. If this persists for over 24 hours, go to your profile, unauthenticate, and reauthenticate with Strava. If issues persist, please email us at <a href="mailto:admin@tucan.fitness">admin@tucan.fitness</a>.<br>
+  </mat-expansion-panel>
+
+   <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Can I filter the map?
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+ 
+     
+    </mat-expansion-panel-header>
+     
+    First navigate to the settings tab.
+    <img src="../../assets/landing/settings.png" alt="pic1" style="width:300px;"> <br>
+    There are options to filter by both gender, age, and followers, as seen below. <br>
+    <img src="../../assets/landing/settings-4.PNG" alt="pic1" style="width:300px;"> <br>
+    Filter to your hearts desire then press <img src="../../assets/landing/settings-2.png" alt="pic1" style="width:70px;">.
+  </mat-expansion-panel>
+
+</mat-accordion>
+<br>
+Is your question still not answered? Email us: <a href="mailto:admin@tucan.fitness">admin@tucan.fitness</a>.<br>
+
+ <!--
       <div>
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button matStepperNext>Next</button>
-      </div>
+      </div> -->
     </form>
   </mat-step>
 
-  <mat-step>
-    <ng-template matStepLabel>Go to map!</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button matStepperPrevious>Back</button>
-      <button mat-button (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
 </mat-horizontal-stepper>
 
 

@@ -1,6 +1,9 @@
 <!-- <app-map></app-map> -->
 <div>
 <app-loader [isActive]="loading"></app-loader>
+<div *ngIf="userStat.total_distance==0">
+<app-race-day [userData]="userData"></app-race-day>
+</div>
 <mat-sidenav-container hasBackdrop="false">
 
   <mat-sidenav  md-disable-backdrop='true' #menu mode="over"  opened="true"> <!--opened="true"-->
@@ -197,24 +200,9 @@
       <i class="material-icons md-18" style="color:#2C007E; ">keyboard_arrow_left</i>
       </a>
     </div>
-      
-
-  
-
-
-<!----<a class="btn btn-primary btn-customized inviteToggle" data-toggle="modal" data-target="#storyModal" (click)="showModal('#storyModal')">
-  <span style="color:white">Add a Story</span>
-</a>>---->
-
-<!----<a class="btn btn-primary btn-customized inviteToggle" (click)="goToTeamForm()">
-  <span style="color:white">Create Team</span>
-</a>--->
 
   </mat-sidenav-content>
 </mat-sidenav-container>
-<!-- Wrapper -->
-
-    <!-- open sidebar menu -->
 
 </div>
 
