@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>
+  <app-user-profile-nav [username]="elementData.username" [displayName]="elementData.display_name"></app-user-profile-nav>'s Story
+</h2>
+<mat-dialog-content>
+
+  <img src="{{ elementData.story_image }}" style="object-fit:contain;max-height:700px">
+
+
+  <h3 style="text-align: center">{{ elementData.story_text }}</h3>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

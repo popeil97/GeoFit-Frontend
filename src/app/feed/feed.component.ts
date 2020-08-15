@@ -1,10 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { RaceFeedService } from './race-feed.service';
 import { UserProfileService } from '../userprofile.service';
 import { StoryFormComponent } from '../story-form/story-form.component';
 import { AuthService } from '../auth.service';
 import { MatTableDataSource } from '@angular/material/table';
+import { StoryDialogComponent } from '../story-dialog/story-dialog.component';
 
 declare var $: any
 
@@ -56,7 +58,8 @@ export class FeedComponent implements OnInit {
 
   constructor(private _userProfileService: UserProfileService, 
               private _raceFeedService: RaceFeedService,
-              public _authService: AuthService) {
+              public _authService: AuthService,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -114,6 +117,15 @@ export class FeedComponent implements OnInit {
     else{
       this.storyModalChild.showModal(storyID);
     }
+  }
+
+  showStoryDialog(element: FeedObj){
+    console.log("In dialogue function");
+    let dialogRef = this.dialog.open(StoryDialogComponent, {
+      data: { 
+        'element': element,
+      },
+    });
   }
 
   public refreshFeed(openStoryIDComments=null){

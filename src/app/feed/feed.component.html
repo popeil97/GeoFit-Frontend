@@ -35,7 +35,7 @@
         <br>
         <div class="center" *ngIf="element.story">
           <div class="container" *ngIf="element.story_image">
-            <img width="200px" src="{{ element.story_image }}" (click)="showStoryModal(element.story_id,true)">
+            <img width="200px" src="{{ element.story_image }}" (click)="showStoryDialog(element)">
           </div>
           <div class="container" *ngIf="element.story_text">
             <p>{{ element.story_text }}</p>
