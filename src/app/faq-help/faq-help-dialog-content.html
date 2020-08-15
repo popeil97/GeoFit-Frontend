@@ -41,6 +41,37 @@
     <app-team-instructions></app-team-instructions>
   </mat-expansion-panel>
 
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        How do I join a team?
+      </mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+ 
+     
+    </mat-expansion-panel-header>
+
+     
+    <mat-vertical-stepper [linear]="true" #stepper>
+  <mat-step [stepControl]>
+    <ng-template matStepLabel>Navigate to the teams tab on the map menu</ng-template>
+    The menu on the left of the map page has a teams tab.
+    <br>
+      <img src="../../assets/landing/team-3.png" alt="pic2" style="width:300px;"><br>
+    
+
+  </mat-step>
+
+  <mat-step>
+    <ng-template matStepLabel>Join a team!</ng-template>
+    Click through the different teams, and click "Request to join". You then have to wait until the team owner accepts you! 
+
+  </mat-step>
+</mat-vertical-stepper>
+
+  </mat-expansion-panel>
+
 
 
    <mat-expansion-panel>
