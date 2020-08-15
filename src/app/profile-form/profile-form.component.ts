@@ -81,14 +81,24 @@ export class ProfileFormComponent implements OnInit, OnChanges {
       //Crop image, and resize image to handle large files
       if (this.profilePicURL){
         this.profilePicURL = this._imageService.squareCropImage(this.profilePicURL);
-        formClean.ProfilePic = this._imageService.resizeImage(this.profilePicURL, 350, 350);
-        //formClean.ProfilePic = this.profilePicURL;
+        
+        this._imageService.resizeImage(this.profilePicURL, 350, 350).then((data) => {
+          formClean.ProfilePic = data;
+
+          //call service to update form
+          this._userProfileService.updateProfile(formClean).then((data) => {
+            this.formUpdated.emit();
+          })
+        });
+      }
+      else{
+        //call service to update form
+        this._userProfileService.updateProfile(formClean).then((data) => {
+          this.formUpdated.emit();
+        })
       }
 
-      //call service to update form
-      this._userProfileService.updateProfile(formClean).then((data) => {
-        this.formUpdated.emit();
-      })
+      
     }
   }
 

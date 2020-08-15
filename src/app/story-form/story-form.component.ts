@@ -39,27 +39,37 @@ export class StoryFormComponent implements OnInit {
     console.log("Story image: ", this.storyImage);
     let withLastStory = false;
 
-    //Resize story images if one dim > 1000px
-    if (this.storyImage){
-      this.storyImage = this._imageService.resizeImage(this.storyImage, 1000, 1000);
-    }
-
     //Get text field input (image already uploaded via eventListener)
     this.storyText = (<HTMLInputElement>document.getElementById("storyImageCaption")).value;
 
-    //Upload story via service
-    this.storyService.uploadStory(this.raceID, this.storyImage, this.storyText, withLastStory).then( data =>
-    {
-      //Emit event to refresh feed
-      this.storyPostedEvent.emit();
-
-      //Clear input fields
-      (<HTMLInputElement>document.getElementById("storyImage")).value = '';
-      (<HTMLInputElement>document.getElementById("storyImageCaption")).value = '';
-      this.storyText = null;
-      this.storyImage = null;
-    });
+    //Resize story images if one dim > 1000px
+    if (this.storyImage){
+      this._imageService.resizeImage(this.storyImage, 800, 800).then((data) => {
+        this.storyImage = data;
+        console.log(this.storyImage);
+        //Upload story via service
+        this.uploadStoryWithService(this.raceID, this.storyImage, this.storyText, withLastStory);
+      });
+    }
+    else {
+      this.uploadStoryWithService(this.raceID, this.storyImage, this.storyText, withLastStory);
+    }
     
+  }
+
+  uploadStoryWithService(raceID, storyImage, storyText, withLastStory){
+    this.storyService.uploadStory(raceID, storyImage, storyText, withLastStory).then( data =>
+      {
+        console.log("Uploaded story");
+        //Emit event to refresh feed
+        this.storyPostedEvent.emit();
+
+        //Clear input fields
+        (<HTMLInputElement>document.getElementById("storyImage")).value = '';
+        (<HTMLInputElement>document.getElementById("storyImageCaption")).value = '';
+        this.storyText = null;
+        this.storyImage = null;
+      });
   }
 
 }
