@@ -175,6 +175,7 @@ export class RaceViewComponent implements OnInit {
   }
 
   getRaceState(): void {
+    this.loading = true;
     this.raceService.getRace(this.raceID).subscribe(data => {
       this.showTeamForm=false;
       let raceData = data as RaceData;
