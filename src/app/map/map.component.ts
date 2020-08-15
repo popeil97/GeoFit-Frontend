@@ -522,6 +522,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     console.log("In dialogue function");
     let dialogRef = thisComponent.dialog.open(RoutePinDialogComponent, {
       data: { 
+        'title': thisComponent.routePins[index].title,
         'description': thisComponent.routePins[index].description,
         'image_urls': thisComponent.routePins[index].image_urls,
       },
@@ -532,7 +533,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     this.routePinMarkers = new L.featureGroup();
 
     for (let i = 0; i < this.routePins.length; i++){
-      var img_html = "<img src=\"" + this.routePins[i].image_urls[0] + "\";\">";
+      var img_html = "<img src=\"" + this.routePins[i].image_urls[0] + "\";\"><div class=\"rounded-pin\"></div>";
       var userIcon = L.divIcon({
         className: 'route-pin',
         html: img_html,
