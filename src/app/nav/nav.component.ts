@@ -36,10 +36,7 @@ picURL:any;
       e.stopPropagation();
     });
 
-    this._notificationService.getNotifications().subscribe((resp:NotificationResp) => {
-      console.log(resp);
-      this.notifications = resp.notifications;
-    })
+    this.getNotifications();
 
     Observable.interval(60000) // make much larger in production
     .switchMap(() => this._notificationService.getNotifications())
@@ -69,6 +66,15 @@ picURL:any;
     }
   }
 
+  getNotifications() {
+
+    this._notificationService.getNotifications().toPromise().then((resp:NotificationResp) => {
+      console.log(resp);
+      this.notifications = resp.notifications;
+    });
+
+  }
+
    getUserPic(){
     //Call a to-be-created service which gets user data, feed, statistics etc
     this._userProfileService.getUserProfile(this._authService.username).then((data) => {
@@ -95,6 +101,11 @@ picURL:any;
   showNotifications(): void {
     console.log('openming')
     this._bottomSheet.open(NotificationPanelComponent,{data:{notifications:this.notifications}});
+
+    this._bottomSheet._openedBottomSheetRef.afterDismissed().subscribe((data) => {
+      console.log('sheet closed');
+      this.getNotifications();
+    })
   }
 
   logout() {
