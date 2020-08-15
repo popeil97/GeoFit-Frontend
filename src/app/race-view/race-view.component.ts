@@ -206,6 +206,7 @@ export class RaceViewComponent implements OnInit {
       console.log('USER SETTINGS:',this.userRaceSettings);
       console.log("FOLLOWER IDS", this.followedIDs);
       console.log("ROUTE PINS ", this.routePins);
+      console.log("USER_STAT", this.userStat);
       this.loading = false;
     });
   }
