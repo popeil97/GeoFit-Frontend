@@ -7,11 +7,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular
   styleUrls: ['./story-dialog.component.css']
 })
 export class StoryDialogComponent implements OnInit {
-<<<<<<< HEAD
+
   public elementData: FeedObj;
-=======
-  elementData: FeedObj;
->>>>>>> 8df913f07e5232d375236f2caabec27e5ca2fbb4
 
   constructor(public dialogRef: MatDialogRef<StoryDialogComponent>,
           @Inject(MAT_DIALOG_DATA) public data: any) {
