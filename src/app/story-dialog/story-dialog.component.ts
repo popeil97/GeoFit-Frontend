@@ -7,7 +7,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular
   styleUrls: ['./story-dialog.component.css']
 })
 export class StoryDialogComponent implements OnInit {
-  private elementData: FeedObj;
+  public elementData: FeedObj;
 
   constructor(public dialogRef: MatDialogRef<StoryDialogComponent>,
           @Inject(MAT_DIALOG_DATA) public data: any) {
