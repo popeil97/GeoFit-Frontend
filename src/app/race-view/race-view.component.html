@@ -1,8 +1,8 @@
 <!-- <app-map></app-map> -->
 <div>
 <app-loader [isActive]="loading"></app-loader>
-<div *ngIf="userStat.total_distance>0">
-<app-race-day [userData]="all_user_data"></app-race-day>
+<div *ngIf="userStat.total_distance==0">
+<app-race-day [userData]="userData"></app-race-day>
 </div>
 <mat-sidenav-container hasBackdrop="false">
 

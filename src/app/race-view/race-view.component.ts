@@ -12,6 +12,7 @@ import { StoryModalComponent } from '../story-modal/story-modal.component';
 import { RaceSettings } from '../race-about/race-about.component';
 import { TeamFormComponent } from '../team-form/team-form.component';
 import { AuthService } from '../auth.service';
+import { UserProfileService } from '../userprofile.service';
 
 declare var $: any
 
@@ -43,6 +44,7 @@ export class RaceViewComponent implements OnInit {
   public userRaceSettings:any;
   public raceSettings:RaceSettings;
   public routePins:any[];
+  public userData:UserData;
 
   public showTeamForm:Boolean = false;
   public changeArrow:Boolean = false;
@@ -64,6 +66,7 @@ export class RaceViewComponent implements OnInit {
   constructor(private raceService:RaceService,
                   private activitiesService:ActivitiesService,
                   private route: ActivatedRoute,
+                  private _userProfileService: UserProfileService,
                   private router:Router,
                   private storyService: StoryService,
                   public _authService: AuthService) {
@@ -75,6 +78,10 @@ export class RaceViewComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.raceName = params['params']['name'];
       this.raceID = params['params']['id'];
+    });
+
+    this._userProfileService.getUserProfile(this._authService.username).then((data) => {
+      this.userData = data as UserData;
     });
 
     this.getRaceState();
@@ -308,4 +315,18 @@ interface PinSettings {
   allAgesOn: boolean;
   minAge: number;
   maxAge: number;
+}
+
+
+interface UserData {
+  user_id:number;
+  profile_url:string;
+  email:string;
+  description: string;
+  location:string;
+  first_name:string;
+  last_name:string;
+  follows:boolean;
+  distance_type: string;
+  is_me: boolean;
 }

@@ -107,6 +107,7 @@
  <div>
         <!----<app-user-stats *ngIf="!showEdit" [userID]="userData.user_id"></app-user-stats>---->
         <app-profile-form *ngIf="showEdit" [userData]="userData" (formUpdated)="profileUpdated($event)"></app-profile-form>
+        
       </div>
 
 </div>

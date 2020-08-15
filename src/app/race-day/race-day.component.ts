@@ -14,11 +14,13 @@ import { UserProfileService } from '../userprofile.service';
 export class RaceDayComponent implements OnInit {
   username;
   @Input() userData:any;
+  
 
   constructor(public dialog: MatDialog, private _authService: AuthService,private route:ActivatedRoute, 
     private router:Router, private _userProfileService:UserProfileService) { }
 
   ngOnInit() {
+    
     this.route.paramMap.subscribe(params => {
       this.username = params['params']['username'];
       this.getUserData();
@@ -65,7 +67,7 @@ export class RaceDayComponent implements OnInit {
 
 export class RaceDayDialogContent implements OnInit{
 
-  public profileUpdated:any;
+  public profileUpdated:boolean;
   public userData:any;
 
   constructor(public dialogRef: MatDialogRef<RaceDayDialogContent>,
@@ -74,8 +76,16 @@ export class RaceDayDialogContent implements OnInit{
   }
 
   ngOnInit() {
+        this.profileUpdated = false;
         this.userData = this.data.userData;
     }
+
+    updateProfile($event) {
+    //Get new data
+    console.log("PROFILE UPDATED!!!!!!!!!!!!");
+    this.profileUpdated = true;
+
+  }
 
     
 

@@ -6,7 +6,9 @@
     <form [formGroup]>
       <ng-template matStepLabel>Update Your Info</ng-template>
       <b> Update your info, including uploading a profile picture </b> so family and friends can find you on the map
-      <app-profile-form [userData]="userData"></app-profile-form>
+      <app-profile-form [userData]="userData" (formUpdated)="updateProfile($event)"></app-profile-form> 
+
+      <div *ngIf="this.profileUpdated"><br> Your info has been updated</div>
     <!--  <div>
         <button mat-button matStepperNext>Next</button>
       </div> -->
