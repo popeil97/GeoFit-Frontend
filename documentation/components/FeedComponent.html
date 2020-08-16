@@ -1,0 +1,1848 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>geo-fit documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">geo-fit documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>FeedComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/feed/feed.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-feed</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./feed.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./feed.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#_authService">_authService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_feedService">_feedService</a>
+                            </li>
+                            <li>
+                                <a href="#columns">columns</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dataSource">dataSource</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#dialog">dialog</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#initialized">initialized</a>
+                            </li>
+                            <li>
+                                <a href="#storyFormComponent">storyFormComponent</a>
+                            </li>
+                            <li>
+                                <a href="#storyModalChild">storyModalChild</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#clickedOnFeedItem">clickedOnFeedItem</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#get_created_ts">get_created_ts</a>
+                            </li>
+                            <li>
+                                <a href="#newCommentPosted">newCommentPosted</a>
+                            </li>
+                            <li>
+                                <a href="#newStoryPosted">newStoryPosted</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges">ngOnChanges</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#refreshFeed">refreshFeed</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#resetFeed">resetFeed</a>
+                            </li>
+                            <li>
+                                <a href="#showStoryDialog">showStoryDialog</a>
+                            </li>
+                            <li>
+                                <a href="#showStoryModal">showStoryModal</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#feedItems">feedItems</a>
+                            </li>
+                            <li>
+                                <a href="#followOnly">followOnly</a>
+                            </li>
+                            <li>
+                                <a href="#hasStoryModalChild">hasStoryModalChild</a>
+                            </li>
+                            <li>
+                                <a href="#ID">ID</a>
+                            </li>
+                            <li>
+                                <a href="#progress">progress</a>
+                            </li>
+                            <li>
+                                <a href="#storyOnly">storyOnly</a>
+                            </li>
+                            <li>
+                                <a href="#use">use</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#feedItemClicked">feedItemClicked</a>
+                            </li>
+                            <li>
+                                <a href="#storyItemClicked">storyItemClicked</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(_userProfileService: <a href="../injectables/UserProfileService.html">UserProfileService</a>, _raceFeedService: <a href="../injectables/RaceFeedService.html">RaceFeedService</a>, _authService: <a href="../injectables/AuthService.html">AuthService</a>, dialog: MatDialog)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/feed/feed.component.ts:57</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>_userProfileService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UserProfileService.html" target="_self" >UserProfileService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_raceFeedService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/RaceFeedService.html" target="_self" >RaceFeedService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_authService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>dialog</td>
+                                                  
+                                                        <td>
+                                                                    <code>MatDialog</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="feedItems"></a>
+                        <b>feedItems</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Array&lt;FeedObj&gt;</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/feed/feed.component.ts:31</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="followOnly"></a>
+                        <b>followOnly</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/feed/feed.component.ts:44</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="hasStoryModalChild"></a>
+                        <b>hasStoryModalChild</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/feed/feed.component.ts:41</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ID"></a>
+                        <b>ID</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/feed/feed.component.ts:28</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="progress"></a>
+                        <b>progress</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/feed/feed.component.ts:34</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="storyOnly"></a>
+                        <b>storyOnly</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/feed/feed.component.ts:47</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="use"></a>
+                        <b>use</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/feed/feed.component.ts:37</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="feedItemClicked"></a>
+                        <b>feedItemClicked</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Event.html" target="_self" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/feed/feed.component.ts:49</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="storyItemClicked"></a>
+                        <b>storyItemClicked</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Event.html" target="_self" >EventEmitter</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/feed/feed.component.ts:50</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clickedOnFeedItem"></a>
+                    <span class="name">
+                        <b>
+                            clickedOnFeedItem
+                        </b>
+                        <a href="#clickedOnFeedItem"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clickedOnFeedItem(item)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="190"
+                            class="link-to-prism">src/app/feed/feed.component.ts:190</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>item</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="get_created_ts"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            get_created_ts
+                        </b>
+                        <a href="#get_created_ts"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>get_created_ts(timestamp)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="162"
+                            class="link-to-prism">src/app/feed/feed.component.ts:162</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>timestamp</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="newCommentPosted"></a>
+                    <span class="name">
+                        <b>
+                            newCommentPosted
+                        </b>
+                        <a href="#newCommentPosted"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>newCommentPosted(storyID)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="199"
+                            class="link-to-prism">src/app/feed/feed.component.ts:199</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>storyID</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="newStoryPosted"></a>
+                    <span class="name">
+                        <b>
+                            newStoryPosted
+                        </b>
+                        <a href="#newStoryPosted"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>newStoryPosted()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="194"
+                            class="link-to-prism">src/app/feed/feed.component.ts:194</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <b>
+                            ngOnChanges
+                        </b>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="87"
+                            class="link-to-prism">src/app/feed/feed.component.ts:87</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changes</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="65"
+                            class="link-to-prism">src/app/feed/feed.component.ts:65</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="refreshFeed"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            refreshFeed
+                        </b>
+                        <a href="#refreshFeed"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>refreshFeed(openStoryIDComments: null)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="131"
+                            class="link-to-prism">src/app/feed/feed.component.ts:131</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>openStoryIDComments</td>
+                                    <td>
+                                            <code>null</code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>null</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resetFeed"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            resetFeed
+                        </b>
+                        <a href="#resetFeed"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>resetFeed()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="185"
+                            class="link-to-prism">src/app/feed/feed.component.ts:185</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showStoryDialog"></a>
+                    <span class="name">
+                        <b>
+                            showStoryDialog
+                        </b>
+                        <a href="#showStoryDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showStoryDialog(element: <a href="../interfaces/FeedObj.html">FeedObj</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="122"
+                            class="link-to-prism">src/app/feed/feed.component.ts:122</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>element</td>
+                                    <td>
+                                                <code><a href="../interfaces/FeedObj.html" target="_self" >FeedObj</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showStoryModal"></a>
+                    <span class="name">
+                        <b>
+                            showStoryModal
+                        </b>
+                        <a href="#showStoryModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showStoryModal(storyID)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="109"
+                            class="link-to-prism">src/app/feed/feed.component.ts:109</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>storyID</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="_authService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            _authService</b>
+                            <a href="#_authService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../injectables/AuthService.html" target="_self" >AuthService</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/feed/feed.component.ts:61</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="_feedService"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            _feedService</b>
+                            <a href="#_feedService"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/feed/feed.component.ts:52</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="columns"></a>
+                        <span class="name">
+                            <b>
+                            columns</b>
+                            <a href="#columns"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>string[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[&#x27;ProfilePic&#x27;,&#x27;Data&#x27;]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/feed/feed.component.ts:57</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dataSource"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            dataSource</b>
+                            <a href="#dataSource"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/feed/feed.component.ts:55</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dialog"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            dialog</b>
+                            <a href="#dialog"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>MatDialog</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/feed/feed.component.ts:62</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="initialized"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            initialized</b>
+                            <a href="#initialized"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/feed/feed.component.ts:53</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="storyFormComponent"></a>
+                        <span class="name">
+                            <b>
+                            storyFormComponent</b>
+                            <a href="#storyFormComponent"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../components/StoryFormComponent.html" target="_self" >StoryFormComponent</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(StoryFormComponent)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/feed/feed.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="storyModalChild"></a>
+                        <span class="name">
+                            <b>
+                            storyModalChild</b>
+                            <a href="#storyModalChild"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../components/StoryModalComponent.html" target="_self" >StoryModalComponent</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(StoryModalComponent)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/feed/feed.component.ts:23</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from &#x27;@angular/core&#x27;;
+import { StoryModalComponent } from &#x27;../story-modal/story-modal.component&#x27;;
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from &#x27;@angular/material/dialog&#x27;;
+import { RaceFeedService } from &#x27;./race-feed.service&#x27;;
+import { UserProfileService } from &#x27;../userprofile.service&#x27;;
+import { StoryFormComponent } from &#x27;../story-form/story-form.component&#x27;;
+import { AuthService } from &#x27;../auth.service&#x27;;
+import { MatTableDataSource } from &#x27;@angular/material/table&#x27;;
+import { StoryDialogComponent } from &#x27;../story-dialog/story-dialog.component&#x27;;
+
+declare var $: any
+
+@Component({
+  selector: &#x27;app-feed&#x27;,
+  templateUrl: &#x27;./feed.component.html&#x27;,
+  styleUrls: [&#x27;./feed.component.css&#x27;]
+})
+export class FeedComponent implements OnInit {
+  /*
+  General Feed component that displays Race or User -specific events
+  */
+
+  @ViewChild(StoryModalComponent) storyModalChild: StoryModalComponent;
+
+  @ViewChild(StoryFormComponent) storyFormComponent: StoryFormComponent;
+
+  //ID of race or user
+  @Input() ID:number;
+
+  //Items on feed to display
+  @Input() feedItems: Array&lt;FeedObj&gt;;
+
+  //Progress object of logged in user
+  @Input() progress: any;
+
+  //Use of feed (&#x27;race&#x27; or &#x27;user&#x27;)
+  @Input() use:string;
+
+  //If true, we have our own story modal that is a child component of the feed component
+  //If false, we emit when a story modal should be activated via storyItemClicked()
+  @Input() hasStoryModalChild:boolean;
+
+  //If true, only show feed items of people user follows
+  @Input() followOnly:boolean;
+
+  //If true, only show Stories (texts and images) in feed
+  @Input() storyOnly:boolean;
+
+  @Output() feedItemClicked &#x3D; new EventEmitter();
+  @Output() storyItemClicked &#x3D; new EventEmitter();
+
+  private _feedService: any;
+  private initialized: boolean;
+  
+  public dataSource: any;
+
+  columns:string[] &#x3D; [&#x27;ProfilePic&#x27;,&#x27;Data&#x27;];
+
+  constructor(private _userProfileService: UserProfileService, 
+              private _raceFeedService: RaceFeedService,
+              public _authService: AuthService,
+              public dialog: MatDialog) {
+  }
+
+  ngOnInit() {
+    if (this.use &#x3D;&#x3D; &#x27;race&#x27;){
+      this._feedService &#x3D; this._raceFeedService;
+    }
+    else if (this.use &#x3D;&#x3D; &#x27;user&#x27;){
+      this._feedService &#x3D; this._userProfileService;
+    }
+
+    console.log(&quot;feed service: &quot;, this._feedService);
+
+    this._feedService.ID &#x3D; this.ID;
+
+    //If no feedItems provided as input, reset and refresh feed
+    if (!this.feedItems){
+      this.resetFeed();
+      this.refreshFeed();
+    }
+
+    //this.storyFormComponent.setStoryImageFieldListener();
+    this.initialized &#x3D; true;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    //Check if user or race ID changes between hops
+    //If yes, we need to update our feed service and pull new data
+
+    if (this.initialized){
+      for(const propName in changes) {
+        if(changes.hasOwnProperty(propName)) {
+
+          switch(propName) {
+            case &#x27;ID&#x27;:
+              if(changes.ID.currentValue !&#x3D; undefined) {
+                this._feedService.ID &#x3D; this.ID;
+                this.resetFeed();
+                this.refreshFeed();
+              }
+          }
+        }
+      }
+    }
+
+  }
+
+  showStoryModal(storyID): void {
+    console.log(&quot;open story modal!&quot;);
+
+    //WE CAN EITHER EMIT STORY MODAL CLICK OUTPUT
+    //OR CALL IT DIRECTLY TO THE CHILD MODAL
+    if (!this.hasStoryModalChild){
+      this.storyItemClicked.emit(storyID);
+    }
+    else{
+      this.storyModalChild.showModal(storyID);
+    }
+  }
+
+  showStoryDialog(element: FeedObj){
+    console.log(&quot;In dialogue function&quot;);
+    let dialogRef &#x3D; this.dialog.open(StoryDialogComponent, {
+      data: { 
+        &#x27;element&#x27;: element,
+      },
+    });
+  }
+
+  public refreshFeed(openStoryIDComments&#x3D;null){
+    var viewComponent &#x3D; this;
+
+    this._feedService.refreshFeed().then(data &#x3D;&gt; {
+      var newFeedObjs: Array&lt;FeedObj&gt; &#x3D; [];
+      var get_created_ts &#x3D; this.get_created_ts;
+
+      Object.keys(data).map(function(feedItemIndex){
+        let feedItem: FeedObj &#x3D; data[feedItemIndex];
+
+        //Initialize time since posts
+        //feedItem.created_ts &#x3D; get_created_ts(feedItem.created_ts);
+
+        //By default don&#x27;t open comment fields
+        //Unless we have just posted a comment
+        if (feedItem.story_id &#x3D;&#x3D; openStoryIDComments){
+          feedItem.show_comments &#x3D; true;
+        }
+        else {
+          feedItem.show_comments &#x3D; false;
+        }
+
+        newFeedObjs.push(feedItem);
+      });
+
+      //viewComponent.feedItems &#x3D; newFeedObjs.concat(viewComponent.feedItems);
+      //Continue to explore ways to refresh feed. In meantime, get all feed objs every time
+      viewComponent.feedItems &#x3D; newFeedObjs;
+    });
+  }
+
+  public get_created_ts(timestamp){
+    var date &#x3D; new Date();
+    var ts &#x3D; date.getTime() / 1000;
+    var secondsPerMinute &#x3D; 60;
+    var secondsPerHour &#x3D; secondsPerMinute * 60;
+    var secondsPerDay &#x3D; secondsPerHour * 24;
+
+    //Calculate how to display the timestamp of the activity
+    //If ts is within an hour, show number of minutes since activity
+    //If ts is over an hour, round to nearest hour
+    var displayTime;
+    if ((ts - timestamp) &lt; secondsPerHour) {
+      displayTime &#x3D; Math.round((ts - timestamp) / secondsPerMinute) + &quot;m&quot;;
+    }
+    else if ((ts - timestamp) &lt; secondsPerDay) {
+      displayTime &#x3D; Math.round((ts - timestamp) / secondsPerHour) + &quot;h&quot;;
+    }
+    else {
+      displayTime &#x3D; Math.round((ts - timestamp) / secondsPerDay) + &quot;d&quot;;
+    }
+    return displayTime;
+  }
+
+  public resetFeed(){
+    console.log(this._feedService);
+    this._feedService.resetFeed();
+  }
+
+  clickedOnFeedItem(item){
+    this.feedItemClicked.emit(item.user_id.toString());
+  }
+
+  newStoryPosted(){
+    //Refresh feed on new story post
+    this.refreshFeed();
+  }
+
+  newCommentPosted(storyID){
+    //Feed items after comment posted
+    console.log(this.feedItems);
+    this.refreshFeed(storyID);
+  }
+}
+
+
+interface FeedObj {
+  user_id: number;
+  display_name: string;
+  username: string;
+  profile_url:string
+  joined: boolean;
+  traveled: boolean;
+  likes: boolean;
+  likes_count: number;
+  story: boolean;
+  story_image:string;
+  story_text:string;
+  story_id:number;
+  total_distance:number;
+  last_distance:number;
+  message: string;
+  created_ts:number;
+  is_mine:boolean;
+  comments: Comment[];
+  show_comments: boolean;
+  follows: boolean;
+}
+
+interface Comment {
+  username: string;
+  display_name:string;
+  profile_url:string;
+  message:string;
+  created_ts:number;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;table-container ex3&quot; style&#x3D;&quot;overflow:hidden;&quot;&gt;
+
+  &lt;!---If we are in race view AND we are authenticated, display form to post new stories--&gt;
+  &lt;div *ngIf&#x3D;&quot;use&#x3D;&#x3D;&#x27;race&#x27; &amp;&amp; this._authService.isLoggedIn() &amp;&amp; this.progress&quot;&gt;
+    &lt;table class&#x3D;&quot;mat-table&quot; style&#x3D;&quot;background-color:rgba(44, 0, 126,0.08);&quot;&gt;
+      &lt;tr class&#x3D;&quot;mat-row&quot;&gt;
+        &lt;ng-container matColumnDef&#x3D;&quot;ProfilePic&quot; style&#x3D;&quot;padding: 10px;&quot;&gt;
+          &lt;td mat-cell&gt;
+            &lt;img width&#x3D;&quot;50px&quot; src&#x3D;&quot;{{ progress.profile_url }}&quot;&gt;
+          &lt;/td&gt;
+        &lt;/ng-container&gt;
+        &lt;ng-container matColumnDef&#x3D;&quot;Data&quot; style&#x3D;&quot;padding: 10px;&quot;&gt;
+          &lt;td mat-cell&gt;
+            &lt;app-user-profile-nav [username]&#x3D;progress.username [displayName]&#x3D;progress.display_name&gt;&lt;/app-user-profile-nav&gt;&lt;b style&#x3D;&quot;&quot;&gt;: Post a Story&lt;/b&gt;
+            &lt;app-story-form [raceID]&#x3D;&quot;ID&quot; (storyPostedEvent)&#x3D;&quot;newStoryPosted($event)&quot;&gt;&lt;/app-story-form&gt;
+          &lt;/td&gt;
+        &lt;/ng-container&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/div&gt;
+
+
+  &lt;table mat-table [dataSource]&#x3D;&quot;feedItems&quot; class&#x3D;&quot;feedTable&quot;&gt;
+    &lt;ng-container matColumnDef&#x3D;&quot;ProfilePic&quot; style&#x3D;&quot;padding: 10px;&quot;&gt;
+      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot; (click)&#x3D;&quot;clickedOnFeedItem(element)&quot; [hidden]&#x3D;&quot;(followOnly &amp;&amp; !element.follows) || (storyOnly &amp;&amp; !element.story)&quot;&gt;
+        &lt;img width&#x3D;&quot;50px&quot; src&#x3D;&quot;{{ element.profile_url }}&quot;&gt;
+      &lt;/td&gt;
+    &lt;/ng-container&gt;
+
+    &lt;ng-container matColumnDef&#x3D;&quot;Data&quot; style&#x3D;&quot;padding: 10px;&quot;&gt;
+      &lt;td mat-cell *matCellDef&#x3D;&quot;let element&quot; [hidden]&#x3D;&quot;(followOnly &amp;&amp; !element.follows) || (storyOnly &amp;&amp; !element.story)&quot;&gt;
+        &lt;app-user-profile-nav [username]&#x3D;element.username [displayName]&#x3D;element.display_name&gt;&lt;/app-user-profile-nav&gt;
+        {{ element.message }}
+        &lt;small&gt;{{ this.get_created_ts(element.created_ts) }}&lt;/small&gt;
+        &lt;br&gt;
+        &lt;div class&#x3D;&quot;center&quot; *ngIf&#x3D;&quot;element.story&quot;&gt;
+          &lt;div class&#x3D;&quot;container&quot; *ngIf&#x3D;&quot;element.story_image&quot;&gt;
+            &lt;img width&#x3D;&quot;200px&quot; src&#x3D;&quot;{{ element.story_image }}&quot; (click)&#x3D;&quot;showStoryDialog(element)&quot;&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;container&quot; *ngIf&#x3D;&quot;element.story_text&quot;&gt;
+            &lt;p&gt;{{ element.story_text }}&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;!---If parent component inputs TRUE, we have a story modal component as a child--&gt;
+          &lt;div *ngIf&#x3D;&quot;this.hasStoryModalChild&quot;&gt;
+            &lt;app-story-modal&gt;&lt;/app-story-modal&gt;
+          &lt;/div&gt;
+
+        &lt;/div&gt;
+
+        &lt;div class&#x3D;&quot;container&quot; style&#x3D;&quot;display:flex;align-content: right;right:0;&quot;&gt;
+          &lt;app-story-btn *ngIf&#x3D;&quot;this._authService.isLoggedIn()&quot; [use]&#x3D;&quot;&#x27;like&#x27;&quot; [storyID]&#x3D;element.story_id [likes]&#x3D;element.likes [likesCount]&#x3D;element.likes_count [likesUsers]&#x3D;element.likes_users&gt;&lt;/app-story-btn&gt;
+          &lt;div role&#x3D;&quot;button&quot; (click)&#x3D;&quot;element.show_comments&#x3D;!element.show_comments&quot;&gt; &lt;i class&#x3D;&quot;material-icons&quot; style&#x3D;&quot;color:#BC164D&quot;&gt;comment&lt;/i&gt; {{ element.comments.length }} 
+            &lt;i style &#x3D; &quot;color:#2C00A5;&quot; *ngIf&#x3D;&quot;element.comments.length&gt;0 &amp;&amp; !element.show_comments&quot;&gt;View comments&lt;/i&gt; 
+            &lt;i style &#x3D; &quot;color:#2C00A5;&quot; *ngIf&#x3D;&quot;element.comments.length&gt;0 &amp;&amp; element.show_comments&quot;&gt;Collapse comments&lt;/i&gt;
+           &lt;i style &#x3D; &quot;color:#2C00A5;&quot; *ngIf&#x3D;&quot;element.comments.length&#x3D;&#x3D;0&quot;&gt;Add comment&lt;/i&gt;
+         &lt;/div&gt;
+        &lt;/div&gt;
+
+        &lt;div *ngIf&#x3D;&quot;element.show_comments&quot;&gt;
+          &lt;app-comments [comments]&#x3D;&quot;element.comments&quot; [storyID]&#x3D;&quot;element.story_id&quot; (commentPosted)&#x3D;&quot;newCommentPosted($event)&quot;&gt;&lt;/app-comments&gt;
+        &lt;/div&gt;
+
+      &lt;/td&gt;
+    &lt;/ng-container&gt;
+
+    &lt;tr mat-row *matRowDef&#x3D;&quot;let myRowData; columns: columns&quot;&gt;&lt;/tr&gt;
+
+  &lt;/table&gt;
+
+
+&lt;/div&gt;
+
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./feed.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.mat-row {
+  height: auto;
+}
+
+.mat-cell {
+  padding: 8px 8px 8px 0;
+}
+
+.mat-column-ProfilePic {
+  vertical-align: top;
+}
+
+.mat-column-Data {
+  justify-content: center;
+}
+
+div.ex3 {
+  overflow: auto;
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="table-container ex3" style="overflow:hidden;">  <!---If we are in race view AND we are authenticated, display form to post new stories-->  <div *ngIf="use==\'race\' && this._authService.isLoggedIn() && this.progress">    <table class="mat-table" style="background-color:rgba(44, 0, 126,0.08);">      <tr class="mat-row">        <ng-container matColumnDef="ProfilePic" style="padding: 10px;">          <td mat-cell>            <img width="50px" src="{{ progress.profile_url }}">          </td>        </ng-container>        <ng-container matColumnDef="Data" style="padding: 10px;">          <td mat-cell>            <app-user-profile-nav [username]=progress.username [displayName]=progress.display_name></app-user-profile-nav><b style="">: Post a Story</b>            <app-story-form [raceID]="ID" (storyPostedEvent)="newStoryPosted($event)"></app-story-form>          </td>        </ng-container>      </tr>    </table>  </div>  <table mat-table [dataSource]="feedItems" class="feedTable">    <ng-container matColumnDef="ProfilePic" style="padding: 10px;">      <td mat-cell *matCellDef="let element" (click)="clickedOnFeedItem(element)" [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">        <img width="50px" src="{{ element.profile_url }}">      </td>    </ng-container>    <ng-container matColumnDef="Data" style="padding: 10px;">      <td mat-cell *matCellDef="let element" [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">        <app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav>        {{ element.message }}        <small>{{ this.get_created_ts(element.created_ts) }}</small>        <br>        <div class="center" *ngIf="element.story">          <div class="container" *ngIf="element.story_image">            <img width="200px" src="{{ element.story_image }}" (click)="showStoryDialog(element)">          </div>          <div class="container" *ngIf="element.story_text">            <p>{{ element.story_text }}</p>          </div>          <!---If parent component inputs TRUE, we have a story modal component as a child-->          <div *ngIf="this.hasStoryModalChild">            <app-story-modal></app-story-modal>          </div>        </div>        <div class="container" style="display:flex;align-content: right;right:0;">          <app-story-btn *ngIf="this._authService.isLoggedIn()" [use]="\'like\'" [storyID]=element.story_id [likes]=element.likes [likesCount]=element.likes_count [likesUsers]=element.likes_users></app-story-btn>          <div role="button" (click)="element.show_comments=!element.show_comments"> <i class="material-icons" style="color:#BC164D">comment</i> {{ element.comments.length }}             <i style = "color:#2C00A5;" *ngIf="element.comments.length>0 && !element.show_comments">View comments</i>             <i style = "color:#2C00A5;" *ngIf="element.comments.length>0 && element.show_comments">Collapse comments</i>           <i style = "color:#2C00A5;" *ngIf="element.comments.length==0">Add comment</i>         </div>        </div>        <div *ngIf="element.show_comments">          <app-comments [comments]="element.comments" [storyID]="element.story_id" (commentPosted)="newCommentPosted($event)"></app-comments>        </div>      </td>    </ng-container>    <tr mat-row *matRowDef="let myRowData; columns: columns"></tr>  </table></div></div>'
+    var COMPONENTS = [{'name': 'ActivitiesMenuComponent', 'selector': 'app-activities-menu'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'CommentsFormComponent', 'selector': 'app-comments-form'},{'name': 'ContactHelpComponent', 'selector': 'app-contact-help'},{'name': 'ContactHelpDialogContent', 'selector': 'app-contact-help-dialog-content'},{'name': 'FaqHelpComponent', 'selector': 'app-faq-help'},{'name': 'FaqHelpDialogContent', 'selector': 'app-faq-help-dialog-content'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'LeaderboardComponent', 'selector': 'app-leaderboard'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManualEntryComponent', 'selector': 'app-manual-entry'},{'name': 'ManualInstructionsComponent', 'selector': 'app-manual-instructions'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationPanelComponent', 'selector': 'app-notification-panel'},{'name': 'PasswordChangeComponent', 'selector': 'app-password-change'},{'name': 'PasswordRequestComponent', 'selector': 'app-password-request'},{'name': 'PaypalComponent', 'selector': 'app-paypal'},{'name': 'PopupComponent', 'selector': 'app-popup'},{'name': 'ProfileFormComponent', 'selector': 'app-profile-form'},{'name': 'ProfilePicComponent', 'selector': 'app-profile-pic'},{'name': 'RaceAboutComponent', 'selector': 'app-race-about'},{'name': 'RaceComponent', 'selector': 'app-race'},{'name': 'RaceCreateComponent', 'selector': 'app-race-create'},{'name': 'RaceDayComponent', 'selector': 'app-race-day'},{'name': 'RaceDayDialogContent', 'selector': 'app-race-day-dialog-content'},{'name': 'RaceMenuComponent', 'selector': 'app-race-menu'},{'name': 'RacesComponent', 'selector': 'app-races'},{'name': 'RaceSettingsComponent', 'selector': 'app-race-settings'},{'name': 'RaceViewComponent', 'selector': 'app-race-view'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RoutePinDialogComponent', 'selector': 'app-route-pin-dialog'},{'name': 'ShippingAddressComponent', 'selector': 'app-shipping-address'},{'name': 'ShippingAddressFormComponent', 'selector': 'app-shipping-address-form'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SignupDialogContent', 'selector': 'signup-dialog-content'},{'name': 'SmilesComponent', 'selector': 'app-smiles'},{'name': 'SnackbarComponent', 'selector': 'app-snackbar'},{'name': 'StoryBtnComponent', 'selector': 'app-story-btn'},{'name': 'StoryDialogComponent', 'selector': 'app-story-dialog'},{'name': 'StoryFormComponent', 'selector': 'app-story-form'},{'name': 'StoryModalComponent', 'selector': 'app-story-modal'},{'name': 'StravaInstructionsComponent', 'selector': 'app-strava-instructions'},{'name': 'StravauthComponent', 'selector': 'app-stravauth'},{'name': 'SwagComponent', 'selector': 'app-swag'},{'name': 'SwagDialogContent', 'selector': 'swag-dialog-content'},{'name': 'TeamFormComponent', 'selector': 'app-team-form'},{'name': 'TeamInstructionsComponent', 'selector': 'app-team-instructions'},{'name': 'TeamListComponent', 'selector': 'app-team-list'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'TermsOfServiceDialogContent', 'selector': 'app-terms-of-service-dialog-content'},{'name': 'UserFollowComponent', 'selector': 'app-user-follow'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserProfileNavComponent', 'selector': 'app-user-profile-nav'},{'name': 'UserProgressComponent', 'selector': 'app-user-progress'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserStatsComponent', 'selector': 'app-user-stats'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'FeedComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'FeedComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

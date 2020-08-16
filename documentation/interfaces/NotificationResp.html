@@ -1,0 +1,337 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>geo-fit documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">geo-fit documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li>NotificationResp</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/nav/nav.component.ts</code>
+        </p>
+
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#notifications">notifications</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="notifications"></a>
+                                        <span class="name"><b>notifications</b><a href="#notifications"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>notifications:     <code>any[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>any[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
+import { AuthService } from &#x27;../auth.service&#x27;;
+import { NotificationsService } from &#x27;../notifications.service&#x27;;
+import {Observable} from &#x27;rxjs/Rx&#x27;;
+import { UserProfileService } from &#x27;../userprofile.service&#x27;;
+import { MatBottomSheet } from &#x27;@angular/material/bottom-sheet&#x27;;
+import { NotificationPanelComponent } from &#x27;../notification-panel/notification-panel.component&#x27;;
+
+declare var $: any
+
+@Component({
+  selector: &#x27;app-nav&#x27;,
+  templateUrl: &#x27;./nav.component.html&#x27;,
+  styleUrls: [&#x27;./nav.component.css&#x27;]
+})
+
+
+export class NavComponent implements OnInit {
+
+userData: UserData;
+picURL:any;
+
+  constructor(private _notificationService:NotificationsService,
+              public _authService: AuthService,
+              private _userProfileService: UserProfileService,
+              private _bottomSheet: MatBottomSheet) { }
+
+  public notifications:any[] &#x3D; [];
+  public isPurple:Boolean &#x3D; false;
+  public path:any;
+
+  ngOnInit() {
+    
+    // copy pasta from stack overflow yahooooooo
+    $(document).on(&#x27;click&#x27;, &#x27;.dropdown-menu&#x27;, function (e) {
+      e.stopPropagation();
+    });
+
+    this.getNotifications();
+
+    Observable.interval(60000) // make much larger in production
+    .switchMap(() &#x3D;&gt; this._notificationService.getNotifications())
+    .subscribe((resp:NotificationResp) &#x3D;&gt; {
+      console.log(resp);
+      this.notifications &#x3D; resp.notifications;
+      console.log(this.notifications);
+    });
+
+    if (localStorage.getItem(&#x27;access_token&#x27;)){
+      this._authService.token &#x3D; localStorage.getItem(&#x27;access_token&#x27;);
+    }
+
+    if (localStorage.getItem(&#x27;loggedInUsername&#x27;)){
+      this._authService.username &#x3D; localStorage.getItem(&#x27;loggedInUsername&#x27;);
+      this.getUserPic();
+    }
+    this.path&#x3D;window.location.pathname;
+
+    if(this.path &#x3D;&#x3D; &quot;/&quot;)
+    {
+      this.isPurple &#x3D; false;
+    }
+    else
+    {
+      this.isPurple &#x3D; true;
+    }
+  }
+
+  getNotifications() {
+
+    this._notificationService.getNotifications().toPromise().then((resp:NotificationResp) &#x3D;&gt; {
+      console.log(resp);
+      this.notifications &#x3D; resp.notifications;
+    });
+
+  }
+
+   getUserPic(){
+    //Call a to-be-created service which gets user data, feed, statistics etc
+    this._userProfileService.getUserProfile(this._authService.username).then((data) &#x3D;&gt; {
+      this.userData &#x3D; data as UserData;
+      this.picURL &#x3D; this.userData.profile_url;
+    });
+  }
+
+  goToMyProfile(){
+    this._userProfileService.goToUserProfile(this._authService.username);
+  }
+
+  setLoggedInUsername(username: string){
+    this._authService.username &#x3D; username;
+  }
+
+
+  removeNotification(not_id:number) {
+    this.notifications &#x3D; this.notifications.filter((notification) &#x3D;&gt; {
+      return not_id !&#x3D; notification.not_id;
+    });
+  }
+
+  showNotifications(): void {
+    console.log(&#x27;openming&#x27;)
+    this._bottomSheet.open(NotificationPanelComponent,{data:{notifications:this.notifications}});
+
+    this._bottomSheet._openedBottomSheetRef.afterDismissed().subscribe((data) &#x3D;&gt; {
+      console.log(&#x27;sheet closed&#x27;);
+      this.getNotifications();
+    })
+  }
+
+  logout() {
+    this._authService.logout();
+  }
+
+  purpleTrue(action?:string) {
+    this.isPurple &#x3D; true;
+   
+  }
+
+  purpleFalse(action?:string) {
+    this.isPurple &#x3D; false;
+   
+  }
+
+  getPath(action?:string){
+    this.path &#x3D; window.location.pathname;
+  }
+
+}
+
+
+
+interface NotificationResp {
+  notifications:any[];
+}
+
+interface UserData {
+  user_id:number;
+  profile_url:string;
+  email:string;
+  description: string;
+  location:string;
+  first_name:string;
+  last_name:string;
+  follows:boolean;
+  distance_type: string;
+  is_me: boolean;
+}
+
+</code></pre>
+    </div>
+</div>
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'NotificationResp.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

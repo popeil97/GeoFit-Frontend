@@ -1,0 +1,444 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>geo-fit documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">geo-fit documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li>ImageService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/image.service.ts</code>
+        </p>
+
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#resizeImage">resizeImage</a>
+                            </li>
+                            <li>
+                                <a href="#squareCropImage">squareCropImage</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/image.service.ts:8</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="resizeImage"></a>
+                    <span class="name">
+                        <b>
+                            resizeImage
+                        </b>
+                        <a href="#resizeImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>resizeImage(base64Str, MAX_HEIGHT, MAX_WIDTH)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="54"
+                            class="link-to-prism">src/app/image.service.ts:54</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>base64Str</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>MAX_HEIGHT</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>MAX_WIDTH</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="squareCropImage"></a>
+                    <span class="name">
+                        <b>
+                            squareCropImage
+                        </b>
+                        <a href="#squareCropImage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>squareCropImage(base64Str)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="12"
+                            class="link-to-prism">src/app/image.service.ts:12</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>base64Str</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
+import { HttpClient, HttpHeaders } from &#x27;@angular/common/http&#x27;;
+import { environment } from &#x27;./../environments/environment&#x27;;
+
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class ImageService {
+
+  constructor() { }
+
+  squareCropImage(base64Str){
+    /*
+    Crops Base64 images to prevent squashing
+    */
+    var img &#x3D; new Image();
+    img.src &#x3D; base64Str;
+    var canvas &#x3D; document.createElement(&#x27;canvas&#x27;);
+    var width &#x3D; img.width;
+    var height &#x3D; img.height;
+
+    console.log(&quot;Original width: &quot;, width);
+    console.log(&quot;Original height: &quot;, height);
+
+    var sX &#x3D; 0; 
+    var sY &#x3D; 0;
+    var sWidth &#x3D; width;
+    var sHeight &#x3D; height;
+
+    canvas.width &#x3D; width;
+    canvas.height &#x3D; height;
+
+    if (width &gt; height) {
+      sWidth &#x3D; height;
+      sX &#x3D; (width - sWidth) / 2;
+      canvas.width &#x3D; sWidth;
+    } 
+    else {
+      sHeight &#x3D; width;
+      sY &#x3D; (height - sHeight) / 2;
+      canvas.height &#x3D; sHeight;
+    }
+
+    console.log(&quot;sWidth width: &quot;, sWidth);
+    console.log(&quot;sHeight height: &quot;, sHeight);
+    console.log(&quot;sX : &quot;, sX);
+    console.log(&quot;sY: &quot;, sY);
+    
+    var ctx &#x3D; canvas.getContext(&#x27;2d&#x27;);
+    ctx.drawImage(img, sX, sY, sWidth, sHeight, 0, 0, canvas.width, canvas.height);
+    return canvas.toDataURL();
+  }
+
+  resizeImage(base64Str, MAX_HEIGHT, MAX_WIDTH) {
+    return new Promise(async function(resolve,reject){
+      /*
+      Resizes Base64 images to ensure smooth upload to Django
+      */
+      console.log(&quot;Max height: &quot;, MAX_HEIGHT);
+      console.log(&quot;Max width: &quot;, MAX_WIDTH);
+      console.log(&quot;base64 width: &quot;, base64Str.width);
+      var img &#x3D; new Image();
+      img.src &#x3D; base64Str;
+
+      img.onload &#x3D; function(){
+        var canvas &#x3D; document.createElement(&#x27;canvas&#x27;);
+        var width &#x3D; img.width;
+        var height &#x3D; img.height;
+
+        console.log(&quot;Img : &quot;, img);
+        console.log(&quot;Img width: &quot;, width);
+        console.log(&quot;Img height: &quot;, height);
+
+        if (width &lt; MAX_WIDTH &amp;&amp; height &lt; MAX_HEIGHT){
+          return base64Str;
+        }
+
+        if (width &gt; height) {
+          if (width &gt; MAX_WIDTH) {
+            height *&#x3D; MAX_WIDTH / width;
+            width &#x3D; MAX_WIDTH;
+          }
+        } else {
+          if (height &gt; MAX_HEIGHT) {
+            width *&#x3D; MAX_HEIGHT / height;
+            height &#x3D; MAX_HEIGHT;
+          }
+        }
+
+        console.log(&quot;Changing width to &quot;, width);
+        console.log(&quot;Changing height to &quot;, height);
+        canvas.width &#x3D; width;
+        canvas.height &#x3D; height;
+        var ctx &#x3D; canvas.getContext(&#x27;2d&#x27;);
+        ctx.drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL());
+      }
+    })
+  }
+  
+}
+
+
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'ImageService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
