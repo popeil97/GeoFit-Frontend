@@ -5,7 +5,6 @@ import {Observable} from 'rxjs/Rx';
 import { UserProfileService } from '../userprofile.service';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { NotificationPanelComponent } from '../notification-panel/notification-panel.component';
-import { Router } from '@angular/router';
 
 declare var $: any
 
@@ -24,8 +23,7 @@ picURL:any;
   constructor(private _notificationService:NotificationsService,
               public _authService: AuthService,
               private _userProfileService: UserProfileService,
-              private _bottomSheet: MatBottomSheet,
-              private router:Router,) { }
+              private _bottomSheet: MatBottomSheet) { }
 
   public notifications:any[] = [];
   public isPurple:Boolean = false;
@@ -114,10 +112,6 @@ picURL:any;
     this._authService.logout();
   }
 
-  login() {
-    this.router.navigate(['/login'])
-  }
-
   purpleTrue(action?:string) {
     this.isPurple = true;
    
@@ -152,4 +146,3 @@ interface UserData {
   distance_type: string;
   is_me: boolean;
 }
-

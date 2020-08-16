@@ -1,6 +1,7 @@
 import { Component, OnChanges, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserProfileService } from '../userprofile.service';
+import { ImageService } from '../image.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -17,7 +18,9 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   profilePicURL: any;
   distanceTypeOptions: any[];
 
-  constructor(private _userProfileService: UserProfileService, private sanitizer:DomSanitizer) {
+  constructor(private _userProfileService: UserProfileService, 
+              private sanitizer:DomSanitizer,
+              private _imageService: ImageService) {
     this.distanceTypeOptions = ['Mi', 'KM'];
     this.profilePicURL = null;
 
@@ -41,6 +44,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     console.log("Calling populate form");
+    console.log("USER DATA, profile", this.userData);
     this.populateForm();
   }
 
@@ -60,15 +64,6 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   }
 
   populateForm(): void {
-    // this.profileForm.setValue({
-    //   ProfilePic: '',
-    //   FirstName: this.userData.first_name,
-    //   LastName: this.userData.last_name,
-    //   About: this.userData.description,
-    //   Location: this.userData.location,
-    //   DistanceType: this.userData.distance_type,
-    // });
-
     console.log("User data: ", this.userData);
 
     this.profileForm.get('FirstName').setValue(this.userData.first_name);
@@ -82,12 +77,28 @@ export class ProfileFormComponent implements OnInit, OnChanges {
 
     if (this.profileForm.valid){
       formClean = this.profileForm.value;
-      formClean.ProfilePic = this.profilePicURL;
 
-      //call service to update form
-      this._userProfileService.updateProfile(formClean).then((data) => {
-        this.formUpdated.emit();
-      })
+      //Crop image, and resize image to handle large files
+      if (this.profilePicURL){
+        this.profilePicURL = this._imageService.squareCropImage(this.profilePicURL);
+        
+        this._imageService.resizeImage(this.profilePicURL, 350, 350).then((data) => {
+          formClean.ProfilePic = data;
+
+          //call service to update form
+          this._userProfileService.updateProfile(formClean).then((data) => {
+            this.formUpdated.emit();
+          })
+        });
+      }
+      else{
+        //call service to update form
+        this._userProfileService.updateProfile(formClean).then((data) => {
+          this.formUpdated.emit();
+        })
+      }
+
+      
     }
   }
 
