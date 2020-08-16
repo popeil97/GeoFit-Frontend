@@ -12,6 +12,7 @@ import { StoryModalComponent } from '../story-modal/story-modal.component';
 import { RaceSettings } from '../race-about/race-about.component';
 import { TeamFormComponent } from '../team-form/team-form.component';
 import { AuthService } from '../auth.service';
+import { UserProfileService } from '../userprofile.service';
 
 declare var $: any
 
@@ -31,15 +32,20 @@ export class RaceViewComponent implements OnInit {
   private raceName:string;
   raceID:number;
   private modalData:any;
+
   public progress:Progress = {} as Progress;
   public actsToImport:number[] = [];
   public loading:Boolean = false;
   public coords:any;
   public leaderboard:LeaderboardItem[];
+  public teamLeaderboard:LeaderboardItem[]
   public all_user_data:Array<FeedObj>;
   public teams:any[];
   public userRaceSettings:any;
   public raceSettings:RaceSettings;
+  public routePins:any[];
+  public userData:UserData;
+
   public showTeamForm:Boolean = false;
   public changeArrow:Boolean = false;
   public userStat:any = {};
@@ -50,12 +56,17 @@ export class RaceViewComponent implements OnInit {
   };
   public isManualEntry:Boolean = false;
 
+  //Filters for activity feed
+  public storyFeedOnly: Boolean = false;
+  public followerFeedOnly: Boolean = false;
+
   private storyImage:string;
   private storyText:string;
 
   constructor(private raceService:RaceService,
                   private activitiesService:ActivitiesService,
                   private route: ActivatedRoute,
+                  private _userProfileService: UserProfileService,
                   private router:Router,
                   private storyService: StoryService,
                   public _authService: AuthService) {
@@ -67,6 +78,10 @@ export class RaceViewComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.raceName = params['params']['name'];
       this.raceID = params['params']['id'];
+    });
+
+    this._userProfileService.getUserProfile(this._authService.username).then((data) => {
+      this.userData = data as UserData;
     });
 
     this.getRaceState();
@@ -82,12 +97,12 @@ export class RaceViewComponent implements OnInit {
 
   }
 
+  
+
   configureLeaderboard(ranked:any[],unranked:any[]) {
     
     console.log("RANKE BOARD:",unranked.concat(ranked));
     return unranked.concat(ranked)
-
-
 
   }
 
@@ -133,12 +148,14 @@ export class RaceViewComponent implements OnInit {
   }
 
   importActs(): void {
-    console.log(this.actsToImport);
+    console.log('GONNA IMPORT THIS SHIT:',this.actsToImport);
     this.loading = true;
     this.activitiesService.importActivities(this.actsToImport,this.raceID).then((res) => {
       console.log(res);
-      this.getRaceState();
       this.actsToImport = [];
+      console.log('BEFORE GETRACESTATE:',this.actsToImport);
+      this.getRaceState();
+      console.log('AFTER GETRACESTATE:',this.actsToImport);
     });
     this.loading = false;
   }
@@ -158,8 +175,9 @@ export class RaceViewComponent implements OnInit {
   }
 
   getRaceState(): void {
+    this.loading = true;
     this.raceService.getRace(this.raceID).subscribe(data => {
-
+      this.showTeamForm=false;
       let raceData = data as RaceData;
       console.log('RACE DATA:',raceData);
 
@@ -170,6 +188,9 @@ export class RaceViewComponent implements OnInit {
       this.coords = raceData.coords;
 
       this.leaderboard = this.configureLeaderboard(raceData.unranked_leaderboard,raceData.ranked_leaderboard);
+      this.teamLeaderboard = this.configureLeaderboard(raceData.unranked_team_leaderboard,raceData.ranked_team_leaderboard);
+
+      console.log('TEAMS LEADERBOARD:',this.teamLeaderboard);
       
       this.all_user_data = raceData.users_data as Array<FeedObj>;
       this.followedIDs = raceData.followedIDs;
@@ -184,6 +205,7 @@ export class RaceViewComponent implements OnInit {
       this.raceSettings = raceData.race_settings;
       this.isManualEntry = this.raceSettings.isManualEntry;
       this.userStat = raceData.user_stat;
+      this.routePins = raceData.route_pins;
 
       console.log('TEAMS:',this.teams);
       console.log('COORDS:',this.coords);
@@ -191,11 +213,20 @@ export class RaceViewComponent implements OnInit {
       console.log("LEADERBOARD ITEMS: ", this.leaderboard);
       console.log('USER SETTINGS:',this.userRaceSettings);
       console.log("FOLLOWER IDS", this.followedIDs);
-
+      console.log("ROUTE PINS ", this.routePins);
+      console.log("USER_STAT", this.userStat);
       this.loading = false;
     });
   }
 
+  USA(action?:string) {
+  console.log("USA");
+  this.mapChild.panToUSA();
+  }
+
+  Israel(action?:string) {
+  this.mapChild.panToIsrael();
+  }
   uploadManualEntry(entry:any) {
     this.activitiesService.uploadManualEntry(entry,this.raceID).then((resp) => {
       console.log('RESP FROM MANUAL IMPORT:',resp);
@@ -214,7 +245,7 @@ export class RaceViewComponent implements OnInit {
 
   showPinsByID(IDs){
     //Pass null to show all pins
-    this.mapChild.showPinsByID(IDs);
+    this.mapChild.showPinsByID(IDs, false);
   }
 
   createUserPins(){
@@ -227,6 +258,15 @@ export class RaceViewComponent implements OnInit {
     //Pass null to show all pins
     this.mapChild.createUserPins(true);
     console.log("Applying heat map...")
+  }
+
+  showAllPins(){
+    this.mapChild.showAllPins();
+    console.log("Showing all pins");
+  }
+
+  showPinsFromSettings(settings: PinSettings){
+    this.mapChild.showPinsFromSettings(settings);
   }
 
 }
@@ -243,6 +283,9 @@ interface RaceData {
   followedIDs:number[];
   unranked_leaderboard:any[];
   ranked_leaderboard:any[];
+  unranked_team_leaderboard:any[];
+  ranked_team_leaderboard:any[];
+  route_pins:any[];
 }
 
 interface FeedObj {
@@ -264,4 +307,27 @@ interface FeedObj {
 export interface TeamEditBody {
   team_id:number;
   isEdit:Boolean;
+}
+
+interface PinSettings {
+  followerPinsOnly: boolean;
+  malePinsOn: boolean;
+  femalePinsOn: boolean;
+  allAgesOn: boolean;
+  minAge: number;
+  maxAge: number;
+}
+
+
+interface UserData {
+  user_id:number;
+  profile_url:string;
+  email:string;
+  description: string;
+  location:string;
+  first_name:string;
+  last_name:string;
+  follows:boolean;
+  distance_type: string;
+  is_me: boolean;
 }

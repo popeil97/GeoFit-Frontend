@@ -1,7 +1,22 @@
 table {
     width: 100%;
   }
-  
+
+.column1{
+    width: 20%;
+    margin: 1px;
+  }
+.column2{
+    width: 77%;
+    margin: 1px;
+  }
+    .row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+ 
 .nav-link.active{
 background-color: #2C00A5;
 }

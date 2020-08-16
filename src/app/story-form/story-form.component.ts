@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StoryService } from '../story.service';
+import { ImageService } from '../image.service';
 
 @Component({
   selector: 'app-story-form',
@@ -15,7 +16,8 @@ export class StoryFormComponent implements OnInit {
 
   private storyImage:any;
 
-  constructor(private storyService: StoryService) { }
+  constructor(private storyService: StoryService,
+              private _imageService: ImageService) { }
 
   ngOnInit() {
   }
@@ -33,9 +35,6 @@ export class StoryFormComponent implements OnInit {
   }
 
   uploadStory(): void{
-    //This bool tells Django whether to add these fields to the user's last story
-    //or simply create a new story that has no activities
-    //False by default but implement mechanism for true in future
     console.log("uploading story");
     console.log("Story image: ", this.storyImage);
     let withLastStory = false;
@@ -43,42 +42,34 @@ export class StoryFormComponent implements OnInit {
     //Get text field input (image already uploaded via eventListener)
     this.storyText = (<HTMLInputElement>document.getElementById("storyImageCaption")).value;
 
-    //Upload story via service
-    this.storyService.uploadStory(this.raceID, this.storyImage, this.storyText, withLastStory).then( data =>
-    {
-      //Emit event to refresh feed
-      this.storyPostedEvent.emit();
-
-      //Clear input fields
-      (<HTMLInputElement>document.getElementById("storyImage")).value = '';
-      (<HTMLInputElement>document.getElementById("storyImageCaption")).value = '';
-      this.storyText = null;
-      this.storyImage = null;
-    });
+    //Resize story images if one dim > 1000px
+    if (this.storyImage){
+      this._imageService.resizeImage(this.storyImage, 800, 800).then((data) => {
+        this.storyImage = data;
+        console.log(this.storyImage);
+        //Upload story via service
+        this.uploadStoryWithService(this.raceID, this.storyImage, this.storyText, withLastStory);
+      });
+    }
+    else {
+      this.uploadStoryWithService(this.raceID, this.storyImage, this.storyText, withLastStory);
+    }
     
   }
 
-  // setStoryImageFieldListener(){
-  //   //LISTENS TO CHANGES IN IMAGE FILE UPLOAD
-  //   var setStoryImg = this.setStoryImage;
-  //   var viewComponent = this;
+  uploadStoryWithService(raceID, storyImage, storyText, withLastStory){
+    this.storyService.uploadStory(raceID, storyImage, storyText, withLastStory).then( data =>
+      {
+        console.log("Uploaded story");
+        //Emit event to refresh feed
+        this.storyPostedEvent.emit();
 
-  //   var storyImageField = <HTMLInputElement>document.getElementById("storyImage");
-
-  //   console.log("adding story event listener: ", storyImageField);
-
-  //   storyImageField.addEventListener('change', function() {
-  //     console.log("thanks for the picture!");
-  //     var file = this.files[0];
-  //     var reader: FileReader = new FileReader();
-  //     reader.onload = function(e) {
-  //         setStoryImg(viewComponent, reader.result);
-  //     }
-  //     reader.readAsDataURL(file);
-  //   }, false);
-
-  //   console.log("added story event listener");
-
-  // }
+        //Clear input fields
+        (<HTMLInputElement>document.getElementById("storyImage")).value = '';
+        (<HTMLInputElement>document.getElementById("storyImageCaption")).value = '';
+        this.storyText = null;
+        this.storyImage = null;
+      });
+  }
 
 }

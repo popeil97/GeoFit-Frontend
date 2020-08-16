@@ -3,6 +3,8 @@ import { AuthService } from '../auth.service';
 import { NotificationsService } from '../notifications.service';
 import {Observable} from 'rxjs/Rx';
 import { UserProfileService } from '../userprofile.service';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { NotificationPanelComponent } from '../notification-panel/notification-panel.component';
 import { Router } from '@angular/router';
 
 declare var $: any
@@ -12,30 +14,38 @@ declare var $: any
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.css']
 })
+
+
 export class NavComponent implements OnInit {
 
-
+userData: UserData;
+picURL:any;
 
   constructor(private _notificationService:NotificationsService,
               public _authService: AuthService,
               private _userProfileService: UserProfileService,
+              private _bottomSheet: MatBottomSheet,
               private router:Router,) { }
 
-  public notifications:any[];
+  public notifications:any[] = [];
   public isPurple:Boolean = false;
   public path:any;
 
   ngOnInit() {
+    
     // copy pasta from stack overflow yahooooooo
     $(document).on('click', '.dropdown-menu', function (e) {
       e.stopPropagation();
     });
 
-    Observable.interval(120000) // make much larger in production
+    this.getNotifications();
+
+    Observable.interval(60000) // make much larger in production
     .switchMap(() => this._notificationService.getNotifications())
     .subscribe((resp:NotificationResp) => {
       console.log(resp);
       this.notifications = resp.notifications;
+      console.log(this.notifications);
     });
 
     if (localStorage.getItem('access_token')){
@@ -44,6 +54,7 @@ export class NavComponent implements OnInit {
 
     if (localStorage.getItem('loggedInUsername')){
       this._authService.username = localStorage.getItem('loggedInUsername');
+      this.getUserPic();
     }
     this.path=window.location.pathname;
 
@@ -55,6 +66,23 @@ export class NavComponent implements OnInit {
     {
       this.isPurple = true;
     }
+  }
+
+  getNotifications() {
+
+    this._notificationService.getNotifications().toPromise().then((resp:NotificationResp) => {
+      console.log(resp);
+      this.notifications = resp.notifications;
+    });
+
+  }
+
+   getUserPic(){
+    //Call a to-be-created service which gets user data, feed, statistics etc
+    this._userProfileService.getUserProfile(this._authService.username).then((data) => {
+      this.userData = data as UserData;
+      this.picURL = this.userData.profile_url;
+    });
   }
 
   goToMyProfile(){
@@ -70,6 +98,16 @@ export class NavComponent implements OnInit {
     this.notifications = this.notifications.filter((notification) => {
       return not_id != notification.not_id;
     });
+  }
+
+  showNotifications(): void {
+    console.log('openming')
+    this._bottomSheet.open(NotificationPanelComponent,{data:{notifications:this.notifications}});
+
+    this._bottomSheet._openedBottomSheetRef.afterDismissed().subscribe((data) => {
+      console.log('sheet closed');
+      this.getNotifications();
+    })
   }
 
   logout() {
@@ -101,3 +139,17 @@ export class NavComponent implements OnInit {
 interface NotificationResp {
   notifications:any[];
 }
+
+interface UserData {
+  user_id:number;
+  profile_url:string;
+  email:string;
+  description: string;
+  location:string;
+  first_name:string;
+  last_name:string;
+  follows:boolean;
+  distance_type: string;
+  is_me: boolean;
+}
+

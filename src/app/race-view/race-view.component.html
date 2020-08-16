@@ -1,8 +1,10 @@
 <!-- <app-map></app-map> -->
 <div>
-
 <app-loader [isActive]="loading"></app-loader>
-<mat-sidenav-container hasBackdrop="false" style="overflow: hidden;">
+<div *ngIf="userStat.total_distance==0">
+<app-race-day [userData]="userData"></app-race-day>
+</div>
+<mat-sidenav-container hasBackdrop="false">
 
   <mat-sidenav  md-disable-backdrop='true' #menu mode="over"  opened="true"> <!--opened="true"-->
      <div class="sidenav-scroll">
@@ -16,56 +18,104 @@
       </div>
       <div class="column-split2">
 
-         <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress>
+         <app-user-progress *ngIf="this._authService.isLoggedIn() && this.progress" [progress]="progress"></app-user-progress>
+         <div class="row">
+          <div class="column">
+            <a class="btn btn-mobile2" style="background-color:#2C007E;color:#FFFFFF;" (click)="USA()">Jump to USA</a>
+          </div>
+          <div class="column">
+            <a class="btn btn-mobile2" style="background-color:#2C007E;color:#FFFFFF;"(click)="Israel()">Jump to Israel</a>
+          </div>
+        </div>
       </div>
      </div>
-   
 
 
-    <mat-tab-group>
+    <mat-tab-group class='tab-subtitled'>
       <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon>emoji_people</mat-icon>
+          <div class="tabs1">Social</div>
+          
         </ng-template>
-        <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call
-        <button (click)="clearUserPins()">Clear User Pins!</button>
-        <button (click)="showPinsByID(null)">Show User Pins!</button>
-        <button (click)="showPinsByID(followedIDs)">Show Followers Only</button>-->
-        <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Activity Feed</b></h3></b>
-        <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
+        
+        <div style="text-align:center;">
+          <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Activity Feed</b></h3></b>
+          Only show people I follow:
+          <input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/>
+           
+          Only show stories: 
+          <input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/>
+        </div>
+
+        <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed> <br><br><br><br><br><br>
       </mat-tab>
 
-      <mat-tab *ngIf="this.progress && this._authService.token">
+      <mat-tab *ngIf="this.progress && this._authService.isLoggedIn()">
         <ng-template mat-tab-label style="background-color: rgba(256,256, 256,1);">
-          <mat-icon>file_download </mat-icon>
-          <div *ngIf="num_activities>0" style="background-color: #F6BF78; border-radius: 5px;padding-left:4px;padding-right:4px;">{{num_activities}} </div>
+        <!--  <mat-icon>add_circle_outline </mat-icon> <div *ngIf="num_activities>0" style="background-color: #F6BF78; border-radius: 5px;padding-left:2px;padding-right:2px;">{{num_activities}} </div> -->
+
+          <mat-icon *ngIf="num_activities>0"  matBadge="{{num_activities}}" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below">add_circle_outline</mat-icon> 
+           <mat-icon *ngIf="num_activities==0" >add_circle_outline</mat-icon>
+
+          <div class="tabs1">Add Activity </div>
+          
         </ng-template>
 
         <div *ngIf="!raceSettings.isManualEntry">
-        <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
-            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu>
+            <h4 *ngIf="userRaceSettings.isAutomaticImport" style="text-align:center;font-family:Roboto; color:#2C007E;"> You have auto import turned on!</h4>
+            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu><br><br><br><br><br><br>
         </div>
 
-        <mat-tab-group>
+        <div *ngIf="num_activities==0">
+        <mat-tab-group [selectedIndex]="1" class='tab-subtitled'>
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
               <mat-icon>cloud_download</mat-icon>
+              <div class="tabs1">Strava</div>
             </ng-template>
             <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
              <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
-            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu>
+             <h4 *ngIf="userRaceSettings.isAutomaticImport" style="text-align:center;font-family:Roboto; color:#2C007E;"> You have auto import turned on!</h4>
+            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu><br><br><br><br><br><br>
           </mat-tab>
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
               <mat-icon>add_circle_outline</mat-icon>
+              <div class="tabs1">Manual</div>
             </ng-template>
              <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Add Activity</b></h3></b>
             <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
           </mat-tab>
         </mat-tab-group>
+      </div>
+
+      <div *ngIf="num_activities>0">
+        <mat-tab-group [selectedIndex]="0" class='tab-subtitled'>
+          <mat-tab *ngIf="raceSettings.isManualEntry">
+            <ng-template mat-tab-label>
+
+              <mat-icon>cloud_download</mat-icon>
+              <div style="font-size:10px;">Strava</div>
+            </ng-template>
+            <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
+             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
+             <h4 *ngIf="userRaceSettings.isAutomaticImport" style="text-align:center;font-family:Roboto; color:#2C007E;"> You have auto import turned on!</h4>
+            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu><br><br><br><br><br><br>
+          </mat-tab>
+          <mat-tab *ngIf="raceSettings.isManualEntry">
+            <ng-template mat-tab-label>
+              <mat-icon>add_circle_outline</mat-icon>
+              <div style="font-size:10px;">Manual</div>
+            </ng-template>
+             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Add Activity</b></h3></b>
+            <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
 
       </mat-tab>
 
@@ -74,48 +124,56 @@
             <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon>format_list_numbered_rtl</mat-icon>
+          <div class="tabs1">Leaderboard</div>
         </ng-template>
         
-        <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Leaderboard</b></h3></b>
-        <app-leaderboard [leaderboard]="leaderboard"></app-leaderboard>
+        
+        
 
-      <!--  <mat-tab-group>
-          <mat-tab label="Distance">
-            <app-leaderboard [leaderboard]="leaderboard"></app-leaderboard>
+      <mat-tab-group class='tab-subtitled'>
+          
+        <mat-tab label="Teams">
+          <ng-template mat-tab-label>
+            <mat-icon>directions_run</mat-icon>
+            <div class="tabs1">Individuals</div>
+          </ng-template>
+          <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Leaderboard</b></h3></b>
+          <app-leaderboard [leaderboard]="leaderboard"  [allowFollow]="true"></app-leaderboard><br><br><br><br><br><br>
           </mat-tab>
-        <!--  <mat-tab label="Pace">
-
-          </mat-tab> -->
-
-        <!--  <mat-tab label="Teams">
-            
-          </mat-tab> -->
-     <!--   </mat-tab-group> -->
+          
+          <mat-tab label="not teams">
+            <ng-template mat-tab-label>
+              <mat-icon>group</mat-icon>
+              <div class="tabs1">Teams</div>
+            </ng-template>
+            <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Teams Leaderboard</b></h3></b>
+            <app-leaderboard [leaderboard]="teamLeaderboard" [allowFollow]="false"></app-leaderboard><br><br><br><br><br><br>
+          </mat-tab>
+     </mat-tab-group>
 
       </mat-tab>
         <mat-tab>
         <ng-template mat-tab-label>
           <mat-icon>group</mat-icon>
+          <div class="tabs1">Teams</div>
         </ng-template>
-        <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call
-        <button (click)="clearUserPins()">Clear User Pins!</button>
-        <button (click)="showPinsByID(null)">Show User Pins!</button>
-        <button (click)="showPinsByID(followedIDs)">Show Followers Only</button>-->
+
         <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Teams</b></h3></b>
-        <button class="btn btn-primary" style="width: 100%; text-align: center; background-color:#2C00A5;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">+ Team</button>
+        <button class="btn btn-primary btn-mobile" style="width: 100%; text-align: center; background-color:#2C00A5;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">Add Team</button>
             <button class="btn btn-danger" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm('clear')" *ngIf="showTeamForm">Cancel</button>
             <div *ngIf="!showTeamForm">   
               <app-team-list [teams]="teams" [userStat]="userStat" (callback)="getRaceState($event)" (edit)="editTeamForm($event)"></app-team-list>
             </div>
 
             <div *ngIf="showTeamForm">
-              <app-team-form (callback)="getRaceState($event)" [teamEditForm]="teamEditForm"></app-team-form>
+              <app-team-form (callback)="getRaceState($event)" [teamEditForm]="teamEditForm"></app-team-form><br><br><br><br><br><br>
             </div>
       </mat-tab>
       <mat-tab>
 
         <ng-template mat-tab-label>
           <mat-icon>settings</mat-icon>
+          <div class="tabs1">Settings</div>
         </ng-template>
         <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Race Settings</b></h3></b>
         <app-race-settings [userSettings]="userRaceSettings"></app-race-settings>
@@ -127,8 +185,7 @@
 
    
   <mat-sidenav-content>
-    <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
-
+    <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true" [followedIDs]="followedIDs" [routePins]="routePins"></app-map>
     <div  *ngIf="changeArrow">
     <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 0px;">
         <br>
@@ -138,29 +195,14 @@
 
 
       <div  *ngIf="!changeArrow">
-        <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 350px;">
+        <a class="button-container btn-left" role="button" (click)="menu.toggle()" (click)="toggleNavButton()">
         <br>
       <i class="material-icons md-18" style="color:#2C007E; ">keyboard_arrow_left</i>
       </a>
     </div>
-      
-
-  
-
-
-<!----<a class="btn btn-primary btn-customized inviteToggle" data-toggle="modal" data-target="#storyModal" (click)="showModal('#storyModal')">
-  <span style="color:white">Add a Story</span>
-</a>>---->
-
-<!----<a class="btn btn-primary btn-customized inviteToggle" (click)="goToTeamForm()">
-  <span style="color:white">Create Team</span>
-</a>--->
 
   </mat-sidenav-content>
 </mat-sidenav-container>
-<!-- Wrapper -->
-
-    <!-- open sidebar menu -->
 
 </div>
 

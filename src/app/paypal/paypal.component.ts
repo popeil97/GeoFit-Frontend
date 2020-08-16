@@ -52,7 +52,7 @@ export class PaypalComponent implements AfterViewChecked {
             payment.race_id = Number(this.race_id);
             payment.payment_type = this.paymentType;
             console.log('PAYMENT OBJ:',payment);
-            let payment_id=this.savePayment(payment).then((resp) => {
+            this.savePayment(payment).then((resp) => {
               console.log('CONFIRMED FROM SERVER:',resp);
               let payment_id = resp['id'];
               this.transactionAlert.emit({data:{payment_id:payment_id},success:true,type:'PAYMENT'} as SignupCallbackStruct);

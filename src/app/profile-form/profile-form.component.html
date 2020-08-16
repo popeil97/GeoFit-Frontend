@@ -21,7 +21,7 @@
       <div *ngIf="profileForm.get('FirstName').invalid && (profileForm.get('FirstName').dirty || profileForm.get('FirstName').touched)"
         class="alert alert-danger">
 
-        <div *ngIf="profileForm.get('FirstName').errors.requied">
+        <div *ngIf="profileForm.get('FirstName').errors.required">
           First Name is required.
         </div>
 
@@ -35,7 +35,7 @@
       <div *ngIf="profileForm.get('LastName').invalid && (profileForm.get('LastName').dirty || profileForm.get('LastName').touched)"
         class="alert alert-danger">
 
-        <div *ngIf="profileForm.get('LastName').errors.requied">
+        <div *ngIf="profileForm.get('LastName').errors.required">
           Last Name is required.
         </div>
       </div>
@@ -53,7 +53,7 @@
       <div *ngIf="profileForm.get('Location').invalid && (profileForm.get('Location').dirty || profileForm.get('Location').touched)"
         class="alert alert-danger">
 
-        <div *ngIf="profileForm.get('Location').errors.requied">
+        <div *ngIf="profileForm.get('Location').errors.required">
           Location is required.
         </div>
       </div>

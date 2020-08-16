@@ -9,6 +9,7 @@ export class LeaderboardComponent implements OnInit {
 
   private columns:string[] = ['Rank','ProfilePic','Name','Distance','Follow'];
   @Input() leaderboard:LeaderboardItem[];
+  @Input() allowFollow: Boolean = false;
 
   constructor() {
   }

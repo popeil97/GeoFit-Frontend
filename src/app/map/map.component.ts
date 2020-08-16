@@ -1,10 +1,12 @@
 import { AfterViewInit, Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef, ComponentFactory, ComponentFactoryResolver, RendererFactory2, ViewContainerRef, ApplicationRef } from '@angular/core';
 import { NgElement, WithProperties } from '@angular/elements';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { UserProfileService } from '../userprofile.service';
 //import * as L from 'leaflet';
 //import * as markercluster from 'leaflet.markercluster';
 import { PopUpService } from '../pop-up.service';
 import { UserFollowComponent } from '../user-follow/user-follow.component';
+import { RoutePinDialogComponent } from '../route-pin-dialog/route-pin-dialog.component';
 
 import 'leaflet';
 import 'leaflet.markercluster';
@@ -29,13 +31,15 @@ export class MapComponent implements AfterViewInit,OnChanges {
   @Input() draw:Boolean;
   @Input() displayUsers:Boolean;
   @Input() userData:any;
+  @Input() routePins:RoutePins[];
   @Input() followedIDs:any;
   @Input() zoom:Boolean;
 
-  private map;
+  public map;
   private coordsRoutes:any[];
   private markersByUserID = {};
   private markerClusters:any;
+  private routePinMarkers:any;
   private layerIDsToUserIndices = {};
   private myMarker: any;
   private marker_start:any;
@@ -43,10 +47,24 @@ export class MapComponent implements AfterViewInit,OnChanges {
   private line:any;
   private myUserID:number;
 
+  //Store user IDs of male and female pins
+  private maleIDs: number[];
+  private femaleIDs: number[];
+
+  //We extend the Marker class to set our own 'routePinIndex' option
+  private routePinMarker = L.Marker.extend({
+    options: {
+      routePinIndex: 0,
+    }
+  });
+
   constructor(private popupService:PopUpService, 
-              private _profileService:UserProfileService,) {
+              private _profileService:UserProfileService,
+              public dialog: MatDialog) {
     this.coordsRoutes = [];
     Window["mapComponent"] = this;
+
+    
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -61,13 +79,15 @@ export class MapComponent implements AfterViewInit,OnChanges {
                 this.createUserPins(false);
               }
 
+              if(this.routePins){
+                this.createRoutePins();
+              }
+
             }
         }
       }
     }
 
-    console.log("USER DATA IN MAP COMPONENT");
-    console.log(this.userData);
   }
 
   ngAfterViewInit(): void {
@@ -87,6 +107,26 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
   }
 
+
+  public panToUSA(){
+    var corner1 = L.latLng(40.4, -73.7);
+    var corner2 = L.latLng(39.79, -75.5);
+    var markerBounds = L.latLngBounds(corner1,corner2);
+    var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
+    this.map.fitBounds(markerBounds, options);
+
+  }
+
+  public panToIsrael(){
+    var corner1 = L.latLng(31.8,35.3);
+    var corner2 = L.latLng(31.76, 35.18);
+    
+    var markerBounds = L.latLngBounds(corner1,corner2);
+    var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
+    this.map.fitBounds(markerBounds, options);
+
+  }
+
   public clearMap(): void {
     if(this.marker_start && this.marker_end && this.line) {
       this.map.removeLayer(this.marker_start);
@@ -100,8 +140,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
     if(!this.map) {
       this.initMap()
     }
-
-    console.log(this.coordinates);
 
     //ugly but neccessary way of adding start pins and paths to map
     var temp_routes = [];
@@ -122,8 +160,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
       temp_routes_flipped.push(temp_coords_flipped);
     });
 
-    console.log(temp_routes_flipped);
-
     let start_coord = temp_routes_flipped[0][0];
     let final_route = temp_routes_flipped[temp_routes_flipped.length-1];
     let end_coord = final_route[final_route.length-1];
@@ -133,8 +169,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
     let bounds = new L.LatLngBounds(begin, finish);
 
     this.map.fitBounds(bounds, { padding: [15, 15] });
-
-    console.log("start coord: ", start_coord);
 
     const lat = 29.651634;
     const lon = -82.324829;
@@ -160,7 +194,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     if(this.zoom)
     {
-      this.map.setView([45, -100], 3);
+      this.map.setView([45, -100], 4);
     }
     
     if(this.zoom)
@@ -191,31 +225,124 @@ export class MapComponent implements AfterViewInit,OnChanges {
     })
   }
 
-public clearUserPins(){
+  private union_arrays (x, y) {
+    var obj = {};
+    for (var i = x.length-1; i >= 0; -- i)
+       obj[x[i]] = x[i];
+    for (var i = y.length-1; i >= 0; -- i)
+       obj[y[i]] = y[i];
+    var res = []
+    for (var k in obj) {
+      if (obj.hasOwnProperty(k))  // <-- optional
+        res.push(obj[k]);
+    }
+    return res;
+  }
+
+  public showPinsFromSettings(settings: PinSettings){
+    if (settings.allAgesOn && settings.malePinsOn && settings.femalePinsOn && !settings.followerPinsOnly){
+      //this.showAllPins();
+
+      //Temp fix to clustering not working after pin filtering
+      //Just redo the whole pin creation process
+      this.createUserPins(false);
+      return;
+    }
+    
+    let unionIDs = [];
+    let maleIDs = [];
+    let femaleIDs = [];
+    
+    //We do this so if both M and F are checked, people of all genders
+    //are displayed
+    if (!settings.malePinsOn || !settings.femalePinsOn){
+      if (settings.malePinsOn){
+        maleIDs = this.getIDsByGender('Male');
+      }
+      if (settings.femalePinsOn){
+        femaleIDs = this.getIDsByGender('Female');
+      }
+      
+      unionIDs = maleIDs.concat(femaleIDs);
+    }
+
+    //Limit to only users we follow
+    if (settings.followerPinsOnly){
+      if (unionIDs.length){
+        unionIDs = unionIDs.filter(value => this.followedIDs.includes(value));
+      }
+      else {
+        unionIDs = this.followedIDs;
+      }
+    }
+
+    //Limit by age group
+    if (!settings.allAgesOn){
+      let ageIDs = this.getIDsInAgeRange(settings.minAge, settings.maxAge);
+      if (unionIDs.length){
+        unionIDs = unionIDs.filter(value => ageIDs.includes(value));
+      }
+      else {
+        unionIDs = ageIDs;
+      }
+    }
+
+    this.showPinsByID(unionIDs, false);
+  }
+
+  public showAllPins(){
+    this.showPinsByID(null, true);
+  }
+
+  public getIDsInAgeRange(minAge: number, maxAge: number){
+    let IDs = [];
+    for (let i = 0; i < this.userData.length; i++){
+      if (this.userData[i].age >= minAge && this.userData[i].age <= maxAge){
+        IDs.push(this.userData[i].user_id);
+      }
+    }
+
+    return IDs;
+  }
+
+  public getIDsByGender(gender: string){
+    let IDs = [];
+    for (let i = 0; i < this.userData.length; i++){
+      if (this.userData[i].gender == gender){
+        IDs.push(this.userData[i].user_id);
+      }
+    }
+
+    return IDs;
+  }
+
+  public clearUserPins(){
     //Remove all current user pins
-    //Currently no working method to remove pins by ID
-    //but this will be resolved perhaps with .forEach(layer)
     if (this.markerClusters){
       this.map.removeLayer(this.markerClusters);
     }
   }
 
-  public showPinsByID(IDs){
-    /////////METHOD NOT WORKING//////////
-
+  public showPinsByID(IDs, showAll: boolean){
     //Clear all pins
     this.clearUserPins();
 
-    //Add user markers based on IDs argument
-    //If IDs null, add all users
-    for (var id in this.markersByUserID){
-      if (IDs == null || IDs.includes(parseInt(id))){
-        this.markersByUserID[id]['locMarker'].addTo(this.map);
+    let viewComponent = this;
+
+    this.map.removeLayer(this.markerClusters);
+
+    this.markerClusters.eachLayer(function(layer) {
+      let tempUserDataIndex = viewComponent.layerIDsToUserIndices[layer._leaflet_id.toString()];
+      let tempUserData = viewComponent.userData[tempUserDataIndex];
+      let pinUserID = tempUserData.user_id;
+
+      if (showAll == true || IDs.includes(parseInt(pinUserID))){
+        layer.addTo(viewComponent.map);
       }
       else {
-        this.markersByUserID[id]['locMarker'].remove();
+        layer.remove();
       }
-    }
+    });
   }
 
   public createUserPins(heatMapOn){
@@ -293,7 +420,7 @@ public clearUserPins(){
       })
 
       //Get user ID of this race stat
-      let elementID = this.userData[i].user_id
+      let elementID = this.userData[i].user_id;
 
       this.markerClusters.addLayer(locMarker);
 
@@ -308,7 +435,7 @@ public clearUserPins(){
       };
 
       //If this pin is current user, pan and zoom to it
-      if (this.userData[i].isMe){
+      if (this.isMe(this.userData[i])){
         this.myMarker = this.markersByUserID[elementID]['locMarker'];
         this.panToUserMarker(elementID);
         this.myUserID = elementID;
@@ -359,7 +486,6 @@ public clearUserPins(){
 
     if(heatMapOn)
     {
-      console.log("CREATING HEAT MAP PINS")
       try{
         heat.remove();
       }
@@ -373,9 +499,67 @@ public clearUserPins(){
         heat.remove();
       }
       catch(ex){}
-      console.log("CREATING NON HEAT MAP PINS")
     }
 
+  }
+
+  private isMe(userData: any){
+    if (userData.isMe){
+      return true;
+    }
+    else if (userData.child_user_stats){
+      for (let i = 0; i < userData.child_user_stats.length; i++){
+        if (userData.child_user_stats[i].isMe){
+          return true;
+        }
+      }
+    }
+
+    return false;
+  }
+
+  private openRoutePinDialogueWithIndex(index: number, thisComponent: any){
+    console.log("In dialogue function");
+    let dialogRef = thisComponent.dialog.open(RoutePinDialogComponent, {
+      data: { 
+        'title': thisComponent.routePins[index].title,
+        'description': thisComponent.routePins[index].description,
+        'image_urls': thisComponent.routePins[index].image_urls,
+      },
+    });
+  }
+
+  private createRoutePins(){
+    this.routePinMarkers = new L.featureGroup();
+
+    for (let i = 0; i < this.routePins.length; i++){
+      var img_html = "<img src=\"" + this.routePins[i].image_urls[0] + "\";\"><div class=\"rounded-pin\"></div>";
+      var userIcon = L.divIcon({
+        className: 'route-pin',
+        html: img_html,
+        iconSize: [30, 30],
+        iconAnchor: [10, 33],
+        popupAnchor: [0, -62],
+      });  
+
+      var latlng = new L.LatLng(this.routePins[i].lat, this.routePins[i].lon);
+
+      var routeMarker = new this.routePinMarker(latlng, { 
+        icon: userIcon,
+        routePinIndex: i });
+
+      this.routePinMarkers.addLayer(routeMarker);
+    }
+
+    this.routePinMarkers.addTo(this.map);
+
+    //Handle marker onclick events (open popups)
+    let thisComponent = this;
+    this.routePinMarkers.on('click', function(ev) {
+      console.log("Thanks for clicking on marker ", ev.layer.options.routePinIndex);
+      thisComponent.openRoutePinDialogueWithIndex(ev.layer.options.routePinIndex, thisComponent);
+    });
+    
   }
 
   private initMap(): void {
@@ -404,4 +588,21 @@ public clearUserPins(){
   }
 
 
+}
+
+interface PinSettings {
+  followerPinsOnly: boolean;
+  malePinsOn: boolean;
+  femalePinsOn: boolean;
+  allAgesOn: boolean;
+  minAge: number;
+  maxAge: number;
+}
+
+interface RoutePins {
+  title: string;
+  desciption: string;
+  lon: number;
+  lat: number;
+  image_urls: string[];
 }

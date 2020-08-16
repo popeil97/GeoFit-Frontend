@@ -10,17 +10,30 @@
       </mat-panel-description>
     </mat-expansion-panel-header>
 
+    <mat-card>
+      <mat-panel-title>
+        Description
+      </mat-panel-title>
+      <mat-panel-description style="padding:8px;">
+        {{team.description}}
+      </mat-panel-description>
+    </mat-card>
+
     <mat-card *ngFor="let member of team.child_user_stats">
       <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + member.profile_url + ')'}" style="position: relative; float:left;"></div>
       <div style="padding-left: 50px;">{{member.display_name}}</div>
       <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div>
+      <mat-chip *ngIf="member.user_id == team.user_id">Owner</mat-chip>
     </mat-card>
 
     <mat-action-row>
       <button mat-button (click)="joinRequest(team)" *ngIf="userStat.team_id == null">Request to Join</button>
       <button mat-button (click)="quitTeam(team)" *ngIf="userStat.team_id == team.team_id">Quit</button>
-      <button mat-button (click)="editTeam(team)" *ngIf="userStat.team_id == team.team_id">Edit</button> 
+      <button mat-button (click)="editTeam(team)" *ngIf="userStat.team_id == team.team_id && userStat.user_id == team.user_id">Edit</button> 
       <!-- Fix edit button so only owner can edit -->
     </mat-action-row>
   </mat-expansion-panel>
+  <br>
+  <br>
+  <br>
 <mat-accordion>

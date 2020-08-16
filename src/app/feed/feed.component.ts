@@ -1,9 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { RaceFeedService } from './race-feed.service';
 import { UserProfileService } from '../userprofile.service';
 import { StoryFormComponent } from '../story-form/story-form.component';
 import { AuthService } from '../auth.service';
+import { MatTableDataSource } from '@angular/material/table';
+import { StoryDialogComponent } from '../story-dialog/story-dialog.component';
 
 declare var $: any
 
@@ -37,17 +40,26 @@ export class FeedComponent implements OnInit {
   //If false, we emit when a story modal should be activated via storyItemClicked()
   @Input() hasStoryModalChild:boolean;
 
+  //If true, only show feed items of people user follows
+  @Input() followOnly:boolean;
+
+  //If true, only show Stories (texts and images) in feed
+  @Input() storyOnly:boolean;
+
   @Output() feedItemClicked = new EventEmitter();
   @Output() storyItemClicked = new EventEmitter();
 
   private _feedService: any;
   private initialized: boolean;
+  
+  public dataSource: any;
 
   columns:string[] = ['ProfilePic','Data'];
 
   constructor(private _userProfileService: UserProfileService, 
               private _raceFeedService: RaceFeedService,
-              public _authService: AuthService) {
+              public _authService: AuthService,
+              public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -107,17 +119,37 @@ export class FeedComponent implements OnInit {
     }
   }
 
-  public refreshFeed(){
+  showStoryDialog(element: FeedObj){
+    console.log("In dialogue function");
+    let dialogRef = this.dialog.open(StoryDialogComponent, {
+      data: { 
+        'element': element,
+      },
+    });
+  }
+
+  public refreshFeed(openStoryIDComments=null){
     var viewComponent = this;
 
     this._feedService.refreshFeed().then(data => {
-      console.log("FEED DATA: ", data);
       var newFeedObjs: Array<FeedObj> = [];
       var get_created_ts = this.get_created_ts;
 
       Object.keys(data).map(function(feedItemIndex){
         let feedItem: FeedObj = data[feedItemIndex];
-        feedItem.created_ts = get_created_ts(feedItem.created_ts);
+
+        //Initialize time since posts
+        //feedItem.created_ts = get_created_ts(feedItem.created_ts);
+
+        //By default don't open comment fields
+        //Unless we have just posted a comment
+        if (feedItem.story_id == openStoryIDComments){
+          feedItem.show_comments = true;
+        }
+        else {
+          feedItem.show_comments = false;
+        }
+
         newFeedObjs.push(feedItem);
       });
 
@@ -132,16 +164,20 @@ export class FeedComponent implements OnInit {
     var ts = date.getTime() / 1000;
     var secondsPerMinute = 60;
     var secondsPerHour = secondsPerMinute * 60;
+    var secondsPerDay = secondsPerHour * 24;
 
     //Calculate how to display the timestamp of the activity
     //If ts is within an hour, show number of minutes since activity
     //If ts is over an hour, round to nearest hour
     var displayTime;
     if ((ts - timestamp) < secondsPerHour) {
-        displayTime = Math.round((ts - timestamp) / secondsPerMinute) + "m";
+      displayTime = Math.round((ts - timestamp) / secondsPerMinute) + "m";
+    }
+    else if ((ts - timestamp) < secondsPerDay) {
+      displayTime = Math.round((ts - timestamp) / secondsPerHour) + "h";
     }
     else {
-        displayTime = Math.round((ts - timestamp) / secondsPerHour) + "h";
+      displayTime = Math.round((ts - timestamp) / secondsPerDay) + "d";
     }
     return displayTime;
   }
@@ -158,6 +194,12 @@ export class FeedComponent implements OnInit {
   newStoryPosted(){
     //Refresh feed on new story post
     this.refreshFeed();
+  }
+
+  newCommentPosted(storyID){
+    //Feed items after comment posted
+    console.log(this.feedItems);
+    this.refreshFeed(storyID);
   }
 }
 
@@ -181,9 +223,12 @@ interface FeedObj {
   created_ts:number;
   is_mine:boolean;
   comments: Comment[];
+  show_comments: boolean;
+  follows: boolean;
 }
 
 interface Comment {
+  username: string;
   display_name:string;
   profile_url:string;
   message:string;

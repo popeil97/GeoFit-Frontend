@@ -82,11 +82,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
 
     if (this.profileForm.valid){
       formClean = this.profileForm.value;
-
-      //Resize image to handle large files
-      if (this.profilePicURL){
-        formClean.ProfilePic = this.resizeImage(this.profilePicURL);
-      }
+      formClean.ProfilePic = this.profilePicURL;
 
       //call service to update form
       this._userProfileService.updateProfile(formClean).then((data) => {
@@ -110,33 +106,6 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   uploadedProfPicSrc() {
     //This allows base64 uploaded pics to be displayed
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.profilePicURL);
-  }
-
-  resizeImage(base64Str) {
-    var img = new Image();
-    img.src = base64Str;
-    var canvas = document.createElement('canvas');
-    var MAX_WIDTH = 350;
-    var MAX_HEIGHT = 350;
-    var width = img.width;
-    var height = img.height;
-
-    if (width > height) {
-      if (width > MAX_WIDTH) {
-        height *= MAX_WIDTH / width;
-        width = MAX_WIDTH;
-      }
-    } else {
-      if (height > MAX_HEIGHT) {
-        width *= MAX_HEIGHT / height;
-        height = MAX_HEIGHT;
-      }
-    }
-    canvas.width = width;
-    canvas.height = height;
-    var ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0, width, height);
-    return canvas.toDataURL();
   }
 
   deleteProfilePic() {
@@ -169,4 +138,3 @@ interface UserData {
   follows:boolean;
   distance_type: string;
 }
-

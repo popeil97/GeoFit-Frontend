@@ -1,7 +1,9 @@
 <div>
 
-  <input type="text" id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="How was your run?" style="height:30px;width:240px;">
-  <input type="file" id="storyImage" name="storyImageField" accept="image/*" (change)="onSelectFile($event)">
-  <button type="button" class="btn btn-primary btn-sm" style="background-color:#2C00A5; border-color:#2C00A5;" (click)="uploadStory()">Add Story</button>
+  <input type="text" id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="Type anything here..." style="width:100%;">
+
+  <input type="file" mdbFileSelect id="storyImage" name="storyImageField" accept="image/*" (change)="onSelectFile($event)">
+  
+  <button type="button" class="btn btn-primary btn-sm btn-mobile" style="background-color:#2C00A5; border-color:#2C00A5;" (click)="uploadStory()">Add Story</button>
 
 </div>

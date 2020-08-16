@@ -13,6 +13,8 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
   settingsForm:FormGroup;
   successfulUpdate:Boolean = false;
 
+  ageRangeOptions: any[];
+
   constructor(private _usersService:UsersService, private _raceview:RaceViewComponent) { 
 
     this.settingsForm = new FormGroup({
@@ -20,9 +22,24 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
         Validators.required, 
       ]),
       heatMapOn: new FormControl('',[
-        Validators.required, 
-      ])
+        Validators.required,
+      ]),
+      followerPinsOnly: new FormControl(false, [
+        Validators.required,
+      ]),
+      malePinsOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      femalePinsOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      allAgesOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      ageRange: new FormControl(-1),
     });
+
+    this.ageRangeOptions = ['0-19', '20-34', '35-49', '50-64', '65-79', '80-'];
     
   }
   ngOnChanges(changes: SimpleChanges): void {
@@ -39,6 +56,16 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
         }
       }
     }
+
+    this.settingsForm.get('allAgesOn').valueChanges
+      .subscribe(value => {
+          if (value == true) {
+            this.settingsForm.get('ageRange').disable();
+          }
+          else {
+            this.settingsForm.get('ageRange').enable();
+          }
+      });
     
   }
   ngAfterViewInit(): void {
@@ -61,14 +88,32 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
         this.successfulUpdate = true;
       });
 
-      if(this.settingsForm.value.heatMapOn == true)
-      {
-        this._raceview.createUserHeatPins();
+      // if(this.settingsForm.value.heatMapOn == true)
+      // {
+      //   this._raceview.createUserHeatPins();
+      // }
+      // else
+      // {
+      //   this._raceview.createUserPins();
+      // }
+
+      let pinSettings = this.settingsForm.value as PinSettings;
+
+      if (!this.settingsForm.value.allAgesOn){
+        let ages = this.settingsForm.value.ageRange.split("-");
+
+        pinSettings.minAge = ages[0];
+        
+        if (ages.length == 2){
+          pinSettings.maxAge = ages[1];
+        }
+        else{
+          //Sorry to everybody in the race aged 1000 and older
+          pinSettings.maxAge = 1000;
+        }
       }
-      else
-      {
-        this._raceview.createUserPins();
-      }
+
+      this._raceview.showPinsFromSettings(pinSettings);
 
     }
   }
@@ -80,10 +125,27 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
       isAutomaticImport: new FormControl(this.userSettings.isAutomaticImport,[
         Validators.required,
       ]),
-      heatMapOn: new FormControl('',[
-        Validators.required, 
-      ])
+      heatMapOn: new FormControl(false,[
+        Validators.required,
+      ]),
+      followerPinsOnly: new FormControl(false, [
+        Validators.required,
+      ]),
+      malePinsOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      femalePinsOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      allAgesOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      ageRange: new FormControl(-1),
     });
+
+    //Disable age control by default
+    this.settingsForm.get('ageRange').disable();
+
     console.log('form value:',this.settingsForm);
   }
 
@@ -93,4 +155,13 @@ interface UserSettings {
   isAutomaticImport:Boolean;
   heatMapOn:Boolean;
   race_id:number;
+}
+
+interface PinSettings {
+  followerPinsOnly: boolean;
+  malePinsOn: boolean;
+  femalePinsOn: boolean;
+  allAgesOn: boolean;
+  minAge: number;
+  maxAge: number;
 }

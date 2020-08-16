@@ -62,7 +62,7 @@
         <div class="form-group">
             <input formControlName="terms_of_service" type="checkbox" name="terms" [ngClass]="{ 'is-invalid': submitted && f.terms_of_service.errors }" />
             
-            <app-terms-of-service></app-terms-of-service>
+            I have read the <app-terms-of-service></app-terms-of-service>
             <div *ngIf="!acceptedTerms">
                 <p style="color: red;">You must acknowledge and agree to the terms of service provided</p>
             </div>

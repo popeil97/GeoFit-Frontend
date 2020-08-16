@@ -9,7 +9,12 @@
             </mat-card-header>
             <mat-card-content>
               <br>
+              <div>
+                <div *ngIf="userStats.run_tot_activities == 0 && userStats.ride_tot_activities==0">
+                  No running or cycling activities.
+                </div>
              <canvas id="lineCharts"></canvas>
+           </div>
              <br>
             </mat-card-content>
           </mat-card>

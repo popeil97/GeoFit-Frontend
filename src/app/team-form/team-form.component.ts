@@ -125,6 +125,7 @@ export class TeamFormComponent implements AfterViewInit,OnChanges {
             // display error message
             this.showError = true;
             this.errorMsg = resp.message;
+            return;
           }
 
           this.callback.emit();
@@ -151,6 +152,7 @@ export class TeamFormComponent implements AfterViewInit,OnChanges {
           // display error message
           this.showError = true;
           this.errorMsg = resp.message;
+          return;
         }
 
         this.callback.emit();

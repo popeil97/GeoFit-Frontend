@@ -1,8 +1,9 @@
 <div *ngIf="use=='like'">
-  {{ likesCount }}
-  <button type="button" class="btn btn-success btn-sm" (click)="changeLikeStatus()" style="background-color:#2C00A5;border-color:#2C00A5;">
-    <span class="ui-button-text"  >{{likes ? 'Unlike' : 'Like'}}</span>
-  </button>
+    <div role="button" (click)="changeLikeStatus()" title="{{ likesUsersString }}">
+    <span *ngIf="likes" matTooltip="Tooltips in Angular" ><i class="material-icons" style="color:#BC164D">favorite</i> </span>
+    <span *ngIf="!likes" matTooltip="Tooltips in Angular" ><i class="material-icons" style="color:#BC164D">favorite_border</i> </span>
+    <span>{{ likesCount }}</span>
+  
 </div>
 
 <button *ngIf="use=='delete'" type="button" class="btn btn-danger btn-sm" (click)="deleteStory()" style="background-color:#F6BF78;border-color:#F6BF78;">

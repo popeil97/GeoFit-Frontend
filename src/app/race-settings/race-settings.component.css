@@ -23,3 +23,10 @@
   /* Support for IE. */
   font-feature-settings: 'liga';
 }
+
+@media only screen and (max-width:1024px) {
+.btn-mobile
+   {
+    font-size:50px;padding:15px;
+   }
+   }

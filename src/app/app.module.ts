@@ -25,7 +25,8 @@ import {TokenInterceptorService} from './users/tokeninterceptorservice';
 import { StravauthService } from './stravauth/stravauth.service';
 import { RaceFeedService } from './feed/race-feed.service';
 import { FeedComponent } from './feed/feed.component';
-import { StoryService } from './story.service'
+import { StoryService } from './story.service';
+import { ImageService } from './image.service';
 
 import {
   HttpRequest,
@@ -66,6 +67,21 @@ import { ShippingAddressComponent } from './shipping-address/shipping-address.co
 import { ShippingAddressFormComponent } from './shipping-address-form/shipping-address-form.component';
 import { SmilesComponent } from './smiles/smiles.component';
 import { TermsOfServiceComponent, TermsOfServiceDialogContent } from './terms-of-service/terms-of-service.component';
+import { PasswordRequestComponent } from './password-request/password-request.component';
+import { PasswordChangeComponent } from './password-change/password-change.component';
+import { RaceDayComponent, RaceDayDialogContent} from './race-day/race-day.component';
+import { StravaInstructionsComponent } from './strava-instructions/strava-instructions.component';
+import { ManualInstructionsComponent} from './manual-instructions/manual-instructions.component';
+import { ProfilePicComponent } from './profile-pic/profile-pic.component';
+import { FaqHelpComponent,FaqHelpDialogContent } from './faq-help/faq-help.component';
+import { ContactHelpComponent,ContactHelpDialogContent } from './contact-help/contact-help.component';
+import { TeamInstructionsComponent } from './team-instructions/team-instructions.component';
+import { RoutePinDialogComponent } from './route-pin-dialog/route-pin-dialog.component';
+
+import { OwlModule } from 'ngx-owl-carousel';
+import { NotificationPanelComponent } from './notification-panel/notification-panel.component';
+import { SnackbarComponent } from './snackbar/snackbar.component';
+import { StoryDialogComponent } from './story-dialog/story-dialog.component';
 
 
 @NgModule({
@@ -114,7 +130,23 @@ import { TermsOfServiceComponent, TermsOfServiceDialogContent } from './terms-of
     SmilesComponent,
     TermsOfServiceComponent,
     TermsOfServiceDialogContent,
-  ],
+    PasswordRequestComponent,
+    PasswordChangeComponent,
+    RaceDayComponent,
+    RaceDayDialogContent,
+    StravaInstructionsComponent,
+    ManualInstructionsComponent,
+    ProfilePicComponent,
+    FaqHelpComponent,
+    FaqHelpDialogContent,
+    ContactHelpComponent,
+    ContactHelpDialogContent,
+    TeamInstructionsComponent,
+    RoutePinDialogComponent,
+    NotificationPanelComponent,
+    SnackbarComponent,
+    StoryDialogComponent,
+      ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -123,6 +155,7 @@ import { TermsOfServiceComponent, TermsOfServiceDialogContent } from './terms-of
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
+    OwlModule,
   ],
   exports: [
     PopupComponent,
@@ -135,9 +168,19 @@ import { TermsOfServiceComponent, TermsOfServiceDialogContent } from './terms-of
     StravauthService,
     RaceFeedService,
     StoryService,
+    ImageService,
   ],
   bootstrap: [AppComponent],
-  entryComponents:[SignupDialogContent,PopupComponent,SwagDialogContent,TermsOfServiceDialogContent],
+  entryComponents:[SignupDialogContent,
+                  PopupComponent,
+                  SwagDialogContent,
+                  TermsOfServiceDialogContent,
+                  RaceDayDialogContent, 
+                  FaqHelpDialogContent,ContactHelpDialogContent,
+                  RoutePinDialogComponent,
+                  NotificationPanelComponent,
+                  SnackbarComponent, 
+                  StoryDialogComponent,] 
 })
 export class AppModule { 
   constructor(private injector: Injector) {

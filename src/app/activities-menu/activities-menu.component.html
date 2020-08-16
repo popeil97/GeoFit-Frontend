@@ -1,12 +1,13 @@
-<div class="table-container">
 
+<p  *ngIf="activities.length >0">Click each activity row so that it is highlighted blue before adding the activity</p>
+<div class="table-container">
   <table mat-table [dataSource]="activities" class="activitiesTable">
     <ng-container matColumnDef="Name" style="padding: 5px;">
       <td mat-cell *matCellDef="let element" (click)="add(element)"> {{element.name}} </td>
     </ng-container>
   
     <ng-container matColumnDef="Distance" style="padding: 10px;">
-      <td mat-cell *matCellDef="let element"> {{element.converted_dist}} {{distance_unit}} </td>
+      <td mat-cell *matCellDef="let element" (click)="add(element)"> {{element.converted_dist}} {{distance_unit}} </td>
     </ng-container>
   
     <!-- <tr mat-header-row *matHeaderRowDef="columns"></tr> -->
@@ -19,7 +20,7 @@
 
   <div *ngIf="activities.length > 0">
     <div style="padding: 5px; position: relative; text-align:center;">
-    <button class="btn btn-primary" style="background-color:#2C00A5;" mat-raised-button (click)="importSelectedActs()">Import</button>
+    <button class="btn btn-primary btn-mobile" style="background-color:#2C00A5;" mat-raised-button (click)="importSelectedActs()">Add</button>
     </div>
   </div>
 </div>

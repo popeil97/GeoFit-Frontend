@@ -1118,7 +1118,11 @@ pre code {
   }
 
   .column-map{
-    float: center;
+    float: right;
+    width: 49%;
+  }
+  .column-map2{
+    float: left;
     width: 49%;
   }
 
@@ -1135,8 +1139,9 @@ pre code {
   }
 
   .column-features{
-    width: 19%;
-    margin: 2px;
+    width: 20%;
+    margin: 20px;
+    text-align:left;
   }
   .column-contact{
     width: 49%;
@@ -10273,7 +10278,6 @@ header.masthead h1 {
 }
 .right {
   right: 0;
-  background: #2C007E;
   
     
   
