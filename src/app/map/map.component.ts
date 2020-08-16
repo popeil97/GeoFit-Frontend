@@ -419,8 +419,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
       var lng_user = along_user.geometry.coordinates[0];
       var lat_user = along_user.geometry.coordinates[1];
 
-      heatArray[i] = [lat_user,lng_user,1]
-      heatArray[i+this.userData.length] = [lat_user,lng_user,1.0]
+      heatArray[i] = [lat_user,lng_user,1];
+      heatArray[i+this.userData.length] = [lat_user,lng_user,1.0];
 
       var locMarker = L.geoJSON(along_user, {
         pointToLayer: function(feature, latlng) {
