@@ -130,9 +130,9 @@ export class SignupDialogContent {
         this.paymentForm.controls['complete'].setValue(true);
       }
       this.stepper.next();
-      if(this.stepper._steps.length - 1 == this.stepper.selectedIndex) {
-        this.stepCallback.emit();
-      }
+      // if(this.stepper._steps.length - 1 == this.stepper.selectedIndex) {
+      //   this.stepCallback.emit();
+      // }
     }
   }
 
