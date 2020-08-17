@@ -19,9 +19,6 @@ export class ImageService {
     var width = img.width;
     var height = img.height;
 
-    console.log("Original width: ", width);
-    console.log("Original height: ", height);
-
     var sX = 0; 
     var sY = 0;
     var sWidth = width;
@@ -40,11 +37,6 @@ export class ImageService {
       sY = (height - sHeight) / 2;
       canvas.height = sHeight;
     }
-
-    console.log("sWidth width: ", sWidth);
-    console.log("sHeight height: ", sHeight);
-    console.log("sX : ", sX);
-    console.log("sY: ", sY);
     
     var ctx = canvas.getContext('2d');
     ctx.drawImage(img, sX, sY, sWidth, sHeight, 0, 0, canvas.width, canvas.height);
@@ -56,9 +48,6 @@ export class ImageService {
       /*
       Resizes Base64 images to ensure smooth upload to Django
       */
-      console.log("Max height: ", MAX_HEIGHT);
-      console.log("Max width: ", MAX_WIDTH);
-      console.log("base64 width: ", base64Str.width);
       var img = new Image();
       img.src = base64Str;
 
@@ -67,37 +56,32 @@ export class ImageService {
         var width = img.width;
         var height = img.height;
 
-        console.log("Img : ", img);
-        console.log("Img width: ", width);
-        console.log("Img height: ", height);
-
         if (width < MAX_WIDTH && height < MAX_HEIGHT){
-          return base64Str;
+          resolve(base64Str);
+        }
+        else {
+
+          if (width > height) {
+            if (width > MAX_WIDTH) {
+              height *= MAX_WIDTH / width;
+              width = MAX_WIDTH;
+            }
+          } else {
+            if (height > MAX_HEIGHT) {
+              width *= MAX_HEIGHT / height;
+              height = MAX_HEIGHT;
+            }
+          }
+  
+          canvas.width = width;
+          canvas.height = height;
+          var ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL());
         }
 
-        if (width > height) {
-          if (width > MAX_WIDTH) {
-            height *= MAX_WIDTH / width;
-            width = MAX_WIDTH;
-          }
-        } else {
-          if (height > MAX_HEIGHT) {
-            width *= MAX_HEIGHT / height;
-            height = MAX_HEIGHT;
-          }
-        }
-
-        console.log("Changing width to ", width);
-        console.log("Changing height to ", height);
-        canvas.width = width;
-        canvas.height = height;
-        var ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0, width, height);
-        resolve(canvas.toDataURL());
       }
     })
   }
   
 }
-
-

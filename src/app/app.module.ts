@@ -27,6 +27,7 @@ import { RaceFeedService } from './feed/race-feed.service';
 import { FeedComponent } from './feed/feed.component';
 import { StoryService } from './story.service';
 import { ImageService } from './image.service';
+import { LeaderboardService } from './leaderboard.service';
 
 import {
   HttpRequest,
@@ -169,6 +170,7 @@ import { StoryDialogComponent } from './story-dialog/story-dialog.component';
     RaceFeedService,
     StoryService,
     ImageService,
+    LeaderboardService,
   ],
   bootstrap: [AppComponent],
   entryComponents:[SignupDialogContent,

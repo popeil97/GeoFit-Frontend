@@ -5,7 +5,6 @@ import { StoryService } from '../story.service'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Progress } from '../user-progress/user-progress.component';
 import { ActivitiesService } from '../activities.service';
-import { LeaderboardItem } from '../leaderboard/leaderboard.component';
 import { MapComponent } from '../map/map.component';
 import { FeedComponent } from '../feed/feed.component';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
@@ -37,8 +36,6 @@ export class RaceViewComponent implements OnInit {
   public actsToImport:number[] = [];
   public loading:Boolean = false;
   public coords:any;
-  public leaderboard:LeaderboardItem[];
-  public teamLeaderboard:LeaderboardItem[]
   public all_user_data:Array<FeedObj>;
   public teams:any[];
   public userRaceSettings:any;
@@ -94,15 +91,6 @@ export class RaceViewComponent implements OnInit {
       first_name:'Katie',
       last_name:'DonaHOE'
     }];
-
-  }
-
-  
-
-  configureLeaderboard(ranked:any[],unranked:any[]) {
-    
-    console.log("RANKE BOARD:",unranked.concat(ranked));
-    return unranked.concat(ranked)
 
   }
 
@@ -186,11 +174,6 @@ export class RaceViewComponent implements OnInit {
       this.num_activities = this.activities.length;
 
       this.coords = raceData.coords;
-
-      this.leaderboard = this.configureLeaderboard(raceData.unranked_leaderboard,raceData.ranked_leaderboard);
-      this.teamLeaderboard = this.configureLeaderboard(raceData.unranked_team_leaderboard,raceData.ranked_team_leaderboard);
-
-      console.log('TEAMS LEADERBOARD:',this.teamLeaderboard);
       
       this.all_user_data = raceData.users_data as Array<FeedObj>;
       this.followedIDs = raceData.followedIDs;
@@ -210,7 +193,6 @@ export class RaceViewComponent implements OnInit {
       console.log('TEAMS:',this.teams);
       console.log('COORDS:',this.coords);
       console.log("ALL USER DATA", this.all_user_data);
-      console.log("LEADERBOARD ITEMS: ", this.leaderboard);
       console.log('USER SETTINGS:',this.userRaceSettings);
       console.log("FOLLOWER IDS", this.followedIDs);
       console.log("ROUTE PINS ", this.routePins);
@@ -275,16 +257,11 @@ interface RaceData {
   progress:any;
   activities:any;
   coords:any;
-  leaderboard:any;
   users_data:any;
   settings:any;
   race_settings:RaceSettings;
   user_stat:any;
   followedIDs:number[];
-  unranked_leaderboard:any[];
-  ranked_leaderboard:any[];
-  unranked_team_leaderboard:any[];
-  ranked_team_leaderboard:any[];
   route_pins:any[];
 }
 

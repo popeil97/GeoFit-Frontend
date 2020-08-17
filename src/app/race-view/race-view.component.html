@@ -138,7 +138,7 @@
             <div class="tabs1">Individuals</div>
           </ng-template>
           <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Leaderboard</b></h3></b>
-          <app-leaderboard [leaderboard]="leaderboard"  [allowFollow]="true"></app-leaderboard><br><br><br><br><br><br>
+          <app-leaderboard [raceID]="raceID" [use]="'individual'"  [allowFollow]="true"></app-leaderboard><br><br><br><br><br><br>
           </mat-tab>
           
           <mat-tab label="not teams">
@@ -147,7 +147,7 @@
               <div class="tabs1">Teams</div>
             </ng-template>
             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Teams Leaderboard</b></h3></b>
-            <app-leaderboard [leaderboard]="teamLeaderboard" [allowFollow]="false"></app-leaderboard><br><br><br><br><br><br>
+            <app-leaderboard [raceID]="raceID" [use]="'teams'" [allowFollow]="false"></app-leaderboard><br><br><br><br><br><br>
           </mat-tab>
      </mat-tab-group>
 
