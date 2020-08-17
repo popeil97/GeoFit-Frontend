@@ -35,12 +35,12 @@ export class RaceViewComponent implements OnInit {
   public progress:Progress = {} as Progress;
   public actsToImport:number[] = [];
   public loading:Boolean = false;
-  public coords:any;
-  public all_user_data:Array<FeedObj>;
+  //public coords:any;
+  //public all_user_data:Array<FeedObj>;
   public teams:any[];
   public userRaceSettings:any;
   public raceSettings:RaceSettings;
-  public routePins:any[];
+  //public routePins:any[];
   public userData:UserData;
 
   public showTeamForm:Boolean = false;
@@ -82,16 +82,6 @@ export class RaceViewComponent implements OnInit {
     });
 
     this.getRaceState();
-
-    this.followers = [{
-      first_name:'Nathan',
-      last_name:'Cunt'
-    },
-    {
-      first_name:'Katie',
-      last_name:'DonaHOE'
-    }];
-
   }
 
   toggleNavButton(action?:string) {
@@ -101,15 +91,12 @@ export class RaceViewComponent implements OnInit {
 
   toggleTeamForm(action?:string) {
     this.showTeamForm = !this.showTeamForm;
-    console.log('ACTION IS:',action);
     if(action == 'clear') {
       this.teamEditForm.isEdit = false;
     }
-    
   }
   
   showModal(id:string): void {
-    console.log(id);
     ($(id) as any).modal('show');
   }
 
@@ -130,26 +117,20 @@ export class RaceViewComponent implements OnInit {
       team_id:team_id,
       isEdit:true
     } as TeamEditBody
-    console.log('TEAM BODY FORM:',this.teamEditForm);
     this.toggleTeamForm();
     // this.teamEditForm.isEdit = false;
   }
 
   importActs(): void {
-    console.log('GONNA IMPORT THIS SHIT:',this.actsToImport);
     this.loading = true;
     this.activitiesService.importActivities(this.actsToImport,this.raceID).then((res) => {
-      console.log(res);
       this.actsToImport = [];
-      console.log('BEFORE GETRACESTATE:',this.actsToImport);
       this.getRaceState();
-      console.log('AFTER GETRACESTATE:',this.actsToImport);
     });
     this.loading = false;
   }
 
   addAct(act:any): void {
-    console.log('IN ADD');
     let actID = act.id;
     let index = this.actsToImport.indexOf(actID);
     if(index >= 0) {
@@ -158,8 +139,6 @@ export class RaceViewComponent implements OnInit {
     else {
       this.actsToImport.push(actID);
     }
-
-    console.log(this.actsToImport);
   }
 
   getRaceState(): void {
@@ -173,30 +152,22 @@ export class RaceViewComponent implements OnInit {
       this.activities = raceData.activities;
       this.num_activities = this.activities.length;
 
-      this.coords = raceData.coords;
+      //this.coords = raceData.coords;
       
-      this.all_user_data = raceData.users_data as Array<FeedObj>;
+      //this.all_user_data = raceData.users_data as Array<FeedObj>;
       this.followedIDs = raceData.followedIDs;
 
-      this.teams = raceData.users_data.filter((user_data) => {
-        if(user_data.isTeam) {
-          return user_data;
-        }
-      });
+      // this.teams = raceData.users_data.filter((user_data) => {
+      //   if(user_data.isTeam) {
+      //     return user_data;
+      //   }
+      // });
 
       this.userRaceSettings = raceData.settings;
       this.raceSettings = raceData.race_settings;
       this.isManualEntry = this.raceSettings.isManualEntry;
       this.userStat = raceData.user_stat;
-      this.routePins = raceData.route_pins;
-
-      console.log('TEAMS:',this.teams);
-      console.log('COORDS:',this.coords);
-      console.log("ALL USER DATA", this.all_user_data);
-      console.log('USER SETTINGS:',this.userRaceSettings);
-      console.log("FOLLOWER IDS", this.followedIDs);
-      console.log("ROUTE PINS ", this.routePins);
-      console.log("USER_STAT", this.userStat);
+      //this.routePins = raceData.route_pins;
       this.loading = false;
     });
   }
@@ -211,13 +182,11 @@ export class RaceViewComponent implements OnInit {
   }
   uploadManualEntry(entry:any) {
     this.activitiesService.uploadManualEntry(entry,this.raceID).then((resp) => {
-      console.log('RESP FROM MANUAL IMPORT:',resp);
       this.getRaceState();
     });
   }
   panToUserMarker(user_id){
     //Call map pan function
-    console.log("Clicked user id: ", user_id);
     this.mapChild.panToUserMarker(user_id);
   }
 
@@ -233,18 +202,15 @@ export class RaceViewComponent implements OnInit {
   createUserPins(){
     //Pass null to show all pins
     this.mapChild.createUserPins(false);
-    console.log("creating new user pins...")
   }
 
   createUserHeatPins(){
     //Pass null to show all pins
     this.mapChild.createUserPins(true);
-    console.log("Applying heat map...")
   }
 
   showAllPins(){
     this.mapChild.showAllPins();
-    console.log("Showing all pins");
   }
 
   showPinsFromSettings(settings: PinSettings){
@@ -256,13 +222,13 @@ export class RaceViewComponent implements OnInit {
 interface RaceData {
   progress:any;
   activities:any;
-  coords:any;
-  users_data:any;
+  //coords:any;
+  //users_data:any;
   settings:any;
   race_settings:RaceSettings;
   user_stat:any;
   followedIDs:number[];
-  route_pins:any[];
+  //route_pins:any[];
 }
 
 interface FeedObj {

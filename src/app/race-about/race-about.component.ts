@@ -67,8 +67,6 @@ export class RaceAboutComponent implements OnInit {
     this.raceService.getRace(this.raceID).subscribe(data => {
 
       let raceData = data as RaceData;
-      this.coords = raceData.coords;
-      this.all_user_data = raceData.users_data as Array<FeedObj>;
       this.followedIDs = raceData.followedIDs;
     });
 
@@ -257,8 +255,6 @@ export interface RaceSettings {
 interface RaceData {
   progress:any;
   activities:any;
-  coords:any;
-  users_data:any;
   settings:any;
   race_settings:RaceSettings;
   user_stat:any;

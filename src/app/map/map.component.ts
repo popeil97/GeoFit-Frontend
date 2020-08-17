@@ -7,6 +7,7 @@ import { UserProfileService } from '../userprofile.service';
 import { PopUpService } from '../pop-up.service';
 import { UserFollowComponent } from '../user-follow/user-follow.component';
 import { RoutePinDialogComponent } from '../route-pin-dialog/route-pin-dialog.component';
+import { MapService } from '../map.service';
 
 import 'leaflet';
 import 'leaflet.markercluster';
@@ -30,10 +31,12 @@ export class MapComponent implements AfterViewInit,OnChanges {
   @Input() coordinates;
   @Input() draw:Boolean;
   @Input() displayUsers:Boolean;
-  @Input() userData:any;
-  @Input() routePins:RoutePins[];
   @Input() followedIDs:any;
   @Input() zoom:Boolean;
+  @Input() raceID:number;
+
+  private userData: any;
+  private routePins: RoutePins[];
 
   public map;
   private coordsRoutes:any[];
@@ -60,6 +63,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
   constructor(private popupService:PopUpService, 
               private _profileService:UserProfileService,
+              private _mapService: MapService,
               public dialog: MatDialog) {
     this.coordsRoutes = [];
     Window["mapComponent"] = this;
@@ -71,19 +75,20 @@ export class MapComponent implements AfterViewInit,OnChanges {
     for(const propName in changes) {
       if(changes.hasOwnProperty(propName)) {
         switch(propName) {
-          case 'coordinates':
-            if(changes.coordinates.currentValue != undefined) {
-              this.applyCoordinates();
+          case 'raceID':
+            this.getMapData();
+            // if(changes.coordinates.currentValue != undefined) {
+            //   this.applyCoordinates();
               
-              if(this.displayUsers) {
-                this.createUserPins(false);
-              }
+            //   if(this.displayUsers) {
+            //     this.createUserPins(false);
+            //   }
 
-              if(this.routePins){
-                this.createRoutePins();
-              }
+            //   if(this.routePins){
+            //     this.createRoutePins();
+            //   }
 
-            }
+            // }
         }
       }
     }
@@ -94,6 +99,36 @@ export class MapComponent implements AfterViewInit,OnChanges {
     if(this.map == undefined) {
       this.initMap();
     }
+
+    //This ensures we can still use homepage coords if provided via Input
+    if (!this.coordinates){
+      this.getMapData();
+    }
+    else {
+      this.applyCoordinates();
+    }
+  }
+
+  public getMapData(){
+    this._mapService.getMapData(this.raceID).then((data) => {
+      let mapData = data as MapData;
+
+      //Get and apply coordinates
+      this.coordinates = mapData.coords;
+      this.applyCoordinates();
+
+      //Get and apply user pins
+      this.userData = mapData.users_data;
+      if (this.displayUsers){
+        this.createUserPins(false);
+      }
+
+      //Get and apply route pins
+      this.routePins = mapData.route_pins;
+      if (this.routePins){
+        this.createRoutePins();
+      }
+    })
   }
 
   public panToUserMarker(user_id, showPopUp=true){
@@ -592,8 +627,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     //An extract of address points from the LINZ bulk extract: http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde
 //Should be this data set: http://data.linz.govt.nz/#/layer/779-nz-street-address-electoral/
-
-    
   }
 
 
@@ -614,4 +647,10 @@ interface RoutePins {
   lon: number;
   lat: number;
   image_urls: string[];
+}
+
+interface MapData {
+  coords: any;
+  users_data: any[];
+  route_pins: RoutePins[];
 }
