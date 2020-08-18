@@ -14,8 +14,8 @@ export class LeaderboardComponent implements OnInit {
   @Input() raceID: number;
   @Input() allowFollow: Boolean = false;
 
-  private columns:string[] = ['Rank','ProfilePic','Name','Distance','Follow'];
-  private leaderboard: LeaderboardItem[];
+  public columns:string[] = ['Rank','ProfilePic','Name','Distance','Follow'];
+  public leaderboard: LeaderboardItem[];
 
   private initialized: boolean;
 
