@@ -26,4 +26,8 @@ export class ActivitiesService {
 
     return this.http.post(environment.apiUrl + '/api/manual/',body).toPromise();
   }
+
+  getActivities(race_id:number) {
+    return this.http.post(environment.apiUrl + '/api/get-activities/',{race_id:race_id}).toPromise();
+  }
 }

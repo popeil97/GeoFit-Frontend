@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import * as bootstrap from "bootstrap";
 import { RaceService } from '../race.service';
 import { StoryService } from '../story.service'
@@ -12,8 +12,11 @@ import { RaceSettings } from '../race-about/race-about.component';
 import { TeamFormComponent } from '../team-form/team-form.component';
 import { AuthService } from '../auth.service';
 import { UserProfileService } from '../userprofile.service';
+import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
 
-declare var $: any
+declare var $: any;
+import * as _ from 'lodash';
+
 
 @Component({
   selector: 'app-race-view',
@@ -24,6 +27,7 @@ export class RaceViewComponent implements OnInit {
   @ViewChild(MapComponent) mapChild: MapComponent;
   @ViewChild(FeedComponent) feedChild: FeedComponent;
   @ViewChild(StoryModalComponent) storyModal: StoryModalComponent;
+  @ViewChildren(LeaderboardComponent) leaderboardChildren: QueryList<LeaderboardComponent>;
 
   public followers:any[];
   public activities:any[];
@@ -33,7 +37,7 @@ export class RaceViewComponent implements OnInit {
   private modalData:any;
 
   public progress:Progress = {} as Progress;
-  public actsToImport:number[] = [];
+  
   public loading:Boolean = false;
   //public coords:any;
   //public all_user_data:Array<FeedObj>;
@@ -121,24 +125,21 @@ export class RaceViewComponent implements OnInit {
     // this.teamEditForm.isEdit = false;
   }
 
-  importActs(): void {
-    this.loading = true;
-    this.activitiesService.importActivities(this.actsToImport,this.raceID).then((res) => {
-      this.actsToImport = [];
-      this.getRaceState();
-    });
-    this.loading = false;
+  setLoaderState(state:boolean): void {
+    this.loading = state;
   }
 
-  addAct(act:any): void {
-    let actID = act.id;
-    let index = this.actsToImport.indexOf(actID);
-    if(index >= 0) {
-      this.actsToImport.splice(index,1);
-    }
-    else {
-      this.actsToImport.push(actID);
-    }
+  refreshStatComponents(): void {
+    // refresh any components stat related
+    // leaderboards
+    // user stats
+    // personal race stat
+    this.getRaceState();
+    this.mapChild.getMapData();
+
+    _.forEach(this.leaderboardChildren.toArray(),(child:LeaderboardComponent) => {
+      child.getLeaderboard();
+    });
   }
 
   getRaceState(): void {
@@ -149,8 +150,8 @@ export class RaceViewComponent implements OnInit {
       console.log('RACE DATA:',raceData);
 
       this.progress = raceData.progress;
-      this.activities = raceData.activities;
-      this.num_activities = this.activities.length;
+      // this.activities = raceData.activities;
+      this.num_activities = 0;
 
       //this.coords = raceData.coords;
       

@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter,OnChanges } from '@angular/core';
+import { ActivitiesService } from '../activities.service';
 
 
 @Component({
@@ -8,28 +9,58 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class ActivitiesMenuComponent implements OnInit {
 
-  @Input() activities:Activity[] = [];
+  activities:Activity[] = [];
+  public actsToImport:number[] = [];
+  @Input() race_id:number;
   @Input() distance_unit:string;
-  @Output() addAct: EventEmitter<any> = new EventEmitter();
-  @Output() importActs: EventEmitter<void> = new EventEmitter();
+  @Output() setLoaderState: EventEmitter<boolean> = new EventEmitter();
+  @Output() refreshStatComponents: EventEmitter<void> = new EventEmitter();
+  
   columns:string[] = ['Name','Distance'];
   selectedRows:number[] = [];
 
 
-  constructor() { }
+  constructor(private _activitiesService:ActivitiesService) { }
 
   ngOnInit() {
 
     // this.addAct.emit({id:2} as any);
+    // call activity service to get activities
+
+    this.getActivities();
+
 
   }
 
-  add(act:Activity): void {
-    this.addAct.emit(act);
-  }
+  // add(act:Activity): void {
+  //   this.addAct.emit(act);
+  // }
+
+  // importSelectedActs(): void {
+  //   this.importActs.emit();
+  // }
 
   importSelectedActs(): void {
-    this.importActs.emit();
+    // this.loading = true; // switch to toggleFunction that communicates with parent
+    this.setLoaderState.emit(true);
+    this._activitiesService.importActivities(this.actsToImport,this.race_id).then((res) => {
+      this.actsToImport = [];
+      this.setLoaderState.emit(false);
+      // this.getRaceState(); // change eventually
+      this.getActivities();
+      this.refreshStatComponents.emit();
+    });
+  }
+
+  addAct(act:any): void {
+    let actID = act.id;
+    let index = this.actsToImport.indexOf(actID);
+    if(index >= 0) {
+      this.actsToImport.splice(index,1);
+    }
+    else {
+      this.actsToImport.push(actID);
+    }
   }
 
   highlight(row:any): void {
@@ -43,6 +74,14 @@ export class ActivitiesMenuComponent implements OnInit {
 
     console.log(this.selectedRows);
   }
+
+  getActivities() {
+    this._activitiesService.getActivities(this.race_id).then((resp) => {
+      this.activities = resp['activities'];
+    });
+  }
+
+
 
 }
 

@@ -21,6 +21,7 @@ import * as turf from '@turf/turf';
 import { ListKeyManager } from '@angular/cdk/a11y';
 import { AppComponent } from '../app.component';
 import { PopupComponent } from '../popup/popup.component';
+import { RaceService } from '../race.service';
 
 @Component({
   selector: 'app-map',
@@ -64,6 +65,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
   constructor(private popupService:PopUpService, 
               private _profileService:UserProfileService,
               private _mapService: MapService,
+              private _raceService:RaceService,
               public dialog: MatDialog) {
     this.coordsRoutes = [];
     Window["mapComponent"] = this;
@@ -118,17 +120,27 @@ export class MapComponent implements AfterViewInit,OnChanges {
       this.applyCoordinates();
 
       //Get and apply user pins
-      this.userData = mapData.users_data;
-      if (this.displayUsers){
-        this.createUserPins(false);
-      }
+      // this.userData = mapData.users_data;
+      // if (this.displayUsers){
+      //   this.createUserPins(false);
+      // }
 
       //Get and apply route pins
       this.routePins = mapData.route_pins;
       if (this.routePins){
         this.createRoutePins();
       }
-    })
+    });
+
+    this._raceService.getUserRacestats(this.raceID).then((data:any) => {
+      this.userData = data.users_data;
+
+      console.log('user data:',this.userData);
+
+      if (this.displayUsers){
+        this.createUserPins(false);
+      }
+    });
   }
 
   public panToUserMarker(user_id, showPopUp=true){

@@ -32,4 +32,8 @@ export class TeamService {
   getTeam(team_id:number) {
     return this.http.post(environment.apiUrl + '/api/get-team/',{team_id:team_id}).toPromise();
   }
+
+  getTeamsList(race_id:number) {
+    return this.http.post(environment.apiUrl + '/api/get-teams/',{race_id:race_id}).toPromise();
+  }
 }
