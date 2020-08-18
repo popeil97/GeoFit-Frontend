@@ -119,12 +119,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
       this.coordinates = mapData.coords;
       this.applyCoordinates();
 
-      //Get and apply user pins
-      // this.userData = mapData.users_data;
-      // if (this.displayUsers){
-      //   this.createUserPins(false);
-      // }
-
       //Get and apply route pins
       this.routePins = mapData.route_pins;
       if (this.routePins){
@@ -663,6 +657,5 @@ interface RoutePins {
 
 interface MapData {
   coords: any;
-  users_data: any[];
   route_pins: RoutePins[];
 }
