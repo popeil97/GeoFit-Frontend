@@ -183,7 +183,7 @@ export class RaceViewComponent implements OnInit {
   }
   uploadManualEntry(entry:any) {
     this.activitiesService.uploadManualEntry(entry,this.raceID).then((resp) => {
-      this.getRaceState();
+      this.refreshStatComponents();
     });
   }
   panToUserMarker(user_id){

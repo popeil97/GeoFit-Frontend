@@ -50,6 +50,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
   private marker_end:any;
   private line:any;
   private myUserID:number;
+  private user_team_or_stat:any;
 
   //Store user IDs of male and female pins
   private maleIDs: number[];
@@ -134,6 +135,11 @@ export class MapComponent implements AfterViewInit,OnChanges {
       if (this.displayUsers){
         this.createUserPins(false);
       }
+    });
+
+    this._raceService.getTeamOrUserStat(this.raceID).then((data:any) => {
+      this.user_team_or_stat = data.team_or_user_stat;
+      console.log('USER DATA FROM MAP:',data);
     });
   }
 
