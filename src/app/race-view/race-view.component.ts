@@ -135,7 +135,9 @@ export class RaceViewComponent implements OnInit {
     // user stats
     // personal race stat
     this.getRaceState();
-    this.mapChild.getMapData();
+    
+    //this.mapChild.getMapData();
+    this.mapChild.updateMyUserStatAndCreatePins();
 
     _.forEach(this.leaderboardChildren.toArray(),(child:LeaderboardComponent) => {
       child.getLeaderboard();

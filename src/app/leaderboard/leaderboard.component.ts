@@ -17,7 +17,7 @@ export class LeaderboardComponent implements OnInit {
   public columns:string[] = ['Rank','ProfilePic','Name','Distance','Follow'];
   public leaderboard: LeaderboardItem[];
 
-  private initialized: boolean;
+  private initialized: boolean = false;
 
   constructor(private _leaderboardService: LeaderboardService) {
   }
@@ -53,19 +53,17 @@ export class LeaderboardComponent implements OnInit {
   getLeaderboard(){
     var leaderboardData;
     console.log("GETTING LEADERBOARD");
-    console.log(this._leaderboardService.raceID);
-    console.log(this.use);
+    
     if (this.use == 'individual'){
       this._leaderboardService.getIndividualLeaderboard().then((data) => {
         leaderboardData = data as LeaderboardStruct;
-        console.log("Leaderboard data: ", leaderboardData);
         this.leaderboard = this.configureLeaderboard(leaderboardData.unranked,leaderboardData.ranked);;
       })
     }
+
     else if (this.use == 'teams'){
       this._leaderboardService.getTeamLeaderboard().then((data) => {
         leaderboardData = data as LeaderboardStruct;
-        console.log("Leaderboard data: ", leaderboardData);
         this.leaderboard = this.configureLeaderboard(leaderboardData.unranked,leaderboardData.ranked);;
       })
     }
