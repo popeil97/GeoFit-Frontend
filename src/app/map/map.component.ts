@@ -571,7 +571,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
     //If this pin is current user, pan and zoom to it
     if (this.isMe(userData)){
       this.myMarker = this.markersByUserID[elementID]['locMarker'];
-      console.log("Entering pan to user marker with elem id ", elementID);
       this.panToUserMarker(elementID);
     }
 
