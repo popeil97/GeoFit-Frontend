@@ -402,16 +402,25 @@ export class MapComponent implements AfterViewInit,OnChanges {
         popupAnchor: [0, -62],
       });
 
-      var user_rel_miles = parseInt(this.userData[i].rel_distance);
+      var user_rel_miles = parseFloat(this.userData[i].rel_distance);
       var user_route_idx = this.userData[i].route_idx;
 
-      var along_user = turf.along(this.coordsRoutes[user_route_idx], user_rel_miles, {units: 'miles'});
+      //Get user's distance type for turf
+      var distanceTypeOptions;
+      if (this.userData[i].distance_type == 'MI'){
+        distanceTypeOptions = {units: 'miles'};
+      }
+      else {
+        distanceTypeOptions = {units: 'kilometers'};
+      }
+
+      var along_user = turf.along(this.coordsRoutes[user_route_idx], user_rel_miles, distanceTypeOptions);
 
       var lng_user = along_user.geometry.coordinates[0];
       var lat_user = along_user.geometry.coordinates[1];
 
-      heatArray[i] = [lat_user,lng_user,1]
-      heatArray[i+this.userData.length] = [lat_user,lng_user,1.0]
+      heatArray[i] = [lat_user,lng_user,1];
+      heatArray[i+this.userData.length] = [lat_user,lng_user,1.0];
 
       var locMarker = L.geoJSON(along_user, {
         pointToLayer: function(feature, latlng) {
