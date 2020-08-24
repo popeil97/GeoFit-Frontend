@@ -53,7 +53,9 @@
        </mat-card-header>
        <mat-card-content>
          <i class="material-icons" style="color:#BC164D">map</i><span id="txt1">From <b>{{ aboutData.start_loc }}</b> to <b>{{aboutData.end_loc}}</b> <i style="color:#BC164D;">   {{ aboutData.distance }} {{ aboutData.distance_type }}</i></span>
-        <i class="material-icons" style="color:#BC164D;">date_range</i><span id="txt1">     From <b> 8/16, 12:01 AM </b> to <b> 9/18, 5:00 PM (EST)</b> <i style="font-size:10px; color:#BC164D;"> Need help? Email admin@tucan.fitness </i></span> 
+        <i class="material-icons" style="color:#BC164D;">date_range</i><span id="txt1">     From <b>{{ aboutData.start_date }}</b> to <b>{{ aboutData.end_date }}</b></span> 
+
+        <i style="font-size:10px; color:#BC164D;"> Need help? Email admin@tucan.fitness </i>
 
         <div class="row">
           <div class="column-map">
@@ -111,38 +113,16 @@
 
      </mat-card-header>
      <mat-card-content >
-       <img src="../../assets/landing/adam.jpeg" alt="Adam" style="width:100%;" class="center">
-      <div style="overflow-y: scroll;height: 280px;background-color:#EFFAF7;">
-      Tucan Fitness has generously helped us create a virtual 100 mile challenge in honor of Adam. The challenge will begin on August 16th and end on September 18th, which this year falls on Adam’s Hebrew birthday, כ״ט אלול - erev Rosh Hashanah. Everyone can participate in whichever way - running, walking, biking, swimming, etc. - and at whatever level they want. Do it outside, on a treadmill and/or on a stationary bike as you binge watch even more Netflix. The key is that this will bring us together to honor Adam and help connect us when we cannot gather together in person.
-      <br><br>
-      While each participant will run, walk or bike in their own neighborhood or home, our shared virtual route will start in Jerusalem and continue in New Jersey. Each stop on the virtual route was part of Adam’s life. One stop on the route is The Jewish Center in Princeton, New Jersey, where Adam was honored to serve as Rabbi for 14½ years, and 100% of every participant dollar will benefit the synagogue’s Rabbi Adam Feldman Memorial Fund. The virtual route will end at Citizens Bank Park in Philadelphia, where Adam’s beloved Phillies play. Each participant should register on their own and then, when the race begins, you can track your own progress or form a group (of up to 5 participants) and track your group’s progress. You will also be able to upload photos of your activities, which we would love to see!
-      <br><br>
-      We hope you join us in this challenge, whether you complete all or less than all of the ~100 miles!
-      <br><br>
-      Fondly and with sMiles,
-      <br>
-      Sara Bucholtz and Talia, Dena & Ilan Feldman
-      <br>
-      August 4, 2020 / י״ד אב תש״פ
+       <img src="{{aboutData.race_image}}" alt="race_img" style="width:100%;" class="center">
+      <div style="overflow-y: scroll;height: 190px;background-color:#EFFAF7;">
+      {{aboutData.description}} 
 
 
 </div>
 
 
-<div class="row">
-
-  <div class="column-merch">
-    
-
-     <img src="../../assets/landing/sMILES.png" alt="Race Image" style="width:80%;" class="center">
-
-
-
-     
-  </div>
-  <div class="column-merch">
-    <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"  style="width:80%;"></app-swag>
-  </div>
+<div class="row" *ngIf="hasMerch">
+    <app-swag  [isOwner]="isOwner" [race_id]="raceID"></app-swag>
 </div>
     
 

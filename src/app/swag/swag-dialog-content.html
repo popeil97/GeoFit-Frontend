@@ -1,5 +1,5 @@
-<h2 mat-dialog-title>Purchase Shirt ($18)</h2>
-<b>All shirt proceeds go to The Jewish Center</b>
+<h2 mat-dialog-title>Purchase Item (${{this.price}})</h2>
+<!--<b>All shirt proceeds go to The Jewish Center</b> -->
 <mat-dialog-content style="width:650px;"  class="center1">
   <mat-horizontal-stepper [linear]="true" #stepper>
     <mat-step [editable]="true" [stepControl]="sizeForm">
@@ -7,7 +7,7 @@
       <div class="form-group" style="padding: 5px;">
         <!--    <label name="start_loc"><input type='date' id='hasta' value='<?php echo date('Y-m-d');?>'></label>--> 
 
-            <img src="../../assets/landing/shirts.jpeg" alt="Shirts Image" style="width:100%;" class="center1">
+            <img src="{{ this.imageUrl}}" alt="Shirts Image" style="width:80%;" class="center1">
 
            <input class="form-control" type="text" placeholder="Size" [matAutocomplete]="sizeTypeAuto" />
            <mat-autocomplete #sizeTypeAuto="matAutocomplete">
