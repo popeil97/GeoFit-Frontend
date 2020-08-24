@@ -162,11 +162,11 @@
         <button class="btn btn-primary btn-mobile" style="width: 100%; text-align: center; background-color:#2C00A5;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">Add Team</button>
             <button class="btn btn-danger" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm('clear')" *ngIf="showTeamForm">Cancel</button>
             <div *ngIf="!showTeamForm">   
-              <app-team-list [race_id]="raceID" [userStat]="userStat" (callback)="refreshStatComponents($event)" (edit)="editTeamForm($event)"></app-team-list>
+              <app-team-list [race_id]="raceID" [userStat]="userStat" (callback)="refreshAllComponents($event)" (edit)="editTeamForm($event)"></app-team-list>
             </div>
 
             <div *ngIf="showTeamForm">
-              <app-team-form (callback)="refreshStatComponents($event)" [teamEditForm]="teamEditForm"></app-team-form><br><br><br><br><br><br>
+              <app-team-form (callback)="refreshAllComponents($event)" [teamEditForm]="teamEditForm"></app-team-form><br><br><br><br><br><br>
             </div>
       </mat-tab>
       <mat-tab>

@@ -129,6 +129,18 @@ export class RaceViewComponent implements OnInit {
     this.loading = state;
   }
 
+  refreshAllComponents(): void {
+
+    this.getRaceState();
+    
+    this.mapChild.getMapData();
+
+    _.forEach(this.leaderboardChildren.toArray(),(child:LeaderboardComponent) => {
+      child.getLeaderboard();
+    });
+
+  }
+
   refreshStatComponents(): void {
     // refresh any components stat related
     // leaderboards
