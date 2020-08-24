@@ -55,7 +55,7 @@ export class RegisterComponent implements OnInit {
           date_of_birth: ['', Validators.required],
           gender: ['', Validators.required],
           email: ['', [Validators.required,
-                        Validators.pattern("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$")]],
+                       Validators.email]],// Validators.pattern("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$")]],
           terms_of_service: [false, [Validators.requiredTrue]],
           password: ['', [Validators.required, Validators.minLength(6)]],
           confirmPassword: ['', Validators.required]
@@ -84,6 +84,9 @@ export class RegisterComponent implements OnInit {
         const momentDate = new Date(this.registerForm.value.date_of_birth);
         const formattedDate = moment(momentDate).format("YYYY-MM-DD");
         this.registerForm.value.date_of_birth = formattedDate;
+
+        //Cast email to lowercase
+        this.registerForm.value.email = this.registerForm.value.email.toLowerCase();
 
         //Register and navigate to login
         this._authService.register(this.registerForm.value).subscribe( 
