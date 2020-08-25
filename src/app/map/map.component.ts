@@ -57,6 +57,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
   //Store user IDs of male and female pins
   private maleIDs: number[];
   private femaleIDs: number[];
+  loading:boolean = false;
 
 
   //We extend the Marker class to set our own 'routePinIndex' option
@@ -109,6 +110,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
 
   public getMapData(){
+    
     this._mapService.getMapData(this.raceID).then((data) => {
       let mapData = data as MapData;
 
@@ -121,13 +123,16 @@ export class MapComponent implements AfterViewInit,OnChanges {
       if (this.routePins){
         this.createRoutePins();
       }
-
+      this.loading=true;
       this._raceService.getUserRacestats(this.raceID).then((data:any) => {
+        
         this.userData = data.users_data;
     
         if (this.displayUsers){
           this.createUserPins(false);
         }
+
+        this.loading=false;
       });
     });
 
