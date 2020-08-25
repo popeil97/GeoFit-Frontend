@@ -17,8 +17,9 @@ export class NotificationComponent implements OnInit {
   constructor(private _notificationService:NotificationsService,private _snackbar:MatSnackBar) { }
 
   ngOnInit() {
-    
-  }
+
+
+}
 
   approve() {
     // general approval action, backend will sort out what the notifcation is for
@@ -36,8 +37,7 @@ export class NotificationComponent implements OnInit {
       this._snackbar.openFromComponent(SnackbarComponent,{duration: 5000,horizontalPosition: 'center',
       verticalPosition: 'bottom',data:{message:'Action has been declined'}});
       this.removeNotification.emit(this.notification.not_id);
-    });
-    
+    });  
   }
 
   hide() {
@@ -57,6 +57,10 @@ export class NotificationComponent implements OnInit {
     }
 
     else if(name == 'Hide' && (type != NotificationType.TEAM_JOIN && type != NotificationType.FOLLOW_REQUEST)) {
+      return true;
+    }
+
+    else if (name=='View' && (type == NotificationType.COMMENT)) {
       return true;
     }
   }
