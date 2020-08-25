@@ -1,11 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import * as bootstrap from "bootstrap";
 import { RaceService } from '../race.service';
 import { StoryService } from '../story.service'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Progress } from '../user-progress/user-progress.component';
 import { ActivitiesService } from '../activities.service';
-import { LeaderboardItem } from '../leaderboard/leaderboard.component';
 import { MapComponent } from '../map/map.component';
 import { FeedComponent } from '../feed/feed.component';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
@@ -13,8 +12,11 @@ import { RaceSettings } from '../race-about/race-about.component';
 import { TeamFormComponent } from '../team-form/team-form.component';
 import { AuthService } from '../auth.service';
 import { UserProfileService } from '../userprofile.service';
+import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
 
-declare var $: any
+declare var $: any;
+import * as _ from 'lodash';
+
 
 @Component({
   selector: 'app-race-view',
@@ -25,6 +27,7 @@ export class RaceViewComponent implements OnInit {
   @ViewChild(MapComponent) mapChild: MapComponent;
   @ViewChild(FeedComponent) feedChild: FeedComponent;
   @ViewChild(StoryModalComponent) storyModal: StoryModalComponent;
+  @ViewChildren(LeaderboardComponent) leaderboardChildren: QueryList<LeaderboardComponent>;
 
   public followers:any[];
   public activities:any[];
@@ -34,16 +37,14 @@ export class RaceViewComponent implements OnInit {
   private modalData:any;
 
   public progress:Progress = {} as Progress;
-  public actsToImport:number[] = [];
+  
   public loading:Boolean = false;
-  public coords:any;
-  public leaderboard:LeaderboardItem[];
-  public teamLeaderboard:LeaderboardItem[]
-  public all_user_data:Array<FeedObj>;
+  //public coords:any;
+  //public all_user_data:Array<FeedObj>;
   public teams:any[];
   public userRaceSettings:any;
   public raceSettings:RaceSettings;
-  public routePins:any[];
+  //public routePins:any[];
   public userData:UserData;
 
   public showTeamForm:Boolean = false;
@@ -85,25 +86,6 @@ export class RaceViewComponent implements OnInit {
     });
 
     this.getRaceState();
-
-    this.followers = [{
-      first_name:'Nathan',
-      last_name:'Cunt'
-    },
-    {
-      first_name:'Katie',
-      last_name:'DonaHOE'
-    }];
-
-  }
-
-  
-
-  configureLeaderboard(ranked:any[],unranked:any[]) {
-    
-    console.log("RANKE BOARD:",unranked.concat(ranked));
-    return unranked.concat(ranked)
-
   }
 
   toggleNavButton(action?:string) {
@@ -113,15 +95,12 @@ export class RaceViewComponent implements OnInit {
 
   toggleTeamForm(action?:string) {
     this.showTeamForm = !this.showTeamForm;
-    console.log('ACTION IS:',action);
     if(action == 'clear') {
       this.teamEditForm.isEdit = false;
     }
-    
   }
   
   showModal(id:string): void {
-    console.log(id);
     ($(id) as any).modal('show');
   }
 
@@ -142,36 +121,39 @@ export class RaceViewComponent implements OnInit {
       team_id:team_id,
       isEdit:true
     } as TeamEditBody
-    console.log('TEAM BODY FORM:',this.teamEditForm);
     this.toggleTeamForm();
     // this.teamEditForm.isEdit = false;
   }
 
-  importActs(): void {
-    console.log('GONNA IMPORT THIS SHIT:',this.actsToImport);
-    this.loading = true;
-    this.activitiesService.importActivities(this.actsToImport,this.raceID).then((res) => {
-      console.log(res);
-      this.actsToImport = [];
-      console.log('BEFORE GETRACESTATE:',this.actsToImport);
-      this.getRaceState();
-      console.log('AFTER GETRACESTATE:',this.actsToImport);
-    });
-    this.loading = false;
+  setLoaderState(state:boolean): void {
+    this.loading = state;
   }
 
-  addAct(act:any): void {
-    console.log('IN ADD');
-    let actID = act.id;
-    let index = this.actsToImport.indexOf(actID);
-    if(index >= 0) {
-      this.actsToImport.splice(index,1);
-    }
-    else {
-      this.actsToImport.push(actID);
-    }
+  refreshAllComponents(): void {
 
-    console.log(this.actsToImport);
+    this.getRaceState();
+    
+    this.mapChild.getMapData();
+
+    _.forEach(this.leaderboardChildren.toArray(),(child:LeaderboardComponent) => {
+      child.getLeaderboard();
+    });
+
+  }
+
+  refreshStatComponents(): void {
+    // refresh any components stat related
+    // leaderboards
+    // user stats
+    // personal race stat
+    this.getRaceState();
+    
+    //this.mapChild.getMapData();
+    this.mapChild.updateMyUserStatAndCreatePins();
+
+    _.forEach(this.leaderboardChildren.toArray(),(child:LeaderboardComponent) => {
+      child.getLeaderboard();
+    });
   }
 
   getRaceState(): void {
@@ -182,39 +164,25 @@ export class RaceViewComponent implements OnInit {
       console.log('RACE DATA:',raceData);
 
       this.progress = raceData.progress;
-      this.activities = raceData.activities;
-      this.num_activities = this.activities.length;
+      // this.activities = raceData.activities;
+      this.num_activities = 0;
 
-      this.coords = raceData.coords;
-
-      this.leaderboard = this.configureLeaderboard(raceData.unranked_leaderboard,raceData.ranked_leaderboard);
-      this.teamLeaderboard = this.configureLeaderboard(raceData.unranked_team_leaderboard,raceData.ranked_team_leaderboard);
-
-      console.log('TEAMS LEADERBOARD:',this.teamLeaderboard);
+      //this.coords = raceData.coords;
       
-      this.all_user_data = raceData.users_data as Array<FeedObj>;
+      //this.all_user_data = raceData.users_data as Array<FeedObj>;
       this.followedIDs = raceData.followedIDs;
 
-      this.teams = raceData.users_data.filter((user_data) => {
-        if(user_data.isTeam) {
-          return user_data;
-        }
-      });
+      // this.teams = raceData.users_data.filter((user_data) => {
+      //   if(user_data.isTeam) {
+      //     return user_data;
+      //   }
+      // });
 
       this.userRaceSettings = raceData.settings;
       this.raceSettings = raceData.race_settings;
       this.isManualEntry = this.raceSettings.isManualEntry;
       this.userStat = raceData.user_stat;
-      this.routePins = raceData.route_pins;
-
-      console.log('TEAMS:',this.teams);
-      console.log('COORDS:',this.coords);
-      console.log("ALL USER DATA", this.all_user_data);
-      console.log("LEADERBOARD ITEMS: ", this.leaderboard);
-      console.log('USER SETTINGS:',this.userRaceSettings);
-      console.log("FOLLOWER IDS", this.followedIDs);
-      console.log("ROUTE PINS ", this.routePins);
-      console.log("USER_STAT", this.userStat);
+      //this.routePins = raceData.route_pins;
       this.loading = false;
     });
   }
@@ -229,13 +197,11 @@ export class RaceViewComponent implements OnInit {
   }
   uploadManualEntry(entry:any) {
     this.activitiesService.uploadManualEntry(entry,this.raceID).then((resp) => {
-      console.log('RESP FROM MANUAL IMPORT:',resp);
-      this.getRaceState();
+      this.refreshStatComponents();
     });
   }
   panToUserMarker(user_id){
     //Call map pan function
-    console.log("Clicked user id: ", user_id);
     this.mapChild.panToUserMarker(user_id);
   }
 
@@ -251,18 +217,15 @@ export class RaceViewComponent implements OnInit {
   createUserPins(){
     //Pass null to show all pins
     this.mapChild.createUserPins(false);
-    console.log("creating new user pins...")
   }
 
   createUserHeatPins(){
     //Pass null to show all pins
     this.mapChild.createUserPins(true);
-    console.log("Applying heat map...")
   }
 
   showAllPins(){
     this.mapChild.showAllPins();
-    console.log("Showing all pins");
   }
 
   showPinsFromSettings(settings: PinSettings){
@@ -274,18 +237,13 @@ export class RaceViewComponent implements OnInit {
 interface RaceData {
   progress:any;
   activities:any;
-  coords:any;
-  leaderboard:any;
-  users_data:any;
+  //coords:any;
+  //users_data:any;
   settings:any;
   race_settings:RaceSettings;
   user_stat:any;
   followedIDs:number[];
-  unranked_leaderboard:any[];
-  ranked_leaderboard:any[];
-  unranked_team_leaderboard:any[];
-  ranked_team_leaderboard:any[];
-  route_pins:any[];
+  //route_pins:any[];
 }
 
 interface FeedObj {

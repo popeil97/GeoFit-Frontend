@@ -63,7 +63,7 @@
          <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
        </mat-card-header>
        <mat-card-content>
-         <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true"></app-map>
+         <app-map [raceID]="raceID" [displayUsers]="true"></app-map>
          <br><br> <br><br> <br><br><br><br> <br><br> <br><br><br><br> <br><br> <br><br><br><br> <br><br> <br><br>
        </mat-card-content>
      </mat-card>
@@ -80,7 +80,7 @@
        <mat-card-content>
         <div style="max-height: 480px;overflow: auto; border-top-left-radius:0px;border-bottom-left-radius:0px;">
          <h4 style="text-align:center;"><b>Live Leaderboard</b></h4>
-         <app-leaderboard [leaderboard]="leaderboard" [allowFollow]="true"></app-leaderboard>
+         <app-leaderboard [raceID]="raceID" [use]="'individual'" [allowFollow]="true"></app-leaderboard>
          
        </div>
        </mat-card-content>

@@ -59,6 +59,10 @@ export class NotificationComponent implements OnInit {
     else if(name == 'Hide' && (type != NotificationType.TEAM_JOIN && type != NotificationType.FOLLOW_REQUEST)) {
       return true;
     }
+
+    else if (name=='View' && (type == NotificationType.COMMENT)) {
+      return true;
+    }
   }
 }
 

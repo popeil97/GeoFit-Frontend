@@ -1,0 +1,1192 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>geo-fit documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">geo-fit documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>UserStatsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/user-stats/user-stats.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-user-stats</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./user-stats.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./user-stats.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#chart">chart</a>
+                            </li>
+                            <li>
+                                <a href="#userStats">userStats</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#openStats">openStats</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#openTab">openTab</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#showChart">showChart</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#userID">userID</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(_usersService: <a href="../injectables/UsersService.html">UsersService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/user-stats/user-stats.component.ts:13</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>_usersService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UsersService.html" target="_self" >UsersService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="userID"></a>
+                        <b>userID</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/user-stats/user-stats.component.ts:11</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="16"
+                            class="link-to-prism">src/app/user-stats/user-stats.component.ts:16</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openStats"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            openStats
+                        </b>
+                        <a href="#openStats"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>openStats(evt, cityName)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="74"
+                            class="link-to-prism">src/app/user-stats/user-stats.component.ts:74</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>evt</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>cityName</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="openTab"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            openTab
+                        </b>
+                        <a href="#openTab"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>openTab()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">src/app/user-stats/user-stats.component.ts:88</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showChart"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Private</span>
+                            showChart
+                        </b>
+                        <a href="#showChart"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>showChart(mydates, mydistances, mycolors)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="26"
+                            class="link-to-prism">src/app/user-stats/user-stats.component.ts:26</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>mydates</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>mydistances</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>mycolors</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="chart"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            chart</b>
+                            <a href="#chart"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Chart</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/user-stats/user-stats.component.ts:13</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="userStats"></a>
+                        <span class="name">
+                            <b>
+                            userStats</b>
+                            <a href="#userStats"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/UserStats.html" target="_self" >UserStats</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/user-stats/user-stats.component.ts:12</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input} from &#x27;@angular/core&#x27;;
+import { UsersService } from &#x27;../users.service&#x27;;
+import {Chart} from &#x27;chart.js&#x27;;
+
+@Component({
+  selector: &#x27;app-user-stats&#x27;,
+  templateUrl: &#x27;./user-stats.component.html&#x27;,
+  styleUrls: [&#x27;./user-stats.component.css&#x27;],
+})
+export class UserStatsComponent implements OnInit {
+  @Input() userID: number;
+  userStats: UserStats;
+  private chart: Chart;
+  constructor(private _usersService:UsersService) { }
+
+  ngOnInit() {
+
+  this._usersService.getUserStats(this.userID).then((res)&#x3D;&gt;{
+  	console.log(&quot;USER&quot;, this.userID,&quot;STATS: &quot;, res);
+    this.userStats &#x3D; res as UserStats;
+    //this.userStats.mycolors
+    this.showChart(this.userStats.mydates,this.userStats.mydistances,this.userStats.mycolors);
+    })
+  }
+
+   private showChart(mydates,mydistances,mycolors) {
+   // var colors &#x3D; [&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;]
+   // var colors2 &#x3D; [&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;]
+
+    var colorArray &#x3D; new Array(mycolors.length);
+    var colorBorder &#x3D; new Array(mycolors.length);
+    var i;
+    for (i &#x3D; 0; i &lt; mycolors.length; i++)
+    {
+      if(mycolors[i] &#x3D;&#x3D; 1){
+        colorArray[i] &#x3D; &#x27;rgba(44, 0, 165,0.2)&#x27;;
+        colorBorder[i] &#x3D; &#x27;rgba(44, 0, 165,1)&#x27;;
+      } //run
+      else{//(mycolors[i] &#x3D;&#x3D; 2){
+        colorArray[i] &#x3D; &#x27;rgba(54, 162, 235,0.2)&#x27;;
+        colorBorder[i] &#x3D; &#x27;rgba(54, 162, 235,1)&#x27;;
+      }  //ride
+    //  if(mycolors[i] !&#x3D; 1 &amp;&amp; mycolors.length[i] !&#x3D;2){colorArray[i] &#x3D; &#x27;rgba(255, 206, 86, 0.2)&#x27;;colorBorder[i] &#x3D; &#x27;rgba(255, 206, 86, 1)&#x27;;}  //else
+    }
+    this.chart &#x3D; new Chart(&#x27;lineCharts&#x27;, {
+      type: &#x27;bar&#x27;,
+      data: {
+
+        labels: mydates,
+        datasets: [{
+            label: &#x27;Distance&#x27;,
+            data: mydistances,
+            backgroundColor: colorArray,
+            borderColor: colorBorder,
+            borderWidth: 1
+        }]
+    },
+    options: {
+       scales: {
+            xAxes: [{
+               gridLines: {
+                  display: false
+               }
+            }],
+            yAxes: [{
+               gridLines: {
+                  display: false
+               }
+            }]
+       }
+    }
+});
+  }
+   private openStats(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent &#x3D; document.getElementsByClassName(&quot;tabcontent&quot;);
+      for (i &#x3D; 0; i &lt; tabcontent.length; i++) {
+        tabcontent[i].style.display &#x3D; &quot;none&quot;;
+      }
+      tablinks &#x3D; document.getElementsByClassName(&quot;tablinks&quot;);
+      for (i &#x3D; 0; i &lt; tablinks.length; i++) {
+        tablinks[i].className &#x3D; tablinks[i].className.replace(&quot; active&quot;, &quot;&quot;);
+      }
+      document.getElementById(cityName).style.display &#x3D; &quot;block&quot;;
+      evt.currentTarget.className +&#x3D; &quot; active&quot;;
+  }
+
+	private openTab() {
+	  document.getElementById(&quot;defaultOpen&quot;).click();
+	}
+}
+
+interface UserStats {
+
+  run_tot_activities:number;
+  run_tot_dist:number;
+  run_tot_hrs:number;
+
+  run_max_dist:number;
+  run_max_time:number;
+  run_max_pace:number;
+
+  run_average_pace:number;
+  run_average_dist:number;
+  run_average_time:number;
+
+  ride_tot_activities:number;
+  ride_tot_dist:number;
+  ride_tot_hrs:number;
+
+  ride_max_dist:number;
+  ride_max_time:number;
+  ride_max_pace:number;
+
+  ride_average_pace:number;
+  ride_average_dist:number;
+  ride_average_time:number;
+
+  mydistances:any[];
+  mydates:any[];
+  mycolors:any[];
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">
+&lt;div class&#x3D;&quot;row&quot;&gt;
+    &lt;div class&#x3D;&quot;column2&quot;&gt;
+        &lt;mat-card class&#x3D;&quot;example-card&quot;&gt;
+            &lt;mat-card-header&gt;
+            &lt;!--  &lt;div mat-card-avatar style &#x3D; &quot;background-image: url({{userData.profile_url}}&lt;/b&gt;);
+  background-size: cover;&quot;&gt;&lt;/div&gt; --&gt;
+              &lt;mat-card-title&gt;Activities&lt;/mat-card-title&gt;
+            &lt;/mat-card-header&gt;
+            &lt;mat-card-content&gt;
+              &lt;br&gt;
+              &lt;div&gt;
+                &lt;div *ngIf&#x3D;&quot;userStats.run_tot_activities &#x3D;&#x3D; 0 &amp;&amp; userStats.ride_tot_activities&#x3D;&#x3D;0&quot;&gt;
+                  No running or cycling activities.
+                &lt;/div&gt;
+             &lt;canvas id&#x3D;&quot;lineCharts&quot;&gt;&lt;/canvas&gt;
+           &lt;/div&gt;
+             &lt;br&gt;
+            &lt;/mat-card-content&gt;
+          &lt;/mat-card&gt;
+    &lt;/div&gt;
+
+     &lt;div class&#x3D;&quot;column2 &quot; *ngIf&#x3D;&quot;userStats.run_tot_activities &gt; 0 &amp;&amp; userStats.ride_tot_activities&#x3D;&#x3D;0&quot;&gt;
+        &lt;mat-card class&#x3D;&quot;example-card &quot;&gt;
+            &lt;mat-card-header&gt;
+            &lt;!--  &lt;div mat-card-avatar style &#x3D; &quot;background-image: url({{userData.profile_url}}&lt;/b&gt;);
+  background-size: cover;&quot;&gt;&lt;/div&gt; --&gt;
+              &lt;mat-card-title&gt;Runs &lt;i class&#x3D;&quot;material-icons&quot; style&#x3D;&quot;color:#BC164D;&quot;&gt;directions_run&lt;/i&gt;&lt;/mat-card-title&gt;
+            &lt;/mat-card-header&gt;
+            &lt;mat-card-content&gt;
+
+             &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Total Runs&lt;/p&gt;
+            &lt;p  style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_tot_activities}}&lt;/b&gt;&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Total Distance&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_tot_dist}}&lt;/b&gt; mi&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Total Time&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_tot_hrs}}&lt;/b&gt; hrs&lt;/p&gt;
+          &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Best Pace&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_max_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Longest Distance&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_max_dist}}&lt;/b&gt; mi&lt;/p&gt;
+          &lt;/div&gt;
+          
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Most Time&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_max_time}}&lt;/b&gt; hrs&lt;/p&gt;
+          &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Average Pace&lt;/p&gt; 
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_average_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Average Distance&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_average_dist}}&lt;/b&gt; mi&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Average Time&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_average_time}}&lt;/b&gt; hrs&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;/div&gt;
+
+            &lt;/mat-card-content&gt;
+          &lt;/mat-card&gt;
+    &lt;/div&gt;
+
+
+     &lt;div class&#x3D;&quot;column2&quot; *ngIf&#x3D;&quot;userStats.run_tot_activities &#x3D;&#x3D; 0 &amp;&amp; userStats.ride_tot_activities &gt; 0&quot;&gt;
+        &lt;mat-card class&#x3D;&quot;example-card&quot;&gt;
+            &lt;mat-card-header&gt;
+            &lt;!--  &lt;div mat-card-avatar style &#x3D; &quot;background-image: url(&lt;b&gt;{{userData.profile_url}}&lt;/b&gt;);
+  background-size: cover;&quot;&gt;&lt;/div&gt; --&gt;
+              &lt;mat-card-title&gt;Cycles &lt;i class&#x3D;&quot;material-icons&quot; style&#x3D;&quot;color:#BC164D;&quot;&gt;directions_bike&lt;/i&gt;&lt;/mat-card-title&gt;
+            &lt;/mat-card-header&gt;
+            &lt;mat-card-content&gt;
+
+             &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Total Cycles&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_tot_activities}}&lt;/b&gt;&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Total Distance&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_tot_dist}}&lt;/b&gt; mi&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Total Time&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_tot_hrs}}&lt;/b&gt; hrs&lt;/p&gt;
+          &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Best Pace&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_max_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Longest Distance&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_max_dist}}&lt;/b&gt; mi&lt;/p&gt;
+          &lt;/div&gt;
+          
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Most Time&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_max_time}}&lt;/b&gt; hrs&lt;/p&gt;
+          &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Average Pace&lt;/p&gt; 
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_average_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Average Distance&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_average_dist}}&lt;/b&gt; mi&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Average Time&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_average_time}}&lt;/b&gt; hrs&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;/div&gt;
+
+            &lt;/mat-card-content&gt;
+          &lt;/mat-card&gt;
+    &lt;/div&gt;
+
+    &lt;div class&#x3D;&quot;column2&quot; *ngIf&#x3D;&quot;userStats.run_tot_activities &gt; 0 &amp;&amp; userStats.ride_tot_activities &gt; 0&quot;&gt;
+        &lt;mat-card class&#x3D;&quot;example-card&quot;&gt;
+            &lt;mat-card-header&gt;
+            &lt;!--  &lt;div mat-card-avatar style &#x3D; &quot;background-image: url(&lt;b&gt;{{userData.profile_url}}&lt;/b&gt;);
+  background-size: cover;&quot;&gt;&lt;/div&gt; --&gt;
+              &lt;mat-card-title&gt;Stats&lt;/mat-card-title&gt;
+            &lt;/mat-card-header&gt;
+            &lt;mat-card-content&gt;
+
+            &lt;div class&#x3D;&quot;tab&quot;&gt;
+          &lt;button class&#x3D;&quot;tablinks&quot; (click)&#x3D;&quot;openStats(event, &#x27;run_stats&#x27;)&quot;&gt;Run Stats&lt;/button&gt;
+          &lt;button class&#x3D;&quot;tablinks&quot; (click)&#x3D;&quot;openStats(event, &#x27;ride_stats&#x27;)&quot;&gt;Ride Stats&lt;/button&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Tab content --&gt;
+
+        &lt;div id&#x3D;&quot;run_stats&quot; class&#x3D;&quot;tabcontent&quot; style&#x3D;&quot;display:block&quot;&gt;
+        &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Total Runs&lt;/p&gt;
+            &lt;p  style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_tot_activities}}&lt;/b&gt;&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Total Distance&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_tot_dist}}&lt;/b&gt; mi&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Total Time&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_tot_hrs}}&lt;/b&gt; hrs&lt;/p&gt;
+          &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Best Pace&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_max_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Longest Distance&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_max_dist}}&lt;/b&gt; mi&lt;/p&gt;
+          &lt;/div&gt;
+          
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Most Time&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_max_time}}&lt;/b&gt; hrs&lt;/p&gt;
+          &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Average Pace&lt;/p&gt; 
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_average_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Average Distance&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_average_dist}}&lt;/b&gt; mi&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Average Time&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_average_time}}&lt;/b&gt; hrs&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;/div&gt;
+          &lt;/div&gt;
+
+          &lt;div id&#x3D;&quot;ride_stats&quot; class&#x3D;&quot;tabcontent&quot;&gt;
+
+                         &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Total Cycles&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_tot_activities}}&lt;/b&gt;&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Total Distance&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_tot_dist}}&lt;/b&gt; mi&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Total Time&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_tot_hrs}}&lt;/b&gt; hrs&lt;/p&gt;
+          &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Best Pace&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_max_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Longest Distance&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_max_dist}}&lt;/b&gt; mi&lt;/p&gt;
+          &lt;/div&gt;
+          
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Most Time&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_max_time}}&lt;/b&gt; hrs&lt;/p&gt;
+          &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Average Pace&lt;/p&gt; 
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_average_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Average Distance&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_average_dist}}&lt;/b&gt; mi&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Average Time&lt;/p&gt;
+            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_average_time}}&lt;/b&gt; hrs&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;/div&gt;
+          &lt;/div&gt;
+
+            &lt;/mat-card-content&gt;
+          &lt;/mat-card&gt;
+    &lt;/div&gt;
+
+&lt;/div&gt;</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./user-stats.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  text-align: center;
+  width: 20.00%;
+  padding: 4px;
+  height: 80px; /* Should be removed. Only for demonstration */
+}
+
+.material-icons {
+  font-family: &#x27;Material Icons&#x27;;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-flex;
+  vertical-align: top;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: &#x27;liga&#x27;;
+}
+
+.column1 {
+  float: left;
+  text-align: center;
+  width: 33.00%;
+  padding: 4px;
+  height: 80px; /* Should be removed. Only for demonstration */
+}
+
+.column2 {
+  float: left;
+  text-align: center;
+  width: 50.00%;
+  padding: 4px;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.column_wide {
+  float: left;
+  text-align: center;
+  width: 99.00%;
+  padding: 4px;
+  height: 280px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: &quot;&quot;;
+  display: table;
+  clear: both;
+}
+
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="row">    <div class="column2">        <mat-card class="example-card">            <mat-card-header>            <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}}</b>);  background-size: cover;"></div> -->              <mat-card-title>Activities</mat-card-title>            </mat-card-header>            <mat-card-content>              <br>              <div>                <div *ngIf="userStats.run_tot_activities == 0 && userStats.ride_tot_activities==0">                  No running or cycling activities.                </div>             <canvas id="lineCharts"></canvas>           </div>             <br>            </mat-card-content>          </mat-card>    </div>     <div class="column2 " *ngIf="userStats.run_tot_activities > 0 && userStats.ride_tot_activities==0">        <mat-card class="example-card ">            <mat-card-header>            <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}}</b>);  background-size: cover;"></div> -->              <mat-card-title>Runs <i class="material-icons" style="color:#BC164D;">directions_run</i></mat-card-title>            </mat-card-header>            <mat-card-content>             <div class="row">          <div class="column1">            <p>Total Runs</p>            <p  style="color:#2C00A5;"><b>{{userStats.run_tot_activities}}</b></p>          </div>          <div class="column1">            <p>Total Distance</p>            <p style="color:#2C00A5;"><b>{{userStats.run_tot_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Total Time</p>            <p style="color:#2C00A5;"><b>{{userStats.run_tot_hrs}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Best Pace</p>            <p style="color:#2C00A5;"><b>{{userStats.run_max_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Longest Distance</p>            <p style="color:#2C00A5;"><b>{{userStats.run_max_dist}}</b> mi</p>          </div>                    <div class="column1">            <p>Most Time</p>            <p style="color:#2C00A5;"><b>{{userStats.run_max_time}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Average Pace</p>             <p style="color:#2C00A5;"><b>{{userStats.run_average_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Average Distance</p>            <p style="color:#2C00A5;"><b>{{userStats.run_average_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Average Time</p>            <p style="color:#2C00A5;"><b>{{userStats.run_average_time}}</b> hrs</p>          </div>          </div>            </mat-card-content>          </mat-card>    </div>     <div class="column2" *ngIf="userStats.run_tot_activities == 0 && userStats.ride_tot_activities > 0">        <mat-card class="example-card">            <mat-card-header>            <!--  <div mat-card-avatar style = "background-image: url(<b>{{userData.profile_url}}</b>);  background-size: cover;"></div> -->              <mat-card-title>Cycles <i class="material-icons" style="color:#BC164D;">directions_bike</i></mat-card-title>            </mat-card-header>            <mat-card-content>             <div class="row">          <div class="column1">            <p>Total Cycles</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_tot_activities}}</b></p>          </div>          <div class="column1">            <p>Total Distance</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_tot_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Total Time</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_tot_hrs}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Best Pace</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_max_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Longest Distance</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_max_dist}}</b> mi</p>          </div>                    <div class="column1">            <p>Most Time</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_max_time}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Average Pace</p>             <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_average_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Average Distance</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_average_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Average Time</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_average_time}}</b> hrs</p>          </div>          </div>            </mat-card-content>          </mat-card>    </div>    <div class="column2" *ngIf="userStats.run_tot_activities > 0 && userStats.ride_tot_activities > 0">        <mat-card class="example-card">            <mat-card-header>            <!--  <div mat-card-avatar style = "background-image: url(<b>{{userData.profile_url}}</b>);  background-size: cover;"></div> -->              <mat-card-title>Stats</mat-card-title>            </mat-card-header>            <mat-card-content>            <div class="tab">          <button class="tablinks" (click)="openStats(event, \'run_stats\')">Run Stats</button>          <button class="tablinks" (click)="openStats(event, \'ride_stats\')">Ride Stats</button>        </div>        <!-- Tab content -->        <div id="run_stats" class="tabcontent" style="display:block">        <div class="row">          <div class="column1">            <p>Total Runs</p>            <p  style="color:#2C00A5;"><b>{{userStats.run_tot_activities}}</b></p>          </div>          <div class="column1">            <p>Total Distance</p>            <p style="color:#2C00A5;"><b>{{userStats.run_tot_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Total Time</p>            <p style="color:#2C00A5;"><b>{{userStats.run_tot_hrs}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Best Pace</p>            <p style="color:#2C00A5;"><b>{{userStats.run_max_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Longest Distance</p>            <p style="color:#2C00A5;"><b>{{userStats.run_max_dist}}</b> mi</p>          </div>                    <div class="column1">            <p>Most Time</p>            <p style="color:#2C00A5;"><b>{{userStats.run_max_time}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Average Pace</p>             <p style="color:#2C00A5;"><b>{{userStats.run_average_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Average Distance</p>            <p style="color:#2C00A5;"><b>{{userStats.run_average_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Average Time</p>            <p style="color:#2C00A5;"><b>{{userStats.run_average_time}}</b> hrs</p>          </div>          </div>          </div>          <div id="ride_stats" class="tabcontent">                         <div class="row">          <div class="column1">            <p>Total Cycles</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_tot_activities}}</b></p>          </div>          <div class="column1">            <p>Total Distance</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_tot_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Total Time</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_tot_hrs}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Best Pace</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_max_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Longest Distance</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_max_dist}}</b> mi</p>          </div>                    <div class="column1">            <p>Most Time</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_max_time}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Average Pace</p>             <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_average_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Average Distance</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_average_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Average Time</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_average_time}}</b> hrs</p>          </div>          </div>          </div>            </mat-card-content>          </mat-card>    </div></div></div>'
+    var COMPONENTS = [{'name': 'ActivitiesMenuComponent', 'selector': 'app-activities-menu'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'CommentsFormComponent', 'selector': 'app-comments-form'},{'name': 'ContactHelpComponent', 'selector': 'app-contact-help'},{'name': 'ContactHelpDialogContent', 'selector': 'app-contact-help-dialog-content'},{'name': 'FaqHelpComponent', 'selector': 'app-faq-help'},{'name': 'FaqHelpDialogContent', 'selector': 'app-faq-help-dialog-content'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'LeaderboardComponent', 'selector': 'app-leaderboard'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManualEntryComponent', 'selector': 'app-manual-entry'},{'name': 'ManualInstructionsComponent', 'selector': 'app-manual-instructions'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationPanelComponent', 'selector': 'app-notification-panel'},{'name': 'PasswordChangeComponent', 'selector': 'app-password-change'},{'name': 'PasswordRequestComponent', 'selector': 'app-password-request'},{'name': 'PaypalComponent', 'selector': 'app-paypal'},{'name': 'PopupComponent', 'selector': 'app-popup'},{'name': 'ProfileFormComponent', 'selector': 'app-profile-form'},{'name': 'ProfilePicComponent', 'selector': 'app-profile-pic'},{'name': 'RaceAboutComponent', 'selector': 'app-race-about'},{'name': 'RaceComponent', 'selector': 'app-race'},{'name': 'RaceCreateComponent', 'selector': 'app-race-create'},{'name': 'RaceDayComponent', 'selector': 'app-race-day'},{'name': 'RaceDayDialogContent', 'selector': 'app-race-day-dialog-content'},{'name': 'RaceMenuComponent', 'selector': 'app-race-menu'},{'name': 'RacesComponent', 'selector': 'app-races'},{'name': 'RaceSettingsComponent', 'selector': 'app-race-settings'},{'name': 'RaceViewComponent', 'selector': 'app-race-view'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RoutePinDialogComponent', 'selector': 'app-route-pin-dialog'},{'name': 'ShippingAddressComponent', 'selector': 'app-shipping-address'},{'name': 'ShippingAddressFormComponent', 'selector': 'app-shipping-address-form'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SignupDialogContent', 'selector': 'signup-dialog-content'},{'name': 'SmilesComponent', 'selector': 'app-smiles'},{'name': 'SnackbarComponent', 'selector': 'app-snackbar'},{'name': 'StoryBtnComponent', 'selector': 'app-story-btn'},{'name': 'StoryDialogComponent', 'selector': 'app-story-dialog'},{'name': 'StoryFormComponent', 'selector': 'app-story-form'},{'name': 'StoryModalComponent', 'selector': 'app-story-modal'},{'name': 'StravaInstructionsComponent', 'selector': 'app-strava-instructions'},{'name': 'StravauthComponent', 'selector': 'app-stravauth'},{'name': 'SwagComponent', 'selector': 'app-swag'},{'name': 'SwagDialogContent', 'selector': 'swag-dialog-content'},{'name': 'TeamFormComponent', 'selector': 'app-team-form'},{'name': 'TeamInstructionsComponent', 'selector': 'app-team-instructions'},{'name': 'TeamListComponent', 'selector': 'app-team-list'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'TermsOfServiceDialogContent', 'selector': 'app-terms-of-service-dialog-content'},{'name': 'UserFollowComponent', 'selector': 'app-user-follow'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserProfileNavComponent', 'selector': 'app-user-profile-nav'},{'name': 'UserProgressComponent', 'selector': 'app-user-progress'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserStatsComponent', 'selector': 'app-user-stats'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'UserStatsComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'UserStatsComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

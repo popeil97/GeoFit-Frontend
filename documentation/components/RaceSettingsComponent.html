@@ -1,0 +1,938 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>geo-fit documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">geo-fit documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>RaceSettingsComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/race-settings/race-settings.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
+                    <code><a href="https://angular.io/api/core/OnChanges" target="_blank" >OnChanges</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-race-settings</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./race-settings.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./race-settings.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ageRangeOptions">ageRangeOptions</a>
+                            </li>
+                            <li>
+                                <a href="#settingsForm">settingsForm</a>
+                            </li>
+                            <li>
+                                <a href="#successfulUpdate">successfulUpdate</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#apply">apply</a>
+                            </li>
+                            <li>
+                                <a href="#initForm">initForm</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit">ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnChanges">ngOnChanges</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#userSettings">userSettings</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(_usersService: <a href="../injectables/UsersService.html">UsersService</a>, _raceview: <a href="../components/RaceViewComponent.html">RaceViewComponent</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/race-settings/race-settings.component.ts:16</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>_usersService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/UsersService.html" target="_self" >UsersService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_raceview</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../components/RaceViewComponent.html" target="_self" >RaceViewComponent</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="userSettings"></a>
+                        <b>userSettings</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/UserSettings.html" target="_self" >UserSettings</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{} as UserSettings</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/race-settings/race-settings.component.ts:12</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="apply"></a>
+                    <span class="name">
+                        <b>
+                            apply
+                        </b>
+                        <a href="#apply"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>apply()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="75"
+                            class="link-to-prism">src/app/race-settings/race-settings.component.ts:75</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initForm"></a>
+                    <span class="name">
+                        <b>
+                            initForm
+                        </b>
+                        <a href="#initForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>initForm()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="121"
+                            class="link-to-prism">src/app/race-settings/race-settings.component.ts:121</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngAfterViewInit"></a>
+                    <span class="name">
+                        <b>
+                            ngAfterViewInit
+                        </b>
+                        <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="71"
+                            class="link-to-prism">src/app/race-settings/race-settings.component.ts:71</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnChanges"></a>
+                    <span class="name">
+                        <b>
+                            ngOnChanges
+                        </b>
+                        <a href="#ngOnChanges"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnChanges(changes: <a href="https://angular.io/api/core/SimpleChanges" target="_blank">SimpleChanges</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="45"
+                            class="link-to-prism">src/app/race-settings/race-settings.component.ts:45</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>changes</td>
+                                    <td>
+                                                <code><a href="https://angular.io/api/core/SimpleChanges" target="_blank" >SimpleChanges</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ageRangeOptions"></a>
+                        <span class="name">
+                            <b>
+                            ageRangeOptions</b>
+                            <a href="#ageRangeOptions"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>any[]</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/race-settings/race-settings.component.ts:16</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="settingsForm"></a>
+                        <span class="name">
+                            <b>
+                            settingsForm</b>
+                            <a href="#settingsForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/race-settings/race-settings.component.ts:13</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="successfulUpdate"></a>
+                        <span class="name">
+                            <b>
+                            successfulUpdate</b>
+                            <a href="#successfulUpdate"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/race-settings/race-settings.component.ts:14</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input, AfterViewInit, OnChanges, SimpleChanges } from &#x27;@angular/core&#x27;;
+import { FormControl,FormGroup, Validators } from &#x27;@angular/forms&#x27;;
+import { UsersService } from &#x27;../users.service&#x27;;
+import { RaceViewComponent } from &#x27;../race-view/race-view.component&#x27;;
+
+@Component({
+  selector: &#x27;app-race-settings&#x27;,
+  templateUrl: &#x27;./race-settings.component.html&#x27;,
+  styleUrls: [&#x27;./race-settings.component.css&#x27;]
+})
+export class RaceSettingsComponent implements AfterViewInit,OnChanges {
+  @Input() userSettings:UserSettings &#x3D; {} as UserSettings;
+  settingsForm:FormGroup;
+  successfulUpdate:Boolean &#x3D; false;
+
+  ageRangeOptions: any[];
+
+  constructor(private _usersService:UsersService, private _raceview:RaceViewComponent) { 
+
+    this.settingsForm &#x3D; new FormGroup({
+      isAutomaticImport: new FormControl(&#x27;&#x27;,[
+        Validators.required, 
+      ]),
+      heatMapOn: new FormControl(&#x27;&#x27;,[
+        Validators.required,
+      ]),
+      followerPinsOnly: new FormControl(false, [
+        Validators.required,
+      ]),
+      malePinsOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      femalePinsOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      allAgesOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      ageRange: new FormControl(-1),
+    });
+
+    this.ageRangeOptions &#x3D; [&#x27;0-19&#x27;, &#x27;20-34&#x27;, &#x27;35-49&#x27;, &#x27;50-64&#x27;, &#x27;65-79&#x27;, &#x27;80-&#x27;];
+    
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+
+    for(const propName in changes) {
+      if(changes.hasOwnProperty(propName)) {
+
+        switch(propName) {
+          case &#x27;userSettings&#x27;:
+            console.log(&#x27;SETTINGS CHANGED&#x27;);
+            if(changes.userSettings.currentValue !&#x3D; undefined) {
+              this.initForm();
+            }
+        }
+      }
+    }
+
+    this.settingsForm.get(&#x27;allAgesOn&#x27;).valueChanges
+      .subscribe(value &#x3D;&gt; {
+          if (value &#x3D;&#x3D; true) {
+            this.settingsForm.get(&#x27;ageRange&#x27;).disable();
+          }
+          else {
+            this.settingsForm.get(&#x27;ageRange&#x27;).enable();
+          }
+      });
+    
+  }
+  ngAfterViewInit(): void {
+    
+  }
+
+  apply(): void {
+    let formClean &#x3D; this.settingsForm.value as UserSettings;
+    console.log(this.settingsForm);
+    let isValid: Boolean &#x3D; this.settingsForm.valid;
+
+    if(isValid) {
+      
+      formClean.race_id &#x3D; this.userSettings.race_id;
+
+      console.log(&#x27;clean:&#x27;,formClean);
+
+      this._usersService.updateUserRaceSetting(formClean).then((resp) &#x3D;&gt; {
+        console.log(&#x27;SETTINGS UPDATE:&#x27;,resp);
+        this.successfulUpdate &#x3D; true;
+      });
+
+      // if(this.settingsForm.value.heatMapOn &#x3D;&#x3D; true)
+      // {
+      //   this._raceview.createUserHeatPins();
+      // }
+      // else
+      // {
+      //   this._raceview.createUserPins();
+      // }
+
+      let pinSettings &#x3D; this.settingsForm.value as PinSettings;
+
+      if (!this.settingsForm.value.allAgesOn){
+        let ages &#x3D; this.settingsForm.value.ageRange.split(&quot;-&quot;);
+
+        pinSettings.minAge &#x3D; ages[0];
+        
+        if (ages.length &#x3D;&#x3D; 2){
+          pinSettings.maxAge &#x3D; ages[1];
+        }
+        else{
+          //Sorry to everybody in the race aged 1000 and older
+          pinSettings.maxAge &#x3D; 1000;
+        }
+      }
+
+      this._raceview.showPinsFromSettings(pinSettings);
+
+    }
+  }
+
+  initForm(): void {
+    console.log(&#x27;Automatic import value:&#x27;,this.userSettings.isAutomaticImport);
+    console.log(&#x27;Heatmap value:&#x27;,this.userSettings.heatMapOn);
+    this.settingsForm &#x3D; new FormGroup({
+      isAutomaticImport: new FormControl(this.userSettings.isAutomaticImport,[
+        Validators.required,
+      ]),
+      heatMapOn: new FormControl(false,[
+        Validators.required,
+      ]),
+      followerPinsOnly: new FormControl(false, [
+        Validators.required,
+      ]),
+      malePinsOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      femalePinsOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      allAgesOn: new FormControl(true, [
+        Validators.required,
+      ]),
+      ageRange: new FormControl(-1),
+    });
+
+    //Disable age control by default
+    this.settingsForm.get(&#x27;ageRange&#x27;).disable();
+
+    console.log(&#x27;form value:&#x27;,this.settingsForm);
+  }
+
+}
+
+interface UserSettings {
+  isAutomaticImport:Boolean;
+  heatMapOn:Boolean;
+  race_id:number;
+}
+
+interface PinSettings {
+  followerPinsOnly: boolean;
+  malePinsOn: boolean;
+  femalePinsOn: boolean;
+  allAgesOn: boolean;
+  minAge: number;
+  maxAge: number;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container&quot; &gt;
+    &lt;form [formGroup]&#x3D;&quot;settingsForm&quot;&gt;
+
+      &lt;h3&gt;Activities&lt;/h3&gt;
+      &lt;div class&#x3D;&quot;form-group&quot; style&#x3D;&quot;padding-left:25px;&quot;&gt;
+        &lt;mat-slide-toggle formControlName&#x3D;&quot;isAutomaticImport&quot;&gt;Automatic Activity Import&lt;/mat-slide-toggle&gt;
+      &lt;/div&gt;
+
+    &lt;!--  &lt;h3&gt;Heat Map&lt;/h3&gt;
+      &lt;div class&#x3D;&quot;form-group&quot;&gt;
+        &lt;mat-slide-toggle formControlName&#x3D;&quot;heatMapOn&quot;&gt;Heat Map On&lt;/mat-slide-toggle&gt;
+      &lt;/div&gt; --&gt;
+      
+      &lt;h3&gt;Toggle Pins by Gender&lt;/h3&gt;
+      &lt;div class&#x3D;&quot;form-group&quot;&gt;
+        &lt;mat-slide-toggle formControlName&#x3D;&quot;malePinsOn&quot; style&#x3D;&quot;padding-left:25px;&quot;&gt;Male Pins On&lt;/mat-slide-toggle&gt;
+        &lt;mat-slide-toggle formControlName&#x3D;&quot;femalePinsOn&quot; style&#x3D;&quot;padding-left:10px;&quot;&gt;Female Pins On&lt;/mat-slide-toggle&gt;
+      &lt;/div&gt;
+
+      &lt;h3&gt;Toggle Pins by Age&lt;/h3&gt;
+      &lt;div class&#x3D;&quot;form-group&quot; style&#x3D;&quot;padding-left:25px;&quot;&gt;
+        &lt;mat-slide-toggle formControlName&#x3D;&quot;allAgesOn&quot; &gt;Show All Ages&lt;/mat-slide-toggle&gt;
+        &lt;br&gt;
+        &lt;div style&#x3D;&quot;display: inline-block&quot;&gt;
+          &lt;select class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;ageRange&quot; style&#x3D;&quot;display: inline-block&quot;&gt;
+            &lt;option class&#x3D;&quot;dropdown-placeholder&quot; style&#x3D;&quot;display: none&quot; value&#x3D;&quot;-1&quot;&gt;Select Age&lt;/option&gt;
+            &lt;option *ngFor&#x3D;&quot;let ageRange of ageRangeOptions&quot; [value]&#x3D;&quot;ageRange&quot;&gt;
+              {{ ageRange }}
+            &lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;h3&gt;Show Follower Pins Only&lt;/h3&gt;
+      &lt;div class&#x3D;&quot;form-group&quot;&gt;
+        &lt;mat-slide-toggle formControlName&#x3D;&quot;followerPinsOnly&quot; style&#x3D;&quot;padding-left:25px;&quot;&gt;Follower Pins On&lt;/mat-slide-toggle&gt;
+      &lt;/div&gt;
+
+    &lt;/form&gt;
+
+      &lt;button mat-button class&#x3D;&quot;btn btn-primary btn-mobile&quot; (click)&#x3D;&quot;apply()&quot; style&#x3D;&quot;background-color:#2C007E&quot;&gt;Apply&lt;/button&gt;
+      
+      &lt;div&gt;
+        &lt;br&gt;
+        &lt;br&gt;
+      &lt;div *ngIf&#x3D;&quot;successfulUpdate&quot;
+    class&#x3D;&quot;alert alert-primary&quot;&gt;
+    
+    &lt;div&gt;
+       Successfully Applied
+    &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;/div&gt;
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./race-settings.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.material-icons {
+  font-family: &#x27;Material Icons&#x27;;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-flex;
+  vertical-align: top;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: &#x27;liga&#x27;;
+}
+
+@media only screen and (max-width:1024px) {
+.btn-mobile
+   {
+    font-size:50px;padding:15px;
+   }
+   }</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="container" >    <form [formGroup]="settingsForm">      <h3>Activities</h3>      <div class="form-group" style="padding-left:25px;">        <mat-slide-toggle formControlName="isAutomaticImport">Automatic Activity Import</mat-slide-toggle>      </div>    <!--  <h3>Heat Map</h3>      <div class="form-group">        <mat-slide-toggle formControlName="heatMapOn">Heat Map On</mat-slide-toggle>      </div> -->            <h3>Toggle Pins by Gender</h3>      <div class="form-group">        <mat-slide-toggle formControlName="malePinsOn" style="padding-left:25px;">Male Pins On</mat-slide-toggle>        <mat-slide-toggle formControlName="femalePinsOn" style="padding-left:10px;">Female Pins On</mat-slide-toggle>      </div>      <h3>Toggle Pins by Age</h3>      <div class="form-group" style="padding-left:25px;">        <mat-slide-toggle formControlName="allAgesOn" >Show All Ages</mat-slide-toggle>        <br>        <div style="display: inline-block">          <select class="form-control" formControlName="ageRange" style="display: inline-block">            <option class="dropdown-placeholder" style="display: none" value="-1">Select Age</option>            <option *ngFor="let ageRange of ageRangeOptions" [value]="ageRange">              {{ ageRange }}            </option>          </select>        </div>      </div>      <h3>Show Follower Pins Only</h3>      <div class="form-group">        <mat-slide-toggle formControlName="followerPinsOnly" style="padding-left:25px;">Follower Pins On</mat-slide-toggle>      </div>    </form>      <button mat-button class="btn btn-primary btn-mobile" (click)="apply()" style="background-color:#2C007E">Apply</button>            <div>        <br>        <br>      <div *ngIf="successfulUpdate"    class="alert alert-primary">        <div>       Successfully Applied    </div>    </div>  </div>  </div></div>'
+    var COMPONENTS = [{'name': 'ActivitiesMenuComponent', 'selector': 'app-activities-menu'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'CommentsFormComponent', 'selector': 'app-comments-form'},{'name': 'ContactHelpComponent', 'selector': 'app-contact-help'},{'name': 'ContactHelpDialogContent', 'selector': 'app-contact-help-dialog-content'},{'name': 'FaqHelpComponent', 'selector': 'app-faq-help'},{'name': 'FaqHelpDialogContent', 'selector': 'app-faq-help-dialog-content'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'LeaderboardComponent', 'selector': 'app-leaderboard'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManualEntryComponent', 'selector': 'app-manual-entry'},{'name': 'ManualInstructionsComponent', 'selector': 'app-manual-instructions'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationPanelComponent', 'selector': 'app-notification-panel'},{'name': 'PasswordChangeComponent', 'selector': 'app-password-change'},{'name': 'PasswordRequestComponent', 'selector': 'app-password-request'},{'name': 'PaypalComponent', 'selector': 'app-paypal'},{'name': 'PopupComponent', 'selector': 'app-popup'},{'name': 'ProfileFormComponent', 'selector': 'app-profile-form'},{'name': 'ProfilePicComponent', 'selector': 'app-profile-pic'},{'name': 'RaceAboutComponent', 'selector': 'app-race-about'},{'name': 'RaceComponent', 'selector': 'app-race'},{'name': 'RaceCreateComponent', 'selector': 'app-race-create'},{'name': 'RaceDayComponent', 'selector': 'app-race-day'},{'name': 'RaceDayDialogContent', 'selector': 'app-race-day-dialog-content'},{'name': 'RaceMenuComponent', 'selector': 'app-race-menu'},{'name': 'RacesComponent', 'selector': 'app-races'},{'name': 'RaceSettingsComponent', 'selector': 'app-race-settings'},{'name': 'RaceViewComponent', 'selector': 'app-race-view'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RoutePinDialogComponent', 'selector': 'app-route-pin-dialog'},{'name': 'ShippingAddressComponent', 'selector': 'app-shipping-address'},{'name': 'ShippingAddressFormComponent', 'selector': 'app-shipping-address-form'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SignupDialogContent', 'selector': 'signup-dialog-content'},{'name': 'SmilesComponent', 'selector': 'app-smiles'},{'name': 'SnackbarComponent', 'selector': 'app-snackbar'},{'name': 'StoryBtnComponent', 'selector': 'app-story-btn'},{'name': 'StoryDialogComponent', 'selector': 'app-story-dialog'},{'name': 'StoryFormComponent', 'selector': 'app-story-form'},{'name': 'StoryModalComponent', 'selector': 'app-story-modal'},{'name': 'StravaInstructionsComponent', 'selector': 'app-strava-instructions'},{'name': 'StravauthComponent', 'selector': 'app-stravauth'},{'name': 'SwagComponent', 'selector': 'app-swag'},{'name': 'SwagDialogContent', 'selector': 'swag-dialog-content'},{'name': 'TeamFormComponent', 'selector': 'app-team-form'},{'name': 'TeamInstructionsComponent', 'selector': 'app-team-instructions'},{'name': 'TeamListComponent', 'selector': 'app-team-list'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'TermsOfServiceDialogContent', 'selector': 'app-terms-of-service-dialog-content'},{'name': 'UserFollowComponent', 'selector': 'app-user-follow'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserProfileNavComponent', 'selector': 'app-user-profile-nav'},{'name': 'UserProgressComponent', 'selector': 'app-user-progress'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserStatsComponent', 'selector': 'app-user-stats'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'RaceSettingsComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'RaceSettingsComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

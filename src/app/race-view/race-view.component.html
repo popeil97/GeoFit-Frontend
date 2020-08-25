@@ -65,7 +65,7 @@
         <div *ngIf="!raceSettings.isManualEntry">
             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
             <h4 *ngIf="userRaceSettings.isAutomaticImport" style="text-align:center;font-family:Roboto; color:#2C007E;"> You have auto import turned on!</h4>
-            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu><br><br><br><br><br><br>
+            <app-activities-menu *ngIf="this.progress" [distance_unit]="progress.distance_type" [race_id]="raceID" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-activities-menu><br><br><br><br><br><br>
         </div>
 
         <div *ngIf="num_activities==0">
@@ -79,7 +79,7 @@
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
              <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
              <h4 *ngIf="userRaceSettings.isAutomaticImport" style="text-align:center;font-family:Roboto; color:#2C007E;"> You have auto import turned on!</h4>
-            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu><br><br><br><br><br><br>
+             <app-activities-menu *ngIf="this.progress" [distance_unit]="progress.distance_type" [race_id]="raceID" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-activities-menu><br><br><br><br><br><br>
           </mat-tab>
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
@@ -104,7 +104,7 @@
             <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
              <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
              <h4 *ngIf="userRaceSettings.isAutomaticImport" style="text-align:center;font-family:Roboto; color:#2C007E;"> You have auto import turned on!</h4>
-            <app-activities-menu *ngIf="this.progress" [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs()"></app-activities-menu><br><br><br><br><br><br>
+             <app-activities-menu *ngIf="this.progress" [distance_unit]="progress.distance_type" [race_id]="raceID" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-activities-menu><br><br><br><br><br><br>
           </mat-tab>
           <mat-tab *ngIf="raceSettings.isManualEntry">
             <ng-template mat-tab-label>
@@ -138,7 +138,7 @@
             <div class="tabs1">Individuals</div>
           </ng-template>
           <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Leaderboard</b></h3></b>
-          <app-leaderboard [leaderboard]="leaderboard"  [allowFollow]="true"></app-leaderboard><br><br><br><br><br><br>
+          <app-leaderboard [raceID]="raceID" [use]="'individual'"  [allowFollow]="true"></app-leaderboard><br><br><br><br><br><br>
           </mat-tab>
           
           <mat-tab label="not teams">
@@ -147,7 +147,7 @@
               <div class="tabs1">Teams</div>
             </ng-template>
             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Teams Leaderboard</b></h3></b>
-            <app-leaderboard [leaderboard]="teamLeaderboard" [allowFollow]="false"></app-leaderboard><br><br><br><br><br><br>
+            <app-leaderboard [raceID]="raceID" [use]="'teams'" [allowFollow]="false"></app-leaderboard><br><br><br><br><br><br>
           </mat-tab>
      </mat-tab-group>
 
@@ -162,11 +162,11 @@
         <button class="btn btn-primary btn-mobile" style="width: 100%; text-align: center; background-color:#2C00A5;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">Add Team</button>
             <button class="btn btn-danger" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm('clear')" *ngIf="showTeamForm">Cancel</button>
             <div *ngIf="!showTeamForm">   
-              <app-team-list [teams]="teams" [userStat]="userStat" (callback)="getRaceState($event)" (edit)="editTeamForm($event)"></app-team-list>
+              <app-team-list [race_id]="raceID" [userStat]="userStat" (callback)="refreshAllComponents($event)" (edit)="editTeamForm($event)"></app-team-list>
             </div>
 
             <div *ngIf="showTeamForm">
-              <app-team-form (callback)="getRaceState($event)" [teamEditForm]="teamEditForm"></app-team-form><br><br><br><br><br><br>
+              <app-team-form (callback)="refreshAllComponents($event)" [teamEditForm]="teamEditForm"></app-team-form><br><br><br><br><br><br>
             </div>
       </mat-tab>
       <mat-tab>
@@ -185,7 +185,7 @@
 
    
   <mat-sidenav-content>
-    <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true" [followedIDs]="followedIDs" [routePins]="routePins"></app-map>
+    <app-map [raceID]="raceID" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
     <div  *ngIf="changeArrow">
     <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 0px;">
         <br>

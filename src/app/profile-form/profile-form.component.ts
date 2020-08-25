@@ -43,8 +43,6 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log("Calling populate form");
-    console.log("USER DATA, profile", this.userData);
     this.populateForm();
   }
 

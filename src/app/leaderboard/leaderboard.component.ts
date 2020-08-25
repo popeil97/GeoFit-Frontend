@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { LeaderboardService } from '../leaderboard.service';
 
 @Component({
   selector: 'app-leaderboard',
@@ -6,18 +7,73 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./leaderboard.component.css']
 })
 export class LeaderboardComponent implements OnInit {
+  //@Input() leaderboard:LeaderboardItem[];
 
-  private columns:string[] = ['Rank','ProfilePic','Name','Distance','Follow'];
-  @Input() leaderboard:LeaderboardItem[];
+  //Can be 'teams' or 'individual'
+  @Input() use: string;
+  @Input() raceID: number;
   @Input() allowFollow: Boolean = false;
 
-  constructor() {
+  public columns:string[] = ['Rank','ProfilePic','Name','Distance','Follow'];
+  public leaderboard: LeaderboardItem[];
+
+  private initialized: boolean = false;
+
+  constructor(private _leaderboardService: LeaderboardService) {
   }
 
   ngOnInit() {
+    this._leaderboardService.raceID = this.raceID;
+    this.getLeaderboard();
+
+    this.initialized = true;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    //Check if user or race ID changes between hops
+    //If yes, we need to pull new data
+
+    if (this.initialized){
+      for(const propName in changes) {
+        if(changes.hasOwnProperty(propName)) {
+
+          switch(propName) {
+            case 'raceID':
+              if(changes.ID.currentValue != undefined) {
+                this._leaderboardService.raceID = this.raceID;
+                this.getLeaderboard();
+              }
+          }
+        }
+      }
+    }
 
   }
 
+  getLeaderboard(){
+    var leaderboardData;
+    console.log("GETTING LEADERBOARD");
+    
+    if (this.use == 'individual'){
+      this._leaderboardService.getIndividualLeaderboard().then((data) => {
+        leaderboardData = data as LeaderboardStruct;
+        this.leaderboard = this.configureLeaderboard(leaderboardData.unranked,leaderboardData.ranked);;
+      })
+    }
+
+    else if (this.use == 'teams'){
+      this._leaderboardService.getTeamLeaderboard().then((data) => {
+        leaderboardData = data as LeaderboardStruct;
+        this.leaderboard = this.configureLeaderboard(leaderboardData.unranked,leaderboardData.ranked);;
+      })
+    }
+
+  }
+
+  configureLeaderboard(ranked:any[],unranked:any[]) {
+    console.log("RANKE BOARD:",unranked.concat(ranked));
+    return unranked.concat(ranked)
+  }
 
 }
 
@@ -27,4 +83,9 @@ export interface LeaderboardItem {
   profile_url: string,
   total_distance:number;
   total_time:number;
+}
+
+export interface LeaderboardStruct {
+  ranked: LeaderboardItem[];
+  unranked: LeaderboardItem[];
 }

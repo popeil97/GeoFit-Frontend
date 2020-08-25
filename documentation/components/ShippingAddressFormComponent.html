@@ -1,0 +1,846 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>geo-fit documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">geo-fit documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>ShippingAddressFormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/shipping-address-form/shipping-address-form.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-shipping-address-form</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./shipping-address-form.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./shipping-address-form.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addressForm">addressForm</a>
+                            </li>
+                            <li>
+                                <a href="#pendingAddress">pendingAddress</a>
+                            </li>
+                            <li>
+                                <a href="#showPendingAddress">showPendingAddress</a>
+                            </li>
+                            <li>
+                                <a href="#stateOptions">stateOptions</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#submitConfirmedAddress">submitConfirmedAddress</a>
+                            </li>
+                            <li>
+                                <a href="#validateAddress">validateAddress</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#address">address</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addressChanged">addressChanged</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(_shippingService: <a href="../injectables/USPSShippingService.html">USPSShippingService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shipping-address-form/shipping-address-form.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>_shippingService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/USPSShippingService.html" target="_self" >USPSShippingService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="address"></a>
+                        <b>address</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Address.html" target="_self" >Address</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/shipping-address-form/shipping-address-form.component.ts:11</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+    <section>
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="addressChanged"></a>
+                        <b>addressChanged</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Event.html" target="_self" >EventEmitter&lt;void&gt;</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/shipping-address-form/shipping-address-form.component.ts:14</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="52"
+                            class="link-to-prism">src/app/shipping-address-form/shipping-address-form.component.ts:52</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="submitConfirmedAddress"></a>
+                    <span class="name">
+                        <b>
+                            submitConfirmedAddress
+                        </b>
+                        <a href="#submitConfirmedAddress"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>submitConfirmedAddress()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="76"
+                            class="link-to-prism">src/app/shipping-address-form/shipping-address-form.component.ts:76</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="validateAddress"></a>
+                    <span class="name">
+                        <b>
+                            validateAddress
+                        </b>
+                        <a href="#validateAddress"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>validateAddress()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="55"
+                            class="link-to-prism">src/app/shipping-address-form/shipping-address-form.component.ts:55</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="addressForm"></a>
+                        <span class="name">
+                            <b>
+                            addressForm</b>
+                            <a href="#addressForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://angular.io/api/forms/FormGroup" target="_blank" >FormGroup</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/shipping-address-form/shipping-address-form.component.ts:23</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="pendingAddress"></a>
+                        <span class="name">
+                            <b>
+                            pendingAddress</b>
+                            <a href="#pendingAddress"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/Address.html" target="_self" >Address</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/shipping-address-form/shipping-address-form.component.ts:17</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showPendingAddress"></a>
+                        <span class="name">
+                            <b>
+                            showPendingAddress</b>
+                            <a href="#showPendingAddress"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/shipping-address-form/shipping-address-form.component.ts:20</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="stateOptions"></a>
+                        <span class="name">
+                            <b>
+                            stateOptions</b>
+                            <a href="#stateOptions"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>string[]</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/shipping-address-form/shipping-address-form.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input,Output, EventEmitter } from &#x27;@angular/core&#x27;;
+import { USPSShippingService } from &#x27;../usps-shipping&#x27;;
+import { FormGroup, FormControl, Validators } from &#x27;@angular/forms&#x27;;
+
+@Component({
+  selector: &#x27;app-shipping-address-form&#x27;,
+  templateUrl: &#x27;./shipping-address-form.component.html&#x27;,
+  styleUrls: [&#x27;./shipping-address-form.component.css&#x27;]
+})
+export class ShippingAddressFormComponent implements OnInit {
+  @Input() address: Address;
+  
+  //Emit to parent component when address change is complete
+  @Output() addressChanged: EventEmitter&lt;void&gt; &#x3D; new EventEmitter();
+
+  //Pending address which user must confirm
+  pendingAddress: Address;
+
+  //Switch to show pending address after form submit
+  showPendingAddress: boolean;
+
+
+  addressForm: FormGroup;
+
+  stateOptions: string[];
+
+  constructor(private _shippingService: USPSShippingService) { 
+    this.stateOptions &#x3D; [&#x27;AL&#x27;, &#x27;AK&#x27;, &#x27;AZ&#x27;, &#x27;AR&#x27;, &#x27;CA&#x27;, &#x27;CO&#x27;, &#x27;CT&#x27;, &#x27;DE&#x27;, &#x27;FL&#x27;, &#x27;GA&#x27;, &#x27;HI&#x27;, &#x27;ID&#x27;, &#x27;IL&#x27;, &#x27;IN&#x27;, 
+        &#x27;IA&#x27;, &#x27;IA&#x27;, &#x27;KS&#x27;, &#x27;KY&#x27;, &#x27;LA&#x27;, &#x27;ME&#x27;, &#x27;MD&#x27;, &#x27;MA&#x27;, &#x27;MI&#x27;, &#x27;MN&#x27;, &#x27;MS&#x27;, &#x27;MO&#x27;, &#x27;MT&#x27;, &#x27;NE&#x27;, &#x27;NV&#x27;, &#x27;NH&#x27;, &#x27;NJ&#x27;, 
+        &#x27;NM&#x27;, &#x27;NY&#x27;, &#x27;NC&#x27;, &#x27;ND&#x27;, &#x27;OH&#x27;, &#x27;OK&#x27;, &#x27;OR&#x27;, &#x27;PA&#x27;, &#x27;RI&#x27;, &#x27;SC&#x27;, &#x27;SD&#x27;, &#x27;TN&#x27;, &#x27;TX&#x27;, &#x27;UT&#x27;, &#x27;VT&#x27;, &#x27;VA&#x27;, &#x27;WA&#x27;, 
+        &#x27;WV&#x27;, &#x27;WI&#x27;, &#x27;WY&#x27;]
+
+    this.addressForm &#x3D; new FormGroup({
+      address1: new FormControl(&#x27;&#x27;, [
+        Validators.maxLength(50)
+      ]),
+      address2: new FormControl(&#x27;&#x27;, [
+        Validators.maxLength(50)
+      ]),
+      city: new FormControl(&#x27;&#x27;, [
+        Validators.maxLength(20)
+      ]),
+      state: new FormControl(&#x27;&#x27;),
+      zip5: new FormControl(&#x27;&#x27;, [
+        Validators.maxLength(5)
+      ]),
+    })
+
+    this.showPendingAddress &#x3D; false;
+  }
+
+  ngOnInit() {
+  }
+
+  validateAddress(): void {
+    let formClean: Address;
+
+    if (this.addressForm.valid){
+      formClean &#x3D; this.addressForm.value;
+
+      this._shippingService.validateAddress(formClean).then(response &#x3D;&gt; {
+        console.log(&quot;Response from USPS&quot;);
+        console.log(response);
+        this.pendingAddress &#x3D; response[&#x27;address&#x27;] as Address;
+        console.log(this.pendingAddress);
+
+        this.showPendingAddress &#x3D; true;
+
+        //here we gotta check if shipping address was valid and created
+        //if it was, revert to address view and updated addresses (getUserAddresses())
+        //if not, display err message
+      })
+    }
+  }
+
+  submitConfirmedAddress(): void{
+    this._shippingService.submitAddress(this.pendingAddress).then(response &#x3D;&gt; {
+      console.log(response);
+      console.log(response);
+      if (response[&#x27;created&#x27;] &#x3D;&#x3D; true){
+        this.addressChanged.emit(response[&#x27;id&#x27;])
+      }
+      else{
+        //handle errors
+      }
+    })
+  }
+
+}
+
+interface Address {
+  address1: string;
+  address2: string;
+  city: string;
+  state: string;
+  zip4: string;
+  zip5: string;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;container&quot; *ngIf&#x3D;&quot;!showPendingAddress&quot;&gt;
+
+    &lt;form [formGroup]&#x3D;&quot;addressForm&quot;&gt;
+  
+      &lt;div class&#x3D;&quot;form-group&quot; style&#x3D;&quot;text-align: left;&quot;&gt;
+        &lt;label name&#x3D;&quot;address1&quot;&gt;Address Line 1&lt;/label&gt;
+        &lt;input class&#x3D;&quot;form-control&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Address Line 1&quot; formControlName&#x3D;&quot;address1&quot;&gt;
+        &lt;br&gt;
+        &lt;div *ngIf&#x3D;&quot;addressForm.get(&#x27;address1&#x27;).invalid &amp;&amp; (addressForm.get(&#x27;address1&#x27;).dirty || addressForm.get(&#x27;address1&#x27;).touched)&quot;
+          class&#x3D;&quot;alert alert-danger&quot;&gt;
+  
+          &lt;div *ngIf&#x3D;&quot;addressForm.get(&#x27;address1&#x27;).errors.requied&quot;&gt;
+            Address Line 1 is required.
+          &lt;/div&gt;
+  
+        &lt;/div&gt;
+      &lt;/div&gt;
+  
+      &lt;div class&#x3D;&quot;form-group&quot; style&#x3D;&quot;text-align: left;&quot;&gt;
+          &lt;label name&#x3D;&quot;address2&quot;&gt;Address Line 2&lt;/label&gt;
+          &lt;input class&#x3D;&quot;form-control&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Address Line 2&quot; formControlName&#x3D;&quot;address2&quot;&gt;
+          &lt;br&gt;
+          &lt;div *ngIf&#x3D;&quot;addressForm.get(&#x27;address2&#x27;).invalid &amp;&amp; (addressForm.get(&#x27;address2&#x27;).dirty || addressForm.get(&#x27;address2&#x27;).touched)&quot;
+            class&#x3D;&quot;alert alert-danger&quot;&gt;
+    
+            &lt;div *ngIf&#x3D;&quot;addressForm.get(&#x27;address2&#x27;).errors.requied&quot;&gt;
+              Address Line 1 is required.
+            &lt;/div&gt;
+    
+          &lt;/div&gt;
+        &lt;/div&gt;
+  
+        &lt;div class&#x3D;&quot;form-group&quot; style&#x3D;&quot;text-align: left;&quot;&gt;
+            &lt;label name&#x3D;&quot;city&quot;&gt;City&lt;/label&gt;
+            &lt;input class&#x3D;&quot;form-control&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;City&quot; formControlName&#x3D;&quot;city&quot;&gt;
+            &lt;br&gt;
+            &lt;div *ngIf&#x3D;&quot;addressForm.get(&#x27;city&#x27;).invalid &amp;&amp; (addressForm.get(&#x27;city&#x27;).dirty || addressForm.get(&#x27;city&#x27;).touched)&quot;
+              class&#x3D;&quot;alert alert-danger&quot;&gt;
+      
+              &lt;div *ngIf&#x3D;&quot;addressForm.get(&#x27;city&#x27;).errors.requied&quot;&gt;
+                City is required.
+              &lt;/div&gt;
+      
+            &lt;/div&gt;
+      &lt;/div&gt;
+  
+      &lt;div class&#x3D;&quot;form-group&quot; style&#x3D;&quot;text-align: left;&quot;&gt;
+        &lt;label name&#x3D;&quot;state&quot;&gt;State&lt;/label&gt;
+        &lt;select class&#x3D;&quot;form-control&quot; formControlName&#x3D;&quot;state&quot;&gt;
+          &lt;option *ngFor&#x3D;&quot;let typeOption of stateOptions&quot; [value]&#x3D;&quot;typeOption&quot;&gt;
+            {{ typeOption }}
+          &lt;/option&gt;
+        &lt;/select&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;form-group&quot; style&#x3D;&quot;text-align: left;&quot;&gt;
+          &lt;label name&#x3D;&quot;zip&quot;&gt;Zip&lt;/label&gt;
+          &lt;input class&#x3D;&quot;form-control&quot; type&#x3D;&quot;text&quot; placeholder&#x3D;&quot;Zip5&quot; formControlName&#x3D;&quot;zip5&quot;&gt;
+          &lt;br&gt;
+          &lt;div *ngIf&#x3D;&quot;addressForm.get(&#x27;zip5&#x27;).invalid &amp;&amp; (addressForm.get(&#x27;zip5&#x27;).dirty || addressForm.get(&#x27;zip5&#x27;).touched)&quot;
+            class&#x3D;&quot;alert alert-danger&quot;&gt;
+    
+            &lt;div *ngIf&#x3D;&quot;addressForm.get(&#x27;zip5&#x27;).errors.requied&quot;&gt;
+              Zip is required.
+            &lt;/div&gt;
+    
+          &lt;/div&gt;
+      &lt;/div&gt;
+  
+      &lt;div style&#x3D;&quot;padding: 5px; position: relative; float: left;&quot;&gt;
+        &lt;button class&#x3D;&quot;btn btn-primary&quot; mat-raised-button (click)&#x3D;&quot;validateAddress()&quot; style&#x3D;&quot;background-color: #2C00A5;&quot;&gt;Submit&lt;/button&gt;
+      &lt;/div&gt;
+  
+    &lt;/form&gt;
+&lt;/div&gt;
+
+&lt;div class&#x3D;&quot;container&quot; *ngIf&#x3D;&quot;showPendingAddress&quot;&gt;
+  &lt;p&gt;
+    Please confirm your address by clicking Confirm below.
+  &lt;/p&gt;
+
+  &lt;p *ngIf&#x3D;pendingAddress.Address1&gt;{{ pendingAddress.Address1 }}&lt;/p&gt;
+  &lt;p *ngIf&#x3D;pendingAddress.Address2&gt;{{ pendingAddress.Address2 }}&lt;/p&gt;
+  &lt;p *ngIf&#x3D;pendingAddress.City&gt;{{ pendingAddress.City }}&lt;/p&gt;
+  &lt;p *ngIf&#x3D;pendingAddress.State&gt;{{ pendingAddress.State }}&lt;/p&gt;
+  &lt;p *ngIf&#x3D;pendingAddress.Zip4&gt;{{ pendingAddress.Zip4 }}&lt;/p&gt;
+  &lt;p *ngIf&#x3D;pendingAddress.Zip5&gt;{{ pendingAddress.Zip5 }}&lt;/p&gt;
+
+  &lt;div style&#x3D;&quot;padding: 5px; position: relative; float: left;&quot;&gt;
+      &lt;button class&#x3D;&quot;btn btn-primary&quot; mat-raised-button (click)&#x3D;&quot;submitConfirmedAddress()&quot; style&#x3D;&quot;background-color: #2C00A5&quot;&gt;Confirm&lt;/button&gt;
+  &lt;/div&gt;
+
+&lt;/div&gt;
+  </code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./shipping-address-form.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss"></code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="container" *ngIf="!showPendingAddress">    <form [formGroup]="addressForm">        <div class="form-group" style="text-align: left;">        <label name="address1">Address Line 1</label>        <input class="form-control" type="text" placeholder="Address Line 1" formControlName="address1">        <br>        <div *ngIf="addressForm.get(\'address1\').invalid && (addressForm.get(\'address1\').dirty || addressForm.get(\'address1\').touched)"          class="alert alert-danger">            <div *ngIf="addressForm.get(\'address1\').errors.requied">            Address Line 1 is required.          </div>          </div>      </div>        <div class="form-group" style="text-align: left;">          <label name="address2">Address Line 2</label>          <input class="form-control" type="text" placeholder="Address Line 2" formControlName="address2">          <br>          <div *ngIf="addressForm.get(\'address2\').invalid && (addressForm.get(\'address2\').dirty || addressForm.get(\'address2\').touched)"            class="alert alert-danger">                <div *ngIf="addressForm.get(\'address2\').errors.requied">              Address Line 1 is required.            </div>              </div>        </div>          <div class="form-group" style="text-align: left;">            <label name="city">City</label>            <input class="form-control" type="text" placeholder="City" formControlName="city">            <br>            <div *ngIf="addressForm.get(\'city\').invalid && (addressForm.get(\'city\').dirty || addressForm.get(\'city\').touched)"              class="alert alert-danger">                    <div *ngIf="addressForm.get(\'city\').errors.requied">                City is required.              </div>                  </div>      </div>        <div class="form-group" style="text-align: left;">        <label name="state">State</label>        <select class="form-control" formControlName="state">          <option *ngFor="let typeOption of stateOptions" [value]="typeOption">            {{ typeOption }}          </option>        </select>      </div>      <div class="form-group" style="text-align: left;">          <label name="zip">Zip</label>          <input class="form-control" type="text" placeholder="Zip5" formControlName="zip5">          <br>          <div *ngIf="addressForm.get(\'zip5\').invalid && (addressForm.get(\'zip5\').dirty || addressForm.get(\'zip5\').touched)"            class="alert alert-danger">                <div *ngIf="addressForm.get(\'zip5\').errors.requied">              Zip is required.            </div>              </div>      </div>        <div style="padding: 5px; position: relative; float: left;">        <button class="btn btn-primary" mat-raised-button (click)="validateAddress()" style="background-color: #2C00A5;">Submit</button>      </div>      </form></div><div class="container" *ngIf="showPendingAddress">  <p>    Please confirm your address by clicking Confirm below.  </p>  <p *ngIf=pendingAddress.Address1>{{ pendingAddress.Address1 }}</p>  <p *ngIf=pendingAddress.Address2>{{ pendingAddress.Address2 }}</p>  <p *ngIf=pendingAddress.City>{{ pendingAddress.City }}</p>  <p *ngIf=pendingAddress.State>{{ pendingAddress.State }}</p>  <p *ngIf=pendingAddress.Zip4>{{ pendingAddress.Zip4 }}</p>  <p *ngIf=pendingAddress.Zip5>{{ pendingAddress.Zip5 }}</p>  <div style="padding: 5px; position: relative; float: left;">      <button class="btn btn-primary" mat-raised-button (click)="submitConfirmedAddress()" style="background-color: #2C00A5">Confirm</button>  </div></div>  </div>'
+    var COMPONENTS = [{'name': 'ActivitiesMenuComponent', 'selector': 'app-activities-menu'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'CommentsFormComponent', 'selector': 'app-comments-form'},{'name': 'ContactHelpComponent', 'selector': 'app-contact-help'},{'name': 'ContactHelpDialogContent', 'selector': 'app-contact-help-dialog-content'},{'name': 'FaqHelpComponent', 'selector': 'app-faq-help'},{'name': 'FaqHelpDialogContent', 'selector': 'app-faq-help-dialog-content'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'LeaderboardComponent', 'selector': 'app-leaderboard'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManualEntryComponent', 'selector': 'app-manual-entry'},{'name': 'ManualInstructionsComponent', 'selector': 'app-manual-instructions'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationPanelComponent', 'selector': 'app-notification-panel'},{'name': 'PasswordChangeComponent', 'selector': 'app-password-change'},{'name': 'PasswordRequestComponent', 'selector': 'app-password-request'},{'name': 'PaypalComponent', 'selector': 'app-paypal'},{'name': 'PopupComponent', 'selector': 'app-popup'},{'name': 'ProfileFormComponent', 'selector': 'app-profile-form'},{'name': 'ProfilePicComponent', 'selector': 'app-profile-pic'},{'name': 'RaceAboutComponent', 'selector': 'app-race-about'},{'name': 'RaceComponent', 'selector': 'app-race'},{'name': 'RaceCreateComponent', 'selector': 'app-race-create'},{'name': 'RaceDayComponent', 'selector': 'app-race-day'},{'name': 'RaceDayDialogContent', 'selector': 'app-race-day-dialog-content'},{'name': 'RaceMenuComponent', 'selector': 'app-race-menu'},{'name': 'RacesComponent', 'selector': 'app-races'},{'name': 'RaceSettingsComponent', 'selector': 'app-race-settings'},{'name': 'RaceViewComponent', 'selector': 'app-race-view'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RoutePinDialogComponent', 'selector': 'app-route-pin-dialog'},{'name': 'ShippingAddressComponent', 'selector': 'app-shipping-address'},{'name': 'ShippingAddressFormComponent', 'selector': 'app-shipping-address-form'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SignupDialogContent', 'selector': 'signup-dialog-content'},{'name': 'SmilesComponent', 'selector': 'app-smiles'},{'name': 'SnackbarComponent', 'selector': 'app-snackbar'},{'name': 'StoryBtnComponent', 'selector': 'app-story-btn'},{'name': 'StoryDialogComponent', 'selector': 'app-story-dialog'},{'name': 'StoryFormComponent', 'selector': 'app-story-form'},{'name': 'StoryModalComponent', 'selector': 'app-story-modal'},{'name': 'StravaInstructionsComponent', 'selector': 'app-strava-instructions'},{'name': 'StravauthComponent', 'selector': 'app-stravauth'},{'name': 'SwagComponent', 'selector': 'app-swag'},{'name': 'SwagDialogContent', 'selector': 'swag-dialog-content'},{'name': 'TeamFormComponent', 'selector': 'app-team-form'},{'name': 'TeamInstructionsComponent', 'selector': 'app-team-instructions'},{'name': 'TeamListComponent', 'selector': 'app-team-list'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'TermsOfServiceDialogContent', 'selector': 'app-terms-of-service-dialog-content'},{'name': 'UserFollowComponent', 'selector': 'app-user-follow'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserProfileNavComponent', 'selector': 'app-user-profile-nav'},{'name': 'UserProgressComponent', 'selector': 'app-user-progress'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserStatsComponent', 'selector': 'app-user-stats'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ShippingAddressFormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ShippingAddressFormComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

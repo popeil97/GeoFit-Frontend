@@ -27,6 +27,7 @@ import { RaceFeedService } from './feed/race-feed.service';
 import { FeedComponent } from './feed/feed.component';
 import { StoryService } from './story.service';
 import { ImageService } from './image.service';
+import { LeaderboardService } from './leaderboard.service';
 
 import {
   HttpRequest,
@@ -82,6 +83,7 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { NotificationPanelComponent } from './notification-panel/notification-panel.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { StoryDialogComponent } from './story-dialog/story-dialog.component';
+import { MapService } from './map.service';
 
 
 @NgModule({
@@ -169,6 +171,8 @@ import { StoryDialogComponent } from './story-dialog/story-dialog.component';
     RaceFeedService,
     StoryService,
     ImageService,
+    LeaderboardService,
+    MapService,
   ],
   bootstrap: [AppComponent],
   entryComponents:[SignupDialogContent,

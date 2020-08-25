@@ -6,7 +6,6 @@ import { AuthService } from '../auth.service';
 declare var $: any
 import { MapComponent } from '../map/map.component';
 import { SignupComponent } from '../signup/signup.component';
-import { LeaderboardItem } from '../leaderboard/leaderboard.component';
 import { SwagComponent } from '../swag/swag.component';
 
 @Component({
@@ -28,7 +27,6 @@ export class RaceAboutComponent implements OnInit {
   teamSizeOptions = [2,3,4,5,6,7,8,9,10];
   isOwner: Boolean;
   hasJoined: Boolean;
-  public leaderboard:LeaderboardItem[];
   public coords:any;
   public all_user_data:Array<FeedObj>;
   public followedIDs:number[];
@@ -73,10 +71,7 @@ export class RaceAboutComponent implements OnInit {
     this.raceService.getRace(this.raceID).subscribe(data => {
 
       let raceData = data as RaceData;
-      this.coords = raceData.coords;
-      this.all_user_data = raceData.users_data as Array<FeedObj>;
       this.followedIDs = raceData.followedIDs;
-      this.leaderboard = this.configureLeaderboard(raceData.unranked_leaderboard,raceData.ranked_leaderboard);
     });
 
 
@@ -108,15 +103,6 @@ export class RaceAboutComponent implements OnInit {
 
   toggleForm(): void {
     this.showForm = !this.showForm;
-  }
-
-
-  configureLeaderboard(ranked:any[],unranked:any[]) {
-
-    return unranked.concat(ranked)
-
-
-
   }
 
 
@@ -273,15 +259,10 @@ export interface RaceSettings {
 interface RaceData {
   progress:any;
   activities:any;
-  coords:any;
-  leaderboard:any;
-  users_data:any;
   settings:any;
   race_settings:RaceSettings;
   user_stat:any;
   followedIDs:number[];
-  unranked_leaderboard:any[];
-  ranked_leaderboard:any[];
 }
 
 interface FeedObj {

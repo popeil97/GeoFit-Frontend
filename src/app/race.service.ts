@@ -46,5 +46,13 @@ export class RaceService {
     return this.http.post(environment.apiUrl + '/api/create/',{form:raceForm}).toPromise();
   }
 
+  getUserRacestats(race_id:number) {
+    return this.http.post(environment.apiUrl + '/api/get-users-racestats/',{race_id:race_id}).toPromise();
+  }
+
+  getTeamOrUserStat(race_id:number) {
+    return this.http.post(environment.apiUrl + '/api/get-team-or-user-stat/',{race_id:race_id}).toPromise();
+  }
+
 
 }
