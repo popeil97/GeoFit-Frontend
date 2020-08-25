@@ -3,6 +3,7 @@
   <div style="padding-left: 50px;"><p>{{notification.message}}</p></div>
   <!-- <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div> -->
   <button mat-button (click)="approve()" *ngIf="showButton('Accept',notification.type)">Accept</button>
+  <button mat-button (click)="approve()" *ngIf="showButton('View',notification.type)">View</button>
   <button mat-button (click)="decline()" *ngIf="showButton('Decline',notification.type)">Decline</button>
 
   <button mat-button *ngIf="showButton('Hide',notification.type)" (click)="hide()">Hide</button>
