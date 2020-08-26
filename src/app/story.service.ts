@@ -46,4 +46,8 @@ export class StoryService {
       return this.http.post(environment.apiUrl + '/api/story-comment-post/', {form:formClean, story_id: storyID}).toPromise();
   }
 
+  getStoryByID(storyID:number) {
+    
+  }
+
 }

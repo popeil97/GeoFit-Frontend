@@ -3,6 +3,9 @@ import { NotificationType, NotificationsService } from '../notifications.service
 import { TeamService } from '../team.service';
 import {MatSnackBar} from '@angular/material/snack-bar'
 import { SnackbarComponent } from '../snackbar/snackbar.component';
+import { StoryDialogComponent } from '../story-dialog/story-dialog.component';
+import { MatDialog } from '@angular/material';
+import { StoryService } from '../story.service';
 
 @Component({
   selector: 'app-notification',
@@ -14,11 +17,12 @@ export class NotificationComponent implements OnInit {
   @Output() removeNotification: EventEmitter<any> = new EventEmitter();
   
 
-  constructor(private _notificationService:NotificationsService,private _snackbar:MatSnackBar) { }
+  constructor(private _notificationService:NotificationsService,private _snackbar:MatSnackBar,public dialog: MatDialog, private _storyService:StoryService) { }
 
   ngOnInit() {
-    
-  }
+
+
+}
 
   approve() {
     // general approval action, backend will sort out what the notifcation is for
@@ -36,8 +40,7 @@ export class NotificationComponent implements OnInit {
       this._snackbar.openFromComponent(SnackbarComponent,{duration: 5000,horizontalPosition: 'center',
       verticalPosition: 'bottom',data:{message:'Action has been declined'}});
       this.removeNotification.emit(this.notification.not_id);
-    });
-    
+    });  
   }
 
   hide() {
@@ -64,6 +67,23 @@ export class NotificationComponent implements OnInit {
       return true;
     }
   }
+
+  viewStory(storyID:number): void {
+    // need to get story from API, then display in dialog
+    let storyData = null;
+    this._storyService.getStoryModalData(this.notification.context_id).then((storyData) => {
+      console.log("In dialogue function");
+      let dialogRef = this.dialog.open(StoryDialogComponent, {
+        data: { 
+          'element': storyData,
+          'showComments':true,
+        },
+      });
+    })
+    
+  }
+
+
 }
 
 
@@ -73,6 +93,7 @@ interface Notification {
   from:any;
   type:NotificationType;
   not_id:number;
+  context_id:number;
 }
 
 export enum NotifactionAction {
