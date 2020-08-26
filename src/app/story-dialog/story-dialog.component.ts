@@ -1,5 +1,7 @@
+  
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
+import { StoryService } from '../story.service';
 
 @Component({
   selector: 'app-story-dialog',
@@ -9,13 +11,21 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular
 export class StoryDialogComponent implements OnInit {
 
   public elementData: FeedObj;
+  public showComments: boolean;
 
   constructor(public dialogRef: MatDialogRef<StoryDialogComponent>,
-          @Inject(MAT_DIALOG_DATA) public data: any) {
+          @Inject(MAT_DIALOG_DATA) public data: any, private _storyService:StoryService) {
             this.elementData = data.element;
+            this.showComments = data.showComments;
            }
 
   ngOnInit() {
+  }
+
+  newCommentPosted(): void {
+    this._storyService.getStoryModalData(this.elementData.story_id).then((updatedPost) => {
+      this.elementData = updatedPost as FeedObj;
+    });
   }
 
 }

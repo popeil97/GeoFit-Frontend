@@ -7,6 +7,10 @@
 
 
   <h3 style="text-align: center">{{ elementData.story_text }}</h3>
+  <div *ngIf="showComments">
+    <app-comments [comments]="elementData.comments" [storyID]="elementData.story_id" (commentPosted)="newCommentPosted($event)"></app-comments>
+  </div>
+  
 
 </mat-dialog-content>
 <mat-dialog-actions>
