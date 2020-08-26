@@ -1,4 +1,6 @@
 <!-- <app-map></app-map> -->
+
+
 <div>
 <app-loader [isActive]="loading"></app-loader>
 <div *ngIf="userStat.total_distance==0">
@@ -184,7 +186,7 @@
   </mat-sidenav>
 
    
-  <mat-sidenav-content>
+  <mat-sidenav-content id="testCanvas">
     <app-map [raceID]="raceID" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
     <div  *ngIf="changeArrow">
     <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 0px;">

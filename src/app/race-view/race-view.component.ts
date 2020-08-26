@@ -13,6 +13,7 @@ import { TeamFormComponent } from '../team-form/team-form.component';
 import { AuthService } from '../auth.service';
 import { UserProfileService } from '../userprofile.service';
 import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
+import * as confetti from 'canvas-confetti';
 
 declare var $: any;
 import * as _ from 'lodash';
@@ -64,6 +65,8 @@ export class RaceViewComponent implements OnInit {
   private storyImage:string;
   private storyText:string;
 
+  varcolors = ['#bb0000', '#ffffff'];
+
   constructor(private raceService:RaceService,
                   private activitiesService:ActivitiesService,
                   private route: ActivatedRoute,
@@ -83,9 +86,15 @@ export class RaceViewComponent implements OnInit {
 
     this._userProfileService.getUserProfile(this._authService.username).then((data) => {
       this.userData = data as UserData;
+      console.log("DATAAAAAAAAAAAAAAAAA",this.userData);
     });
 
     this.getRaceState();
+
+    // go Buckeyes!
+
+  
+
   }
 
   toggleNavButton(action?:string) {
@@ -164,6 +173,20 @@ export class RaceViewComponent implements OnInit {
       console.log('RACE DATA:',raceData);
 
       this.progress = raceData.progress;
+
+      if(this.progress.distance_remaining <= 0)
+      {
+            confetti.create()({
+            particleCount: 5000,
+            spread: 900,
+            
+            origin: {
+                y: (1),
+                x: (0.5)
+            }
+        });
+      }
+      console.log("GETTING RACE STATE");
       // this.activities = raceData.activities;
       this.num_activities = 0;
 

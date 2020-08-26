@@ -52,7 +52,10 @@ export class ManualEntryComponent implements OnInit {
 
       this.uploadManualEntry.emit(formClean);
     }
-    
+    this.manualEntryForm.get('distanceType').setValue('MI');
+    this.manualEntryForm.get('hours').setValue(0);
+    this.manualEntryForm.get('minutes').setValue(0);
+    this.manualEntryForm.get('seconds').setValue(0);
   }
 
   parseDistanceType(entry:any) {

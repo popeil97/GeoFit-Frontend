@@ -2,6 +2,13 @@
     float: center;
     width: 32%;
   }
+
+    .column0{
+    width: 70%;
+  }
+   .column1{
+    width: 28%;
+  }
   .row {
   display: flex;
   flex-wrap: wrap;
