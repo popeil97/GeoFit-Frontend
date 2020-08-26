@@ -24,7 +24,7 @@ background-size: cover;"></div> -->
         <mat-card-title>{{userData.first_name}} {{userData.last_name}}</mat-card-title> <br>
       </mat-card-header>
       <mat-card-content>
-       <img style="width:220px;height:220px;border-radius: 50%;" src="{{userData.profile_url}}" class="img-responsive" alt="">
+       <img style="width:220px;border-radius: 50%;" src="{{userData.profile_url}}" alt="">
        <br>
     <p> <span class="material-icons" style="color:#BC164D;">location_on </span> {{ userData.location }}</p>
 
@@ -86,7 +86,7 @@ background-size: cover;"></div> -->
 
         <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
       </mat-card-header>
-      <img mat-card-image style="height: 191px; width: 255px;" src="{{race.race_image}}" alt="Race">
+      <img mat-card-image style="width: 255px;" src="{{race.race_image}}" alt="Race">
       <mat-card-content>
         <i class="material-icons" style="color:#BC164D;vertical-align: bottom;">map</i><span id="txt1">From <b>{{ race.start_loc }}</b> to <b>{{race.end_loc}}</b> <i style="color:#2C007E;">   {{ race.distance }} {{ race.distance_type }}</i></span>
         <br><br>
@@ -136,7 +136,7 @@ background-size: cover;"></div> -->
       <div class="example-element-detail"
            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
 
-           <img src="{{element.race_image}}" style="height: 191px; width: 255px;" />
+           <img src="{{element.race_image}}" style="width: 255px;" />
            <br>
         <div class="container example-element-description">
           {{element.description}}

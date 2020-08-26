@@ -19,7 +19,7 @@
       <div class="column-split2">
 
          <app-user-progress *ngIf="this._authService.isLoggedIn() && this.progress" [progress]="progress"></app-user-progress>
-         <div class="row">
+         <div class="row" *ngIf="this.raceID==1">
           <div class="column">
             <a class="btn btn-mobile2" style="background-color:#2C007E;color:#FFFFFF;" (click)="USA()">Jump to USA</a>
           </div>
