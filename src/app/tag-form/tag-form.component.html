@@ -1,0 +1,29 @@
+<div class="container" style="overflow:hidden;">
+  <form [formGroup]="tagForm">
+    <div class="form-group" style="text-align: left;">
+      <b><mat-label>Tags</mat-label></b>
+      <input class="form-control" type="text" placeholder="Tag Name" formControlName="name"/> 
+      <div class="input-group-btn">
+        <button class="btn btn-primary btn-mobile" style="background-color:#2C00A5;" mat-raised-button (click)="addTag()">Add</button>
+        </div>
+      <br>
+      <div *ngIf="tagForm.get('name').invalid && (tagForm.get('name').dirty || tagForm.get('name').touched)"
+    class="alert alert-danger">
+    
+    <div *ngIf="tagForm.get('name').errors.required">
+       Name is required.
+    </div>
+    </div>
+    </div>
+  </form>
+</div>
+
+<div class="container">
+  <mat-chip-list #chipList>
+    <mat-chip *ngFor="let tag of entryTags">
+      
+      {{tag.name}}
+      <mat-icon matChipRemove (click)="removeTag(tag.id)">cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+</div>

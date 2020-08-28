@@ -1,0 +1,20 @@
+<form [formGroup]="tagSelectForm">
+  <div class="form-group" style="text-align: left; padding: 5px;" *ngIf="AboutForm.get('rules').get('allowTeams').value == true">
+    <label>Max Team Size</label>
+    <input class="form-control" type="text" formControlName="maxTeamSize" [matAutocomplete]="maxTeamSizeAuto"/>
+
+    <mat-autocomplete #maxTeamSizeAuto="matAutocomplete">
+      <mat-option *ngFor="let option of teamSizeOptions" [value]="option">
+        {{ option }}
+      </mat-option>
+    </mat-autocomplete>
+
+    <div *ngIf="AboutForm.get('rules').get('maxTeamSize').invalid && (AboutForm.get('rules').get('maxTeamSize').dirty || AboutForm.get('rules').get('maxTeamSize').touched)"
+  class="alert alert-danger">
+  
+  <div *ngIf="AboutForm.get('rules').get('maxTeamSize').errors.max">
+     Max Team Size is 10
+  </div>
+  </div>
+  </div>
+</form>

@@ -7,6 +7,7 @@ declare var $: any
 import { MapComponent } from '../map/map.component';
 import { SignupComponent } from '../signup/signup.component';
 import { SwagComponent } from '../swag/swag.component';
+import { TagType } from '../tags.service';
 
 @Component({
   selector: 'app-race-about',
@@ -34,6 +35,7 @@ export class RaceAboutComponent implements OnInit {
   hasMerch:Boolean;
   popup:Boolean;
   hasStarted:Boolean;
+  tagType = TagType.ENTRY;
 
   public num_users:any;
 
@@ -121,6 +123,7 @@ export class RaceAboutComponent implements OnInit {
         paymentRequired: new FormControl(this.raceSettings.paymentRequired),
         price: new FormControl(this.raceSettings.price),
         hasSwag: new FormControl(this.raceSettings.has_swag),
+        hasEntryTags: new FormControl(this.raceSettings.has_entry_tags)
       })
     });
 
@@ -250,6 +253,7 @@ export interface RaceSettings {
   paymentRequired: Boolean,
   price:any,
   has_swag:Boolean,
+  has_entry_tags:Boolean,
 }
 
 interface RaceData {
