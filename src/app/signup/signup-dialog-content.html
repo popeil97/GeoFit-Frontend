@@ -1,6 +1,11 @@
 <h2 mat-dialog-title>Register for Race!</h2>
 <mat-dialog-content>
   <mat-horizontal-stepper [linear]="true" #stepper>
+    <mat-step [editable]="false" [stepControl]="tagForm" *ngIf="hasTags">
+      <ng-template matStepLabel aria-disabled="true">Select Organizational/Athletic Tag</ng-template>
+      <app-tag-select [raceID]="race_id" [tagType]="tagType" (emitState)="stepCallback($event)"></app-tag-select>
+      
+    </mat-step>
     <mat-step [editable]="false" [stepControl]="paymentForm" *ngIf="needsPayment">
       <ng-template matStepLabel aria-disabled="true">Pay Signup Fee</ng-template>
       <app-paypal (transactionAlert)="stepCallback($event)" [price]="price" [race_id]="race_id" [paymentType]="paymentType"></app-paypal>

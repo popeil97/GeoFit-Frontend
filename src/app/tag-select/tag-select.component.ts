@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl,FormGroup, Validators} from '@angular/forms';
-import { Tag } from '../tags.service';
+import { Tag, TagType, TagsService } from '../tags.service';
+import { SignupCallbackStruct } from '../signup/signup.component';
 
 @Component({
   selector: 'app-tag-select',
@@ -10,19 +11,45 @@ import { Tag } from '../tags.service';
 export class TagSelectComponent implements OnInit {
 
   tagSelectForm:FormGroup;
+  selectedTag:Tag;
+  @Input() raceID:number;
+  @Input() tagType: TagType;
+  @Input() hasAll: Boolean;
+  @Input() title:string;
+  @Output() emitState:EventEmitter<any> = new EventEmitter();
+  tags:Tag[];
 
-  constructor() { }
+  noneTag = {id:-1,name:'None',type:TagType.ENTRY} as Tag;
+  allTag = {id:0,name:'All',type:TagType.ENTRY} as Tag;
+
+  constructor(private _tagService:TagsService) { }
 
   ngOnInit() {
     this.tagSelectForm = new FormGroup({
-      tagID: new FormControl('',[
+      tag: new FormControl(this.noneTag,[
         Validators.required,
       ]),
-    })
+    });
+
+    this._tagService.getTags(this.raceID,this.tagType).then((resp:any) => {
+      this.tags = resp['tags'];
+      console.log('TAGS:',this.tags);
+
+      this.tags.push(this.noneTag);
+
+      if(this.hasAll) {
+        this.tags.push(this.allTag);
+      }
+    });
   }
 
   onTagSelect(tag:Tag) {
-
+    let callbackBody = {} as SignupCallbackStruct
+    callbackBody.success = true;
+    callbackBody.data = {id:tag.id} as any;
+    callbackBody.type = "TAG";
+    console.log(tag);
+    this.emitState.emit(callbackBody);
   }
 
 }

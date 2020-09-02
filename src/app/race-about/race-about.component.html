@@ -9,7 +9,7 @@
             <div *ngIf="aboutData.race_type == 1">
                <mat-card-title>{{aboutData.name}}
                <i class="material-icons" style="color:#BC164D;">directions_run</i>            
-               <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" style="color:white;
+               <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" style="color:white;
                 box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
                 background: green;
                 border-radius: 4px;
@@ -23,7 +23,7 @@
              <div *ngIf="aboutData.race_type == 2">
                <mat-card-title>{{aboutData.name}}
                    <i class="material-icons" style="color:#BC164D;">directions_bike</i>
-                   <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" style="color:white;
+                   <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" style="color:white;
                 box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
                 background: green;
                 border-radius: 4px;
@@ -37,7 +37,7 @@
            <div *ngIf="aboutData.race_type == 3">
                <mat-card-title>{{aboutData.name}}
                <i class="material-icons" style="color:#BC164D;">directions_run</i><i class="material-icons" style="color:#BC164D;">directions_bike</i>
-               <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" style="color:white;
+               <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" style="color:white;
                 box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
                 background: green;
                 border-radius: 4px;

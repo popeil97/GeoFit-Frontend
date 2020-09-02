@@ -1,19 +1,21 @@
 <form [formGroup]="tagSelectForm">
-  <div class="form-group" style="text-align: left; padding: 5px;" *ngIf="AboutForm.get('rules').get('allowTeams').value == true">
-    <label>Max Team Size</label>
-    <input class="form-control" type="text" formControlName="maxTeamSize" [matAutocomplete]="maxTeamSizeAuto"/>
+  <div class="form-group" style="text-align: left; padding: 5px;">
+    <h4>{{title}}</h4>
+    <!-- <input class="form-control" type="text" formControlName="tag" [matAutocomplete]="maxTeamSizeAuto"/> -->
+    <mat-form-field appearance="fill">
+      <mat-select formControlName="tag">
+        <mat-option *ngFor="let tag of tags" [value]="tag" (click)="onTagSelect(tag)">
+          {{ tag.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
 
-    <mat-autocomplete #maxTeamSizeAuto="matAutocomplete">
-      <mat-option *ngFor="let option of teamSizeOptions" [value]="option">
-        {{ option }}
-      </mat-option>
-    </mat-autocomplete>
-
-    <div *ngIf="AboutForm.get('rules').get('maxTeamSize').invalid && (AboutForm.get('rules').get('maxTeamSize').dirty || AboutForm.get('rules').get('maxTeamSize').touched)"
+    <div *ngIf="tagSelectForm.get('tag').invalid && (tagSelectForm.get('tag').dirty || tagSelectForm.get('tag').touched)"
   class="alert alert-danger">
   
-  <div *ngIf="AboutForm.get('rules').get('maxTeamSize').errors.max">
-     Max Team Size is 10
+  <div *ngIf="tagSelectForm.get('tag').errors">
+     Must Select a Tag
   </div>
   </div>
   </div>

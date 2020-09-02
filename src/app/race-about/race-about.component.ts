@@ -145,46 +145,47 @@ export class RaceAboutComponent implements OnInit {
     ($(id) as any).modal('hide');
   }
 
-  confirmRegistration(user:any): void {
-    // login user
-    console.log('USER CONFIRMED:',user);
-    this._authService.login(user).subscribe(data => {
-      console.log(data);
-      localStorage.setItem('access_token', data['token']);
-      localStorage.setItem('loggedInUsername', user.username);
-      this.joinRace();
-      location.reload();
-    },
-    err => {
+  // confirmRegistration(user:any): void {
+  //   // login user
+  //   console.log('USER CONFIRMED:',user);
+  //   this._authService.login(user).subscribe(data => {
+  //     console.log(data);
+  //     localStorage.setItem('access_token', data['token']);
+  //     localStorage.setItem('loggedInUsername', user.username);
+  //     this.joinRace();
+  //     location.reload();
+  //   },
+  //   err => {
 
-    });
-  }
+  //   });
+  // }
 
-  joinRace() {
-    let race_id = this.raceID
+  joinRace(registrationBody:any) {
 
     if(!localStorage.getItem('loggedInUsername')) {
       // route to landing page
       this.showModal('#registerModal');
     }
 
-    this.raceService.joinRace(race_id).then((res) => {
+    this.raceService.joinRace(registrationBody).then((res) => {
       console.log('RES FROM JOIN:',res);
       // this.router.navigate(['/race',{name:this.raceName,id:race_id}]);
     });
   }
 
-  signupCallback() {
+  signupCallback(registrationBody:any) {
     // prompt for swag
     // then join race
 
-    console.log('IN CALL BACK')
+    console.log('IN CALL BACK');
+
+    this.joinRace(registrationBody);
 
     if(this.hasMerch) {
       this.swagChild.openDialog();
     }
 
-    this.joinRace();
+    
   }
 
   update(): void {
