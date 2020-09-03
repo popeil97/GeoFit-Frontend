@@ -131,7 +131,7 @@
         
         
         <app-tag-select *ngIf="raceSettings.has_entry_tags" [raceID]="raceID" [tagType]="entryTagType" [hasAll]="true" [title]="'Filter by Org'" (emitState)="setLeaderboardTagID($event)"></app-tag-select>
-        <div *ngIf="selectedTagFilterID == 0">
+        <div *ngIf="selectedTagFilterID == 0 && raceSettings.has_entry_tags">
           <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Org Leaderboard</b></h3></b>
           <app-leaderboard [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard><br><br><br><br><br><br>
         </div>

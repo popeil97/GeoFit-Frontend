@@ -21,8 +21,16 @@ export class TagsService {
     return this.http.post(environment.apiUrl + '/api/get-tags/',{race_id:race_id,tag_type:tag_type}).toPromise();
   }
 
-  addTag(tagBody:TagFormObj) {
-    return this.http.post(environment.apiUrl + '/api/add-tag/',{tag:tagBody}).toPromise();
+  addTag(tagBody:TagFormObj, img:any) {
+    let payload = {
+      tag:tagBody
+    } as any;
+
+    if(img) {
+      payload.img = img;
+    }
+
+    return this.http.post(environment.apiUrl + '/api/add-tag/',payload).toPromise();
   }
 
   removeTag(tag_id:number) {
@@ -39,5 +47,6 @@ export interface Tag {
 }
 
 export enum TagType {
-  ENTRY=1
+  ENTRY=1,
+  OWNER=2,
 }

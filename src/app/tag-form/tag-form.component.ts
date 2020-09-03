@@ -11,6 +11,7 @@ export class TagFormComponent implements OnInit {
 
   tagForm:FormGroup;
   entryTags:Tag[];
+  uploadedUrl:any;
   @Input() raceID:number;
   @Input() tagType:TagType;
 
@@ -41,12 +42,13 @@ export class TagFormComponent implements OnInit {
 
   addTag() {
     let formClean = this.tagForm.value as TagFormObj;
+    
     console.log(this.tagForm);
     let isValid: Boolean = this.tagForm.valid;
 
     if(isValid && formClean.name != '') {
-      formClean
-      this._tagService.addTag(formClean).then((resp:any) =>{
+      this._tagService.addTag(formClean,this.uploadedUrl).then((resp:any) =>{
+        this.uploadedUrl = null;
         if(resp.success) {
           this.getTags();
         }
@@ -60,6 +62,18 @@ export class TagFormComponent implements OnInit {
         this.getTags();
       }
     });
+  }
+
+  onSelectFile(event) {
+    if (event.target.files && event.target.files[0]) {
+      var reader = new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload = (event) => { // called once readAsDataURL is completed
+        this.uploadedUrl = reader.result;
+      }
+    }
   }
 
 }
