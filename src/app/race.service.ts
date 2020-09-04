@@ -54,5 +54,4 @@ export class RaceService {
     return this.http.post(environment.apiUrl + '/api/get-team-or-user-stat/',{race_id:race_id}).toPromise();
   }
 
-
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl,FormGroup, Validators} from '@angular/forms';
 import { TagsService, Tag, TagType } from '../tags.service';
+import { Control } from 'leaflet';
 
 @Component({
   selector: 'app-tag-form',
@@ -30,7 +31,8 @@ export class TagFormComponent implements OnInit {
       ]),
       tag_type: new FormControl(this.tagType,[
         Validators.required,
-      ])
+      ]),
+      tag_img: new FormControl('')
     });
   }
 
@@ -41,7 +43,8 @@ export class TagFormComponent implements OnInit {
   }
 
   addTag() {
-    let formClean = this.tagForm.value as TagFormObj;
+    let formClean = this.tagForm.value as any;
+    formClean.tag_img = this.uploadedUrl;
     
     console.log(this.tagForm);
     let isValid: Boolean = this.tagForm.valid;
@@ -50,6 +53,7 @@ export class TagFormComponent implements OnInit {
       this._tagService.addTag(formClean,this.uploadedUrl).then((resp:any) =>{
         this.uploadedUrl = null;
         if(resp.success) {
+          this.tagForm.reset();
           this.getTags();
         }
       });

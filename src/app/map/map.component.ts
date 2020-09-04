@@ -110,6 +110,10 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
 
   public getMapData(){
+
+    this._mapService.getOrgPinStats(this.raceID).then((data) => {
+      console.log('ORG PINSSSS DATAAAAA',data);
+    })
     
     this._mapService.getMapData(this.raceID).then((data) => {
       let mapData = data as MapData;
