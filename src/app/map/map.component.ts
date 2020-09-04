@@ -690,16 +690,11 @@ interface MapData {
 
 interface UserData {
   user_id: number,
-  race_id: number,
   total_distance: number,
   distance_type: string,
   rel_distance: number,
   route_idx: number,
-  total_time: number,
-  rank: number,
-  team_id: number,
   display_name: string,
-  username: string,
   profile_url: string,
   follows: boolean,
   child_user_stats: any[],
@@ -709,3 +704,4 @@ interface UserData {
   age: number,
   description: string,
 }
+

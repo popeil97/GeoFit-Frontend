@@ -57,6 +57,8 @@ export class RaceViewComponent implements OnInit {
   };
   public isManualEntry:Boolean = false;
 
+  public userRegistered:Boolean = false;
+
   //Filters for activity feed
   public storyFeedOnly: Boolean = false;
   public followerFeedOnly: Boolean = false;
@@ -81,9 +83,14 @@ export class RaceViewComponent implements OnInit {
       this.raceID = params['params']['id'];
     });
 
-    this._userProfileService.getUserProfile(this._authService.username).then((data) => {
+    if(this._authService.isLoggedIn())
+    {
+      this._userProfileService.getUserProfile(this._authService.username).then((data) => {
       this.userData = data as UserData;
+      console.log("UD", this.userData);
     });
+    }
+    
 
     this.getRaceState();
   }
@@ -150,7 +157,8 @@ export class RaceViewComponent implements OnInit {
       this.showTeamForm=false;
       let raceData = data as RaceData;
       console.log('RACE DATA:',raceData);
-
+      this.userRegistered = raceData.user_stat!=null;
+      console.log("userRegistered", this.userRegistered);
       this.progress = raceData.progress;
       // this.activities = raceData.activities;
       this.num_activities = 0;
