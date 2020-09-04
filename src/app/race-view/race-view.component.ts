@@ -306,6 +306,7 @@ interface PinSettings {
   allAgesOn: boolean;
   minAge: number;
   maxAge: number;
+  showOrgPins: boolean;
 }
 
 
