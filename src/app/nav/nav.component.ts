@@ -36,7 +36,9 @@ picURL:any;
       e.stopPropagation();
     });
 
-    this.getNotifications();
+    try{this.getNotifications();}
+    catch{console.log("Couldnt get notifs");}
+    
 
     Observable.interval(60000) // make much larger in production
     .switchMap(() => this._notificationService.getNotifications())
