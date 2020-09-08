@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges,OnChanges } from '@angular/core';
 import { LeaderboardService } from '../leaderboard.service';
 
 @Component({
@@ -6,18 +6,20 @@ import { LeaderboardService } from '../leaderboard.service';
   templateUrl: './leaderboard.component.html',
   styleUrls: ['./leaderboard.component.css']
 })
-export class LeaderboardComponent implements OnInit {
+export class LeaderboardComponent implements OnInit,OnChanges {
   //@Input() leaderboard:LeaderboardItem[];
 
   //Can be 'teams' or 'individual'
   @Input() use: string;
   @Input() raceID: number;
   @Input() allowFollow: Boolean = false;
+  @Input() tagID:any = null; // just in case it gets initialized to 0
 
   public columns:string[] = ['Rank','ProfilePic','Name','Distance','Follow'];
   public leaderboard: LeaderboardItem[];
 
   private initialized: boolean = false;
+  private page:number = 1;
 
   constructor(private _leaderboardService: LeaderboardService) {
   }
@@ -43,8 +45,15 @@ export class LeaderboardComponent implements OnInit {
                 this._leaderboardService.raceID = this.raceID;
                 this.getLeaderboard();
               }
+
+            case 'tagID':
+              this.getLeaderboard() // get leaderboard for tags
+
+
+
           }
         }
+        
       }
     }
 
@@ -53,21 +62,54 @@ export class LeaderboardComponent implements OnInit {
   getLeaderboard(){
     var leaderboardData;
     console.log("GETTING LEADERBOARD");
+
+    this.page = 1;
     
-    if (this.use == 'individual'){
-      this._leaderboardService.getIndividualLeaderboard().then((data) => {
+    if (this.use == 'individual' && this.tagID != 0){ // and tagID != all_id
+      this._leaderboardService.getIndividualLeaderboard(this.page,this.tagID != -1 ? this.tagID : null).then((data) => {
         leaderboardData = data as LeaderboardStruct;
-        this.leaderboard = this.configureLeaderboard(leaderboardData.unranked,leaderboardData.ranked);;
+        this.leaderboard = leaderboardData.leaderboard;
       })
     }
 
-    else if (this.use == 'teams'){
-      this._leaderboardService.getTeamLeaderboard().then((data) => {
+    else if (this.use == 'teams' && this.tagID != 0){ // and tagID != all_id
+      this._leaderboardService.getTeamLeaderboard(this.page,this.tagID != -1 ? this.tagID : null).then((data) => {
         leaderboardData = data as LeaderboardStruct;
-        this.leaderboard = this.configureLeaderboard(leaderboardData.unranked,leaderboardData.ranked);;
+        this.leaderboard = leaderboardData.leaderboard;
       })
     }
 
+    else {
+      // get all tag cumulative leaderboard
+      this._leaderboardService.getOrganizationLeaderboard().then((resp:any) => {
+        console.log('ALL LEADERBOARD:',resp);
+        this.leaderboard = resp.organization_leaderboard;
+      })
+    }
+
+    this.page++;
+
+  }
+
+  getNextLeaderboardPage() {
+    var leaderboardData;
+    if (this.use == 'individual' && this.tagID != 0){ // and tagID != all_id
+      this._leaderboardService.getIndividualLeaderboard(this.page,this.tagID != -1 ? this.tagID : null).then((data) => {
+        leaderboardData = data as LeaderboardStruct;
+        let leaderboardPage = leaderboardData.leaderboard;
+        this.leaderboard = this.leaderboard.concat(leaderboardPage);
+      })
+    }
+
+    else if (this.use == 'teams' && this.tagID != 0){ // and tagID != all_id
+      this._leaderboardService.getTeamLeaderboard(this.page,this.tagID != -1 ? this.tagID : null).then((data) => {
+        leaderboardData = data as LeaderboardStruct;
+        let leaderboardPage = leaderboardData.leaderboard;
+        this.leaderboard = this.leaderboard.concat(leaderboardPage);
+      })
+    }
+
+    this.page++;
   }
 
   configureLeaderboard(ranked:any[],unranked:any[]) {
@@ -86,6 +128,5 @@ export interface LeaderboardItem {
 }
 
 export interface LeaderboardStruct {
-  ranked: LeaderboardItem[];
-  unranked: LeaderboardItem[];
+  leaderboard: LeaderboardItem[];
 }

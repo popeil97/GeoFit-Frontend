@@ -84,6 +84,8 @@ import { NotificationPanelComponent } from './notification-panel/notification-pa
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { StoryDialogComponent } from './story-dialog/story-dialog.component';
 import { MapService } from './map.service';
+import { TagFormComponent } from './tag-form/tag-form.component';
+import { TagSelectComponent } from './tag-select/tag-select.component';
 
 
 @NgModule({
@@ -148,6 +150,8 @@ import { MapService } from './map.service';
     NotificationPanelComponent,
     SnackbarComponent,
     StoryDialogComponent,
+    TagFormComponent,
+    TagSelectComponent,
       ],
   imports: [
     BrowserModule,

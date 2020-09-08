@@ -17,6 +17,7 @@ import * as confetti from 'canvas-confetti';
 
 declare var $: any;
 import * as _ from 'lodash';
+import { TagType, Tag } from '../tags.service';
 
 
 @Component({
@@ -65,6 +66,9 @@ export class RaceViewComponent implements OnInit {
   private storyImage:string;
   private storyText:string;
 
+  entryTagType: TagType = TagType.ENTRY;
+  selectedTagFilterID = -1;
+
   varcolors = ['#bb0000', '#ffffff'];
 
   constructor(private raceService:RaceService,
@@ -91,10 +95,14 @@ export class RaceViewComponent implements OnInit {
 
     this.getRaceState();
 
-    // go Buckeyes!
+    // go GATORS!
 
   
 
+  }
+
+  setLeaderboardTagID(tagFilterStruct:any): void {
+    this.selectedTagFilterID = tagFilterStruct.data.id;
   }
 
   toggleNavButton(action?:string) {
@@ -203,6 +211,7 @@ export class RaceViewComponent implements OnInit {
 
       this.userRaceSettings = raceData.settings;
       this.raceSettings = raceData.race_settings;
+      console.log('RACE SETTINGS:',this.raceSettings);
       this.isManualEntry = this.raceSettings.isManualEntry;
       this.userStat = raceData.user_stat;
       //this.routePins = raceData.route_pins;
@@ -297,6 +306,7 @@ interface PinSettings {
   allAgesOn: boolean;
   minAge: number;
   maxAge: number;
+  showOrgPins: boolean;
 }
 
 

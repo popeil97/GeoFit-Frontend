@@ -37,11 +37,15 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
         Validators.required,
       ]),
       ageRange: new FormControl(-1),
+      showOrgPins: new FormControl(false, [
+        Validators.required,
+      ]),
     });
 
     this.ageRangeOptions = ['0-19', '20-34', '35-49', '50-64', '65-79', '80-'];
-    
   }
+
+
   ngOnChanges(changes: SimpleChanges): void {
 
     for(const propName in changes) {
@@ -66,6 +70,24 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
             this.settingsForm.get('ageRange').enable();
           }
       });
+
+    this.settingsForm.get('showOrgPins').valueChanges
+      .subscribe(value => {
+        if (value == true) {
+          this.settingsForm.get('ageRange').disable();
+          this.settingsForm.get('allAgesOn').disable();
+          this.settingsForm.get('femalePinsOn').disable();
+          this.settingsForm.get('malePinsOn').disable();
+          this.settingsForm.get('followerPinsOnly').disable();
+        }
+        else {
+          this.settingsForm.get('ageRange').enable();
+          this.settingsForm.get('allAgesOn').enable();
+          this.settingsForm.get('femalePinsOn').enable();
+          this.settingsForm.get('malePinsOn').enable();
+          this.settingsForm.get('followerPinsOnly').enable();
+        }
+      })
     
   }
   ngAfterViewInit(): void {
@@ -88,18 +110,9 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
         this.successfulUpdate = true;
       });
 
-      // if(this.settingsForm.value.heatMapOn == true)
-      // {
-      //   this._raceview.createUserHeatPins();
-      // }
-      // else
-      // {
-      //   this._raceview.createUserPins();
-      // }
-
       let pinSettings = this.settingsForm.value as PinSettings;
 
-      if (!this.settingsForm.value.allAgesOn){
+      if (!this.settingsForm.value.allAgesOn && !this.settingsForm.get('ageRange').disabled){
         let ages = this.settingsForm.value.ageRange.split("-");
 
         pinSettings.minAge = ages[0];
@@ -141,6 +154,9 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
         Validators.required,
       ]),
       ageRange: new FormControl(-1),
+      showOrgPins: new FormControl(false, [
+        Validators.required,
+      ]),
     });
 
     //Disable age control by default
@@ -164,4 +180,5 @@ interface PinSettings {
   allAgesOn: boolean;
   minAge: number;
   maxAge: number;
+  showOrgPins: boolean;
 }

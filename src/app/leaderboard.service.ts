@@ -21,12 +21,30 @@ export class LeaderboardService {
     };
   }
 
-  public getIndividualLeaderboard() {
-    return this.http.post(environment.apiUrl + '/api/individual-leaderboard/', {race_id : this.raceID}).toPromise();
+  public getIndividualLeaderboard(page:number,tagID?:number) {
+
+    let payload = {race_id:this.raceID,page:page} as any;
+
+    if(tagID) {
+      payload.tag_id = tagID;
+    }
+
+    return this.http.post(environment.apiUrl + '/api/individual-leaderboard/', payload).toPromise();
   }
 
-  public getTeamLeaderboard() {
-    return this.http.post(environment.apiUrl + '/api/team-leaderboard/', {race_id : this.raceID}).toPromise();
+  public getTeamLeaderboard(page:number,tagID?:number) {
+
+    let payload = {race_id:this.raceID,page:page} as any;
+
+    if(tagID) {
+      payload.tag_id = tagID;
+    }
+
+    return this.http.post(environment.apiUrl + '/api/team-leaderboard/', payload).toPromise();
+  }
+
+  public getOrganizationLeaderboard() {
+    return this.http.post(environment.apiUrl + '/api/organization-leaderboard/',{race_id:this.raceID}).toPromise();
   }
 
 }

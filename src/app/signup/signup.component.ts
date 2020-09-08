@@ -6,6 +6,8 @@ import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentType } from '../payments.service';
 import { AboutData } from '../race-about/race-about.component';
+import { TagType } from '../tags.service';
+import { RaceService } from '../race.service';
 
 
 interface SignupDialogData {
@@ -14,6 +16,7 @@ interface SignupDialogData {
   race_id:number,
   aboutData:AboutData,
   hasStarted:Boolean,
+  hasTags:Boolean,
 }
 
 @Component({
@@ -32,6 +35,7 @@ export class SignupComponent implements OnInit {
   @Input() hasPaid: Boolean = false;
   @Input() aboutData: AboutData = {} as AboutData;
   @Input() hasStarted:Boolean;
+  @Input() hasTags:Boolean;
 
   openDialog() {
 
@@ -45,7 +49,7 @@ export class SignupComponent implements OnInit {
       this.price = null;
     }
 
-    const dialogRef = this.dialog.open(SignupDialogContent,{disableClose: true, data:{price:this.price,isLoggedIn:this._authService.isLoggedIn(),race_id:this.race_id,aboutData:this.aboutData,hasStarted:this.hasStarted} as MatDialogConfig});
+    const dialogRef = this.dialog.open(SignupDialogContent,{disableClose: true, data:{price:this.price,isLoggedIn:this._authService.isLoggedIn(),race_id:this.race_id,aboutData:this.aboutData,hasStarted:this.hasStarted,hasTags:this.hasTags} as MatDialogConfig});
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -72,6 +76,7 @@ export class SignupComponent implements OnInit {
 })
 export class SignupDialogContent {
   paymentType = PaymentType.ENTRY;
+  tagType = TagType.ENTRY;
   isLoggedIn:Boolean;
   price:any;
   isSuccess:Boolean = false;
@@ -79,6 +84,7 @@ export class SignupDialogContent {
   race_id:number;
   hasStarted:Boolean;
   aboutData:AboutData;
+  hasTags:Boolean;
   @ViewChild('stepper') public stepper: MatStepper;
 
   registerLoginform: FormGroup = new FormGroup({
@@ -93,14 +99,21 @@ export class SignupDialogContent {
     ]),
   })
 
+  tagForm: FormGroup = new FormGroup({
+    tagID: new FormControl('',[
+      Validators.required
+    ]),
+  })
+
   constructor(
     public dialogRef: MatDialogRef<SignupDialogContent>,
-    @Inject(MAT_DIALOG_DATA) public data: SignupDialogData) { 
+    @Inject(MAT_DIALOG_DATA) public data: SignupDialogData, private _raceService:RaceService) { 
       this.isLoggedIn = data.isLoggedIn;
       this.price = data.price;
       this.race_id = data.race_id;
       this.hasStarted = data.hasStarted;
       this.aboutData = data.aboutData;
+      this.hasTags = data.hasTags;
       if(this.price != null && this.price != undefined) {
         this.needsPayment = true;
       }
@@ -120,6 +133,8 @@ export class SignupDialogContent {
     let data = callbackStruct.data;
     let type = callbackStruct.type;
 
+    console.log(callbackStruct);
+
     if(success) {
       console.log('STEPPER INDEX:',this.stepper.selectedIndex);
       if(type == 'REGISTER') {
@@ -129,6 +144,17 @@ export class SignupDialogContent {
       }
       if(type == 'PAYMENT') {
         this.paymentForm.controls['complete'].setValue(true);
+        let registrationBody = {race_id:this.race_id} as any;
+
+        if(this.hasTags) {
+          let tagFormClean = this.tagForm.value as any;
+          registrationBody.tag_id = tagFormClean.tagID
+        }
+        this._raceService.joinRace(registrationBody);
+      }
+
+      if(type == 'TAG') {
+        this.tagForm.controls['tagID'].setValue(data.id);
       }
       this.stepper.next();
     }

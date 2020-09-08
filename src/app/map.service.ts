@@ -22,4 +22,8 @@ export class MapService {
     return this.http.post(environment.apiUrl + '/api/map/', {race_id : raceID}).toPromise();
   }
 
+  public getOrgPinStats(raceID:number) {
+    return this.http.post(environment.apiUrl + '/api/get-org-pins/',{race_id:raceID}).toPromise();
+  }
+
 }
