@@ -13,6 +13,7 @@ import { SmilesComponent } from './smiles/smiles.component';
 import { LoginComponent } from './login/login.component';
 import { PasswordRequestComponent } from './password-request/password-request.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
+import { RaceDashboardComponent } from './race-dashboard/race-dashboard.component';
 
 const routes: Routes = [
   {path: 'race', component:RaceViewComponent},
@@ -20,14 +21,15 @@ const routes: Routes = [
   {path: '', component:UsersComponent},
   {path: 'create', component:RaceCreateComponent},
   {path: 'profile',component:UserPageComponent},
-  {path:'about',component:RaceAboutComponent},
-  {path:'teams',component:TeamFormComponent},
+  {path: 'about',component:RaceAboutComponent},
+  {path: 'teams',component:TeamFormComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'shipping', component:ShippingAddressComponent },
   {path: 'smiles', component:SmilesComponent },
   {path: 'login', component:LoginComponent },
   {path: 'password-request', component:PasswordRequestComponent},
   {path: 'password-change', component:PasswordChangeComponent},
+  {path: 'dashboard', component:RaceDashboardComponent },
 ];
 
 @NgModule({

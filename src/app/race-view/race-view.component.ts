@@ -57,7 +57,9 @@ export class RaceViewComponent implements OnInit {
   };
   public isManualEntry:Boolean = false;
 
+  //User access permissions
   public userRegistered:Boolean = false;
+  public isOwnerOrModerator: Boolean = false;
 
   //Filters for activity feed
   public storyFeedOnly: Boolean = false;
@@ -180,6 +182,7 @@ export class RaceViewComponent implements OnInit {
       this.userStat = raceData.user_stat;
       //this.routePins = raceData.route_pins;
       this.loading = false;
+      this.isOwnerOrModerator = raceData.is_mod_or_owner;
     });
   }
 
@@ -233,13 +236,11 @@ export class RaceViewComponent implements OnInit {
 interface RaceData {
   progress:any;
   activities:any;
-  //coords:any;
-  //users_data:any;
   settings:any;
   race_settings:RaceSettings;
   user_stat:any;
   followedIDs:number[];
-  //route_pins:any[];
+  is_mod_or_owner:boolean;
 }
 
 interface FeedObj {

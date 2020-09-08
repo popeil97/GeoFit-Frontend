@@ -54,5 +54,8 @@ export class RaceService {
     return this.http.post(environment.apiUrl + '/api/get-team-or-user-stat/',{race_id:race_id}).toPromise();
   }
 
+  getReportedStories(race_id: number){
+    return this.http.post(environment.apiUrl + '/api/story-reported/',{race_id:race_id}).toPromise();
+  }
 
 }
