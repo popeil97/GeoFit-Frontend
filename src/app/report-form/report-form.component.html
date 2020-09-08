@@ -1,0 +1,38 @@
+<h2 mat-dialog-title>Report</h2>
+<mat-dialog-content>
+
+  <div *ngIf="!this.reportSuccess">
+    <h3>
+      You can report the post by checking the box next to the most applicable offence and clicking Report.
+    </h3>
+    
+    <br>
+  
+    <form [formGroup]="reportForm" (submit)="submit(reportForm.value)">
+      <div *ngFor="let offence of offences.controls; let i=index">
+        <input type="checkbox" [formControl]="offence"/> {{offencesList[i].type}}
+      </div>
+  
+      <br>
+  
+      <div *ngIf="!reportForm.valid">
+        Please select one checkbox only.
+      </div>
+  
+      <br>
+  
+      <button [disabled]="!reportForm.valid" class="btn btn-sm btn-danger" type="submit">Report</button>
+    </form>
+  </div>
+
+  <div *ngIf="this.reportSuccess">
+    <h3>
+      Your report has been received successfully. Thanks for helping to keep our community safe!
+    </h3>
+  </div>
+
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

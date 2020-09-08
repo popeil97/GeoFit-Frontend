@@ -93,11 +93,10 @@
     </mat-card-content>
       <mat-card-actions>
         <!--<button mat-button (click)="joinRace()" *ngIf="this._authService.token">JOIN</button> -->
-         
         <button mat-button (click)="viewRace()" *ngIf="hasStarted">GO TO RACE</button>
-
-       </mat-card-actions>
-     </mat-card>
+        <button mat-button (click)="goToRaceDashboard()" *ngIf="isOwner || isModerator">GO TO DASHBOARD</button>
+      </mat-card-actions>
+    </mat-card>
 
      <br>
    </div>

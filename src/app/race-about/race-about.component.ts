@@ -27,6 +27,7 @@ export class RaceAboutComponent implements OnInit {
   uploadeUrl:any;
   teamSizeOptions = [2,3,4,5,6,7,8,9,10];
   isOwner: Boolean;
+  isModerator: Boolean;
   hasJoined: Boolean;
   public coords:any;
   public all_user_data:Array<FeedObj>;
@@ -79,6 +80,7 @@ export class RaceAboutComponent implements OnInit {
       this.aboutData = resp['about_info'] as AboutData;
       this.raceSettings = resp['race_settings'];
       this.isOwner = resp['isOwner'];
+      this.isModerator = resp['isModerator'];
       this.hasJoined = resp['hasJoined'];
       this.hasPaid = resp['hasPaid'];
       this.hasStarted = resp['hasStarted'];
@@ -224,6 +226,10 @@ export class RaceAboutComponent implements OnInit {
         this.uploadeUrl = reader.result;
       }
     }
+  }
+
+  goToRaceDashboard(){
+    this.router.navigate(['/dashboard',{name:this.raceName,id:this.raceID}]);
   }
 
 }

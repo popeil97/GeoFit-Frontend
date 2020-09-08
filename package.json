@@ -34,6 +34,8 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "@asymmetrik/ngx-leaflet": "^7.0.1",
+    "@giphy/js-components": "^3.6.0",
+    "@giphy/js-fetch-api": "^1.6.2",
     "@ng-toolkit/serverless": "^8.1.0",
     "@ng-toolkit/universal": "^8.1.0",
     "@syncfusion/ej2": "^18.1.56",

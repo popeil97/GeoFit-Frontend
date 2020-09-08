@@ -18,6 +18,7 @@ export class UserStatsComponent implements OnInit {
   this._usersService.getUserStats(this.userID).then((res)=>{
   	console.log("USER", this.userID,"STATS: ", res);
     this.userStats = res as UserStats;
+    console.log("STATS",this.userStats);
     //this.userStats.mycolors
     this.showChart(this.userStats.mydates,this.userStats.mydistances,this.userStats.mycolors);
     })

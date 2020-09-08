@@ -3,15 +3,15 @@
 
 <div>
 <app-loader [isActive]="loading"></app-loader>
-<div *ngIf="userStat.total_distance==0">
-<app-race-day [userData]="userData"></app-race-day>
+<div *ngIf="this._authService.isLoggedIn() && this.userRegistered">
+<app-race-day *ngIf="userStat.total_distance==0" [userData]="userData"></app-race-day>
 </div>
 <mat-sidenav-container hasBackdrop="false">
 
   <mat-sidenav  md-disable-backdrop='true' #menu mode="over"  opened="true"> <!--opened="true"-->
      <div class="sidenav-scroll">
 
-     <div class="row" style="padding-top:12px;">
+     <div class="row" style="padding-top:12px;" *ngIf="this._authService.isLoggedIn() && this.userRegistered">
       <div class="column-split0">
       </div>
       <div class="column-split1">
@@ -20,7 +20,7 @@
       </div>
       <div class="column-split2">
 
-         <app-user-progress *ngIf="this._authService.isLoggedIn() && this.progress" [progress]="progress"></app-user-progress>
+         <app-user-progress *ngIf="this.progress" [progress]="progress"></app-user-progress>
          <div class="row" *ngIf="this.raceID==1">
           <div class="column">
             <a class="btn btn-mobile2" style="background-color:#2C007E;color:#FFFFFF;" (click)="USA()">Jump to USA</a>
@@ -53,7 +53,7 @@
         <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed> <br><br><br><br><br><br>
       </mat-tab>
 
-      <mat-tab *ngIf="this.progress && this._authService.isLoggedIn()">
+      <mat-tab *ngIf="this.progress && this._authService.isLoggedIn() && this.userRegistered">
         <ng-template mat-tab-label style="background-color: rgba(256,256, 256,1);">
         <!--  <mat-icon>add_circle_outline </mat-icon> <div *ngIf="num_activities>0" style="background-color: #F6BF78; border-radius: 5px;padding-left:2px;padding-right:2px;">{{num_activities}} </div> -->
 
@@ -160,7 +160,7 @@
      </mat-tab-group>
 
       </mat-tab>
-        <mat-tab>
+        <mat-tab *ngIf="this._authService.isLoggedIn() && this.userRegistered">
         <ng-template mat-tab-label>
           <mat-icon>group</mat-icon>
           <div class="tabs1">Teams</div>
@@ -177,7 +177,7 @@
               <app-team-form (callback)="refreshAllComponents($event)" [teamEditForm]="teamEditForm"></app-team-form><br><br><br><br><br><br>
             </div>
       </mat-tab>
-      <mat-tab>
+      <mat-tab *ngIf="this._authService.isLoggedIn() && this.userRegistered">
 
         <ng-template mat-tab-label>
           <mat-icon>settings</mat-icon>

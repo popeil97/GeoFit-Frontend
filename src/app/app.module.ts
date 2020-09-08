@@ -86,6 +86,10 @@ import { StoryDialogComponent } from './story-dialog/story-dialog.component';
 import { MapService } from './map.service';
 import { TagFormComponent } from './tag-form/tag-form.component';
 import { TagSelectComponent } from './tag-select/tag-select.component';
+import { ReportFormComponent } from './report-form/report-form.component';
+import { StoryDeleteDialogComponent } from './story-delete-dialog/story-delete-dialog.component';
+import { RaceDashboardComponent } from './race-dashboard/race-dashboard.component';
+import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.component';
 
 
 @NgModule({
@@ -152,6 +156,10 @@ import { TagSelectComponent } from './tag-select/tag-select.component';
     StoryDialogComponent,
     TagFormComponent,
     TagSelectComponent,
+    ReportFormComponent,
+    StoryDeleteDialogComponent,
+    RaceDashboardComponent,
+    RaceStoryManageComponent,
       ],
   imports: [
     BrowserModule,
@@ -188,7 +196,9 @@ import { TagSelectComponent } from './tag-select/tag-select.component';
                   RoutePinDialogComponent,
                   NotificationPanelComponent,
                   SnackbarComponent, 
-                  StoryDialogComponent,] 
+                  StoryDialogComponent,
+                  ReportFormComponent,
+                  StoryDeleteDialogComponent] 
 })
 export class AppModule { 
   constructor(private injector: Injector) {

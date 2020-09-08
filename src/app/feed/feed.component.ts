@@ -7,6 +7,8 @@ import { StoryFormComponent } from '../story-form/story-form.component';
 import { AuthService } from '../auth.service';
 import { MatTableDataSource } from '@angular/material/table';
 import { StoryDialogComponent } from '../story-dialog/story-dialog.component';
+import { ReportFormComponent } from '../report-form/report-form.component';
+import { StoryDeleteDialogComponent } from '../story-delete-dialog/story-delete-dialog.component';
 
 declare var $: any
 
@@ -51,6 +53,12 @@ export class FeedComponent implements OnInit {
 
   private _feedService: any;
   private initialized: boolean;
+  private loading = false;
+
+  //Variables for pagination
+  private page_number = 1;
+  private items_per_page = 10;
+  private canRefresh: boolean = false;
   
   public dataSource: any;
 
@@ -79,9 +87,6 @@ export class FeedComponent implements OnInit {
       this.resetFeed();
       this.refreshFeed();
     }
-
-    //this.storyFormComponent.setStoryImageFieldListener();
-    this.initialized = true;
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -96,6 +101,8 @@ export class FeedComponent implements OnInit {
             case 'ID':
               if(changes.ID.currentValue != undefined) {
                 this._feedService.ID = this.ID;
+                this.page_number = 1;
+
                 this.resetFeed();
                 this.refreshFeed();
               }
@@ -128,18 +135,25 @@ export class FeedComponent implements OnInit {
     });
   }
 
-  public refreshFeed(openStoryIDComments=null){
+  public refreshFeed(openStoryIDComments=null, getNextPage=false){
     var viewComponent = this;
+    this.loading = true;
 
-    this._feedService.refreshFeed().then(data => {
+    if (getNextPage){
+      this.page_number += 1;
+    }
+
+    console.log(getNextPage);
+    console.log("Getting page num ", this.page_number);
+
+    this._feedService.refreshFeed(this.page_number, this.items_per_page, !this.initialized).then(payload => {
       var newFeedObjs: Array<FeedObj> = [];
       var get_created_ts = this.get_created_ts;
+      var data = payload.serialized_feed;
+      this.canRefresh = payload.can_refresh;
 
       Object.keys(data).map(function(feedItemIndex){
         let feedItem: FeedObj = data[feedItemIndex];
-
-        //Initialize time since posts
-        //feedItem.created_ts = get_created_ts(feedItem.created_ts);
 
         //By default don't open comment fields
         //Unless we have just posted a comment
@@ -156,7 +170,10 @@ export class FeedComponent implements OnInit {
       //viewComponent.feedItems = newFeedObjs.concat(viewComponent.feedItems);
       //Continue to explore ways to refresh feed. In meantime, get all feed objs every time
       viewComponent.feedItems = newFeedObjs;
+      this.loading = false;
     });
+
+    this.initialized = true;
   }
 
   public get_created_ts(timestamp){
@@ -165,6 +182,7 @@ export class FeedComponent implements OnInit {
     var secondsPerMinute = 60;
     var secondsPerHour = secondsPerMinute * 60;
     var secondsPerDay = secondsPerHour * 24;
+    var secondsPerWeek = secondsPerDay * 7;
 
     //Calculate how to display the timestamp of the activity
     //If ts is within an hour, show number of minutes since activity
@@ -176,8 +194,11 @@ export class FeedComponent implements OnInit {
     else if ((ts - timestamp) < secondsPerDay) {
       displayTime = Math.round((ts - timestamp) / secondsPerHour) + "h";
     }
-    else {
+    else if ((ts - timestamp) < secondsPerWeek) {
       displayTime = Math.round((ts - timestamp) / secondsPerDay) + "d";
+    }
+    else {
+      displayTime = Math.round((ts - timestamp) / secondsPerWeek) + "w";
     }
     return displayTime;
   }
@@ -200,6 +221,27 @@ export class FeedComponent implements OnInit {
     //Feed items after comment posted
     console.log(this.feedItems);
     this.refreshFeed(storyID);
+  }
+
+  public openReportDialog(storyID: number){
+    let dialogRef = this.dialog.open(ReportFormComponent, {
+      data: { 
+        'storyID': storyID,
+      },
+    });
+  }
+
+  public openDeleteStoryDialog(storyID: number){
+    let dialogRef = this.dialog.open(StoryDeleteDialogComponent, {
+      data: { 
+        'storyID': storyID,
+      },
+    }).afterClosed().subscribe(response => {
+      if (response && response['deleted']){
+        this.resetFeed();
+        this.refreshFeed();
+      }
+    });
   }
 }
 
@@ -225,6 +267,11 @@ interface FeedObj {
   comments: Comment[];
   show_comments: boolean;
   follows: boolean;
+}
+
+interface FeedPayload {
+  serialized_feed: FeedObj[];
+  can_refresh: boolean;
 }
 
 interface Comment {

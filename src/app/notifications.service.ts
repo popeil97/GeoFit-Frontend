@@ -11,16 +11,36 @@ export class NotificationsService {
   constructor(private http:HttpClient) { }
 
   createNotification(form:any) {
-    return this.http.post(environment.apiUrl + '/api/notification-create/',{form:form}).toPromise();
+    try {
+      return this.http.post(environment.apiUrl + '/api/notification-create/',{form:form}).toPromise();
+    }
+    catch(err) {
+        console.log("couldn't create notification.")
+    }
+    
   }
 
   // will poll for notifications, this is very bad, don't keep this for too long
   getNotifications() {
-    return this.http.get(environment.apiUrl + '/api/notification-get/');
+    try {
+      return this.http.get(environment.apiUrl + '/api/notification-get/');
+    }
+    catch(err) {
+        console.log("couldn't get notifications.")
+    }
+
+    
   }
 
   submitAction(not_id:number,action:NotifactionAction) {
-    return this.http.post(environment.apiUrl + '/api/notification-action/',{not_id:not_id,action:action}).toPromise();
+    try {
+      return this.http.post(environment.apiUrl + '/api/notification-action/',{not_id:not_id,action:action}).toPromise();
+    }
+    catch(err) {
+        console.log("couldn't take action for notifications.")
+    }
+
+    
   }
 }
 

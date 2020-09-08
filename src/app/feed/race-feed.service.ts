@@ -26,10 +26,9 @@ export class RaceFeedService {
     this.refresh_ts = null;
   }
 
-  public refreshFeed() {
-    //Comment this out as we continue to explore ways to refresh feed
-    //this.refresh_ts = Math.round((new Date()).getTime() / 1000);
-    return this.http.post(environment.apiUrl + '/api/refresh-feed/', {refresh : this.refresh_ts, race_id: this.ID}).toPromise();
+  public refreshFeed(page_num: number, items_per_page: number, init: boolean = false) {
+    //return this.http.post(environment.apiUrl + '/api/refresh-feed/', {refresh : this.refresh_ts, race_id: this.ID}).toPromise();
+    return this.http.post(environment.apiUrl + '/api/race-feed-paginate/', {page_number : page_num, items_per_page: items_per_page, init: init, race_id: this.ID}).toPromise();
   }
 
   public resetFeed(){
