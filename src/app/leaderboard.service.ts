@@ -21,9 +21,9 @@ export class LeaderboardService {
     };
   }
 
-  public getIndividualLeaderboard(tagID?:number) {
+  public getIndividualLeaderboard(page:number,tagID?:number) {
 
-    let payload = {race_id:this.raceID} as any;
+    let payload = {race_id:this.raceID,page:page} as any;
 
     if(tagID) {
       payload.tag_id = tagID;
@@ -32,9 +32,9 @@ export class LeaderboardService {
     return this.http.post(environment.apiUrl + '/api/individual-leaderboard/', payload).toPromise();
   }
 
-  public getTeamLeaderboard(tagID?:number) {
+  public getTeamLeaderboard(page:number,tagID?:number) {
 
-    let payload = {race_id:this.raceID} as any;
+    let payload = {race_id:this.raceID,page:page} as any;
 
     if(tagID) {
       payload.tag_id = tagID;

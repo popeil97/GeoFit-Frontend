@@ -19,6 +19,7 @@ export class LeaderboardComponent implements OnInit,OnChanges {
   public leaderboard: LeaderboardItem[];
 
   private initialized: boolean = false;
+  private page:number = 1;
 
   constructor(private _leaderboardService: LeaderboardService) {
   }
@@ -61,18 +62,20 @@ export class LeaderboardComponent implements OnInit,OnChanges {
   getLeaderboard(){
     var leaderboardData;
     console.log("GETTING LEADERBOARD");
+
+    this.page = 1;
     
     if (this.use == 'individual' && this.tagID != 0){ // and tagID != all_id
-      this._leaderboardService.getIndividualLeaderboard(this.tagID != -1 ? this.tagID : null).then((data) => {
+      this._leaderboardService.getIndividualLeaderboard(this.page,this.tagID != -1 ? this.tagID : null).then((data) => {
         leaderboardData = data as LeaderboardStruct;
-        this.leaderboard = this.configureLeaderboard(leaderboardData.unranked,leaderboardData.ranked);;
+        this.leaderboard = leaderboardData.leaderboard;
       })
     }
 
     else if (this.use == 'teams' && this.tagID != 0){ // and tagID != all_id
-      this._leaderboardService.getTeamLeaderboard(this.tagID != -1 ? this.tagID : null).then((data) => {
+      this._leaderboardService.getTeamLeaderboard(this.page,this.tagID != -1 ? this.tagID : null).then((data) => {
         leaderboardData = data as LeaderboardStruct;
-        this.leaderboard = this.configureLeaderboard(leaderboardData.unranked,leaderboardData.ranked);;
+        this.leaderboard = leaderboardData.leaderboard;
       })
     }
 
@@ -84,6 +87,29 @@ export class LeaderboardComponent implements OnInit,OnChanges {
       })
     }
 
+    this.page++;
+
+  }
+
+  getNextLeaderboardPage() {
+    var leaderboardData;
+    if (this.use == 'individual' && this.tagID != 0){ // and tagID != all_id
+      this._leaderboardService.getIndividualLeaderboard(this.page,this.tagID != -1 ? this.tagID : null).then((data) => {
+        leaderboardData = data as LeaderboardStruct;
+        let leaderboardPage = leaderboardData.leaderboard;
+        this.leaderboard = this.leaderboard.concat(leaderboardPage);
+      })
+    }
+
+    else if (this.use == 'teams' && this.tagID != 0){ // and tagID != all_id
+      this._leaderboardService.getTeamLeaderboard(this.page,this.tagID != -1 ? this.tagID : null).then((data) => {
+        leaderboardData = data as LeaderboardStruct;
+        let leaderboardPage = leaderboardData.leaderboard;
+        this.leaderboard = this.leaderboard.concat(leaderboardPage);
+      })
+    }
+
+    this.page++;
   }
 
   configureLeaderboard(ranked:any[],unranked:any[]) {
@@ -102,6 +128,5 @@ export interface LeaderboardItem {
 }
 
 export interface LeaderboardStruct {
-  ranked: LeaderboardItem[];
-  unranked: LeaderboardItem[];
+  leaderboard: LeaderboardItem[];
 }
