@@ -191,18 +191,18 @@ export class RaceViewComponent implements OnInit {
       console.log("userRegistered", this.userRegistered);
       this.progress = raceData.progress;
 
-      if(this.progress.distance_remaining <= 0)
-      {
-            confetti.create()({
-            particleCount: 5000,
-            spread: 900,
+      // if(this.progress.distance_remaining <= 0)
+      // {
+      //       confetti.create()({
+      //       particleCount: 5000,
+      //       spread: 900,
             
-            origin: {
-                y: (1),
-                x: (0.5)
-            }
-        });
-      }
+      //       origin: {
+      //           y: (1),
+      //           x: (0.5)
+      //       }
+      //   });
+      // }
       console.log("GETTING RACE STATE");
       // this.activities = raceData.activities;
       this.num_activities = 0;

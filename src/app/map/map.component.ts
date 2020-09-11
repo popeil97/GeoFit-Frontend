@@ -119,6 +119,37 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
   public getMapData(){
 
+    this.userData = [];
+    let workers = [] as any;
+
+    this._mapService.getUserPinSize(this.raceID).then((resp) => {
+      console.log('USER PIN SIZE RESP:',resp);
+      let pages = resp['pages'];
+
+      for(var page = 1; page <= pages; page++) {
+        let worker = this.getUserPinData(page);
+        workers.push(worker);
+      }
+
+      console.log('WORKERS:',workers)
+
+      // Promise.all(workers).then((vals:any) => {
+      //   console.log('DONE LOADING PINS:',vals)
+      //   vals.forEach((val) => {
+      //     this.userData = this.userData.concat(val['users_data']);
+      //   });
+
+      //   console.log('ALL USERS DATA:',this.userData)
+
+      //   if (this.displayUsers){
+      //     this.createUserPins(false);
+      //   }
+      //   this.loading = false;
+      // })
+    });
+
+    
+
     this._mapService.getOrgPinStats(this.raceID).then((data) => {
       console.log('ORG PINSSSS DATAAAAA',data);
       let orgPinData = data as OrgPinData;
@@ -134,23 +165,25 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
       //Get and apply route pins
       this.routePins = mapData.route_pins;
-      if (this.routePins){
-        this.createRoutePins();
-      }
+      
 
       this.loading=true;
 
-      this._raceService.getUserRacestats(this.raceID).then((data:any) => {
-        this.userData = data.users_data;
-    
-        if (this.displayUsers){
-          this.createUserPins(false);
-        }
-
-        this.loading=false;
-      });
+      
     });
 
+  }
+
+  public getUserPinData(page:number) {
+    console.log('getting user data')
+    return this._raceService.getUserRacestats(this.raceID,page).then((data) =>{
+      this.userData = this.userData.concat(data['users_data']);
+
+      if (this.displayUsers){
+        this.createUserPins(false);
+      }
+      this.loading = false;
+    });
   }
 
 
