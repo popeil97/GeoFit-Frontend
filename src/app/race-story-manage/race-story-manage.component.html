@@ -25,6 +25,10 @@
               <p>{{ element.story_text }}</p>
             </div>
 
+            <div class="container">
+              <p>Reported: {{ element.report_count }} times</p>
+            </div>
+
             <div class="container" style="display:flex;align-content: right;right:0;">
               <button mat-raised-button (click)="closeCase(element.story_id)">Close Case</button>
               <button mat-raised-button color="warn" (click)="openDeleteStoryDialog(element.story_id)">Delete</button>
