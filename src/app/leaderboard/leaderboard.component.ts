@@ -47,9 +47,7 @@ export class LeaderboardComponent implements OnInit,OnChanges {
               }
 
             case 'tagID':
-              this.getLeaderboard() // get leaderboard for tags
-
-
+              this.getLeaderboard(); // get leaderboard for tags
 
           }
         }
@@ -61,7 +59,7 @@ export class LeaderboardComponent implements OnInit,OnChanges {
 
   getLeaderboard(){
     var leaderboardData;
-    console.log("GETTING LEADERBOARD");
+    console.log("GETTING LEADERBOARD", this.tagID);
 
     this.page = 1;
     
@@ -69,7 +67,10 @@ export class LeaderboardComponent implements OnInit,OnChanges {
       this._leaderboardService.getIndividualLeaderboard(this.page,this.tagID != -1 ? this.tagID : null).then((data) => {
         leaderboardData = data as LeaderboardStruct;
         this.leaderboard = leaderboardData.leaderboard;
+        
       })
+
+      console.log("YEEE",this.leaderboard);
     }
 
     else if (this.use == 'teams' && this.tagID != 0){ // and tagID != all_id

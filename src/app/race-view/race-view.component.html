@@ -21,7 +21,7 @@
       <div class="column-split2">
 
          <app-user-progress *ngIf="this.progress" [progress]="progress"></app-user-progress>
-         <div class="row" *ngIf="this.raceID==1">
+         <div class="row" *ngIf="this.raceID==0">
           <div class="column">
             <a class="btn btn-mobile2" style="background-color:#2C007E;color:#FFFFFF;" (click)="USA()">Jump to USA</a>
           </div>
@@ -89,7 +89,7 @@
               <div class="tabs1">Manual</div>
             </ng-template>
              <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Add Activity</b></h3></b>
-            <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
+            <app-manual-entry [race_type]="raceType" (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
           </mat-tab>
         </mat-tab-group>
       </div>

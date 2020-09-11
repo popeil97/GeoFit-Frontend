@@ -45,6 +45,7 @@ export class RaceViewComponent implements OnInit {
   //public all_user_data:Array<FeedObj>;
   public teams:any[];
   public userRaceSettings:any;
+  public raceType:number;
   public raceSettings:RaceSettings;
   //public routePins:any[];
   public userData:UserData;
@@ -90,6 +91,7 @@ export class RaceViewComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.raceName = params['params']['name'];
       this.raceID = params['params']['id'];
+      console.log("PARAMS...",params);
     });
 
     if(this._authService.isLoggedIn())
@@ -217,7 +219,7 @@ export class RaceViewComponent implements OnInit {
       //     return user_data;
       //   }
       // });
-
+      this.raceType = raceData.race.race_type;
       this.userRaceSettings = raceData.settings;
       this.raceSettings = raceData.race_settings;
       console.log('RACE SETTINGS:',this.raceSettings);
@@ -278,6 +280,7 @@ export class RaceViewComponent implements OnInit {
 
 interface RaceData {
   progress:any;
+  race:any;
   activities:any;
   settings:any;
   race_settings:RaceSettings;

@@ -33,14 +33,22 @@ export class UserStatsComponent implements OnInit {
     var i;
     for (i = 0; i < mycolors.length; i++)
     {
-      if(mycolors[i] == 1){
-        colorArray[i] = 'rgba(44, 0, 165,0.2)';
-        colorBorder[i] = 'rgba(44, 0, 165,1)';
+      if(mycolors[i] == 1){ //dark blue
+        colorArray[i] = 'rgba(0, 51, 204,0.2)';
+        colorBorder[i] = 'rgba(0, 51, 204,1)';
       } //run
-      else{//(mycolors[i] == 2){
-        colorArray[i] = 'rgba(54, 162, 235,0.2)';
-        colorBorder[i] = 'rgba(54, 162, 235,1)';
-      }  //ride
+      if(mycolors[i] == 2){ //light blue
+        colorArray[i] = 'rgba(153, 204, 255,0.2)';
+        colorBorder[i] = 'rgba(153, 204, 255,1)';
+      } //walk
+      if(mycolors[i] == 3){ //pink
+        colorArray[i] = 'rgba(204, 0, 204,0.2)';
+        colorBorder[i] = 'rgba(204, 0, 204,1)';
+      } //ride
+      if(mycolors[i] == 4){ //orange
+        colorArray[i] = 'rgba(255, 179, 102,0.2)';
+        colorBorder[i] = 'rgba(255, 179, 102,1)';
+      } //other
     //  if(mycolors[i] != 1 && mycolors.length[i] !=2){colorArray[i] = 'rgba(255, 206, 86, 0.2)';colorBorder[i] = 'rgba(255, 206, 86, 1)';}  //else
     }
     this.chart = new Chart('lineCharts', {
@@ -54,7 +62,8 @@ export class UserStatsComponent implements OnInit {
             backgroundColor: colorArray,
             borderColor: colorBorder,
             borderWidth: 1
-        }]
+        }
+        ]
     },
     options: {
        scales: {
@@ -104,6 +113,18 @@ interface UserStats {
   run_average_pace:number;
   run_average_dist:number;
   run_average_time:number;
+
+  walk_tot_activities:number;
+  walk_tot_dist:number;
+  walk_tot_hrs:number;
+
+  walk_max_dist:number;
+  walk_max_time:number;
+  walk_max_pace:number;
+
+  walk_average_pace:number;
+  walk_average_dist:number;
+  walk_average_time:number;
 
   ride_tot_activities:number;
   ride_tot_dist:number;
