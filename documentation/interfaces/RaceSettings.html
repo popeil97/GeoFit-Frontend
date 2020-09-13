@@ -82,6 +82,9 @@
                                         <a href="#allowTeams">allowTeams</a>
                                 </li>
                                 <li>
+                                        <a href="#has_entry_tags">has_entry_tags</a>
+                                </li>
+                                <li>
                                         <a href="#has_swag">has_swag</a>
                                 </li>
                                 <li>
@@ -121,6 +124,35 @@
                                 <tr>
                                     <td class="col-md-4">
                                         <code>allowTeams:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="has_entry_tags"></a>
+                                        <span class="name"><b>has_entry_tags</b><a href="#has_entry_tags"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>has_entry_tags:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
 </code>
                                     </td>
                                 </tr>
@@ -326,8 +358,8 @@ import { AuthService } from &#x27;../auth.service&#x27;;
 declare var $: any
 import { MapComponent } from &#x27;../map/map.component&#x27;;
 import { SignupComponent } from &#x27;../signup/signup.component&#x27;;
-import { LeaderboardItem } from &#x27;../leaderboard/leaderboard.component&#x27;;
 import { SwagComponent } from &#x27;../swag/swag.component&#x27;;
+import { TagType } from &#x27;../tags.service&#x27;;
 
 @Component({
   selector: &#x27;app-race-about&#x27;,
@@ -347,8 +379,8 @@ export class RaceAboutComponent implements OnInit {
   uploadeUrl:any;
   teamSizeOptions &#x3D; [2,3,4,5,6,7,8,9,10];
   isOwner: Boolean;
+  isModerator: Boolean;
   hasJoined: Boolean;
-  public leaderboard:LeaderboardItem[];
   public coords:any;
   public all_user_data:Array&lt;FeedObj&gt;;
   public followedIDs:number[];
@@ -356,6 +388,7 @@ export class RaceAboutComponent implements OnInit {
   hasMerch:Boolean;
   popup:Boolean;
   hasStarted:Boolean;
+  tagType &#x3D; TagType.ENTRY;
 
   public num_users:any;
 
@@ -389,10 +422,7 @@ export class RaceAboutComponent implements OnInit {
     this.raceService.getRace(this.raceID).subscribe(data &#x3D;&gt; {
 
       let raceData &#x3D; data as RaceData;
-      this.coords &#x3D; raceData.coords;
-      this.all_user_data &#x3D; raceData.users_data as Array&lt;FeedObj&gt;;
       this.followedIDs &#x3D; raceData.followedIDs;
-      this.leaderboard &#x3D; this.configureLeaderboard(raceData.unranked_leaderboard,raceData.ranked_leaderboard);
     });
 
 
@@ -402,6 +432,7 @@ export class RaceAboutComponent implements OnInit {
       this.aboutData &#x3D; resp[&#x27;about_info&#x27;] as AboutData;
       this.raceSettings &#x3D; resp[&#x27;race_settings&#x27;];
       this.isOwner &#x3D; resp[&#x27;isOwner&#x27;];
+      this.isModerator &#x3D; resp[&#x27;isModerator&#x27;];
       this.hasJoined &#x3D; resp[&#x27;hasJoined&#x27;];
       this.hasPaid &#x3D; resp[&#x27;hasPaid&#x27;];
       this.hasStarted &#x3D; resp[&#x27;hasStarted&#x27;];
@@ -427,15 +458,6 @@ export class RaceAboutComponent implements OnInit {
   }
 
 
-  configureLeaderboard(ranked:any[],unranked:any[]) {
-
-    return unranked.concat(ranked)
-
-
-
-  }
-
-
   initializeForm(): void {
     this.AboutForm &#x3D; new FormGroup({
       name: new FormControl(this.aboutData.name,[
@@ -455,6 +477,7 @@ export class RaceAboutComponent implements OnInit {
         paymentRequired: new FormControl(this.raceSettings.paymentRequired),
         price: new FormControl(this.raceSettings.price),
         hasSwag: new FormControl(this.raceSettings.has_swag),
+        hasEntryTags: new FormControl(this.raceSettings.has_entry_tags)
       })
     });
 
@@ -476,46 +499,47 @@ export class RaceAboutComponent implements OnInit {
     ($(id) as any).modal(&#x27;hide&#x27;);
   }
 
-  confirmRegistration(user:any): void {
-    // login user
-    console.log(&#x27;USER CONFIRMED:&#x27;,user);
-    this._authService.login(user).subscribe(data &#x3D;&gt; {
-      console.log(data);
-      localStorage.setItem(&#x27;access_token&#x27;, data[&#x27;token&#x27;]);
-      localStorage.setItem(&#x27;loggedInUsername&#x27;, user.username);
-      this.joinRace();
-      location.reload();
-    },
-    err &#x3D;&gt; {
+  // confirmRegistration(user:any): void {
+  //   // login user
+  //   console.log(&#x27;USER CONFIRMED:&#x27;,user);
+  //   this._authService.login(user).subscribe(data &#x3D;&gt; {
+  //     console.log(data);
+  //     localStorage.setItem(&#x27;access_token&#x27;, data[&#x27;token&#x27;]);
+  //     localStorage.setItem(&#x27;loggedInUsername&#x27;, user.username);
+  //     this.joinRace();
+  //     location.reload();
+  //   },
+  //   err &#x3D;&gt; {
 
-    });
-  }
+  //   });
+  // }
 
-  joinRace() {
-    let race_id &#x3D; this.raceID
+  joinRace(registrationBody:any) {
 
     if(!localStorage.getItem(&#x27;loggedInUsername&#x27;)) {
       // route to landing page
       this.showModal(&#x27;#registerModal&#x27;);
     }
 
-    this.raceService.joinRace(race_id).then((res) &#x3D;&gt; {
+    this.raceService.joinRace(registrationBody).then((res) &#x3D;&gt; {
       console.log(&#x27;RES FROM JOIN:&#x27;,res);
       // this.router.navigate([&#x27;/race&#x27;,{name:this.raceName,id:race_id}]);
     });
   }
 
-  signupCallback() {
+  signupCallback(registrationBody:any) {
     // prompt for swag
     // then join race
 
-    console.log(&#x27;IN CALL BACK&#x27;)
+    console.log(&#x27;IN CALL BACK&#x27;);
+
+    this.joinRace(registrationBody);
 
     if(this.hasMerch) {
       this.swagChild.openDialog();
     }
 
-    this.joinRace();
+    
   }
 
   update(): void {
@@ -556,6 +580,10 @@ export class RaceAboutComponent implements OnInit {
     }
   }
 
+  goToRaceDashboard(){
+    this.router.navigate([&#x27;/dashboard&#x27;,{name:this.raceName,id:this.raceID}]);
+  }
+
 }
 
 export interface AboutData {
@@ -584,20 +612,16 @@ export interface RaceSettings {
   paymentRequired: Boolean,
   price:any,
   has_swag:Boolean,
+  has_entry_tags:Boolean,
 }
 
 interface RaceData {
   progress:any;
   activities:any;
-  coords:any;
-  leaderboard:any;
-  users_data:any;
   settings:any;
   race_settings:RaceSettings;
   user_stat:any;
   followedIDs:number[];
-  unranked_leaderboard:any[];
-  ranked_leaderboard:any[];
 }
 
 interface FeedObj {

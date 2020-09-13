@@ -324,8 +324,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="69"
-                            class="link-to-prism">src/app/nav/nav.component.ts:69</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="71"
+                            class="link-to-prism">src/app/nav/nav.component.ts:71</a></div>
                 </td>
             </tr>
 
@@ -363,8 +363,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="125"
-                            class="link-to-prism">src/app/nav/nav.component.ts:125</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="127"
+                            class="link-to-prism">src/app/nav/nav.component.ts:127</a></div>
                 </td>
             </tr>
 
@@ -433,8 +433,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="78"
-                            class="link-to-prism">src/app/nav/nav.component.ts:78</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="80"
+                            class="link-to-prism">src/app/nav/nav.component.ts:80</a></div>
                 </td>
             </tr>
 
@@ -472,8 +472,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="86"
-                            class="link-to-prism">src/app/nav/nav.component.ts:86</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="88"
+                            class="link-to-prism">src/app/nav/nav.component.ts:88</a></div>
                 </td>
             </tr>
 
@@ -511,8 +511,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="111"
-                            class="link-to-prism">src/app/nav/nav.component.ts:111</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="113"
+                            class="link-to-prism">src/app/nav/nav.component.ts:113</a></div>
                 </td>
             </tr>
 
@@ -589,8 +589,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="120"
-                            class="link-to-prism">src/app/nav/nav.component.ts:120</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="122"
+                            class="link-to-prism">src/app/nav/nav.component.ts:122</a></div>
                 </td>
             </tr>
 
@@ -659,8 +659,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="115"
-                            class="link-to-prism">src/app/nav/nav.component.ts:115</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="117"
+                            class="link-to-prism">src/app/nav/nav.component.ts:117</a></div>
                 </td>
             </tr>
 
@@ -729,8 +729,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="95"
-                            class="link-to-prism">src/app/nav/nav.component.ts:95</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="97"
+                            class="link-to-prism">src/app/nav/nav.component.ts:97</a></div>
                 </td>
             </tr>
 
@@ -799,8 +799,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="90"
-                            class="link-to-prism">src/app/nav/nav.component.ts:90</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="92"
+                            class="link-to-prism">src/app/nav/nav.component.ts:92</a></div>
                 </td>
             </tr>
 
@@ -869,8 +869,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="101"
-                            class="link-to-prism">src/app/nav/nav.component.ts:101</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="103"
+                            class="link-to-prism">src/app/nav/nav.component.ts:103</a></div>
                 </td>
             </tr>
 
@@ -1112,7 +1112,9 @@ picURL:any;
       e.stopPropagation();
     });
 
-    this.getNotifications();
+    try{this.getNotifications();}
+    catch{console.log(&quot;Couldnt get notifs&quot;);}
+    
 
     Observable.interval(60000) // make much larger in production
     .switchMap(() &#x3D;&gt; this._notificationService.getNotifications())
@@ -1403,7 +1405,7 @@ a.navbar-brand {
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
         var COMPONENT_TEMPLATE = '<div><nav class="navbar navbar-expand-lg navbar-light" style="top: 0; height: 5%;width: 100%;z-index: 10000000;background:rgba(256,256,256,0.7);">  <a class="navbar-brand" href="#" *ngIf="!this._authService.isLoggedIn()"><img src= "../../assets/landing/tucan_purple-02.png" width="48" height="20"></a>   <a class="navbar-brand" *ngIf="this._authService.isLoggedIn()"><img src= "../../assets/landing/tucan_purple-02.png" width="48" height="20"></a>  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">    <span class="navbar-toggler-icon"></span>  </button>  <div class="collapse navbar-collapse" id="navbarSupportedContent">    <ul class="navbar-nav mr-auto">      <li class="nav-item active">        <a class="nav-link" routerLink=\'/races\'><i class="material-icons roboto-purple">run_circle</i> Home <span class="sr-only">(current)</span></a>      </li>      <div *ngIf="this._authService.isLoggedIn()">      <li class="nav-item dropdown">        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">          <img src= "{{this.picURL}}" style="border-radius:50%;width:20px;"> My Profile        </a>         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">              <a class="dropdown-item" [routerLink]="[\'/profile\', {username: this._authService.username}]">My profile</a>              <div class="dropdown-divider"></div>              <a class="dropdown-item" (click)="logout()">Log out {{this._authService.username}}</a>          </div>      </li>          </div>      <li class="nav-item" *ngIf="this._authService.isLoggedIn()">        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="showNotifications()">          <mat-icon *ngIf="notifications.length>0" class="roboto-purple" matBadge="{{notifications.length}}" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below">circle_notifications</mat-icon>            <mat-icon *ngIf="notifications.length==0" class="roboto-purple" >circle_notifications</mat-icon>          Notifications        </a>      </li>      <li class="nav-item dropdown">        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">          <i class="material-icons roboto-purple">help</i> Help        </a>         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">              <a class="dropdown-item"><app-faq-help></app-faq-help></a>              <div class="dropdown-divider"></div>              <a class="dropdown-item"><app-terms-of-service></app-terms-of-service></a>              <div class="dropdown-divider"></div>          <!--    <a class="dropdown-item"><button mat-button [routerLink]="[\'/\']" type=\'button\'>About Us</button></a>              <div class="dropdown-divider"></div> -->              <a class="dropdown-item"><app-contact-help></app-contact-help></a>          </div>      </li>    </ul>  </div></nav></div>'
-    var COMPONENTS = [{'name': 'ActivitiesMenuComponent', 'selector': 'app-activities-menu'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'CommentsFormComponent', 'selector': 'app-comments-form'},{'name': 'ContactHelpComponent', 'selector': 'app-contact-help'},{'name': 'ContactHelpDialogContent', 'selector': 'app-contact-help-dialog-content'},{'name': 'FaqHelpComponent', 'selector': 'app-faq-help'},{'name': 'FaqHelpDialogContent', 'selector': 'app-faq-help-dialog-content'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'LeaderboardComponent', 'selector': 'app-leaderboard'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManualEntryComponent', 'selector': 'app-manual-entry'},{'name': 'ManualInstructionsComponent', 'selector': 'app-manual-instructions'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationPanelComponent', 'selector': 'app-notification-panel'},{'name': 'PasswordChangeComponent', 'selector': 'app-password-change'},{'name': 'PasswordRequestComponent', 'selector': 'app-password-request'},{'name': 'PaypalComponent', 'selector': 'app-paypal'},{'name': 'PopupComponent', 'selector': 'app-popup'},{'name': 'ProfileFormComponent', 'selector': 'app-profile-form'},{'name': 'ProfilePicComponent', 'selector': 'app-profile-pic'},{'name': 'RaceAboutComponent', 'selector': 'app-race-about'},{'name': 'RaceComponent', 'selector': 'app-race'},{'name': 'RaceCreateComponent', 'selector': 'app-race-create'},{'name': 'RaceDayComponent', 'selector': 'app-race-day'},{'name': 'RaceDayDialogContent', 'selector': 'app-race-day-dialog-content'},{'name': 'RaceMenuComponent', 'selector': 'app-race-menu'},{'name': 'RacesComponent', 'selector': 'app-races'},{'name': 'RaceSettingsComponent', 'selector': 'app-race-settings'},{'name': 'RaceViewComponent', 'selector': 'app-race-view'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RoutePinDialogComponent', 'selector': 'app-route-pin-dialog'},{'name': 'ShippingAddressComponent', 'selector': 'app-shipping-address'},{'name': 'ShippingAddressFormComponent', 'selector': 'app-shipping-address-form'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SignupDialogContent', 'selector': 'signup-dialog-content'},{'name': 'SmilesComponent', 'selector': 'app-smiles'},{'name': 'SnackbarComponent', 'selector': 'app-snackbar'},{'name': 'StoryBtnComponent', 'selector': 'app-story-btn'},{'name': 'StoryDialogComponent', 'selector': 'app-story-dialog'},{'name': 'StoryFormComponent', 'selector': 'app-story-form'},{'name': 'StoryModalComponent', 'selector': 'app-story-modal'},{'name': 'StravaInstructionsComponent', 'selector': 'app-strava-instructions'},{'name': 'StravauthComponent', 'selector': 'app-stravauth'},{'name': 'SwagComponent', 'selector': 'app-swag'},{'name': 'SwagDialogContent', 'selector': 'swag-dialog-content'},{'name': 'TeamFormComponent', 'selector': 'app-team-form'},{'name': 'TeamInstructionsComponent', 'selector': 'app-team-instructions'},{'name': 'TeamListComponent', 'selector': 'app-team-list'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'TermsOfServiceDialogContent', 'selector': 'app-terms-of-service-dialog-content'},{'name': 'UserFollowComponent', 'selector': 'app-user-follow'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserProfileNavComponent', 'selector': 'app-user-profile-nav'},{'name': 'UserProgressComponent', 'selector': 'app-user-progress'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserStatsComponent', 'selector': 'app-user-stats'}];
+    var COMPONENTS = [{'name': 'ActivitiesMenuComponent', 'selector': 'app-activities-menu'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'CommentsFormComponent', 'selector': 'app-comments-form'},{'name': 'ContactHelpComponent', 'selector': 'app-contact-help'},{'name': 'ContactHelpDialogContent', 'selector': 'app-contact-help-dialog-content'},{'name': 'FaqHelpComponent', 'selector': 'app-faq-help'},{'name': 'FaqHelpDialogContent', 'selector': 'app-faq-help-dialog-content'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'LeaderboardComponent', 'selector': 'app-leaderboard'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManualEntryComponent', 'selector': 'app-manual-entry'},{'name': 'ManualInstructionsComponent', 'selector': 'app-manual-instructions'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationPanelComponent', 'selector': 'app-notification-panel'},{'name': 'PasswordChangeComponent', 'selector': 'app-password-change'},{'name': 'PasswordRequestComponent', 'selector': 'app-password-request'},{'name': 'PaypalComponent', 'selector': 'app-paypal'},{'name': 'PopupComponent', 'selector': 'app-popup'},{'name': 'ProfileFormComponent', 'selector': 'app-profile-form'},{'name': 'ProfilePicComponent', 'selector': 'app-profile-pic'},{'name': 'RaceAboutComponent', 'selector': 'app-race-about'},{'name': 'RaceComponent', 'selector': 'app-race'},{'name': 'RaceCreateComponent', 'selector': 'app-race-create'},{'name': 'RaceDashboardComponent', 'selector': 'app-race-dashboard'},{'name': 'RaceDayComponent', 'selector': 'app-race-day'},{'name': 'RaceDayDialogContent', 'selector': 'app-race-day-dialog-content'},{'name': 'RaceMenuComponent', 'selector': 'app-race-menu'},{'name': 'RacesComponent', 'selector': 'app-races'},{'name': 'RaceSettingsComponent', 'selector': 'app-race-settings'},{'name': 'RaceStoryManageComponent', 'selector': 'app-race-story-manage'},{'name': 'RaceViewComponent', 'selector': 'app-race-view'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReportFormComponent', 'selector': 'app-report-form'},{'name': 'RoutePinDialogComponent', 'selector': 'app-route-pin-dialog'},{'name': 'ShippingAddressComponent', 'selector': 'app-shipping-address'},{'name': 'ShippingAddressFormComponent', 'selector': 'app-shipping-address-form'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SignupDialogContent', 'selector': 'signup-dialog-content'},{'name': 'SmilesComponent', 'selector': 'app-smiles'},{'name': 'SnackbarComponent', 'selector': 'app-snackbar'},{'name': 'StoryBtnComponent', 'selector': 'app-story-btn'},{'name': 'StoryDeleteDialogComponent', 'selector': 'app-story-delete-dialog'},{'name': 'StoryDialogComponent', 'selector': 'app-story-dialog'},{'name': 'StoryFormComponent', 'selector': 'app-story-form'},{'name': 'StoryModalComponent', 'selector': 'app-story-modal'},{'name': 'StravaInstructionsComponent', 'selector': 'app-strava-instructions'},{'name': 'StravauthComponent', 'selector': 'app-stravauth'},{'name': 'SwagComponent', 'selector': 'app-swag'},{'name': 'SwagDialogContent', 'selector': 'swag-dialog-content'},{'name': 'TagFormComponent', 'selector': 'app-tag-form'},{'name': 'TagSelectComponent', 'selector': 'app-tag-select'},{'name': 'TeamFormComponent', 'selector': 'app-team-form'},{'name': 'TeamInstructionsComponent', 'selector': 'app-team-instructions'},{'name': 'TeamListComponent', 'selector': 'app-team-list'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'TermsOfServiceDialogContent', 'selector': 'app-terms-of-service-dialog-content'},{'name': 'UserFollowComponent', 'selector': 'app-user-follow'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserProfileNavComponent', 'selector': 'app-user-profile-nav'},{'name': 'UserProgressComponent', 'selector': 'app-user-progress'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserStatsComponent', 'selector': 'app-user-stats'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'NavComponent'};
 </script>

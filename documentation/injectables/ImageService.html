@@ -139,8 +139,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="54"
-                            class="link-to-prism">src/app/image.service.ts:54</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="46"
+                            class="link-to-prism">src/app/image.service.ts:46</a></div>
                 </td>
             </tr>
 
@@ -294,9 +294,6 @@ export class ImageService {
     var width &#x3D; img.width;
     var height &#x3D; img.height;
 
-    console.log(&quot;Original width: &quot;, width);
-    console.log(&quot;Original height: &quot;, height);
-
     var sX &#x3D; 0; 
     var sY &#x3D; 0;
     var sWidth &#x3D; width;
@@ -315,11 +312,6 @@ export class ImageService {
       sY &#x3D; (height - sHeight) / 2;
       canvas.height &#x3D; sHeight;
     }
-
-    console.log(&quot;sWidth width: &quot;, sWidth);
-    console.log(&quot;sHeight height: &quot;, sHeight);
-    console.log(&quot;sX : &quot;, sX);
-    console.log(&quot;sY: &quot;, sY);
     
     var ctx &#x3D; canvas.getContext(&#x27;2d&#x27;);
     ctx.drawImage(img, sX, sY, sWidth, sHeight, 0, 0, canvas.width, canvas.height);
@@ -331,9 +323,6 @@ export class ImageService {
       /*
       Resizes Base64 images to ensure smooth upload to Django
       */
-      console.log(&quot;Max height: &quot;, MAX_HEIGHT);
-      console.log(&quot;Max width: &quot;, MAX_WIDTH);
-      console.log(&quot;base64 width: &quot;, base64Str.width);
       var img &#x3D; new Image();
       img.src &#x3D; base64Str;
 
@@ -342,41 +331,35 @@ export class ImageService {
         var width &#x3D; img.width;
         var height &#x3D; img.height;
 
-        console.log(&quot;Img : &quot;, img);
-        console.log(&quot;Img width: &quot;, width);
-        console.log(&quot;Img height: &quot;, height);
-
         if (width &lt; MAX_WIDTH &amp;&amp; height &lt; MAX_HEIGHT){
-          return base64Str;
+          resolve(base64Str);
+        }
+        else {
+
+          if (width &gt; height) {
+            if (width &gt; MAX_WIDTH) {
+              height *&#x3D; MAX_WIDTH / width;
+              width &#x3D; MAX_WIDTH;
+            }
+          } else {
+            if (height &gt; MAX_HEIGHT) {
+              width *&#x3D; MAX_HEIGHT / height;
+              height &#x3D; MAX_HEIGHT;
+            }
+          }
+  
+          canvas.width &#x3D; width;
+          canvas.height &#x3D; height;
+          var ctx &#x3D; canvas.getContext(&#x27;2d&#x27;);
+          ctx.drawImage(img, 0, 0, width, height);
+          resolve(canvas.toDataURL(&quot;image/jpeg&quot;,1.0));
         }
 
-        if (width &gt; height) {
-          if (width &gt; MAX_WIDTH) {
-            height *&#x3D; MAX_WIDTH / width;
-            width &#x3D; MAX_WIDTH;
-          }
-        } else {
-          if (height &gt; MAX_HEIGHT) {
-            width *&#x3D; MAX_HEIGHT / height;
-            height &#x3D; MAX_HEIGHT;
-          }
-        }
-
-        console.log(&quot;Changing width to &quot;, width);
-        console.log(&quot;Changing height to &quot;, height);
-        canvas.width &#x3D; width;
-        canvas.height &#x3D; height;
-        var ctx &#x3D; canvas.getContext(&#x27;2d&#x27;);
-        ctx.drawImage(img, 0, 0, width, height);
-        resolve(canvas.toDataURL());
       }
     })
   }
   
-}
-
-
-</code></pre>
+}</code></pre>
     </div>
 
 </div>

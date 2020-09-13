@@ -242,8 +242,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="18"
-                            class="link-to-prism">src/app/notifications.service.ts:18</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="24"
+                            class="link-to-prism">src/app/notifications.service.ts:24</a></div>
                 </td>
             </tr>
 
@@ -281,8 +281,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/app/notifications.service.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="35"
+                            class="link-to-prism">src/app/notifications.service.ts:35</a></div>
                 </td>
             </tr>
 
@@ -360,16 +360,36 @@ export class NotificationsService {
   constructor(private http:HttpClient) { }
 
   createNotification(form:any) {
-    return this.http.post(environment.apiUrl + &#x27;/api/notification-create/&#x27;,{form:form}).toPromise();
+    try {
+      return this.http.post(environment.apiUrl + &#x27;/api/notification-create/&#x27;,{form:form}).toPromise();
+    }
+    catch(err) {
+        console.log(&quot;couldn&#x27;t create notification.&quot;)
+    }
+    
   }
 
   // will poll for notifications, this is very bad, don&#x27;t keep this for too long
   getNotifications() {
-    return this.http.get(environment.apiUrl + &#x27;/api/notification-get/&#x27;);
+    try {
+      return this.http.get(environment.apiUrl + &#x27;/api/notification-get/&#x27;);
+    }
+    catch(err) {
+        console.log(&quot;couldn&#x27;t get notifications.&quot;)
+    }
+
+    
   }
 
   submitAction(not_id:number,action:NotifactionAction) {
-    return this.http.post(environment.apiUrl + &#x27;/api/notification-action/&#x27;,{not_id:not_id,action:action}).toPromise();
+    try {
+      return this.http.post(environment.apiUrl + &#x27;/api/notification-action/&#x27;,{not_id:not_id,action:action}).toPromise();
+    }
+    catch(err) {
+        console.log(&quot;couldn&#x27;t take action for notifications.&quot;)
+    }
+
+    
   }
 }
 
@@ -378,6 +398,9 @@ export enum NotificationType {
   TEAM_JOIN&#x3D;2,
   TEAM_JOIN_SUCCESS&#x3D;3,
   FOLLOW_REQUEST&#x3D;4,
+  AUTO_IMPORT_ALERT&#x3D;5,
+  LIKE&#x3D;6,
+  COMMENT&#x3D;7,
 }
 </code></pre>
     </div>

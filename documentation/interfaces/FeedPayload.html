@@ -1,0 +1,503 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>geo-fit documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">geo-fit documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li>FeedPayload</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/feed/feed.component.ts</code>
+        </p>
+
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#can_refresh">can_refresh</a>
+                                </li>
+                                <li>
+                                        <a href="#serialized_feed">serialized_feed</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="can_refresh"></a>
+                                        <span class="name"><b>can_refresh</b><a href="#can_refresh"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>can_refresh:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="serialized_feed"></a>
+                                        <span class="name"><b>serialized_feed</b><a href="#serialized_feed"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>serialized_feed:     <code>FeedObj[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>FeedObj[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from &#x27;@angular/core&#x27;;
+import { StoryModalComponent } from &#x27;../story-modal/story-modal.component&#x27;;
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from &#x27;@angular/material/dialog&#x27;;
+import { RaceFeedService } from &#x27;./race-feed.service&#x27;;
+import { UserProfileService } from &#x27;../userprofile.service&#x27;;
+import { StoryFormComponent } from &#x27;../story-form/story-form.component&#x27;;
+import { AuthService } from &#x27;../auth.service&#x27;;
+import { MatTableDataSource } from &#x27;@angular/material/table&#x27;;
+import { StoryDialogComponent } from &#x27;../story-dialog/story-dialog.component&#x27;;
+import { ReportFormComponent } from &#x27;../report-form/report-form.component&#x27;;
+import { StoryDeleteDialogComponent } from &#x27;../story-delete-dialog/story-delete-dialog.component&#x27;;
+
+declare var $: any
+
+@Component({
+  selector: &#x27;app-feed&#x27;,
+  templateUrl: &#x27;./feed.component.html&#x27;,
+  styleUrls: [&#x27;./feed.component.css&#x27;]
+})
+export class FeedComponent implements OnInit {
+  /*
+  General Feed component that displays Race or User -specific events
+  */
+
+  @ViewChild(StoryModalComponent) storyModalChild: StoryModalComponent;
+
+  @ViewChild(StoryFormComponent) storyFormComponent: StoryFormComponent;
+
+  //ID of race or user
+  @Input() ID:number;
+
+  //Items on feed to display
+  @Input() feedItems: Array&lt;FeedObj&gt;;
+
+  //Progress object of logged in user
+  @Input() progress: any;
+
+  //Use of feed (&#x27;race&#x27; or &#x27;user&#x27;)
+  @Input() use:string;
+
+  //If true, we have our own story modal that is a child component of the feed component
+  //If false, we emit when a story modal should be activated via storyItemClicked()
+  @Input() hasStoryModalChild:boolean;
+
+  //If true, only show feed items of people user follows
+  @Input() followOnly:boolean;
+
+  //If true, only show Stories (texts and images) in feed
+  @Input() storyOnly:boolean;
+
+  @Output() feedItemClicked &#x3D; new EventEmitter();
+  @Output() storyItemClicked &#x3D; new EventEmitter();
+
+  private _feedService: any;
+  private initialized: boolean;
+  private loading &#x3D; false;
+
+  //Variables for pagination
+  private page_number &#x3D; 1;
+  private items_per_page &#x3D; 10;
+  private canRefresh: boolean &#x3D; false;
+  
+  public dataSource: any;
+
+  columns:string[] &#x3D; [&#x27;ProfilePic&#x27;,&#x27;Data&#x27;];
+
+  constructor(private _userProfileService: UserProfileService, 
+              private _raceFeedService: RaceFeedService,
+              public _authService: AuthService,
+              public dialog: MatDialog) {
+  }
+
+  ngOnInit() {
+    if (this.use &#x3D;&#x3D; &#x27;race&#x27;){
+      this._feedService &#x3D; this._raceFeedService;
+    }
+    else if (this.use &#x3D;&#x3D; &#x27;user&#x27;){
+      this._feedService &#x3D; this._userProfileService;
+    }
+
+    console.log(&quot;feed service: &quot;, this._feedService);
+
+    this._feedService.ID &#x3D; this.ID;
+
+    //If no feedItems provided as input, reset and refresh feed
+    if (!this.feedItems){
+      this.resetFeed();
+      this.refreshFeed();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    //Check if user or race ID changes between hops
+    //If yes, we need to update our feed service and pull new data
+
+    if (this.initialized){
+      for(const propName in changes) {
+        if(changes.hasOwnProperty(propName)) {
+
+          switch(propName) {
+            case &#x27;ID&#x27;:
+              if(changes.ID.currentValue !&#x3D; undefined) {
+                this._feedService.ID &#x3D; this.ID;
+                this.page_number &#x3D; 1;
+
+                this.resetFeed();
+                this.refreshFeed();
+              }
+          }
+        }
+      }
+    }
+
+  }
+
+  showStoryModal(storyID): void {
+    console.log(&quot;open story modal!&quot;);
+
+    //WE CAN EITHER EMIT STORY MODAL CLICK OUTPUT
+    //OR CALL IT DIRECTLY TO THE CHILD MODAL
+    if (!this.hasStoryModalChild){
+      this.storyItemClicked.emit(storyID);
+    }
+    else{
+      this.storyModalChild.showModal(storyID);
+    }
+  }
+
+  showStoryDialog(element: FeedObj){
+    console.log(&quot;In dialogue function&quot;);
+    let dialogRef &#x3D; this.dialog.open(StoryDialogComponent, {
+      data: { 
+        &#x27;element&#x27;: element,
+      },
+    });
+  }
+
+  public refreshFeed(openStoryIDComments&#x3D;null, getNextPage&#x3D;false){
+    var viewComponent &#x3D; this;
+    this.loading &#x3D; true;
+
+    if (getNextPage){
+      this.page_number +&#x3D; 1;
+    }
+
+    console.log(getNextPage);
+    console.log(&quot;Getting page num &quot;, this.page_number);
+
+    this._feedService.refreshFeed(this.page_number, this.items_per_page, !this.initialized).then(payload &#x3D;&gt; {
+      var newFeedObjs: Array&lt;FeedObj&gt; &#x3D; [];
+      var get_created_ts &#x3D; this.get_created_ts;
+      var data &#x3D; payload.serialized_feed;
+      this.canRefresh &#x3D; payload.can_refresh;
+
+      Object.keys(data).map(function(feedItemIndex){
+        let feedItem: FeedObj &#x3D; data[feedItemIndex];
+
+        //By default don&#x27;t open comment fields
+        //Unless we have just posted a comment
+        if (feedItem.story_id &#x3D;&#x3D; openStoryIDComments){
+          feedItem.show_comments &#x3D; true;
+        }
+        else {
+          feedItem.show_comments &#x3D; false;
+        }
+
+        newFeedObjs.push(feedItem);
+      });
+
+      //viewComponent.feedItems &#x3D; newFeedObjs.concat(viewComponent.feedItems);
+      //Continue to explore ways to refresh feed. In meantime, get all feed objs every time
+      viewComponent.feedItems &#x3D; newFeedObjs;
+      this.loading &#x3D; false;
+    });
+
+    this.initialized &#x3D; true;
+  }
+
+  public get_created_ts(timestamp){
+    var date &#x3D; new Date();
+    var ts &#x3D; date.getTime() / 1000;
+    var secondsPerMinute &#x3D; 60;
+    var secondsPerHour &#x3D; secondsPerMinute * 60;
+    var secondsPerDay &#x3D; secondsPerHour * 24;
+    var secondsPerWeek &#x3D; secondsPerDay * 7;
+
+    //Calculate how to display the timestamp of the activity
+    //If ts is within an hour, show number of minutes since activity
+    //If ts is over an hour, round to nearest hour
+    var displayTime;
+    if ((ts - timestamp) &lt; secondsPerHour) {
+      displayTime &#x3D; Math.round((ts - timestamp) / secondsPerMinute) + &quot;m&quot;;
+    }
+    else if ((ts - timestamp) &lt; secondsPerDay) {
+      displayTime &#x3D; Math.round((ts - timestamp) / secondsPerHour) + &quot;h&quot;;
+    }
+    else if ((ts - timestamp) &lt; secondsPerWeek) {
+      displayTime &#x3D; Math.round((ts - timestamp) / secondsPerDay) + &quot;d&quot;;
+    }
+    else {
+      displayTime &#x3D; Math.round((ts - timestamp) / secondsPerWeek) + &quot;w&quot;;
+    }
+    return displayTime;
+  }
+
+  public resetFeed(){
+    console.log(this._feedService);
+    this._feedService.resetFeed();
+  }
+
+  clickedOnFeedItem(item){
+    this.feedItemClicked.emit(item.user_id.toString());
+  }
+
+  newStoryPosted(){
+    //Refresh feed on new story post
+    this.refreshFeed();
+  }
+
+  newCommentPosted(storyID){
+    //Feed items after comment posted
+    console.log(this.feedItems);
+    this.refreshFeed(storyID);
+  }
+
+  public openReportDialog(storyID: number){
+    let dialogRef &#x3D; this.dialog.open(ReportFormComponent, {
+      data: { 
+        &#x27;storyID&#x27;: storyID,
+      },
+    });
+  }
+
+  public openDeleteStoryDialog(storyID: number){
+    let dialogRef &#x3D; this.dialog.open(StoryDeleteDialogComponent, {
+      data: { 
+        &#x27;storyID&#x27;: storyID,
+      },
+    }).afterClosed().subscribe(response &#x3D;&gt; {
+      if (response &amp;&amp; response[&#x27;deleted&#x27;]){
+        this.resetFeed();
+        this.refreshFeed();
+      }
+    });
+  }
+}
+
+
+interface FeedObj {
+  user_id: number;
+  display_name: string;
+  username: string;
+  profile_url:string
+  joined: boolean;
+  traveled: boolean;
+  likes: boolean;
+  likes_count: number;
+  story: boolean;
+  story_image:string;
+  story_text:string;
+  story_id:number;
+  total_distance:number;
+  last_distance:number;
+  message: string;
+  created_ts:number;
+  is_mine:boolean;
+  comments: Comment[];
+  show_comments: boolean;
+  follows: boolean;
+}
+
+interface FeedPayload {
+  serialized_feed: FeedObj[];
+  can_refresh: boolean;
+}
+
+interface Comment {
+  username: string;
+  display_name:string;
+  profile_url:string;
+  message:string;
+  created_ts:number;
+}
+</code></pre>
+    </div>
+</div>
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'FeedPayload.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

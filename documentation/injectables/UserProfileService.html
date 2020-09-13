@@ -350,15 +350,15 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>refreshFeed()</code>
+                    <code>refreshFeed(page_num: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, items_per_page: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="43"
-                            class="link-to-prism">src/app/userprofile.service.ts:43</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="44"
+                            class="link-to-prism">src/app/userprofile.service.ts:44</a></div>
                 </td>
             </tr>
 
@@ -367,8 +367,51 @@
                 <td class="col-md-4">
 
                     <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>page_num</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>items_per_page</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -398,8 +441,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="47"
-                            class="link-to-prism">src/app/userprofile.service.ts:47</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/app/userprofile.service.ts:49</a></div>
                 </td>
             </tr>
 
@@ -615,12 +658,14 @@ export class UserProfileService {
   }
 
   getUserProfile(username:string){
+    console.log(&quot;from service username&quot;, username);
     return this.http.post(environment.apiUrl + &#x27;/api/user-profile/&#x27;,{&#x27;username&#x27;:username}).toPromise();
   }
 
   //Functions to refresh user feed
-  public refreshFeed() {
-    return this.http.post(environment.apiUrl + &#x27;/api/user-feed/&#x27;,{&#x27;username&#x27;:this.ID}).toPromise();
+  public refreshFeed(page_num: number, items_per_page: number) {
+    //return this.http.post(environment.apiUrl + &#x27;/api/user-feed/&#x27;,{&#x27;username&#x27;:this.ID}).toPromise();
+    return this.http.post(environment.apiUrl + &#x27;/api/user-feed/&#x27;, {page_number : page_num, items_per_page: items_per_page, username: this.ID}).toPromise();
   }
 
   public resetFeed(){

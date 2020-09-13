@@ -190,7 +190,8 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input, Output, EventEmitter } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input, Output, EventEmitter,OnChanges } from &#x27;@angular/core&#x27;;
+import { ActivitiesService } from &#x27;../activities.service&#x27;;
 
 
 @Component({
@@ -200,28 +201,58 @@
 })
 export class ActivitiesMenuComponent implements OnInit {
 
-  @Input() activities:Activity[] &#x3D; [];
+  activities:Activity[] &#x3D; [];
+  public actsToImport:number[] &#x3D; [];
+  @Input() race_id:number;
   @Input() distance_unit:string;
-  @Output() addAct: EventEmitter&lt;any&gt; &#x3D; new EventEmitter();
-  @Output() importActs: EventEmitter&lt;void&gt; &#x3D; new EventEmitter();
+  @Output() setLoaderState: EventEmitter&lt;boolean&gt; &#x3D; new EventEmitter();
+  @Output() refreshStatComponents: EventEmitter&lt;void&gt; &#x3D; new EventEmitter();
+  
   columns:string[] &#x3D; [&#x27;Name&#x27;,&#x27;Distance&#x27;];
   selectedRows:number[] &#x3D; [];
 
 
-  constructor() { }
+  constructor(private _activitiesService:ActivitiesService) { }
 
   ngOnInit() {
 
     // this.addAct.emit({id:2} as any);
+    // call activity service to get activities
+
+    this.getActivities();
+
 
   }
 
-  add(act:Activity): void {
-    this.addAct.emit(act);
-  }
+  // add(act:Activity): void {
+  //   this.addAct.emit(act);
+  // }
+
+  // importSelectedActs(): void {
+  //   this.importActs.emit();
+  // }
 
   importSelectedActs(): void {
-    this.importActs.emit();
+    // this.loading &#x3D; true; // switch to toggleFunction that communicates with parent
+    this.setLoaderState.emit(true);
+    this._activitiesService.importActivities(this.actsToImport,this.race_id).then((res) &#x3D;&gt; {
+      this.actsToImport &#x3D; [];
+      this.setLoaderState.emit(false);
+      // this.getRaceState(); // change eventually
+      this.getActivities();
+      this.refreshStatComponents.emit();
+    });
+  }
+
+  addAct(act:any): void {
+    let actID &#x3D; act.id;
+    let index &#x3D; this.actsToImport.indexOf(actID);
+    if(index &gt;&#x3D; 0) {
+      this.actsToImport.splice(index,1);
+    }
+    else {
+      this.actsToImport.push(actID);
+    }
   }
 
   highlight(row:any): void {
@@ -235,6 +266,14 @@ export class ActivitiesMenuComponent implements OnInit {
 
     console.log(this.selectedRows);
   }
+
+  getActivities() {
+    this._activitiesService.getActivities(this.race_id).then((resp) &#x3D;&gt; {
+      this.activities &#x3D; resp[&#x27;activities&#x27;];
+    });
+  }
+
+
 
 }
 

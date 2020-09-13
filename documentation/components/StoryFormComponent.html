@@ -212,7 +212,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/story-form/story-form.component.ts:17</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/story-form/story-form.component.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -280,7 +280,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/story-form/story-form.component.ts:11</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/story-form/story-form.component.ts:12</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -304,7 +304,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/story-form/story-form.component.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="14" class="link-to-prism">src/app/story-form/story-form.component.ts:14</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -339,8 +339,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="22"
-                            class="link-to-prism">src/app/story-form/story-form.component.ts:22</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="23"
+                            class="link-to-prism">src/app/story-form/story-form.component.ts:23</a></div>
                 </td>
             </tr>
 
@@ -378,8 +378,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="25"
-                            class="link-to-prism">src/app/story-form/story-form.component.ts:25</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="26"
+                            class="link-to-prism">src/app/story-form/story-form.component.ts:26</a></div>
                 </td>
             </tr>
 
@@ -444,8 +444,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="37"
-                            class="link-to-prism">src/app/story-form/story-form.component.ts:37</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="38"
+                            class="link-to-prism">src/app/story-form/story-form.component.ts:38</a></div>
                 </td>
             </tr>
 
@@ -483,8 +483,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="60"
-                            class="link-to-prism">src/app/story-form/story-form.component.ts:60</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="61"
+                            class="link-to-prism">src/app/story-form/story-form.component.ts:61</a></div>
                 </td>
             </tr>
 
@@ -581,7 +581,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/story-form/story-form.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/story-form/story-form.component.ts:18</a></div>
                             </td>
                         </tr>
 
@@ -609,7 +609,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/story-form/story-form.component.ts:15</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/story-form/story-form.component.ts:16</a></div>
                             </td>
                         </tr>
 
@@ -625,6 +625,7 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input, Output, EventEmitter } from &#x27;@angular/core&#x27;;
 import { StoryService } from &#x27;../story.service&#x27;;
 import { ImageService } from &#x27;../image.service&#x27;;
+
 
 @Component({
   selector: &#x27;app-story-form&#x27;,
@@ -705,7 +706,7 @@ export class StoryFormComponent implements OnInit {
 
   &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;storyImageCaption&quot; name&#x3D;&quot;storyImageCaptionField&quot; maxlength&#x3D;&quot;100&quot; placeholder&#x3D;&quot;Type anything here...&quot; style&#x3D;&quot;width:100%;&quot;&gt;
 
-  &lt;input type&#x3D;&quot;file&quot; mdbFileSelect id&#x3D;&quot;storyImage&quot; name&#x3D;&quot;storyImageField&quot; accept&#x3D;&quot;image/*&quot; (change)&#x3D;&quot;onSelectFile($event)&quot;&gt;
+  &lt;input type&#x3D;&quot;file&quot; id&#x3D;&quot;storyImage&quot; name&#x3D;&quot;storyImageField&quot; accept&#x3D;&quot;image/*&quot; (change)&#x3D;&quot;onSelectFile($event)&quot;&gt;
   
   &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary btn-sm btn-mobile&quot; style&#x3D;&quot;background-color:#2C00A5; border-color:#2C00A5;&quot; (click)&#x3D;&quot;uploadStory()&quot;&gt;Add Story&lt;/button&gt;
 
@@ -750,8 +751,8 @@ export class StoryFormComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div>  <input type="text" id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="Type anything here..." style="width:100%;">  <input type="file" mdbFileSelect id="storyImage" name="storyImageField" accept="image/*" (change)="onSelectFile($event)">    <button type="button" class="btn btn-primary btn-sm btn-mobile" style="background-color:#2C00A5; border-color:#2C00A5;" (click)="uploadStory()">Add Story</button></div></div>'
-    var COMPONENTS = [{'name': 'ActivitiesMenuComponent', 'selector': 'app-activities-menu'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'CommentsFormComponent', 'selector': 'app-comments-form'},{'name': 'ContactHelpComponent', 'selector': 'app-contact-help'},{'name': 'ContactHelpDialogContent', 'selector': 'app-contact-help-dialog-content'},{'name': 'FaqHelpComponent', 'selector': 'app-faq-help'},{'name': 'FaqHelpDialogContent', 'selector': 'app-faq-help-dialog-content'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'LeaderboardComponent', 'selector': 'app-leaderboard'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManualEntryComponent', 'selector': 'app-manual-entry'},{'name': 'ManualInstructionsComponent', 'selector': 'app-manual-instructions'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationPanelComponent', 'selector': 'app-notification-panel'},{'name': 'PasswordChangeComponent', 'selector': 'app-password-change'},{'name': 'PasswordRequestComponent', 'selector': 'app-password-request'},{'name': 'PaypalComponent', 'selector': 'app-paypal'},{'name': 'PopupComponent', 'selector': 'app-popup'},{'name': 'ProfileFormComponent', 'selector': 'app-profile-form'},{'name': 'ProfilePicComponent', 'selector': 'app-profile-pic'},{'name': 'RaceAboutComponent', 'selector': 'app-race-about'},{'name': 'RaceComponent', 'selector': 'app-race'},{'name': 'RaceCreateComponent', 'selector': 'app-race-create'},{'name': 'RaceDayComponent', 'selector': 'app-race-day'},{'name': 'RaceDayDialogContent', 'selector': 'app-race-day-dialog-content'},{'name': 'RaceMenuComponent', 'selector': 'app-race-menu'},{'name': 'RacesComponent', 'selector': 'app-races'},{'name': 'RaceSettingsComponent', 'selector': 'app-race-settings'},{'name': 'RaceViewComponent', 'selector': 'app-race-view'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RoutePinDialogComponent', 'selector': 'app-route-pin-dialog'},{'name': 'ShippingAddressComponent', 'selector': 'app-shipping-address'},{'name': 'ShippingAddressFormComponent', 'selector': 'app-shipping-address-form'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SignupDialogContent', 'selector': 'signup-dialog-content'},{'name': 'SmilesComponent', 'selector': 'app-smiles'},{'name': 'SnackbarComponent', 'selector': 'app-snackbar'},{'name': 'StoryBtnComponent', 'selector': 'app-story-btn'},{'name': 'StoryDialogComponent', 'selector': 'app-story-dialog'},{'name': 'StoryFormComponent', 'selector': 'app-story-form'},{'name': 'StoryModalComponent', 'selector': 'app-story-modal'},{'name': 'StravaInstructionsComponent', 'selector': 'app-strava-instructions'},{'name': 'StravauthComponent', 'selector': 'app-stravauth'},{'name': 'SwagComponent', 'selector': 'app-swag'},{'name': 'SwagDialogContent', 'selector': 'swag-dialog-content'},{'name': 'TeamFormComponent', 'selector': 'app-team-form'},{'name': 'TeamInstructionsComponent', 'selector': 'app-team-instructions'},{'name': 'TeamListComponent', 'selector': 'app-team-list'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'TermsOfServiceDialogContent', 'selector': 'app-terms-of-service-dialog-content'},{'name': 'UserFollowComponent', 'selector': 'app-user-follow'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserProfileNavComponent', 'selector': 'app-user-profile-nav'},{'name': 'UserProgressComponent', 'selector': 'app-user-progress'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserStatsComponent', 'selector': 'app-user-stats'}];
+        var COMPONENT_TEMPLATE = '<div><div>  <input type="text" id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="Type anything here..." style="width:100%;">  <input type="file" id="storyImage" name="storyImageField" accept="image/*" (change)="onSelectFile($event)">    <button type="button" class="btn btn-primary btn-sm btn-mobile" style="background-color:#2C00A5; border-color:#2C00A5;" (click)="uploadStory()">Add Story</button></div></div>'
+    var COMPONENTS = [{'name': 'ActivitiesMenuComponent', 'selector': 'app-activities-menu'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'CommentsFormComponent', 'selector': 'app-comments-form'},{'name': 'ContactHelpComponent', 'selector': 'app-contact-help'},{'name': 'ContactHelpDialogContent', 'selector': 'app-contact-help-dialog-content'},{'name': 'FaqHelpComponent', 'selector': 'app-faq-help'},{'name': 'FaqHelpDialogContent', 'selector': 'app-faq-help-dialog-content'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'LeaderboardComponent', 'selector': 'app-leaderboard'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManualEntryComponent', 'selector': 'app-manual-entry'},{'name': 'ManualInstructionsComponent', 'selector': 'app-manual-instructions'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationPanelComponent', 'selector': 'app-notification-panel'},{'name': 'PasswordChangeComponent', 'selector': 'app-password-change'},{'name': 'PasswordRequestComponent', 'selector': 'app-password-request'},{'name': 'PaypalComponent', 'selector': 'app-paypal'},{'name': 'PopupComponent', 'selector': 'app-popup'},{'name': 'ProfileFormComponent', 'selector': 'app-profile-form'},{'name': 'ProfilePicComponent', 'selector': 'app-profile-pic'},{'name': 'RaceAboutComponent', 'selector': 'app-race-about'},{'name': 'RaceComponent', 'selector': 'app-race'},{'name': 'RaceCreateComponent', 'selector': 'app-race-create'},{'name': 'RaceDashboardComponent', 'selector': 'app-race-dashboard'},{'name': 'RaceDayComponent', 'selector': 'app-race-day'},{'name': 'RaceDayDialogContent', 'selector': 'app-race-day-dialog-content'},{'name': 'RaceMenuComponent', 'selector': 'app-race-menu'},{'name': 'RacesComponent', 'selector': 'app-races'},{'name': 'RaceSettingsComponent', 'selector': 'app-race-settings'},{'name': 'RaceStoryManageComponent', 'selector': 'app-race-story-manage'},{'name': 'RaceViewComponent', 'selector': 'app-race-view'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReportFormComponent', 'selector': 'app-report-form'},{'name': 'RoutePinDialogComponent', 'selector': 'app-route-pin-dialog'},{'name': 'ShippingAddressComponent', 'selector': 'app-shipping-address'},{'name': 'ShippingAddressFormComponent', 'selector': 'app-shipping-address-form'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SignupDialogContent', 'selector': 'signup-dialog-content'},{'name': 'SmilesComponent', 'selector': 'app-smiles'},{'name': 'SnackbarComponent', 'selector': 'app-snackbar'},{'name': 'StoryBtnComponent', 'selector': 'app-story-btn'},{'name': 'StoryDeleteDialogComponent', 'selector': 'app-story-delete-dialog'},{'name': 'StoryDialogComponent', 'selector': 'app-story-dialog'},{'name': 'StoryFormComponent', 'selector': 'app-story-form'},{'name': 'StoryModalComponent', 'selector': 'app-story-modal'},{'name': 'StravaInstructionsComponent', 'selector': 'app-strava-instructions'},{'name': 'StravauthComponent', 'selector': 'app-stravauth'},{'name': 'SwagComponent', 'selector': 'app-swag'},{'name': 'SwagDialogContent', 'selector': 'swag-dialog-content'},{'name': 'TagFormComponent', 'selector': 'app-tag-form'},{'name': 'TagSelectComponent', 'selector': 'app-tag-select'},{'name': 'TeamFormComponent', 'selector': 'app-team-form'},{'name': 'TeamInstructionsComponent', 'selector': 'app-team-instructions'},{'name': 'TeamListComponent', 'selector': 'app-team-list'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'TermsOfServiceDialogContent', 'selector': 'app-terms-of-service-dialog-content'},{'name': 'UserFollowComponent', 'selector': 'app-user-follow'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserProfileNavComponent', 'selector': 'app-user-profile-nav'},{'name': 'UserProgressComponent', 'selector': 'app-user-progress'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserStatsComponent', 'selector': 'app-user-stats'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'StoryFormComponent'};
 </script>

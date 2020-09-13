@@ -79,6 +79,9 @@
                         <td class="col-md-4">
                             <ul class="index-list">
                                 <li>
+                                        <a href="#context_id">context_id</a>
+                                </li>
+                                <li>
                                         <a href="#from">from</a>
                                 </li>
                                 <li>
@@ -101,6 +104,35 @@
 
             <section>
                 <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="context_id"></a>
+                                        <span class="name"><b>context_id</b><a href="#context_id"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>context_id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                                 <tr>
@@ -227,6 +259,9 @@ import { NotificationType, NotificationsService } from &#x27;../notifications.se
 import { TeamService } from &#x27;../team.service&#x27;;
 import {MatSnackBar} from &#x27;@angular/material/snack-bar&#x27;
 import { SnackbarComponent } from &#x27;../snackbar/snackbar.component&#x27;;
+import { StoryDialogComponent } from &#x27;../story-dialog/story-dialog.component&#x27;;
+import { MatDialog } from &#x27;@angular/material&#x27;;
+import { StoryService } from &#x27;../story.service&#x27;;
 
 @Component({
   selector: &#x27;app-notification&#x27;,
@@ -238,11 +273,12 @@ export class NotificationComponent implements OnInit {
   @Output() removeNotification: EventEmitter&lt;any&gt; &#x3D; new EventEmitter();
   
 
-  constructor(private _notificationService:NotificationsService,private _snackbar:MatSnackBar) { }
+  constructor(private _notificationService:NotificationsService,private _snackbar:MatSnackBar,public dialog: MatDialog, private _storyService:StoryService) { }
 
   ngOnInit() {
-    
-  }
+
+
+}
 
   approve() {
     // general approval action, backend will sort out what the notifcation is for
@@ -260,8 +296,7 @@ export class NotificationComponent implements OnInit {
       this._snackbar.openFromComponent(SnackbarComponent,{duration: 5000,horizontalPosition: &#x27;center&#x27;,
       verticalPosition: &#x27;bottom&#x27;,data:{message:&#x27;Action has been declined&#x27;}});
       this.removeNotification.emit(this.notification.not_id);
-    });
-    
+    });  
   }
 
   hide() {
@@ -283,7 +318,28 @@ export class NotificationComponent implements OnInit {
     else if(name &#x3D;&#x3D; &#x27;Hide&#x27; &amp;&amp; (type !&#x3D; NotificationType.TEAM_JOIN &amp;&amp; type !&#x3D; NotificationType.FOLLOW_REQUEST)) {
       return true;
     }
+
+    else if (name&#x3D;&#x3D;&#x27;View&#x27; &amp;&amp; (type &#x3D;&#x3D; NotificationType.COMMENT)) {
+      return true;
+    }
   }
+
+  viewStory(storyID:number): void {
+    // need to get story from API, then display in dialog
+    let storyData &#x3D; null;
+    this._storyService.getStoryModalData(this.notification.context_id).then((storyData) &#x3D;&gt; {
+      console.log(&quot;In dialogue function&quot;);
+      let dialogRef &#x3D; this.dialog.open(StoryDialogComponent, {
+        data: { 
+          &#x27;element&#x27;: storyData,
+          &#x27;showComments&#x27;:true,
+        },
+      });
+    })
+    
+  }
+
+
 }
 
 
@@ -293,14 +349,14 @@ interface Notification {
   from:any;
   type:NotificationType;
   not_id:number;
+  context_id:number;
 }
 
 export enum NotifactionAction {
   APPROVE&#x3D;1,
   DECLINE&#x3D;2,
   HIDE&#x3D;3,
-}
-</code></pre>
+}</code></pre>
     </div>
 </div>
 

@@ -333,8 +333,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="74"
-                            class="link-to-prism">src/app/user-stats/user-stats.component.ts:74</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="80"
+                            class="link-to-prism">src/app/user-stats/user-stats.component.ts:80</a></div>
                 </td>
             </tr>
 
@@ -410,8 +410,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="88"
-                            class="link-to-prism">src/app/user-stats/user-stats.component.ts:88</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="94"
+                            class="link-to-prism">src/app/user-stats/user-stats.component.ts:94</a></div>
                 </td>
             </tr>
 
@@ -444,15 +444,15 @@
             <tr>
                 <td class="col-md-4">
                     <span class="modifier-icon icon ion-ios-reset"></span>
-                    <code>showChart(mydates, mydistances, mycolors)</code>
+                    <code>showChart(mydates, run_dists, walk_dists, bike_dists, other_dists)</code>
                 </td>
             </tr>
 
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="26"
-                            class="link-to-prism">src/app/user-stats/user-stats.component.ts:26</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="27"
+                            class="link-to-prism">src/app/user-stats/user-stats.component.ts:27</a></div>
                 </td>
             </tr>
 
@@ -480,7 +480,7 @@
 
                                 </tr>
                                 <tr>
-                                    <td>mydistances</td>
+                                    <td>run_dists</td>
 
                                     <td>
                                         No
@@ -489,7 +489,25 @@
 
                                 </tr>
                                 <tr>
-                                    <td>mycolors</td>
+                                    <td>walk_dists</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>bike_dists</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>other_dists</td>
 
                                     <td>
                                         No
@@ -600,42 +618,48 @@ export class UserStatsComponent implements OnInit {
   this._usersService.getUserStats(this.userID).then((res)&#x3D;&gt;{
   	console.log(&quot;USER&quot;, this.userID,&quot;STATS: &quot;, res);
     this.userStats &#x3D; res as UserStats;
+    console.log(&quot;STATS&quot;,this.userStats);
     //this.userStats.mycolors
-    this.showChart(this.userStats.mydates,this.userStats.mydistances,this.userStats.mycolors);
+    this.showChart(this.userStats.mydates,this.userStats.run_dists,this.userStats.walk_dists, this.userStats.bike_dists, this.userStats.other_dists);
     })
   }
 
-   private showChart(mydates,mydistances,mycolors) {
-   // var colors &#x3D; [&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;,&#x27;rgba(255, 99, 132, 0.2)&#x27;,&#x27;rgba(54, 162, 235, 0.2)&#x27;,&#x27;rgba(255, 206, 86, 0.2)&#x27;,&#x27;rgba(75, 192, 192, 0.2)&#x27;,&#x27;rgba(153, 102, 255, 0.2)&#x27;,&#x27;rgba(255, 159, 64, 0.2)&#x27;]
-   // var colors2 &#x3D; [&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;,&#x27;rgba(255, 99, 132, 1)&#x27;,&#x27;rgba(54, 162, 235, 1)&#x27;,&#x27;rgba(255, 206, 86, 1)&#x27;,&#x27;rgba(75, 192, 192, 1)&#x27;,&#x27;rgba(153, 102, 255, 1)&#x27;,&#x27;rgba(255, 159, 64, 1)&#x27;]
+   private showChart(mydates,run_dists,walk_dists,bike_dists,other_dists) {
 
-    var colorArray &#x3D; new Array(mycolors.length);
-    var colorBorder &#x3D; new Array(mycolors.length);
-    var i;
-    for (i &#x3D; 0; i &lt; mycolors.length; i++)
-    {
-      if(mycolors[i] &#x3D;&#x3D; 1){
-        colorArray[i] &#x3D; &#x27;rgba(44, 0, 165,0.2)&#x27;;
-        colorBorder[i] &#x3D; &#x27;rgba(44, 0, 165,1)&#x27;;
-      } //run
-      else{//(mycolors[i] &#x3D;&#x3D; 2){
-        colorArray[i] &#x3D; &#x27;rgba(54, 162, 235,0.2)&#x27;;
-        colorBorder[i] &#x3D; &#x27;rgba(54, 162, 235,1)&#x27;;
-      }  //ride
-    //  if(mycolors[i] !&#x3D; 1 &amp;&amp; mycolors.length[i] !&#x3D;2){colorArray[i] &#x3D; &#x27;rgba(255, 206, 86, 0.2)&#x27;;colorBorder[i] &#x3D; &#x27;rgba(255, 206, 86, 1)&#x27;;}  //else
-    }
     this.chart &#x3D; new Chart(&#x27;lineCharts&#x27;, {
       type: &#x27;bar&#x27;,
       data: {
 
         labels: mydates,
         datasets: [{
-            label: &#x27;Distance&#x27;,
-            data: mydistances,
-            backgroundColor: colorArray,
-            borderColor: colorBorder,
+            label: &#x27;Run&#x27;,
+            data: run_dists,
+            backgroundColor: &#x27;rgba(0, 51, 204,0.2)&#x27;,
+            borderColor: &#x27;rgba(0, 51, 204,1)&#x27;,
             borderWidth: 1
-        }]
+        },
+        {
+            label: &#x27;Walk&#x27;,
+            data: walk_dists,
+            backgroundColor: &#x27;rgba(153, 204, 255,0.2)&#x27;,
+            borderColor: &#x27;rgba(153, 204, 255,1)&#x27;,
+            borderWidth: 1
+        },
+        {
+            label: &#x27;Ride&#x27;,
+            data: bike_dists,
+            backgroundColor: &#x27;rgba(204, 0, 204,0.2)&#x27;,
+            borderColor: &#x27;rgba(204, 0, 204,1)&#x27;,
+            borderWidth: 1
+        },
+        {
+            label: &#x27;Other&#x27;,
+            data: other_dists,
+            backgroundColor: &#x27;rgba(255, 179, 102,0.2)&#x27;,
+            borderColor: &#x27;rgba(255, 179, 102,1)&#x27;,
+            borderWidth: 1
+        }
+        ],
     },
     options: {
        scales: {
@@ -686,6 +710,18 @@ interface UserStats {
   run_average_dist:number;
   run_average_time:number;
 
+  walk_tot_activities:number;
+  walk_tot_dist:number;
+  walk_tot_hrs:number;
+
+  walk_max_dist:number;
+  walk_max_time:number;
+  walk_max_pace:number;
+
+  walk_average_pace:number;
+  walk_average_dist:number;
+  walk_average_time:number;
+
   ride_tot_activities:number;
   ride_tot_dist:number;
   ride_tot_hrs:number;
@@ -698,9 +734,11 @@ interface UserStats {
   ride_average_dist:number;
   ride_average_time:number;
 
-  mydistances:any[];
   mydates:any[];
-  mycolors:any[];
+  run_dists:any[];
+  walk_dists:any[];
+  bike_dists:any[];
+  other_dists:any[];
 }</code></pre>
     </div>
 
@@ -727,134 +765,8 @@ interface UserStats {
           &lt;/mat-card&gt;
     &lt;/div&gt;
 
-     &lt;div class&#x3D;&quot;column2 &quot; *ngIf&#x3D;&quot;userStats.run_tot_activities &gt; 0 &amp;&amp; userStats.ride_tot_activities&#x3D;&#x3D;0&quot;&gt;
-        &lt;mat-card class&#x3D;&quot;example-card &quot;&gt;
-            &lt;mat-card-header&gt;
-            &lt;!--  &lt;div mat-card-avatar style &#x3D; &quot;background-image: url({{userData.profile_url}}&lt;/b&gt;);
-  background-size: cover;&quot;&gt;&lt;/div&gt; --&gt;
-              &lt;mat-card-title&gt;Runs &lt;i class&#x3D;&quot;material-icons&quot; style&#x3D;&quot;color:#BC164D;&quot;&gt;directions_run&lt;/i&gt;&lt;/mat-card-title&gt;
-            &lt;/mat-card-header&gt;
-            &lt;mat-card-content&gt;
 
-             &lt;div class&#x3D;&quot;row&quot;&gt;
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Total Runs&lt;/p&gt;
-            &lt;p  style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_tot_activities}}&lt;/b&gt;&lt;/p&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Total Distance&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_tot_dist}}&lt;/b&gt; mi&lt;/p&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Total Time&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_tot_hrs}}&lt;/b&gt; hrs&lt;/p&gt;
-          &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;div class&#x3D;&quot;row&quot;&gt;
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Best Pace&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_max_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
-          &lt;/div&gt;
-
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Longest Distance&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_max_dist}}&lt;/b&gt; mi&lt;/p&gt;
-          &lt;/div&gt;
-          
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Most Time&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_max_time}}&lt;/b&gt; hrs&lt;/p&gt;
-          &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;div class&#x3D;&quot;row&quot;&gt;
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Average Pace&lt;/p&gt; 
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_average_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
-          &lt;/div&gt;
-
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Average Distance&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_average_dist}}&lt;/b&gt; mi&lt;/p&gt;
-          &lt;/div&gt;
-
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Average Time&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_average_time}}&lt;/b&gt; hrs&lt;/p&gt;
-          &lt;/div&gt;
-
-          &lt;/div&gt;
-
-            &lt;/mat-card-content&gt;
-          &lt;/mat-card&gt;
-    &lt;/div&gt;
-
-
-     &lt;div class&#x3D;&quot;column2&quot; *ngIf&#x3D;&quot;userStats.run_tot_activities &#x3D;&#x3D; 0 &amp;&amp; userStats.ride_tot_activities &gt; 0&quot;&gt;
-        &lt;mat-card class&#x3D;&quot;example-card&quot;&gt;
-            &lt;mat-card-header&gt;
-            &lt;!--  &lt;div mat-card-avatar style &#x3D; &quot;background-image: url(&lt;b&gt;{{userData.profile_url}}&lt;/b&gt;);
-  background-size: cover;&quot;&gt;&lt;/div&gt; --&gt;
-              &lt;mat-card-title&gt;Cycles &lt;i class&#x3D;&quot;material-icons&quot; style&#x3D;&quot;color:#BC164D;&quot;&gt;directions_bike&lt;/i&gt;&lt;/mat-card-title&gt;
-            &lt;/mat-card-header&gt;
-            &lt;mat-card-content&gt;
-
-             &lt;div class&#x3D;&quot;row&quot;&gt;
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Total Cycles&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_tot_activities}}&lt;/b&gt;&lt;/p&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Total Distance&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_tot_dist}}&lt;/b&gt; mi&lt;/p&gt;
-          &lt;/div&gt;
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Total Time&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_tot_hrs}}&lt;/b&gt; hrs&lt;/p&gt;
-          &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;div class&#x3D;&quot;row&quot;&gt;
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Best Pace&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_max_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
-          &lt;/div&gt;
-
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Longest Distance&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_max_dist}}&lt;/b&gt; mi&lt;/p&gt;
-          &lt;/div&gt;
-          
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Most Time&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_max_time}}&lt;/b&gt; hrs&lt;/p&gt;
-          &lt;/div&gt;
-      &lt;/div&gt;
-
-      &lt;div class&#x3D;&quot;row&quot;&gt;
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Average Pace&lt;/p&gt; 
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_average_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
-          &lt;/div&gt;
-
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Average Distance&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_average_dist}}&lt;/b&gt; mi&lt;/p&gt;
-          &lt;/div&gt;
-
-          &lt;div class&#x3D;&quot;column1&quot;&gt;
-            &lt;p&gt;Average Time&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_average_time}}&lt;/b&gt; hrs&lt;/p&gt;
-          &lt;/div&gt;
-
-          &lt;/div&gt;
-
-            &lt;/mat-card-content&gt;
-          &lt;/mat-card&gt;
-    &lt;/div&gt;
-
-    &lt;div class&#x3D;&quot;column2&quot; *ngIf&#x3D;&quot;userStats.run_tot_activities &gt; 0 &amp;&amp; userStats.ride_tot_activities &gt; 0&quot;&gt;
+    &lt;div class&#x3D;&quot;column2&quot;&gt;
         &lt;mat-card class&#x3D;&quot;example-card&quot;&gt;
             &lt;mat-card-header&gt;
             &lt;!--  &lt;div mat-card-avatar style &#x3D; &quot;background-image: url(&lt;b&gt;{{userData.profile_url}}&lt;/b&gt;);
@@ -864,112 +776,168 @@ interface UserStats {
             &lt;mat-card-content&gt;
 
             &lt;div class&#x3D;&quot;tab&quot;&gt;
-          &lt;button class&#x3D;&quot;tablinks&quot; (click)&#x3D;&quot;openStats(event, &#x27;run_stats&#x27;)&quot;&gt;Run Stats&lt;/button&gt;
-          &lt;button class&#x3D;&quot;tablinks&quot; (click)&#x3D;&quot;openStats(event, &#x27;ride_stats&#x27;)&quot;&gt;Ride Stats&lt;/button&gt;
+          &lt;button *ngIf&#x3D;&quot;userStats.run_tot_activities &gt; 0&quot; style&#x3D;&quot;background-color:rgba(0, 51, 204,0.2);&quot; class&#x3D;&quot;tablinks&quot; (click)&#x3D;&quot;openStats(event, &#x27;run_stats&#x27;)&quot;&gt;Run Stats&lt;/button&gt;
+          &lt;button *ngIf&#x3D;&quot;userStats.walk_tot_activities &gt; 0&quot; style&#x3D;&quot;background-color:rgba(153, 204, 255,0.2);&quot; class&#x3D;&quot;tablinks&quot; (click)&#x3D;&quot;openStats(event, &#x27;walk_stats&#x27;)&quot;&gt;Walk Stats&lt;/button&gt;
+          &lt;button *ngIf&#x3D;&quot;userStats.ride_tot_activities &gt; 0&quot; style&#x3D;&quot;background-color:rgba(204, 0, 204,0.2);&quot; class&#x3D;&quot;tablinks&quot; (click)&#x3D;&quot;openStats(event, &#x27;ride_stats&#x27;)&quot;&gt;Ride Stats&lt;/button&gt;
         &lt;/div&gt;
 
         &lt;!-- Tab content --&gt;
 
-        &lt;div id&#x3D;&quot;run_stats&quot; class&#x3D;&quot;tabcontent&quot; style&#x3D;&quot;display:block&quot;&gt;
+        &lt;div id&#x3D;&quot;run_stats&quot; class&#x3D;&quot;tabcontent&quot; style&#x3D;&quot;display:block&quot; *ngIf&#x3D;&quot;userStats.run_tot_activities &gt; 0&quot;&gt;
         &lt;div class&#x3D;&quot;row&quot;&gt;
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Total Runs&lt;/p&gt;
-            &lt;p  style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_tot_activities}}&lt;/b&gt;&lt;/p&gt;
+            &lt;p  &gt;&lt;b&gt;{{userStats.run_tot_activities}}&lt;/b&gt;&lt;/p&gt;
           &lt;/div&gt;
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Total Distance&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_tot_dist}}&lt;/b&gt; mi&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.run_tot_dist}}&lt;/b&gt; mi&lt;/p&gt;
           &lt;/div&gt;
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Total Time&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_tot_hrs}}&lt;/b&gt; hrs&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.run_tot_hrs}}&lt;/b&gt; hrs&lt;/p&gt;
           &lt;/div&gt;
       &lt;/div&gt;
 
       &lt;div class&#x3D;&quot;row&quot;&gt;
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Best Pace&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_max_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.run_max_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
           &lt;/div&gt;
 
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Longest Distance&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_max_dist}}&lt;/b&gt; mi&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.run_max_dist}}&lt;/b&gt; mi&lt;/p&gt;
           &lt;/div&gt;
           
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Most Time&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_max_time}}&lt;/b&gt; hrs&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.run_max_time}}&lt;/b&gt; hrs&lt;/p&gt;
           &lt;/div&gt;
       &lt;/div&gt;
 
       &lt;div class&#x3D;&quot;row&quot;&gt;
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Average Pace&lt;/p&gt; 
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_average_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.run_average_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
           &lt;/div&gt;
 
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Average Distance&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_average_dist}}&lt;/b&gt; mi&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.run_average_dist}}&lt;/b&gt; mi&lt;/p&gt;
           &lt;/div&gt;
 
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Average Time&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:#2C00A5;&quot;&gt;&lt;b&gt;{{userStats.run_average_time}}&lt;/b&gt; hrs&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.run_average_time}}&lt;/b&gt; hrs&lt;/p&gt;
           &lt;/div&gt;
 
           &lt;/div&gt;
           &lt;/div&gt;
 
-          &lt;div id&#x3D;&quot;ride_stats&quot; class&#x3D;&quot;tabcontent&quot;&gt;
+
+          &lt;div id&#x3D;&quot;walk_stats&quot; class&#x3D;&quot;tabcontent&quot; style&#x3D;&quot;display:block;&quot; *ngIf&#x3D;&quot;userStats.walk_tot_activities &gt; 0&quot;&gt;
+        &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Total Walks&lt;/p&gt;
+            &lt;p  &gt;&lt;b&gt;{{userStats.walk_tot_activities}}&lt;/b&gt;&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Total Distance&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.walk_tot_dist}}&lt;/b&gt; mi&lt;/p&gt;
+          &lt;/div&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Total Time&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.walk_tot_hrs}}&lt;/b&gt; hrs&lt;/p&gt;
+          &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Best Pace&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.walk_max_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Longest Distance&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.walk_max_dist}}&lt;/b&gt; mi&lt;/p&gt;
+          &lt;/div&gt;
+          
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Most Time&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.walk_max_time}}&lt;/b&gt; hrs&lt;/p&gt;
+          &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;row&quot;&gt;
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Average Pace&lt;/p&gt; 
+            &lt;p &gt;&lt;b&gt;{{userStats.walk_average_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Average Distance&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.walk_average_dist}}&lt;/b&gt; mi&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;div class&#x3D;&quot;column1&quot;&gt;
+            &lt;p&gt;Average Time&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.walk_average_time}}&lt;/b&gt; hrs&lt;/p&gt;
+          &lt;/div&gt;
+
+          &lt;/div&gt;
+          &lt;/div&gt;
+
+
+
+          &lt;div id&#x3D;&quot;ride_stats&quot; class&#x3D;&quot;tabcontent&quot; *ngIf&#x3D;&quot;userStats.ride_tot_activities &gt; 0&quot;&gt;
 
                          &lt;div class&#x3D;&quot;row&quot;&gt;
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Total Cycles&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_tot_activities}}&lt;/b&gt;&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.ride_tot_activities}}&lt;/b&gt;&lt;/p&gt;
           &lt;/div&gt;
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Total Distance&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_tot_dist}}&lt;/b&gt; mi&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.ride_tot_dist}}&lt;/b&gt; mi&lt;/p&gt;
           &lt;/div&gt;
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Total Time&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_tot_hrs}}&lt;/b&gt; hrs&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.ride_tot_hrs}}&lt;/b&gt; hrs&lt;/p&gt;
           &lt;/div&gt;
       &lt;/div&gt;
 
       &lt;div class&#x3D;&quot;row&quot;&gt;
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Best Pace&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_max_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.ride_max_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
           &lt;/div&gt;
 
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Longest Distance&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_max_dist}}&lt;/b&gt; mi&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.ride_max_dist}}&lt;/b&gt; mi&lt;/p&gt;
           &lt;/div&gt;
           
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Most Time&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_max_time}}&lt;/b&gt; hrs&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.ride_max_time}}&lt;/b&gt; hrs&lt;/p&gt;
           &lt;/div&gt;
       &lt;/div&gt;
 
       &lt;div class&#x3D;&quot;row&quot;&gt;
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Average Pace&lt;/p&gt; 
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_average_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.ride_average_pace}}&lt;/b&gt; min/mi&lt;/p&gt;
           &lt;/div&gt;
 
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Average Distance&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_average_dist}}&lt;/b&gt; mi&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.ride_average_dist}}&lt;/b&gt; mi&lt;/p&gt;
           &lt;/div&gt;
 
           &lt;div class&#x3D;&quot;column1&quot;&gt;
             &lt;p&gt;Average Time&lt;/p&gt;
-            &lt;p style&#x3D;&quot;color:rgb(54, 162, 235);&quot;&gt;&lt;b&gt;{{userStats.ride_average_time}}&lt;/b&gt; hrs&lt;/p&gt;
+            &lt;p &gt;&lt;b&gt;{{userStats.ride_average_time}}&lt;/b&gt; hrs&lt;/p&gt;
           &lt;/div&gt;
 
           &lt;/div&gt;
@@ -1119,8 +1087,8 @@ interface UserStats {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="row">    <div class="column2">        <mat-card class="example-card">            <mat-card-header>            <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}}</b>);  background-size: cover;"></div> -->              <mat-card-title>Activities</mat-card-title>            </mat-card-header>            <mat-card-content>              <br>              <div>                <div *ngIf="userStats.run_tot_activities == 0 && userStats.ride_tot_activities==0">                  No running or cycling activities.                </div>             <canvas id="lineCharts"></canvas>           </div>             <br>            </mat-card-content>          </mat-card>    </div>     <div class="column2 " *ngIf="userStats.run_tot_activities > 0 && userStats.ride_tot_activities==0">        <mat-card class="example-card ">            <mat-card-header>            <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}}</b>);  background-size: cover;"></div> -->              <mat-card-title>Runs <i class="material-icons" style="color:#BC164D;">directions_run</i></mat-card-title>            </mat-card-header>            <mat-card-content>             <div class="row">          <div class="column1">            <p>Total Runs</p>            <p  style="color:#2C00A5;"><b>{{userStats.run_tot_activities}}</b></p>          </div>          <div class="column1">            <p>Total Distance</p>            <p style="color:#2C00A5;"><b>{{userStats.run_tot_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Total Time</p>            <p style="color:#2C00A5;"><b>{{userStats.run_tot_hrs}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Best Pace</p>            <p style="color:#2C00A5;"><b>{{userStats.run_max_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Longest Distance</p>            <p style="color:#2C00A5;"><b>{{userStats.run_max_dist}}</b> mi</p>          </div>                    <div class="column1">            <p>Most Time</p>            <p style="color:#2C00A5;"><b>{{userStats.run_max_time}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Average Pace</p>             <p style="color:#2C00A5;"><b>{{userStats.run_average_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Average Distance</p>            <p style="color:#2C00A5;"><b>{{userStats.run_average_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Average Time</p>            <p style="color:#2C00A5;"><b>{{userStats.run_average_time}}</b> hrs</p>          </div>          </div>            </mat-card-content>          </mat-card>    </div>     <div class="column2" *ngIf="userStats.run_tot_activities == 0 && userStats.ride_tot_activities > 0">        <mat-card class="example-card">            <mat-card-header>            <!--  <div mat-card-avatar style = "background-image: url(<b>{{userData.profile_url}}</b>);  background-size: cover;"></div> -->              <mat-card-title>Cycles <i class="material-icons" style="color:#BC164D;">directions_bike</i></mat-card-title>            </mat-card-header>            <mat-card-content>             <div class="row">          <div class="column1">            <p>Total Cycles</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_tot_activities}}</b></p>          </div>          <div class="column1">            <p>Total Distance</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_tot_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Total Time</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_tot_hrs}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Best Pace</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_max_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Longest Distance</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_max_dist}}</b> mi</p>          </div>                    <div class="column1">            <p>Most Time</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_max_time}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Average Pace</p>             <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_average_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Average Distance</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_average_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Average Time</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_average_time}}</b> hrs</p>          </div>          </div>            </mat-card-content>          </mat-card>    </div>    <div class="column2" *ngIf="userStats.run_tot_activities > 0 && userStats.ride_tot_activities > 0">        <mat-card class="example-card">            <mat-card-header>            <!--  <div mat-card-avatar style = "background-image: url(<b>{{userData.profile_url}}</b>);  background-size: cover;"></div> -->              <mat-card-title>Stats</mat-card-title>            </mat-card-header>            <mat-card-content>            <div class="tab">          <button class="tablinks" (click)="openStats(event, \'run_stats\')">Run Stats</button>          <button class="tablinks" (click)="openStats(event, \'ride_stats\')">Ride Stats</button>        </div>        <!-- Tab content -->        <div id="run_stats" class="tabcontent" style="display:block">        <div class="row">          <div class="column1">            <p>Total Runs</p>            <p  style="color:#2C00A5;"><b>{{userStats.run_tot_activities}}</b></p>          </div>          <div class="column1">            <p>Total Distance</p>            <p style="color:#2C00A5;"><b>{{userStats.run_tot_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Total Time</p>            <p style="color:#2C00A5;"><b>{{userStats.run_tot_hrs}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Best Pace</p>            <p style="color:#2C00A5;"><b>{{userStats.run_max_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Longest Distance</p>            <p style="color:#2C00A5;"><b>{{userStats.run_max_dist}}</b> mi</p>          </div>                    <div class="column1">            <p>Most Time</p>            <p style="color:#2C00A5;"><b>{{userStats.run_max_time}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Average Pace</p>             <p style="color:#2C00A5;"><b>{{userStats.run_average_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Average Distance</p>            <p style="color:#2C00A5;"><b>{{userStats.run_average_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Average Time</p>            <p style="color:#2C00A5;"><b>{{userStats.run_average_time}}</b> hrs</p>          </div>          </div>          </div>          <div id="ride_stats" class="tabcontent">                         <div class="row">          <div class="column1">            <p>Total Cycles</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_tot_activities}}</b></p>          </div>          <div class="column1">            <p>Total Distance</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_tot_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Total Time</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_tot_hrs}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Best Pace</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_max_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Longest Distance</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_max_dist}}</b> mi</p>          </div>                    <div class="column1">            <p>Most Time</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_max_time}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Average Pace</p>             <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_average_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Average Distance</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_average_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Average Time</p>            <p style="color:rgb(54, 162, 235);"><b>{{userStats.ride_average_time}}</b> hrs</p>          </div>          </div>          </div>            </mat-card-content>          </mat-card>    </div></div></div>'
-    var COMPONENTS = [{'name': 'ActivitiesMenuComponent', 'selector': 'app-activities-menu'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'CommentsFormComponent', 'selector': 'app-comments-form'},{'name': 'ContactHelpComponent', 'selector': 'app-contact-help'},{'name': 'ContactHelpDialogContent', 'selector': 'app-contact-help-dialog-content'},{'name': 'FaqHelpComponent', 'selector': 'app-faq-help'},{'name': 'FaqHelpDialogContent', 'selector': 'app-faq-help-dialog-content'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'LeaderboardComponent', 'selector': 'app-leaderboard'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManualEntryComponent', 'selector': 'app-manual-entry'},{'name': 'ManualInstructionsComponent', 'selector': 'app-manual-instructions'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationPanelComponent', 'selector': 'app-notification-panel'},{'name': 'PasswordChangeComponent', 'selector': 'app-password-change'},{'name': 'PasswordRequestComponent', 'selector': 'app-password-request'},{'name': 'PaypalComponent', 'selector': 'app-paypal'},{'name': 'PopupComponent', 'selector': 'app-popup'},{'name': 'ProfileFormComponent', 'selector': 'app-profile-form'},{'name': 'ProfilePicComponent', 'selector': 'app-profile-pic'},{'name': 'RaceAboutComponent', 'selector': 'app-race-about'},{'name': 'RaceComponent', 'selector': 'app-race'},{'name': 'RaceCreateComponent', 'selector': 'app-race-create'},{'name': 'RaceDayComponent', 'selector': 'app-race-day'},{'name': 'RaceDayDialogContent', 'selector': 'app-race-day-dialog-content'},{'name': 'RaceMenuComponent', 'selector': 'app-race-menu'},{'name': 'RacesComponent', 'selector': 'app-races'},{'name': 'RaceSettingsComponent', 'selector': 'app-race-settings'},{'name': 'RaceViewComponent', 'selector': 'app-race-view'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RoutePinDialogComponent', 'selector': 'app-route-pin-dialog'},{'name': 'ShippingAddressComponent', 'selector': 'app-shipping-address'},{'name': 'ShippingAddressFormComponent', 'selector': 'app-shipping-address-form'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SignupDialogContent', 'selector': 'signup-dialog-content'},{'name': 'SmilesComponent', 'selector': 'app-smiles'},{'name': 'SnackbarComponent', 'selector': 'app-snackbar'},{'name': 'StoryBtnComponent', 'selector': 'app-story-btn'},{'name': 'StoryDialogComponent', 'selector': 'app-story-dialog'},{'name': 'StoryFormComponent', 'selector': 'app-story-form'},{'name': 'StoryModalComponent', 'selector': 'app-story-modal'},{'name': 'StravaInstructionsComponent', 'selector': 'app-strava-instructions'},{'name': 'StravauthComponent', 'selector': 'app-stravauth'},{'name': 'SwagComponent', 'selector': 'app-swag'},{'name': 'SwagDialogContent', 'selector': 'swag-dialog-content'},{'name': 'TeamFormComponent', 'selector': 'app-team-form'},{'name': 'TeamInstructionsComponent', 'selector': 'app-team-instructions'},{'name': 'TeamListComponent', 'selector': 'app-team-list'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'TermsOfServiceDialogContent', 'selector': 'app-terms-of-service-dialog-content'},{'name': 'UserFollowComponent', 'selector': 'app-user-follow'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserProfileNavComponent', 'selector': 'app-user-profile-nav'},{'name': 'UserProgressComponent', 'selector': 'app-user-progress'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserStatsComponent', 'selector': 'app-user-stats'}];
+        var COMPONENT_TEMPLATE = '<div><div class="row">    <div class="column2">        <mat-card class="example-card">            <mat-card-header>            <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}}</b>);  background-size: cover;"></div> -->              <mat-card-title>Activities</mat-card-title>            </mat-card-header>            <mat-card-content>              <br>              <div>                <div *ngIf="userStats.run_tot_activities == 0 && userStats.ride_tot_activities==0">                  No running or cycling activities.                </div>             <canvas id="lineCharts"></canvas>           </div>             <br>            </mat-card-content>          </mat-card>    </div>    <div class="column2">        <mat-card class="example-card">            <mat-card-header>            <!--  <div mat-card-avatar style = "background-image: url(<b>{{userData.profile_url}}</b>);  background-size: cover;"></div> -->              <mat-card-title>Stats</mat-card-title>            </mat-card-header>            <mat-card-content>            <div class="tab">          <button *ngIf="userStats.run_tot_activities > 0" style="background-color:rgba(0, 51, 204,0.2);" class="tablinks" (click)="openStats(event, \'run_stats\')">Run Stats</button>          <button *ngIf="userStats.walk_tot_activities > 0" style="background-color:rgba(153, 204, 255,0.2);" class="tablinks" (click)="openStats(event, \'walk_stats\')">Walk Stats</button>          <button *ngIf="userStats.ride_tot_activities > 0" style="background-color:rgba(204, 0, 204,0.2);" class="tablinks" (click)="openStats(event, \'ride_stats\')">Ride Stats</button>        </div>        <!-- Tab content -->        <div id="run_stats" class="tabcontent" style="display:block" *ngIf="userStats.run_tot_activities > 0">        <div class="row">          <div class="column1">            <p>Total Runs</p>            <p  ><b>{{userStats.run_tot_activities}}</b></p>          </div>          <div class="column1">            <p>Total Distance</p>            <p ><b>{{userStats.run_tot_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Total Time</p>            <p ><b>{{userStats.run_tot_hrs}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Best Pace</p>            <p ><b>{{userStats.run_max_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Longest Distance</p>            <p ><b>{{userStats.run_max_dist}}</b> mi</p>          </div>                    <div class="column1">            <p>Most Time</p>            <p ><b>{{userStats.run_max_time}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Average Pace</p>             <p ><b>{{userStats.run_average_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Average Distance</p>            <p ><b>{{userStats.run_average_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Average Time</p>            <p ><b>{{userStats.run_average_time}}</b> hrs</p>          </div>          </div>          </div>          <div id="walk_stats" class="tabcontent" style="display:block;" *ngIf="userStats.walk_tot_activities > 0">        <div class="row">          <div class="column1">            <p>Total Walks</p>            <p  ><b>{{userStats.walk_tot_activities}}</b></p>          </div>          <div class="column1">            <p>Total Distance</p>            <p ><b>{{userStats.walk_tot_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Total Time</p>            <p ><b>{{userStats.walk_tot_hrs}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Best Pace</p>            <p ><b>{{userStats.walk_max_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Longest Distance</p>            <p ><b>{{userStats.walk_max_dist}}</b> mi</p>          </div>                    <div class="column1">            <p>Most Time</p>            <p ><b>{{userStats.walk_max_time}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Average Pace</p>             <p ><b>{{userStats.walk_average_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Average Distance</p>            <p ><b>{{userStats.walk_average_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Average Time</p>            <p ><b>{{userStats.walk_average_time}}</b> hrs</p>          </div>          </div>          </div>          <div id="ride_stats" class="tabcontent" *ngIf="userStats.ride_tot_activities > 0">                         <div class="row">          <div class="column1">            <p>Total Cycles</p>            <p ><b>{{userStats.ride_tot_activities}}</b></p>          </div>          <div class="column1">            <p>Total Distance</p>            <p ><b>{{userStats.ride_tot_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Total Time</p>            <p ><b>{{userStats.ride_tot_hrs}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Best Pace</p>            <p ><b>{{userStats.ride_max_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Longest Distance</p>            <p ><b>{{userStats.ride_max_dist}}</b> mi</p>          </div>                    <div class="column1">            <p>Most Time</p>            <p ><b>{{userStats.ride_max_time}}</b> hrs</p>          </div>      </div>      <div class="row">          <div class="column1">            <p>Average Pace</p>             <p ><b>{{userStats.ride_average_pace}}</b> min/mi</p>          </div>          <div class="column1">            <p>Average Distance</p>            <p ><b>{{userStats.ride_average_dist}}</b> mi</p>          </div>          <div class="column1">            <p>Average Time</p>            <p ><b>{{userStats.ride_average_time}}</b> hrs</p>          </div>          </div>          </div>            </mat-card-content>          </mat-card>    </div></div></div>'
+    var COMPONENTS = [{'name': 'ActivitiesMenuComponent', 'selector': 'app-activities-menu'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'CommentsFormComponent', 'selector': 'app-comments-form'},{'name': 'ContactHelpComponent', 'selector': 'app-contact-help'},{'name': 'ContactHelpDialogContent', 'selector': 'app-contact-help-dialog-content'},{'name': 'FaqHelpComponent', 'selector': 'app-faq-help'},{'name': 'FaqHelpDialogContent', 'selector': 'app-faq-help-dialog-content'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'LeaderboardComponent', 'selector': 'app-leaderboard'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManualEntryComponent', 'selector': 'app-manual-entry'},{'name': 'ManualInstructionsComponent', 'selector': 'app-manual-instructions'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationPanelComponent', 'selector': 'app-notification-panel'},{'name': 'PasswordChangeComponent', 'selector': 'app-password-change'},{'name': 'PasswordRequestComponent', 'selector': 'app-password-request'},{'name': 'PaypalComponent', 'selector': 'app-paypal'},{'name': 'PopupComponent', 'selector': 'app-popup'},{'name': 'ProfileFormComponent', 'selector': 'app-profile-form'},{'name': 'ProfilePicComponent', 'selector': 'app-profile-pic'},{'name': 'RaceAboutComponent', 'selector': 'app-race-about'},{'name': 'RaceComponent', 'selector': 'app-race'},{'name': 'RaceCreateComponent', 'selector': 'app-race-create'},{'name': 'RaceDashboardComponent', 'selector': 'app-race-dashboard'},{'name': 'RaceDayComponent', 'selector': 'app-race-day'},{'name': 'RaceDayDialogContent', 'selector': 'app-race-day-dialog-content'},{'name': 'RaceMenuComponent', 'selector': 'app-race-menu'},{'name': 'RacesComponent', 'selector': 'app-races'},{'name': 'RaceSettingsComponent', 'selector': 'app-race-settings'},{'name': 'RaceStoryManageComponent', 'selector': 'app-race-story-manage'},{'name': 'RaceViewComponent', 'selector': 'app-race-view'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReportFormComponent', 'selector': 'app-report-form'},{'name': 'RoutePinDialogComponent', 'selector': 'app-route-pin-dialog'},{'name': 'ShippingAddressComponent', 'selector': 'app-shipping-address'},{'name': 'ShippingAddressFormComponent', 'selector': 'app-shipping-address-form'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SignupDialogContent', 'selector': 'signup-dialog-content'},{'name': 'SmilesComponent', 'selector': 'app-smiles'},{'name': 'SnackbarComponent', 'selector': 'app-snackbar'},{'name': 'StoryBtnComponent', 'selector': 'app-story-btn'},{'name': 'StoryDeleteDialogComponent', 'selector': 'app-story-delete-dialog'},{'name': 'StoryDialogComponent', 'selector': 'app-story-dialog'},{'name': 'StoryFormComponent', 'selector': 'app-story-form'},{'name': 'StoryModalComponent', 'selector': 'app-story-modal'},{'name': 'StravaInstructionsComponent', 'selector': 'app-strava-instructions'},{'name': 'StravauthComponent', 'selector': 'app-stravauth'},{'name': 'SwagComponent', 'selector': 'app-swag'},{'name': 'SwagDialogContent', 'selector': 'swag-dialog-content'},{'name': 'TagFormComponent', 'selector': 'app-tag-form'},{'name': 'TagSelectComponent', 'selector': 'app-tag-select'},{'name': 'TeamFormComponent', 'selector': 'app-team-form'},{'name': 'TeamInstructionsComponent', 'selector': 'app-team-instructions'},{'name': 'TeamListComponent', 'selector': 'app-team-list'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'TermsOfServiceDialogContent', 'selector': 'app-terms-of-service-dialog-content'},{'name': 'UserFollowComponent', 'selector': 'app-user-follow'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserProfileNavComponent', 'selector': 'app-user-profile-nav'},{'name': 'UserProgressComponent', 'selector': 'app-user-progress'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserStatsComponent', 'selector': 'app-user-stats'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'UserStatsComponent'};
 </script>
