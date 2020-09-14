@@ -5,7 +5,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 /* .mat-drawer-backdrop.mat-drawer-shown {
     background: none;
 } */
-
+.btn-outline{
+ border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 10px 22px;
+  font-size: 16px;
+  cursor: pointer;
+}
 /****** Leaflet Icons *****/
 .location-pin img {
     width: 46px;

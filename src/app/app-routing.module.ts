@@ -15,6 +15,10 @@ import { PasswordRequestComponent } from './password-request/password-request.co
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { TagSelectComponent } from './tag-select/tag-select.component';
 import { RaceDashboardComponent } from './race-dashboard/race-dashboard.component';
+import {WelcomeComponent} from './welcome/welcome.component'
+import {AboutTucanComponent} from './about-tucan/about-tucan.component'
+import {FaqPageComponent} from './faq-page/faq-page.component'
+import {ContactPageComponent} from './contact-page/contact-page.component'
 
 const routes: Routes = [
   {path: 'race', component:RaceViewComponent},
@@ -32,6 +36,10 @@ const routes: Routes = [
   {path: 'password-change', component:PasswordChangeComponent},
   {path: 'tag',component:TagSelectComponent},
   {path: 'dashboard', component:RaceDashboardComponent },
+  {path: 'welcome', component:WelcomeComponent},
+  {path: 'about-tucan', component:AboutTucanComponent},
+  {path: 'faqs', component:FaqPageComponent},
+  {path: 'contact', component:ContactPageComponent},
 ];
 
 @NgModule({

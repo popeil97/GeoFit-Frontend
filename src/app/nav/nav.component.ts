@@ -58,14 +58,7 @@ picURL:any;
     }
     this.path=window.location.pathname;
 
-    if(this.path == "/")
-    {
-      this.isPurple = false;
-    }
-    else
-    {
-      this.isPurple = true;
-    }
+
   }
 
   getNotifications() {

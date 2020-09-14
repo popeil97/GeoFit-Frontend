@@ -1,0 +1,8 @@
+<p>How does this all work?</p>
+diagram
+<p>Integrate Strava</p>
+<app-stravauth></app-stravauth>
+<p>Read our FAQs</p>
+<a class="btn btn-outline" routerLink='/faqs'>FAQs</a>
+<p>_______________</p>
+<a class="btn btn-outline"  [routerLink]="['/profile', {username: this._authService.username}]">Go to my profile</a>

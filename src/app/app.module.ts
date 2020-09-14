@@ -90,6 +90,10 @@ import { ReportFormComponent } from './report-form/report-form.component';
 import { StoryDeleteDialogComponent } from './story-delete-dialog/story-delete-dialog.component';
 import { RaceDashboardComponent } from './race-dashboard/race-dashboard.component';
 import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { AboutTucanComponent } from './about-tucan/about-tucan.component';
+import { FaqPageComponent } from './faq-page/faq-page.component';
+import { ContactPageComponent } from './contact-page/contact-page.component';
 
 
 @NgModule({
@@ -160,6 +164,10 @@ import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.
     StoryDeleteDialogComponent,
     RaceDashboardComponent,
     RaceStoryManageComponent,
+    WelcomeComponent,
+    AboutTucanComponent,
+    FaqPageComponent,
+    ContactPageComponent,
       ],
   imports: [
     BrowserModule,
