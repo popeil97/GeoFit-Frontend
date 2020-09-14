@@ -15,90 +15,7 @@
   
 
 <div class="row" >
-    <div class="col-3 col-sm-3 col-md-3 col-lg-3" *ngIf="this._authService.isLoggedIn()">
-  <h3>Me</h3>
-  <mat-card class="example-card" style="padding-bottom: 5px;background-color:#EFFAF7;" >
-      <mat-card-header>
-      <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}});
-background-size: cover;"></div> -->
-        <mat-card-title>{{userData.first_name}} {{userData.last_name}}</mat-card-title> <br>
-      </mat-card-header>
-      <mat-card-content>
-       <img style="width:220px;border-radius: 50%;" src="{{userData.profile_url}}" alt="">
-       <br>
-    <p> <span class="material-icons" style="color:#BC164D;">location_on </span> {{ userData.location }}</p>
 
-    <p><span class="material-icons" style="color:#BC164D;">textsms</span> {{ userData.description }}</p>
-
-        <b>Strava Authentication</b>
-        <p>
-        <app-stravauth></app-stravauth>
-      </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button [routerLink]="['/profile', {username: this._authService.username}]">VIEW PROFILE</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-
-   <div class="col-3 col-sm-3 col-md-3 col-lg-3" *ngIf="!this._authService.isLoggedIn()">
-  <h3>Sign in</h3>
-  <mat-card class="example-card">
-                <mat-card-header> 
-                    
-                  <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-                </mat-card-header>
-                <mat-card-content>
-                  <app-login></app-login>
-                </mat-card-content>
-              </mat-card>
-
-
-  </div>
-
-  
-
-
-
-  <div *ngFor="let race of userRaces" class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding-bottom: 5px;" >
-
-  <div *ngIf="userRaces.length>0 &&this._authService.isLoggedIn()">  
-    <h3 >My Races</h3>
-    <mat-card class="example-card roboto-black" >
-      <mat-card-header>
-           <div *ngIf="race.race_type == 1">
-              <mat-card-title>{{race.name}}
-              <i class="material-icons" style="color:#BC164D;vertical-align: bottom;">directions_run</i>
-            </mat-card-title>
-
-            </div>
-            <div *ngIf="race.race_type == 2">
-              <mat-card-title>{{race.name}}
-                  <i class="material-icons" style="color:#BC164D;vertical-align: bottom;">directions_bike</i>
-                </mat-card-title>
-          </div>
-
-          <div *ngIf="race.race_type == 3">
-              <mat-card-title>{{race.name}}
-              <i class="material-icons" style="color:#BC164D;vertical-align: bottom;">directions_run</i><i class="material-icons" style="color:#BC164D;">directions_bike</i>
-            </mat-card-title>
-          </div>
-
-        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-      </mat-card-header>
-      <img mat-card-image style="width: 255px;" src="{{race.race_image}}" alt="Race">
-      <mat-card-content>
-        <i class="material-icons" style="color:#BC164D;vertical-align: bottom;">map</i><span id="txt1">From <b>{{ race.start_loc }}</b> to <b>{{race.end_loc}}</b> <i style="color:#2C007E;">   {{ race.distance }} {{ race.distance_type }}</i></span>
-        <br><br>
-       <i class="material-icons" style="color:#BC164D; vertical-align: bottom;">date_range</i><span id="txt1">From <b>{{ race.start_date }}</b> to <b>{{ race.end_date }}</b></span>   
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button (click)="viewRace(race)">GO TO RACE</button>
-        <button mat-button (click)="viewAbout(race)">ABOUT</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-</div>
 
 <div class="col-3 col-sm-3 col-md-3 col-lg-3" *ngIf="!this._authService.isLoggedIn() || races.length>0">
   <h3>Public Races</h3>
@@ -164,45 +81,10 @@ background-size: cover;"></div> -->
 
 
   </div>
-  <!--
-  <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding-bottom: 5px;">
-    <mat-card class="example-card" >
-      <mat-card-header>
-        <mat-card-title style="float: left;">Create Race</mat-card-title>
-        <a class="dropdown-hide text-black" style="padding-left: 10px;color:#2C007E;" type="button" routerLink='/create'><i class="material-icons">add_circle</i></a>
-        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
- <!--     </mat-card-header>
-      
-      
-      <mat-card-content>      
-      </mat-card-content>
-    </mat-card>
-  </div> -->
 
   
 </div>
 
 
 </div>
-
-
-
-
-    <!-- Modal -->
-<!-- <div class="modal fade" id="joinModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary" id='joinBtn' (click)="joinRace(race)">Join</button>
-        </div>
-      </div>
-    </div>
-  </div> -->
 

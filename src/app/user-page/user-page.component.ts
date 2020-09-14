@@ -2,6 +2,8 @@ import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { UserProfileService } from '../userprofile.service';
 import { AuthService } from '../auth.service';
+import { RaceService } from '../race.service';
+import * as _ from 'lodash';
 
 declare var $: any;
 
@@ -13,10 +15,14 @@ declare var $: any;
 export class UserPageComponent implements OnInit {
   username;
   userData: UserData;
+  public userRaces:any[];
+  public racesData:any;
 
   constructor(private route:ActivatedRoute, 
+              private router:Router,
               private _userProfileService:UserProfileService,
-              public _authService: AuthService,) { }
+              public _authService: AuthService,
+              private raceService: RaceService,) { }
 
   showEdit: boolean;
 
@@ -29,6 +35,19 @@ export class UserPageComponent implements OnInit {
       this.getUserData();
       console.log(this.username);
     });
+
+    this.raceService.getRaces({}).subscribe(
+      data => {
+        this.racesData = data;
+        this.userRaces = _.filter(this.racesData.races,(race:any) => {
+          if(race.joined) {
+            return race;
+          }
+        });
+        console.log("USER RACES", this.userRaces);
+      }
+    )
+
 
   }
 
@@ -71,6 +90,18 @@ export class UserPageComponent implements OnInit {
   }
   toggleEditView(): void{
     this.showEdit = !this.showEdit;
+  }
+
+  viewRace(race:any) {
+    console.log('SELECTED RACE:',race);
+
+    // set race in race service
+
+    this.router.navigate(['/race',{name:race.name,id:race.id}]);
+  }
+
+  viewAbout(race:any) {
+    this.router.navigate(['/about',{name:race.name,id:race.id}]);
   }
 
   profileUpdated($event) {

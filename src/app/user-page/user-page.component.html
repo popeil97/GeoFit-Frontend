@@ -1,124 +1,73 @@
-<!--<div class="container" *ngIf="!this._authService.token">
-  <div class="row">
-    <div class="column-43">
-    </div>
-
-    <div class="column-44">
-      <div class="centered">
-      <mat-card class="example-card roboto-purple rounded-card">
-                <mat-card-header> 
-                    
-                  <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-         <!--       </mat-card-header>
-                <mat-card-content>
-                    <h3 class="text-uppercase roboto-purple"><b>Log in to view profiles</b></h3>
-                        <hr class="divider my-4" />
-                    
-                  <app-login></app-login>
-                </mat-card-content>
-              </mat-card>
-            </div>
-    </div>
-
-    <div class="column-43">
-    </div>
-
-  </div>
-</div> -->
-
-<div class="container">
-  <div class="row">
-    <div class="column-31" *ngIf="!showEdit">
-        <mat-card class="example-card" >
-            <mat-card-header>
-            <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}});
-  background-size: cover;"></div> -->
-        
-              <mat-card-title >{{userData.first_name}} {{userData.last_name}}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-             <img style="width:150px;height:150px;" src="{{userData.profile_url}}" class="img-responsive" alt="">
-             
-          <p> <span class="material-icons" style="color:#BC164D;">location_on </span> {{ userData.location }}</p>
-
-          <p><span class="material-icons" style="color:#BC164D;">textsms</span> {{ userData.description }}</p>
+  <div *ngIf="!showEdit">
+        {{userData.first_name}} {{userData.last_name}}
+        <img style="width:150px;height:150px;" src="{{userData.profile_url}}" class="img-responsive" alt="">   
+        Location: {{ userData.location }}
+        <br>
+        Description: {{ userData.description }}
 
           <div  *ngIf="this._authService.isLoggedIn()">
-          <div *ngIf="userData.is_me">
-               <b>Trophies</b>
-              <b>Strava Authentication</b>
-              <p>
-              <app-stravauth></app-stravauth>
-            </p>
-          </div>
-          </div>
-            </mat-card-content>
-             <div  *ngIf="this._authService.isLoggedIn()">
-            <mat-card-actions>
-              <button mat-button *ngIf="userData.is_me" (click)="toggleEditView()">EDIT</button>
+            <div *ngIf="userData.is_me">
+                <b>Strava Authentication</b>
+                <app-stravauth></app-stravauth>
+            </div>
+            <div *ngIf="userData.is_me">
+              <button mat-button (click)="toggleEditView()">EDIT</button>
+              <button mat-button (click)="logout()">Log out</button>
+            </div>
               <app-user-follow *ngIf="!userData.is_me" [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
-            </mat-card-actions>
           </div>
-            
-          </mat-card>
 
-  </div>
-
-  <div class="column-32" id="feedContent" *ngIf="!showEdit">
-        <!---<app-user-stats [userID]="userData.user_id"></app-user-stats>-->
-        
-         <mat-card class="example-card">
-            <mat-card-header>
-            <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}});
-  background-size: cover;"></div> -->
-            <div *ngIf="this._authService.isLoggedIn()">
-              <mat-card-title *ngIf="userData.is_me">My Stats</mat-card-title>
-              <mat-card-title *ngIf="!userData.is_me">{{userData.first_name}}'s Stats</mat-card-title>
-            </div>
-            <mat-card-title *ngIf="!this._authService.isLoggedIn()">{{userData.first_name}}'s Stats</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-
+          {{userData.first_name}}'s Stats
              <app-user-stats [userID]="userData.user_id"></app-user-stats>
-
-            </mat-card-content>
-          </mat-card>
-
-           <br>
-        
-        <mat-card class="example-card">
-          <mat-card-header>
-            <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}});
-  background-size: cover;"></div> -->
-              <div *ngIf="this._authService.isLoggedIn()">
-              <mat-card-title *ngIf="userData.is_me">My Feed</mat-card-title>
-              <mat-card-title *ngIf="!userData.is_me">{{userData.first_name}}'s Feed</mat-card-title>
-            </div>
-              <mat-card-title *ngIf="!this._authService.isLoggedIn()">{{userData.first_name}}'s Feed</mat-card-title>
-            </mat-card-header>
-            
-          <div style="max-height:60vh;overflow: auto;">
-            
-            <mat-card-content>
-
-             <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
-
-            </mat-card-content>
-            </div>
-          </mat-card>
-        
-
-     
-
-
   </div>
 
+  <div id="feedContent" *ngIf="!showEdit">
+      {{userData.first_name}}'s Feed
+      <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
   </div>
 
- <div>
-        <!----<app-user-stats *ngIf="!showEdit" [userID]="userData.user_id"></app-user-stats>---->
-        <app-profile-form *ngIf="showEdit" [userData]="userData" (formUpdated)="profileUpdated($event)"></app-profile-form>
-        
-      </div>
 
+ <div *ngIf="showEdit">
+        <app-profile-form  [userData]="userData" (formUpdated)="profileUpdated($event)"></app-profile-form>
 </div>
+
+  <div *ngFor="let race of userRaces" class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding-bottom: 5px;" >
+
+  <div *ngIf="userRaces.length>0 &&this._authService.isLoggedIn()">  
+    <h3 >My Races</h3>
+    <mat-card class="example-card roboto-black" >
+      <mat-card-header>
+           <div *ngIf="race.race_type == 1">
+              <mat-card-title>{{race.name}}
+              <i class="material-icons" style="color:#BC164D;vertical-align: bottom;">directions_run</i>
+            </mat-card-title>
+
+            </div>
+            <div *ngIf="race.race_type == 2">
+              <mat-card-title>{{race.name}}
+                  <i class="material-icons" style="color:#BC164D;vertical-align: bottom;">directions_bike</i>
+                </mat-card-title>
+          </div>
+
+          <div *ngIf="race.race_type == 3">
+              <mat-card-title>{{race.name}}
+              <i class="material-icons" style="color:#BC164D;vertical-align: bottom;">directions_run</i><i class="material-icons" style="color:#BC164D;">directions_bike</i>
+            </mat-card-title>
+          </div>
+
+        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+      </mat-card-header>
+      <img mat-card-image style="width: 255px;" src="{{race.race_image}}" alt="Race">
+      <mat-card-content>
+        <i class="material-icons" style="color:#BC164D;vertical-align: bottom;">map</i><span id="txt1">From <b>{{ race.start_loc }}</b> to <b>{{race.end_loc}}</b> <i style="color:#2C007E;">   {{ race.distance }} {{ race.distance_type }}</i></span>
+        <br><br>
+       <i class="material-icons" style="color:#BC164D; vertical-align: bottom;">date_range</i><span id="txt1">From <b>{{ race.start_date }}</b> to <b>{{ race.end_date }}</b></span>   
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="viewRace(race)">GO TO RACE</button>
+        <button mat-button (click)="viewAbout(race)">ABOUT</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+
