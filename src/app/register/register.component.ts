@@ -103,7 +103,8 @@ export class RegisterComponent implements OnInit {
                   this.router.navigate([this.redirectUrl,this.redirectParams]);
                 }
                 else {
-                  this._userProfileService.goToUserProfile(data['username']);
+                  this.router.navigate(['/welcome']);
+              //    this._userProfileService.goToUserProfile(data['username']);
                 }
               },
             err => {

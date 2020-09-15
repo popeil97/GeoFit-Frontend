@@ -42,6 +42,19 @@
       </li>
     </div>
 
+    <div *ngIf="!this._authService.isLoggedIn()">
+    <li class="nav-item active">
+        <app-dialog-skeleton type=1></app-dialog-skeleton> <!--login-->
+      </li>
+    </div>
+     <div *ngIf="!this._authService.isLoggedIn()">
+     <li class="nav-item active">
+        <app-dialog-skeleton type=2></app-dialog-skeleton> <!--register-->
+      </li>
+    </div>
+
+
+
     </ul>
 
   </div>

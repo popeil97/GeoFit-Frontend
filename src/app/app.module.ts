@@ -94,6 +94,7 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { AboutTucanComponent } from './about-tucan/about-tucan.component';
 import { FaqPageComponent } from './faq-page/faq-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
+import { DialogSkeletonComponent,DialogSkeletonDialogContent } from './dialog-skeleton/dialog-skeleton.component';
 
 
 @NgModule({
@@ -168,6 +169,8 @@ import { ContactPageComponent } from './contact-page/contact-page.component';
     AboutTucanComponent,
     FaqPageComponent,
     ContactPageComponent,
+    DialogSkeletonComponent,
+    DialogSkeletonDialogContent
       ],
   imports: [
     BrowserModule,
@@ -206,7 +209,9 @@ import { ContactPageComponent } from './contact-page/contact-page.component';
                   SnackbarComponent, 
                   StoryDialogComponent,
                   ReportFormComponent,
-                  StoryDeleteDialogComponent] 
+                  StoryDeleteDialogComponent,
+                  DialogSkeletonDialogContent
+                  ] 
 })
 export class AppModule { 
   constructor(private injector: Injector) {

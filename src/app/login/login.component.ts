@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
           this.loggedInAsUsernameEvent.emit(data['username']);
 
           if (data['success']){
-            this.continueAsMe();
+            this.continueAsMe(data['username']);
           }
         },
         err => {
@@ -81,7 +81,7 @@ export class LoginComponent implements OnInit {
    
   }
 
-  public continueAsMe(){
-    this.router.navigate(['/races']);
+  public continueAsMe(username?:string){
+    this.router.navigate(['/profile', {username: username}]);
   }
 }
