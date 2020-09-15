@@ -1,6 +1,35 @@
-header.masthead {
-  
+.masthead {
+
+  height:100vh;
+
+  display:flex;
+  flex-direction:row;
+  justify-content: flex-start;
+  align-items: stretch;
 }
+
+.split {
+  position:relative;
+  width:50%;
+
+  padding-left:16px;
+  padding-right:16px;
+  box-sizing: border-box;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  .masthead {
+    flex-direction: column;
+  }
+  .split {
+    width:100%;
+    height:100vh;
+  }
+}
+
+
 header.masthead h1 {
   font-size: 2.25rem;
 }
@@ -24,6 +53,7 @@ header.masthead h1 {
   }
 }
 
+/*
 .split {
   height: 100%;
   width: 50%;
@@ -43,6 +73,7 @@ header.masthead h1 {
   right: 0;
   background-color: black;
 }
+*/
 
 .centered {
   position: absolute;
@@ -50,34 +81,7 @@ header.masthead h1 {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-}
-
-.container {
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-@media (min-width: 576px) {
-  .container {
-    max-width: 540px;
-  }
-}
-@media (min-width: 768px) {
-  .container {
-    max-width: 720px;
-  }
-}
-@media (min-width: 992px) {
-  .container {
-    max-width: 960px;
-  }
-}
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1140px;
-  }
+  width:100%;
 }
 
 article, aside, figcaption, figure, footer,b header, hgroup, main, nav, section {
