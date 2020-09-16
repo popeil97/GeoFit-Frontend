@@ -58,6 +58,8 @@ export class RaceAboutComponent implements OnInit {
 
     this.showForm = false;
 
+    
+
     this.route.paramMap.subscribe(params => {
       this.raceName = params['params']['name'];
       this.raceID = params['params']['id'];

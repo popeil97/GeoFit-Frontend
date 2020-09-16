@@ -1,35 +1,65 @@
-<!-- icon to indicate race type : 1-run;2-bike;3-all -->
-<div *ngIf="aboutData.race_type == 1">
-  <i class="material-icons" style="color:#BC164D;">directions_run</i> 
+<div class='AboutRaceImageContainer'>
+  <img 
+    *ngIf="aboutData.race_image != null" 
+    src="{{aboutData.race_image}}" 
+    alt="race_img"
+    class='AboutRaceImage'
+  />
 </div>
-<div *ngIf="aboutData.race_type == 2">
-  <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
-</div>
-<div *ngIf="aboutData.race_type == 3">
-  <i class="material-icons" style="color:#BC164D;">directions_run</i> <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
-</div>
+<div class='PageContainer'>
+  <div class='PageSegment'>
+    <h1>{{aboutData.name}}</h1>
+    <p>{{aboutData.description}}</p>
 
-<h3>Race Name:</h3>
-<p>{{aboutData.name}}</p>
-<h3>About Race:</h3>
-<p>{{aboutData.description}} </p>
-<h3>Start Location:</h3>
-<p>{{aboutData.start_loc}}</p>
-<h3>End Location:</h3>
-<p>{{aboutData.end_loc}}</p>
-<h3>Start Date:</h3>
-<p>{{aboutData.start_date}}</p>
-<h3>End Date:</h3>
-<p>{{aboutData.end_date}}</p>
- <img src="{{aboutData.race_image}}" alt="race_img" style="width:10%;">
-<!--<app-map [raceID]="raceID" [displayUsers]="true"></app-map>-->
-
-<a class="btn"  (click)="viewRace()" *ngIf="hasStarted">View Race</a>
-<a class="btn"  mat-button (click)="goToRaceDashboard()" *ngIf="isOwner || isModerator">GO TO DASHBOARD</a>        
-<app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" [aboutData]="aboutData" [race_id]="raceID" [hasStarted]="hasStarted" (signupCallback)="signupCallback($event)" [hasPaid]="hasPaid" (click)="trySignup()"></app-signup>
-
-<!-- test this by going into the "swag" module in the backend and adding swag to your race -->
-<app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag>
+    <!-- icon to indicate race type : 1-run;2-bike;3-all -->
+    <div *ngIf="aboutData.race_type == 1">
+      <i class="material-icons" style="color:#BC164D;">directions_run</i> 
+    </div>
+    <div *ngIf="aboutData.race_type == 2">
+      <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
+    </div>
+    <div *ngIf="aboutData.race_type == 3">
+      <i class="material-icons" style="color:#BC164D;">directions_run</i> <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
+    </div>
+  </div>
+  <div class='PageSegment'>
+    <h2>Race Details</h2>
+    <h3>Important Locations</h3>
+    <div class='RaceLocationsContainer'>
+      <div class='RaceLocation'>
+        <p>{{aboutData.start_loc}}</p>
+      </div>
+      <div class='RaceLocation'>
+        <p>- to -</p>
+      </div>
+      <div class='RaceLocation'>
+        <p>{{aboutData.end_loc}}</p>
+      </div>
+    </div>
+    <h3>Important Dates</h3>
+    <div class='RaceLocationsContainer'>
+      <div class='RaceLocation'>
+        <p>{{aboutData.start_date}}</p>
+      </div>
+      <div class='RaceLocation'>
+        <p>- to -</p>
+      </div>
+      <div class='RaceLocation'>
+        <p>{{aboutData.end_date}}</p>
+      </div>
+    </div>
+  </div>
+  <div class='PageSegment'>
+    <h2>Action Items</h2>
+    <div class='RaceButtonsContainer'>
+      <a class="btn"  (click)="viewRace()" *ngIf="hasStarted">View Race</a>
+      <a class="btn"  mat-button (click)="goToRaceDashboard()" *ngIf="isOwner || isModerator">GO TO DASHBOARD</a>        
+      <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" [aboutData]="aboutData" [race_id]="raceID" [hasStarted]="hasStarted" (signupCallback)="signupCallback($event)" [hasPaid]="hasPaid" (click)="trySignup()"></app-signup>
+    </div>
+    <!-- test this by going into the "swag" module in the backend and adding swag to your race -->
+    <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag>
+  </div>
+  <!--<app-map [raceID]="raceID" [displayUsers]="true"></app-map>-->
 
 
 
@@ -284,6 +314,7 @@
 
   <br> -->
 
+</div>
 
 
   

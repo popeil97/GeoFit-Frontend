@@ -1,0 +1,31 @@
+.AboutRaceImageContainer {
+	position:relative;
+	height:280px;
+	overflow:hidden;
+}
+.AboutRaceImage {
+	display:block;
+	width:100%;
+
+	margin-left:auto;
+	margin-right:auto;
+}
+
+.RaceLocationsContainer {
+	display:flex;
+	flex-direction:row;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+.RaceLocationsContainer.RaceLocation {
+	width:30%;
+}
+
+.RaceButtonsContainer {
+	display:flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-wrap: wrap;
+}

@@ -1,10 +1,10 @@
-<div class="RacesContainer">
-  <div class="RacesSegment RacesLogo">
-    <img src= "../../assets/landing/tucan_main.png" class="races-logo" />
-    <h1 class="RacesTitle">Public Races</h1>
+<div class='PageContainer'>
+  <div class="PageSegment PageHeaderSegment">
+    <img src= "../../assets/landing/tucan_main.png" class="TucanLogo" />
+    <h1 class="PageHeaderSegmentTitle">Public Races</h1>
     <app-loader [isActive]="loading"></app-loader>
   </div>
-  <div class="RacesSegment">
+  <div class="PageSegment">
     <!-- <a type="button" class="btn btn-primary" style="float:right" routerLink='/create'>Create Race</a> -->
     
     <div *ngIf="races.length == 0 && !isUserRaces">
@@ -25,10 +25,8 @@
             <p>{{race.start_loc}}</p>
             <h3>End Location:</h3>
             <p>{{race.end_loc}}</p>
-            <h3>Start Date:</h3>
-            <p>{{race.start_date}}</p>
-            <h3>End Date:</h3>
-            <p>{{race.end_date}}</p>
+            <h3>Race Period:</h3>
+            <p>{{race.start_date}} to {{race.end_date}}</p>
             <h3>Distance:</h3>
             <p>{{race.distance}}</p>
 
@@ -41,13 +39,11 @@
             </a>
              <!-- this is just temporary for now, have to come back in and fix the inputs -->
             <app-signup [price]="0.01" [hasTags]=false [race_id]="2" (click)="trySignup()"></app-signup>
-
-             <a class="btn" (click)="viewAbout(race)">
-              View Race Details
-            </a>
           </div>
           <div class='TucanRaceItemSpecificButtons'>
-            <p>Good morning Ryan</p>
+            <a class="btn" (click)="viewAbout(race)">
+              View Race Details
+            </a>
           </div>
         </div>
       </div>

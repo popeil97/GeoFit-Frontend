@@ -17,64 +17,6 @@
   box-sizing: border-box;
 }
 
-
-
-@media only screen and (max-width: 600px) {
-  .masthead {
-    flex-direction: column;
-  }
-  .split {
-    width:100%;
-    height:100vh;
-  }
-}
-
-
-header.masthead h1 {
-  font-size: 2.25rem;
-}
-@media (min-width: 992px) {
-  header.masthead {
-    height: 90vh;
-    min-height: 40rem;
-    padding-top: 4.5rem;
-    padding-bottom: 0;
-  }
-  header.masthead p {
-    font-size: 1.15rem;
-  }
-  header.masthead h1 {
-    font-size: 3rem;
-  }
-}
-@media (min-width: 1200px) {
-  header.masthead h1 {
-    font-size: 3.5rem;
-  }
-}
-
-/*
-.split {
-  height: 100%;
-  width: 50%;
-  position: absolute;
-  top: 0;
-  z-index:1;
-  overflow-x: hidden;
-  padding-top: 20px;
-}
-
-.left {
-  left: 0;
-  background-color: white;
-}
-
-.right {
-  right: 0;
-  background-color: black;
-}
-*/
-
 .centered {
   position: absolute;
   top: 50%;
@@ -88,15 +30,22 @@ article, aside, figcaption, figure, footer,b header, hgroup, main, nav, section 
   display: block;
 }
 
-.logo{
- width:280px; border-radius:0%;
-}
-
-.btn-outline{
- border: 2px solid black;
+.btn-outline {
+  border: 2px solid black;
   background-color: white;
   color: black;
   padding: 10px 22px;
   font-size: 16px;
   cursor: pointer;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .masthead {
+    flex-direction: column;
+  }
+  .split {
+    width:100%;
+    height:100vh;
+  }
 }
