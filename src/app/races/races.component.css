@@ -21,6 +21,24 @@
   padding-top:16px;
   padding-bottom:16px;
 }
+.RacesLogo {
+  height:360px;
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.races-logo {
+  display:block;
+  width: 280px;
+}
+.RacesTitle {
+  margin-top:32px;
+  margin-bottom:0;
+  text-align: center;
+  line-height: initial !important
+}
 .TucanRaceItem {
   display:block;
   background-color: lightgrey;
