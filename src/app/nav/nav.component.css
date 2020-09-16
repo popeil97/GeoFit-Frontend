@@ -178,7 +178,6 @@ a.navbar-brand {
     background-color: white;
 
     flex-direction: column;
-    justify-content: space-between;
     align-items: stretch;
   }
   .TucanNavigationButtonSegment {
