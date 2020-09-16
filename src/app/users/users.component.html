@@ -1,50 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <!-- <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" /> -->
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Tucan Fitness</title>
-        <!-- Favicon-->
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="/src/app/users/users.component.css" rel="stylesheet" />
-        <style>
-            h1 {text-align: center;}
-        </style>
-    </head>
-    <body id="page-top">
-        <!-- Navigation-->
-        
-        <!-- Masthead-->
-      <header class="masthead" id="race">
+<!-- Masthead-->
+<div class="masthead" id="race">
+    <div class="split left">
+        <div class='TucanContainer'>
+            <div class="centered">
+                <img src= "../../assets/landing/tucan_main.png" class="logo">
+                <p >~~~ ~~~</p>
+                <p>~~~ ~~~~~~~~ ~~~~~~~~ ~~~~~~~ ~~~ ~~~ ~~~~~ ~~~~~~ ~~~</p>
 
-        <div class="split left">
-          <div class="centered">
-            <img src= "../../assets/landing/tucan_main.png" class="logo">
-            <p >~~~~~~</p>
-            <p>~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~</p>
-
-            <div *ngIf="!this._authService.isLoggedIn()">
-                 <app-dialog-skeleton type=1></app-dialog-skeleton> <!--login-->
+                <div *ngIf="!this._authService.isLoggedIn()">
+                     <app-dialog-skeleton type=1></app-dialog-skeleton> <!--login-->
+                </div>
+                <a class="btn btn-outline" routerLink='/about-tucan'>
+                    About Tucan Fitness
+                </a>
             </div>
-            <a class="btn btn-outline" routerLink='/about-tucan'>About Tucan Fitness</a>
-
-            </div>
-            
-
-          </div>
-
-        <div class="split right">    
         </div>
+    </div>
 
-        </header>
+    <div class="split right"></div>
 
-
-
-        <footer class="bg-light py-5">
-            <div class="container"><div class="small text-center text-muted">Copyright © 2020 Tucan Fitness  </div></div>
-        </footer>
-       
-    </body>
-</html>
+</div>
