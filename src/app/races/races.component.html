@@ -1,90 +1,111 @@
-<br>
-
-<app-loader [isActive]="loading"></app-loader>
-
-
-
-  <div class="container">
- <!-- <a type="button" class="btn btn-primary" style="float:right" routerLink='/create'>Create Race</a> -->
-
-  <br>
-  
-<div *ngIf="races.length == 0 && !isUserRaces">
-       <p style="text-align:center;"><b> No races to display</b> </p>
+<div class="RacesContainer">
+  <div class='RacesSegment'>
+    <h1>Public Races</h1>
+    <app-loader [isActive]="loading"></app-loader>
   </div>
-  
-
-<div class="row" >
-
-
-<div class="col-3 col-sm-3 col-md-3 col-lg-3" *ngIf="!this._authService.isLoggedIn() || races.length>0">
-  <h3>Public Races</h3>
-
- <table mat-table
-       [dataSource]="races" multiTemplateDataRows
-       class="mat-elevation-z8"
-       *ngIf="races.length > 0">
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Race </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="distance">
-    <th mat-header-cell *matHeaderCellDef> Distance </th>
-    <td mat-cell *matCellDef="let element"> {{element.distance}} {{element.distance_type}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="start_loc">
-    <th mat-header-cell *matHeaderCellDef> Start Loc </th>
-    <td mat-cell *matCellDef="let element"> {{element.start_loc}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="end_loc">
-    <th mat-header-cell *matHeaderCellDef> End Loc </th>
-    <td mat-cell *matCellDef="let element"> {{element.end_loc}} </td>
-  </ng-container>
-  
-
-
-
-  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-  <ng-container matColumnDef="expandedDetail">
-    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-      <div class="example-element-detail"
-           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-
-           <img src="{{element.race_image}}" style="width: 255px;" />
-           <br>
-        <div class="container example-element-description">
-          {{element.description}}
+  <div class="RacesSegment">
+    <!-- <a type="button" class="btn btn-primary" style="float:right" routerLink='/create'>Create Race</a> -->
+    
+    <div *ngIf="races.length == 0 && !isUserRaces">
+      <p style="text-align:center;"><b> No races to display</b> </p>
+    </div>
+    <div *ngIf="races.length > 0">
+      <div *ngFor="let race of races" class="TucanRaceItem">
+        <h2>{{race.name}}</h2>
+        <div class='TucanRaceItemDetails'>
+          <div class='TucanRaceItemBasicInfo'>
+            <div class='TucanRaceItemDescription'>
+              <p>{{race.description}}</p>
+              <img class="TucanRaceItemImage" *ngIf="race.race_image != null" src="{{race.race_image}}" />
+            </div>
+          </div>
+          <div class='TucanRaceItemSpecificInfo'>
+            <h3>Start Location:</h3>
+            <p>{{race.start_loc}}</p>
+            <h3>End Location:</h3>
+            <p>{{race.end_loc}}</p>
+            <h3>Distance:</h3>
+            <p>{{race.distance}}</p>
+          </div>
         </div>
-
-        <div class="container" style="float: right;">
-
-
-          <button type="button" class="btn btn-secondary" style="float: right;margin-right:3px; " (click)="viewAbout(element)">View</button>
+        <div class='TucanRaceItemButtons'>
+          <div class='TucanRaceItemBasicButtons'>
+            <p>Hello</p>
+          </div>
+          <div class='TucanRaceItemSpecificButtons'>
+            <p>there.</p>
+          </div>
         </div>
-        
       </div>
-      
-    </td>
-  </ng-container>
+    </div>
 
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
-      class="example-element-row"
-      [class.example-expanded-row]="expandedElement === element"
-      (click)="expandedElement = expandedElement === element ? null : element">
-  </tr>
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-</table>
+<!--
+    <div class="row" >
+      <div 
+        class="col-3 col-sm-3 col-md-3 col-lg-3" 
+        *ngIf="!this._authService.isLoggedIn() || races.length>0"
+      >
+        <table 
+          mat-table
+          [dataSource]="races" multiTemplateDataRows
+          class="mat-elevation-z8"
+          *ngIf="races.length > 0"
+        >
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> Race </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="distance">
+            <th mat-header-cell *matHeaderCellDef> Distance </th>
+            <td mat-cell *matCellDef="let element"> {{element.distance}} {{element.distance_type}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="start_loc">
+            <th mat-header-cell *matHeaderCellDef> Start Loc </th>
+            <td mat-cell *matCellDef="let element"> {{element.start_loc}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="end_loc">
+            <th mat-header-cell *matHeaderCellDef> End Loc </th>
+            <td mat-cell *matCellDef="let element"> {{element.end_loc}} </td>
+          </ng-container>
+-->
+          <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+<!--
+          <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+              <div class="example-element-detail"
+                   [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+                   <img src="{{element.race_image}}" style="width: 255px;" />
+                   <br>
+                <div class="container example-element-description">
+                  {{element.description}}
+                </div>
+
+                <div class="container" style="float: right;">
 
 
+                  <button type="button" class="btn btn-secondary" style="float: right;margin-right:3px; " (click)="viewAbout(element)">View</button>
+                </div>
+                
+              </div>
+              
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+          <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+              class="example-element-row"
+              [class.example-expanded-row]="expandedElement === element"
+              (click)="expandedElement = expandedElement === element ? null : element">
+          </tr>
+          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+        </table>
+      </div>
+    </div>
+-->
   </div>
-
-  
-</div>
-
-
 </div>
 

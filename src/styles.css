@@ -16,7 +16,10 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif; 
 }
 
-h1 {  font-size: 50px !important; }
+h1 {  
+  font-size: 50px !important;
+  line-height: normal !important;
+}
 
 .TucanContainer {
   position:relative;

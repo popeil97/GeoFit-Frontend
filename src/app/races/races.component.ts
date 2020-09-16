@@ -44,7 +44,12 @@ export class RacesComponent implements OnInit {
     console.log('in races');
 
     this.races=[{
-      name:'test'
+      name:'Example Race',
+      description:"This is an example race! Prepare to get your debugging pants on, because this is going to be painful...",
+      start_loc:'Boston, Massachusetts, USA',
+      end_loc:'New York, NY, USA',
+      distance:'100m',
+      race_image:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSzGFzG_J1u_4gIb3vF_Dx7cDityeuW9ABlKw&usqp=CAU',
     }] as any[];
 
     this.raceService.getRaces({}).subscribe(
