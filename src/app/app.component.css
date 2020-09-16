@@ -1,3 +1,23 @@
+.TucanBody {
+	display:flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+	flex-wrap: nowrap;
+}
 .MainContainer {
 	padding-top:64px;
+	min-height: calc(100vh - 160px);
 }
+
+footer {
+	flex-shrink: 0;
+
+	background-color:var(--light);
+
+	position:relative;
+	height:160px;
+}
+	footer p {
+		margin:0 !important;
+	}

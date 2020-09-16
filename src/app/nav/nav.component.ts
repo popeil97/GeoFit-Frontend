@@ -16,14 +16,16 @@ declare var $: any
 
 
 export class NavComponent implements OnInit {
+  userData: UserData;
+  picURL:any;
+  navigationOpen : boolean = false;
 
-userData: UserData;
-picURL:any;
-
-  constructor(private _notificationService:NotificationsService,
-              public _authService: AuthService,
-              private _userProfileService: UserProfileService,
-              private _bottomSheet: MatBottomSheet) { }
+  constructor(
+    private _notificationService:NotificationsService,
+    public _authService: AuthService,
+    private _userProfileService: UserProfileService,
+    private _bottomSheet: MatBottomSheet
+  ) {}
 
   public notifications:any[] = [];
   public isPurple:Boolean = false;
@@ -59,6 +61,15 @@ picURL:any;
     this.path=window.location.pathname;
 
 
+  }
+
+  ToggleNavigation() {
+    this.navigationOpen = !this.navigationOpen;
+    console.log(this.navigationOpen);
+  }
+
+  NavItemClick() {
+    if (this.navigationOpen) this.ToggleNavigation();
   }
 
   getNotifications() {

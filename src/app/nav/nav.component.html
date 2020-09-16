@@ -1,63 +1,69 @@
 <nav 
   class="navbar navbar-expand-lg navbar-light" 
 >
-  <a class="navbar-brand" href="#"><img src= "../../assets/landing/tucan_purple-02.png" width="48" height="20"></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button 
+    class="TucanNavigationToggler"
+    (click)="ToggleNavigation()"
+  >
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-       <li class="nav-item active">
-        <a class="nav-link" routerLink='/about-tucan'>About Tucan<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" routerLink='/races'>Public Races <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" routerLink='/faqs'>FAQs<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" routerLink='/contact'>Contact Us<span class="sr-only">(current)</span></a>
-      </li>
+  <div 
+    class="TucanNavigationButtons"
+    [ngClass]="navigationOpen ? 'open' : ''"
+  >
+    <div class='TucanContainer'>
+      <div 
+        class="TucanNavigationBlackTransparent"
+        (click)="ToggleNavigation()"
+      ></div>
+      <div class="TucanNavigationContents">
 
-    <div *ngIf="this._authService.isLoggedIn()">
-     <li class="nav-item">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="showNotifications()">
-          <mat-icon *ngIf="notifications.length>0" class="roboto-purple" matBadge="{{notifications.length}}" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below">circle_notifications</mat-icon> 
-           <mat-icon *ngIf="notifications.length==0" class="roboto-purple" >circle_notifications</mat-icon>
-          Notifications
-        </a>
-      </li>
+        <a class="TucanNavigationLogo" routerLink='/'><img src= "../../assets/landing/tucan_purple-02.png"></a>
+         
+        <div class="nav-item active" (click)="NavItemClick()">
+          <a class="nav-link" routerLink='/about-tucan'>About Tucan<span class="sr-only">(current)</span></a>
+        </div>
+        
+        <div class="nav-item active" (click)="NavItemClick()">
+          <a class="nav-link" routerLink='/races'>Public Races <span class="sr-only">(current)</span></a>
+        </div>
+        
+        <div class="nav-item active" (click)="NavItemClick()">
+          <a class="nav-link" routerLink='/faqs'>FAQs<span class="sr-only">(current)</span></a>
+        </div>
+
+        <div class="nav-item active" (click)="NavItemClick()">
+          <a class="nav-link" routerLink='/contact'>Contact Us<span class="sr-only">(current)</span></a>
+        </div>
+
+        <div *ngIf="this._authService.isLoggedIn()">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="showNotifications()">
+              <mat-icon *ngIf="notifications.length>0" class="roboto-purple" matBadge="{{notifications.length}}" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below">circle_notifications</mat-icon> 
+               <mat-icon *ngIf="notifications.length==0" class="roboto-purple" >circle_notifications</mat-icon>
+              Notifications
+            </a>
+        </div>
+
+       <div *ngIf="this._authService.isLoggedIn()">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="NavItemClick()">
+            <img src= "{{this.picURL}}" style="border-radius:50%;width:20px;"> My Profile
+          </a>
+           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" [routerLink]="['/profile', {username: this._authService.username}]">My profile</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" (click)="logout()">Log out {{this._authService.username}}</a>
+            </div>
+        </div>
+
+        <div *ngIf="!this._authService.isLoggedIn()">
+          <app-dialog-skeleton type=1 (click)="NavItemClick()"></app-dialog-skeleton> <!--login-->
+        </div>
+        
+        <div *ngIf="!this._authService.isLoggedIn()">
+          <app-dialog-skeleton type=2 (click)="NavItemClick()"></app-dialog-skeleton> <!--register-->
+        </div>
+      </div>
     </div>
-
-     <div *ngIf="this._authService.isLoggedIn()">
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img src= "{{this.picURL}}" style="border-radius:50%;width:20px;"> My Profile
-        </a>
-         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" [routerLink]="['/profile', {username: this._authService.username}]">My profile</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" (click)="logout()">Log out {{this._authService.username}}</a>
-          </div>
-      </li>
-    </div>
-
-    <div *ngIf="!this._authService.isLoggedIn()">
-    <li class="nav-item active">
-        <app-dialog-skeleton type=1></app-dialog-skeleton> <!--login-->
-      </li>
-    </div>
-     <div *ngIf="!this._authService.isLoggedIn()">
-     <li class="nav-item active">
-        <app-dialog-skeleton type=2></app-dialog-skeleton> <!--register-->
-      </li>
-    </div>
-
-
-
-    </ul>
-
   </div>
 </nav>

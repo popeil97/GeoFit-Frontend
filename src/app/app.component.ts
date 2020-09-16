@@ -9,5 +9,4 @@ import {throwError} from 'rxjs';
 })
 export class AppComponent {
   constructor(public viewRef: ViewContainerRef) { }
- 
 }
