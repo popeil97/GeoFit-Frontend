@@ -40,6 +40,7 @@ export class RaceAboutComponent implements OnInit {
 
   public num_users:any;
 
+
   constructor(private raceService:RaceService, 
               private route:ActivatedRoute, 
               private router:Router, 

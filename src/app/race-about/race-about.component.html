@@ -1,3 +1,50 @@
+<!-- icon to indicate race type : 1-run;2-bike;3-all -->
+<div *ngIf="aboutData.race_type == 1">
+  <i class="material-icons" style="color:#BC164D;">directions_run</i> 
+</div>
+<div *ngIf="aboutData.race_type == 2">
+  <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
+</div>
+<div *ngIf="aboutData.race_type == 3">
+  <i class="material-icons" style="color:#BC164D;">directions_run</i> <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
+</div>
+
+<h3>Race Name:</h3>
+<p>{{aboutData.name}}</p>
+<h3>About Race:</h3>
+<p>{{aboutData.description}} </p>
+<h3>Start Location:</h3>
+<p>{{aboutData.start_loc}}</p>
+<h3>End Location:</h3>
+<p>{{aboutData.end_loc}}</p>
+<h3>Start Date:</h3>
+<p>{{aboutData.start_date}}</p>
+<h3>End Date:</h3>
+<p>{{aboutData.end_date}}</p>
+ <img src="{{aboutData.race_image}}" alt="race_img" style="width:10%;">
+<!--<app-map [raceID]="raceID" [displayUsers]="true"></app-map>-->
+
+<a class="btn"  (click)="viewRace()" *ngIf="hasStarted">View Race</a>
+<a class="btn"  mat-button (click)="goToRaceDashboard()" *ngIf="isOwner || isModerator">GO TO DASHBOARD</a>        
+<app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" [aboutData]="aboutData" [race_id]="raceID" [hasStarted]="hasStarted" (signupCallback)="signupCallback($event)" [hasPaid]="hasPaid" (click)="trySignup()"></app-signup>
+
+<!-- test this by going into the "swag" module in the backend and adding swag to your race -->
+<app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 <div class="row">
   <div class="column-about1">
    <div class="container" style="text-align: left;" id="raceView">
@@ -6,50 +53,25 @@
        <mat-card-header>
          <i class="material-icons" style="color:#2C00A5;" type="button" routerLink='/races'>keyboard_backspace</i>
 
+
             <div *ngIf="aboutData.race_type == 1">
+              <i class="material-icons" style="color:#BC164D;">directions_run</i> 
+            </div>
+            <div *ngIf="aboutData.race_type == 2">
+              <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
+            </div>
+            <div *ngIf="aboutData.race_type == 3">
+              <i class="material-icons" style="color:#BC164D;">directions_run</i> <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
+            </div>
+
                <mat-card-title>{{aboutData.name}}
                <i class="material-icons" style="color:#BC164D;">directions_run</i>            
-               <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" style="color:white;
-                box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
-                background: green;
-                border-radius: 4px;
-                font-weight: normal;
-                text-transform: uppercase;
-                transition: all 0.2s ease-in-out;
-                width:90px;height:60px;" [aboutData]="aboutData" [race_id]="raceID" [hasStarted]="hasStarted" (signupCallback)="signupCallback($event)" [hasPaid]="hasPaid" (click)="trySignup()"></app-signup>
+               <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" [aboutData]="aboutData" [race_id]="raceID" [hasStarted]="hasStarted" (signupCallback)="signupCallback($event)" [hasPaid]="hasPaid" (click)="trySignup()"></app-signup>
              </mat-card-title>
 
-             </div>
-             <div *ngIf="aboutData.race_type == 2">
-               <mat-card-title>{{aboutData.name}}
-                   <i class="material-icons" style="color:#BC164D;">directions_bike</i>
-                   <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" style="color:white;
-                box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
-                background: green;
-                border-radius: 4px;
-                font-weight: normal;
-                text-transform: uppercase;
-                transition: all 0.2s ease-in-out;
-                width:90px;height:60px;" [aboutData]="aboutData" [race_id]="raceID" [hasStarted]="hasStarted" (signupCallback)="signupCallback($event)" [hasPaid]="hasPaid" (click)="trySignup()"></app-signup>
-                 </mat-card-title>
-
-           </div>
-           <div *ngIf="aboutData.race_type == 3">
-               <mat-card-title>{{aboutData.name}}
-               <i class="material-icons" style="color:#BC164D;">directions_run</i><i class="material-icons" style="color:#BC164D;">directions_bike</i>
-               <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" style="color:white;
-                box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
-                background: green;
-                border-radius: 4px;
-                font-weight: normal;
-                text-transform: uppercase;
-                transition: all 0.2s ease-in-out;
-                width:90px;height:60px;" [aboutData]="aboutData" [race_id]="raceID" [hasStarted]="hasStarted" (signupCallback)="signupCallback($event)" [hasPaid]="hasPaid" (click)="trySignup()"></app-signup>
-             </mat-card-title>
-           </div>
 
 
-         <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+
        </mat-card-header>
        <mat-card-content>
          <i class="material-icons" style="color:#BC164D">map</i><span id="txt1">From <b>{{ aboutData.start_loc }}</b> to <b>{{aboutData.end_loc}}</b> <i style="color:#BC164D;">   {{ aboutData.distance }} {{ aboutData.distance_type }}</i></span>
@@ -62,7 +84,7 @@
 
             <mat-card class="example-card" style="border-top-right-radius:0px;border-bottom-right-radius:0px;" >
        <mat-card-header>
-         <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+        
        </mat-card-header>
        <mat-card-content>
          <app-map [raceID]="raceID" [displayUsers]="true"></app-map>
@@ -77,7 +99,7 @@
 
             <mat-card class="example-card" >
        <mat-card-header>
-         <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+       
        </mat-card-header>
        <mat-card-content>
         <div style="max-height: 480px;overflow: auto; border-top-left-radius:0px;border-bottom-left-radius:0px;">
@@ -92,7 +114,7 @@
         
     </mat-card-content>
       <mat-card-actions>
-        <!--<button mat-button (click)="joinRace()" *ngIf="this._authService.token">JOIN</button> -->
+    
         <button mat-button (click)="viewRace()" *ngIf="hasStarted">GO TO RACE</button>
         <button mat-button (click)="goToRaceDashboard()" *ngIf="isOwner || isModerator">GO TO DASHBOARD</button>
       </mat-card-actions>
@@ -108,7 +130,7 @@
        <mat-card class="example-card " style="min-height:650px;">
      <mat-card-header>
        <mat-card-title>About Race</mat-card-title>
-       <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
+     
 
      </mat-card-header>
      <mat-card-content >
@@ -242,13 +264,13 @@
  <div class="modal-dialog">
    <div class="modal-content">
 
-     <!-- Modal Header -->
+    
      <div class="modal-header">
        <h4 class="modal-title">Please Register as a Tucan User First</h4>
        <button type="button" class="close" (click)="hideModal('#registerModal')">&times;</button>
      </div>
 
-     <!-- Modal body -->
+   
      <div class="modal-body">
        <app-register (registerAlert)="confirmRegistration($event)"></app-register>
      </div>
@@ -260,7 +282,7 @@
 
 
 
-  <br>
+  <br> -->
 
 
 

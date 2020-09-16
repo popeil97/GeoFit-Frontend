@@ -1,73 +1,68 @@
   <div *ngIf="!showEdit">
-        {{userData.first_name}} {{userData.last_name}}
-        <img style="width:150px;height:150px;" src="{{userData.profile_url}}" class="img-responsive" alt="">   
-        Location: {{ userData.location }}
-        <br>
-        Description: {{ userData.description }}
 
-          <div  *ngIf="this._authService.isLoggedIn()">
-            <div *ngIf="userData.is_me">
-                <b>Strava Authentication</b>
-                <app-stravauth></app-stravauth>
-            </div>
-            <div *ngIf="userData.is_me">
-              <button mat-button (click)="toggleEditView()">EDIT</button>
-              <button mat-button (click)="logout()">Log out</button>
-            </div>
-              <app-user-follow *ngIf="!userData.is_me" [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
-          </div>
+    <!-- user profile info -->
+    <h2>About User</h2>
+    <h3>Name:</h3>
+    <p>{{userData.first_name}} {{userData.last_name}}</p>
+    <h3>Pic:</h3>
+    <img style="width:150px;height:150px;" src="{{userData.profile_url}}" class="img-responsive" alt=""> 
+    <h3>Location:</h3>
+    <p>{{ userData.location }}</p>  
+    <h3>About:</h3>
+    <p>{{ userData.description }}</p>  
+     
+    <div  *ngIf="this._authService.isLoggedIn()">
+      <div *ngIf="userData.is_me">
+          <h3>Strava Authentication</h3>
+          <app-stravauth></app-stravauth>
+          <a class="btn" (click)="toggleEditView()">EDIT</a>
+          <a class="btn" (click)="logout()">Log out</a>
+      </div>
+    </div>
+       <div *ngIf="!userData.is_me">
+          <app-user-follow [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
+       </div>
 
-          {{userData.first_name}}'s Stats
-             <app-user-stats [userID]="userData.user_id"></app-user-stats>
-  </div>
+    <h2>{{userData.first_name}}'s Stats</h2>
+    <app-user-stats [userID]="userData.user_id"></app-user-stats>
+
 
   <div id="feedContent" *ngIf="!showEdit">
-      {{userData.first_name}}'s Feed
+    <h2 > {{userData.first_name}}'s Feed</h2>
       <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
   </div>
 
-
- <div *ngIf="showEdit">
-        <app-profile-form  [userData]="userData" (formUpdated)="profileUpdated($event)"></app-profile-form>
-</div>
-
-  <div *ngFor="let race of userRaces" class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding-bottom: 5px;" >
-
-  <div *ngIf="userRaces.length>0 &&this._authService.isLoggedIn()">  
-    <h3 >My Races</h3>
-    <mat-card class="example-card roboto-black" >
-      <mat-card-header>
-           <div *ngIf="race.race_type == 1">
-              <mat-card-title>{{race.name}}
-              <i class="material-icons" style="color:#BC164D;vertical-align: bottom;">directions_run</i>
-            </mat-card-title>
-
-            </div>
-            <div *ngIf="race.race_type == 2">
-              <mat-card-title>{{race.name}}
-                  <i class="material-icons" style="color:#BC164D;vertical-align: bottom;">directions_bike</i>
-                </mat-card-title>
-          </div>
-
-          <div *ngIf="race.race_type == 3">
-              <mat-card-title>{{race.name}}
-              <i class="material-icons" style="color:#BC164D;vertical-align: bottom;">directions_run</i><i class="material-icons" style="color:#BC164D;">directions_bike</i>
-            </mat-card-title>
-          </div>
-
-        <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-      </mat-card-header>
+  <div *ngFor="let race of userRaces">
+    <div *ngIf="userRaces.length>0 &&this._authService.isLoggedIn()">  
+      <h2 >My Races</h2>
+      <h3 >Race Type:</h3>
+      <div *ngIf="race.race_type == 1">
+        <i class="material-icons" style="color:#BC164D;">directions_run</i> 
+      </div>
+      <div *ngIf="race.race_type == 2">
+        <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
+      </div>
+      <div *ngIf="race.race_type == 3">
+        <i class="material-icons" style="color:#BC164D;">directions_run</i> <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
+      </div>
+      <h3 >Race img:</h3>
       <img mat-card-image style="width: 255px;" src="{{race.race_image}}" alt="Race">
-      <mat-card-content>
-        <i class="material-icons" style="color:#BC164D;vertical-align: bottom;">map</i><span id="txt1">From <b>{{ race.start_loc }}</b> to <b>{{race.end_loc}}</b> <i style="color:#2C007E;">   {{ race.distance }} {{ race.distance_type }}</i></span>
-        <br><br>
-       <i class="material-icons" style="color:#BC164D; vertical-align: bottom;">date_range</i><span id="txt1">From <b>{{ race.start_date }}</b> to <b>{{ race.end_date }}</b></span>   
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button (click)="viewRace(race)">GO TO RACE</button>
-        <button mat-button (click)="viewAbout(race)">ABOUT</button>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+      <h3>Start Location:</h3>
+      <p>{{race.start_loc}}</p>
+      <h3>End Location:</h3>
+      <p>{{race.end_loc}}</p>
+      <h3>Start Date:</h3>
+      <p>{{race.start_date}}</p>
+      <h3>End Date:</h3>
+      <p>{{race.end_date}}</p>
+      <h3>Distance:</h3>
+      <p>{{race.distance}}</p>
+      <a class="btn"(click)="viewRace(race)">GO TO RACE</a>
+      <a class="btn" (click)="viewAbout(race)">ABOUT</a>
+    </div>
 </div>
 
+
+<div *ngIf="showEdit">
+  <app-profile-form  [userData]="userData" (formUpdated)="profileUpdated($event)"></app-profile-form>
+</div>

@@ -3,9 +3,10 @@
 
 <div>
 <app-loader [isActive]="loading"></app-loader>
+<!--
 <div *ngIf="this._authService.isLoggedIn() && this.userRegistered">
 <app-race-day *ngIf="userStat.total_distance==0" [userData]="userData"></app-race-day>
-</div>
+</div> -->
 <mat-sidenav-container hasBackdrop="false">
 
   <mat-sidenav  md-disable-backdrop='true' #menu mode="over"  opened="true"> <!--opened="true"-->

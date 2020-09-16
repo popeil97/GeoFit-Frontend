@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RaceService } from '../race.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import * as _ from 'lodash';
 import { AuthService } from '../auth.service';
 import { UserProfileService } from '../userprofile.service';
+import { SignupComponent } from '../signup/signup.component';
+
 
 @Component({
   selector: 'app-races',
@@ -20,6 +22,7 @@ import { UserProfileService } from '../userprofile.service';
 })
 
 export class RacesComponent implements OnInit {
+   @ViewChild(SignupComponent) signupChild: SignupComponent;
   userData: UserData;
   public races:any[];
   public userRaces:any[];
@@ -95,6 +98,13 @@ export class RacesComponent implements OnInit {
     }
   }
 
+  trySignup(): void {
+    if(!this._authService.isLoggedIn()) {
+      this.signupChild.closeDialog();
+     // this.router.navigate(['/register',{params:JSON.stringify({redirectParams: {name:this.raceName,id:this.raceID,popup:true}, redirectUrl:'/about'})}]);
+    }
+  }
+  
   viewRace(race:any) {
     console.log('SELECTED RACE:',race);
 

@@ -25,16 +25,29 @@
             <p>{{race.start_loc}}</p>
             <h3>End Location:</h3>
             <p>{{race.end_loc}}</p>
+            <h3>Start Date:</h3>
+            <p>{{race.start_date}}</p>
+            <h3>End Date:</h3>
+            <p>{{race.end_date}}</p>
             <h3>Distance:</h3>
             <p>{{race.distance}}</p>
+
           </div>
         </div>
         <div class='TucanRaceItemButtons'>
           <div class='TucanRaceItemBasicButtons'>
-            <p>Hello</p>
+            <a class="btn" (click)="viewRace(race)">
+              View Race Map
+            </a>
+             <!-- this is just temporary for now, have to come back in and fix the inputs -->
+            <app-signup [price]="0.01" [hasTags]=false [race_id]="2" (click)="trySignup()"></app-signup>
+
+             <a class="btn" (click)="viewAbout(race)">
+              View Race Details
+            </a>
           </div>
           <div class='TucanRaceItemSpecificButtons'>
-            <p>there.</p>
+            <p>Good morning Ryan</p>
           </div>
         </div>
       </div>
