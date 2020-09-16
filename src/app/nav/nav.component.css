@@ -26,10 +26,20 @@
 .TucanNavigationToggler {
   display:none;
 }
+.TucanNavigationContents {
+  width:100%;
+}
 .TucanNavigationBlackTransparent {
   display:none;
 }
-.TucanNavigationContents {
+.TucanNavigationButtons {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.TucanNavigationButtonSegment {
   display:flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -133,7 +143,7 @@ a.navbar-brand {
   .TucanNavigationToggler {
     display:block;
   }
-  .TucanNavigationButtons {
+  .TucanNavigationContents {
     position:fixed;
     left:0;
     top:0;
@@ -141,7 +151,7 @@ a.navbar-brand {
     height:100vh;
     overflow:hidden;
   }
-  .TucanNavigationButtons.open {
+  .TucanNavigationContents.open {
     width:100vw;
   }
   .TucanNavigationBlackTransparent {
@@ -154,11 +164,10 @@ a.navbar-brand {
 
     background-color: rgba(0,0,0,0.5);
   }
-  .TucanNavigationContents {
+  .TucanNavigationButtons {
     position:relative;
     z-index: 2;
 
-    display:block;
     width:auto;
     max-width: 60%;
     height:100%;
@@ -168,6 +177,11 @@ a.navbar-brand {
 
     background-color: white;
 
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+  }
+  .TucanNavigationButtonSegment {
     flex-direction: column;
     align-items: stretch;
   }
