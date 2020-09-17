@@ -74,10 +74,11 @@ export class RegisterDialogContent {
       this.registerForm = this.formBuilder.group({
           first_name: ['', Validators.required],
           last_name: ['', Validators.required],
-          date_of_birth: ['', Validators.required],
+          month_of_birth: ['', Validators.required],
+          day_of_birth: ['', Validators.required],
+          year_of_birth: ['', Validators.required],
           gender: ['', Validators.required],
           email: ['', [Validators.required, Validators.email]], //Validators.pattern("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$")
-          terms_of_service: [false, [Validators.requiredTrue]],
           password: ['', [Validators.required, Validators.minLength(6)]],
           confirmPassword: ['', Validators.required]
         }, {
@@ -92,7 +93,7 @@ export class RegisterDialogContent {
 
     onSubmit() {
         this.submitted = true;
-        this.acceptedTerms = this.registerForm.value.terms_of_service;
+        this.acceptedTerms = true;
         console.log('REEE',this.acceptedTerms);
         // stop here if form is invalid
         if (this.registerForm.invalid) {
@@ -100,9 +101,9 @@ export class RegisterDialogContent {
         }
 
         this.loading = true;
-
+        console.log("BIRTH. " ,this.registerForm.value.month_of_birth, this.registerForm.value.day_of_birth,this.registerForm.value.year_of_birth);
         //Convert date field to Django-compatible format (YYYY-MM-DD)
-        const momentDate = new Date(this.registerForm.value.date_of_birth);
+        const momentDate = new Date(this.registerForm.value.year_of_birth,this.registerForm.value.month_of_birth-1,this.registerForm.value.day_of_birth);
         const formattedDate = moment(momentDate).format("YYYY-MM-DD");
         this.registerForm.value.date_of_birth = formattedDate;
 

@@ -95,6 +95,7 @@ import { AboutTucanComponent } from './about-tucan/about-tucan.component';
 import { FaqPageComponent } from './faq-page/faq-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { DialogSkeletonComponent,DialogSkeletonDialogContent } from './dialog-skeleton/dialog-skeleton.component';
+import { WhyInfoComponent,WhyInfoDialogContent} from './why-info/why-info.component';
 
 
 @NgModule({
@@ -172,7 +173,9 @@ import { DialogSkeletonComponent,DialogSkeletonDialogContent } from './dialog-sk
     FaqPageComponent,
     ContactPageComponent,
     DialogSkeletonComponent,
-    DialogSkeletonDialogContent
+    DialogSkeletonDialogContent,
+    WhyInfoComponent,
+    WhyInfoDialogContent
       ],
   imports: [
     BrowserModule,
@@ -214,7 +217,8 @@ import { DialogSkeletonComponent,DialogSkeletonDialogContent } from './dialog-sk
                   StoryDeleteDialogComponent,
                   LoginDialogContent,
                   RegisterDialogContent,
-                  DialogSkeletonDialogContent
+                  DialogSkeletonDialogContent,
+                  WhyInfoDialogContent
                   ] 
 })
 export class AppModule { 

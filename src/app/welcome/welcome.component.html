@@ -1,8 +1,22 @@
-<p>How does this all work?</p>
-diagram
-<p>Integrate Strava</p>
-<app-stravauth></app-stravauth>
-<p>Read our FAQs</p>
-<a class="btn btn-outline" routerLink='/faqs'>FAQs</a>
-<p>_______________</p>
-<a class="btn btn-outline"  [routerLink]="['/profile', {username: this._authService.username}]">Go to my profile</a>
+<div class='PageContainer'>
+  <div class='PageSegment PageHeaderSegment'>
+    <img src= "../../assets/landing/tucan_main.png" class="TucanLogo" />
+    <h1 class="PageHeaderSegmentTitle">Welcome to Tucan</h1>
+  </div>
+  <div class='PageSegment'>
+  	<h3>How does this all work?</h3>
+	diagram
+
+  </div>
+  <div class='PageSegment'>
+  	<div  *ngIf="this._authService.isLoggedIn()">
+	<h3>Integrate Strava</h3>
+		<app-stravauth></app-stravauth>
+	</div>
+    <h3>Read our FAQs</h3>
+	<a class="btn btn-outline" routerLink='/faqs'>FAQs</a>
+  </div>
+
+  <div class='PageSegment'>
+	<a class="btn btn-outline"  [routerLink]="['/profile', {username: this._authService.username}]">Go to my profile</a>
+</div>
