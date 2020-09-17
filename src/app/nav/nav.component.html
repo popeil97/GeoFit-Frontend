@@ -59,12 +59,12 @@
           </div>
 
           <div *ngIf="!this._authService.isLoggedIn()">
-            <app-login></app-login>
+            <app-login (click)="NavItemClick()"></app-login>
            <!-- <app-dialog-skeleton type=1 (click)="NavItemClick()"></app-dialog-skeleton> <!--login-->
           </div>
           
           <div *ngIf="!this._authService.isLoggedIn()">
-            <app-register></app-register>
+            <app-register (click)="NavItemClick()"></app-register>
           <!--  <app-dialog-skeleton type=2 (click)="NavItemClick()"></app-dialog-skeleton> <!--register-->
           </div>
         </div>
