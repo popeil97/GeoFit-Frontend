@@ -17,6 +17,8 @@ types:
 })
 export class DialogSkeletonComponent implements OnInit {
   @Input() type;
+  items = [];
+
   constructor(public dialog: MatDialog, private _authService: AuthService,private route:ActivatedRoute, 
     private router:Router) { }
 
@@ -29,6 +31,7 @@ export class DialogSkeletonComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogSkeletonDialogContent,{disableClose: false, data:{type: this.type} as MatDialogConfig});
 
   }
+
 
 }
 

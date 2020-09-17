@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, Output, EventEmitter, Input } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -13,29 +14,50 @@ import { UserProfileService } from '../userprofile.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
-    registerForm: FormGroup;
-    loading = false;
-    submitted = false;
-    errors: any = [];
+export class RegisterComponent {
+    constructor(public dialog: MatDialog,) {
 
-    redirectParams: any = null;
-    redirectUrl:string;
-    genderOptions:any[];
+    }
 
-    acceptedTerms:Boolean = true;
+    openDialog() {
+      const dialogRef = this.dialog.open(RegisterDialogContent,{disableClose: false, data:{} as MatDialogConfig});
+    }
 
-    constructor(
+
+}
+
+@Component({
+  selector: 'app-register-dialog-content',
+  templateUrl: './register-dialog-content.html',
+})
+
+export class RegisterDialogContent {
+
+  public type: any
+  registerForm: FormGroup;
+  loading = false;
+  submitted = false;
+  errors: any = [];
+
+  redirectParams: any = null;
+  redirectUrl:string;
+  genderOptions:any[];
+
+  acceptedTerms:Boolean = true;
+
+   constructor(
         private formBuilder: FormBuilder,
         private router: Router,
         private route:ActivatedRoute,
         private _authService: AuthService,
         private _userProfileService:UserProfileService,
-    ) {
+        public dialogRef: MatDialogRef<RegisterDialogContent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
       this.genderOptions = ['Male', 'Female', 'Non-binary'];
     }
 
-    ngOnInit() {
+
+      ngOnInit() {
 
       this.route.paramMap.subscribe(params => {
         console.log('PARAMS:',params);
@@ -103,8 +125,9 @@ export class RegisterComponent implements OnInit {
                   this.router.navigate([this.redirectUrl,this.redirectParams]);
                 }
                 else {
-                  this._userProfileService.goToUserProfile(data['username']);
+                  this.router.navigate(['/welcome']);
                 }
+                this.closeDialog();
               },
             err => {
               this.loading = false;
@@ -121,4 +144,8 @@ export class RegisterComponent implements OnInit {
           });
 
     }
+    closeDialog() {
+    this.dialogRef.close(RegisterDialogContent);
+  }
+
 }

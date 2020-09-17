@@ -1,0 +1,86 @@
+<section class="page-section">
+<div class="container">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <input type="text" formControlName="first_name" placeholder="First Name *" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" />
+            <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+                <div *ngIf="f.first_name.errors.required">First Name is required</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="text" formControlName="last_name" placeholder="Last Name *" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" />
+            <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+                <div *ngIf="f.last_name.errors.required">Last Name is required</div>
+            </div>
+        </div>
+
+        <div class="form-group" style="border-color:#ced4da;">
+            <input matInput [matDatepicker]="picker" formControlName="date_of_birth" placeholder="Birthday (MM/DD/YYYY) *" [ngClass]="{ 'is-invalid': submitted && f.date_of_birth.errors }">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <div *ngIf="submitted && f.date_of_birth.errors" class="invalid-feedback">
+                <div *ngIf="f.date_of_birth.errors.required">Please enter your date of birth (MM/DD/YYYY).</div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <select class="form-control" formControlName="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
+                <option value="" label=" -Gender *- " selected ></option>
+                <option *ngFor="let typeOption of genderOptions" [value]="typeOption">
+                {{ typeOption }}
+                </option>
+            </select>
+            <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                <div *ngIf="f.gender.errors.required">Please select a gender.</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input type="text" formControlName="email" class="form-control" placeholder="Email Address *" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email address is required</div>
+                <div *ngIf="f.email.errors.email" class="text-danger">Please provide a valid email address</div>
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="password" formControlName="password" class="form-control" placeholder="Password *" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+        </div>
+
+         <div class="form-group">
+            <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password *" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input formControlName="terms_of_service" type="checkbox" name="terms" [ngClass]="{ 'is-invalid': submitted && f.terms_of_service.errors }" />
+            
+            I have read the <app-terms-of-service></app-terms-of-service>
+            <div *ngIf="!acceptedTerms">
+                <p style="color: red;">You must acknowledge and agree to the terms of service provided</p>
+            </div>
+        </div>
+
+        <div class="container">
+            <span *ngFor="let error of errors">{{ error }}<br /></span>
+        </div>
+
+        <div class="form-group">
+            <!--<span class="material-icons" style="background-color:#2C007E;">keyboard_backspace</span> -->
+            <button [disabled]="loading" class="btn btn-primary" style="background-color:#2C007E; border:#2C007E;">Sign Up</button>
+            <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <!-- <a routerLink="/login" class="btn btn-link text-white" style="text-align:right; float: right;">Cancel</a> -->
+        </div>
+
+        
+
+    </form>
+</div>
+</section>

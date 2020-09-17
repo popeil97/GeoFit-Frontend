@@ -54,8 +54,8 @@ import { CommentsFormComponent } from './comments-form/comments-form.component';
 import { RaceSettingsComponent } from './race-settings/race-settings.component';
 import { StoryFormComponent } from './story-form/story-form.component';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent, LoginDialogContent } from './login/login.component';
+import { RegisterComponent, RegisterDialogContent} from './register/register.component';
 import { PaypalComponent } from './paypal/paypal.component';
 import { SignupComponent } from './signup/signup.component';
 import { SignupDialogContent } from './signup/signup.component';
@@ -130,7 +130,9 @@ import { DialogSkeletonComponent,DialogSkeletonDialogContent } from './dialog-sk
     StoryFormComponent,
     ProfileFormComponent,
     LoginComponent,
+    LoginDialogContent,
     RegisterComponent,
+    RegisterDialogContent,
     PaypalComponent,
     SignupComponent,
     SignupDialogContent,
@@ -210,6 +212,8 @@ import { DialogSkeletonComponent,DialogSkeletonDialogContent } from './dialog-sk
                   StoryDialogComponent,
                   ReportFormComponent,
                   StoryDeleteDialogComponent,
+                  LoginDialogContent,
+                  RegisterDialogContent,
                   DialogSkeletonDialogContent
                   ] 
 })

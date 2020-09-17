@@ -14,13 +14,13 @@
 
     <!-- icon to indicate race type : 1-run;2-bike;3-all -->
     <div *ngIf="aboutData.race_type == 1">
-      <i class="material-icons" style="color:#BC164D;">directions_run</i> 
+      <i class="material-icons">directions_run</i> 
     </div>
     <div *ngIf="aboutData.race_type == 2">
-      <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
+      <i class="material-icons">directions_bike</i> 
     </div>
     <div *ngIf="aboutData.race_type == 3">
-      <i class="material-icons" style="color:#BC164D;">directions_run</i> <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
+      <i class="material-icons">directions_run</i> <i class="material-icons" >directions_bike</i> 
     </div>
   </div>
   <div class='PageSegment'>
@@ -60,7 +60,11 @@
     <!-- test this by going into the "swag" module in the backend and adding swag to your race -->
     <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag>
   </div>
-  <!--<app-map [raceID]="raceID" [displayUsers]="true"></app-map>-->
+
+<div class='PageSegment'>
+  <br><br><br><br><br><br><br><br><br><br>
+<app-map [raceID]="raceID" [displayUsers]="false"></app-map>
+</div>
 
 
 
