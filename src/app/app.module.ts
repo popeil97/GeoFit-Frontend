@@ -90,6 +90,7 @@ import { ReportFormComponent } from './report-form/report-form.component';
 import { StoryDeleteDialogComponent } from './story-delete-dialog/story-delete-dialog.component';
 import { RaceDashboardComponent } from './race-dashboard/race-dashboard.component';
 import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.component';
+import { MapRouteComponent } from './map-route/map-route.component';
 
 
 @NgModule({
@@ -160,6 +161,7 @@ import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.
     StoryDeleteDialogComponent,
     RaceDashboardComponent,
     RaceStoryManageComponent,
+    MapRouteComponent,
       ],
   imports: [
     BrowserModule,

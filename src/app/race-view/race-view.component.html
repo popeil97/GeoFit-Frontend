@@ -1,7 +1,5 @@
-<!-- <app-map></app-map> -->
-
-
 <div>
+  
 <app-loader [isActive]="loading"></app-loader>
 <div *ngIf="this._authService.isLoggedIn() && this.userRegistered">
 <app-race-day *ngIf="userStat.total_distance==0" [userData]="userData"></app-race-day>
@@ -31,6 +29,15 @@
         </div>
       </div>
      </div>
+
+     <div *ngIf="this.childRaceData.length > 1">
+      <div class="container">
+        <label>Select Route</label>
+        <select [(ngModel)]="selectedRaceID">
+            <option *ngFor="let x of this.childRaceData" [value]="x.id" [selected]="selectedRaceID == x.id">{{x.name}}</option>
+        </select>
+      </div>
+    </div>
 
 
     <mat-tab-group class='tab-subtitled'>
@@ -193,7 +200,7 @@
 
    
   <mat-sidenav-content id="testCanvas">
-    <app-map [raceID]="raceID" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
+    <app-map [raceIDs]="raceIDs" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
     <div  *ngIf="changeArrow">
     <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 0px;">
         <br>
