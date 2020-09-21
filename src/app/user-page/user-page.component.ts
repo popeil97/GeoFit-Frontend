@@ -4,6 +4,7 @@ import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { UserProfileService } from '../userprofile.service';
 import { AuthService } from '../auth.service';
 import { RaceService } from '../race.service';
+import { UsersService } from '../users.service';
 import * as _ from 'lodash';
 
 declare var $: any;
@@ -22,6 +23,7 @@ export class UserPageComponent implements OnInit {
   constructor(private route:ActivatedRoute, 
               private router:Router,
               private _userProfileService:UserProfileService,
+              private _userService:UsersService,
               public _authService: AuthService,
               private raceService: RaceService,) { 
   }
@@ -49,6 +51,11 @@ export class UserPageComponent implements OnInit {
         console.log("USER RACES", this.userRaces);
       }
     )
+
+    this._userService.getFollowersAndFollowed().then((resp:FollowersResp) => {
+      console.log('Followers and followed:',resp);
+     // this.followerOptions = resp.follwers_and_followed;
+    });
 
 
   }
@@ -130,3 +137,6 @@ interface UserData {
   is_me: boolean;
 }
 
+interface FollowersResp {
+  followers_and_followed:any[];
+}
