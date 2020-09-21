@@ -85,6 +85,8 @@ import { SmilesComponent } from &#x27;./smiles/smiles.component&#x27;;
 import { LoginComponent } from &#x27;./login/login.component&#x27;;
 import { PasswordRequestComponent } from &#x27;./password-request/password-request.component&#x27;;
 import { PasswordChangeComponent } from &#x27;./password-change/password-change.component&#x27;;
+import { TagSelectComponent } from &#x27;./tag-select/tag-select.component&#x27;;
+import { RaceDashboardComponent } from &#x27;./race-dashboard/race-dashboard.component&#x27;;
 
 const routes: Routes &#x3D; [
   {path: &#x27;race&#x27;, component:RaceViewComponent},
@@ -92,14 +94,16 @@ const routes: Routes &#x3D; [
   {path: &#x27;&#x27;, component:UsersComponent},
   {path: &#x27;create&#x27;, component:RaceCreateComponent},
   {path: &#x27;profile&#x27;,component:UserPageComponent},
-  {path:&#x27;about&#x27;,component:RaceAboutComponent},
-  {path:&#x27;teams&#x27;,component:TeamFormComponent},
+  {path: &#x27;about&#x27;,component:RaceAboutComponent},
+  {path: &#x27;teams&#x27;,component:TeamFormComponent},
   {path: &#x27;register&#x27;, component:RegisterComponent},
   {path: &#x27;shipping&#x27;, component:ShippingAddressComponent },
   {path: &#x27;smiles&#x27;, component:SmilesComponent },
   {path: &#x27;login&#x27;, component:LoginComponent },
   {path: &#x27;password-request&#x27;, component:PasswordRequestComponent},
   {path: &#x27;password-change&#x27;, component:PasswordChangeComponent},
+  {path: &#x27;tag&#x27;,component:TagSelectComponent},
+  {path: &#x27;dashboard&#x27;, component:RaceDashboardComponent },
 ];
 
 @NgModule({

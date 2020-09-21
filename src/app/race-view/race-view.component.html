@@ -1,7 +1,5 @@
-<!-- <app-map></app-map> -->
-
-
 <div>
+  
 <app-loader [isActive]="loading"></app-loader>
 <div *ngIf="this._authService.isLoggedIn() && this.userRegistered">
 <app-race-day *ngIf="userStat.total_distance==0" [userData]="userData"></app-race-day>
@@ -21,7 +19,7 @@
       <div class="column-split2">
 
          <app-user-progress *ngIf="this.progress" [progress]="progress"></app-user-progress>
-         <div class="row" *ngIf="this.raceID==1">
+         <div class="row" *ngIf="this.raceID==0">
           <div class="column">
             <a class="btn btn-mobile2" style="background-color:#2C007E;color:#FFFFFF;" (click)="USA()">Jump to USA</a>
           </div>
@@ -31,6 +29,15 @@
         </div>
       </div>
      </div>
+
+     <div *ngIf="this.childRaceData.length > 1">
+      <div class="container">
+        <label>Select Route</label>
+        <select [(ngModel)]="selectedRaceID">
+            <option *ngFor="let x of this.childRaceData" [value]="x.id" [selected]="selectedRaceID == x.id">{{x.name}}</option>
+        </select>
+      </div>
+    </div>
 
 
     <mat-tab-group class='tab-subtitled'>
@@ -89,7 +96,7 @@
               <div class="tabs1">Manual</div>
             </ng-template>
              <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Add Activity</b></h3></b>
-            <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
+            <app-manual-entry [race_type]="raceType" (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
           </mat-tab>
         </mat-tab-group>
       </div>
@@ -193,7 +200,7 @@
 
    
   <mat-sidenav-content id="testCanvas">
-    <app-map [raceID]="raceID" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
+    <app-map [raceIDs]="raceIDs" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
     <div  *ngIf="changeArrow">
     <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 0px;">
         <br>

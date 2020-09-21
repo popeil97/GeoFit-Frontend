@@ -4,9 +4,12 @@
   }
 
     .column0{
-    width: 70%;
+    width: 60%;
   }
-   .column1{
+  .column1{
+    width: 10%;
+  }
+   .column2{
     width: 28%;
   }
   .row {

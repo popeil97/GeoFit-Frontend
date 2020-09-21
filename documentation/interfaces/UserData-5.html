@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/race-view/race-view.component.ts</code>
+            <code>src/app/race-day/race-day.component.ts</code>
         </p>
 
 
@@ -414,326 +414,99 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
-import * as bootstrap from &quot;bootstrap&quot;;
-import { RaceService } from &#x27;../race.service&#x27;;
-import { StoryService } from &#x27;../story.service&#x27;
-import { Router, ActivatedRoute, ParamMap } from &#x27;@angular/router&#x27;;
-import { Progress } from &#x27;../user-progress/user-progress.component&#x27;;
-import { ActivitiesService } from &#x27;../activities.service&#x27;;
-import { LeaderboardItem } from &#x27;../leaderboard/leaderboard.component&#x27;;
-import { MapComponent } from &#x27;../map/map.component&#x27;;
-import { FeedComponent } from &#x27;../feed/feed.component&#x27;;
-import { StoryModalComponent } from &#x27;../story-modal/story-modal.component&#x27;;
-import { RaceSettings } from &#x27;../race-about/race-about.component&#x27;;
-import { TeamFormComponent } from &#x27;../team-form/team-form.component&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Inject, ViewChild, Output, EventEmitter, Input } from &#x27;@angular/core&#x27;;
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from &#x27;@angular/material/dialog&#x27;;
+import { MatStepper } from &#x27;@angular/material/stepper&#x27;;
+import { FormControl,FormGroup, Validators } from &#x27;@angular/forms&#x27;;
 import { AuthService } from &#x27;../auth.service&#x27;;
+import { Router, ActivatedRoute } from &#x27;@angular/router&#x27;;
 import { UserProfileService } from &#x27;../userprofile.service&#x27;;
 
-declare var $: any
+@Component({
+  selector: &#x27;app-race-day&#x27;,
+  templateUrl: &#x27;./race-day.component.html&#x27;,
+  styleUrls: [&#x27;./race-day.component.css&#x27;]
+})
+export class RaceDayComponent implements OnInit {
+  username;
+  @Input() userData:any;
+  
+
+  constructor(public dialog: MatDialog, private _authService: AuthService,private route:ActivatedRoute, 
+    private router:Router, private _userProfileService:UserProfileService) { }
+
+  ngOnInit() {
+    
+    this.route.paramMap.subscribe(params &#x3D;&gt; {
+      this.username &#x3D; params[&#x27;params&#x27;][&#x27;username&#x27;];
+      this.getUserData();
+      console.log(&quot;USER&quot;,this.username);
+      console.log(&quot;USERDATA race-day&quot;, this.userData);
+    });
+    this.openDialog();
+  }
+  getUserData(){
+    //Call a to-be-created service which gets user data, feed, statistics etc
+
+      if (this.userData.location &#x3D;&#x3D;&quot;&quot;)
+      {
+        this.userData.location &#x3D; &quot;N/A&quot;;
+      }
+
+      if (this.userData.description &#x3D;&#x3D;&quot;&quot;)
+      {
+        this.userData.description &#x3D; &quot;N/A&quot;;
+      }
+
+  }
+
+  profileUpdated($event) {
+    //Get new data
+    this.getUserData();
+  }
+  openDialog() {
+
+     const dialogConfig &#x3D; new MatDialogConfig();
+       dialogConfig.data &#x3D; {
+        userData: this.userData
+    };
+
+    this.dialog.open(RaceDayDialogContent, dialogConfig);
+  }
+
+}
 
 @Component({
-  selector: &#x27;app-race-view&#x27;,
-  templateUrl: &#x27;./race-view.component.html&#x27;,
-  styleUrls: [&#x27;./race-view.component.css&#x27;],
+  selector: &#x27;app-race-day-dialog-content&#x27;,
+  templateUrl: &#x27;./race-day-dialog-content.html&#x27;,
 })
-export class RaceViewComponent implements OnInit {
-  @ViewChild(MapComponent) mapChild: MapComponent;
-  @ViewChild(FeedComponent) feedChild: FeedComponent;
-  @ViewChild(StoryModalComponent) storyModal: StoryModalComponent;
 
-  public followers:any[];
-  public activities:any[];
-  public num_activities:any;
-  private raceName:string;
-  raceID:number;
-  private modalData:any;
+export class RaceDayDialogContent implements OnInit{
 
-  public progress:Progress &#x3D; {} as Progress;
-  public actsToImport:number[] &#x3D; [];
-  public loading:Boolean &#x3D; false;
-  public coords:any;
-  public leaderboard:LeaderboardItem[];
-  public teamLeaderboard:LeaderboardItem[]
-  public all_user_data:Array&lt;FeedObj&gt;;
-  public teams:any[];
-  public userRaceSettings:any;
-  public raceSettings:RaceSettings;
-  public routePins:any[];
-  public userData:UserData;
+  public profileUpdated:boolean;
+  public userData:any;
 
-  public showTeamForm:Boolean &#x3D; false;
-  public changeArrow:Boolean &#x3D; false;
-  public userStat:any &#x3D; {};
-  public followedIDs:number[];
-  public teamEditForm:TeamEditBody &#x3D; {
-    isEdit:false,
-    team_id:null
-  };
-  public isManualEntry:Boolean &#x3D; false;
+  constructor(public dialogRef: MatDialogRef&lt;RaceDayDialogContent&gt;,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
 
-  //Filters for activity feed
-  public storyFeedOnly: Boolean &#x3D; false;
-  public followerFeedOnly: Boolean &#x3D; false;
-
-  private storyImage:string;
-  private storyText:string;
-
-  constructor(private raceService:RaceService,
-                  private activitiesService:ActivitiesService,
-                  private route: ActivatedRoute,
-                  private _userProfileService: UserProfileService,
-                  private router:Router,
-                  private storyService: StoryService,
-                  public _authService: AuthService) {
-    this.modalData &#x3D; {};
   }
 
   ngOnInit() {
-    this.loading &#x3D; true;
-    this.route.paramMap.subscribe(params &#x3D;&gt; {
-      this.raceName &#x3D; params[&#x27;params&#x27;][&#x27;name&#x27;];
-      this.raceID &#x3D; params[&#x27;params&#x27;][&#x27;id&#x27;];
-    });
+        this.profileUpdated &#x3D; false;
+        this.userData &#x3D; this.data.userData;
+    }
 
-    this._userProfileService.getUserProfile(this._authService.username).then((data) &#x3D;&gt; {
-      this.userData &#x3D; data as UserData;
-    });
-
-    this.getRaceState();
-
-    this.followers &#x3D; [{
-      first_name:&#x27;Nathan&#x27;,
-      last_name:&#x27;Cunt&#x27;
-    },
-    {
-      first_name:&#x27;Katie&#x27;,
-      last_name:&#x27;DonaHOE&#x27;
-    }];
+    updateProfile($event) {
+    //Get new data
+    console.log(&quot;PROFILE UPDATED!!!!!!!!!!!!&quot;);
+    this.profileUpdated &#x3D; true;
 
   }
 
-  
-
-  configureLeaderboard(ranked:any[],unranked:any[]) {
     
-    console.log(&quot;RANKE BOARD:&quot;,unranked.concat(ranked));
-    return unranked.concat(ranked)
 
-  }
-
-  toggleNavButton(action?:string) {
-    this.changeArrow &#x3D; !this.changeArrow;
-   
-  }
-
-  toggleTeamForm(action?:string) {
-    this.showTeamForm &#x3D; !this.showTeamForm;
-    console.log(&#x27;ACTION IS:&#x27;,action);
-    if(action &#x3D;&#x3D; &#x27;clear&#x27;) {
-      this.teamEditForm.isEdit &#x3D; false;
-    }
-    
-  }
-  
-  showModal(id:string): void {
-    console.log(id);
-    ($(id) as any).modal(&#x27;show&#x27;);
-  }
-
-  showStoryModal(id:string): void {
-    this.storyModal.showModal(id);
-  }
-
-  hideModal(id:string): void {
-    ($(id) as any).modal(&#x27;hide&#x27;);
-  }
-
-  goToTeamForm(): void {
-    this.router.navigate([&#x27;/teams&#x27;,{name:this.raceName,id:this.raceID}]);
-  }
-
-  editTeamForm(team_id:number): void {
-    this.teamEditForm &#x3D; {
-      team_id:team_id,
-      isEdit:true
-    } as TeamEditBody
-    console.log(&#x27;TEAM BODY FORM:&#x27;,this.teamEditForm);
-    this.toggleTeamForm();
-    // this.teamEditForm.isEdit &#x3D; false;
-  }
-
-  importActs(): void {
-    console.log(&#x27;GONNA IMPORT THIS SHIT:&#x27;,this.actsToImport);
-    this.loading &#x3D; true;
-    this.activitiesService.importActivities(this.actsToImport,this.raceID).then((res) &#x3D;&gt; {
-      console.log(res);
-      this.actsToImport &#x3D; [];
-      console.log(&#x27;BEFORE GETRACESTATE:&#x27;,this.actsToImport);
-      this.getRaceState();
-      console.log(&#x27;AFTER GETRACESTATE:&#x27;,this.actsToImport);
-    });
-    this.loading &#x3D; false;
-  }
-
-  addAct(act:any): void {
-    console.log(&#x27;IN ADD&#x27;);
-    let actID &#x3D; act.id;
-    let index &#x3D; this.actsToImport.indexOf(actID);
-    if(index &gt;&#x3D; 0) {
-      this.actsToImport.splice(index,1);
-    }
-    else {
-      this.actsToImport.push(actID);
-    }
-
-    console.log(this.actsToImport);
-  }
-
-  getRaceState(): void {
-    this.loading &#x3D; true;
-    this.raceService.getRace(this.raceID).subscribe(data &#x3D;&gt; {
-      this.showTeamForm&#x3D;false;
-      let raceData &#x3D; data as RaceData;
-      console.log(&#x27;RACE DATA:&#x27;,raceData);
-
-      this.progress &#x3D; raceData.progress;
-      this.activities &#x3D; raceData.activities;
-      this.num_activities &#x3D; this.activities.length;
-
-      this.coords &#x3D; raceData.coords;
-
-      this.leaderboard &#x3D; this.configureLeaderboard(raceData.unranked_leaderboard,raceData.ranked_leaderboard);
-      this.teamLeaderboard &#x3D; this.configureLeaderboard(raceData.unranked_team_leaderboard,raceData.ranked_team_leaderboard);
-
-      console.log(&#x27;TEAMS LEADERBOARD:&#x27;,this.teamLeaderboard);
-      
-      this.all_user_data &#x3D; raceData.users_data as Array&lt;FeedObj&gt;;
-      this.followedIDs &#x3D; raceData.followedIDs;
-
-      this.teams &#x3D; raceData.users_data.filter((user_data) &#x3D;&gt; {
-        if(user_data.isTeam) {
-          return user_data;
-        }
-      });
-
-      this.userRaceSettings &#x3D; raceData.settings;
-      this.raceSettings &#x3D; raceData.race_settings;
-      this.isManualEntry &#x3D; this.raceSettings.isManualEntry;
-      this.userStat &#x3D; raceData.user_stat;
-      this.routePins &#x3D; raceData.route_pins;
-
-      console.log(&#x27;TEAMS:&#x27;,this.teams);
-      console.log(&#x27;COORDS:&#x27;,this.coords);
-      console.log(&quot;ALL USER DATA&quot;, this.all_user_data);
-      console.log(&quot;LEADERBOARD ITEMS: &quot;, this.leaderboard);
-      console.log(&#x27;USER SETTINGS:&#x27;,this.userRaceSettings);
-      console.log(&quot;FOLLOWER IDS&quot;, this.followedIDs);
-      console.log(&quot;ROUTE PINS &quot;, this.routePins);
-      console.log(&quot;USER_STAT&quot;, this.userStat);
-      this.loading &#x3D; false;
-    });
-  }
-
-  USA(action?:string) {
-  console.log(&quot;USA&quot;);
-  this.mapChild.panToUSA();
-  }
-
-  Israel(action?:string) {
-  this.mapChild.panToIsrael();
-  }
-  uploadManualEntry(entry:any) {
-    this.activitiesService.uploadManualEntry(entry,this.raceID).then((resp) &#x3D;&gt; {
-      console.log(&#x27;RESP FROM MANUAL IMPORT:&#x27;,resp);
-      this.getRaceState();
-    });
-  }
-  panToUserMarker(user_id){
-    //Call map pan function
-    console.log(&quot;Clicked user id: &quot;, user_id);
-    this.mapChild.panToUserMarker(user_id);
-  }
-
-  clearUserPins(){
-    this.mapChild.clearUserPins();
-  }
-
-  showPinsByID(IDs){
-    //Pass null to show all pins
-    this.mapChild.showPinsByID(IDs, false);
-  }
-
-  createUserPins(){
-    //Pass null to show all pins
-    this.mapChild.createUserPins(false);
-    console.log(&quot;creating new user pins...&quot;)
-  }
-
-  createUserHeatPins(){
-    //Pass null to show all pins
-    this.mapChild.createUserPins(true);
-    console.log(&quot;Applying heat map...&quot;)
-  }
-
-  showAllPins(){
-    this.mapChild.showAllPins();
-    console.log(&quot;Showing all pins&quot;);
-  }
-
-  showPinsFromSettings(settings: PinSettings){
-    this.mapChild.showPinsFromSettings(settings);
-  }
 
 }
-
-interface RaceData {
-  progress:any;
-  activities:any;
-  coords:any;
-  leaderboard:any;
-  users_data:any;
-  settings:any;
-  race_settings:RaceSettings;
-  user_stat:any;
-  followedIDs:number[];
-  unranked_leaderboard:any[];
-  ranked_leaderboard:any[];
-  unranked_team_leaderboard:any[];
-  ranked_team_leaderboard:any[];
-  route_pins:any[];
-}
-
-interface FeedObj {
-  user_id: number;
-  display_name: string;
-  username: string;
-  profile_url:string
-  joined: boolean;
-  traveled: boolean;
-  story: boolean;
-  story_image:string;
-  story_text:string;
-  total_distance:number;
-  last_distance:number;
-  message: string;
-  created_ts:number;
-}
-
-export interface TeamEditBody {
-  team_id:number;
-  isEdit:Boolean;
-}
-
-interface PinSettings {
-  followerPinsOnly: boolean;
-  malePinsOn: boolean;
-  femalePinsOn: boolean;
-  allAgesOn: boolean;
-  minAge: number;
-  maxAge: number;
-}
-
 
 interface UserData {
   user_id:number;
@@ -747,6 +520,7 @@ interface UserData {
   distance_type: string;
   is_me: boolean;
 }
+
 </code></pre>
     </div>
 </div>

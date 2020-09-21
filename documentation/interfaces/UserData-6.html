@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/races/races.component.ts</code>
+            <code>src/app/race-view/race-view.component.ts</code>
         </p>
 
 
@@ -414,144 +414,328 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
-import { Router, ActivatedRoute, ParamMap } from &#x27;@angular/router&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ViewChild, ViewChildren, QueryList } from &#x27;@angular/core&#x27;;
+import * as bootstrap from &quot;bootstrap&quot;;
 import { RaceService } from &#x27;../race.service&#x27;;
-import {animate, state, style, transition, trigger} from &#x27;@angular/animations&#x27;;
-import * as _ from &#x27;lodash&#x27;;
+import { StoryService } from &#x27;../story.service&#x27;
+import { Router, ActivatedRoute, ParamMap } from &#x27;@angular/router&#x27;;
+import { Progress } from &#x27;../user-progress/user-progress.component&#x27;;
+import { ActivitiesService } from &#x27;../activities.service&#x27;;
+import { MapComponent } from &#x27;../map/map.component&#x27;;
+import { FeedComponent } from &#x27;../feed/feed.component&#x27;;
+import { StoryModalComponent } from &#x27;../story-modal/story-modal.component&#x27;;
+import { RaceSettings } from &#x27;../race-about/race-about.component&#x27;;
+import { TeamFormComponent } from &#x27;../team-form/team-form.component&#x27;;
 import { AuthService } from &#x27;../auth.service&#x27;;
 import { UserProfileService } from &#x27;../userprofile.service&#x27;;
+import { LeaderboardComponent } from &#x27;../leaderboard/leaderboard.component&#x27;;
+import * as confetti from &#x27;canvas-confetti&#x27;;
+
+declare var $: any;
+import * as _ from &#x27;lodash&#x27;;
+import { TagType, Tag } from &#x27;../tags.service&#x27;;
+
 
 @Component({
-  selector: &#x27;app-races&#x27;,
-  templateUrl: &#x27;./races.component.html&#x27;,
-  styleUrls: [&#x27;./races.component.css&#x27;],
-  animations: [
-    trigger(&#x27;detailExpand&#x27;, [
-      state(&#x27;collapsed&#x27;, style({height: &#x27;0px&#x27;, minHeight: &#x27;0&#x27;})),
-      state(&#x27;expanded&#x27;, style({height: &#x27;*&#x27;})),
-      transition(&#x27;expanded &lt;&#x3D;&gt; collapsed&#x27;, animate(&#x27;225ms cubic-bezier(0.4, 0.0, 0.2, 1)&#x27;)),
-    ]),
-  ],
+  selector: &#x27;app-race-view&#x27;,
+  templateUrl: &#x27;./race-view.component.html&#x27;,
+  styleUrls: [&#x27;./race-view.component.css&#x27;],
 })
+export class RaceViewComponent implements OnInit {
+  @ViewChild(MapComponent) mapChild: MapComponent;
+  @ViewChild(FeedComponent) feedChild: FeedComponent;
+  @ViewChild(StoryModalComponent) storyModal: StoryModalComponent;
+  @ViewChildren(LeaderboardComponent) leaderboardChildren: QueryList&lt;LeaderboardComponent&gt;;
 
-export class RacesComponent implements OnInit {
-  userData: UserData;
-  public races:any[];
-  public userRaces:any[];
-  public racesInvited:any[];
-  public racesData:any;
-  public isUserRaces:Boolean &#x3D; true;
-  public isInvitedRaces:Boolean;
-  public isPublicRaces:Boolean;
-  public joinedRacesIDs:number[];
+  public followers:any[];
+  public activities:any[];
+  public num_activities:any;
+  private raceName:string;
+  raceID:number;
+  private modalData:any;
 
+  public progress:Progress &#x3D; {} as Progress;
+  
   public loading:Boolean &#x3D; false;
+  //public coords:any;
+  //public all_user_data:Array&lt;FeedObj&gt;;
+  public teams:any[];
+  public userRaceSettings:any;
+  public raceType:number;
+  public raceSettings:RaceSettings;
+  //public routePins:any[];
+  public userData:UserData;
 
-  dataSource &#x3D; this.races;
-  private columnsToDisplay:string[] &#x3D; [&#x27;name&#x27;,&#x27;distance&#x27;, &#x27;start_loc&#x27;, &#x27;end_loc&#x27;];
-  expandedElement: any | null;
+  public showTeamForm:Boolean &#x3D; false;
+  public changeArrow:Boolean &#x3D; false;
+  public userStat:any &#x3D; {};
+  public followedIDs:number[];
+  public teamEditForm:TeamEditBody &#x3D; {
+    isEdit:false,
+    team_id:null
+  };
+  public isManualEntry:Boolean &#x3D; false;
 
-  constructor(private raceService: RaceService, 
-              private router:Router,
-              public _authService: AuthService,private _userProfileService: UserProfileService) { }
+  //User access permissions
+  public userRegistered:Boolean &#x3D; false;
+  public isOwnerOrModerator: Boolean &#x3D; false;
+
+  //Filters for activity feed
+  public storyFeedOnly: Boolean &#x3D; false;
+  public followerFeedOnly: Boolean &#x3D; false;
+
+  private storyImage:string;
+  private storyText:string;
+
+  entryTagType: TagType &#x3D; TagType.ENTRY;
+  selectedTagFilterID &#x3D; -1;
+
+  varcolors &#x3D; [&#x27;#bb0000&#x27;, &#x27;#ffffff&#x27;];
+
+  constructor(private raceService:RaceService,
+                  private activitiesService:ActivitiesService,
+                  private route: ActivatedRoute,
+                  private _userProfileService: UserProfileService,
+                  private router:Router,
+                  private storyService: StoryService,
+                  public _authService: AuthService) {
+    this.modalData &#x3D; {};
+  }
 
   ngOnInit() {
-    console.log(&#x27;in races&#x27;);
+    this.loading &#x3D; true;
+    this.route.paramMap.subscribe(params &#x3D;&gt; {
+      this.raceName &#x3D; params[&#x27;params&#x27;][&#x27;name&#x27;];
+      this.raceID &#x3D; params[&#x27;params&#x27;][&#x27;id&#x27;];
+      console.log(&quot;PARAMS...&quot;,params);
+    });
 
-    this.races&#x3D;[{
-      name:&#x27;test&#x27;
-    }] as any[];
-
-    this.raceService.getRaces({}).subscribe(
-      data &#x3D;&gt; {
-        this.racesData &#x3D; data;
-        console.log(&#x27;RACE DATA:&#x27;,this.racesData);
-        this.races &#x3D; _.filter(this.racesData.races,(race:any) &#x3D;&gt; {
-          if(!race.joined) {
-            return race;
-          }
-        });
-        console.log(&#x27;RACES:&#x27;,this.races)
-        this.userRaces &#x3D; _.filter(this.racesData.races,(race:any) &#x3D;&gt; {
-          if(race.joined) {
-            return race;
-          }
-        });
-        this.racesInvited &#x3D; this.racesData.races_invited;
-        this.joinedRacesIDs &#x3D; this.racesData.user_race_ids;
-      }
-    )
-
-    // this.races &#x3D; this.racesData.races;
-
-    console.log(&#x27;CONTR:&#x27;,this.racesData);
-
-    if (localStorage.getItem(&#x27;loggedInUsername&#x27;)){
-      this._authService.username &#x3D; localStorage.getItem(&#x27;loggedInUsername&#x27;);
-
+    if(this._authService.isLoggedIn())
+    {
       this._userProfileService.getUserProfile(this._authService.username).then((data) &#x3D;&gt; {
       this.userData &#x3D; data as UserData;
-
-       if (this.userData.location &#x3D;&#x3D;&quot;&quot;)
-      {
-        this.userData.location &#x3D; &quot;N/A&quot;;
-      }
-
-      if (this.userData.description &#x3D;&#x3D;&quot;&quot;)
-      {
-        this.userData.description &#x3D; &quot;N/A&quot;;
-      }
+      console.log(&quot;UD&quot;, this.userData);
     });
     }
-  }
+    
 
-  viewRace(race:any) {
-    console.log(&#x27;SELECTED RACE:&#x27;,race);
+    this.getRaceState();
 
-    // set race in race service
+    // go GATORS!
 
-    this.router.navigate([&#x27;/race&#x27;,{name:race.name,id:race.id}]);
-  }
-
-  joinRace(race:any) {
-    this.loading &#x3D; true;
-    let race_id &#x3D; race.id;
-    console.log(&#x27;attemptiong to join race:&#x27;,race);
-    this.raceService.joinRace(race_id).then((res) &#x3D;&gt; {
-      console.log(&#x27;RES FROM JOIN:&#x27;,res);
-      this.loading &#x3D; false;
-      this.router.navigate([&#x27;/race&#x27;,{name:race.name,id:race.id}]);
-    });
-  }
-
-  viewAbout(race:any) {
-    this.router.navigate([&#x27;/about&#x27;,{name:race.name,id:race.id}]);
-  }
-
-  toggle_pill(pill_type:string) {
-    if(pill_type &#x3D;&#x3D; &#x27;user&#x27;) {
-      this.isUserRaces &#x3D; true;
-      this.isPublicRaces &#x3D; false;
-      this.isInvitedRaces &#x3D; false;
-    }
-
-    else if(pill_type &#x3D;&#x3D; &#x27;invited&#x27;) {
-      this.isUserRaces &#x3D; false;
-      this.isPublicRaces &#x3D; false;
-      this.isInvitedRaces &#x3D; true;
-    }
-
-    else {
-      this.isUserRaces &#x3D; false;
-      this.isPublicRaces &#x3D; true;
-      this.isInvitedRaces &#x3D; false;
-    }
-
-  }
   
 
+  }
+
+  setLeaderboardTagID(tagFilterStruct:any): void {
+    this.selectedTagFilterID &#x3D; tagFilterStruct.data.id;
+  }
+
+  toggleNavButton(action?:string) {
+    this.changeArrow &#x3D; !this.changeArrow;
+   
+  }
+
+  toggleTeamForm(action?:string) {
+    this.showTeamForm &#x3D; !this.showTeamForm;
+    if(action &#x3D;&#x3D; &#x27;clear&#x27;) {
+      this.teamEditForm.isEdit &#x3D; false;
+    }
+  }
+  
+  showModal(id:string): void {
+    ($(id) as any).modal(&#x27;show&#x27;);
+  }
+
+  showStoryModal(id:string): void {
+    this.storyModal.showModal(id);
+  }
+
+  hideModal(id:string): void {
+    ($(id) as any).modal(&#x27;hide&#x27;);
+  }
+
+  goToTeamForm(): void {
+    this.router.navigate([&#x27;/teams&#x27;,{name:this.raceName,id:this.raceID}]);
+  }
+
+  editTeamForm(team_id:number): void {
+    this.teamEditForm &#x3D; {
+      team_id:team_id,
+      isEdit:true
+    } as TeamEditBody
+    this.toggleTeamForm();
+    // this.teamEditForm.isEdit &#x3D; false;
+  }
+
+  setLoaderState(state:boolean): void {
+    this.loading &#x3D; state;
+  }
+
+  refreshAllComponents(): void {
+
+    this.getRaceState();
+    
+    this.mapChild.getMapData();
+
+    _.forEach(this.leaderboardChildren.toArray(),(child:LeaderboardComponent) &#x3D;&gt; {
+      child.getLeaderboard();
+    });
+
+  }
+
+  refreshStatComponents(): void {
+    // refresh any components stat related
+    // leaderboards
+    // user stats
+    // personal race stat
+    this.getRaceState();
+    
+    //this.mapChild.getMapData();
+    this.mapChild.updateMyUserStatAndCreatePins();
+
+    _.forEach(this.leaderboardChildren.toArray(),(child:LeaderboardComponent) &#x3D;&gt; {
+      child.getLeaderboard();
+    });
+  }
+
+  getRaceState(): void {
+    this.loading &#x3D; true;
+    this.raceService.getRace(this.raceID).subscribe(data &#x3D;&gt; {
+      this.showTeamForm&#x3D;false;
+      let raceData &#x3D; data as RaceData;
+      console.log(&#x27;RACE DATA:&#x27;,raceData);
+      this.userRegistered &#x3D; raceData.user_stat!&#x3D;null;
+      console.log(&quot;userRegistered&quot;, this.userRegistered);
+      this.progress &#x3D; raceData.progress;
+
+      if(this.progress.distance_remaining &lt;&#x3D; 0)
+      {
+            confetti.create()({
+            particleCount: 5000,
+            spread: 900,
+            
+            origin: {
+                y: (1),
+                x: (0.5)
+            }
+        });
+      }
+      console.log(&quot;GETTING RACE STATE&quot;);
+      // this.activities &#x3D; raceData.activities;
+      this.num_activities &#x3D; 0;
+
+      //this.coords &#x3D; raceData.coords;
+      
+      //this.all_user_data &#x3D; raceData.users_data as Array&lt;FeedObj&gt;;
+      this.followedIDs &#x3D; raceData.followedIDs;
+
+      // this.teams &#x3D; raceData.users_data.filter((user_data) &#x3D;&gt; {
+      //   if(user_data.isTeam) {
+      //     return user_data;
+      //   }
+      // });
+      this.raceType &#x3D; raceData.race.race_type;
+      this.userRaceSettings &#x3D; raceData.settings;
+      this.raceSettings &#x3D; raceData.race_settings;
+      console.log(&#x27;RACE SETTINGS:&#x27;,this.raceSettings);
+      this.isManualEntry &#x3D; this.raceSettings.isManualEntry;
+      this.userStat &#x3D; raceData.user_stat;
+      //this.routePins &#x3D; raceData.route_pins;
+      this.loading &#x3D; false;
+      this.isOwnerOrModerator &#x3D; raceData.is_mod_or_owner;
+    });
+  }
+
+  USA(action?:string) {
+  console.log(&quot;USA&quot;);
+  this.mapChild.panToUSA();
+  }
+
+  Israel(action?:string) {
+  this.mapChild.panToIsrael();
+  }
+  uploadManualEntry(entry:any) {
+    this.activitiesService.uploadManualEntry(entry,this.raceID).then((resp) &#x3D;&gt; {
+      this.refreshStatComponents();
+    });
+  }
+  panToUserMarker(user_id){
+    //Call map pan function
+    this.mapChild.panToUserMarker(user_id);
+  }
+
+  clearUserPins(){
+    this.mapChild.clearUserPins();
+  }
+
+  showPinsByID(IDs){
+    //Pass null to show all pins
+    this.mapChild.showPinsByID(IDs, false);
+  }
+
+  createUserPins(){
+    //Pass null to show all pins
+    this.mapChild.createUserPins(false);
+  }
+
+  createUserHeatPins(){
+    //Pass null to show all pins
+    this.mapChild.createUserPins(true);
+  }
+
+  showAllPins(){
+    this.mapChild.showAllPins();
+  }
+
+  showPinsFromSettings(settings: PinSettings){
+    this.mapChild.showPinsFromSettings(settings);
+  }
+
 }
+
+interface RaceData {
+  progress:any;
+  race:any;
+  activities:any;
+  settings:any;
+  race_settings:RaceSettings;
+  user_stat:any;
+  followedIDs:number[];
+  is_mod_or_owner:boolean;
+}
+
+interface FeedObj {
+  user_id: number;
+  display_name: string;
+  username: string;
+  profile_url:string
+  joined: boolean;
+  traveled: boolean;
+  story: boolean;
+  story_image:string;
+  story_text:string;
+  total_distance:number;
+  last_distance:number;
+  message: string;
+  created_ts:number;
+}
+
+export interface TeamEditBody {
+  team_id:number;
+  isEdit:Boolean;
+}
+
+interface PinSettings {
+  followerPinsOnly: boolean;
+  malePinsOn: boolean;
+  femalePinsOn: boolean;
+  allAgesOn: boolean;
+  minAge: number;
+  maxAge: number;
+  showOrgPins: boolean;
+}
+
 
 interface UserData {
   user_id:number;
@@ -565,7 +749,6 @@ interface UserData {
   distance_type: string;
   is_me: boolean;
 }
-
 </code></pre>
     </div>
 </div>

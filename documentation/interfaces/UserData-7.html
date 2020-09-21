@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/user-page/user-page.component.ts</code>
+            <code>src/app/races/races.component.ts</code>
         </p>
 
 
@@ -414,63 +414,86 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, SimpleChanges } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit } from &#x27;@angular/core&#x27;;
 import { Router, ActivatedRoute, ParamMap } from &#x27;@angular/router&#x27;;
-import { UserProfileService } from &#x27;../userprofile.service&#x27;;
+import { RaceService } from &#x27;../race.service&#x27;;
+import {animate, state, style, transition, trigger} from &#x27;@angular/animations&#x27;;
+import * as _ from &#x27;lodash&#x27;;
 import { AuthService } from &#x27;../auth.service&#x27;;
-
-declare var $: any;
+import { UserProfileService } from &#x27;../userprofile.service&#x27;;
 
 @Component({
-  selector: &#x27;app-user-page&#x27;,
-  templateUrl: &#x27;./user-page.component.html&#x27;,
-  styleUrls: [&#x27;./user-page.component.css&#x27;]
+  selector: &#x27;app-races&#x27;,
+  templateUrl: &#x27;./races.component.html&#x27;,
+  styleUrls: [&#x27;./races.component.css&#x27;],
+  animations: [
+    trigger(&#x27;detailExpand&#x27;, [
+      state(&#x27;collapsed&#x27;, style({height: &#x27;0px&#x27;, minHeight: &#x27;0&#x27;})),
+      state(&#x27;expanded&#x27;, style({height: &#x27;*&#x27;})),
+      transition(&#x27;expanded &lt;&#x3D;&gt; collapsed&#x27;, animate(&#x27;225ms cubic-bezier(0.4, 0.0, 0.2, 1)&#x27;)),
+    ]),
+  ],
 })
-export class UserPageComponent implements OnInit {
-  username;
+
+export class RacesComponent implements OnInit {
   userData: UserData;
+  public races:any[];
+  public userRaces:any[];
+  public racesInvited:any[];
+  public racesData:any;
+  public isUserRaces:Boolean &#x3D; true;
+  public isInvitedRaces:Boolean;
+  public isPublicRaces:Boolean;
+  public joinedRacesIDs:number[];
 
-  constructor(private route:ActivatedRoute, 
-              private _userProfileService:UserProfileService,
-              public _authService: AuthService,) { }
+  public loading:Boolean &#x3D; false;
 
-  showEdit: boolean;
+  dataSource &#x3D; this.races;
+  private columnsToDisplay:string[] &#x3D; [&#x27;name&#x27;,&#x27;distance&#x27;, &#x27;start_loc&#x27;, &#x27;end_loc&#x27;];
+  expandedElement: any | null;
+
+  constructor(private raceService: RaceService, 
+              private router:Router,
+              public _authService: AuthService,private _userProfileService: UserProfileService) { }
 
   ngOnInit() {
-    //Don&#x27;t show edit page by default
-    this.showEdit &#x3D; false;
+    console.log(&#x27;in races&#x27;);
 
-    this.route.paramMap.subscribe(params &#x3D;&gt; {
-      this.username &#x3D; params[&#x27;params&#x27;][&#x27;username&#x27;];
-      this.getUserData();
-      console.log(this.username);
-    });
+    this.races&#x3D;[{
+      name:&#x27;test&#x27;
+    }] as any[];
 
-  }
-
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(&#x27;changes:&#x27;,changes);
-
-    for(const propName in changes) {
-      if(changes.hasOwnProperty(propName)) {
-
-        switch(propName) {
-          case &#x27;username&#x27;:
-            if(changes.username.currentValue !&#x3D; undefined) {
-              this.getUserData();
-            }
-        }
+    this.raceService.getRaces({}).subscribe(
+      data &#x3D;&gt; {
+        this.racesData &#x3D; data;
+        console.log(&#x27;RACE DATA:&#x27;,this.racesData);
+        this.races &#x3D; _.filter(this.racesData.races,(race:any) &#x3D;&gt; {
+          if(!race.joined) {
+            return race;
+          }
+        });
+        console.log(&#x27;RACES:&#x27;,this.races)
+        this.userRaces &#x3D; _.filter(this.racesData.races,(race:any) &#x3D;&gt; {
+          if(race.joined) {
+            return race;
+          }
+        });
+        this.racesInvited &#x3D; this.racesData.races_invited;
+        this.joinedRacesIDs &#x3D; this.racesData.user_race_ids;
       }
-    }
-  }
+    )
 
-  getUserData(){
-    //Call a to-be-created service which gets user data, feed, statistics etc
-    this._userProfileService.getUserProfile(this.username).then((data) &#x3D;&gt; {
+    // this.races &#x3D; this.racesData.races;
+
+    console.log(&#x27;CONTR:&#x27;,this.racesData);
+
+    if (localStorage.getItem(&#x27;loggedInUsername&#x27;)){
+      this._authService.username &#x3D; localStorage.getItem(&#x27;loggedInUsername&#x27;);
+
+      this._userProfileService.getUserProfile(this._authService.username).then((data) &#x3D;&gt; {
       this.userData &#x3D; data as UserData;
-      console.log(&quot;New user data: &quot;, this.userData);
 
-      if (this.userData.location &#x3D;&#x3D;&quot;&quot;)
+       if (this.userData.location &#x3D;&#x3D;&quot;&quot;)
       {
         this.userData.location &#x3D; &quot;N/A&quot;;
       }
@@ -480,22 +503,53 @@ export class UserPageComponent implements OnInit {
         this.userData.description &#x3D; &quot;N/A&quot;;
       }
     });
+    }
   }
 
-  logout() {
-    this._authService.logout();
-  }
-  toggleEditView(): void{
-    this.showEdit &#x3D; !this.showEdit;
+  viewRace(race:any) {
+    console.log(&#x27;SELECTED RACE:&#x27;,race);
+
+    // set race in race service
+
+    this.router.navigate([&#x27;/race&#x27;,{name:race.name,id:race.id}]);
   }
 
-  profileUpdated($event) {
-    //Get new data
-    this.getUserData();
-
-    //Switch back to main view
-    this.toggleEditView();
+  joinRace(race:any) {
+    this.loading &#x3D; true;
+    let race_id &#x3D; race.id;
+    console.log(&#x27;attemptiong to join race:&#x27;,race);
+    this.raceService.joinRace(race_id).then((res) &#x3D;&gt; {
+      console.log(&#x27;RES FROM JOIN:&#x27;,res);
+      this.loading &#x3D; false;
+      this.router.navigate([&#x27;/race&#x27;,{name:race.name,id:race.id}]);
+    });
   }
+
+  viewAbout(race:any) {
+    this.router.navigate([&#x27;/about&#x27;,{name:race.name,id:race.id}]);
+  }
+
+  toggle_pill(pill_type:string) {
+    if(pill_type &#x3D;&#x3D; &#x27;user&#x27;) {
+      this.isUserRaces &#x3D; true;
+      this.isPublicRaces &#x3D; false;
+      this.isInvitedRaces &#x3D; false;
+    }
+
+    else if(pill_type &#x3D;&#x3D; &#x27;invited&#x27;) {
+      this.isUserRaces &#x3D; false;
+      this.isPublicRaces &#x3D; false;
+      this.isInvitedRaces &#x3D; true;
+    }
+
+    else {
+      this.isUserRaces &#x3D; false;
+      this.isPublicRaces &#x3D; true;
+      this.isInvitedRaces &#x3D; false;
+    }
+
+  }
+  
 
 }
 

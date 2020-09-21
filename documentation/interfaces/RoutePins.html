@@ -263,6 +263,7 @@ import { UserProfileService } from &#x27;../userprofile.service&#x27;;
 import { PopUpService } from &#x27;../pop-up.service&#x27;;
 import { UserFollowComponent } from &#x27;../user-follow/user-follow.component&#x27;;
 import { RoutePinDialogComponent } from &#x27;../route-pin-dialog/route-pin-dialog.component&#x27;;
+import { MapService } from &#x27;../map.service&#x27;;
 
 import &#x27;leaflet&#x27;;
 import &#x27;leaflet.markercluster&#x27;;
@@ -276,6 +277,7 @@ import * as turf from &#x27;@turf/turf&#x27;;
 import { ListKeyManager } from &#x27;@angular/cdk/a11y&#x27;;
 import { AppComponent } from &#x27;../app.component&#x27;;
 import { PopupComponent } from &#x27;../popup/popup.component&#x27;;
+import { RaceService } from &#x27;../race.service&#x27;;
 
 @Component({
   selector: &#x27;app-map&#x27;,
@@ -286,26 +288,41 @@ export class MapComponent implements AfterViewInit,OnChanges {
   @Input() coordinates;
   @Input() draw:Boolean;
   @Input() displayUsers:Boolean;
-  @Input() userData:any;
-  @Input() routePins:RoutePins[];
   @Input() followedIDs:any;
   @Input() zoom:Boolean;
+  @Input() raceID:number;
+
+  private orgData: UserData[];
+  private userData: UserData[];
+  private myUserDataIdx: number;
+
+  private routePins: RoutePins[];
 
   public map;
+  private line:any;
   private coordsRoutes:any[];
+
   private markersByUserID &#x3D; {};
   private markerClusters:any;
+  private orgMarkerClusters:any;
   private routePinMarkers:any;
   private layerIDsToUserIndices &#x3D; {};
+  private layerIDsToOrgIndices &#x3D; {};
+
   private myMarker: any;
+
   private marker_start:any;
   private marker_end:any;
-  private line:any;
-  private myUserID:number;
+
+  private user_team_or_stat:any;
+
+  private initialized: boolean &#x3D; false;
 
   //Store user IDs of male and female pins
   private maleIDs: number[];
   private femaleIDs: number[];
+
+  loading:boolean &#x3D; false;
 
   //We extend the Marker class to set our own &#x27;routePinIndex&#x27; option
   private routePinMarker &#x3D; L.Marker.extend({
@@ -314,43 +331,84 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }
   });
 
+
   constructor(private popupService:PopUpService, 
               private _profileService:UserProfileService,
+              private _mapService: MapService,
+              private _raceService:RaceService,
               public dialog: MatDialog) {
     this.coordsRoutes &#x3D; [];
     Window[&quot;mapComponent&quot;] &#x3D; this;
-
-    
   }
 
+
   ngOnChanges(changes: SimpleChanges) {
-    for(const propName in changes) {
-      if(changes.hasOwnProperty(propName)) {
-        switch(propName) {
-          case &#x27;coordinates&#x27;:
-            if(changes.coordinates.currentValue !&#x3D; undefined) {
-              this.applyCoordinates();
-              
-              if(this.displayUsers) {
-                this.createUserPins(false);
-              }
-
-              if(this.routePins){
-                this.createRoutePins();
-              }
-
-            }
+    if (this.initialized){
+      for(const propName in changes) {
+        if(changes.hasOwnProperty(propName)) {
+          switch(propName) {
+            case &#x27;raceID&#x27;:
+              this.getMapData();
+          }
         }
       }
     }
-
   }
+
 
   ngAfterViewInit(): void {
     if(this.map &#x3D;&#x3D; undefined) {
       this.initMap();
     }
+
+    //This ensures we can still use homepage coords if provided via Input
+    if (!this.coordinates){
+      this.getMapData();
+    }
+    else {
+      this.applyCoordinates();
+    }
+
+    this.initialized &#x3D; true;
   }
+
+
+  public getMapData(){
+
+    this._mapService.getOrgPinStats(this.raceID).then((data) &#x3D;&gt; {
+      console.log(&#x27;ORG PINSSSS DATAAAAA&#x27;,data);
+      let orgPinData &#x3D; data as OrgPinData;
+      this.orgData &#x3D; orgPinData.org_pins;
+    })
+    
+    this._mapService.getMapData(this.raceID).then((data) &#x3D;&gt; {
+      let mapData &#x3D; data as MapData;
+
+      //Get and apply coordinates
+      this.coordinates &#x3D; mapData.coords;
+      this.applyCoordinates();
+
+      //Get and apply route pins
+      this.routePins &#x3D; mapData.route_pins;
+      if (this.routePins){
+        this.createRoutePins();
+      }
+
+      this.loading&#x3D;true;
+
+      this._raceService.getUserRacestats(this.raceID).then((data:any) &#x3D;&gt; {
+        this.userData &#x3D; data.users_data;
+    
+        if (this.displayUsers){
+          this.createUserPins(false);
+        }
+
+        this.loading&#x3D;false;
+      });
+    });
+
+  }
+
 
   public panToUserMarker(user_id, showPopUp&#x3D;true){
     //Do this to simply pan to user pin
@@ -360,7 +418,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
     var markerBounds &#x3D; L.latLngBounds([this.markersByUserID[user_id.toString()][&#x27;latLng&#x27;]]);
     var options &#x3D; {&#x27;maxZoom&#x27;: 15, &#x27;animate&#x27;: true, &#x27;easeLinearity&#x27;: 0.1}
     this.map.fitBounds(markerBounds, options);
-
   }
 
 
@@ -370,8 +427,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
     var markerBounds &#x3D; L.latLngBounds(corner1,corner2);
     var options &#x3D; {&#x27;maxZoom&#x27;: 15, &#x27;animate&#x27;: true, &#x27;easeLinearity&#x27;: 0.1}
     this.map.fitBounds(markerBounds, options);
-
   }
+
 
   public panToIsrael(){
     var corner1 &#x3D; L.latLng(31.8,35.3);
@@ -380,8 +437,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
     var markerBounds &#x3D; L.latLngBounds(corner1,corner2);
     var options &#x3D; {&#x27;maxZoom&#x27;: 15, &#x27;animate&#x27;: true, &#x27;easeLinearity&#x27;: 0.1}
     this.map.fitBounds(markerBounds, options);
-
   }
+
 
   public clearMap(): void {
     if(this.marker_start &amp;&amp; this.marker_end &amp;&amp; this.line) {
@@ -391,8 +448,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }
   }
 
-  private applyCoordinates():void {
 
+  private applyCoordinates():void {
     if(!this.map) {
       this.initMap()
     }
@@ -481,6 +538,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     })
   }
 
+
   private union_arrays (x, y) {
     var obj &#x3D; {};
     for (var i &#x3D; x.length-1; i &gt;&#x3D; 0; -- i)
@@ -495,15 +553,22 @@ export class MapComponent implements AfterViewInit,OnChanges {
     return res;
   }
 
-  public showPinsFromSettings(settings: PinSettings){
-    if (settings.allAgesOn &amp;&amp; settings.malePinsOn &amp;&amp; settings.femalePinsOn &amp;&amp; !settings.followerPinsOnly){
-      //this.showAllPins();
 
-      //Temp fix to clustering not working after pin filtering
-      //Just redo the whole pin creation process
+  public showPinsFromSettings(settings: PinSettings){
+    //If showing org pins, this overrides all other settings
+    if (settings.showOrgPins){
+      this.createOrgPins();
+      return;
+    }
+
+    //If we instead wish to show all user pins, simply call createUserPins()
+    if (settings.allAgesOn &amp;&amp; settings.malePinsOn &amp;&amp; settings.femalePinsOn &amp;&amp; !settings.followerPinsOnly){
       this.createUserPins(false);
       return;
     }
+
+    //If user selects more granular options, we have to collect IDs corresponding to users
+    //within user selection bounds, and plot the pins of only these users
     
     let unionIDs &#x3D; [];
     let maleIDs &#x3D; [];
@@ -518,8 +583,12 @@ export class MapComponent implements AfterViewInit,OnChanges {
       if (settings.femalePinsOn){
         femaleIDs &#x3D; this.getIDsByGender(&#x27;Female&#x27;);
       }
+
+      console.log(&quot;female IDs: &quot;, femaleIDs);
       
       unionIDs &#x3D; maleIDs.concat(femaleIDs);
+      console.log(&quot;Union IDs: &quot;, unionIDs);
+
     }
 
     //Limit to only users we follow
@@ -543,12 +612,15 @@ export class MapComponent implements AfterViewInit,OnChanges {
       }
     }
 
+    console.log(&quot;Union IDs: &quot;, unionIDs);
+
     this.showPinsByID(unionIDs, false);
   }
 
   public showAllPins(){
     this.showPinsByID(null, true);
   }
+
 
   public getIDsInAgeRange(minAge: number, maxAge: number){
     let IDs &#x3D; [];
@@ -561,6 +633,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     return IDs;
   }
 
+
   public getIDsByGender(gender: string){
     let IDs &#x3D; [];
     for (let i &#x3D; 0; i &lt; this.userData.length; i++){
@@ -572,6 +645,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     return IDs;
   }
 
+
   public clearUserPins(){
     //Remove all current user pins
     if (this.markerClusters){
@@ -579,9 +653,20 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }
   }
 
+  
+  public clearOrgPins(){
+    if (this.orgMarkerClusters){
+      this.map.removeLayer(this.orgMarkerClusters);
+    }
+  }
+
+
   public showPinsByID(IDs, showAll: boolean){
-    //Clear all pins
+    //Clear all user and org pins
     this.clearUserPins();
+    this.clearOrgPins();
+
+    console.log(&quot;IDs to show: &quot;, IDs);
 
     let viewComponent &#x3D; this;
 
@@ -590,9 +675,12 @@ export class MapComponent implements AfterViewInit,OnChanges {
     this.markerClusters.eachLayer(function(layer) {
       let tempUserDataIndex &#x3D; viewComponent.layerIDsToUserIndices[layer._leaflet_id.toString()];
       let tempUserData &#x3D; viewComponent.userData[tempUserDataIndex];
+      console.log(&quot;user data: &quot;, viewComponent.userData);
+      console.log(&quot;User data index: &quot;, tempUserDataIndex);
+      console.log(&quot;layerIDstouserindices: &quot;, viewComponent.layerIDsToUserIndices);
       let pinUserID &#x3D; tempUserData.user_id;
 
-      if (showAll &#x3D;&#x3D; true || IDs.includes(parseInt(pinUserID))){
+      if (showAll &#x3D;&#x3D; true || IDs.includes(pinUserID)){
         layer.addTo(viewComponent.map);
       }
       else {
@@ -601,14 +689,9 @@ export class MapComponent implements AfterViewInit,OnChanges {
     });
   }
 
-  public createUserPins(heatMapOn){
-    //Clear all user pins
-    this.clearUserPins();
 
-    //Set max number of markers in a cluster
-    var maxMarkersInCluster &#x3D; 4;
-
-    this.markerClusters &#x3D; L.markerClusterGroup({
+  public createMarkerClusterGroup(maxMarkers: number){
+    return L.markerClusterGroup({
       //disableClusteringAtZoom: 12, //12
       maxClusterRadius: 20, //20
       animateAddingMarkers: true,
@@ -616,7 +699,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
           var markers &#x3D; cluster.getAllChildMarkers();
 
           //Maximum of 4 imgs per cluster (choose first 4 children)
-          var markersInCluster &#x3D; Math.min(maxMarkersInCluster, markers.length);
+          var markersInCluster &#x3D; Math.min(maxMarkers, markers.length);
 
           var inner_html &#x3D; &#x27;&#x27;;
 
@@ -644,68 +727,43 @@ export class MapComponent implements AfterViewInit,OnChanges {
           });
         }
     });
+  }
 
-    var heatArray &#x3D; new Array(this.userData.length);
 
+  //Updates the logged in users stat and recreates *all* pins
+  public updateMyUserStatAndCreatePins(){
+    //Update our user data item in array
+    this._raceService.getTeamOrUserStat(this.raceID).then((data) &#x3D;&gt; {
+      let userData &#x3D; data as UserData;
+      this.userData[this.myUserDataIdx] &#x3D; userData;
+
+      //Reshow all pins
+      this.createUserPins(false);
+    });
+  }
+
+
+  public createUserPins(heatMapOn){
+    //Clear all user and org pins
+    this.clearUserPins();
+    this.clearOrgPins();
+
+    //Set max number of markers in a cluster and set up clustering
+    var maxMarkersInCluster &#x3D; 4;
+    this.markerClusters &#x3D; this.createMarkerClusterGroup(maxMarkersInCluster);
+
+    //var heatArray &#x3D; new Array(this.userData.length);
+
+    //Iterate over user data, create and show pins and retain map of leaflet ID -&gt; user idx
     for (var i &#x3D; 0; i &lt; this.userData.length; i++){
-      var img_html &#x3D; &quot;&lt;img src&#x3D;\&quot;&quot; + this.userData[i].profile_url + &quot;\&quot;;\&quot;&gt;&lt;div class&#x3D;\&quot;pin\&quot;&gt;&lt;/div&gt;&lt;div class&#x3D;\&quot;pulse\&quot;&gt;&lt;/div&gt;&quot;;
-
-      var userIcon &#x3D; L.divIcon({
-        className: &#x27;location-pin&#x27;,
-        html: img_html,
-        iconSize: [30, 30],
-        iconAnchor: [10, 33],
-        popupAnchor: [0, -62],
-      });
-
-      var user_rel_miles &#x3D; parseFloat(this.userData[i].rel_distance);
-      var user_route_idx &#x3D; this.userData[i].route_idx;
-
-      //Get user&#x27;s distance type for turf
-      var distanceTypeOptions;
-      if (this.userData[i].distance_type &#x3D;&#x3D; &#x27;MI&#x27;){
-        distanceTypeOptions &#x3D; {units: &#x27;miles&#x27;};
-      }
-      else {
-        distanceTypeOptions &#x3D; {units: &#x27;kilometers&#x27;};
-      }
-
-      var along_user &#x3D; turf.along(this.coordsRoutes[user_route_idx], user_rel_miles, distanceTypeOptions);
-
-      var lng_user &#x3D; along_user.geometry.coordinates[0];
-      var lat_user &#x3D; along_user.geometry.coordinates[1];
-
-      heatArray[i] &#x3D; [lat_user,lng_user,1]
-      heatArray[i+this.userData.length] &#x3D; [lat_user,lng_user,1.0]
-
-      var locMarker &#x3D; L.geoJSON(along_user, {
-        pointToLayer: function(feature, latlng) {
-          return L.marker(latlng, { icon: userIcon });
-        }
-      })
-
-      //Get user ID of this race stat
-      let elementID &#x3D; this.userData[i].user_id;
-
-      this.markerClusters.addLayer(locMarker);
-
-      //Update mapping of leaflet marker IDs to index in userData
-      let user_leaflet_id &#x3D; Object.keys(locMarker._layers)[0].toString()
+      // heatArray[i] &#x3D; [lat_user,lng_user,1]
+      // heatArray[i+this.userData.length] &#x3D; [lat_user,lng_user,1.0]
+      let user_leaflet_id &#x3D; this.createPin(this.userData[i]);
       this.layerIDsToUserIndices[user_leaflet_id] &#x3D; i;
 
-      //Retain markers in dict so we can pan to it upon select
-      this.markersByUserID[elementID] &#x3D; {
-          &#x27;locMarker&#x27; : locMarker,
-          &#x27;latLng&#x27; : L.latLng(lat_user, lng_user),
-      };
-
-      //If this pin is current user, pan and zoom to it
       if (this.isMe(this.userData[i])){
-        this.myMarker &#x3D; this.markersByUserID[elementID][&#x27;locMarker&#x27;];
-        this.panToUserMarker(elementID);
-        this.myUserID &#x3D; elementID;
+        this.myUserDataIdx &#x3D; i;
       }
-
     }
 
     //Add pin clusters to map
@@ -746,27 +804,141 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     });
 
+    // heatArray &#x3D; heatArray.map(function (p) { return [p[0], p[1]]; });
 
-    heatArray &#x3D; heatArray.map(function (p) { return [p[0], p[1]]; });
-
-    if(heatMapOn)
-    {
-      try{
-        heat.remove();
-      }
-      catch(ex){}
+    // if(heatMapOn)
+    // {
+    //   try{
+    //     heat.remove();
+    //   }
+    //   catch(ex){}
       
-      heat &#x3D; L.heatLayer(heatArray, {radius: 50},{minOpacity: 1.0}).addTo(this.map);
-    }
-    else
-    {
-      try{
-        heat.remove();
-      }
-      catch(ex){}
+    //   heat &#x3D; L.heatLayer(heatArray, {radius: 50},{minOpacity: 1.0}).addTo(this.map);
+    // }
+    // else
+    // {
+    //   try{
+    //     heat.remove();
+    //   }
+    //   catch(ex){}
+    // }
+  }
+
+  
+  public createOrgPins() {
+    console.log(&quot;Creating org pins&quot;);
+
+    //Clear all user and org pins
+    this.clearUserPins();
+    this.clearOrgPins();
+
+    //Set max number of markers in a cluster and set up clustering
+    var maxMarkersInCluster &#x3D; 4;
+    this.orgMarkerClusters &#x3D; this.createMarkerClusterGroup(maxMarkersInCluster);
+
+    //Iterate over user data, create and show pins and retain map of leaflet ID -&gt; user idx
+    for (var i &#x3D; 0; i &lt; this.orgData.length; i++){
+      console.log(&quot;Creating pin with data &quot;, this.orgData[i]);
+      let user_leaflet_id &#x3D; this.createPin(this.orgData[i], true);
+      this.layerIDsToOrgIndices[user_leaflet_id] &#x3D; i;
     }
 
+    //Add pin clusters to map
+    this.map.addLayer(this.orgMarkerClusters);
+
+    //Bind everybody&#x27;s Popupcomponent to their Popup
+    //If popup is ours, we open it up by default
+    let thisComponent &#x3D; this;
+    this.orgMarkerClusters.eachLayer(function(layer) {
+      let tempOrgDataIndex &#x3D; thisComponent.layerIDsToOrgIndices[layer._leaflet_id.toString()];
+      let tempOrgData &#x3D; thisComponent.orgData[tempOrgDataIndex];
+
+      layer.bindPopup( layer &#x3D;&gt; { const popupEl: NgElement &amp; WithProperties&lt;PopupComponent&gt; &#x3D; document.createElement(&#x27;popup-element&#x27;) as any;
+                                      popupEl.userData &#x3D; tempOrgData;
+                                      popupEl.isTag &#x3D; true;
+                                      document.body.appendChild(popupEl);
+                                      return popupEl}, {
+                                        &#x27;autoClose&#x27;: false,
+                                      })
+    })
+
+    //Handle marker onclick events (open popups)
+    this.orgMarkerClusters.on(&#x27;click&#x27;, function(ev) {
+      if (!ev.layer.getPopup()._isOpen){
+        //Open popup if it is already binded
+        ev.layer.getPopup().openPopup();
+      }
+
+      else {
+        //If popup open before click, close it
+        ev.layer.getPopup().closePopup();
+      }
+
+    });
   }
+  
+
+  public createPin(userData: UserData, isTag: boolean&#x3D;false){
+    var img_html &#x3D; &quot;&lt;img src&#x3D;\&quot;&quot; + userData.profile_url + &quot;\&quot;;\&quot;&gt;&lt;div class&#x3D;\&quot;pin\&quot;&gt;&lt;/div&gt;&lt;div class&#x3D;\&quot;pulse\&quot;&gt;&lt;/div&gt;&quot;;
+
+    var userIcon &#x3D; L.divIcon({
+      className: &#x27;location-pin&#x27;,
+      html: img_html,
+      iconSize: [30, 30],
+      iconAnchor: [10, 33],
+      popupAnchor: [0, -62],
+    });
+
+    var user_rel_miles &#x3D; userData.rel_distance;
+    var user_route_idx &#x3D; userData.route_idx;
+
+    //Get user&#x27;s distance type for turf
+    var distanceTypeOptions;
+    if (userData.distance_type &#x3D;&#x3D; &#x27;MI&#x27;){
+      distanceTypeOptions &#x3D; {units: &#x27;miles&#x27;};
+    }
+    else {
+      distanceTypeOptions &#x3D; {units: &#x27;kilometers&#x27;};
+    }
+
+    var along_user &#x3D; turf.along(this.coordsRoutes[user_route_idx], user_rel_miles, distanceTypeOptions);
+
+    var lng_user &#x3D; along_user.geometry.coordinates[0];
+    var lat_user &#x3D; along_user.geometry.coordinates[1];
+
+    var locMarker &#x3D; L.geoJSON(along_user, {
+      pointToLayer: function(feature, latlng) {
+        return L.marker(latlng, { icon: userIcon });
+      }
+    })
+
+    if (isTag){
+      this.orgMarkerClusters.addLayer(locMarker);
+    }
+    else {
+      //Get user ID of this race stat
+      let elementID &#x3D; userData.user_id;
+
+      this.markerClusters.addLayer(locMarker);
+
+      //Retain markers in dict so we can pan to it upon select
+      this.markersByUserID[elementID] &#x3D; {
+          &#x27;locMarker&#x27; : locMarker,
+          &#x27;latLng&#x27; : L.latLng(lat_user, lng_user),
+      };
+
+      //If this pin is current user, pan and zoom to it
+      if (this.isMe(userData)){
+        this.myMarker &#x3D; this.markersByUserID[elementID][&#x27;locMarker&#x27;];
+        this.panToUserMarker(elementID);
+      }
+    }
+
+    //Return leaflet id
+    let user_leaflet_id &#x3D; Object.keys(locMarker._layers)[0].toString()
+    return user_leaflet_id;
+  }
+
 
   private isMe(userData: any){
     if (userData.isMe){
@@ -783,8 +955,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
     return false;
   }
 
+
   private openRoutePinDialogueWithIndex(index: number, thisComponent: any){
-    console.log(&quot;In dialogue function&quot;);
     let dialogRef &#x3D; thisComponent.dialog.open(RoutePinDialogComponent, {
       data: { 
         &#x27;title&#x27;: thisComponent.routePins[index].title,
@@ -793,6 +965,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
       },
     });
   }
+
 
   private createRoutePins(){
     this.routePinMarkers &#x3D; new L.featureGroup();
@@ -821,11 +994,11 @@ export class MapComponent implements AfterViewInit,OnChanges {
     //Handle marker onclick events (open popups)
     let thisComponent &#x3D; this;
     this.routePinMarkers.on(&#x27;click&#x27;, function(ev) {
-      console.log(&quot;Thanks for clicking on marker &quot;, ev.layer.options.routePinIndex);
       thisComponent.openRoutePinDialogueWithIndex(ev.layer.options.routePinIndex, thisComponent);
     });
     
   }
+
 
   private initMap(): void {
     this.map &#x3D; L.map(&#x27;map&#x27;, { zoomControl: false });
@@ -848,8 +1021,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     //An extract of address points from the LINZ bulk extract: http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde
 //Should be this data set: http://data.linz.govt.nz/#/layer/779-nz-street-address-electoral/
-
-    
   }
 
 
@@ -862,6 +1033,7 @@ interface PinSettings {
   allAgesOn: boolean;
   minAge: number;
   maxAge: number;
+  showOrgPins: boolean;
 }
 
 interface RoutePins {
@@ -870,7 +1042,34 @@ interface RoutePins {
   lon: number;
   lat: number;
   image_urls: string[];
-}</code></pre>
+}
+
+interface MapData {
+  coords: any;
+  route_pins: RoutePins[];
+}
+
+interface UserData {
+  user_id: number,
+  total_distance: number,
+  distance_type: string,
+  rel_distance: number,
+  route_idx: number,
+  display_name: string,
+  profile_url: string,
+  follows: boolean,
+  child_user_stats: any[],
+  isTeam: boolean,
+  isMe: boolean,
+  gender: string,
+  age: number,
+  description: string,
+}
+
+interface OrgPinData {
+  org_pins: UserData[];
+}
+</code></pre>
     </div>
 </div>
 

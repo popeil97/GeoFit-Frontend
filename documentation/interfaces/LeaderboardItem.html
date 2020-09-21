@@ -254,26 +254,125 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input, SimpleChanges,OnChanges } from &#x27;@angular/core&#x27;;
+import { LeaderboardService } from &#x27;../leaderboard.service&#x27;;
 
 @Component({
   selector: &#x27;app-leaderboard&#x27;,
   templateUrl: &#x27;./leaderboard.component.html&#x27;,
   styleUrls: [&#x27;./leaderboard.component.css&#x27;]
 })
-export class LeaderboardComponent implements OnInit {
+export class LeaderboardComponent implements OnInit,OnChanges {
+  //@Input() leaderboard:LeaderboardItem[];
 
-  private columns:string[] &#x3D; [&#x27;Rank&#x27;,&#x27;ProfilePic&#x27;,&#x27;Name&#x27;,&#x27;Distance&#x27;,&#x27;Follow&#x27;];
-  @Input() leaderboard:LeaderboardItem[];
+  //Can be &#x27;teams&#x27; or &#x27;individual&#x27;
+  @Input() use: string;
+  @Input() raceID: number;
   @Input() allowFollow: Boolean &#x3D; false;
+  @Input() tagID:any &#x3D; null; // just in case it gets initialized to 0
 
-  constructor() {
+  public columns:string[] &#x3D; [&#x27;Rank&#x27;,&#x27;ProfilePic&#x27;,&#x27;Name&#x27;,&#x27;Distance&#x27;,&#x27;Follow&#x27;];
+  public leaderboard: LeaderboardItem[];
+
+  private initialized: boolean &#x3D; false;
+  private page:number &#x3D; 1;
+
+  constructor(private _leaderboardService: LeaderboardService) {
   }
 
   ngOnInit() {
+    this._leaderboardService.raceID &#x3D; this.raceID;
+    this.getLeaderboard();
+
+    this.initialized &#x3D; true;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    //Check if user or race ID changes between hops
+    //If yes, we need to pull new data
+
+    if (this.initialized){
+      for(const propName in changes) {
+        if(changes.hasOwnProperty(propName)) {
+
+          switch(propName) {
+            case &#x27;raceID&#x27;:
+              if(changes.ID.currentValue !&#x3D; undefined) {
+                this._leaderboardService.raceID &#x3D; this.raceID;
+                this.getLeaderboard();
+              }
+
+            case &#x27;tagID&#x27;:
+              this.getLeaderboard(); // get leaderboard for tags
+
+          }
+        }
+        
+      }
+    }
 
   }
 
+  getLeaderboard(){
+    var leaderboardData;
+    console.log(&quot;GETTING LEADERBOARD&quot;, this.tagID);
+
+    this.page &#x3D; 1;
+    
+    if (this.use &#x3D;&#x3D; &#x27;individual&#x27; &amp;&amp; this.tagID !&#x3D; 0){ // and tagID !&#x3D; all_id
+      this._leaderboardService.getIndividualLeaderboard(this.page,this.tagID !&#x3D; -1 ? this.tagID : null).then((data) &#x3D;&gt; {
+        leaderboardData &#x3D; data as LeaderboardStruct;
+        this.leaderboard &#x3D; leaderboardData.leaderboard;
+        
+      })
+
+      console.log(&quot;YEEE&quot;,this.leaderboard);
+    }
+
+    else if (this.use &#x3D;&#x3D; &#x27;teams&#x27; &amp;&amp; this.tagID !&#x3D; 0){ // and tagID !&#x3D; all_id
+      this._leaderboardService.getTeamLeaderboard(this.page,this.tagID !&#x3D; -1 ? this.tagID : null).then((data) &#x3D;&gt; {
+        leaderboardData &#x3D; data as LeaderboardStruct;
+        this.leaderboard &#x3D; leaderboardData.leaderboard;
+      })
+    }
+
+    else {
+      // get all tag cumulative leaderboard
+      this._leaderboardService.getOrganizationLeaderboard().then((resp:any) &#x3D;&gt; {
+        console.log(&#x27;ALL LEADERBOARD:&#x27;,resp);
+        this.leaderboard &#x3D; resp.organization_leaderboard;
+      })
+    }
+
+    this.page++;
+
+  }
+
+  getNextLeaderboardPage() {
+    var leaderboardData;
+    if (this.use &#x3D;&#x3D; &#x27;individual&#x27; &amp;&amp; this.tagID !&#x3D; 0){ // and tagID !&#x3D; all_id
+      this._leaderboardService.getIndividualLeaderboard(this.page,this.tagID !&#x3D; -1 ? this.tagID : null).then((data) &#x3D;&gt; {
+        leaderboardData &#x3D; data as LeaderboardStruct;
+        let leaderboardPage &#x3D; leaderboardData.leaderboard;
+        this.leaderboard &#x3D; this.leaderboard.concat(leaderboardPage);
+      })
+    }
+
+    else if (this.use &#x3D;&#x3D; &#x27;teams&#x27; &amp;&amp; this.tagID !&#x3D; 0){ // and tagID !&#x3D; all_id
+      this._leaderboardService.getTeamLeaderboard(this.page,this.tagID !&#x3D; -1 ? this.tagID : null).then((data) &#x3D;&gt; {
+        leaderboardData &#x3D; data as LeaderboardStruct;
+        let leaderboardPage &#x3D; leaderboardData.leaderboard;
+        this.leaderboard &#x3D; this.leaderboard.concat(leaderboardPage);
+      })
+    }
+
+    this.page++;
+  }
+
+  configureLeaderboard(ranked:any[],unranked:any[]) {
+    console.log(&quot;RANKE BOARD:&quot;,unranked.concat(ranked));
+    return unranked.concat(ranked)
+  }
 
 }
 
@@ -283,6 +382,10 @@ export interface LeaderboardItem {
   profile_url: string,
   total_distance:number;
   total_time:number;
+}
+
+export interface LeaderboardStruct {
+  leaderboard: LeaderboardItem[];
 }
 </code></pre>
     </div>

@@ -743,6 +743,8 @@ import { StoryFormComponent } from &#x27;../story-form/story-form.component&#x27
 import { AuthService } from &#x27;../auth.service&#x27;;
 import { MatTableDataSource } from &#x27;@angular/material/table&#x27;;
 import { StoryDialogComponent } from &#x27;../story-dialog/story-dialog.component&#x27;;
+import { ReportFormComponent } from &#x27;../report-form/report-form.component&#x27;;
+import { StoryDeleteDialogComponent } from &#x27;../story-delete-dialog/story-delete-dialog.component&#x27;;
 
 declare var $: any
 
@@ -787,6 +789,12 @@ export class FeedComponent implements OnInit {
 
   private _feedService: any;
   private initialized: boolean;
+  private loading &#x3D; false;
+
+  //Variables for pagination
+  private page_number &#x3D; 1;
+  private items_per_page &#x3D; 10;
+  private canRefresh: boolean &#x3D; false;
   
   public dataSource: any;
 
@@ -815,9 +823,6 @@ export class FeedComponent implements OnInit {
       this.resetFeed();
       this.refreshFeed();
     }
-
-    //this.storyFormComponent.setStoryImageFieldListener();
-    this.initialized &#x3D; true;
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -832,6 +837,8 @@ export class FeedComponent implements OnInit {
             case &#x27;ID&#x27;:
               if(changes.ID.currentValue !&#x3D; undefined) {
                 this._feedService.ID &#x3D; this.ID;
+                this.page_number &#x3D; 1;
+
                 this.resetFeed();
                 this.refreshFeed();
               }
@@ -864,18 +871,25 @@ export class FeedComponent implements OnInit {
     });
   }
 
-  public refreshFeed(openStoryIDComments&#x3D;null){
+  public refreshFeed(openStoryIDComments&#x3D;null, getNextPage&#x3D;false){
     var viewComponent &#x3D; this;
+    this.loading &#x3D; true;
 
-    this._feedService.refreshFeed().then(data &#x3D;&gt; {
+    if (getNextPage){
+      this.page_number +&#x3D; 1;
+    }
+
+    console.log(getNextPage);
+    console.log(&quot;Getting page num &quot;, this.page_number);
+
+    this._feedService.refreshFeed(this.page_number, this.items_per_page, !this.initialized).then(payload &#x3D;&gt; {
       var newFeedObjs: Array&lt;FeedObj&gt; &#x3D; [];
       var get_created_ts &#x3D; this.get_created_ts;
+      var data &#x3D; payload.serialized_feed;
+      this.canRefresh &#x3D; payload.can_refresh;
 
       Object.keys(data).map(function(feedItemIndex){
         let feedItem: FeedObj &#x3D; data[feedItemIndex];
-
-        //Initialize time since posts
-        //feedItem.created_ts &#x3D; get_created_ts(feedItem.created_ts);
 
         //By default don&#x27;t open comment fields
         //Unless we have just posted a comment
@@ -892,7 +906,10 @@ export class FeedComponent implements OnInit {
       //viewComponent.feedItems &#x3D; newFeedObjs.concat(viewComponent.feedItems);
       //Continue to explore ways to refresh feed. In meantime, get all feed objs every time
       viewComponent.feedItems &#x3D; newFeedObjs;
+      this.loading &#x3D; false;
     });
+
+    this.initialized &#x3D; true;
   }
 
   public get_created_ts(timestamp){
@@ -901,6 +918,7 @@ export class FeedComponent implements OnInit {
     var secondsPerMinute &#x3D; 60;
     var secondsPerHour &#x3D; secondsPerMinute * 60;
     var secondsPerDay &#x3D; secondsPerHour * 24;
+    var secondsPerWeek &#x3D; secondsPerDay * 7;
 
     //Calculate how to display the timestamp of the activity
     //If ts is within an hour, show number of minutes since activity
@@ -912,8 +930,11 @@ export class FeedComponent implements OnInit {
     else if ((ts - timestamp) &lt; secondsPerDay) {
       displayTime &#x3D; Math.round((ts - timestamp) / secondsPerHour) + &quot;h&quot;;
     }
-    else {
+    else if ((ts - timestamp) &lt; secondsPerWeek) {
       displayTime &#x3D; Math.round((ts - timestamp) / secondsPerDay) + &quot;d&quot;;
+    }
+    else {
+      displayTime &#x3D; Math.round((ts - timestamp) / secondsPerWeek) + &quot;w&quot;;
     }
     return displayTime;
   }
@@ -936,6 +957,27 @@ export class FeedComponent implements OnInit {
     //Feed items after comment posted
     console.log(this.feedItems);
     this.refreshFeed(storyID);
+  }
+
+  public openReportDialog(storyID: number){
+    let dialogRef &#x3D; this.dialog.open(ReportFormComponent, {
+      data: { 
+        &#x27;storyID&#x27;: storyID,
+      },
+    });
+  }
+
+  public openDeleteStoryDialog(storyID: number){
+    let dialogRef &#x3D; this.dialog.open(StoryDeleteDialogComponent, {
+      data: { 
+        &#x27;storyID&#x27;: storyID,
+      },
+    }).afterClosed().subscribe(response &#x3D;&gt; {
+      if (response &amp;&amp; response[&#x27;deleted&#x27;]){
+        this.resetFeed();
+        this.refreshFeed();
+      }
+    });
   }
 }
 
@@ -961,6 +1003,11 @@ interface FeedObj {
   comments: Comment[];
   show_comments: boolean;
   follows: boolean;
+}
+
+interface FeedPayload {
+  serialized_feed: FeedObj[];
+  can_refresh: boolean;
 }
 
 interface Comment {

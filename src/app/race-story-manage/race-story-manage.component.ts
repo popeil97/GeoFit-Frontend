@@ -104,4 +104,5 @@ interface Story {
   story_text: string;
   story_image: string;
   created_ts: number;
+  report_count: number;
 }

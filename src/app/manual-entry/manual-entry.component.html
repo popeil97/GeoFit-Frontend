@@ -1,29 +1,48 @@
 <div class="container" style="overflow:hidden;">
   <form [formGroup]="manualEntryForm">
-    <div class="form-group" style="text-align: left;">
-      <b><mat-label>Activity Info</mat-label></b>
-      <input class="form-control" type="text" placeholder="Activity Name" formControlName="name"/>
-      <br>
-      <div *ngIf="manualEntryForm.get('name').invalid && (manualEntryForm.get('name').dirty || manualEntryForm.get('name').touched)"
-    class="alert alert-danger">
-    
-    <div *ngIf="manualEntryForm.get('name').errors.required">
-       Name is required.
-    </div>
-    </div>
-    </div>
 
-    <div class="form-group" style="text-align: left;">
+
+    <div class="row">
+
+  <div class="column0">
+        <div class="form-group" style="padding-left:15px;">
       <input class="form-control" type="text" placeholder="Distance" formControlName="distance"/>
       <br>
       <div *ngIf="manualEntryForm.get('distance').invalid && (manualEntryForm.get('distance').dirty || manualEntryForm.get('distance').touched)"
     class="alert alert-danger">
     
     <div *ngIf="manualEntryForm.get('distance').errors.required">
-       Distance is required.
+       Required
     </div>
     </div>
     </div>
+
+  </div>
+  <div class="column1">
+    mile
+  </div>
+
+  <div class="column2">
+        <div class="form-group">
+            <select class="form-control" formControlName="activityType" [ngClass]="{ 'is-invalid': submitted && f.activityType.errors }">
+                <option *ngFor="let typeOption of activityOptions" [value]="typeOption">
+                {{ typeOption }}
+                </option>
+            </select>
+            <div *ngIf="submitted && f.activityType.errors" class="invalid-feedback">
+                <div *ngIf="f.activityType.errors.required">Required</div>
+            </div>
+        </div>
+  </div>
+  </div>
+
+
+
+
+
+
+
+    <!--
 
     <div class="form-group">
       <b><mat-label name="distanceType">Distance Units</mat-label></b>
@@ -39,8 +58,19 @@
        Distance Units is required.
     </div>
     </div>
-    </div>
-<b><mat-label>Activity Time</mat-label></b>
+    </div> -->
+
+    <div class="form-group" style="border-color:#ced4da;">
+            <input matInput [matDatepicker]="picker" formControlName="activityDate" placeholder="Activity Date (MM/DD/YYYY) *" [ngClass]="{ 'is-invalid': submitted && f.date_of_birth.errors }">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <div *ngIf="submitted && f.activityDate.errors" class="invalid-feedback">
+                <div *ngIf="f.activityDate.errors.required">Required (MM/DD/YYYY).</div>
+            </div>
+        </div>
+
+
+
 <div class="row">
 
   <div class="column">
@@ -53,7 +83,7 @@
     class="alert alert-danger">
     
     <div *ngIf="manualEntryForm.get('hours').errors.required">
-       Hours is required.
+       Required
     </div>
     </div>
     </div>
@@ -69,7 +99,7 @@
     class="alert alert-danger">
     
     <div *ngIf="manualEntryForm.get('minutes').errors.required">
-       Minutes is required.
+       Required
     </div>
     </div>
     </div>
@@ -85,7 +115,7 @@
     class="alert alert-danger">
     
     <div *ngIf="manualEntryForm.get('seconds').errors.required">
-      Seconds is required.
+      Required
     </div>
     </div>
     </div>
@@ -95,7 +125,7 @@
     
 
     <div style="position: relative; text-align:center;">
-    <button class="btn btn-primary btn-mobile" style="background-color:#2C00A5;" mat-raised-button (click)="upload()">Add</button>
+    <button class="btn btn-primary btn-mobile" style="background-color:#2C00A5;" mat-raised-button (click)="upload()">Add Activity</button>
     </div>
   </form>
 </div>

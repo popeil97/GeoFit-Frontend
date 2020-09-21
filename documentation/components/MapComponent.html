@@ -144,11 +144,22 @@
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
+                                <a href="#initialized">initialized</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#layerIDsToOrgIndices">layerIDsToOrgIndices</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
                                 <a href="#layerIDsToUserIndices">layerIDsToUserIndices</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#line">line</a>
+                            </li>
+                            <li>
+                                <a href="#loading">loading</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -180,7 +191,15 @@
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
-                                <a href="#myUserID">myUserID</a>
+                                <a href="#myUserDataIdx">myUserDataIdx</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#orgData">orgData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#orgMarkerClusters">orgMarkerClusters</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -189,6 +208,18 @@
                             <li>
                                     <span class="modifier">Private</span>
                                 <a href="#routePinMarkers">routePinMarkers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#routePins">routePins</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#user_team_or_stat">user_team_or_stat</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#userData">userData</a>
                             </li>
                         </ul>
                     </td>
@@ -212,7 +243,23 @@
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
+                                <a href="#clearOrgPins">clearOrgPins</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
                                 <a href="#clearUserPins">clearUserPins</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#createMarkerClusterGroup">createMarkerClusterGroup</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#createOrgPins">createOrgPins</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#createPin">createPin</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -229,6 +276,10 @@
                             <li>
                                     <span class="modifier">Public</span>
                                 <a href="#getIDsInAgeRange">getIDsInAgeRange</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#getMapData">getMapData</a>
                             </li>
                             <li>
                                     <span class="modifier">Private</span>
@@ -276,6 +327,10 @@
                                     <span class="modifier">Private</span>
                                 <a href="#union_arrays">union_arrays</a>
                             </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#updateMyUserStatAndCreatePins">updateMyUserStatAndCreatePins</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -301,10 +356,7 @@
                                 <a href="#followedIDs">followedIDs</a>
                             </li>
                             <li>
-                                <a href="#routePins">routePins</a>
-                            </li>
-                            <li>
-                                <a href="#userData">userData</a>
+                                <a href="#raceID">raceID</a>
                             </li>
                             <li>
                                 <a href="#zoom">zoom</a>
@@ -326,12 +378,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(popupService: <a href="../injectables/PopUpService.html">PopUpService</a>, _profileService: <a href="../injectables/UserProfileService.html">UserProfileService</a>, dialog: MatDialog)</code>
+<code>constructor(popupService: <a href="../injectables/PopUpService.html">PopUpService</a>, _profileService: <a href="../injectables/UserProfileService.html">UserProfileService</a>, _mapService: <a href="../injectables/MapService.html">MapService</a>, _raceService: <a href="../injectables/RaceService.html">RaceService</a>, dialog: MatDialog)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/map/map.component.ts:59</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="76" class="link-to-prism">src/app/map/map.component.ts:76</a></div>
                             </td>
                         </tr>
 
@@ -373,6 +425,30 @@
                                                     
                                                 </tr>
                                                 <tr>
+                                                        <td>_mapService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/MapService.html" target="_self" >MapService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>_raceService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/RaceService.html" target="_self" >RaceService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
                                                         <td>dialog</td>
                                                   
                                                         <td>
@@ -405,7 +481,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/map/map.component.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/map/map.component.ts:32</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -426,7 +502,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/map/map.component.ts:32</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/map/map.component.ts:34</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -447,7 +523,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/map/map.component.ts:31</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/map/map.component.ts:33</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -477,40 +553,19 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="routePins"></a>
-                        <b>routePins</b>
+                        <a name="raceID"></a>
+                        <b>raceID</b>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="../interfaces/RoutePins.html" target="_self" >RoutePins[]</a></code>
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/map/map.component.ts:34</a></div>
-                            </td>
-                        </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="userData"></a>
-                        <b>userData</b>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/map/map.component.ts:33</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/map/map.component.ts:37</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -569,8 +624,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="138"
-                            class="link-to-prism">src/app/map/map.component.ts:138</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="196"
+                            class="link-to-prism">src/app/map/map.component.ts:196</a></div>
                 </td>
             </tr>
 
@@ -610,8 +665,49 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="130"
-                            class="link-to-prism">src/app/map/map.component.ts:130</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="187"
+                            class="link-to-prism">src/app/map/map.component.ts:187</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearOrgPins"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            clearOrgPins
+                        </b>
+                        <a href="#clearOrgPins"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>clearOrgPins()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="401"
+                            class="link-to-prism">src/app/map/map.component.ts:401</a></div>
                 </td>
             </tr>
 
@@ -651,8 +747,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="319"
-                            class="link-to-prism">src/app/map/map.component.ts:319</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="393"
+                            class="link-to-prism">src/app/map/map.component.ts:393</a></div>
                 </td>
             </tr>
 
@@ -663,6 +759,209 @@
                     <div class="io-description">
                         <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
 
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createMarkerClusterGroup"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            createMarkerClusterGroup
+                        </b>
+                        <a href="#createMarkerClusterGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createMarkerClusterGroup(maxMarkers: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="437"
+                            class="link-to-prism">src/app/map/map.component.ts:437</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>maxMarkers</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createOrgPins"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            createOrgPins
+                        </b>
+                        <a href="#createOrgPins"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createOrgPins()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="572"
+                            class="link-to-prism">src/app/map/map.component.ts:572</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createPin"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            createPin
+                        </b>
+                        <a href="#createPin"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>createPin(userData: <a href="../interfaces/UserData.html">UserData</a>, isTag: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="625"
+                            class="link-to-prism">src/app/map/map.component.ts:625</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                    <td>Default value</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>userData</td>
+                                    <td>
+                                                <code><a href="../interfaces/UserData.html" target="_self" >UserData</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>isTag</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+                                    <td>
+                                        <code>false</code>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
                     </div>
                 </td>
             </tr>
@@ -692,8 +991,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="541"
-                            class="link-to-prism">src/app/map/map.component.ts:541</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="714"
+                            class="link-to-prism">src/app/map/map.component.ts:714</a></div>
                 </td>
             </tr>
 
@@ -733,8 +1032,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="348"
-                            class="link-to-prism">src/app/map/map.component.ts:348</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="490"
+                            class="link-to-prism">src/app/map/map.component.ts:490</a></div>
                 </td>
             </tr>
 
@@ -801,8 +1100,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="308"
-                            class="link-to-prism">src/app/map/map.component.ts:308</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="381"
+                            class="link-to-prism">src/app/map/map.component.ts:381</a></div>
                 </td>
             </tr>
 
@@ -873,8 +1172,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="297"
-                            class="link-to-prism">src/app/map/map.component.ts:297</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="369"
+                            class="link-to-prism">src/app/map/map.component.ts:369</a></div>
                 </td>
             </tr>
 
@@ -937,6 +1236,47 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="getMapData"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            getMapData
+                        </b>
+                        <a href="#getMapData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getMapData()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="120"
+                            class="link-to-prism">src/app/map/map.component.ts:120</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="initMap"></a>
                     <span class="name">
                         <b>
@@ -957,8 +1297,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="574"
-                            class="link-to-prism">src/app/map/map.component.ts:574</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="747"
+                            class="link-to-prism">src/app/map/map.component.ts:747</a></div>
                 </td>
             </tr>
 
@@ -998,8 +1338,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="515"
-                            class="link-to-prism">src/app/map/map.component.ts:515</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="687"
+                            class="link-to-prism">src/app/map/map.component.ts:687</a></div>
                 </td>
             </tr>
 
@@ -1068,8 +1408,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="93"
-                            class="link-to-prism">src/app/map/map.component.ts:93</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="103"
+                            class="link-to-prism">src/app/map/map.component.ts:103</a></div>
                 </td>
             </tr>
 
@@ -1107,8 +1447,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="70"
-                            class="link-to-prism">src/app/map/map.component.ts:70</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="89"
+                            class="link-to-prism">src/app/map/map.component.ts:89</a></div>
                 </td>
             </tr>
 
@@ -1179,8 +1519,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="530"
-                            class="link-to-prism">src/app/map/map.component.ts:530</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="703"
+                            class="link-to-prism">src/app/map/map.component.ts:703</a></div>
                 </td>
             </tr>
 
@@ -1263,8 +1603,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="120"
-                            class="link-to-prism">src/app/map/map.component.ts:120</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="177"
+                            class="link-to-prism">src/app/map/map.component.ts:177</a></div>
                 </td>
             </tr>
 
@@ -1304,8 +1644,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="111"
-                            class="link-to-prism">src/app/map/map.component.ts:111</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="168"
+                            class="link-to-prism">src/app/map/map.component.ts:168</a></div>
                 </td>
             </tr>
 
@@ -1345,8 +1685,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="99"
-                            class="link-to-prism">src/app/map/map.component.ts:99</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="157"
+                            class="link-to-prism">src/app/map/map.component.ts:157</a></div>
                 </td>
             </tr>
 
@@ -1428,8 +1768,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="293"
-                            class="link-to-prism">src/app/map/map.component.ts:293</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="364"
+                            class="link-to-prism">src/app/map/map.component.ts:364</a></div>
                 </td>
             </tr>
 
@@ -1469,8 +1809,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="326"
-                            class="link-to-prism">src/app/map/map.component.ts:326</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="408"
+                            class="link-to-prism">src/app/map/map.component.ts:408</a></div>
                 </td>
             </tr>
 
@@ -1552,8 +1892,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="242"
-                            class="link-to-prism">src/app/map/map.component.ts:242</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="301"
+                            class="link-to-prism">src/app/map/map.component.ts:301</a></div>
                 </td>
             </tr>
 
@@ -1624,8 +1964,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="228"
-                            class="link-to-prism">src/app/map/map.component.ts:228</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="286"
+                            class="link-to-prism">src/app/map/map.component.ts:286</a></div>
                 </td>
             </tr>
 
@@ -1677,6 +2017,47 @@
             </tr>
         </tbody>
     </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateMyUserStatAndCreatePins"></a>
+                    <span class="name">
+                        <b>
+                            <span class="modifier">Public</span>
+                            updateMyUserStatAndCreatePins
+                        </b>
+                        <a href="#updateMyUserStatAndCreatePins"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                    <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>updateMyUserStatAndCreatePins()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="478"
+                            class="link-to-prism">src/app/map/map.component.ts:478</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </section>
     <section>
     
@@ -1704,7 +2085,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/map/map.component.ts:39</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/map/map.component.ts:47</a></div>
                             </td>
                         </tr>
 
@@ -1732,7 +2113,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/map/map.component.ts:63</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/map/map.component.ts:83</a></div>
                             </td>
                         </tr>
 
@@ -1760,7 +2141,73 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/map/map.component.ts:52</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/map/map.component.ts:67</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="initialized"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            initialized</b>
+                            <a href="#initialized"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/map/map.component.ts:63</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="layerIDsToOrgIndices"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            layerIDsToOrgIndices</b>
+                            <a href="#layerIDsToOrgIndices"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/map/map.component.ts:54</a></div>
                             </td>
                         </tr>
 
@@ -1793,7 +2240,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/map/map.component.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/map/map.component.ts:53</a></div>
                             </td>
                         </tr>
 
@@ -1821,7 +2268,39 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/map/map.component.ts:47</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/map/map.component.ts:46</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loading"></a>
+                        <span class="name">
+                            <b>
+                            loading</b>
+                            <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/map/map.component.ts:69</a></div>
                             </td>
                         </tr>
 
@@ -1849,7 +2328,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/map/map.component.ts:51</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="66" class="link-to-prism">src/app/map/map.component.ts:66</a></div>
                             </td>
                         </tr>
 
@@ -1871,7 +2350,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/map/map.component.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/map/map.component.ts:45</a></div>
                             </td>
                         </tr>
 
@@ -1899,7 +2378,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/map/map.component.ts:46</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/map/map.component.ts:59</a></div>
                             </td>
                         </tr>
 
@@ -1927,7 +2406,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/map/map.component.ts:45</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/map/map.component.ts:58</a></div>
                             </td>
                         </tr>
 
@@ -1955,7 +2434,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/map/map.component.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/map/map.component.ts:50</a></div>
                             </td>
                         </tr>
 
@@ -1988,7 +2467,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/map/map.component.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/map/map.component.ts:49</a></div>
                             </td>
                         </tr>
 
@@ -2016,7 +2495,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/map/map.component.ts:44</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/map/map.component.ts:56</a></div>
                             </td>
                         </tr>
 
@@ -2027,12 +2506,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="myUserID"></a>
+                        <a name="myUserDataIdx"></a>
                         <span class="name">
                             <b>
                                 <span class="modifier">Private</span>
-                            myUserID</b>
-                            <a href="#myUserID"><span class="icon ion-ios-link"></span></a>
+                            myUserDataIdx</b>
+                            <a href="#myUserDataIdx"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -2044,7 +2523,63 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="48" class="link-to-prism">src/app/map/map.component.ts:48</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/map/map.component.ts:41</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="orgData"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            orgData</b>
+                            <a href="#orgData"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>UserData[]</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/map/map.component.ts:39</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="orgMarkerClusters"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            orgMarkerClusters</b>
+                            <a href="#orgMarkerClusters"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/map/map.component.ts:51</a></div>
                             </td>
                         </tr>
 
@@ -2075,7 +2610,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/map/map.component.ts:55</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="72" class="link-to-prism">src/app/map/map.component.ts:72</a></div>
                             </td>
                         </tr>
 
@@ -2103,7 +2638,91 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/map/map.component.ts:42</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/map/map.component.ts:52</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="routePins"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            routePins</b>
+                            <a href="#routePins"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/RoutePins.html" target="_self" >RoutePins[]</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/map/map.component.ts:43</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="user_team_or_stat"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            user_team_or_stat</b>
+                            <a href="#user_team_or_stat"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/map/map.component.ts:61</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="userData"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            userData</b>
+                            <a href="#userData"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>UserData[]</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/map/map.component.ts:40</a></div>
                             </td>
                         </tr>
 
@@ -2125,6 +2744,7 @@ import { UserProfileService } from &#x27;../userprofile.service&#x27;;
 import { PopUpService } from &#x27;../pop-up.service&#x27;;
 import { UserFollowComponent } from &#x27;../user-follow/user-follow.component&#x27;;
 import { RoutePinDialogComponent } from &#x27;../route-pin-dialog/route-pin-dialog.component&#x27;;
+import { MapService } from &#x27;../map.service&#x27;;
 
 import &#x27;leaflet&#x27;;
 import &#x27;leaflet.markercluster&#x27;;
@@ -2138,6 +2758,7 @@ import * as turf from &#x27;@turf/turf&#x27;;
 import { ListKeyManager } from &#x27;@angular/cdk/a11y&#x27;;
 import { AppComponent } from &#x27;../app.component&#x27;;
 import { PopupComponent } from &#x27;../popup/popup.component&#x27;;
+import { RaceService } from &#x27;../race.service&#x27;;
 
 @Component({
   selector: &#x27;app-map&#x27;,
@@ -2148,26 +2769,41 @@ export class MapComponent implements AfterViewInit,OnChanges {
   @Input() coordinates;
   @Input() draw:Boolean;
   @Input() displayUsers:Boolean;
-  @Input() userData:any;
-  @Input() routePins:RoutePins[];
   @Input() followedIDs:any;
   @Input() zoom:Boolean;
+  @Input() raceID:number;
+
+  private orgData: UserData[];
+  private userData: UserData[];
+  private myUserDataIdx: number;
+
+  private routePins: RoutePins[];
 
   public map;
+  private line:any;
   private coordsRoutes:any[];
+
   private markersByUserID &#x3D; {};
   private markerClusters:any;
+  private orgMarkerClusters:any;
   private routePinMarkers:any;
   private layerIDsToUserIndices &#x3D; {};
+  private layerIDsToOrgIndices &#x3D; {};
+
   private myMarker: any;
+
   private marker_start:any;
   private marker_end:any;
-  private line:any;
-  private myUserID:number;
+
+  private user_team_or_stat:any;
+
+  private initialized: boolean &#x3D; false;
 
   //Store user IDs of male and female pins
   private maleIDs: number[];
   private femaleIDs: number[];
+
+  loading:boolean &#x3D; false;
 
   //We extend the Marker class to set our own &#x27;routePinIndex&#x27; option
   private routePinMarker &#x3D; L.Marker.extend({
@@ -2176,43 +2812,84 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }
   });
 
+
   constructor(private popupService:PopUpService, 
               private _profileService:UserProfileService,
+              private _mapService: MapService,
+              private _raceService:RaceService,
               public dialog: MatDialog) {
     this.coordsRoutes &#x3D; [];
     Window[&quot;mapComponent&quot;] &#x3D; this;
-
-    
   }
 
+
   ngOnChanges(changes: SimpleChanges) {
-    for(const propName in changes) {
-      if(changes.hasOwnProperty(propName)) {
-        switch(propName) {
-          case &#x27;coordinates&#x27;:
-            if(changes.coordinates.currentValue !&#x3D; undefined) {
-              this.applyCoordinates();
-              
-              if(this.displayUsers) {
-                this.createUserPins(false);
-              }
-
-              if(this.routePins){
-                this.createRoutePins();
-              }
-
-            }
+    if (this.initialized){
+      for(const propName in changes) {
+        if(changes.hasOwnProperty(propName)) {
+          switch(propName) {
+            case &#x27;raceID&#x27;:
+              this.getMapData();
+          }
         }
       }
     }
-
   }
+
 
   ngAfterViewInit(): void {
     if(this.map &#x3D;&#x3D; undefined) {
       this.initMap();
     }
+
+    //This ensures we can still use homepage coords if provided via Input
+    if (!this.coordinates){
+      this.getMapData();
+    }
+    else {
+      this.applyCoordinates();
+    }
+
+    this.initialized &#x3D; true;
   }
+
+
+  public getMapData(){
+
+    this._mapService.getOrgPinStats(this.raceID).then((data) &#x3D;&gt; {
+      console.log(&#x27;ORG PINSSSS DATAAAAA&#x27;,data);
+      let orgPinData &#x3D; data as OrgPinData;
+      this.orgData &#x3D; orgPinData.org_pins;
+    })
+    
+    this._mapService.getMapData(this.raceID).then((data) &#x3D;&gt; {
+      let mapData &#x3D; data as MapData;
+
+      //Get and apply coordinates
+      this.coordinates &#x3D; mapData.coords;
+      this.applyCoordinates();
+
+      //Get and apply route pins
+      this.routePins &#x3D; mapData.route_pins;
+      if (this.routePins){
+        this.createRoutePins();
+      }
+
+      this.loading&#x3D;true;
+
+      this._raceService.getUserRacestats(this.raceID).then((data:any) &#x3D;&gt; {
+        this.userData &#x3D; data.users_data;
+    
+        if (this.displayUsers){
+          this.createUserPins(false);
+        }
+
+        this.loading&#x3D;false;
+      });
+    });
+
+  }
+
 
   public panToUserMarker(user_id, showPopUp&#x3D;true){
     //Do this to simply pan to user pin
@@ -2222,7 +2899,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
     var markerBounds &#x3D; L.latLngBounds([this.markersByUserID[user_id.toString()][&#x27;latLng&#x27;]]);
     var options &#x3D; {&#x27;maxZoom&#x27;: 15, &#x27;animate&#x27;: true, &#x27;easeLinearity&#x27;: 0.1}
     this.map.fitBounds(markerBounds, options);
-
   }
 
 
@@ -2232,8 +2908,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
     var markerBounds &#x3D; L.latLngBounds(corner1,corner2);
     var options &#x3D; {&#x27;maxZoom&#x27;: 15, &#x27;animate&#x27;: true, &#x27;easeLinearity&#x27;: 0.1}
     this.map.fitBounds(markerBounds, options);
-
   }
+
 
   public panToIsrael(){
     var corner1 &#x3D; L.latLng(31.8,35.3);
@@ -2242,8 +2918,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
     var markerBounds &#x3D; L.latLngBounds(corner1,corner2);
     var options &#x3D; {&#x27;maxZoom&#x27;: 15, &#x27;animate&#x27;: true, &#x27;easeLinearity&#x27;: 0.1}
     this.map.fitBounds(markerBounds, options);
-
   }
+
 
   public clearMap(): void {
     if(this.marker_start &amp;&amp; this.marker_end &amp;&amp; this.line) {
@@ -2253,8 +2929,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }
   }
 
-  private applyCoordinates():void {
 
+  private applyCoordinates():void {
     if(!this.map) {
       this.initMap()
     }
@@ -2343,6 +3019,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     })
   }
 
+
   private union_arrays (x, y) {
     var obj &#x3D; {};
     for (var i &#x3D; x.length-1; i &gt;&#x3D; 0; -- i)
@@ -2357,15 +3034,22 @@ export class MapComponent implements AfterViewInit,OnChanges {
     return res;
   }
 
-  public showPinsFromSettings(settings: PinSettings){
-    if (settings.allAgesOn &amp;&amp; settings.malePinsOn &amp;&amp; settings.femalePinsOn &amp;&amp; !settings.followerPinsOnly){
-      //this.showAllPins();
 
-      //Temp fix to clustering not working after pin filtering
-      //Just redo the whole pin creation process
+  public showPinsFromSettings(settings: PinSettings){
+    //If showing org pins, this overrides all other settings
+    if (settings.showOrgPins){
+      this.createOrgPins();
+      return;
+    }
+
+    //If we instead wish to show all user pins, simply call createUserPins()
+    if (settings.allAgesOn &amp;&amp; settings.malePinsOn &amp;&amp; settings.femalePinsOn &amp;&amp; !settings.followerPinsOnly){
       this.createUserPins(false);
       return;
     }
+
+    //If user selects more granular options, we have to collect IDs corresponding to users
+    //within user selection bounds, and plot the pins of only these users
     
     let unionIDs &#x3D; [];
     let maleIDs &#x3D; [];
@@ -2380,8 +3064,12 @@ export class MapComponent implements AfterViewInit,OnChanges {
       if (settings.femalePinsOn){
         femaleIDs &#x3D; this.getIDsByGender(&#x27;Female&#x27;);
       }
+
+      console.log(&quot;female IDs: &quot;, femaleIDs);
       
       unionIDs &#x3D; maleIDs.concat(femaleIDs);
+      console.log(&quot;Union IDs: &quot;, unionIDs);
+
     }
 
     //Limit to only users we follow
@@ -2405,12 +3093,15 @@ export class MapComponent implements AfterViewInit,OnChanges {
       }
     }
 
+    console.log(&quot;Union IDs: &quot;, unionIDs);
+
     this.showPinsByID(unionIDs, false);
   }
 
   public showAllPins(){
     this.showPinsByID(null, true);
   }
+
 
   public getIDsInAgeRange(minAge: number, maxAge: number){
     let IDs &#x3D; [];
@@ -2423,6 +3114,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     return IDs;
   }
 
+
   public getIDsByGender(gender: string){
     let IDs &#x3D; [];
     for (let i &#x3D; 0; i &lt; this.userData.length; i++){
@@ -2434,6 +3126,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     return IDs;
   }
 
+
   public clearUserPins(){
     //Remove all current user pins
     if (this.markerClusters){
@@ -2441,9 +3134,20 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }
   }
 
+  
+  public clearOrgPins(){
+    if (this.orgMarkerClusters){
+      this.map.removeLayer(this.orgMarkerClusters);
+    }
+  }
+
+
   public showPinsByID(IDs, showAll: boolean){
-    //Clear all pins
+    //Clear all user and org pins
     this.clearUserPins();
+    this.clearOrgPins();
+
+    console.log(&quot;IDs to show: &quot;, IDs);
 
     let viewComponent &#x3D; this;
 
@@ -2452,9 +3156,12 @@ export class MapComponent implements AfterViewInit,OnChanges {
     this.markerClusters.eachLayer(function(layer) {
       let tempUserDataIndex &#x3D; viewComponent.layerIDsToUserIndices[layer._leaflet_id.toString()];
       let tempUserData &#x3D; viewComponent.userData[tempUserDataIndex];
+      console.log(&quot;user data: &quot;, viewComponent.userData);
+      console.log(&quot;User data index: &quot;, tempUserDataIndex);
+      console.log(&quot;layerIDstouserindices: &quot;, viewComponent.layerIDsToUserIndices);
       let pinUserID &#x3D; tempUserData.user_id;
 
-      if (showAll &#x3D;&#x3D; true || IDs.includes(parseInt(pinUserID))){
+      if (showAll &#x3D;&#x3D; true || IDs.includes(pinUserID)){
         layer.addTo(viewComponent.map);
       }
       else {
@@ -2463,14 +3170,9 @@ export class MapComponent implements AfterViewInit,OnChanges {
     });
   }
 
-  public createUserPins(heatMapOn){
-    //Clear all user pins
-    this.clearUserPins();
 
-    //Set max number of markers in a cluster
-    var maxMarkersInCluster &#x3D; 4;
-
-    this.markerClusters &#x3D; L.markerClusterGroup({
+  public createMarkerClusterGroup(maxMarkers: number){
+    return L.markerClusterGroup({
       //disableClusteringAtZoom: 12, //12
       maxClusterRadius: 20, //20
       animateAddingMarkers: true,
@@ -2478,7 +3180,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
           var markers &#x3D; cluster.getAllChildMarkers();
 
           //Maximum of 4 imgs per cluster (choose first 4 children)
-          var markersInCluster &#x3D; Math.min(maxMarkersInCluster, markers.length);
+          var markersInCluster &#x3D; Math.min(maxMarkers, markers.length);
 
           var inner_html &#x3D; &#x27;&#x27;;
 
@@ -2506,68 +3208,43 @@ export class MapComponent implements AfterViewInit,OnChanges {
           });
         }
     });
+  }
 
-    var heatArray &#x3D; new Array(this.userData.length);
 
+  //Updates the logged in users stat and recreates *all* pins
+  public updateMyUserStatAndCreatePins(){
+    //Update our user data item in array
+    this._raceService.getTeamOrUserStat(this.raceID).then((data) &#x3D;&gt; {
+      let userData &#x3D; data as UserData;
+      this.userData[this.myUserDataIdx] &#x3D; userData;
+
+      //Reshow all pins
+      this.createUserPins(false);
+    });
+  }
+
+
+  public createUserPins(heatMapOn){
+    //Clear all user and org pins
+    this.clearUserPins();
+    this.clearOrgPins();
+
+    //Set max number of markers in a cluster and set up clustering
+    var maxMarkersInCluster &#x3D; 4;
+    this.markerClusters &#x3D; this.createMarkerClusterGroup(maxMarkersInCluster);
+
+    //var heatArray &#x3D; new Array(this.userData.length);
+
+    //Iterate over user data, create and show pins and retain map of leaflet ID -&gt; user idx
     for (var i &#x3D; 0; i &lt; this.userData.length; i++){
-      var img_html &#x3D; &quot;&lt;img src&#x3D;\&quot;&quot; + this.userData[i].profile_url + &quot;\&quot;;\&quot;&gt;&lt;div class&#x3D;\&quot;pin\&quot;&gt;&lt;/div&gt;&lt;div class&#x3D;\&quot;pulse\&quot;&gt;&lt;/div&gt;&quot;;
-
-      var userIcon &#x3D; L.divIcon({
-        className: &#x27;location-pin&#x27;,
-        html: img_html,
-        iconSize: [30, 30],
-        iconAnchor: [10, 33],
-        popupAnchor: [0, -62],
-      });
-
-      var user_rel_miles &#x3D; parseFloat(this.userData[i].rel_distance);
-      var user_route_idx &#x3D; this.userData[i].route_idx;
-
-      //Get user&#x27;s distance type for turf
-      var distanceTypeOptions;
-      if (this.userData[i].distance_type &#x3D;&#x3D; &#x27;MI&#x27;){
-        distanceTypeOptions &#x3D; {units: &#x27;miles&#x27;};
-      }
-      else {
-        distanceTypeOptions &#x3D; {units: &#x27;kilometers&#x27;};
-      }
-
-      var along_user &#x3D; turf.along(this.coordsRoutes[user_route_idx], user_rel_miles, distanceTypeOptions);
-
-      var lng_user &#x3D; along_user.geometry.coordinates[0];
-      var lat_user &#x3D; along_user.geometry.coordinates[1];
-
-      heatArray[i] &#x3D; [lat_user,lng_user,1]
-      heatArray[i+this.userData.length] &#x3D; [lat_user,lng_user,1.0]
-
-      var locMarker &#x3D; L.geoJSON(along_user, {
-        pointToLayer: function(feature, latlng) {
-          return L.marker(latlng, { icon: userIcon });
-        }
-      })
-
-      //Get user ID of this race stat
-      let elementID &#x3D; this.userData[i].user_id;
-
-      this.markerClusters.addLayer(locMarker);
-
-      //Update mapping of leaflet marker IDs to index in userData
-      let user_leaflet_id &#x3D; Object.keys(locMarker._layers)[0].toString()
+      // heatArray[i] &#x3D; [lat_user,lng_user,1]
+      // heatArray[i+this.userData.length] &#x3D; [lat_user,lng_user,1.0]
+      let user_leaflet_id &#x3D; this.createPin(this.userData[i]);
       this.layerIDsToUserIndices[user_leaflet_id] &#x3D; i;
 
-      //Retain markers in dict so we can pan to it upon select
-      this.markersByUserID[elementID] &#x3D; {
-          &#x27;locMarker&#x27; : locMarker,
-          &#x27;latLng&#x27; : L.latLng(lat_user, lng_user),
-      };
-
-      //If this pin is current user, pan and zoom to it
       if (this.isMe(this.userData[i])){
-        this.myMarker &#x3D; this.markersByUserID[elementID][&#x27;locMarker&#x27;];
-        this.panToUserMarker(elementID);
-        this.myUserID &#x3D; elementID;
+        this.myUserDataIdx &#x3D; i;
       }
-
     }
 
     //Add pin clusters to map
@@ -2608,27 +3285,141 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     });
 
+    // heatArray &#x3D; heatArray.map(function (p) { return [p[0], p[1]]; });
 
-    heatArray &#x3D; heatArray.map(function (p) { return [p[0], p[1]]; });
-
-    if(heatMapOn)
-    {
-      try{
-        heat.remove();
-      }
-      catch(ex){}
+    // if(heatMapOn)
+    // {
+    //   try{
+    //     heat.remove();
+    //   }
+    //   catch(ex){}
       
-      heat &#x3D; L.heatLayer(heatArray, {radius: 50},{minOpacity: 1.0}).addTo(this.map);
-    }
-    else
-    {
-      try{
-        heat.remove();
-      }
-      catch(ex){}
+    //   heat &#x3D; L.heatLayer(heatArray, {radius: 50},{minOpacity: 1.0}).addTo(this.map);
+    // }
+    // else
+    // {
+    //   try{
+    //     heat.remove();
+    //   }
+    //   catch(ex){}
+    // }
+  }
+
+  
+  public createOrgPins() {
+    console.log(&quot;Creating org pins&quot;);
+
+    //Clear all user and org pins
+    this.clearUserPins();
+    this.clearOrgPins();
+
+    //Set max number of markers in a cluster and set up clustering
+    var maxMarkersInCluster &#x3D; 4;
+    this.orgMarkerClusters &#x3D; this.createMarkerClusterGroup(maxMarkersInCluster);
+
+    //Iterate over user data, create and show pins and retain map of leaflet ID -&gt; user idx
+    for (var i &#x3D; 0; i &lt; this.orgData.length; i++){
+      console.log(&quot;Creating pin with data &quot;, this.orgData[i]);
+      let user_leaflet_id &#x3D; this.createPin(this.orgData[i], true);
+      this.layerIDsToOrgIndices[user_leaflet_id] &#x3D; i;
     }
 
+    //Add pin clusters to map
+    this.map.addLayer(this.orgMarkerClusters);
+
+    //Bind everybody&#x27;s Popupcomponent to their Popup
+    //If popup is ours, we open it up by default
+    let thisComponent &#x3D; this;
+    this.orgMarkerClusters.eachLayer(function(layer) {
+      let tempOrgDataIndex &#x3D; thisComponent.layerIDsToOrgIndices[layer._leaflet_id.toString()];
+      let tempOrgData &#x3D; thisComponent.orgData[tempOrgDataIndex];
+
+      layer.bindPopup( layer &#x3D;&gt; { const popupEl: NgElement &amp; WithProperties&lt;PopupComponent&gt; &#x3D; document.createElement(&#x27;popup-element&#x27;) as any;
+                                      popupEl.userData &#x3D; tempOrgData;
+                                      popupEl.isTag &#x3D; true;
+                                      document.body.appendChild(popupEl);
+                                      return popupEl}, {
+                                        &#x27;autoClose&#x27;: false,
+                                      })
+    })
+
+    //Handle marker onclick events (open popups)
+    this.orgMarkerClusters.on(&#x27;click&#x27;, function(ev) {
+      if (!ev.layer.getPopup()._isOpen){
+        //Open popup if it is already binded
+        ev.layer.getPopup().openPopup();
+      }
+
+      else {
+        //If popup open before click, close it
+        ev.layer.getPopup().closePopup();
+      }
+
+    });
   }
+  
+
+  public createPin(userData: UserData, isTag: boolean&#x3D;false){
+    var img_html &#x3D; &quot;&lt;img src&#x3D;\&quot;&quot; + userData.profile_url + &quot;\&quot;;\&quot;&gt;&lt;div class&#x3D;\&quot;pin\&quot;&gt;&lt;/div&gt;&lt;div class&#x3D;\&quot;pulse\&quot;&gt;&lt;/div&gt;&quot;;
+
+    var userIcon &#x3D; L.divIcon({
+      className: &#x27;location-pin&#x27;,
+      html: img_html,
+      iconSize: [30, 30],
+      iconAnchor: [10, 33],
+      popupAnchor: [0, -62],
+    });
+
+    var user_rel_miles &#x3D; userData.rel_distance;
+    var user_route_idx &#x3D; userData.route_idx;
+
+    //Get user&#x27;s distance type for turf
+    var distanceTypeOptions;
+    if (userData.distance_type &#x3D;&#x3D; &#x27;MI&#x27;){
+      distanceTypeOptions &#x3D; {units: &#x27;miles&#x27;};
+    }
+    else {
+      distanceTypeOptions &#x3D; {units: &#x27;kilometers&#x27;};
+    }
+
+    var along_user &#x3D; turf.along(this.coordsRoutes[user_route_idx], user_rel_miles, distanceTypeOptions);
+
+    var lng_user &#x3D; along_user.geometry.coordinates[0];
+    var lat_user &#x3D; along_user.geometry.coordinates[1];
+
+    var locMarker &#x3D; L.geoJSON(along_user, {
+      pointToLayer: function(feature, latlng) {
+        return L.marker(latlng, { icon: userIcon });
+      }
+    })
+
+    if (isTag){
+      this.orgMarkerClusters.addLayer(locMarker);
+    }
+    else {
+      //Get user ID of this race stat
+      let elementID &#x3D; userData.user_id;
+
+      this.markerClusters.addLayer(locMarker);
+
+      //Retain markers in dict so we can pan to it upon select
+      this.markersByUserID[elementID] &#x3D; {
+          &#x27;locMarker&#x27; : locMarker,
+          &#x27;latLng&#x27; : L.latLng(lat_user, lng_user),
+      };
+
+      //If this pin is current user, pan and zoom to it
+      if (this.isMe(userData)){
+        this.myMarker &#x3D; this.markersByUserID[elementID][&#x27;locMarker&#x27;];
+        this.panToUserMarker(elementID);
+      }
+    }
+
+    //Return leaflet id
+    let user_leaflet_id &#x3D; Object.keys(locMarker._layers)[0].toString()
+    return user_leaflet_id;
+  }
+
 
   private isMe(userData: any){
     if (userData.isMe){
@@ -2645,8 +3436,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
     return false;
   }
 
+
   private openRoutePinDialogueWithIndex(index: number, thisComponent: any){
-    console.log(&quot;In dialogue function&quot;);
     let dialogRef &#x3D; thisComponent.dialog.open(RoutePinDialogComponent, {
       data: { 
         &#x27;title&#x27;: thisComponent.routePins[index].title,
@@ -2655,6 +3446,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
       },
     });
   }
+
 
   private createRoutePins(){
     this.routePinMarkers &#x3D; new L.featureGroup();
@@ -2683,11 +3475,11 @@ export class MapComponent implements AfterViewInit,OnChanges {
     //Handle marker onclick events (open popups)
     let thisComponent &#x3D; this;
     this.routePinMarkers.on(&#x27;click&#x27;, function(ev) {
-      console.log(&quot;Thanks for clicking on marker &quot;, ev.layer.options.routePinIndex);
       thisComponent.openRoutePinDialogueWithIndex(ev.layer.options.routePinIndex, thisComponent);
     });
     
   }
+
 
   private initMap(): void {
     this.map &#x3D; L.map(&#x27;map&#x27;, { zoomControl: false });
@@ -2710,8 +3502,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     //An extract of address points from the LINZ bulk extract: http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde
 //Should be this data set: http://data.linz.govt.nz/#/layer/779-nz-street-address-electoral/
-
-    
   }
 
 
@@ -2724,6 +3514,7 @@ interface PinSettings {
   allAgesOn: boolean;
   minAge: number;
   maxAge: number;
+  showOrgPins: boolean;
 }
 
 interface RoutePins {
@@ -2732,11 +3523,39 @@ interface RoutePins {
   lon: number;
   lat: number;
   image_urls: string[];
-}</code></pre>
+}
+
+interface MapData {
+  coords: any;
+  route_pins: RoutePins[];
+}
+
+interface UserData {
+  user_id: number,
+  total_distance: number,
+  distance_type: string,
+  rel_distance: number,
+  route_idx: number,
+  display_name: string,
+  profile_url: string,
+  follows: boolean,
+  child_user_stats: any[],
+  isTeam: boolean,
+  isMe: boolean,
+  gender: string,
+  age: number,
+  description: string,
+}
+
+interface OrgPinData {
+  org_pins: UserData[];
+}
+</code></pre>
     </div>
 
     <div class="tab-pane fade " id="c-templateData">
         <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;map-container&quot;&gt;
+    &lt;app-loader [isActive]&#x3D;&quot;loading&quot;&gt;&lt;/app-loader&gt;
     &lt;div id&#x3D;&quot;map&quot;&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
     </div>
@@ -2852,8 +3671,8 @@ interface RoutePins {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="map-container">    <div id="map"></div></div></div>'
-    var COMPONENTS = [{'name': 'ActivitiesMenuComponent', 'selector': 'app-activities-menu'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'CommentsFormComponent', 'selector': 'app-comments-form'},{'name': 'ContactHelpComponent', 'selector': 'app-contact-help'},{'name': 'ContactHelpDialogContent', 'selector': 'app-contact-help-dialog-content'},{'name': 'FaqHelpComponent', 'selector': 'app-faq-help'},{'name': 'FaqHelpDialogContent', 'selector': 'app-faq-help-dialog-content'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'LeaderboardComponent', 'selector': 'app-leaderboard'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManualEntryComponent', 'selector': 'app-manual-entry'},{'name': 'ManualInstructionsComponent', 'selector': 'app-manual-instructions'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationPanelComponent', 'selector': 'app-notification-panel'},{'name': 'PasswordChangeComponent', 'selector': 'app-password-change'},{'name': 'PasswordRequestComponent', 'selector': 'app-password-request'},{'name': 'PaypalComponent', 'selector': 'app-paypal'},{'name': 'PopupComponent', 'selector': 'app-popup'},{'name': 'ProfileFormComponent', 'selector': 'app-profile-form'},{'name': 'ProfilePicComponent', 'selector': 'app-profile-pic'},{'name': 'RaceAboutComponent', 'selector': 'app-race-about'},{'name': 'RaceComponent', 'selector': 'app-race'},{'name': 'RaceCreateComponent', 'selector': 'app-race-create'},{'name': 'RaceDayComponent', 'selector': 'app-race-day'},{'name': 'RaceDayDialogContent', 'selector': 'app-race-day-dialog-content'},{'name': 'RaceMenuComponent', 'selector': 'app-race-menu'},{'name': 'RacesComponent', 'selector': 'app-races'},{'name': 'RaceSettingsComponent', 'selector': 'app-race-settings'},{'name': 'RaceViewComponent', 'selector': 'app-race-view'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RoutePinDialogComponent', 'selector': 'app-route-pin-dialog'},{'name': 'ShippingAddressComponent', 'selector': 'app-shipping-address'},{'name': 'ShippingAddressFormComponent', 'selector': 'app-shipping-address-form'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SignupDialogContent', 'selector': 'signup-dialog-content'},{'name': 'SmilesComponent', 'selector': 'app-smiles'},{'name': 'SnackbarComponent', 'selector': 'app-snackbar'},{'name': 'StoryBtnComponent', 'selector': 'app-story-btn'},{'name': 'StoryDialogComponent', 'selector': 'app-story-dialog'},{'name': 'StoryFormComponent', 'selector': 'app-story-form'},{'name': 'StoryModalComponent', 'selector': 'app-story-modal'},{'name': 'StravaInstructionsComponent', 'selector': 'app-strava-instructions'},{'name': 'StravauthComponent', 'selector': 'app-stravauth'},{'name': 'SwagComponent', 'selector': 'app-swag'},{'name': 'SwagDialogContent', 'selector': 'swag-dialog-content'},{'name': 'TeamFormComponent', 'selector': 'app-team-form'},{'name': 'TeamInstructionsComponent', 'selector': 'app-team-instructions'},{'name': 'TeamListComponent', 'selector': 'app-team-list'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'TermsOfServiceDialogContent', 'selector': 'app-terms-of-service-dialog-content'},{'name': 'UserFollowComponent', 'selector': 'app-user-follow'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserProfileNavComponent', 'selector': 'app-user-profile-nav'},{'name': 'UserProgressComponent', 'selector': 'app-user-progress'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserStatsComponent', 'selector': 'app-user-stats'}];
+        var COMPONENT_TEMPLATE = '<div><div class="map-container">    <app-loader [isActive]="loading"></app-loader>    <div id="map"></div></div></div>'
+    var COMPONENTS = [{'name': 'ActivitiesMenuComponent', 'selector': 'app-activities-menu'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'CommentsFormComponent', 'selector': 'app-comments-form'},{'name': 'ContactHelpComponent', 'selector': 'app-contact-help'},{'name': 'ContactHelpDialogContent', 'selector': 'app-contact-help-dialog-content'},{'name': 'FaqHelpComponent', 'selector': 'app-faq-help'},{'name': 'FaqHelpDialogContent', 'selector': 'app-faq-help-dialog-content'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'LeaderboardComponent', 'selector': 'app-leaderboard'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManualEntryComponent', 'selector': 'app-manual-entry'},{'name': 'ManualInstructionsComponent', 'selector': 'app-manual-instructions'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationPanelComponent', 'selector': 'app-notification-panel'},{'name': 'PasswordChangeComponent', 'selector': 'app-password-change'},{'name': 'PasswordRequestComponent', 'selector': 'app-password-request'},{'name': 'PaypalComponent', 'selector': 'app-paypal'},{'name': 'PopupComponent', 'selector': 'app-popup'},{'name': 'ProfileFormComponent', 'selector': 'app-profile-form'},{'name': 'ProfilePicComponent', 'selector': 'app-profile-pic'},{'name': 'RaceAboutComponent', 'selector': 'app-race-about'},{'name': 'RaceComponent', 'selector': 'app-race'},{'name': 'RaceCreateComponent', 'selector': 'app-race-create'},{'name': 'RaceDashboardComponent', 'selector': 'app-race-dashboard'},{'name': 'RaceDayComponent', 'selector': 'app-race-day'},{'name': 'RaceDayDialogContent', 'selector': 'app-race-day-dialog-content'},{'name': 'RaceMenuComponent', 'selector': 'app-race-menu'},{'name': 'RacesComponent', 'selector': 'app-races'},{'name': 'RaceSettingsComponent', 'selector': 'app-race-settings'},{'name': 'RaceStoryManageComponent', 'selector': 'app-race-story-manage'},{'name': 'RaceViewComponent', 'selector': 'app-race-view'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReportFormComponent', 'selector': 'app-report-form'},{'name': 'RoutePinDialogComponent', 'selector': 'app-route-pin-dialog'},{'name': 'ShippingAddressComponent', 'selector': 'app-shipping-address'},{'name': 'ShippingAddressFormComponent', 'selector': 'app-shipping-address-form'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SignupDialogContent', 'selector': 'signup-dialog-content'},{'name': 'SmilesComponent', 'selector': 'app-smiles'},{'name': 'SnackbarComponent', 'selector': 'app-snackbar'},{'name': 'StoryBtnComponent', 'selector': 'app-story-btn'},{'name': 'StoryDeleteDialogComponent', 'selector': 'app-story-delete-dialog'},{'name': 'StoryDialogComponent', 'selector': 'app-story-dialog'},{'name': 'StoryFormComponent', 'selector': 'app-story-form'},{'name': 'StoryModalComponent', 'selector': 'app-story-modal'},{'name': 'StravaInstructionsComponent', 'selector': 'app-strava-instructions'},{'name': 'StravauthComponent', 'selector': 'app-stravauth'},{'name': 'SwagComponent', 'selector': 'app-swag'},{'name': 'SwagDialogContent', 'selector': 'swag-dialog-content'},{'name': 'TagFormComponent', 'selector': 'app-tag-form'},{'name': 'TagSelectComponent', 'selector': 'app-tag-select'},{'name': 'TeamFormComponent', 'selector': 'app-team-form'},{'name': 'TeamInstructionsComponent', 'selector': 'app-team-instructions'},{'name': 'TeamListComponent', 'selector': 'app-team-list'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'TermsOfServiceDialogContent', 'selector': 'app-terms-of-service-dialog-content'},{'name': 'UserFollowComponent', 'selector': 'app-user-follow'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserProfileNavComponent', 'selector': 'app-user-profile-nav'},{'name': 'UserProgressComponent', 'selector': 'app-user-progress'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserStatsComponent', 'selector': 'app-user-stats'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'MapComponent'};
 </script>

@@ -97,6 +97,9 @@
                                 <a href="#getTeam">getTeam</a>
                             </li>
                             <li>
+                                <a href="#getTeamsList">getTeamsList</a>
+                            </li>
+                            <li>
                                 <a href="#joinTeam">joinTeam</a>
                             </li>
                             <li>
@@ -318,6 +321,76 @@
                             <tbody>
                                 <tr>
                                     <td>team_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getTeamsList"></a>
+                    <span class="name">
+                        <b>
+                            getTeamsList
+                        </b>
+                        <a href="#getTeamsList"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getTeamsList(race_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="36"
+                            class="link-to-prism">src/app/team.service.ts:36</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>race_id</td>
                                     <td>
                                                 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
                                     </td>
@@ -593,6 +666,10 @@ export class TeamService {
 
   getTeam(team_id:number) {
     return this.http.post(environment.apiUrl + &#x27;/api/get-team/&#x27;,{team_id:team_id}).toPromise();
+  }
+
+  getTeamsList(race_id:number) {
+    return this.http.post(environment.apiUrl + &#x27;/api/get-teams/&#x27;,{race_id:race_id}).toPromise();
   }
 }
 </code></pre>

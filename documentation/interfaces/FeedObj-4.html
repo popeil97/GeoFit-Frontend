@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/story-dialog/story-dialog.component.ts</code>
+            <code>src/app/story-modal/story-modal.component.ts</code>
         </p>
 
 
@@ -88,9 +88,6 @@
                                         <a href="#display_name">display_name</a>
                                 </li>
                                 <li>
-                                        <a href="#follows">follows</a>
-                                </li>
-                                <li>
                                         <a href="#is_mine">is_mine</a>
                                 </li>
                                 <li>
@@ -110,9 +107,6 @@
                                 </li>
                                 <li>
                                         <a href="#profile_url">profile_url</a>
-                                </li>
-                                <li>
-                                        <a href="#show_comments">show_comments</a>
                                 </li>
                                 <li>
                                         <a href="#story">story</a>
@@ -226,35 +220,6 @@
                                     <tr>
                                         <td class="col-md-4">
                                             <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="follows"></a>
-                                        <span class="name"><b>follows</b><a href="#follows"><span class="icon ion-ios-link"></span></a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>follows:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                                         </td>
                                     </tr>
@@ -458,35 +423,6 @@
                                     <tr>
                                         <td class="col-md-4">
                                             <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
-
-                                        </td>
-                                    </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <a name="show_comments"></a>
-                                        <span class="name"><b>show_comments</b><a href="#show_comments"><span class="icon ion-ios-link"></span></a></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="col-md-4">
-                                        <code>show_comments:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
-</code>
-                                    </td>
-                                </tr>
-
-
-                                    <tr>
-                                        <td class="col-md-4">
-                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
 
                                         </td>
                                     </tr>
@@ -734,24 +670,40 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Inject } from &#x27;@angular/core&#x27;;
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from &#x27;@angular/material/dialog&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, Input } from &#x27;@angular/core&#x27;;
+import { StoryService } from &#x27;../story.service&#x27;;
+import { AuthService } from &#x27;../auth.service&#x27;;
+
+declare var $: any;
 
 @Component({
-  selector: &#x27;app-story-dialog&#x27;,
-  templateUrl: &#x27;./story-dialog.component.html&#x27;,
-  styleUrls: [&#x27;./story-dialog.component.css&#x27;]
+  selector: &#x27;app-story-modal&#x27;,
+  templateUrl: &#x27;./story-modal.component.html&#x27;,
+  styleUrls: [&#x27;./story-modal.component.css&#x27;]
 })
-export class StoryDialogComponent implements OnInit {
+export class StoryModalComponent implements OnInit {
+  storyItem: FeedObj;
 
-  public elementData: FeedObj;
-
-  constructor(public dialogRef: MatDialogRef&lt;StoryDialogComponent&gt;,
-          @Inject(MAT_DIALOG_DATA) public data: any) {
-            this.elementData &#x3D; data.element;
-           }
+  constructor(private _storyService: StoryService,
+              private _authService: AuthService) { }
 
   ngOnInit() {
+  }
+
+  showModal(storyID):void {
+    console.log(&quot;querying with ID: &quot;, storyID);
+    this._storyService.getStoryModalData(storyID).then((data) &#x3D;&gt; {
+      this.storyItem &#x3D; data as FeedObj;
+      $(&quot;#storyModal&quot;).modal(&#x27;show&#x27;);
+    })
+  }
+
+  sendModal(): void {
+    //do something here
+    this.hideModal();
+  }
+  hideModal():void {
+    document.getElementById(&#x27;close-modal&#x27;).click();
   }
 
 }
@@ -775,8 +727,14 @@ interface FeedObj {
   created_ts:number;
   is_mine:boolean;
   comments: Comment[];
-  show_comments: boolean;
-  follows: boolean;
+}
+
+interface Comment {
+  display_name:string;
+  username: string;
+  profile_url:string;
+  body:string;
+  created_ts:number;
 }
 </code></pre>
     </div>

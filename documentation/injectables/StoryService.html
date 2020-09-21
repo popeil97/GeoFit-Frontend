@@ -109,6 +109,9 @@
                                 <a href="#postComment">postComment</a>
                             </li>
                             <li>
+                                <a href="#reportStory">reportStory</a>
+                            </li>
+                            <li>
                                 <a href="#uploadStory">uploadStory</a>
                             </li>
                         </ul>
@@ -586,6 +589,88 @@
         <tbody>
             <tr>
                 <td class="col-md-4">
+                    <a name="reportStory"></a>
+                    <span class="name">
+                        <b>
+                            reportStory
+                        </b>
+                        <a href="#reportStory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>reportStory(storyID: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, reportType: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/app/story.service.ts:49</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>storyID</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td>reportType</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
                     <a name="uploadStory"></a>
                     <span class="name">
                         <b>
@@ -761,6 +846,10 @@ export class StoryService {
 
   postComment(storyID, formClean){
       return this.http.post(environment.apiUrl + &#x27;/api/story-comment-post/&#x27;, {form:formClean, story_id: storyID}).toPromise();
+  }
+
+  reportStory(storyID: number, reportType: number){
+    return this.http.post(environment.apiUrl + &#x27;/api/story-report/&#x27;, {story_id: storyID, report_type: reportType}).toPromise();
   }
 
 }

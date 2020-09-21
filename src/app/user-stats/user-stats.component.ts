@@ -20,41 +20,46 @@ export class UserStatsComponent implements OnInit {
     this.userStats = res as UserStats;
     console.log("STATS",this.userStats);
     //this.userStats.mycolors
-    this.showChart(this.userStats.mydates,this.userStats.mydistances,this.userStats.mycolors);
+    this.showChart(this.userStats.mydates,this.userStats.run_dists,this.userStats.walk_dists, this.userStats.bike_dists, this.userStats.other_dists);
     })
   }
 
-   private showChart(mydates,mydistances,mycolors) {
-   // var colors = ['rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)','rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)','rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)','rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)','rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)','rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)','rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)','rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)','rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)','rgba(255, 99, 132, 0.2)','rgba(54, 162, 235, 0.2)','rgba(255, 206, 86, 0.2)','rgba(75, 192, 192, 0.2)','rgba(153, 102, 255, 0.2)','rgba(255, 159, 64, 0.2)']
-   // var colors2 = ['rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)','rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)','rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)','rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)','rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)','rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)','rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)','rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)','rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)','rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)','rgba(255, 99, 132, 1)','rgba(54, 162, 235, 1)','rgba(255, 206, 86, 1)','rgba(75, 192, 192, 1)','rgba(153, 102, 255, 1)','rgba(255, 159, 64, 1)']
+   private showChart(mydates,run_dists,walk_dists,bike_dists,other_dists) {
 
-    var colorArray = new Array(mycolors.length);
-    var colorBorder = new Array(mycolors.length);
-    var i;
-    for (i = 0; i < mycolors.length; i++)
-    {
-      if(mycolors[i] == 1){
-        colorArray[i] = 'rgba(44, 0, 165,0.2)';
-        colorBorder[i] = 'rgba(44, 0, 165,1)';
-      } //run
-      else{//(mycolors[i] == 2){
-        colorArray[i] = 'rgba(54, 162, 235,0.2)';
-        colorBorder[i] = 'rgba(54, 162, 235,1)';
-      }  //ride
-    //  if(mycolors[i] != 1 && mycolors.length[i] !=2){colorArray[i] = 'rgba(255, 206, 86, 0.2)';colorBorder[i] = 'rgba(255, 206, 86, 1)';}  //else
-    }
     this.chart = new Chart('lineCharts', {
       type: 'bar',
       data: {
 
         labels: mydates,
         datasets: [{
-            label: 'Distance',
-            data: mydistances,
-            backgroundColor: colorArray,
-            borderColor: colorBorder,
+            label: 'Run',
+            data: run_dists,
+            backgroundColor: 'rgba(0, 51, 204,0.2)',
+            borderColor: 'rgba(0, 51, 204,1)',
             borderWidth: 1
-        }]
+        },
+        {
+            label: 'Walk',
+            data: walk_dists,
+            backgroundColor: 'rgba(153, 204, 255,0.2)',
+            borderColor: 'rgba(153, 204, 255,1)',
+            borderWidth: 1
+        },
+        {
+            label: 'Ride',
+            data: bike_dists,
+            backgroundColor: 'rgba(204, 0, 204,0.2)',
+            borderColor: 'rgba(204, 0, 204,1)',
+            borderWidth: 1
+        },
+        {
+            label: 'Other',
+            data: other_dists,
+            backgroundColor: 'rgba(255, 179, 102,0.2)',
+            borderColor: 'rgba(255, 179, 102,1)',
+            borderWidth: 1
+        }
+        ],
     },
     options: {
        scales: {
@@ -105,6 +110,18 @@ interface UserStats {
   run_average_dist:number;
   run_average_time:number;
 
+  walk_tot_activities:number;
+  walk_tot_dist:number;
+  walk_tot_hrs:number;
+
+  walk_max_dist:number;
+  walk_max_time:number;
+  walk_max_pace:number;
+
+  walk_average_pace:number;
+  walk_average_dist:number;
+  walk_average_time:number;
+
   ride_tot_activities:number;
   ride_tot_dist:number;
   ride_tot_hrs:number;
@@ -117,7 +134,9 @@ interface UserStats {
   ride_average_dist:number;
   ride_average_time:number;
 
-  mydistances:any[];
   mydates:any[];
-  mycolors:any[];
+  run_dists:any[];
+  walk_dists:any[];
+  bike_dists:any[];
+  other_dists:any[];
 }

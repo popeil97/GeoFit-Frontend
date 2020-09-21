@@ -61,7 +61,7 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/app/profile-form/profile-form.component.ts</code>
+            <code>src/app/profile-pic/profile-pic.component.ts</code>
         </p>
 
 
@@ -389,11 +389,11 @@ import { ImageService } from &#x27;../image.service&#x27;;
 import { DomSanitizer } from &#x27;@angular/platform-browser&#x27;;
 
 @Component({
-  selector: &#x27;app-profile-form&#x27;,
-  templateUrl: &#x27;./profile-form.component.html&#x27;,
-  styleUrls: [&#x27;./profile-form.component.css&#x27;]
+  selector: &#x27;app-profile-pic&#x27;,
+  templateUrl: &#x27;./profile-pic.component.html&#x27;,
+  styleUrls: [&#x27;./profile-pic.component.css&#x27;]
 })
-export class ProfileFormComponent implements OnInit, OnChanges {
+export class ProfilePicComponent implements OnInit, OnChanges {
   @Input() userData: UserData;
 
   @Output() formUpdated: EventEmitter&lt;void&gt; &#x3D; new EventEmitter();
@@ -409,26 +409,11 @@ export class ProfileFormComponent implements OnInit, OnChanges {
     this.profilePicURL &#x3D; null;
 
     this.profileForm &#x3D; new FormGroup({
-      ProfilePic: new FormControl(&#x27;&#x27;),
-      FirstName: new FormControl(&#x27;&#x27;,[
-        Validators.required,
-        Validators.maxLength(30)
-      ]),
-      LastName: new FormControl(&#x27;&#x27;,[
-        Validators.required,
-        Validators.maxLength(30)
-      ]),
-      About: new FormControl(&#x27;&#x27;),
-      Location: new FormControl(&#x27;&#x27;,[
-        Validators.maxLength(30)
-      ]),
-      DistanceType: new FormControl(&#x27;&#x27;),
-    });
+      ProfilePic: new FormControl(&#x27;&#x27;), });
   }
 
   ngOnInit() {
     console.log(&quot;Calling populate form&quot;);
-    console.log(&quot;USER DATA, profile&quot;, this.userData);
     this.populateForm();
   }
 
@@ -449,11 +434,6 @@ export class ProfileFormComponent implements OnInit, OnChanges {
 
   populateForm(): void {
     console.log(&quot;User data: &quot;, this.userData);
-
-    this.profileForm.get(&#x27;FirstName&#x27;).setValue(this.userData.first_name);
-    this.profileForm.get(&#x27;LastName&#x27;).setValue(this.userData.last_name);
-    this.profileForm.get(&#x27;About&#x27;).setValue(this.userData.description);
-    this.profileForm.get(&#x27;Location&#x27;).setValue(this.userData.location);
   }
 
   updateProfile(): void{
@@ -462,27 +442,15 @@ export class ProfileFormComponent implements OnInit, OnChanges {
     if (this.profileForm.valid){
       formClean &#x3D; this.profileForm.value;
 
-      //Crop image, and resize image to handle large files
+      //Resize image to handle large files
       if (this.profilePicURL){
-        this.profilePicURL &#x3D; this._imageService.squareCropImage(this.profilePicURL);
-        
-        this._imageService.resizeImage(this.profilePicURL, 350, 350).then((data) &#x3D;&gt; {
-          formClean.ProfilePic &#x3D; data;
-
-          //call service to update form
-          this._userProfileService.updateProfile(formClean).then((data) &#x3D;&gt; {
-            this.formUpdated.emit();
-          })
-        });
-      }
-      else{
-        //call service to update form
-        this._userProfileService.updateProfile(formClean).then((data) &#x3D;&gt; {
-          this.formUpdated.emit();
-        })
+        formClean.ProfilePic &#x3D; this._imageService.resizeImage(this.profilePicURL, 350, 350);
       }
 
-      
+      //call service to update form
+      this._userProfileService.updateProfile(formClean).then((data) &#x3D;&gt; {
+        this.formUpdated.emit();
+      })
     }
   }
 

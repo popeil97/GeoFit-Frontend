@@ -309,8 +309,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="75"
-                            class="link-to-prism">src/app/race-settings/race-settings.component.ts:75</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="97"
+                            class="link-to-prism">src/app/race-settings/race-settings.component.ts:97</a></div>
                 </td>
             </tr>
 
@@ -348,8 +348,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="121"
-                            class="link-to-prism">src/app/race-settings/race-settings.component.ts:121</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="134"
+                            class="link-to-prism">src/app/race-settings/race-settings.component.ts:134</a></div>
                 </td>
             </tr>
 
@@ -387,8 +387,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="71"
-                            class="link-to-prism">src/app/race-settings/race-settings.component.ts:71</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="93"
+                            class="link-to-prism">src/app/race-settings/race-settings.component.ts:93</a></div>
                 </td>
             </tr>
 
@@ -426,8 +426,8 @@
 
             <tr>
                 <td class="col-md-4">
-                    <div class="io-line">Defined in <a href="" data-line="45"
-                            class="link-to-prism">src/app/race-settings/race-settings.component.ts:45</a></div>
+                    <div class="io-line">Defined in <a href="" data-line="49"
+                            class="link-to-prism">src/app/race-settings/race-settings.component.ts:49</a></div>
                 </td>
             </tr>
 
@@ -611,11 +611,15 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
         Validators.required,
       ]),
       ageRange: new FormControl(-1),
+      showOrgPins: new FormControl(false, [
+        Validators.required,
+      ]),
     });
 
     this.ageRangeOptions &#x3D; [&#x27;0-19&#x27;, &#x27;20-34&#x27;, &#x27;35-49&#x27;, &#x27;50-64&#x27;, &#x27;65-79&#x27;, &#x27;80-&#x27;];
-    
   }
+
+
   ngOnChanges(changes: SimpleChanges): void {
 
     for(const propName in changes) {
@@ -640,6 +644,24 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
             this.settingsForm.get(&#x27;ageRange&#x27;).enable();
           }
       });
+
+    this.settingsForm.get(&#x27;showOrgPins&#x27;).valueChanges
+      .subscribe(value &#x3D;&gt; {
+        if (value &#x3D;&#x3D; true) {
+          this.settingsForm.get(&#x27;ageRange&#x27;).disable();
+          this.settingsForm.get(&#x27;allAgesOn&#x27;).disable();
+          this.settingsForm.get(&#x27;femalePinsOn&#x27;).disable();
+          this.settingsForm.get(&#x27;malePinsOn&#x27;).disable();
+          this.settingsForm.get(&#x27;followerPinsOnly&#x27;).disable();
+        }
+        else {
+          this.settingsForm.get(&#x27;ageRange&#x27;).enable();
+          this.settingsForm.get(&#x27;allAgesOn&#x27;).enable();
+          this.settingsForm.get(&#x27;femalePinsOn&#x27;).enable();
+          this.settingsForm.get(&#x27;malePinsOn&#x27;).enable();
+          this.settingsForm.get(&#x27;followerPinsOnly&#x27;).enable();
+        }
+      })
     
   }
   ngAfterViewInit(): void {
@@ -662,18 +684,9 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
         this.successfulUpdate &#x3D; true;
       });
 
-      // if(this.settingsForm.value.heatMapOn &#x3D;&#x3D; true)
-      // {
-      //   this._raceview.createUserHeatPins();
-      // }
-      // else
-      // {
-      //   this._raceview.createUserPins();
-      // }
-
       let pinSettings &#x3D; this.settingsForm.value as PinSettings;
 
-      if (!this.settingsForm.value.allAgesOn){
+      if (!this.settingsForm.value.allAgesOn &amp;&amp; !this.settingsForm.get(&#x27;ageRange&#x27;).disabled){
         let ages &#x3D; this.settingsForm.value.ageRange.split(&quot;-&quot;);
 
         pinSettings.minAge &#x3D; ages[0];
@@ -715,6 +728,9 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
         Validators.required,
       ]),
       ageRange: new FormControl(-1),
+      showOrgPins: new FormControl(false, [
+        Validators.required,
+      ]),
     });
 
     //Disable age control by default
@@ -738,6 +754,7 @@ interface PinSettings {
   allAgesOn: boolean;
   minAge: number;
   maxAge: number;
+  showOrgPins: boolean;
 }
 </code></pre>
     </div>
@@ -755,6 +772,11 @@ interface PinSettings {
       &lt;div class&#x3D;&quot;form-group&quot;&gt;
         &lt;mat-slide-toggle formControlName&#x3D;&quot;heatMapOn&quot;&gt;Heat Map On&lt;/mat-slide-toggle&gt;
       &lt;/div&gt; --&gt;
+
+      &lt;h3&gt;Organization Pins&lt;/h3&gt;
+      &lt;div class&#x3D;&quot;form-group&quot;&gt;
+        &lt;mat-slide-toggle formControlName&#x3D;&quot;showOrgPins&quot; style&#x3D;&quot;padding-left:25px;&quot;&gt;Show Organization Pins&lt;/mat-slide-toggle&gt;
+      &lt;/div&gt;
       
       &lt;h3&gt;Toggle Pins by Gender&lt;/h3&gt;
       &lt;div class&#x3D;&quot;form-group&quot;&gt;
@@ -865,8 +887,8 @@ interface PinSettings {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div class="container" >    <form [formGroup]="settingsForm">      <h3>Activities</h3>      <div class="form-group" style="padding-left:25px;">        <mat-slide-toggle formControlName="isAutomaticImport">Automatic Activity Import</mat-slide-toggle>      </div>    <!--  <h3>Heat Map</h3>      <div class="form-group">        <mat-slide-toggle formControlName="heatMapOn">Heat Map On</mat-slide-toggle>      </div> -->            <h3>Toggle Pins by Gender</h3>      <div class="form-group">        <mat-slide-toggle formControlName="malePinsOn" style="padding-left:25px;">Male Pins On</mat-slide-toggle>        <mat-slide-toggle formControlName="femalePinsOn" style="padding-left:10px;">Female Pins On</mat-slide-toggle>      </div>      <h3>Toggle Pins by Age</h3>      <div class="form-group" style="padding-left:25px;">        <mat-slide-toggle formControlName="allAgesOn" >Show All Ages</mat-slide-toggle>        <br>        <div style="display: inline-block">          <select class="form-control" formControlName="ageRange" style="display: inline-block">            <option class="dropdown-placeholder" style="display: none" value="-1">Select Age</option>            <option *ngFor="let ageRange of ageRangeOptions" [value]="ageRange">              {{ ageRange }}            </option>          </select>        </div>      </div>      <h3>Show Follower Pins Only</h3>      <div class="form-group">        <mat-slide-toggle formControlName="followerPinsOnly" style="padding-left:25px;">Follower Pins On</mat-slide-toggle>      </div>    </form>      <button mat-button class="btn btn-primary btn-mobile" (click)="apply()" style="background-color:#2C007E">Apply</button>            <div>        <br>        <br>      <div *ngIf="successfulUpdate"    class="alert alert-primary">        <div>       Successfully Applied    </div>    </div>  </div>  </div></div>'
-    var COMPONENTS = [{'name': 'ActivitiesMenuComponent', 'selector': 'app-activities-menu'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'CommentsFormComponent', 'selector': 'app-comments-form'},{'name': 'ContactHelpComponent', 'selector': 'app-contact-help'},{'name': 'ContactHelpDialogContent', 'selector': 'app-contact-help-dialog-content'},{'name': 'FaqHelpComponent', 'selector': 'app-faq-help'},{'name': 'FaqHelpDialogContent', 'selector': 'app-faq-help-dialog-content'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'LeaderboardComponent', 'selector': 'app-leaderboard'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManualEntryComponent', 'selector': 'app-manual-entry'},{'name': 'ManualInstructionsComponent', 'selector': 'app-manual-instructions'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationPanelComponent', 'selector': 'app-notification-panel'},{'name': 'PasswordChangeComponent', 'selector': 'app-password-change'},{'name': 'PasswordRequestComponent', 'selector': 'app-password-request'},{'name': 'PaypalComponent', 'selector': 'app-paypal'},{'name': 'PopupComponent', 'selector': 'app-popup'},{'name': 'ProfileFormComponent', 'selector': 'app-profile-form'},{'name': 'ProfilePicComponent', 'selector': 'app-profile-pic'},{'name': 'RaceAboutComponent', 'selector': 'app-race-about'},{'name': 'RaceComponent', 'selector': 'app-race'},{'name': 'RaceCreateComponent', 'selector': 'app-race-create'},{'name': 'RaceDayComponent', 'selector': 'app-race-day'},{'name': 'RaceDayDialogContent', 'selector': 'app-race-day-dialog-content'},{'name': 'RaceMenuComponent', 'selector': 'app-race-menu'},{'name': 'RacesComponent', 'selector': 'app-races'},{'name': 'RaceSettingsComponent', 'selector': 'app-race-settings'},{'name': 'RaceViewComponent', 'selector': 'app-race-view'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'RoutePinDialogComponent', 'selector': 'app-route-pin-dialog'},{'name': 'ShippingAddressComponent', 'selector': 'app-shipping-address'},{'name': 'ShippingAddressFormComponent', 'selector': 'app-shipping-address-form'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SignupDialogContent', 'selector': 'signup-dialog-content'},{'name': 'SmilesComponent', 'selector': 'app-smiles'},{'name': 'SnackbarComponent', 'selector': 'app-snackbar'},{'name': 'StoryBtnComponent', 'selector': 'app-story-btn'},{'name': 'StoryDialogComponent', 'selector': 'app-story-dialog'},{'name': 'StoryFormComponent', 'selector': 'app-story-form'},{'name': 'StoryModalComponent', 'selector': 'app-story-modal'},{'name': 'StravaInstructionsComponent', 'selector': 'app-strava-instructions'},{'name': 'StravauthComponent', 'selector': 'app-stravauth'},{'name': 'SwagComponent', 'selector': 'app-swag'},{'name': 'SwagDialogContent', 'selector': 'swag-dialog-content'},{'name': 'TeamFormComponent', 'selector': 'app-team-form'},{'name': 'TeamInstructionsComponent', 'selector': 'app-team-instructions'},{'name': 'TeamListComponent', 'selector': 'app-team-list'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'TermsOfServiceDialogContent', 'selector': 'app-terms-of-service-dialog-content'},{'name': 'UserFollowComponent', 'selector': 'app-user-follow'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserProfileNavComponent', 'selector': 'app-user-profile-nav'},{'name': 'UserProgressComponent', 'selector': 'app-user-progress'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserStatsComponent', 'selector': 'app-user-stats'}];
+        var COMPONENT_TEMPLATE = '<div><div class="container" >    <form [formGroup]="settingsForm">      <h3>Activities</h3>      <div class="form-group" style="padding-left:25px;">        <mat-slide-toggle formControlName="isAutomaticImport">Automatic Activity Import</mat-slide-toggle>      </div>    <!--  <h3>Heat Map</h3>      <div class="form-group">        <mat-slide-toggle formControlName="heatMapOn">Heat Map On</mat-slide-toggle>      </div> -->      <h3>Organization Pins</h3>      <div class="form-group">        <mat-slide-toggle formControlName="showOrgPins" style="padding-left:25px;">Show Organization Pins</mat-slide-toggle>      </div>            <h3>Toggle Pins by Gender</h3>      <div class="form-group">        <mat-slide-toggle formControlName="malePinsOn" style="padding-left:25px;">Male Pins On</mat-slide-toggle>        <mat-slide-toggle formControlName="femalePinsOn" style="padding-left:10px;">Female Pins On</mat-slide-toggle>      </div>      <h3>Toggle Pins by Age</h3>      <div class="form-group" style="padding-left:25px;">        <mat-slide-toggle formControlName="allAgesOn" >Show All Ages</mat-slide-toggle>        <br>        <div style="display: inline-block">          <select class="form-control" formControlName="ageRange" style="display: inline-block">            <option class="dropdown-placeholder" style="display: none" value="-1">Select Age</option>            <option *ngFor="let ageRange of ageRangeOptions" [value]="ageRange">              {{ ageRange }}            </option>          </select>        </div>      </div>      <h3>Show Follower Pins Only</h3>      <div class="form-group">        <mat-slide-toggle formControlName="followerPinsOnly" style="padding-left:25px;">Follower Pins On</mat-slide-toggle>      </div>    </form>      <button mat-button class="btn btn-primary btn-mobile" (click)="apply()" style="background-color:#2C007E">Apply</button>            <div>        <br>        <br>      <div *ngIf="successfulUpdate"    class="alert alert-primary">        <div>       Successfully Applied    </div>    </div>  </div>  </div></div>'
+    var COMPONENTS = [{'name': 'ActivitiesMenuComponent', 'selector': 'app-activities-menu'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'CommentsFormComponent', 'selector': 'app-comments-form'},{'name': 'ContactHelpComponent', 'selector': 'app-contact-help'},{'name': 'ContactHelpDialogContent', 'selector': 'app-contact-help-dialog-content'},{'name': 'FaqHelpComponent', 'selector': 'app-faq-help'},{'name': 'FaqHelpDialogContent', 'selector': 'app-faq-help-dialog-content'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'LeaderboardComponent', 'selector': 'app-leaderboard'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManualEntryComponent', 'selector': 'app-manual-entry'},{'name': 'ManualInstructionsComponent', 'selector': 'app-manual-instructions'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'NotificationPanelComponent', 'selector': 'app-notification-panel'},{'name': 'PasswordChangeComponent', 'selector': 'app-password-change'},{'name': 'PasswordRequestComponent', 'selector': 'app-password-request'},{'name': 'PaypalComponent', 'selector': 'app-paypal'},{'name': 'PopupComponent', 'selector': 'app-popup'},{'name': 'ProfileFormComponent', 'selector': 'app-profile-form'},{'name': 'ProfilePicComponent', 'selector': 'app-profile-pic'},{'name': 'RaceAboutComponent', 'selector': 'app-race-about'},{'name': 'RaceComponent', 'selector': 'app-race'},{'name': 'RaceCreateComponent', 'selector': 'app-race-create'},{'name': 'RaceDashboardComponent', 'selector': 'app-race-dashboard'},{'name': 'RaceDayComponent', 'selector': 'app-race-day'},{'name': 'RaceDayDialogContent', 'selector': 'app-race-day-dialog-content'},{'name': 'RaceMenuComponent', 'selector': 'app-race-menu'},{'name': 'RacesComponent', 'selector': 'app-races'},{'name': 'RaceSettingsComponent', 'selector': 'app-race-settings'},{'name': 'RaceStoryManageComponent', 'selector': 'app-race-story-manage'},{'name': 'RaceViewComponent', 'selector': 'app-race-view'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'ReportFormComponent', 'selector': 'app-report-form'},{'name': 'RoutePinDialogComponent', 'selector': 'app-route-pin-dialog'},{'name': 'ShippingAddressComponent', 'selector': 'app-shipping-address'},{'name': 'ShippingAddressFormComponent', 'selector': 'app-shipping-address-form'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'SignupDialogContent', 'selector': 'signup-dialog-content'},{'name': 'SmilesComponent', 'selector': 'app-smiles'},{'name': 'SnackbarComponent', 'selector': 'app-snackbar'},{'name': 'StoryBtnComponent', 'selector': 'app-story-btn'},{'name': 'StoryDeleteDialogComponent', 'selector': 'app-story-delete-dialog'},{'name': 'StoryDialogComponent', 'selector': 'app-story-dialog'},{'name': 'StoryFormComponent', 'selector': 'app-story-form'},{'name': 'StoryModalComponent', 'selector': 'app-story-modal'},{'name': 'StravaInstructionsComponent', 'selector': 'app-strava-instructions'},{'name': 'StravauthComponent', 'selector': 'app-stravauth'},{'name': 'SwagComponent', 'selector': 'app-swag'},{'name': 'SwagDialogContent', 'selector': 'swag-dialog-content'},{'name': 'TagFormComponent', 'selector': 'app-tag-form'},{'name': 'TagSelectComponent', 'selector': 'app-tag-select'},{'name': 'TeamFormComponent', 'selector': 'app-team-form'},{'name': 'TeamInstructionsComponent', 'selector': 'app-team-instructions'},{'name': 'TeamListComponent', 'selector': 'app-team-list'},{'name': 'TermsOfServiceComponent', 'selector': 'app-terms-of-service'},{'name': 'TermsOfServiceDialogContent', 'selector': 'app-terms-of-service-dialog-content'},{'name': 'UserFollowComponent', 'selector': 'app-user-follow'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserProfileNavComponent', 'selector': 'app-user-profile-nav'},{'name': 'UserProgressComponent', 'selector': 'app-user-progress'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserStatsComponent', 'selector': 'app-user-stats'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'RaceSettingsComponent'};
 </script>

@@ -93,6 +93,7 @@ import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.
 import { SwagListComponent } from './swag-list/swag-list.component';
 import { SwagItemComponent } from './swag-item/swag-item.component';
 import { CartEditComponent } from './cart-edit/cart-edit.component';
+import { MapRouteComponent } from './map-route/map-route.component';
 
 
 @NgModule({
@@ -166,6 +167,7 @@ import { CartEditComponent } from './cart-edit/cart-edit.component';
     SwagListComponent,
     SwagItemComponent,
     CartEditComponent,
+    MapRouteComponent,
       ],
   imports: [
     BrowserModule,
