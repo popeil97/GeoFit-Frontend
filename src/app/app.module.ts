@@ -182,7 +182,7 @@ import { MapRouteComponent } from './map-route/map-route.component';
     DialogSkeletonComponent,
     DialogSkeletonDialogContent,
     WhyInfoComponent,
-    WhyInfoDialogContent
+    WhyInfoDialogContent,
 
     SwagListComponent,
     SwagItemComponent,
