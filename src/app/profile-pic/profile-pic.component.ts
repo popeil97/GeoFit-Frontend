@@ -17,6 +17,7 @@ export class ProfilePicComponent implements OnInit, OnChanges {
   profileForm: FormGroup;
   profilePicURL: any;
   distanceTypeOptions: any[];
+  public profileUpdated:boolean;
 
   constructor(private _userProfileService: UserProfileService, 
               private sanitizer:DomSanitizer,
@@ -25,12 +26,13 @@ export class ProfilePicComponent implements OnInit, OnChanges {
     this.profilePicURL = null;
 
     this.profileForm = new FormGroup({
-      ProfilePic: new FormControl(''), });
+      ProfilePic: new FormControl(''),
+    });
   }
 
   ngOnInit() {
-    console.log("Calling populate form");
     this.populateForm();
+    this.profileUpdated = false;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -53,21 +55,34 @@ export class ProfilePicComponent implements OnInit, OnChanges {
   }
 
   updateProfile(): void{
-    let formClean: ProfileForm;
+    let formClean: ProfilePic;
 
     if (this.profileForm.valid){
       formClean = this.profileForm.value;
 
-      //Resize image to handle large files
+      //Crop image, and resize image to handle large files
       if (this.profilePicURL){
-        formClean.ProfilePic = this._imageService.resizeImage(this.profilePicURL, 350, 350);
+        this.profilePicURL = this._imageService.squareCropImage(this.profilePicURL);
+        
+        this._imageService.resizeImage(this.profilePicURL, 350, 350).then((data) => {
+          formClean.ProfilePic = data;
+
+          //call service to update form
+          this._userProfileService.updateProfile(formClean).then((data) => {
+            this.formUpdated.emit();
+          })
+        });
+      }
+      else{
+        //call service to update form
+        this._userProfileService.updateProfile(formClean).then((data) => {
+          this.formUpdated.emit();
+        })
       }
 
-      //call service to update form
-      this._userProfileService.updateProfile(formClean).then((data) => {
-        this.formUpdated.emit();
-      })
+      
     }
+    this.profileUpdated = true;
   }
 
   onSelectFile(event) {
@@ -97,7 +112,7 @@ export class ProfilePicComponent implements OnInit, OnChanges {
 
 }
 
-export interface ProfileForm {
+export interface ProfilePic {
   ProfilePic: any;
   FirstName: string;
   LastName: string;

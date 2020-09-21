@@ -1,5 +1,6 @@
 import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { UserProfileService } from '../userprofile.service';
 import { AuthService } from '../auth.service';
 import { RaceService } from '../race.service';
@@ -22,7 +23,8 @@ export class UserPageComponent implements OnInit {
               private router:Router,
               private _userProfileService:UserProfileService,
               public _authService: AuthService,
-              private raceService: RaceService,) { }
+              private raceService: RaceService,) { 
+  }
 
   showEdit: boolean;
 
@@ -90,6 +92,7 @@ export class UserPageComponent implements OnInit {
   }
   toggleEditView(): void{
     this.showEdit = !this.showEdit;
+    console.log("EDIT .", this.showEdit);
   }
 
   viewRace(race:any) {

@@ -39,6 +39,16 @@ export class ProfileFormComponent implements OnInit, OnChanges {
         Validators.maxLength(30)
       ]),
       DistanceType: new FormControl(''),
+      emailToggle: new FormControl(false, [
+        Validators.required,
+      ]),
+    
+      locationToggle: new FormControl(false, [
+        Validators.required,
+      ]),
+      aboutToggle: new FormControl(false, [
+        Validators.required,
+      ]),
     });
   }
 

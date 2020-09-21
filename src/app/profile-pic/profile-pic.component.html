@@ -5,7 +5,7 @@
     <div class="form-group" style="text-align: left; padding: 5px;">
       <label name="ProfilePic">Profile Picture</label>
       <br>
-      <input type="file" formControlName="ProfilePic" (change)="onSelectFile($event)"/>
+      <input type="file" formControlName="ProfilePic" (change)="onSelectFile($event)" />
       <i class="material-icons" *ngIf="profilePicURL" (click)="deleteProfilePic()">close</i>
 
       <br>
@@ -13,5 +13,12 @@
         <img [src]="uploadedProfPicSrc()" width="300px">
       </div>
     </div>
-</form>
+
+
+    <div style="padding: 5px; position: relative; float: left;">
+      <button class="btn btn-primary" mat-raised-button (click)="updateProfile()">Update</button>
+      <div *ngIf="this.profileUpdated"><br> Your info has been updated</div>
+    </div>
+
+  </form>
 </div>
