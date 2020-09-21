@@ -90,6 +90,9 @@ import { ReportFormComponent } from './report-form/report-form.component';
 import { StoryDeleteDialogComponent } from './story-delete-dialog/story-delete-dialog.component';
 import { RaceDashboardComponent } from './race-dashboard/race-dashboard.component';
 import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.component';
+import { SwagListComponent } from './swag-list/swag-list.component';
+import { SwagItemComponent } from './swag-item/swag-item.component';
+import { CartEditComponent } from './cart-edit/cart-edit.component';
 
 
 @NgModule({
@@ -160,6 +163,9 @@ import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.
     StoryDeleteDialogComponent,
     RaceDashboardComponent,
     RaceStoryManageComponent,
+    SwagListComponent,
+    SwagItemComponent,
+    CartEditComponent,
       ],
   imports: [
     BrowserModule,

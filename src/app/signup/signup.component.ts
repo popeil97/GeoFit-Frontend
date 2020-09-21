@@ -8,6 +8,7 @@ import { PaymentType } from '../payments.service';
 import { AboutData } from '../race-about/race-about.component';
 import { TagType } from '../tags.service';
 import { RaceService } from '../race.service';
+import { Cart } from '../swag.service';
 
 
 interface SignupDialogData {
@@ -97,12 +98,18 @@ export class SignupDialogContent {
     complete: new FormControl('',[
       Validators.required,
     ]),
-  })
+  });
 
   tagForm: FormGroup = new FormGroup({
     tagID: new FormControl('',[
       Validators.required
     ]),
+  });
+
+  cartForm: FormGroup = new FormGroup({
+    complete: new FormControl('',[
+      Validators.required,
+    ])
   })
 
   constructor(
@@ -127,10 +134,10 @@ export class SignupDialogContent {
   //   this.dialogRef.close();
   // }
 
-  stepCallback(callbackStruct:SignupCallbackStruct): void {
+  stepCallback(callbackStruct:any): void {
     // if step is completed correctly then do stepper.next()
     let success = callbackStruct.success;
-    let data = callbackStruct.data;
+    
     let type = callbackStruct.type;
 
     console.log(callbackStruct);
@@ -154,7 +161,15 @@ export class SignupDialogContent {
       }
 
       if(type == 'TAG') {
+        let data = callbackStruct.data;
         this.tagForm.controls['tagID'].setValue(data.id);
+      }
+
+      if(type == 'CHECKOUT') {
+        // do nothing?
+        let cart:Cart = callbackStruct.data;
+        this.price = cart.price.toString();
+        this.cartForm.controls['complete'].setValue(true);
       }
       this.stepper.next();
     }
