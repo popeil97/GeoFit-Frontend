@@ -90,12 +90,19 @@ import { ReportFormComponent } from './report-form/report-form.component';
 import { StoryDeleteDialogComponent } from './story-delete-dialog/story-delete-dialog.component';
 import { RaceDashboardComponent } from './race-dashboard/race-dashboard.component';
 import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.component';
+
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AboutTucanComponent } from './about-tucan/about-tucan.component';
 import { FaqPageComponent } from './faq-page/faq-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
 import { DialogSkeletonComponent,DialogSkeletonDialogContent } from './dialog-skeleton/dialog-skeleton.component';
 import { WhyInfoComponent,WhyInfoDialogContent} from './why-info/why-info.component';
+
+import { SwagListComponent } from './swag-list/swag-list.component';
+import { SwagItemComponent } from './swag-item/swag-item.component';
+import { CartEditComponent } from './cart-edit/cart-edit.component';
+import { MapRouteComponent } from './map-route/map-route.component';
+
 
 
 @NgModule({
@@ -176,6 +183,11 @@ import { WhyInfoComponent,WhyInfoDialogContent} from './why-info/why-info.compon
     DialogSkeletonDialogContent,
     WhyInfoComponent,
     WhyInfoDialogContent
+
+    SwagListComponent,
+    SwagItemComponent,
+    CartEditComponent,
+    MapRouteComponent,
       ],
   imports: [
     BrowserModule,

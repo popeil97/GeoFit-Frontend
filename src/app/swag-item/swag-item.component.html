@@ -1,0 +1,57 @@
+<mat-card>
+  <div class="row" *ngIf="!isOrder">
+    <img style="height: 15%; width: 15%;" src={{item.image}}/>
+    <div class="column" style="padding-left: 10%;">
+      <div>{{item.name}}</div>
+      <br>
+      <div>${{item.price}}</div>
+      <br>
+      <div><p style="width: 40%;
+        word-wrap: break-word;">reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee</p></div>
+    </div>
+
+    <div class="column" style="padding-left: 10%;">
+      
+      <h4>Size:</h4>
+      <mat-form-field appearance="fill">
+        <mat-select [(ngModel)]="selectedSize">
+          <mat-option *ngFor="let size of sizes" [value]="size" (click)="onSizeSelect(size)">
+            {{ size }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <br>
+      <button class="btn btn-warning" [disabled]="btnDisabled" mat-raised-button style="position: relative;" (click)="addToCart()">Add to Cart <mat-icon>shopping_cart</mat-icon></button>
+    </div>
+    
+  </div>
+
+
+
+  <div class="row" *ngIf="isOrder">
+    <img style="height: 15%; width: 15%;" src={{order.item.image}}/>
+    <div class="col-md-3" style="padding-left: 10%;">
+      <div>{{order.item.name}}</div>
+      <br>
+      <div>${{order.item.price}}</div>
+
+    </div>
+
+    <div class="col-md-3" *ngIf="isOrder">
+        
+      <h4>Size: {{order.details}}</h4>
+      <br>
+      <br>
+    
+  </div>
+  <div class="col-md-2" *ngIf="isOrder">
+        
+    <button class="btn btn-danger"  mat-raised-button style="float:right;" (click)="removeFromCart()">Remove<mat-icon>shopping_cart</mat-icon></button>
+  
+</div>
+  </div>
+  
+</mat-card>
+
+

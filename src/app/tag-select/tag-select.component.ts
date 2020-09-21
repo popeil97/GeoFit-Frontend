@@ -44,7 +44,7 @@ export class TagSelectComponent implements OnInit {
   }
 
   onTagSelect(tag:Tag) {
-    let callbackBody = {} as SignupCallbackStruct
+    let callbackBody = {} as any
     callbackBody.success = true;
     callbackBody.data = {id:tag.id} as any;
     callbackBody.type = "TAG";

@@ -13,12 +13,14 @@ import { SmilesComponent } from './smiles/smiles.component';
 import { LoginComponent } from './login/login.component';
 import { PasswordRequestComponent } from './password-request/password-request.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
-import { TagSelectComponent } from './tag-select/tag-select.component';
 import { RaceDashboardComponent } from './race-dashboard/race-dashboard.component';
 import {WelcomeComponent} from './welcome/welcome.component'
 import {AboutTucanComponent} from './about-tucan/about-tucan.component'
 import {FaqPageComponent} from './faq-page/faq-page.component'
 import {ContactPageComponent} from './contact-page/contact-page.component'
+import { SwagListComponent } from './swag-list/swag-list.component';
+import { CartEditComponent } from './cart-edit/cart-edit.component';
+import { PaypalComponent } from './paypal/paypal.component';
 
 const routes: Routes = [
   {path: 'race', component:RaceViewComponent},
@@ -34,7 +36,7 @@ const routes: Routes = [
   {path: 'login', component:LoginComponent },
   {path: 'password-request', component:PasswordRequestComponent},
   {path: 'password-change', component:PasswordChangeComponent},
-  {path: 'tag',component:TagSelectComponent},
+  {path: 'test',component:PaypalComponent},
   {path: 'dashboard', component:RaceDashboardComponent },
   {path: 'welcome', component:WelcomeComponent},
   {path: 'about-tucan', component:AboutTucanComponent},

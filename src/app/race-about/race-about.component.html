@@ -67,6 +67,7 @@
 </div>
 
 
+</div>
 
 
 
@@ -101,9 +102,50 @@
 
                <mat-card-title>{{aboutData.name}}
                <i class="material-icons" style="color:#BC164D;">directions_run</i>            
+<<<<<<< HEAD
                <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" [aboutData]="aboutData" [race_id]="raceID" [hasStarted]="hasStarted" (signupCallback)="signupCallback($event)" [hasPaid]="hasPaid" (click)="trySignup()"></app-signup>
              </mat-card-title>
 
+=======
+               <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" style="color:white;
+                box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+                background: green;
+                border-radius: 4px;
+                font-weight: normal;
+                text-transform: uppercase;
+                transition: all 0.2s ease-in-out;
+                width:90px;height:60px;" [aboutData]="aboutData" [race_id]="raceID" [hasStarted]="hasStarted" (signupCallback)="signupCallback($event)" (click)="trySignup()"></app-signup>
+             </mat-card-title>
+
+             </div>
+             <div *ngIf="aboutData.race_type == 2">
+               <mat-card-title>{{aboutData.name}}
+                   <i class="material-icons" style="color:#BC164D;">directions_bike</i>
+                   <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" style="color:white;
+                box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+                background: green;
+                border-radius: 4px;
+                font-weight: normal;
+                text-transform: uppercase;
+                transition: all 0.2s ease-in-out;
+                width:90px;height:60px;" [aboutData]="aboutData" [race_id]="raceID" [hasStarted]="hasStarted" (signupCallback)="signupCallback($event)" (click)="trySignup()"></app-signup>
+                 </mat-card-title>
+
+           </div>
+           <div *ngIf="aboutData.race_type == 3">
+               <mat-card-title>{{aboutData.name}}
+               <i class="material-icons" style="color:#BC164D;">directions_run</i><i class="material-icons" style="color:#BC164D;">directions_bike</i>
+               <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" style="color:white;
+                box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
+                background: green;
+                border-radius: 4px;
+                font-weight: normal;
+                text-transform: uppercase;
+                transition: all 0.2s ease-in-out;
+                width:90px;height:60px;" [aboutData]="aboutData" [race_id]="raceID" [hasStarted]="hasStarted" (signupCallback)="signupCallback($event)" (click)="trySignup()"></app-signup>
+             </mat-card-title>
+           </div>
+>>>>>>> 636599b85964d7a48e64f974c7f4419df315ff87
 
 
 
@@ -122,7 +164,7 @@
         
        </mat-card-header>
        <mat-card-content>
-         <app-map [raceID]="raceID" [displayUsers]="true"></app-map>
+         <app-map [raceIDs]="raceIDs" [displayUsers]="true"></app-map>
          <br><br> <br><br> <br><br><br><br> <br><br> <br><br><br><br> <br><br> <br><br><br><br> <br><br> <br><br>
        </mat-card-content>
      </mat-card>
@@ -319,7 +361,6 @@
 
   <br> -->
 
-</div>
 
 
   

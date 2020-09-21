@@ -22,8 +22,13 @@ export class RaceAboutComponent implements OnInit {
   aboutData:AboutData;
   raceSettings:RaceSettings = {} as RaceSettings;
   showForm: Boolean;
+
+  //Race info
   raceName:string;
   raceID:number;
+  //Includes race IDs of child races if present
+  raceIDs:number[];
+
   uploadeUrl:any;
   teamSizeOptions = [2,3,4,5,6,7,8,9,10];
   isOwner: Boolean;
@@ -32,7 +37,7 @@ export class RaceAboutComponent implements OnInit {
   public coords:any;
   public all_user_data:Array<FeedObj>;
   public followedIDs:number[];
-  hasPaid:Boolean;
+  // hasPaid:Boolean;
   hasMerch:Boolean;
   popup:Boolean;
   hasStarted:Boolean;
@@ -74,6 +79,8 @@ export class RaceAboutComponent implements OnInit {
 
       let raceData = data as RaceData;
       this.followedIDs = raceData.followedIDs;
+      this.raceIDs = raceData.race_IDs;
+      console.log("Race IDs: ", this.raceIDs);
     });
 
 
@@ -85,7 +92,7 @@ export class RaceAboutComponent implements OnInit {
       this.isOwner = resp['isOwner'];
       this.isModerator = resp['isModerator'];
       this.hasJoined = resp['hasJoined'];
-      this.hasPaid = resp['hasPaid'];
+      // this.hasPaid = resp['hasPaid'];
       this.hasStarted = resp['hasStarted'];
       this.hasMerch = this.raceSettings.has_swag;
 
@@ -273,6 +280,8 @@ interface RaceData {
   race_settings:RaceSettings;
   user_stat:any;
   followedIDs:number[];
+  is_mod_or_owner:boolean;
+  race_IDs: number[];
 }
 
 interface FeedObj {

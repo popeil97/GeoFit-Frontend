@@ -1,0 +1,16 @@
+
+<div *ngIf="!isCart">
+  <div *ngFor="let item of items">
+    <app-swag-item [item]="item" [isOrder]="isCart" (refreshState)="refreshCallback($event)"></app-swag-item>
+  </div>
+</div>
+
+<div *ngIf="isCart">
+  <div *ngFor="let order of cart.orders">
+    <app-swag-item [order]="order" [isOrder]="isCart" (refreshState)="refreshCallback($event)"></app-swag-item>
+    <br>
+  </div>
+  <h2 style="float: right;">Total: ${{cart.price}}</h2>
+  
+</div>
+

@@ -17,6 +17,14 @@ export class PaymentsService {
   confirmPayment(payment:Payment) {
     return this.http.post(environment.apiUrl + '/api/payment-confirmed/',{payment:payment}).toPromise();
   }
+
+  getOrderID(price:string) {
+    return this.http.post(environment.apiUrl + '/api/create-order/',{price:price}).toPromise();
+  }
+
+  captureOrder(race_id:number,payment_id:string) {
+    return this.http.post(environment.apiUrl + '/api/capture-order/',{race_id:race_id,payment_id:payment_id}).toPromise();
+  }
 }
 
 export interface Payment {

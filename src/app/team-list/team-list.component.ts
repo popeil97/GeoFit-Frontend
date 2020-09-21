@@ -16,12 +16,12 @@ export class TeamListComponent implements OnInit {
   @Output() callback:EventEmitter<any> = new EventEmitter();
   @Output() edit:EventEmitter<any> = new EventEmitter();
 
-  constructor(private _notificationService:NotificationsService,private _teamService:TeamService,private _snackbar:MatSnackBar) { }
+  constructor(private _notificationService:NotificationsService,
+              private _teamService:TeamService,
+              private _snackbar:MatSnackBar) { }
 
   ngOnInit() {
-    
     this.getTeams();
-    
   }
 
   getTeams(): void {

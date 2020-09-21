@@ -160,7 +160,7 @@ export class RaceCreateComponent implements OnInit {
 
       this._coordinateService.getCoordinates(start_coord,end_coord).then((resp:GraphHopperResp) => {
         console.log('RESP:',resp);
-        this.map.clearMap();
+        //this.map.clearMap();
         this.coords = resp.coords;
         this.isPreviewMode = true;
         this.previewDistance = resp.distance.toString() + resp.dist_unit

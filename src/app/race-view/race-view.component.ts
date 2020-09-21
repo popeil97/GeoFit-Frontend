@@ -34,31 +34,42 @@ export class RaceViewComponent implements OnInit {
   public followers:any[];
   public activities:any[];
   public num_activities:any;
+
   private raceName:string;
+
+  //Parent race ID
   raceID:number;
+
+  //Child race IDs (same as parent if no child IDs)
+  public raceIDs:number[];
+
+  //Info of all child races if present (else just parent race)
+  public childRaceData: ChildRaceData[];
+
+  //Current race ID selected by user. If race has no children, this always equals
+  //ID of parent race
+  public selectedRaceID: number;
+
   private modalData:any;
 
   public progress:Progress = {} as Progress;
-  
   public loading:Boolean = false;
-  //public coords:any;
-  //public all_user_data:Array<FeedObj>;
   public teams:any[];
   public userRaceSettings:any;
   public raceType:number;
   public raceSettings:RaceSettings;
-  //public routePins:any[];
   public userData:UserData;
-
-  public showTeamForm:Boolean = false;
   public changeArrow:Boolean = false;
   public userStat:any = {};
   public followedIDs:number[];
+  public isManualEntry:Boolean = false;
+
+  //Team edit form
+  public showTeamForm:Boolean = false;
   public teamEditForm:TeamEditBody = {
     isEdit:false,
     team_id:null
   };
-  public isManualEntry:Boolean = false;
 
   //User access permissions
   public userRegistered:Boolean = false;
@@ -91,24 +102,17 @@ export class RaceViewComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.raceName = params['params']['name'];
       this.raceID = params['params']['id'];
-      console.log("PARAMS...",params);
     });
 
     if(this._authService.isLoggedIn())
     {
       this._userProfileService.getUserProfile(this._authService.username).then((data) => {
       this.userData = data as UserData;
-      console.log("UD", this.userData);
     });
     }
     
 
     this.getRaceState();
-
-    // go GATORS!
-
-  
-
   }
 
   setLeaderboardTagID(tagFilterStruct:any): void {
@@ -176,7 +180,7 @@ export class RaceViewComponent implements OnInit {
     this.getRaceState();
     
     //this.mapChild.getMapData();
-    this.mapChild.updateMyUserStatAndCreatePins();
+    this.mapChild.updateMyUserStatAndCreatePins(this.selectedRaceID);
 
     _.forEach(this.leaderboardChildren.toArray(),(child:LeaderboardComponent) => {
       child.getLeaderboard();
@@ -186,87 +190,76 @@ export class RaceViewComponent implements OnInit {
   getRaceState(): void {
     this.loading = true;
     this.raceService.getRace(this.raceID).subscribe(data => {
+      console.log(data);
       this.showTeamForm=false;
       let raceData = data as RaceData;
-      console.log('RACE DATA:',raceData);
       this.userRegistered = raceData.user_stat!=null;
-      console.log("userRegistered", this.userRegistered);
       this.progress = raceData.progress;
 
-      if(this.progress.distance_remaining <= 0)
-      {
-            confetti.create()({
-            particleCount: 5000,
-            spread: 900,
-            
-            origin: {
-                y: (1),
-                x: (0.5)
-            }
-        });
-      }
-      console.log("GETTING RACE STATE");
-      // this.activities = raceData.activities;
+      // if(this.progress.distance_remaining <= 0)
+      // {
+      //     confetti.create()({
+      //     particleCount: 5000,
+      //     spread: 900,
+          
+      //     origin: {
+      //         y: (1),
+      //         x: (0.5)
+      //     }
+      //   });
+      // }
+
       this.num_activities = 0;
-
-      //this.coords = raceData.coords;
-      
-      //this.all_user_data = raceData.users_data as Array<FeedObj>;
       this.followedIDs = raceData.followedIDs;
-
-      // this.teams = raceData.users_data.filter((user_data) => {
-      //   if(user_data.isTeam) {
-      //     return user_data;
-      //   }
-      // });
       this.raceType = raceData.race.race_type;
+      this.raceIDs = raceData.race_IDs;
       this.userRaceSettings = raceData.settings;
       this.raceSettings = raceData.race_settings;
-      console.log('RACE SETTINGS:',this.raceSettings);
       this.isManualEntry = this.raceSettings.isManualEntry;
       this.userStat = raceData.user_stat;
-      //this.routePins = raceData.route_pins;
-      this.loading = false;
       this.isOwnerOrModerator = raceData.is_mod_or_owner;
+      this.childRaceData = raceData.child_race_dict;
+
+      this.loading = false;
+
+      //Default to first race ID if not set
+      if (this.selectedRaceID == undefined){
+        this.selectedRaceID = this.raceIDs[0];
+      }
+
+      //Handle case of race having child races
+
     });
   }
 
-  USA(action?:string) {
-  console.log("USA");
-  this.mapChild.panToUSA();
-  }
+  // USA(action?:string) {
+  // console.log("USA");
+  // this.mapChild.panToUSA();
+  // }
 
-  Israel(action?:string) {
-  this.mapChild.panToIsrael();
-  }
+  // Israel(action?:string) {
+  // this.mapChild.panToIsrael();
+  // }
+
   uploadManualEntry(entry:any) {
-    this.activitiesService.uploadManualEntry(entry,this.raceID).then((resp) => {
+    this.activitiesService.uploadManualEntry(entry,this.selectedRaceID).then((resp) => {
       this.refreshStatComponents();
     });
   }
-  panToUserMarker(user_id){
-    //Call map pan function
-    this.mapChild.panToUserMarker(user_id);
-  }
+
+  // panToUserMarker(user_id){
+  //   //Call map pan function
+  //   this.mapChild.panToUserMarker(user_id);
+  // }
 
   clearUserPins(){
     this.mapChild.clearUserPins();
   }
 
-  showPinsByID(IDs){
-    //Pass null to show all pins
-    this.mapChild.showPinsByID(IDs, false);
-  }
-
-  createUserPins(){
-    //Pass null to show all pins
-    this.mapChild.createUserPins(false);
-  }
-
-  createUserHeatPins(){
-    //Pass null to show all pins
-    this.mapChild.createUserPins(true);
-  }
+  // showPinsByID(IDs){
+  //   //Pass null to show all pins
+  //   this.mapChild.showPinsByID(IDs, false);
+  // }
 
   showAllPins(){
     this.mapChild.showAllPins();
@@ -287,6 +280,14 @@ interface RaceData {
   user_stat:any;
   followedIDs:number[];
   is_mod_or_owner:boolean;
+  IDs_to_name: any;
+  race_IDs: number[];
+  child_race_dict: ChildRaceData[];
+}
+
+interface ChildRaceData {
+  id: number,
+  name: string,
 }
 
 interface FeedObj {
