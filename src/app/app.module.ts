@@ -102,6 +102,7 @@ import { SwagListComponent } from './swag-list/swag-list.component';
 import { SwagItemComponent } from './swag-item/swag-item.component';
 import { CartEditComponent } from './cart-edit/cart-edit.component';
 import { MapRouteComponent } from './map-route/map-route.component';
+import { ViewFollowComponent, ViewFollowDialogContent } from './view-follow/view-follow.component';
 
 
 
@@ -188,6 +189,8 @@ import { MapRouteComponent } from './map-route/map-route.component';
     SwagItemComponent,
     CartEditComponent,
     MapRouteComponent,
+    ViewFollowComponent,
+    ViewFollowDialogContent,
       ],
   imports: [
     BrowserModule,
@@ -230,7 +233,8 @@ import { MapRouteComponent } from './map-route/map-route.component';
                   LoginDialogContent,
                   RegisterDialogContent,
                   DialogSkeletonDialogContent,
-                  WhyInfoDialogContent
+                  WhyInfoDialogContent,
+                  ViewFollowDialogContent
                   ] 
 })
 export class AppModule { 

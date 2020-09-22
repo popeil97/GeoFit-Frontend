@@ -1,5 +1,10 @@
   <div *ngIf="!showEdit">
-
+    <div  *ngIf="this._authService.isLoggedIn()">
+      <div *ngIf="userData.is_me">
+        <h2> Following Info </h2>
+       <app-view-follow></app-view-follow>
+     </div>
+   </div>
     <!-- user profile info -->
     <h2>About User</h2>
     <h3>Name:</h3>
@@ -27,6 +32,7 @@
        <div *ngIf="!userData.is_me">
           <app-user-follow [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
        </div>
+
 
     <h2>{{userData.first_name}}'s Stats</h2>
     <app-user-stats [userID]="userData.user_id"></app-user-stats>

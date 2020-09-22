@@ -1,0 +1,13 @@
+ <h3>Followers</h3>
+ <div *ngFor="let person of data.followers">
+ 	<app-user-profile-nav [username]=person.username [displayName]=person.full_name></app-user-profile-nav>
+ 	<app-user-follow [userID]=person.user_id [follows]=false></app-user-follow>
+
+ </div>
+
+<h3> Following</h3>
+  <div *ngFor="let person of data.following">
+ 	<app-user-profile-nav [username]=person.username [displayName]=person.full_name></app-user-profile-nav>
+ 	<app-user-follow [userID]=person.user_id [follows]=true></app-user-follow>
+ </div>
+

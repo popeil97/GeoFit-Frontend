@@ -26,40 +26,56 @@ export class UserStatsComponent implements OnInit {
 
    private showChart(mydates,run_dists,walk_dists,bike_dists,other_dists) {
 
-    this.chart = new Chart('lineCharts', {
-      type: 'bar',
-      data: {
-
-        labels: mydates,
-        datasets: [{
+     var data = [];
+        if(run_dists.length>0)
+        {
+          data.push({
             label: 'Run',
             data: run_dists,
             backgroundColor: 'rgba(0, 51, 204,0.2)',
             borderColor: 'rgba(0, 51, 204,1)',
             borderWidth: 1
-        },
+          });
+        }
+        if(walk_dists.length>0)
         {
+          data.push({
             label: 'Walk',
             data: walk_dists,
             backgroundColor: 'rgba(153, 204, 255,0.2)',
             borderColor: 'rgba(153, 204, 255,1)',
             borderWidth: 1
-        },
+          });
+        }
+        if(bike_dists.length>0)
         {
-            label: 'Ride',
+          data.push({
+           label: 'Ride',
             data: bike_dists,
             backgroundColor: 'rgba(204, 0, 204,0.2)',
             borderColor: 'rgba(204, 0, 204,1)',
             borderWidth: 1
-        },
+          });
+        }
+
+        if(other_dists.length>0)
         {
-            label: 'Other',
+          data.push({
+          label: 'Other',
             data: other_dists,
             backgroundColor: 'rgba(255, 179, 102,0.2)',
             borderColor: 'rgba(255, 179, 102,1)',
             borderWidth: 1
+          });
         }
-        ],
+        console.log("DATA", data);
+    this.chart = new Chart('lineCharts', {
+      type: 'bar',
+      data: {
+
+
+        labels: mydates,
+        datasets: data,
     },
     options: {
        scales: {

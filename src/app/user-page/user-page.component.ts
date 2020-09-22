@@ -19,6 +19,7 @@ export class UserPageComponent implements OnInit {
   userData: UserData;
   public userRaces:any[];
   public racesData:any;
+  
 
   constructor(private route:ActivatedRoute, 
               private router:Router,
@@ -51,11 +52,6 @@ export class UserPageComponent implements OnInit {
         console.log("USER RACES", this.userRaces);
       }
     )
-
-    this._userService.getFollowersAndFollowed().then((resp:FollowersResp) => {
-      console.log('Followers and followed:',resp);
-     // this.followerOptions = resp.follwers_and_followed;
-    });
 
 
   }
@@ -137,6 +133,3 @@ interface UserData {
   is_me: boolean;
 }
 
-interface FollowersResp {
-  followers_and_followed:any[];
-}

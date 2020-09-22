@@ -42,6 +42,10 @@ export class UsersService {
     return this.http.get(environment.apiUrl + '/api/get-followers-and-followed/').toPromise();
   }
 
+  getFollowersAndFollowedSeperate(){
+    return this.http.get(environment.apiUrl + '/api/get-followers-and-followed-sep/').toPromise();
+  }
+
   updateUserRaceSetting(form:any) {
     return this.http.post(environment.apiUrl + '/api/user-race-setting-update/',{form:form}).toPromise();
   }
