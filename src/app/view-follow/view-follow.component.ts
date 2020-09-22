@@ -36,6 +36,8 @@ export class ViewFollowComponent implements OnInit {
   }
 
 
+
+
 }
 
 @Component({
@@ -43,11 +45,17 @@ export class ViewFollowComponent implements OnInit {
   templateUrl: './view-follow-dialog-content.html',
 })
 
-export class ViewFollowDialogContent {
+export class ViewFollowDialogContent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<ViewFollowDialogContent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
+  }
+
+  ngOnInit() {
+      }
+  closeDialog() {
+    this.dialogRef.close(ViewFollowDialogContent);
   }
 
 
