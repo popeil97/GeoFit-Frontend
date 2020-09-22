@@ -2,6 +2,7 @@ import { UserProfileService } from '../userprofile.service';
 import { UsersService } from '../users.service';
 import { Component, OnInit, Inject, ViewChild, Output, EventEmitter, Input } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
+
 @Component({
   selector: 'app-view-follow',
   templateUrl: './view-follow.component.html',

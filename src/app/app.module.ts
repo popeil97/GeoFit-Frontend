@@ -103,6 +103,7 @@ import { SwagItemComponent } from './swag-item/swag-item.component';
 import { CartEditComponent } from './cart-edit/cart-edit.component';
 import { MapRouteComponent } from './map-route/map-route.component';
 import { ViewFollowComponent, ViewFollowDialogContent } from './view-follow/view-follow.component';
+import { ShowFollowersComponent } from './show-followers/show-followers.component';
 
 
 
@@ -191,6 +192,7 @@ import { ViewFollowComponent, ViewFollowDialogContent } from './view-follow/view
     MapRouteComponent,
     ViewFollowComponent,
     ViewFollowDialogContent,
+    ShowFollowersComponent,
       ],
   imports: [
     BrowserModule,

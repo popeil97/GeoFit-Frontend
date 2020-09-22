@@ -32,6 +32,7 @@ export class RacesComponent implements OnInit {
   public isInvitedRaces:Boolean;
   public isPublicRaces:Boolean;
   public joinedRacesIDs:number[];
+  raceSettings:RaceSettings = {} as RaceSettings;
 
   public loading:Boolean = false;
 
@@ -61,6 +62,8 @@ export class RacesComponent implements OnInit {
         console.log('RACE DATA:',this.racesData);
         this.races = _.filter(this.racesData.races,(race:any) => {
           if(!race.joined) {
+            race.raceSettings = this.getRaceSettings(race);
+            console.log("RACE SET",race.raceSettings);
             return race;
           }
         });
@@ -96,6 +99,17 @@ export class RacesComponent implements OnInit {
       }
     });
     }
+  }
+
+  getRaceSettings(race:any)
+  {
+    this.raceService.getRaceAbout(race.id).then((resp) => {
+      resp = resp as any;
+      this.raceSettings = resp['race_settings'];
+      race.raceSettings = this.raceSettings;
+      console.log("RACE SETTINGS", this.raceSettings);
+      return this.raceSettings;
+    });
   }
 
   trySignup(): void {
@@ -165,3 +179,13 @@ interface UserData {
   is_me: boolean;
 }
 
+export interface RaceSettings {
+  isManualEntry:Boolean;
+  allowTeams:Boolean;
+  race_id:number;
+  max_team_size:number;
+  paymentRequired: Boolean,
+  price:any,
+  has_swag:Boolean,
+  has_entry_tags:Boolean,
+}

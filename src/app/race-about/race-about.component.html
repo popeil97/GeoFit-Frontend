@@ -58,7 +58,7 @@
      <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" [aboutData]="aboutData" [race_id]="raceID" [hasStarted]="hasStarted" (signupCallback)="signupCallback($event)" (click)="trySignup()"></app-signup>
     </div>
     <!-- test this by going into the "swag" module in the backend and adding swag to your race -->
-    <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag>
+   <!-- <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag> -->
   </div>
 
 <div class='PageSegment'>

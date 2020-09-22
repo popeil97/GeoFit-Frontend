@@ -29,6 +29,8 @@
             <p>{{race.start_date}} to {{race.end_date}}</p>
             <h3>Distance:</h3>
             <p>{{race.distance}}</p>
+            <h3>Entry Fee:</h3>
+            <p>$ {{race.raceSettings.price}}</p>
 
           </div>
         </div>
@@ -38,7 +40,8 @@
               View Race Map
             </a>
              <!-- this is just temporary for now, have to come back in and fix the inputs -->
-            <app-signup [price]="0.01" [hasTags]=false [race_id]="2" (click)="trySignup()"></app-signup>
+            <app-signup [price]="race.raceSettings.price" [hasTags]="race.raceSettings.has_entry_tags" [race_id]="race.race_id" (signupCallback)="signupCallback($event)" (click)="trySignup()"></app-signup>
+            
           </div>
           <div class='TucanRaceItemSpecificButtons'>
             <a class="btn" (click)="viewAbout(race)">
