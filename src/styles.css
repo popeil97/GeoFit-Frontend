@@ -49,9 +49,37 @@ h6, .h6 {
   left:50%;
   transform:translate(-50%,-50%);
 }
-.TucanFormSegment {
+.TucanFormSegmentContainer, .TucanFormSegment {
   margin-bottom:16px;
 }
+.TucanFormSegment {
+  width:100%;
+}
+.TucanFormLabelSegment {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.TucanFormSegmentContainer {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+  .TucanFormSegmentContainer .TucanFormSegment {
+    flex-shrink:1;
+    margin-left:16px;
+    margin-right:16px;
+    margin-bottom:0;
+  }
+  .TucanFormSegmentContainer .TucanFormSegment:first-child {
+    margin-left:0;
+  }
+  .TucanFormSegmentContainer .TucanFormSegment:last-child {
+    margin-right:0;
+  }
 .InputLabel {
   margin-top:0px;
   margin-bottom:8px;
