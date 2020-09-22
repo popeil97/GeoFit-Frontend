@@ -15,11 +15,26 @@ html, body {
 body { 
   margin: 0; 
   font-family: Roboto, "Helvetica Neue", sans-serif; 
+  font-size: 16px;
 }
 
-h1 {  
-  font-size: 50px !important;
-  line-height: normal !important;
+h1, .h1 {  
+  font-size: 48px !important;
+}
+h2, .h2 {
+  font-size: 40px !important;
+}
+h3, .h3 {
+  font-size: 32px !important;
+}
+h4, .h4 {
+  font-size: 28px !important;
+}
+h5, .h5 {
+  font-size: 24px !important;
+}
+h6, .h6 {
+  font-size: 20px !important;
 }
 
 /* ---- General Use ---- */
@@ -33,6 +48,16 @@ h1 {
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
+}
+.TucanFormSegment {
+  margin-bottom:16px;
+}
+.InputLabel {
+  margin-top:0px;
+  margin-bottom:8px;
+}
+.redText {
+  color:red !important;
 }
 
 /* ---- Global Elements ---- */

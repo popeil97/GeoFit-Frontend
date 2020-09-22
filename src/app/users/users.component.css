@@ -1,6 +1,6 @@
 .masthead {
 
-  height:100vh;
+  height: calc(100vh - 64px);
 
   display:flex;
   flex-direction:row;
@@ -15,6 +15,10 @@
   padding-left:16px;
   padding-right:16px;
   box-sizing: border-box;
+}
+
+.split.right {
+  background-color:darkcyan;
 }
 
 .centered {
@@ -43,9 +47,26 @@ article, aside, figcaption, figure, footer,b header, hgroup, main, nav, section 
 @media only screen and (max-width: 600px) {
   .masthead {
     flex-direction: column;
+    justify-content: flex-end;
   }
   .split {
     width:100%;
+  }
+  .split.left {
+    position: relative;
+    z-index: 1;
+  
+    height:300px;
+
+    background:linear-gradient(0deg, white, white 75%, transparent);
+  }
+  .split.right {
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    z-index: 0;
+
     height:100vh;
   }
 }

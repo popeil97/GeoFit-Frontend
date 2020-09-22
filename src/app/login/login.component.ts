@@ -18,7 +18,6 @@ export class LoginComponent {
   ) {}
 
   openDialog() {
-
     const dialogRef = this.dialog.open(LoginDialogContent,{disableClose: false, data:{} as MatDialogConfig});
   }
 
@@ -28,6 +27,7 @@ export class LoginComponent {
 @Component({
   selector: 'app-login-dialog-content',
   templateUrl: './login-dialog-content.html',
+  styleUrls:['./login-dialog-content.css']
 })
 
 export class LoginDialogContent implements OnInit {
@@ -55,9 +55,8 @@ export class LoginDialogContent implements OnInit {
 
    ngOnInit() {
       this.loginForm = this.formBuilder.group({
-        email: ['', [Validators.required,
-          Validators.email]], //Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
-          password: ['', Validators.required]
+        email: ['', [Validators.required, Validators.email]], //Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
+        password: ['', Validators.required]
       });
 
       // get return url from route parameters or default to '/'

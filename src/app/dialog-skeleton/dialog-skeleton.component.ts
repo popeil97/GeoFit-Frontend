@@ -27,9 +27,7 @@ export class DialogSkeletonComponent implements OnInit {
   }
 
   openDialog() {
-
     const dialogRef = this.dialog.open(DialogSkeletonDialogContent,{disableClose: false, data:{type: this.type} as MatDialogConfig});
-
   }
 
 
@@ -46,7 +44,6 @@ export class DialogSkeletonDialogContent {
 	public type: any
   constructor(public dialogRef: MatDialogRef<DialogSkeletonDialogContent>,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-
   }
 
 
