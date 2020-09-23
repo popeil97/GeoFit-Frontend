@@ -32,6 +32,9 @@ export class Register2Component implements OnInit {
   credentialsSubmitted = false;
   personalSubmitted = false;
   currentYear = new Date().getFullYear();
+  
+  credentialsErrors:any = [];
+  personalErrors:any = [];
   errors: any = [];
 
   redirectParams: any = null;
@@ -51,7 +54,7 @@ export class Register2Component implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       console.log('PARAMS:',params);
-      if(params['params']) {
+      if(params['params'] && params['params']['params']) {
         let inputs = JSON.parse(params['params']['params']);
         console.log('INPUTS:',inputs);
         this.redirectParams = inputs['redirectParams'];
