@@ -40,7 +40,7 @@
               View Race Map
             </a>
              <!-- this is just temporary for now, have to come back in and fix the inputs -->
-            <app-signup [price]="race.raceSettings.price" [hasTags]="race.raceSettings.has_entry_tags" [race_id]="race.race_id" (signupCallback)="signupCallback($event)" (click)="trySignup()"></app-signup>
+            <app-signup [price]="race.raceSettings.price" [hasTags]="race.raceSettings.has_entry_tags"[race_id]="race.id" (signupCallback)="signupCallback($event)" (click)="trySignup()"></app-signup>
             
           </div>
           <div class='TucanRaceItemSpecificButtons'>

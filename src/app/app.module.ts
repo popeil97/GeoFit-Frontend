@@ -203,10 +203,10 @@ import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderbo
     ModalComponent,
     Login2Component,
     Register2Component,
-  ],
     RouteSelectComponent,
     HybridLeaderboardComponent,
       ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
