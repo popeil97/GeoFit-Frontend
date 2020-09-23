@@ -68,5 +68,6 @@ export enum ItemState {
 
 export enum ItemType {
   ENTRY=1,
-  SWAG=2
+  SWAG=2,
+  ENTRYANDSWAG=3
 }

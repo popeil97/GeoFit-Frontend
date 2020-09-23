@@ -103,12 +103,15 @@ import { SwagListComponent } from './swag-list/swag-list.component';
 import { SwagItemComponent } from './swag-item/swag-item.component';
 import { CartEditComponent } from './cart-edit/cart-edit.component';
 import { MapRouteComponent } from './map-route/map-route.component';
+
 import { ViewFollowComponent, ViewFollowDialogContent } from './view-follow/view-follow.component';
 import { ShowFollowersComponent } from './show-followers/show-followers.component';
 import { ModalComponent } from './modal/modal.component';
 import { Login2Component } from './login2/login2.component';
 import { Register2Component } from './register2/register2.component';
 
+import { RouteSelectComponent } from './route-select/route-select.component';
+import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderboard.component';
 
 
 @NgModule({
@@ -201,6 +204,9 @@ import { Register2Component } from './register2/register2.component';
     Login2Component,
     Register2Component,
   ],
+    RouteSelectComponent,
+    HybridLeaderboardComponent,
+      ],
   imports: [
     BrowserModule,
     AppRoutingModule,
