@@ -94,6 +94,8 @@ import { SwagListComponent } from './swag-list/swag-list.component';
 import { SwagItemComponent } from './swag-item/swag-item.component';
 import { CartEditComponent } from './cart-edit/cart-edit.component';
 import { MapRouteComponent } from './map-route/map-route.component';
+import { RouteSelectComponent } from './route-select/route-select.component';
+import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderboard.component';
 
 
 @NgModule({
@@ -168,6 +170,8 @@ import { MapRouteComponent } from './map-route/map-route.component';
     SwagItemComponent,
     CartEditComponent,
     MapRouteComponent,
+    RouteSelectComponent,
+    HybridLeaderboardComponent,
       ],
   imports: [
     BrowserModule,
