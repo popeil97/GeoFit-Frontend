@@ -1,0 +1,49 @@
+<div class="TucanContainer">
+  <button class="CloseLogin" (click)="closeDialog()">Cancel</button>
+  <form class="LoginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      
+      <h2>Log In</h2>
+
+      <div class="TucanFormSegment">
+          <h6 class='InputLabel'>Email</h6>
+          <input type="text" id="loginEmail" formControlName="email" class="form-control" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+          <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">Email address is required</div>
+              <div *ngIf="f.email.errors.email" class="text-danger">Please provide a valid email address</div>
+          </div>
+      </div>
+              
+      <div class="TucanFormSegment">
+          <h6 class='InputLabel'>Password</h6>
+          <input type="password" id="loginPassword" formControlName="password" class="form-control" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+              <div *ngIf="f.password.errors.required">Password is required</div>
+          </div>
+          <a routerLink="/password-request">Forgot password?</a>
+      </div>
+
+      <div class="TucanFormSegment">
+          <button [disabled]="loading" class="">Login</button>
+          <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          <!--<app-register (click)="closeDialog()"></app-register> -->
+         <!-- <a class="btn btn-link"><app-dialog-skeleton type=2></app-dialog-skeleton> </a> -->
+      </div>
+  
+      <div class="TucanContainer">
+          <span *ngFor="let error of errors.non_field_errors">{{ error }}</span>
+      </div>
+  
+  </form>
+
+<!--
+      <div *ngIf="this._authService.isLoggedIn()">
+          <br><br><br>
+          <button (click)="continueAsMe()" class="btn btn-primary" style="background-color:#2C007E; border:#2C007E;">Continue as {{ this._authService.username }}</button>
+          <br><br><br>
+          <button (click)="this._authService.logout()" class="btn btn-primary" style="background-color:#2C007E; border:#2C007E;">Log Out</button>
+      </div>
+      
+  </div>
+-->
+
+</div>

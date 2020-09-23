@@ -59,16 +59,26 @@
           </div>
 
           <div *ngIf="!this._authService.isLoggedIn()">
+            <!--
             <app-login (click)="NavItemClick()"></app-login>
-           <!-- <app-dialog-skeleton type=1 (click)="NavItemClick()"></app-dialog-skeleton> <!--login-->
+            -->
+            <button (click)="openModal('custom-modal-1')">Log In</button>
+            <!-- <app-dialog-skeleton type=1 (click)="NavItemClick()"></app-dialog-skeleton> <!--login-->
           </div>
           
           <div *ngIf="!this._authService.isLoggedIn()">
-            <app-register (click)="NavItemClick()"></app-register>
-          <!--  <app-dialog-skeleton type=2 (click)="NavItemClick()"></app-dialog-skeleton> <!--register-->
+            <!--
+              <app-register (click)="NavItemClick()"></app-register>
+            -->
+            <button (click)="openModal('custom-modal-2')">Sign Up</button>
+            <!--  <app-dialog-skeleton type=2 (click)="NavItemClick()"></app-dialog-skeleton> <!--register-->
           </div>
         </div>
       </div>
     </div>
   </div>
 </nav>
+
+<custom-modal class='custom-modal-container' id="custom-modal-1">
+  <app-login2 id="custom-modal-1"></app-login2>
+</custom-modal>

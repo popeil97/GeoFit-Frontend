@@ -8,9 +8,11 @@
                 <p>Tucan fitness is a social fitness platform for race and fundraiser organizers to engage audiences virtually.</p>
 
                 <div *ngIf="!this._authService.isLoggedIn()">
-                    <app-login></app-login> <!--login-->
+                    <!-- <app-login></app-login> --> <!--login-->
+                    <button (click)="openModal('custom-modal-1')">Log In</button>
                     <p>Don't have an account?</p>
-                    <app-register></app-register>
+                    <button (click)="openModal('custom-modal-2')">Sign Up</button>
+                    <!--<app-register></app-register>-->
                 </div>
                 <a class="btn btn-outline" routerLink='/about-tucan'>
                     About Tucan Fitness

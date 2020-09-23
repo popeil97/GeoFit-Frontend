@@ -3,6 +3,8 @@ import {AuthService} from '../auth.service';
 import {throwError} from 'rxjs';
 import $ from "jquery";
 
+import { ModalService } from '../modalServices';
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -15,7 +17,7 @@ export class UsersComponent implements OnInit {
    */
   public user: any;
   public coords:any;
-  constructor(private _authService: AuthService) { }
+  constructor(private _authService: AuthService, private modalService: ModalService) { }
 
   ngOnInit() {
     this.user = {
@@ -100,6 +102,13 @@ export class UsersComponent implements OnInit {
     this._authService.logout();
   }
 
+  openModal(id: string) {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string) {
+      this.modalService.close(id);
+  }
 
 /**
 * Template Name: Mamba - v2.3.0

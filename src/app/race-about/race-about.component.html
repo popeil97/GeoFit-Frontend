@@ -6,52 +6,45 @@
     class='AboutRaceImage'
   />
 </div>
+
 <div class='PageContainer'>
+  
   <div class='PageSegment'>
     <a class="nav-link" routerLink='/races'><- Return to Public Races</a>
     <h1>{{aboutData.name}}</h1>
     <p>{{aboutData.description}}</p>
 
     <!-- icon to indicate race type : 1-run;2-bike;3-all -->
-    <div *ngIf="aboutData.race_type == 1">
-      <i class="material-icons">directions_run</i> 
-    </div>
-    <div *ngIf="aboutData.race_type == 2">
-      <i class="material-icons">directions_bike</i> 
-    </div>
-    <div *ngIf="aboutData.race_type == 3">
-      <i class="material-icons">directions_run</i> <i class="material-icons" >directions_bike</i> 
-    </div>
+    <i *ngIf="aboutData.race_type == 1" class="material-icons">directions_run</i>
+    <i *ngIf="aboutData.race_type == 2" class="material-icons">directions_bike</i> 
+    <i *ngIf="aboutData.race_type == 3" class="material-icons">directions_run</i> <i class="material-icons" >directions_bike</i> 
   </div>
+  
   <div class='PageSegment'>
-    <h2>Race Details</h2>
-    <h3>Important Locations</h3>
-    <div class='RaceLocationsContainer'>
-      <div class='RaceLocation'>
-        <p>{{aboutData.start_loc}}</p>
+    <h3>Race Details</h3>
+    <div class='MapPreview'>
+      <div class='MapContainer'>
+        <app-map [raceIDs]="raceID" [displayUsers]="false"></app-map>
       </div>
-      <div class='RaceLocation'>
-        <p>- to -</p>
-      </div>
-      <div class='RaceLocation'>
-        <p>{{aboutData.end_loc}}</p>
-      </div>
-    </div>
-    <h3>Important Dates</h3>
-    <div class='RaceLocationsContainer'>
-      <div class='RaceLocation'>
-        <p>{{aboutData.start_date}}</p>
-      </div>
-      <div class='RaceLocation'>
-        <p>- to -</p>
-      </div>
-      <div class='RaceLocation'>
-        <p>{{aboutData.end_date}}</p>
+      <div class='RaceLocationsContainer'>
+        <h6>Important Locations</h6>
+        <p>
+          {{aboutData.start_loc}}
+          <br />- to -<br />
+          {{aboutData.end_loc}}
+        </p>
+        <h6>Important Dates</h6>
+        <p>
+          {{aboutData.start_date}}
+          <br />- to -<br />
+          {{aboutData.end_date}}
+        </p>
       </div>
     </div>
   </div>
+  
   <div class='PageSegment'>
-    <h2>Action Items</h2>
+    <h3>Action Items</h3>
     <div class='RaceButtonsContainer'>
       <a class="btn"  (click)="viewRace()" *ngIf="hasStarted">View Race</a>
       <a class="btn"  mat-button (click)="goToRaceDashboard()" *ngIf="isOwner || isModerator">GO TO DASHBOARD</a>        
@@ -60,12 +53,6 @@
     <!-- test this by going into the "swag" module in the backend and adding swag to your race -->
    <!-- <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag> -->
   </div>
-
-<div class='PageSegment'>
-  <br><br><br><br><br><br><br><br><br><br>
- <app-map [raceIDs]="raceID" [displayUsers]="false"></app-map>
-</div>
-
 
 </div>
 

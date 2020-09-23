@@ -35,6 +35,7 @@ export class RegisterDialogContent {
 
   public type: any
   registerForm: FormGroup;
+  formSegmentIndex = 0;
   loading = false;
   submitted = false;
   errors: any = [];
@@ -86,6 +87,11 @@ export class RegisterDialogContent {
         },
         
         );
+    }
+
+    ChangeFormSegment(n:number) {
+      if (n == null) return;
+      this.formSegmentIndex = n;
     }
 
     // convenience getter for easy access to form fields

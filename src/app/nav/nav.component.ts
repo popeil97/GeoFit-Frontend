@@ -6,6 +6,8 @@ import { UserProfileService } from '../userprofile.service';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { NotificationPanelComponent } from '../notification-panel/notification-panel.component';
 
+import { ModalService } from '../modalServices';
+
 declare var $: any
 
 @Component({
@@ -24,7 +26,8 @@ export class NavComponent implements OnInit {
     private _notificationService:NotificationsService,
     public _authService: AuthService,
     private _userProfileService: UserProfileService,
-    private _bottomSheet: MatBottomSheet
+    private _bottomSheet: MatBottomSheet,
+    private modalService: ModalService,
   ) {}
 
   public notifications:any[] = [];
@@ -120,16 +123,19 @@ export class NavComponent implements OnInit {
 
   purpleTrue(action?:string) {
     this.isPurple = true;
-   
   }
 
   purpleFalse(action?:string) {
     this.isPurple = false;
-   
   }
 
   getPath(action?:string){
     this.path = window.location.pathname;
+  }
+
+  openModal(id: string) {
+    this.modalService.open(id);
+    this.NavItemClick();
   }
 
 }

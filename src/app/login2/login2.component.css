@@ -1,11 +1,8 @@
-.LoginForm {
-    /*margin-top:32px; */
+.LoginForm h2 {
+    margin-bottom:16px;
 }
-    .LoginForm h2 {
-        margin-bottom:16px;
-    }
 .CloseLogin {
-    display:block;
+    /* display:inline-block; */
 }
 .CloseLogin:hover {
     cursor:pointer;

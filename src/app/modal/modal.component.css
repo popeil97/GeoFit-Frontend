@@ -1,0 +1,61 @@
+.custom-modal {
+    /* modal container fixed across whole screen */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    /* z-index must be higher than .jw-modal-background */
+    z-index: 1000;
+    
+    /* enables scrolling for tall modals */
+    overflow: auto;
+}
+
+.custom-modal-body {
+
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+
+    width:75%;
+    max-width:640px;
+
+    padding: 20px;
+    box-sizing: border-box;
+
+    background: #fff;
+}
+
+.custom-modal-background {
+    /* modal background fixed across whole screen */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    /* semi-transparent black  */
+    background-color: #000;
+    opacity: 0.75;
+    
+    /* z-index must be below .jw-modal and above everything else  */
+    z-index: 900;
+}
+
+@media only screen and (max-width:600px) {
+    .custom-modal-body {
+        bottom:0;
+        top:0;
+        left:0;
+        right:0;
+
+        transform:none;
+
+        width:100%;
+        max-width: initial;
+        height:100%;
+    }
+}

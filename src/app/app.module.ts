@@ -62,6 +62,8 @@ import { SignupDialogContent } from './signup/signup.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
 import { SwagComponent, SwagDialogContent } from './swag/swag.component';
 
+import { ModalComponent } from './modal/modal.component';
+
 import { createCustomElement } from '@angular/elements';
 import { PopupComponent } from './popup/popup.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
@@ -104,6 +106,9 @@ import { CartEditComponent } from './cart-edit/cart-edit.component';
 import { MapRouteComponent } from './map-route/map-route.component';
 import { ViewFollowComponent, ViewFollowDialogContent } from './view-follow/view-follow.component';
 import { ShowFollowersComponent } from './show-followers/show-followers.component';
+import { ModalComponent } from './modal/modal.component';
+import { Login2Component } from './login2/login2.component';
+import { Register2Component } from './register2/register2.component';
 
 
 
@@ -193,7 +198,10 @@ import { ShowFollowersComponent } from './show-followers/show-followers.componen
     ViewFollowComponent,
     ViewFollowDialogContent,
     ShowFollowersComponent,
-      ],
+    ModalComponent,
+    Login2Component,
+    Register2Component,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

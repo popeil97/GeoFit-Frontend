@@ -2,11 +2,118 @@
     
     <h2>Sign Up</h2>
 
+    <div *ngIf="formSegmentIndex==0" class="TucanFormPage">
+
+        <div class="TucanFormSegment">
+            <h6 class="InputLabel">Email <sup class="redText">*</sup></h6>
+            <input type="text" formControlName="email" class="form-control" placeholder="Email Address *" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+            <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                <div *ngIf="f.email.errors.required">Email address is required</div>
+                <div *ngIf="f.email.errors.email" class="text-danger">Please provide a valid email address</div>
+            </div>
+        </div>
+    
+        <div class="TucanFormSegment">
+            <h6 class="InputLabel">Password <sup class="redText">*</sup></h6>
+            <input type="password" formControlName="password" class="form-control" placeholder="Password *" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                <div *ngIf="f.password.errors.required">Password is required</div>
+                <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+            </div>
+        </div>
+
+        <div class="TucanFormSegment">
+            <h6 class="InputLabel">Confirm Password <sup class="redText">*</sup></h6>
+            <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password *" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+            <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+                <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+                <div *ngIf="f.confirmPassword.errors.mustMatch">Passwords must match</div>
+            </div>
+        </div>
+        
+        <button (click)="this.ChangeFormSegment(1)">Next</button>
+    </div>
+
+    <div *ngIf="formSegmentIndex==1" class="TucanFormPage">
+        <div class="TucanFormSegmentContainer">
+            <div class="TucanFormSegment">
+                <h6 class="InputLabel">First Name <sup class="redText">*</sup></h6>
+                <input type="text" formControlName="first_name" placeholder="First Name *" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" />
+                <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+                    <div *ngIf="f.first_name.errors.required">First Name is required</div>
+                </div>
+            </div>
+
+            <div class="TucanFormSegment">
+                <h6 class="InputLabel">Last Name <sup class="redText">*</sup></h6>
+                <input type="text" formControlName="last_name" placeholder="Last Name *" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" />
+                <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
+                    <div *ngIf="f.last_name.errors.required">Last Name is required</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="TucanFormLabelSegment">
+            <h6 class="InputLabel">Birthday <sup class="redText">*</sup></h6>
+            <app-why-info></app-why-info>
+        </div>
+        <div class="TucanFormSegmentContainer">
+            <div class="TucanFormSegment">
+                <input type="text" formControlName="month_of_birth" placeholder="Month *" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.month_of_birth.errors }" />
+                <div *ngIf="submitted && f.month_of_birth.errors" class="invalid-feedback">
+                    <div *ngIf="f.month_of_birth.errors.required">Month is required</div>
+                </div>
+            </div>
+            
+            <div class="TucanFormSegment">
+                <input type="text" formControlName="day_of_birth" placeholder="Day *" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.day_of_birth.errors }" />
+                <div *ngIf="submitted && f.day_of_birth.errors" class="invalid-feedback">
+                    <div *ngIf="f.day_of_birth.errors.required">Day is required</div>
+                </div>
+            </div>
+            
+            <div class="TucanFormSegment">
+                <input type="text" formControlName="year_of_birth" placeholder="Year *" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.year_of_birth.errors }" />
+                <div *ngIf="submitted && f.year_of_birth.errors" class="invalid-feedback">
+                    <div *ngIf="f.year_of_birth.errors.required">Year is required</div>
+                </div>
+            </div>
+        </div>
+            
+        <div class="TucanFormSegment">
+            <h6 class="InputLabel">Gender <sup class="redText">*</sup></h6>
+            <select class="form-control" formControlName="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
+                <option value="" label=" -Gender *- " selected ></option>
+                <option *ngFor="let typeOption of genderOptions" [value]="typeOption">
+                {{ typeOption }}
+                </option>
+            </select>
+            <div *ngIf="submitted && f.gender.errors" class="invalid-feedback">
+                <div *ngIf="f.gender.errors.required">Please select a gender.</div>
+            </div>
+        </div>
+
+        <p>By signing up, you agree to our <app-terms-of-service></app-terms-of-service>.</p>
+
+        <div class="container">
+            <span *ngFor="let error of errors">{{ error }}<br /></span>
+        </div>
+
+        <div class="TucanFormSegment">
+            <button (click)="this.ChangeFormSegment(0)">Back</button>
+            <button [disabled]="loading" class="btn btn-primary">Sign Up</button>
+            <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+        </div>
+    </div>
+
+<!--
     <mat-horizontal-stepper linear #stepper> 
         <mat-step [stepControl]>
+            
             <ng-template matStepLabel>Basic Credentials</ng-template>
+
             <div class="TucanFormSegment">
-                <h6 class="InputLabel">Email</h6>
+                <h6 class="InputLabel">Email <sup class="redText">*</sup></h6>
                 <input type="text" formControlName="email" class="form-control" placeholder="Email Address *" [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
                 <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                     <div *ngIf="f.email.errors.required">Email address is required</div>
@@ -15,7 +122,7 @@
             </div>
         
             <div class="TucanFormSegment">
-                <h6 class="InputLabel">Password</h6>
+                <h6 class="InputLabel">Password <sup class="redText">*</sup></h6>
                 <input type="password" formControlName="password" class="form-control" placeholder="Password *" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
                 <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                     <div *ngIf="f.password.errors.required">Password is required</div>
@@ -24,7 +131,7 @@
             </div>
 
             <div class="TucanFormSegment">
-                <h6 class="InputLabel">Confirm Password</h6>
+                <h6 class="InputLabel">Confirm Password <sup class="redText">*</sup></h6>
                 <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Confirm Password *" [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
                 <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
                     <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
@@ -41,7 +148,7 @@
 
             <div class="TucanFormSegmentContainer">
                 <div class="TucanFormSegment">
-                    <h6 class="InputLabel">First Name</h6>
+                    <h6 class="InputLabel">First Name <sup class="redText">*</sup></h6>
                     <input type="text" formControlName="first_name" placeholder="First Name *" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }" />
                     <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
                         <div *ngIf="f.first_name.errors.required">First Name is required</div>
@@ -49,7 +156,7 @@
                 </div>
     
                 <div class="TucanFormSegment">
-                    <h6 class="InputLabel">Last Name</h6>
+                    <h6 class="InputLabel">Last Name <sup class="redText">*</sup></h6>
                     <input type="text" formControlName="last_name" placeholder="Last Name *" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.last_name.errors }" />
                     <div *ngIf="submitted && f.last_name.errors" class="invalid-feedback">
                         <div *ngIf="f.last_name.errors.required">Last Name is required</div>
@@ -57,7 +164,7 @@
                 </div>
             </div>
 
-            <!--
+---------------------------
             <div class="form-group" style="border-color:#ced4da;">
                     <input matInput [matDatepicker]="picker" formControlName="date_of_birth" placeholder="Birthday (MM/DD/YYYY) *" [ngClass]="{ 'is-invalid': submitted && f.date_of_birth.errors }">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -66,10 +173,10 @@
                         <div *ngIf="f.date_of_birth.errors.required">Please enter your date of birth (MM/DD/YYYY).</div>
                     </div>
                 </div> 
-            -->
+---------------------------
 
             <div class="TucanFormLabelSegment">
-                <h6 class="InputLabel">Birthday</h6>
+                <h6 class="InputLabel">Birthday <sup class="redText">*</sup></h6>
                 <app-why-info></app-why-info>
             </div>
             <div class="TucanFormSegmentContainer">
@@ -95,7 +202,8 @@
                 </div>
             </div>
                 
-            <div class="form-group">
+            <div class="TucanFormSegment">
+                <h6 class="InputLabel">Gender <sup class="redText">*</sup></h6>
                 <select class="form-control" formControlName="gender" [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
                     <option value="" label=" -Gender *- " selected ></option>
                     <option *ngFor="let typeOption of genderOptions" [value]="typeOption">
@@ -114,15 +222,20 @@
             </div>
 
             <div class="form-group">
-                <!--<span class="material-icons" style="background-color:#2C007E;">keyboard_backspace</span> -->
+---------------------------
+<span class="material-icons" style="background-color:#2C007E;">keyboard_backspace</span>
+---------------------------
                 <button [disabled]="loading" class="btn btn-primary" style="background-color:#2C007E; border:#2C007E;">Sign Up</button>
                 <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
-                <!-- <a routerLink="/login" class="btn btn-link text-white" style="text-align:right; float: right;">Cancel</a> -->
+---------------------------
+<a routerLink="/login" class="btn btn-link text-white" style="text-align:right; float: right;">Cancel</a>
+---------------------------
             </div>
 
             <button mat-button matStepperPrevious>Back</button>
             <app-login (click)="closeDialog()"></app-login>
-        </mat-step>h
+        </mat-step>
 
     </mat-horizontal-stepper>
+-->
 </form>
