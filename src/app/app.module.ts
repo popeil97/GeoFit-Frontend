@@ -62,7 +62,6 @@ import { SignupDialogContent } from './signup/signup.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
 import { SwagComponent, SwagDialogContent } from './swag/swag.component';
 
-import { ModalComponent } from './modal/modal.component';
 
 import { createCustomElement } from '@angular/elements';
 import { PopupComponent } from './popup/popup.component';
