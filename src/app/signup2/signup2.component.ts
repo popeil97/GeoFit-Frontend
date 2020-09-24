@@ -26,7 +26,7 @@ interface SignupDialogData {
   templateUrl: './signup2.component.html',
   styleUrls: ['./signup2.component.css']
 })
-export class Signup2Component implements OnInit, OnChanges {
+export class Signup2Component implements OnInit {
 
   constructor(
     public dialog: MatDialog, 
