@@ -108,8 +108,7 @@ export class RaceAboutComponent implements OnInit {
 
 
   openModal(id: string) {
-    const data = (id == 'custom-modal-3') ? {price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,aboutData:this.aboutData,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} : null;
-    //
+    const data = (id == 'custom-modal-2') ? {register:true, price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} :(id == 'custom-modal-3') ? {price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} : null;
     console.log("MODAL DATA", data);
     this.modalService.open(id,data);
   }

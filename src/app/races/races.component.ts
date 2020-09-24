@@ -142,10 +142,8 @@ export class RacesComponent implements OnInit {
     this.router.navigate(['/about',{name:race.name,id:race.id}]);
   }
 
-  openModal(id: string, race) {
-    console.log("TEST", race.raceSettings.price,race.id,race.raceSettings.has_entry_tags);
-    const data = (id == 'custom-modal-3') ? {price:race.raceSettings.price,race_id:race.id, hasTags: race.raceSettings.has_entry_tags} : null;
-    //
+ openModal(id: string,race:any) {
+    const data = (id == 'custom-modal-2') ? {register:true, price:race.raceSettings.price,race_id:race.id,hasTags: race.raceSettings.has_entry_tags} :(id == 'custom-modal-3') ? {price:race.raceSettings.price,race_id:race.id,hasTags: race.raceSettings.has_entry_tags} : null;
     console.log("MODAL DATA", data);
     this.modalService.open(id,data);
   }

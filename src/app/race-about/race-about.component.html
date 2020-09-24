@@ -62,8 +62,9 @@
 
       <a class="btn"  mat-button (click)="goToRaceDashboard()" *ngIf="isOwner || isModerator">GO TO DASHBOARD</a>      
 
-      <!--*ngIf="!this._authService.isLoggedIn()"-->
-    <button  (click)="openModal('custom-modal-3')">Register for Race</button>
+    
+    <button *ngIf="!this._authService.isLoggedIn()" (click)="openModal('custom-modal-2')">Register for Race</button>
+    <button *ngIf="this._authService.isLoggedIn()" (click)="openModal('custom-modal-3')">Register for Race</button>
     </div>
     <!-- test this by going into the "swag" module in the backend and adding swag to your race -->
    <!-- <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag> -->

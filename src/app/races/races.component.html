@@ -42,7 +42,8 @@
              <!-- this is just temporary for now, have to come back in and fix the inputs -->
          <!--   <app-signup [price]="race.raceSettings.price" [hasTags]="race.raceSettings.has_entry_tags"[race_id]="race.id" (signupCallback)="signupCallback($event)" (click)="trySignup()"></app-signup> -->
 
-            <button  (click)="openModal('custom-modal-3',race)">Register for Race</button>
+           <button *ngIf="!this._authService.isLoggedIn()" (click)="openModal('custom-modal-2')">Register for Race</button>
+           <button *ngIf= "this._authService.isLoggedIn()" (click)="openModal('custom-modal-3',race)">Register for Race</button>
             
           </div>
           <div class='TucanRaceItemSpecificButtons'>

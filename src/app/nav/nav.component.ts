@@ -133,7 +133,8 @@ export class NavComponent implements OnInit {
     this.path = window.location.pathname;
   }
 
-  openModal(id: string, data:any = null) {
+  openModal(id: string) {
+    const data = (id == 'custom-modal-1') ? {register:false}:(id == 'custom-modal-2') ? {register:false} : null;
     this.modalService.open(id, data);
     this.NavItemClick();
   }

@@ -16,22 +16,8 @@
       <ng-template matStepLabel aria-disabled="true">Pay Signup Fee</ng-template>
       <app-paypal (transactionAlert)="stepCallback($event)" [price]="d.price" [race_id]="d.race_id"></app-paypal>
     </mat-step>
-    <mat-step [attr.disabled]="stepper.selectedIndex != 2" >
-      <ng-template matStepLabel aria-disabled="true">Done</ng-template>
-      <h2 style="text-align: center;">You are Registered!</h2>
-      <div *ngIf="!d.hasStarted" style="text-align:center;">
-        reroute to welcome
-      </div>
-
-      <div *ngIf="d.hasStarted" style="text-align:center;">
-        <h3>You're Ready to join the race!</h3>
-      </div>
-      
-      
-    </mat-step>
   </mat-horizontal-stepper>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button class="CloseLogin" *ngIf="stepper.selectedIndex != 1"(click)="closeDialog()">Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial style="float: center;" class="btn btn-success" *ngIf="stepper.selectedIndex == 1">Complete Registration</button>
+  <button class="CloseLogin" (click)="closeDialog()">Cancel</button>
 </mat-dialog-actions>

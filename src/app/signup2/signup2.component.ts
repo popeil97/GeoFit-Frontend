@@ -86,7 +86,7 @@ export class Signup2Component implements OnInit {
     
     let type = callbackStruct.type;
 
-    console.log(callbackStruct);
+    console.log("CALLBACK",callbackStruct);
 
     if(success) {
       console.log('STEPPER INDEX:',this.stepper.selectedIndex);
@@ -117,7 +117,18 @@ export class Signup2Component implements OnInit {
         this.d.price = cart.price.toString();
         this.cartForm.controls['complete'].setValue(true);
       }
+
+     if(this.stepper.selectedIndex==1)
+     {
+      this.closeDialog();
+      this.router.navigate(['/welcome']);
+     }
+     else
+     {
       this.stepper.next();
+     }
+     
+
     }
   }
 
