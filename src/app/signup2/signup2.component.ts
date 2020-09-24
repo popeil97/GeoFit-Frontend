@@ -39,13 +39,6 @@ export class Signup2Component implements OnInit {
 
   @Input() id: string;
 
-  @Output() signupCallback: EventEmitter<any> = new EventEmitter();
-  @Input() price: any;
-  @Input() race_id: number;
-  @Input() hasPaid: Boolean = false;
-  @Input() aboutData: AboutData = {} as AboutData;
-  @Input() hasStarted:Boolean;
-  @Input() hasTags:Boolean;
 
   modalData: any;
   isLoggedIn:Boolean;
@@ -80,7 +73,7 @@ export class Signup2Component implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn = this._authService.isLoggedIn();
-  	if(this.price != null && this.price != undefined) {
+  	if(this.d.price != null && this.d.price != undefined) {
       this.needsPayment = true;
     }
   }
@@ -104,9 +97,9 @@ export class Signup2Component implements OnInit {
       }
       if(type == 'PAYMENT') {
         this.paymentForm.controls['complete'].setValue(true);
-        let registrationBody = {race_id:this.race_id} as any;
+        let registrationBody = {race_id:this.d.race_id} as any;
 
-        if(this.hasTags) {
+        if(this.d.hasTags) {
           let tagFormClean = this.tagForm.value as any;
           registrationBody.tag_id = tagFormClean.tagID
         }
@@ -121,7 +114,7 @@ export class Signup2Component implements OnInit {
       if(type == 'CHECKOUT') {
         // do nothing?
         let cart:Cart = callbackStruct.data;
-        this.price = cart.price.toString();
+        this.d.price = cart.price.toString();
         this.cartForm.controls['complete'].setValue(true);
       }
       this.stepper.next();

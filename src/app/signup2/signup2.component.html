@@ -1,31 +1,29 @@
 <h2 mat-dialog-title>Register for Race!</h2>
-<p>From Parent - {{d.race_id}}</p> 
+
 
 <mat-dialog-content>
   <mat-horizontal-stepper [linear]="true" #stepper>
-    <mat-step [editable]="true" [stepControl]="tagForm" *ngIf="hasTags">
+    <mat-step [editable]="true" [stepControl]="tagForm" *ngIf="d.hasTags">
       <ng-template matStepLabel aria-disabled="true">Select Organizational/Athletic Tag</ng-template>
       <app-tag-select [raceID]="race_id" [tagType]="tagType" (emitState)="stepCallback($event)"></app-tag-select>
       
     </mat-step>
     <mat-step [editable]="true" [stepControl]="cartForm">
-      <ng-template matStepLabel aria-disabled="true">Pay Signup Fee</ng-template>
+      <ng-template matStepLabel aria-disabled="true">Select Items</ng-template>
       <app-cart-edit [raceID]="race_id" (checkoutAlert)="stepCallback($event)"></app-cart-edit>
     </mat-step>
     <mat-step [editable]="false" [stepControl]="paymentForm">
       <ng-template matStepLabel aria-disabled="true">Pay Signup Fee</ng-template>
-      <app-paypal (transactionAlert)="stepCallback($event)" [price]="price" [race_id]="race_id"></app-paypal>
+      <app-paypal (transactionAlert)="stepCallback($event)" [price]="d.price" [race_id]="d.race_id"></app-paypal>
     </mat-step>
     <mat-step [attr.disabled]="stepper.selectedIndex != 2" >
       <ng-template matStepLabel aria-disabled="true">Done</ng-template>
       <h2 style="text-align: center;">You are Registered!</h2>
-      <div *ngIf="!hasStarted" style="text-align:center;">
-        <h3 style="color:#BC164D;">The race does not start until 8/16, 12:01 AM, come by then and join the race!  <span class="material-icons">sentiment_very_satisfied</span></h3>
-       
-        <h3>In the meantime, download Strava on your mobile device so you're prepared for race day! <br> You can go to your profile (Located in the top left <span class="material-icons">account_circle</span>) to connect Strava and/or change your picture and info.</h3>
+      <div *ngIf="!d.hasStarted" style="text-align:center;">
+        reroute to welcome
       </div>
 
-      <div *ngIf="hasStarted" style="text-align:center;">
+      <div *ngIf="d.hasStarted" style="text-align:center;">
         <h3>You're Ready to join the race!</h3>
       </div>
       
@@ -34,6 +32,6 @@
   </mat-horizontal-stepper>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close *ngIf="stepper.selectedIndex != 1">Cancel</button>
+  <button class="CloseLogin" *ngIf="stepper.selectedIndex != 1"(click)="closeDialog()">Cancel</button>
   <button mat-button [mat-dialog-close]="true" cdkFocusInitial style="float: center;" class="btn btn-success" *ngIf="stepper.selectedIndex == 1">Complete Registration</button>
 </mat-dialog-actions>

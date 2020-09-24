@@ -106,8 +106,16 @@ export class RaceAboutComponent implements OnInit {
     
   }
 
+
   openModal(id: string) {
-    this.modalService.open(id);
+    const data = (id == 'custom-modal-3') ? {price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,aboutData:this.aboutData,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} : null;
+    //
+    console.log("MODAL DATA", data);
+    this.modalService.open(id,data);
+  }
+
+  closeModal(id: string) {
+      this.modalService.close(id);
   }
 
   trySignup(): void {

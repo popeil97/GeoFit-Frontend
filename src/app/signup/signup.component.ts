@@ -66,6 +66,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("DATA FROM RBOT", this.price, this.race_id, this.hasPaid, this.aboutData, this.hasStarted, this.hasTags);
   }
 
 }

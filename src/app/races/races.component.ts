@@ -6,7 +6,7 @@ import * as _ from 'lodash';
 import { AuthService } from '../auth.service';
 import { UserProfileService } from '../userprofile.service';
 import { SignupComponent } from '../signup/signup.component';
-
+import { ModalService } from '../modalServices';
 
 @Component({
   selector: 'app-races',
@@ -42,7 +42,7 @@ export class RacesComponent implements OnInit {
 
   constructor(private raceService: RaceService, 
               private router:Router,
-              public _authService: AuthService,private _userProfileService: UserProfileService) { }
+              public _authService: AuthService,private _userProfileService: UserProfileService,private modalService: ModalService,) { }
 
   ngOnInit() {
     console.log('in races');
@@ -140,6 +140,17 @@ export class RacesComponent implements OnInit {
 
   viewAbout(race:any) {
     this.router.navigate(['/about',{name:race.name,id:race.id}]);
+  }
+
+  openModal(id: string, race) {
+    console.log("TEST", race.raceSettings.price,race.id,race.raceSettings.has_entry_tags);
+    const data = (id == 'custom-modal-3') ? {price:race.raceSettings.price,race_id:race.id, hasTags: race.raceSettings.has_entry_tags} : null;
+    //
+    console.log("MODAL DATA", data);
+    this.modalService.open(id,data);
+  }
+  closeModal(id: string) {
+      this.modalService.close(id);
   }
 
   toggle_pill(pill_type:string) {

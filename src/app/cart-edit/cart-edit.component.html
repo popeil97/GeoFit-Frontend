@@ -1,12 +1,8 @@
 <h2>Items for Sale</h2>
-<div class="jumbotron">
-  <app-swag-list [raceID]="raceID" [isCart]="false" (refreshCart)="refreshCart($event)"></app-swag-list>
-</div>
+<app-swag-list [raceID]="raceID" [isCart]="false" (refreshCart)="refreshCart($event)"></app-swag-list>
 
-<br>
 <h2>Your Cart</h2>
-<div class="jumbotron">
-  <app-swag-list #cart [raceID]="raceID" [isCart]="true" (refreshCart)="refreshCart($event)"></app-swag-list>
-</div>
+ <app-swag-list #cart [raceID]="raceID" [isCart]="true" (refreshCart)="refreshCart($event)"></app-swag-list>
 
-<button class="btn btn-danger"  mat-raised-button style="float:right;" (click)="checkout()">Checkout<mat-icon>shopping_bag</mat-icon></button>
+
+<button class="btn" (click)="checkout()">Checkout<mat-icon>shopping_bag</mat-icon></button>
