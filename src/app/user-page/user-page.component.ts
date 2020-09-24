@@ -19,17 +19,16 @@ export class UserPageComponent implements OnInit {
   userData: UserData;
   public userRaces:any[];
   public racesData:any;
-  
-
-  constructor(private route:ActivatedRoute, 
-              private router:Router,
-              private _userProfileService:UserProfileService,
-              private _userService:UsersService,
-              public _authService: AuthService,
-              private raceService: RaceService,) { 
-  }
-
   showEdit: boolean;
+
+  constructor(
+    private route:ActivatedRoute, 
+    private router:Router,
+    private _userProfileService:UserProfileService,
+    private _userService:UsersService,
+    public _authService: AuthService,
+    private raceService: RaceService,
+  ) {}
 
   ngOnInit() {
     //Don't show edit page by default
@@ -52,7 +51,6 @@ export class UserPageComponent implements OnInit {
         console.log("USER RACES", this.userRaces);
       }
     )
-
 
   }
 
@@ -78,13 +76,11 @@ export class UserPageComponent implements OnInit {
       this.userData = data as UserData;
       console.log("New user data: ", this.userData);
 
-      if (this.userData.location =="")
-      {
+      if (this.userData.location == "") {
         this.userData.location = "N/A";
       }
 
-      if (this.userData.description =="")
-      {
+      if (this.userData.description == "") {
         this.userData.description = "N/A";
       }
     });

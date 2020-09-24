@@ -9,8 +9,10 @@ import { UserProfileService } from '../userprofile.service';
 })
 export class WelcomeComponent implements OnInit {
   userData: UserData;
-  constructor(public _authService: AuthService,
-    private _userProfileService: UserProfileService) { }
+  constructor(
+    public _authService: AuthService,
+    private _userProfileService: UserProfileService
+  ) {}
 
   ngOnInit() {
 
@@ -20,18 +22,11 @@ export class WelcomeComponent implements OnInit {
 
     if (localStorage.getItem('loggedInUsername')){
       this._authService.username = localStorage.getItem('loggedInUsername');
-
       this._userProfileService.getUserProfile(this._authService.username).then((data) => {
-      this.userData = data as UserData;
-      
-    });
-
+        this.userData = data as UserData;
+      });
     }
-
-
-
   }
-
 }
 
 interface UserData {

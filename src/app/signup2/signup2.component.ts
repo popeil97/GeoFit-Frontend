@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Inject, ViewChild, Output, EventEmitter, Input} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
@@ -12,6 +12,7 @@ import { Cart } from '../swag.service';
 import { ModalService } from '../modalServices';
 
 interface SignupDialogData {
+
   price:string,
   isLoggedIn:Boolean,
   race_id:number,
@@ -25,12 +26,19 @@ interface SignupDialogData {
   templateUrl: './signup2.component.html',
   styleUrls: ['./signup2.component.css']
 })
-export class Signup2Component implements OnInit {
+export class Signup2Component implements OnInit, OnChanges {
 
-  constructor(public dialog: MatDialog, private _authService: AuthService,private route:ActivatedRoute, 
-    private router:Router, private _raceService:RaceService, private modalService: ModalService) { }
+  constructor(
+    public dialog: MatDialog, 
+    private _authService: AuthService,
+    private route:ActivatedRoute, 
+    private router:Router, 
+    private _raceService:RaceService, 
+    private modalService: ModalService
+  ) {}
 
   @Input() id: string;
+
   @Output() signupCallback: EventEmitter<any> = new EventEmitter();
   @Input() price: any;
   @Input() race_id: number;
@@ -39,6 +47,7 @@ export class Signup2Component implements OnInit {
   @Input() hasStarted:Boolean;
   @Input() hasTags:Boolean;
 
+  modalData: any;
   isLoggedIn:Boolean;
   needsPayment:Boolean = false;
 
@@ -66,16 +75,17 @@ export class Signup2Component implements OnInit {
     complete: new FormControl('',[
       Validators.required,
     ])
-  })
+  });
 
 
   ngOnInit() {
-  	this.isLoggedIn = this._authService.isLoggedIn();
-
+    this.isLoggedIn = this._authService.isLoggedIn();
   	if(this.price != null && this.price != undefined) {
-        this.needsPayment = true;
-      }
+      this.needsPayment = true;
+    }
   }
+
+  get d() { return this.modalService.modalsData[this.id]}
 
   stepCallback(callbackStruct:any): void {
     // if step is completed correctly then do stepper.next()

@@ -1,7 +1,8 @@
 import { 
   Component, 
   ElementRef, 
-  Input, 
+  Input,
+  ViewChild,
   OnInit 
 } from '@angular/core';
 import { ModalService } from '../modalServices';
@@ -12,7 +13,7 @@ import { ModalService } from '../modalServices';
   styleUrls: ['./modal.component.css']
 })
 export class ModalComponent implements OnInit {
-  
+
   @Input() id: string;
   private element: any;
 

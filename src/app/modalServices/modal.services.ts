@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({ providedIn: 'root' })
 export class ModalService {
     private modals: any[] = [];
+    public modalsData = {};
 
     add(modal: any) {
         // add modal to array of active modals
@@ -14,9 +15,11 @@ export class ModalService {
         this.modals = this.modals.filter(x => x.id !== id);
     }
 
-    open(id: string) {
+    open(id: string, data: any = null) {
         // open modal specified by id
         let modal: any = this.modals.filter(x => x.id === id)[0];
+        if (modal == null || modal == false) return;
+        this.modalsData[id] = data;
         modal.open();
     }
 

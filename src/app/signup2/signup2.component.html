@@ -1,4 +1,6 @@
 <h2 mat-dialog-title>Register for Race!</h2>
+<p>From Parent - {{d.race_id}}</p> 
+
 <mat-dialog-content>
   <mat-horizontal-stepper [linear]="true" #stepper>
     <mat-step [editable]="true" [stepControl]="tagForm" *ngIf="hasTags">
