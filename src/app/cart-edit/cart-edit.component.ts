@@ -8,7 +8,7 @@ import { SwagListComponent } from '../swag-list/swag-list.component';
 })
 export class CartEditComponent implements OnInit {
 
-  @Input() raceID:number = 1;
+  @Input() raceID:number;
   @Output() checkoutAlert: EventEmitter<any> = new EventEmitter();
   @ViewChild('cart') cartList:SwagListComponent;
 

@@ -48,7 +48,7 @@ export class UserPageComponent implements OnInit {
             return race;
           }
         });
-        console.log("USER RACES", this.userRaces);
+        console.log("USER RACES PROFILE", this.userRaces);
       }
     )
 

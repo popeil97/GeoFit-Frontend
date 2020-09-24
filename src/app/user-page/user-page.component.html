@@ -67,8 +67,9 @@
       <p>{{race.end_date}}</p>
       <h3>Distance:</h3>
       <p>{{race.distance}}</p>
-      <a class="btn"(click)="viewRace(race)">GO TO RACE</a>
-      <a class="btn" (click)="viewAbout(race)">ABOUT</a>
+      <a class="btn"(click)="viewRace(race)" *ngIf="race.has_started">GO TO RACE</a>
+      <p *ngIf="race.has_started">You will be able to go to the race on race day! </p>
+      <a class="btn" (click)="viewAbout(race)">ABOUT RACE</a>
     </div>
   </div>
 </div>

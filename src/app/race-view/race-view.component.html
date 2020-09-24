@@ -1,23 +1,18 @@
-<div>
-  
+<div> 
 <app-loader [isActive]="loading"></app-loader>
-<div *ngIf="this._authService.isLoggedIn() && this.userRegistered">
-<app-race-day *ngIf="userStat.total_distance==0" [userData]="userData"></app-race-day>
-</div>
 <mat-sidenav-container hasBackdrop="false">
-
-  <mat-sidenav  md-disable-backdrop='true' #menu mode="over"  opened="true"> <!--opened="true"-->
+  <mat-sidenav  md-disable-backdrop='true' #menu mode="over"  opened="true"> 
      <div class="sidenav-scroll">
 
      <div class="row" style="padding-top:12px;" *ngIf="this._authService.isLoggedIn() && this.userRegistered">
       <div class="column-split0">
       </div>
       <div class="column-split1">
-        <img style="width:80px;height:80px;border-radius: 50%;" src="{{userStat.profile_url}}" class="img-responsive" alt=""> <!--<a class="btn" [routerLink]="['/profile', {username: this._authService.username}]"></a> -->
-        
+        <img style="width:80px;height:80px;border-radius: 50%;" src="{{userStat.profile_url}}" class="img-responsive" alt=""> <!--<a class="btn" [routerLink]="['/profile', {username: this._authService.username}]"></a> -->       
       </div>
-      <div class="column-split2">
 
+
+      <div class="column-split2">
          <app-user-progress *ngIf="this.progress" [progress]="progress"></app-user-progress>
          <div class="row" *ngIf="this.raceID==0">
           <div class="column">
@@ -28,9 +23,9 @@
           </div>
         </div>
       </div>
-     </div>
+    </div>
 
-     <div *ngIf="this.childRaceData.length > 1">
+    <div *ngIf="this.childRaceData.length > 1">
       <div class="container">
         <label>Select Route</label>
         <select [(ngModel)]="selectedRaceID">

@@ -150,13 +150,14 @@ export class Register2Component implements OnInit {
               this.router.navigate([this.redirectUrl,this.redirectParams]);
             }
             else {
-               if(this.d.register = true)
+               if(this.d.register == true)
                 {
                   this.closeDialog() ;
                   this.openModal('custom-modal-3');
                 }
                 else
                 {
+                  console.log("WELCOME");
                   this.router.navigate(['/welcome']);
                 }
             }

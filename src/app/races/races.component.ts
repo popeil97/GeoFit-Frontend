@@ -22,7 +22,9 @@ import { ModalService } from '../modalServices';
 })
 
 export class RacesComponent implements OnInit {
-   @ViewChild(SignupComponent) signupChild: SignupComponent;
+  
+  @ViewChild(SignupComponent) signupChild: SignupComponent;
+  
   userData: UserData;
   public races:any[];
   public userRaces:any[];
@@ -45,16 +47,6 @@ export class RacesComponent implements OnInit {
               public _authService: AuthService,private _userProfileService: UserProfileService,private modalService: ModalService,) { }
 
   ngOnInit() {
-    console.log('in races');
-
-    this.races=[{
-      name:'Example Race',
-      description:"This is an example race! Prepare to get your debugging pants on, because this is going to be painful...",
-      start_loc:'Boston, Massachusetts, USA',
-      end_loc:'New York, NY, USA',
-      distance:'100m',
-      race_image:'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSzGFzG_J1u_4gIb3vF_Dx7cDityeuW9ABlKw&usqp=CAU',
-    }] as any[];
 
     this.raceService.getRaces({}).subscribe(
       data => {
@@ -143,6 +135,7 @@ export class RacesComponent implements OnInit {
   }
 
  openModal(id: string,race:any) {
+    console.log("MODAL RACE", race);
     const data = (id == 'custom-modal-2') ? {register:true, price:race.raceSettings.price,race_id:race.id,hasTags: race.raceSettings.has_entry_tags} :(id == 'custom-modal-3') ? {price:race.raceSettings.price,race_id:race.id,hasTags: race.raceSettings.has_entry_tags} : null;
     console.log("MODAL DATA", data);
     this.modalService.open(id,data);
