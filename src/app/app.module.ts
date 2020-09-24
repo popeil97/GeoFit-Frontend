@@ -113,6 +113,7 @@ import { Register2Component } from './register2/register2.component';
 import { RouteSelectComponent } from './route-select/route-select.component';
 import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderboard.component';
 import { Signup2Component } from './signup2/signup2.component';
+import { RaceTypeComponent } from './race-type/race-type.component';
 
 
 @NgModule({
@@ -207,6 +208,7 @@ import { Signup2Component } from './signup2/signup2.component';
     RouteSelectComponent,
     HybridLeaderboardComponent,
     Signup2Component,
+    RaceTypeComponent,
       ],
 
   imports: [

@@ -88,7 +88,7 @@ export class RaceAboutComponent implements OnInit {
 
     this.raceService.getRaceAbout(this.raceID).then((resp) => {
       resp = resp as any;
-      console.log('RESP FROM SERVER:',resp);
+      console.log('RESP FROM ABOUT SERVER:',resp);
       this.aboutData = resp['about_info'] as AboutData;
       this.raceSettings = resp['race_settings'];
       this.isOwner = resp['isOwner'];
@@ -248,6 +248,7 @@ export class RaceAboutComponent implements OnInit {
     this.router.navigate(['/dashboard',{name:this.raceName,id:this.raceID}]);
   }
 
+
 }
 
 export interface AboutData {
@@ -262,6 +263,8 @@ export interface AboutData {
   distance_type:any;
   start_date:any;
   end_date:any;
+  num_children:any;
+  is_hybrid:any;
 }
 
 interface Event {

@@ -77,11 +77,8 @@ export class Register2Component implements OnInit {
       event.stopPropagation();
     }
     */
-<<<<<<< HEAD
     console.log("anything");
-=======
     console.log('Credentials Check Processing');
->>>>>>> 902d7f3ad85fde9a5ff4e446e2707cfac876698a
     this.credentialsSubmitted = true;
     this.credentialsLoading = true;
     if (this.credentialsForm.invalid) {

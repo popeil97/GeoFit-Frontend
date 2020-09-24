@@ -16,7 +16,7 @@
 
     <!-- icon to indicate race type : 1-run;2-bike;3-all -->
 
-    <i *ngIf="aboutData.race_type == 3" class="material-icons">directions_run</i> <i class="material-icons" >directions_bike</i> 
+    <!--<i *ngIf="aboutData.race_type == 3" class="material-icons">directions_run</i> <i class="material-icons" >directions_bike</i>--> 
     <i *ngIf="aboutData.race_type == 1" class="material-icons">directions_run</i>
     <i *ngIf="aboutData.race_type == 2" class="material-icons">directions_bike</i> 
     
@@ -41,6 +41,16 @@
           <br />- to -<br />
           {{aboutData.end_date}}
         </p>
+        <h6>Race Type</h6> <button (click)="openModal('custom-modal-4')">What does this mean?</button>
+        <p *ngIf="aboutData.is_hybrid">Hybrid </p>
+        <p *ngIf="!aboutData.is_hybrid">Virtual</p>
+        
+
+        <h6>Entry Fee</h6>
+        <p>${{raceSettings.price}}</p>
+
+        <h6 *ngIf="aboutData.num_children>1">Number of trails </h6>
+        <p *ngIf="aboutData.num_children>1">{{aboutData.num_children}}</p>
       </div>
     </div>
   </div>
