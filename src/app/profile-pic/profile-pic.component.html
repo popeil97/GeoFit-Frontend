@@ -1,24 +1,16 @@
-<div class="container">
-
+<div class="TucanContainer">
   <form [formGroup]="profileForm">
-
     <div class="form-group" style="text-align: left; padding: 5px;">
       <label name="ProfilePic">Profile Picture</label>
-      <br>
       <input type="file" formControlName="ProfilePic" (change)="onSelectFile($event)" />
       <i class="material-icons" *ngIf="profilePicURL" (click)="deleteProfilePic()">close</i>
-
-      <br>
       <div class="wrapper" *ngIf="profilePicURL">
         <img [src]="uploadedProfPicSrc()" width="300px">
       </div>
     </div>
-
-
     <div style="padding: 5px; position: relative; float: left;">
       <button class="btn btn-primary" mat-raised-button (click)="updateProfile()">Update</button>
       <div *ngIf="this.profileUpdated"><br> Your info has been updated</div>
     </div>
-
   </form>
 </div>

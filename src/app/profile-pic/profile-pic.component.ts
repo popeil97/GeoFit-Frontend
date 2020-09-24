@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserProfileService } from '../userprofile.service';
 import { ImageService } from '../image.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-profile-pic',
@@ -10,8 +11,8 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./profile-pic.component.css']
 })
 export class ProfilePicComponent implements OnInit, OnChanges {
+  
   @Input() userData: UserData;
-
   @Output() formUpdated: EventEmitter<void> = new EventEmitter();
 
   profileForm: FormGroup;
@@ -19,9 +20,12 @@ export class ProfilePicComponent implements OnInit, OnChanges {
   distanceTypeOptions: any[];
   public profileUpdated:boolean;
 
-  constructor(private _userProfileService: UserProfileService, 
-              private sanitizer:DomSanitizer,
-              private _imageService: ImageService) {
+  constructor(
+    private _userProfileService: UserProfileService, 
+    private sanitizer:DomSanitizer,
+    private _imageService: ImageService,
+    private _authService: AuthService,
+  ) {
     this.distanceTypeOptions = ['Mi', 'KM'];
     this.profilePicURL = null;
 
@@ -31,9 +35,36 @@ export class ProfilePicComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+
+    console.log('Welcome:',this._authService);
+
+    //this.route.paramMap.subscribe(params => {
+    //  this.username = params['params']['username'];
+    //  this.getUserData();
+    //  console.log(this.username);
+    //});
+
     this.populateForm();
     this.profileUpdated = false;
   }
+
+  /*
+  getUserData(){
+    //Call a to-be-created service which gets user data, feed, statistics etc
+    this._userProfileService.getUserProfile(this.username).then((data) => {
+      this.userData = data as UserData;
+      console.log("New user data: ", this.userData);
+
+      if (this.userData.location == "") {
+        this.userData.location = "N/A";
+      }
+
+      if (this.userData.description == "") {
+        this.userData.description = "N/A";
+      }
+    });
+  }
+  */
 
   ngOnChanges(changes: SimpleChanges): void {
 

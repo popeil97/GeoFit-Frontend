@@ -103,7 +103,8 @@ export class UsersComponent implements OnInit {
   }
 
   openModal(id: string) {
-    this.modalService.open(id);
+    const data = (id == 'custom-modal-3') ? {race_id:'HELLO'} : null;
+    this.modalService.open(id,data);
   }
 
   closeModal(id: string) {
