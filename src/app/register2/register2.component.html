@@ -1,6 +1,6 @@
 <div class="TucanContainer">
   <button class="CloseLogin" (click)="closeDialog()">Cancel</button>
-  <form *ngIf="formSegmentIndex==0" name='registerCredentialsForm' [formGroup]="credentialsForm" (ngSubmit)="onCredentialsSubmit($event)">
+  <form *ngIf="formSegmentIndex==0" id='registerCredentialsForm' [formGroup]="credentialsForm" (ngSubmit)="onCredentialsSubmit($event)">
     
     <h2>Sign Up</h2>
     <p>Your Credentials</p>
@@ -59,7 +59,6 @@
     <div class="TucanFormSegment">
       <input [disabled]="loading" type="submit" name='submit' form='registerCredentialsForm' value='Next' />
     </div>
-    <!-- <button (click)="ChangeFormSegment(1)">Next</button> -->
   </form>
   
   <form *ngIf="formSegmentIndex==1" name='registerPersonalForm' [formGroup]='personalForm' (ngSubmit)="onPersonalSubmit($event)">

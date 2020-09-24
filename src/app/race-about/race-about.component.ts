@@ -8,6 +8,7 @@ import { MapComponent } from '../map/map.component';
 import { SignupComponent } from '../signup/signup.component';
 import { SwagComponent } from '../swag/swag.component';
 import { TagType } from '../tags.service';
+import { ModalService } from '../modalServices';
 
 @Component({
   selector: 'app-race-about',
@@ -49,7 +50,8 @@ export class RaceAboutComponent implements OnInit {
   constructor(private raceService:RaceService, 
               private route:ActivatedRoute, 
               private router:Router, 
-              public _authService: AuthService,) { }
+              public _authService: AuthService,
+              private modalService: ModalService,) { }
 
   ngAfterViewInit(): void {
     while(!this.aboutData);
@@ -102,6 +104,10 @@ export class RaceAboutComponent implements OnInit {
     
 
     
+  }
+
+  openModal(id: string) {
+    this.modalService.open(id);
   }
 
   trySignup(): void {

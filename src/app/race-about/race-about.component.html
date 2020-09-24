@@ -15,9 +15,11 @@
     <p>{{aboutData.description}}</p>
 
     <!-- icon to indicate race type : 1-run;2-bike;3-all -->
+
+    <i *ngIf="aboutData.race_type == 3" class="material-icons">directions_run</i> <i class="material-icons" >directions_bike</i> 
     <i *ngIf="aboutData.race_type == 1" class="material-icons">directions_run</i>
     <i *ngIf="aboutData.race_type == 2" class="material-icons">directions_bike</i> 
-    <i *ngIf="aboutData.race_type == 3" class="material-icons">directions_run</i> <i class="material-icons" >directions_bike</i> 
+    
   </div>
   
   <div class='PageSegment'>
@@ -47,7 +49,10 @@
     <h3>Action Items</h3>
     <div class='RaceButtonsContainer'>
       <a class="btn"  (click)="viewRace()" *ngIf="hasStarted">View Race</a>
-      <a class="btn"  mat-button (click)="goToRaceDashboard()" *ngIf="isOwner || isModerator">GO TO DASHBOARD</a>        
+
+      <a class="btn"  mat-button (click)="goToRaceDashboard()" *ngIf="isOwner || isModerator">GO TO DASHBOARD</a>      
+
+    <button *ngIf="!this._authService.isLoggedIn()" (click)="openModal('custom-modal-3')">Register for Race</button>  
      <app-signup *ngIf="!hasJoined" [price]="raceSettings.price" [hasTags]="raceSettings.has_entry_tags" [aboutData]="aboutData" [race_id]="raceID" [hasStarted]="hasStarted" (signupCallback)="signupCallback($event)" (click)="trySignup()"></app-signup>
     </div>
     <!-- test this by going into the "swag" module in the backend and adding swag to your race -->

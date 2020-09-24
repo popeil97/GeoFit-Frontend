@@ -112,6 +112,7 @@ import { Register2Component } from './register2/register2.component';
 
 import { RouteSelectComponent } from './route-select/route-select.component';
 import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderboard.component';
+import { Signup2Component } from './signup2/signup2.component';
 
 
 @NgModule({
@@ -205,6 +206,7 @@ import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderbo
     Register2Component,
     RouteSelectComponent,
     HybridLeaderboardComponent,
+    Signup2Component,
       ],
 
   imports: [
