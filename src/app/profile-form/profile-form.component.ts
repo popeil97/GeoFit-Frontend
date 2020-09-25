@@ -72,12 +72,15 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   }
 
   populateForm(): void {
-    console.log("User data: ", this.userData);
+    console.log("User data prof: ", this.userData);
 
     this.profileForm.get('FirstName').setValue(this.userData.first_name);
     this.profileForm.get('LastName').setValue(this.userData.last_name);
     this.profileForm.get('About').setValue(this.userData.description);
     this.profileForm.get('Location').setValue(this.userData.location);
+    this.profileForm.get('locationToggle').setValue(this.userData.location_visibility);
+    this.profileForm.get('aboutToggle').setValue(this.userData.about_visibility);
+    this.profileForm.get('emailToggle').setValue(this.userData.email_visibility);
   }
 
   updateProfile(): void{
@@ -155,6 +158,9 @@ interface UserData {
   first_name:string;
   last_name:string;
   follows:boolean;
+  location_visibility:boolean;
+  about_visibility:boolean;
+  email_visibility:boolean;
   distance_type: string;
 }
 
