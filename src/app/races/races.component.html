@@ -36,14 +36,13 @@
         </div>
         <div class='TucanRaceItemButtons'>
           <div class='TucanRaceItemBasicButtons'>
-            <a class="btn" (click)="viewRace(race)">
-              View Race Map
-            </a>
+            <a class="btn" *ngIf="race.has_started" (click)="viewRace(race)">Go to race</a>
              <!-- this is just temporary for now, have to come back in and fix the inputs -->
          <!--   <app-signup [price]="race.raceSettings.price" [hasTags]="race.raceSettings.has_entry_tags"[race_id]="race.id" (signupCallback)="signupCallback($event)" (click)="trySignup()"></app-signup> -->
 
            <button *ngIf="!this._authService.isLoggedIn()" (click)="openModal('custom-modal-2',race)">Register for Race</button>
-           <button *ngIf= "this._authService.isLoggedIn()" (click)="openModal('custom-modal-3',race)">Register for Race</button>
+           <button *ngIf= "this._authService.isLoggedIn() &&!race.joined" (click)="openModal('custom-modal-3',race)">Register for Race</button>
+           <b *ngIf="race.joined && !race.has_started">You've registered for this race. Come back on race day ({{race.start_date}}).</b>
             
           </div>
           <div class='TucanRaceItemSpecificButtons'>

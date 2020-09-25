@@ -53,11 +53,9 @@ export class RacesComponent implements OnInit {
         this.racesData = data;
         console.log('RACE DATA:',this.racesData);
         this.races = _.filter(this.racesData.races,(race:any) => {
-          if(!race.joined) {
             race.raceSettings = this.getRaceSettings(race);
             console.log("RACE SET",race.raceSettings);
-            return race;
-          }
+            return race;    
         });
         console.log('RACES:',this.races)
         this.userRaces = _.filter(this.racesData.races,(race:any) => {

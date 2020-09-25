@@ -58,7 +58,7 @@
   <div class='PageSegment'>
     <h3>Action Items</h3>
     <div class='RaceButtonsContainer'>
-      <a class="btn"  (click)="viewRace()" *ngIf="hasStarted">View Race</a>
+      <a class="btn"  (click)="viewRace()" *ngIf="hasStarted">Go to Race</a>
 
       <a class="btn"  mat-button (click)="goToRaceDashboard()" *ngIf="isOwner || isModerator">GO TO DASHBOARD</a>      
 
@@ -66,7 +66,8 @@
     <button *ngIf="!this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-2')">Register for Race</button>
     <button *ngIf="this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-3')">Register for Race</button>
     
-    <p *ngIf="this._authService.isLoggedIn() &&this.hasJoined">You've joined this race.</p>
+
+    <b *ngIf="this._authService.isLoggedIn() &&this.hasJoined && !hasStarted">You've registered for this race. Come back on race day ({{aboutData.start_date}}).</b>
     </div>
     <!-- test this by going into the "swag" module in the backend and adding swag to your race -->
    <!-- <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag> -->
