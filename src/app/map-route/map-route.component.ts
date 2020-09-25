@@ -86,13 +86,13 @@ export class MapRouteComponent implements OnChanges {
             }
 
           case 'routePins':
-            if (this.routePins){
+            if (this.routePins && this.displayUsers){
               console.log("route pins: ", this.routePins);
               this.createRoutePins();
             }
 
           case 'userData':
-            if (this.userData){
+            if (this.userData && this.displayUsers){
               console.log("NEW USER DATA IN MAP-ROUTE COMP:");
               console.log("userData: ", this.userData);
               this.createUserPins(false);
@@ -166,17 +166,11 @@ export class MapRouteComponent implements OnChanges {
 
     if(this.zoom)
     {
-      this.map.setView([45, -100], 4);
+      this.map.setZoom(9);
     }
     
-    if(this.zoom)
-    {
-      var color = "#BC164D";
-    }
-    else
-    {
-      var color = "blue";
-    }
+    
+    var color = "blue";
 
     //Add each path to map independently
     _.forEach(temp_routes_flipped,(route) => {

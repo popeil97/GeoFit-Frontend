@@ -76,7 +76,6 @@ export class Signup2Component implements OnInit {
   	if(this.d.price != null && this.d.price != undefined) {
       this.needsPayment = true;
     }
-    console.log("SIGNUP2",this.d);
   }
 
   get d() { return this.modalService.modalsData[this.id]}

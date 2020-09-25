@@ -9,11 +9,14 @@ import { ModalService } from '../modalServices';
 export class RaceTypeComponent implements OnInit {
 
   @Input() id: string;
+  modalData: any;
 
   constructor(private modalService: ModalService) { }
 
   ngOnInit() {
   }
+
+   get d() { return this.modalService.modalsData[this.id]}
 
   closeDialog() {
     if (this.id == null) return;
