@@ -7,7 +7,8 @@
 }
 .MainContainer {
 	padding-top:64px;
-	min-height: calc(100vh - 160px);
+	/*min-height: calc(100vh - 80px);*/
+	min-height: 100vh;
 }
 
 footer {
@@ -16,7 +17,7 @@ footer {
 	background-color:var(--light);
 
 	position:relative;
-	height:160px;
+	height:80px;
 }
 	footer p {
 		margin:0 !important;

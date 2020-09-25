@@ -1,0 +1,38 @@
+.UserProfileContainer {
+    position: relative;
+    width:100%;
+    height:auto;
+    min-height: 100%;
+    overflow-y:auto;
+    padding-left:320px;
+    box-sizing: border-box;
+}
+.UserProfileUserInfoContainer {
+    position: fixed;
+    left:0;
+    top:0;
+    height:100vh;
+    width:320px;
+    background-color:grey;
+
+    padding-top: 64px;
+    box-sizing: border-box;
+}
+.UserProfileUserInfoInnerContainer, .UserProfileMainContentContainer {
+    padding:16px;
+    box-sizing: border-box;
+}
+    img.UserProfileImage {
+        width:100%;
+        /* width:150px;height:150px; */
+    }
+    .UserProfileUserInfoInnerContainer {
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+        flex-wrap: nowrap;
+    }
+.UserProfileMainContentContainer {
+    
+}

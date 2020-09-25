@@ -1,84 +1,97 @@
-<div *ngIf="!showEdit" class='HELLO TEST'>
-  
-  <div  *ngIf="this._authService.isLoggedIn()">
-    <div *ngIf="userData.is_me">
-      <h2> Following Info </h2>
-      <app-view-follow></app-view-follow>
-    </div>
-  </div>
+<div *ngIf="!showEdit" class='UserProfileContainer'>
   
   <!-- user profile info -->
-  <div>
-    <img style="width:150px;height:150px;" src="{{userData.profile_url}}" class="img-responsive" alt=""> 
-  </div>
-  <h1>{{userData.first_name}} {{userData.last_name}}</h1>
+  <div class="UserProfileUserInfoContainer">
+    <div class="TucanContainer UserProfileUserInfoInnerContainer">
+      <div>
+        <img class="UserProfileImage img-responsive" src="{{userData.profile_url}}" alt=""> 
+        <h3>{{userData.first_name}} {{userData.last_name}}</h3>
+        <p *ngIf="userData.email_visibility||userData.is_me">{{ userData.email }}</p>
 
-  <div *ngIf="userData.email_visibility||userData.is_me">
-    <h3>Email:</h3>
-    <p>{{ userData.email }}</p>  
-  </div>
-    
-  <div *ngIf="userData.location_visibility||userData.is_me">
-    <h3>Location:</h3>
-    <p>{{ userData.location }}</p>  
-  </div>
+        <div *ngIf="userData.about_visibility||userData.location_visibility||userData.is_me">
+          <h6>About:</h6>
+          <div>
+            <p *ngIf="userData.about_visibility && userData.description!='N/A'; else descriptionDefault">{{ userData.description }}</p> 
+            <ng-template #descriptionDefault>No description available</ng-template>
+          </div>
+          <div>
+            <p *ngIf="userData.location_visibility && userData.location != 'N/A'; else locationDefault">{{ userData.location }}</p>  
+            <ng-template #locationDefault>No location info available</ng-template>
+          </div>
+        </div>
 
-  <div *ngIf="userData.about_visibility||userData.is_me">
-    <h3>About:</h3>
-    <p>{{ userData.description }}</p>  
-  </div>
+        <div *ngIf="this._authService.isLoggedIn()">
+          <div *ngIf="userData.is_me">
+            <app-view-follow></app-view-follow>
+            <div>
+              <h6>Strava Authentication</h6>
+              <app-stravauth></app-stravauth>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!userData.is_me">
+          <app-user-follow [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
+        </div>
 
-  <div  *ngIf="this._authService.isLoggedIn()">
-    <div *ngIf="userData.is_me">
-      <h3>Strava Authentication</h3>
-      <app-stravauth></app-stravauth>
-      <a class="btn" (click)="toggleEditView()">EDIT</a>
-      <a class="btn" (click)="logout()">Log out</a>
+        <!--
+        <div *ngIf="userData.location_visibility||userData.is_me">
+          <h6>Location:</h6>
+          <p *ngIf="userData.location != 'N/A'; else locationDefault">{{ userData.location }}</p>  
+          <ng-template #locationDefault>No location info available</ng-template>
+        </div>
+      -->
+      </div>
+
+      <div *ngIf="this._authService.isLoggedIn()">
+        <div *ngIf="userData.is_me">
+          <a class="btn" (click)="toggleEditView()">EDIT</a>
+          <a class="btn" (click)="logout()">Log out</a>
+        </div>
+      </div>
+
     </div>
   </div>
-  
-  <div *ngIf="!userData.is_me">
-    <app-user-follow [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
-  </div>
+  <div class="UserProfileMainContentContainer">
+    <h2>{{userData.first_name}}'s Stats</h2>
+    <app-user-stats [userID]="userData.user_id"></app-user-stats>
 
-  <h2>{{userData.first_name}}'s Stats</h2>
-  <app-user-stats [userID]="userData.user_id"></app-user-stats>
+    <div id="feedContent" *ngIf="!showEdit">
+      <h2 > {{userData.first_name}}'s Feed</h2>
+      <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
+    </div>
 
-  <div id="feedContent" *ngIf="!showEdit">
-    <h2 > {{userData.first_name}}'s Feed</h2>
-    <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
-  </div>
-
-  <div *ngFor="let race of userRaces">
-    <div *ngIf="userRaces.length>0 &&this._authService.isLoggedIn()">  
-      <h2>My Races</h2>
-      <h3>Race Type:</h3>
-      <div *ngIf="race.race_type == 1">
-        <i class="material-icons" style="color:#BC164D;">directions_run</i> 
+    <div *ngFor="let race of userRaces">
+      <div *ngIf="userRaces.length>0 &&this._authService.isLoggedIn()">  
+        <h2>My Races</h2>
+        <h3>Race Type:</h3>
+        <div *ngIf="race.race_type == 1">
+          <i class="material-icons" style="color:#BC164D;">directions_run</i> 
+        </div>
+        <div *ngIf="race.race_type == 2">
+          <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
+        </div>
+        <div *ngIf="race.race_type == 3">
+          <i class="material-icons" style="color:#BC164D;">directions_run</i> <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
+        </div>
+        <h3 >Race img:</h3>
+        <img mat-card-image style="width: 255px;" src="{{race.race_image}}" alt="Race">
+        <h3>Start Location:</h3>
+        <p>{{race.start_loc}}</p>
+        <h3>End Location:</h3>
+        <p>{{race.end_loc}}</p>
+        <h3>Start Date:</h3>
+        <p>{{race.start_date}}</p>
+        <h3>End Date:</h3>
+        <p>{{race.end_date}}</p>
+        <h3>Distance:</h3>
+        <p>{{race.distance}}</p>
+        <a class="btn"(click)="viewRace(race)" *ngIf="race.has_started">GO TO RACE</a>
+        <p *ngIf="!race.has_started">Come back on race day ({{race.start_date}})! </p>
+        <a class="btn" (click)="viewAbout(race)">ABOUT RACE</a>
       </div>
-      <div *ngIf="race.race_type == 2">
-        <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
-      </div>
-      <div *ngIf="race.race_type == 3">
-        <i class="material-icons" style="color:#BC164D;">directions_run</i> <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
-      </div>
-      <h3 >Race img:</h3>
-      <img mat-card-image style="width: 255px;" src="{{race.race_image}}" alt="Race">
-      <h3>Start Location:</h3>
-      <p>{{race.start_loc}}</p>
-      <h3>End Location:</h3>
-      <p>{{race.end_loc}}</p>
-      <h3>Start Date:</h3>
-      <p>{{race.start_date}}</p>
-      <h3>End Date:</h3>
-      <p>{{race.end_date}}</p>
-      <h3>Distance:</h3>
-      <p>{{race.distance}}</p>
-      <a class="btn"(click)="viewRace(race)" *ngIf="race.has_started">GO TO RACE</a>
-      <p *ngIf="!race.has_started">Come back on race day ({{race.start_date}})! </p>
-      <a class="btn" (click)="viewAbout(race)">ABOUT RACE</a>
     </div>
   </div>
+
 </div>
 
 <div *ngIf="showEdit">
