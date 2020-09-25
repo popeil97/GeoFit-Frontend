@@ -23,6 +23,7 @@ export class RaceService {
     return this.http.get(environment.apiUrl + '/api/races/')
   }
 
+
   getRace(race_id:number) {
     console.log(race_id)
     return this.http.post(environment.apiUrl + '/api/race/',{race_id:race_id});

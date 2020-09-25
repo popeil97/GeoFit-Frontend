@@ -52,6 +52,8 @@ export class UserPageComponent implements OnInit {
       }
     )
 
+    
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
