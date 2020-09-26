@@ -28,4 +28,10 @@ export class ModalService {
         let modal: any = this.modals.filter(x => x.id === id)[0];
         modal.close();
     }
+
+    getModalData = (id:string) => {
+        const d = this.modalsData[id];
+        if (typeof d === 'undefined') return null;
+        return d;
+    }
 }

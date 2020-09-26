@@ -8,20 +8,25 @@ import {Chart} from 'chart.js';
   styleUrls: ['./user-stats.component.css'],
 })
 export class UserStatsComponent implements OnInit {
+  
   @Input() userID: number;
   userStats: UserStats;
   private chart: Chart;
+  
   constructor(private _usersService:UsersService) { }
 
   ngOnInit() {
-
-  this._usersService.getUserStats(this.userID).then((res)=>{
-  	console.log("USER", this.userID,"STATS: ", res);
-    this.userStats = res as UserStats;
-    console.log("STATS",this.userStats);
-    //this.userStats.mycolors
-    this.showChart(this.userStats.mydates,this.userStats.run_dists,this.userStats.walk_dists, this.userStats.bike_dists, this.userStats.other_dists);
-    })
+    this._usersService.getUserStats(this.userID)
+      .then((res)=>{
+      console.log("USER", this.userID,"STATS: ", res);
+      this.userStats = res as UserStats;
+      console.log("STATS",this.userStats);
+      //this.userStats.mycolors
+      this.showChart(this.userStats.mydates,this.userStats.run_dists,this.userStats.walk_dists, this.userStats.bike_dists, this.userStats.other_dists);
+      })
+      .catch(err=>{
+        console.error(err);
+      })
   }
 
    private showChart(mydates,run_dists,walk_dists,bike_dists,other_dists) {

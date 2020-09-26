@@ -46,11 +46,11 @@ export class UserPageComponent implements OnInit {
 
     this.raceService.getRaces({}).subscribe(
       data => {
+        //console.log('user-page - getRaces',data);
         this.racesData = data;
         this.userRaces = _.filter(this.racesData.races,(race:any) => {
-          if(race.joined) {
-            return race;
-          }
+          return true;
+          // return race.joined;
         });
         console.log("USER RACES PROFILE", this.userRaces);
       }
@@ -76,6 +76,7 @@ export class UserPageComponent implements OnInit {
 
   getUserData(){
     //Call a to-be-created service which gets user data, feed, statistics etc
+    console.log('user-page - getUserData()',this.username);
     this._userProfileService.getUserProfile(this.username).then((data) => {
       this.userData = data as UserData;
       console.log("New user data profPage: ", this.userData);

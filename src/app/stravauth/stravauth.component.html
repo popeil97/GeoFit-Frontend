@@ -1,15 +1,18 @@
-<div *ngIf="!stravaData.authorized">
-  <img style="max-width: 150px;" (click)="authenticate()" src="../../assets/landing/btn_strava_connectwith_light@2x.png">
+<div *ngIf="stravaData != null; else StravaLoadingMessage">
+  <div *ngIf="!stravaData.authorized">
+    <img style="max-width: 150px;" (click)="authenticate()" src="../../assets/landing/btn_strava_connectwith_light@2x.png">
+  </div>
+  
+  <div *ngIf="stravaData.authorized">
+    <!--
+    <p>
+      Strava ID: {{ stravaData.ID }}
+    </p>-->
+    <p>
+      <button class="btn btn-primary btn-danger btn-sm" (click)="revokeAccess()">
+        Revoke Access
+      </button>
+    </p>
+  </div>
 </div>
-
-<div *ngIf="stravaData.authorized">
-	<!--
-  <p>
-    Strava ID: {{ stravaData.ID }}
-  </p>-->
-  <p>
-    <button class="btn btn-primary btn-danger btn-sm" (click)="revokeAccess()">
-      Revoke Access
-    </button>
-  </p>
-</div>
+<ng-template #StravaLoadingMessage><p>Loading Strava...</p></ng-template>

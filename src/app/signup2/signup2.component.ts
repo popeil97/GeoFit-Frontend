@@ -73,12 +73,17 @@ export class Signup2Component implements OnInit {
 
   ngOnInit() {
     this.isLoggedIn = this._authService.isLoggedIn();
+    this.InitForm();
+  }
+
+  get d() { return this.modalService.getModalData(this.id); }
+
+  InitForm = () => {
+    if (this.d == null) return;
   	if(this.d.price != null && this.d.price != undefined) {
       this.needsPayment = true;
     }
   }
-
-  get d() { return this.modalService.modalsData[this.id]}
 
   stepCallback(callbackStruct:any): void {
     // if step is completed correctly then do stepper.next()
