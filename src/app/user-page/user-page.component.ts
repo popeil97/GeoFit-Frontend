@@ -15,6 +15,7 @@ declare var $: any;
   styleUrls: ['./user-page.component.css']
 })
 export class UserPageComponent implements OnInit {
+
   username;
   userData: UserData;
   public userRaces:any[];
@@ -29,6 +30,9 @@ export class UserPageComponent implements OnInit {
     public _authService: AuthService,
     private raceService: RaceService,
   ) {}
+
+  private currentScreen = 'stats';
+  private acceptedScreens = ['stats','races','feed'];
 
   ngOnInit() {
     //Don't show edit page by default
@@ -50,9 +54,7 @@ export class UserPageComponent implements OnInit {
         });
         console.log("USER RACES PROFILE", this.userRaces);
       }
-    )
-
-    
+    );
 
   }
 
@@ -114,6 +116,12 @@ export class UserPageComponent implements OnInit {
 
     //Switch back to main view
     this.toggleEditView();
+  }
+
+  SwitchSlideshow = (to:string = null) => {
+    if (to == null || this.acceptedScreens.indexOf(to) == -1) return;
+    this.currentScreen = to;
+    return;
   }
 
 }

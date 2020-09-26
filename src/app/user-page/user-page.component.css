@@ -33,6 +33,39 @@
         align-items: stretch;
         flex-wrap: nowrap;
     }
-.UserProfileMainContentContainer {
-    
+
+.Slideshow {
+    position: relative;
+
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: nowrap;
+}
+.SlideshowHeader {
+    flex-shrink:0;
+    flex-grow:1;
+    flex-basis: 32px;
+
+    margin-bottom:32px;
+
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-end;
+    flex-wrap: wrap;
+}
+
+.SlideshowSlide {
+    height:0;
+    visibility: hidden;
+    opacity:0;
+
+    overflow:hidden;
+}
+.SlideshowSlide.Slideshow-CurrentSlide {
+    height:auto;
+    visibility: visible;
+    opacity:1;
 }
