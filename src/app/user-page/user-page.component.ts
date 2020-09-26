@@ -46,15 +46,15 @@ export class UserPageComponent implements OnInit {
 
     this.raceService.getRaces({}).subscribe(
       data => {
-        //console.log('user-page - getRaces',data);
         this.racesData = data;
         this.userRaces = _.filter(this.racesData.races,(race:any) => {
-          return true;
-          // return race.joined;
+          if(race.joined) {
+            return race;
+          }
         });
         console.log("USER RACES PROFILE", this.userRaces);
       }
-    );
+    )
 
   }
 
