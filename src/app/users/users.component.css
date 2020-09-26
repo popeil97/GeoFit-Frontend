@@ -18,7 +18,8 @@
 }
 
 .split.right {
-  background-color:darkcyan;
+  background-image: url("../../assets/landing/main.jpg");
+  
 }
 
 .centered {
