@@ -37,13 +37,31 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  
   text-align: center;
-  width:100%;
+  width:75%;
+  min-width: 300px;
+}
+.centered p {
+  margin-top:16px;
+  margin-bottom:0;
 }
 
+.LandingTucanLogo {
+  margin-bottom:40px;
+}
+.LandingSubheading {
+  margin-bottom:16px;
+}
+.LandingAboutButton {
+  margin-top:8px;
+}
+
+/*
 article, aside, figcaption, figure, footer,b header, hgroup, main, nav, section {
   display: block;
 }
+*/
 
 .btn-outline {
   border: 2px solid black;

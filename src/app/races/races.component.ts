@@ -26,7 +26,7 @@ export class RacesComponent implements OnInit {
   @ViewChild(SignupComponent) signupChild: SignupComponent;
   
   userData: UserData;
-  public races:any[];
+  public races:any[] = null;
   public userRaces:any[];
   public racesInvited:any[];
   public racesData:any;
@@ -42,6 +42,21 @@ export class RacesComponent implements OnInit {
   private columnsToDisplay:string[] = ['name','distance', 'start_loc', 'end_loc'];
   expandedElement: any | null;
 
+  private monthKey = {
+    '1':'Jan.',
+    '2':'Feb.',
+    '3':'Mar.',
+    '4':'Apr.',
+    '5':'May',
+    '6':'June',
+    '7':'July',
+    '8':'Aug.',
+    '9':'Sep.',
+    '10':'Oct.',
+    '11':'Nov.',
+    '12':'Dec.',
+  }
+
   constructor(private raceService: RaceService, 
               private router:Router,
               public _authService: AuthService,private _userProfileService: UserProfileService,private modalService: ModalService,) { }
@@ -50,18 +65,26 @@ export class RacesComponent implements OnInit {
 
     this.raceService.getRaces({}).subscribe(
       data => {
+        /*
+        this.racesData = data.map(race=>{
+          var ma = {...race};
+          ma.start_date = this.ProcessDate(race.start_date);
+          ma.end_date = this.ProcessDate(race.end_date);
+          return ma;
+        });
+        */
         this.racesData = data;
         console.log('RACE DATA:',this.racesData);
         this.races = _.filter(this.racesData.races,(race:any) => {
             race.raceSettings = this.getRaceSettings(race);
-            console.log("RACE SET",race.raceSettings);
+            race.start_date = this.ProcessDate(race.start_date);
+            race.end_date = this.ProcessDate(race.end_date);
+            console.log("RACE SET",race);
             return race;    
         });
         console.log('RACES:',this.races)
         this.userRaces = _.filter(this.racesData.races,(race:any) => {
-          if(race.joined) {
-            return race;
-          }
+          return race.joined;
         });
         this.racesInvited = this.racesData.races_invited;
         this.joinedRacesIDs = this.racesData.user_race_ids;
@@ -89,6 +112,12 @@ export class RacesComponent implements OnInit {
       }
     });
     }
+  }
+
+  ProcessDate = (date = null) => {
+    if (date == null) return {month:null,day:date}
+    const dateComponents = date.split('-');
+    return {month:this.monthKey[dateComponents[0]],day:dateComponents[1]}
   }
 
   getRaceSettings(race:any)

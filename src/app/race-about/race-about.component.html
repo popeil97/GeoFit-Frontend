@@ -1,34 +1,52 @@
 <div class='AboutRaceImageContainer'>
   <img 
-    *ngIf="this.aboutData.race_image != null" 
+    *ngIf="this.aboutData != null && this.aboutData.race_image != null" 
     src="{{aboutData.race_image}}" 
     alt="race_img"
     class='AboutRaceImage'
   />
 </div>
 
-<div class='PageContainer'>
-  
+<!--<div class='PageContainer' *ngIf="this.aboutData != null; else LoadingRaceBlock">-->
+<div class="PageContainer">
   <div class='PageSegment'>
     <a class="nav-link" routerLink='/races'><- Return to Public Races</a>
-    <h1>{{aboutData.name}}</h1>
-    <p>{{aboutData.description}}</p>
-
-    <!-- icon to indicate race type : 1-run;2-bike;3-all -->
-
-    <!--<i *ngIf="aboutData.race_type == 3" class="material-icons">directions_run</i> <i class="material-icons" >directions_bike</i>--> 
-    <i *ngIf="aboutData.race_type == 1" class="material-icons">directions_run</i>
-    <i *ngIf="aboutData.race_type == 2" class="material-icons">directions_bike</i> 
-    
+    <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceHeaderBlock">
+      <p>Loading race description and dates...</p>
+    </ng-template>
+    <ng-template #RaceHeaderBlock>
+      <div class='RaceHeader'>
+        <h1>{{aboutData.name}}</h1>
+        <div class='CalendarDaysContainer'>
+          <div class='CalendarDay'>
+            <div class='CalendarDayM'><p class='h7'>{{aboutData.start_date.month}}</p></div>
+            <div class='CalendarDayD'><p>{{aboutData.start_date.day}}</p></div>
+          </div>
+          <div class='CalendarDaysLine'>
+            <p class='h7'>to</p>
+          </div>
+          <div class='CalendarDay'>
+            <div class='CalendarDayM'><p class='h7'>{{aboutData.end_date.month}}</p></div>
+            <div class='CalendarDayD'><p>{{aboutData.end_date.day}}</p></div>
+          </div>
+        </div>
+      </div>
+      <p>{{aboutData.description}}</p>
+      <!-- icon to indicate race type : 1-run;2-bike;3-all -->
+      <!--<i *ngIf="aboutData.race_type == 3" class="material-icons">directions_run</i> <i class="material-icons" >directions_bike</i>--> 
+      <i *ngIf="aboutData.race_type == 1" class="material-icons">directions_run</i>
+      <i *ngIf="aboutData.race_type == 2" class="material-icons">directions_bike</i> 
+    </ng-template>
   </div>
-  
+    
   <div class='PageSegment'>
     <h3>Race Details</h3>
+
     <div class='Slideshow'>
       <div class="SlideshowHeader">
         <button class="SlideshowButton" (click)="SwitchSlideshow('map')">Route Map</button>
         <button class="SlideshowButton" (click)="SwitchSlideshow('info')">Information</button>
-        <button class="SlideshowButton" (click)="SwitchSlideshow('locations')">Locations and Dates</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('logistics')">Logistics</button>
       </div>
       <div class="SlideshowContents">
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'map'}">
@@ -37,75 +55,76 @@
           </div>
         </div>
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'info'}">
-          <h6>Race Type</h6> <button (click)="openModal('custom-modal-4')">What does this mean?</button>
-          <p *ngIf="aboutData.is_hybrid">Hybrid </p>
-          <p *ngIf="!aboutData.is_hybrid">Virtual</p>
-          <h6>Entry Fee</h6>
-          <p>${{raceSettings.price}}</p>
+          <ng-template [ngIf]="this.aboutData == null">
+            <p>Loading race details...</p>
+          </ng-template>
+          <h6>Race Type</h6>
+            <button (click)="this.openModal('custom-modal-4')">What does this mean?</button>
+            <p *ngIf="this.aboutData.is_hybrid; else VirtualText">Hybrid </p>
+            <ng-template #VirtualText>
+              <p>Virtual</p>
+            </ng-template>
+            <h6>Entry Fee</h6>
+            <p *ngIf="this.raceSettings != null; else LoadingRaceSettings">${{raceSettings.price}}</p>
+            <ng-template #LoadingRaceSettings>
+              <p>Loading Race Settings</p>
+            </ng-template>
         </div>
-        <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'locations'}">
-          <h6>Important Locations</h6>
-          <p>
-            {{aboutData.start_loc}}
-            <br />- to -<br />
-            {{aboutData.end_loc}}
-          </p>
-          <h6>Important Dates</h6>
-          <p>
-            {{aboutData.start_date}}
-            <br />- to -<br />
-            {{aboutData.end_date}}
-          </p>
-          <h6 *ngIf="aboutData.num_children>1">Number of trails </h6>
-          <p *ngIf="aboutData.num_children>1">{{aboutData.num_children}}</p>
+        <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'logistics'}">
+          <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceLogisticsBlock">
+            <p>Loading race details...</p>
+          </ng-template>
+          <ng-template #RaceLogisticsBlock>
+            <div class='RaceLocationsContainer'>
+              <p class='RaceLocation'>{{aboutData.start_loc}}</p>
+              <div class='RaceDistanceLine'>
+                <p class='h7'>{{aboutData.distance}}km</p>
+              </div>
+              <p class='RaceLocation'>{{aboutData.end_loc}}</p>
+            </div>
+            <h6>Number of trails</h6>
+            <p *ngIf="aboutData.num_children>1;else OneChildBlock">{{aboutData.num_children}}</p>
+            <ng-template #OneChildBlock><p>1</p></ng-template>
+          </ng-template>
         </div>
-      </div>
-    </div>
-    <!--
-    <div class='MapPreview'>
-      
-      <div class='RaceLocationsContainer'>
-        <h6>Important Locations</h6>
-        <p>
-          {{aboutData.start_loc}}
-          <br />- to -<br />
-          {{aboutData.end_loc}}
-        </p>
-        <h6>Important Dates</h6>
-        <p>
-          {{aboutData.start_date}}
-          <br />- to -<br />
-          {{aboutData.end_date}}
-        </p>
-        <h6 *ngIf="aboutData.num_children>1">Number of trails </h6>
-        <p *ngIf="aboutData.num_children>1">{{aboutData.num_children}}</p>
       </div>
     </div>
   </div>
-  -->
-</div>
-  
+    
   <div class='PageSegment'>
     <h3>Action Items</h3>
-    <div class='RaceButtonsContainer'>
-      <a class="btn"  (click)="viewRace()" *ngIf="hasStarted && this.hasJoined">Go to Race</a>
-      <a class="btn"  (click)="viewRace()" *ngIf="hasStarted && !this.hasJoined ">Preview Race</a>
 
-      <a class="btn"  mat-button (click)="goToRaceDashboard()" *ngIf="isOwner || isModerator">GO TO DASHBOARD</a>      
+    <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceActionsBlock">
+      <p>Waiting for race data...</p>
+    </ng-template>
+    <ng-template #RaceActionsBlock>
+      <div class='RaceButtonsContainer'>
+        <a class="btn"  (click)="this.viewRace()" *ngIf="this.hasStarted && this.hasJoined">Go to Race</a>
+        <a class="btn"  (click)="this.viewRace()" *ngIf="this.hasStarted && !this.hasJoined ">Preview Race</a>
+        <a class="btn"  mat-button (click)="this.goToRaceDashboard()" *ngIf="this.isOwner || this.isModerator">GO TO DASHBOARD</a>      
+  
+        <button *ngIf="!this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-2')">Register for Race</button>
+        <button *ngIf="this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-3')">Register for Race</button>
 
-    
-    <button *ngIf="!this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-2')">Register for Race</button>
-    <button *ngIf="this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-3')">Register for Race</button>
-    
+        <b *ngIf="this._authService.isLoggedIn() && this.hasJoined">You've registered for this race.</b><b *ngIf=" !hasStarted"> Come back on race day ({{aboutData.start_date}}).</b>
+      </div>
 
-    <b *ngIf="this._authService.isLoggedIn() &&this.hasJoined">You've registered for this race.</b><b *ngIf=" !hasStarted"> Come back on race day ({{aboutData.start_date}}).</b>
-    </div>
-    <!-- test this by going into the "swag" module in the backend and adding swag to your race -->
-   <!-- <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag> -->
+      <!-- test this by going into the "swag" module in the backend and adding swag to your race -->
+    <!-- <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag> -->
+    </ng-template>
   </div>
+</div>
 
-
-
+<!--
+<ng-template #LoadingRaceBlock>
+  <div class="PageContainer">
+    <div class='PageSegment'>
+      <a class="nav-link" routerLink='/races'><- Return to Public Races</a>
+      <h6>Loading Race Data...</h6>
+    </div>
+  </div>
+</ng-template>
+-->
 
 
 
@@ -392,10 +411,7 @@
    </div>
  </div>
 </div>
-
-
-
-  <br> -->
+-->
 
 
 

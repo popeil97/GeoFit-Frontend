@@ -20,8 +20,8 @@ export class RaceAboutComponent implements OnInit {
   @ViewChild(SignupComponent) signupChild: SignupComponent;
   @ViewChild(SwagComponent) swagChild: SwagComponent;
   public AboutForm: FormGroup;
-  aboutData:AboutData;
-  raceSettings:RaceSettings = {} as RaceSettings;
+  aboutData:AboutData = null;
+  raceSettings:RaceSettings = null as RaceSettings;
   showForm: Boolean;
 
   //Race info
@@ -47,7 +47,22 @@ export class RaceAboutComponent implements OnInit {
   public num_users:any;
 
   private currentScreen = 'map';
-  private acceptedScreens = ['map','info','locations'];
+  private acceptedScreens = ['map','info','logistics'];
+
+  private monthKey = {
+    '1':'Jan.',
+    '2':'Feb.',
+    '3':'Mar.',
+    '4':'Apr.',
+    '5':'May',
+    '6':'June',
+    '7':'July',
+    '8':'Aug.',
+    '9':'Sep.',
+    '10':'Oct.',
+    '11':'Nov.',
+    '12':'Dec.',
+  }
 
 
   constructor(
@@ -67,48 +82,59 @@ export class RaceAboutComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    // Debugging
+    var _this = this;
+    // Hides some kind of form. Dunno what it is yet, but we'll figure it out
     this.showForm = false;
-
-    
-
+    // I still don't know what this does, but I suspect it's to parse the parameters of the current URL
     this.route.paramMap.subscribe(params => {
-      this.raceName = params['params']['name'];
-      this.raceID = params['params']['id'];
-      this.popup = params['params']['popup'];
+      _this.raceName = params['params']['name'];
+      _this.raceID = params['params']['id'];
+      _this.popup = params['params']['popup'];
 
-      console.log('POPUP:',this.popup);
+      // Console.log debug
+      console.log('Race ID', _this.raceID);
+      console.log('POPUP:', _this.popup);
 
+      // I HOPE YOU REALIZE THAT this.raceID IS SET ONLY INSIDE OF THE PROMISE RESULT OF paramMap.subscribe AND THUS HAS TO BE PUT INSIDE THE PROMISE OUTPUT FUNCTION...
+      // Get information about this race
+      //... I'm confused about the difference between getRace and getRaceAbout. Shouldn't they be within the same API call?
+      _this.raceService.getRace(_this.raceID).subscribe(data => {
+        let raceData = data as RaceData;
+        _this.followedIDs = raceData.followedIDs;
+        _this.raceIDs = raceData.race_IDs;
+        console.log("Race IDs: ", _this.raceIDs);
+      });
       
+      // Get information about this particular rase
+      _this.raceService.getRaceAbout(_this.raceID).then((resp) => {
+        resp = resp as any;
+        console.log('RESP FROM ABOUT SERVER:',resp);
+  
+        _this.aboutData = resp['about_info'] as AboutData;
+        _this.aboutData.start_date = _this.ProcessDate(_this.aboutData.start_date);
+        _this.aboutData.end_date = _this.ProcessDate(_this.aboutData.end_date);
+  
+        _this.raceSettings = resp['race_settings'];
+        _this.isOwner = resp['isOwner'];
+        _this.isModerator = resp['isModerator'];
+        _this.hasJoined = resp['hasJoined'];
+        // _this.hasPaid = resp['hasPaid'];
+        _this.hasStarted = resp['hasStarted'];
+        _this.hasMerch = _this.raceSettings.has_swag;
+  
+        _this.initializeForm();
+      });
     });
+  }
 
-    this.raceService.getRace(this.raceID).subscribe(data => {
-
-      let raceData = data as RaceData;
-      this.followedIDs = raceData.followedIDs;
-      this.raceIDs = raceData.race_IDs;
-      console.log("Race IDs: ", this.raceIDs);
-    });
-
-
-    this.raceService.getRaceAbout(this.raceID).then((resp) => {
-      resp = resp as any;
-      console.log('RESP FROM ABOUT SERVER:',resp);
-      this.aboutData = resp['about_info'] as AboutData;
-      this.raceSettings = resp['race_settings'];
-      this.isOwner = resp['isOwner'];
-      this.isModerator = resp['isModerator'];
-      this.hasJoined = resp['hasJoined'];
-      // this.hasPaid = resp['hasPaid'];
-      this.hasStarted = resp['hasStarted'];
-      this.hasMerch = this.raceSettings.has_swag;
-
-      this.initializeForm();
-    });
-
-    
-
-    
+  ProcessDate = (date = null) => {
+    if (date == null) return {month:null,day:date}
+    var d = new Date(date);
+    var month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+    return {month:this.monthKey[month],day:day}
   }
 
 
@@ -140,7 +166,7 @@ export class RaceAboutComponent implements OnInit {
   }
 
 
-  initializeForm(): void {
+  initializeForm = () => {
     this.AboutForm = new FormGroup({
       name: new FormControl(this.aboutData.name,[
         Validators.required,

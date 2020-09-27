@@ -3,21 +3,18 @@
     <div class="split left">
         <div class='TucanContainer'>
             <div class="centered">
-                <img src= "../../assets/landing/tucan_main.png" class="TucanLogo">
-                <p>We bring community to virtual racing</p>
-                <p>Tucan fitness is a social fitness platform for race and fundraiser organizers to engage their community virtually.</p>
+                <img src= "../../assets/landing/tucan_main.png" class="TucanLogo LandingTucanLogo">
+                <h1>We bring community to virtual racing</h1>
+                <div class='LandingSubheading'>
+                    <p>Tucan fitness is a social fitness platform for race and fundraiser organizers to engage their community virtually.</p>
+                    <a class="btn btn-outline LandingAboutButton" routerLink='/about-tucan'>About Tucan Fitness</a>
+                </div>
 
                 <div *ngIf="!this._authService.isLoggedIn()">
-                    <!-- <app-login></app-login> --> <!--login-->
                     <button (click)="openModal('custom-modal-1')">Log In</button>
                     <p>Don't have an account?</p>
                     <button (click)="openModal('custom-modal-2')">Sign Up</button>
-                    
-                    <!--<app-register></app-register>-->
                 </div>
-                <a class="btn btn-outline" routerLink='/about-tucan'>
-                    About Tucan Fitness
-                </a>
             </div>
         </div>
     </div>

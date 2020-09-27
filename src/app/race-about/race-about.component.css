@@ -10,6 +10,15 @@
 	margin-left:auto;
 	margin-right:auto;
 }
+.RaceHeader {
+	display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+	flex-wrap: wrap;
+	
+	margin-bottom:16px;
+}
 
 .MapPreview {
 	position: relative;
@@ -28,13 +37,8 @@
 	height:320px;
 }
 .RaceLocationsContainer {
-	flex-shrink: 0;
-	flex-grow: 0;
-	width:240px;
-	margin-left:16px;
-}
-.RaceLocationsContainer.RaceLocation {
-	width:30%;
+	width:100%;
+	margin-bottom:16px;
 }
 
 .RaceButtonsContainer {

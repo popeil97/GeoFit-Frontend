@@ -40,6 +40,9 @@ h5, .h5 {
 h6, .h6 {
   font-size: 20px !important;
 }
+.h7 {
+  font-size:12px;
+}
 
 /* ---- General Use ---- */
 .TucanContainer {
@@ -227,6 +230,104 @@ h1.PageHeaderSegmentTitle {
   visibility: visible;
   opacity:1;
 }
+
+.RaceLocationsContainer {
+  position:relative;
+  padding-top:16px;
+  padding-bottom:16px;
+
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+  .RaceLocationsContainer .RaceLocation {
+    position: relative;
+    z-index: 2;
+    flex-grow:0;
+    flex-shrink: 1;
+    flex-basis:30%;
+
+    margin-bottom:0;
+  }
+  .RaceLocationsContainer .RaceDistanceLine {
+    flex-grow: 1;
+    width:100%;
+    border-bottom:1px solid rgb(200,200,200);
+    margin-left:32px;
+    margin-right:32px;
+  }
+    .RaceLocationsContainer .RaceDistanceLine p {
+      text-align:center;
+      margin:0 !important;
+      opacity:0.5;
+    }
+
+.CalendarDaysContainer {
+  position:relative;
+
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+  .CalendarDaysLine {
+    flex-grow: 1;
+    width:100%;
+    border-bottom:1px solid rgb(200,200,200);
+    margin-left:32px;
+    margin-right:32px;
+  }
+    .CalendarDaysLine p {
+      text-align:center;
+      margin:0 !important;
+      opacity:0.5;
+    }
+  .CalendarDay {
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis:48px;
+    
+    position: relative;
+    background-color: white;
+    border: 1px solid rgb(200,200,200);
+    border-radius: 8px;
+
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: nowrap;
+
+    overflow:hidden;
+
+    width:48px;
+    height:48px;
+  }
+    .CalendarDay .CalendarDayM {
+      flex-shrink: 0;
+      background-color:red;
+      color:white;
+    }
+      .CalendarDay .CalendarDayM p {
+        text-align: center;
+        margin:0;
+      }
+    .CalendarDay .CalendarDayD {
+      position: relative;
+      flex-grow: 1;
+    }
+      .CalendarDay .CalendarDayD p {
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        margin:0;
+      }
+
+
 
 /* .mat-drawer-backdrop.mat-drawer-shown {
     background: none;

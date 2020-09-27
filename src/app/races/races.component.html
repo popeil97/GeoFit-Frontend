@@ -7,53 +7,66 @@
   <div class="PageSegment">
     <!-- <a type="button" class="btn btn-primary" style="float:right" routerLink='/create'>Create Race</a> -->
     
-    <div *ngIf="races.length == 0">
+    <div *ngIf="races == null"><p>Loading races...</p></div>
+    <div *ngIf="races != null && races.length == 0; else DisplayRacesBlock">
       <p style="text-align:center;"><b> No races to display</b> </p>
     </div>
-    <div *ngIf="races.length > 0">
+
+    <ng-template #DisplayRacesBlock>
       <div *ngFor="let race of races" class="TucanRaceItem">
-        <h2>{{race.name}}</h2>
-        <div class='TucanRaceItemDetails'>
-          <div class='TucanRaceItemBasicInfo'>
-            <div class='TucanRaceItemDescription'>
-              <p>{{race.description}}</p>
-              <img class="TucanRaceItemImage" *ngIf="race.race_image != null" src="{{race.race_image}}" />
+        <div class='TucanRaceItemImageContainer'>
+          <img class="TucanRaceItemImage" *ngIf="race.race_image != null" src="{{race.race_image}}" />
+        </div>
+        <div class='TucanRaceItemContents'>
+          
+          <div class='TucanRaceItemHeader'>
+            <h2>{{race.name}}</h2>
+            <div class='CalendarDaysContainer'>
+              <div class='CalendarDay'>
+                <div class='CalendarDayM'><p class='h7'>{{race.start_date.month}}</p></div>
+                <div class='CalendarDayD'><p>{{race.start_date.day}}</p></div>
+              </div>
+              <div class='CalendarDaysLine'>
+                <p class='h7'>to</p>
+              </div>
+              <div class='CalendarDay'>
+                <div class='CalendarDayM'><p class='h7'>{{race.end_date.month}}</p></div>
+                <div class='CalendarDayD'><p>{{race.end_date.day}}</p></div>
+              </div>
             </div>
           </div>
-          <div class='TucanRaceItemSpecificInfo'>
-            <h6>Start Location:</h6>
-            <p>{{race.start_loc}}</p>
-            <h6>End Location:</h6>
-            <p>{{race.end_loc}}</p>
-            <h6>Race Period:</h6>
-            <p>{{race.start_date}} to {{race.end_date}}</p>
-            <h6>Distance:</h6>
-            <p>{{race.distance}}</p>
-            <h6>Entry Fee:</h6>
-            <p>$ {{race.raceSettings.price}}</p>
-          </div>
-        </div>
-        <div class='TucanRaceItemButtons'>
-          <div class='TucanRaceItemBasicButtons'>
+          
+          <p class='TucanRaceItemDescription'>{{race.description}}</p>
 
-            <a class="btn"  (click)="viewRace(race)" *ngIf="race.has_started && race.joined">Go to Race</a>
-            <a class="btn"  (click)="viewRace(race)" *ngIf="race.has_started && !race.joined ">Preview Race</a>
-             <!-- this is just temporary for now, have to come back in and fix the inputs -->
-         <!--   <app-signup [price]="race.raceSettings.price" [hasTags]="race.raceSettings.has_entry_tags"[race_id]="race.id" (signupCallback)="signupCallback($event)" (click)="trySignup()"></app-signup> -->
-
-           <button *ngIf="!this._authService.isLoggedIn()" (click)="openModal('custom-modal-2',race)">Register for Race</button>
-           <button *ngIf= "this._authService.isLoggedIn() &&!race.joined" (click)="openModal('custom-modal-3',race)">Register for Race</button>
-           <b *ngIf="race.joined">You've registered for this race. </b><b *ngIf="!race.has_started">Come back on race day ({{race.start_date}}).</b>
-            
-          </div>
-          <div class='TucanRaceItemSpecificButtons'>
-            <a class="btn" (click)="viewAbout(race)">
-              View Race Details
-            </a>
+          <div class='TucanRaceItemDetails'>
+            <div class='TucanRaceItemSpecificInfo'>
+              <div class='RaceLocationsContainer'>
+                <p class='RaceLocation'>{{race.start_loc}}</p>
+                <div class='RaceDistanceLine'>
+                  <p class='h7'>{{race.distance}}km</p>
+                </div>
+                <p class='RaceLocation'>{{race.end_loc}}</p>
+              </div>
+              <!--
+              <h6>Entry Fee:</h6>
+              <p>$ {{race.raceSettings.price}}</p>
+              -->
+            </div>
+            <div class='TucanRaceItemButtons'>
+              <a class="btn" (click)="viewAbout(race)">View Race Details</a>
+              <a class="btn"  (click)="viewRace(race)" *ngIf="race.has_started && race.joined">Go to Race</a>
+              <a class="btn"  (click)="viewRace(race)" *ngIf="race.has_started && !race.joined ">Preview Race</a>
+              <!-- this is just temporary for now, have to come back in and fix the inputs -->
+              <!--   <app-signup [price]="race.raceSettings.price" [hasTags]="race.raceSettings.has_entry_tags"[race_id]="race.id" (signupCallback)="signupCallback($event)" (click)="trySignup()"></app-signup> -->
+  
+              <button *ngIf="!this._authService.isLoggedIn(); else OtherRegisterButton" (click)="openModal('custom-modal-2',race)">Register for Race</button>
+              <ng-template #OtherRegisterButton><button *ngIf="!race.joined" (click)="openModal('custom-modal-3',race)">Register for Race</button></ng-template>
+              <b *ngIf="race.joined">You've registered for this race. </b><b *ngIf="!race.has_started">Come back on race day ({{race.start_date.month}} {{race.start_date.day}}).</b>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ng-template>
 
 <!--
     <div class="row" >
