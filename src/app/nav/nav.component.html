@@ -21,20 +21,20 @@
         <div class="TucanNavigationButtonSegment">
           <a class="TucanNavigationLogo" routerLink='/'><img src= "../../assets/landing/tucan_purple-02.png"></a>
            
-          <div class="nav-item active" (click)="NavItemClick()">
-            <a class="nav-link" routerLink='/about-tucan'>About Tucan<span class="sr-only">(current)</span></a>
+          <div class="NavItem active" (click)="NavItemClick()">
+            <a class="NavLink" routerLink='/about-tucan'>About Tucan<span class="sr-only">(current)</span></a>
           </div>
           
-          <div class="nav-item active" (click)="NavItemClick()">
-            <a class="nav-link" routerLink='/races'>Public Races <span class="sr-only">(current)</span></a>
+          <div class="NavItem active" (click)="NavItemClick()">
+            <a class="NavLink" routerLink='/races'>Public Races <span class="sr-only">(current)</span></a>
           </div>
           
-          <div class="nav-item active" (click)="NavItemClick()">
-            <a class="nav-link" routerLink='/faqs'>FAQs<span class="sr-only">(current)</span></a>
+          <div class="NavItem active" (click)="NavItemClick()">
+            <a class="NavLink" routerLink='/faqs'>FAQs<span class="sr-only">(current)</span></a>
           </div>
 
-          <div class="nav-item active" (click)="NavItemClick()">
-            <a class="nav-link" routerLink='/contact'>Contact Us<span class="sr-only">(current)</span></a>
+          <div class="NavItem active" (click)="NavItemClick()">
+            <a class="NavLink" routerLink='/contact'>Contact Us<span class="sr-only">(current)</span></a>
           </div>
         </div>
 
@@ -74,18 +74,12 @@
           -->
           </div>
           <ng-template #NavButtonsBlock>
-            <!--
-            <app-login (click)="NavItemClick()"></app-login>
-            -->
-            <button (click)="openModal('custom-modal-1')">Log In</button>
-            <!-- <app-dialog-skeleton type=1 (click)="NavItemClick()"></app-dialog-skeleton> <!--login-->
-
-            <!--
-              <app-register (click)="NavItemClick()"></app-register>
-            -->
-            <button (click)="openModal('custom-modal-2')">Sign Up</button>
-            <!--<app-register></app-register>-->
-            <!--  <app-dialog-skeleton type=2 (click)="NavItemClick()"></app-dialog-skeleton> <!--register-->
+            <div class='NavItem'>
+              <button class='darkButton' (click)="openModal('custom-modal-1')">Log In</button>
+            </div>
+            <div class='NavItem'>
+              <button class='darkButton' (click)="openModal('custom-modal-2')">Sign Up</button>
+            </div>
           </ng-template>
         </div>
       </div>

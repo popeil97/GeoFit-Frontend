@@ -27,6 +27,7 @@
     box-sizing: border-box;
 
     background: #fff;
+    border-radius: 16px;
 }
 
 .custom-modal-background {
@@ -57,5 +58,7 @@
         width:100%;
         max-width: initial;
         height:100%;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
     }
 }

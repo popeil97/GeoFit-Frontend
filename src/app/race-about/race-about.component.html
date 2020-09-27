@@ -45,7 +45,7 @@
     <div class='Slideshow'>
       <div class="SlideshowHeader">
         <button class="SlideshowButton" (click)="SwitchSlideshow('map')">Route Map</button>
-        <button class="SlideshowButton" (click)="SwitchSlideshow('info')">Information</button>
+        <!--<button class="SlideshowButton" (click)="SwitchSlideshow('info')">Information</button>-->
         <button class="SlideshowButton" (click)="SwitchSlideshow('logistics')">Logistics</button>
       </div>
       <div class="SlideshowContents">
@@ -54,22 +54,24 @@
             <app-map [raceIDs]="raceID" [displayUsers]="false" zoom="true"></app-map>
           </div>
         </div>
+        <!--
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'info'}">
           <ng-template [ngIf]="this.aboutData == null">
             <p>Loading race details...</p>
           </ng-template>
           <h6>Race Type</h6>
-            <button (click)="this.openModal('custom-modal-4')">What does this mean?</button>
-            <p *ngIf="this.aboutData.is_hybrid; else VirtualText">Hybrid </p>
-            <ng-template #VirtualText>
-              <p>Virtual</p>
-            </ng-template>
-            <h6>Entry Fee</h6>
-            <p *ngIf="this.raceSettings != null; else LoadingRaceSettings">${{raceSettings.price}}</p>
-            <ng-template #LoadingRaceSettings>
-              <p>Loading Race Settings</p>
-            </ng-template>
+          <button (click)="this.openModal('custom-modal-4')">What does this mean?</button>
+          <p *ngIf="this.aboutData.is_hybrid; else VirtualText">Hybrid </p>
+          <ng-template #VirtualText>
+            <p>Virtual</p>
+          </ng-template>
+          <h6>Entry Fee</h6>
+          <p *ngIf="this.raceSettings != null; else LoadingRaceSettings">${{raceSettings.price}}</p>
+          <ng-template #LoadingRaceSettings>
+            <p>Loading Race Settings</p>
+          </ng-template>
         </div>
+        -->
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'logistics'}">
           <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceLogisticsBlock">
             <p>Loading race details...</p>
@@ -82,9 +84,22 @@
               </div>
               <p class='RaceLocation'>{{aboutData.end_loc}}</p>
             </div>
-            <h6>Number of trails</h6>
-            <p *ngIf="aboutData.num_children>1;else OneChildBlock">{{aboutData.num_children}}</p>
-            <ng-template #OneChildBlock><p>1</p></ng-template>
+          </ng-template>
+          <p>
+            <span class='h6'>Number of trails: </span>
+            <span *ngIf="aboutData.num_children>1;else OneChildBlock">{{aboutData.num_children}}</span>
+            <ng-template #OneChildBlock><span>1</span></ng-template>
+          </p>
+          <p>
+            <span class='h6'>Race Type: </span>
+            <span *ngIf="this.aboutData.is_hybrid; else VirtualText">Hybrid</span>
+            <ng-template #VirtualText><span>Virtual</span></ng-template>
+          </p>
+          <button (click)="this.openModal('custom-modal-4')">What does this mean?</button>
+          <h6>Entry Fee</h6>
+          <p *ngIf="this.raceSettings != null; else LoadingRaceSettings">${{raceSettings.price}}</p>
+          <ng-template #LoadingRaceSettings>
+            <p>Loading Race Settings</p>
           </ng-template>
         </div>
       </div>

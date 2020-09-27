@@ -1,5 +1,9 @@
 <div class="TucanContainer">
-  <button class="CloseLogin" (click)="closeDialog()">Cancel</button>
+
+    <div class='LoginSignupHeader'>
+        <button class="CloseLogin" (click)="closeDialog()">Cancel</button>
+        <button class="CloseLogin" (click)="SwitchToSignup()">Sign Up</button>
+    </div>
   <form class="LoginForm" [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
       
       <h2>Log In</h2>

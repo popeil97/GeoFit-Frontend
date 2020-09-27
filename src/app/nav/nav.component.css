@@ -22,6 +22,14 @@
   align-items: center;
   flex-wrap: nowrap;
 }
+.NavItem {
+  padding-right: 8px;
+  padding-left: 8px;
+}
+.NavLink {
+  
+}
+
 .TucanNavigationLogo img {
   width:48px;
 }
@@ -77,11 +85,6 @@ a.navbar-brand {
 
 .navbar-nav {
 }
-
-.nav-link {
-    padding-right: .5rem !important;
-    padding-left: .5rem !important;
-  }
   
   /* Fixes dropdown menus placed on the right side */
   .ml-auto .dropdown-menu {

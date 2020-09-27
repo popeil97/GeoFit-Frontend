@@ -16,20 +16,16 @@
   padding-left:16px;
   padding-right:16px;
   box-sizing: border-box;
+
+  background-color: var(--primary-darkgrey);
 }
 
+.split.left {
+}
 .split.right {
   position: relative;
   overflow:hidden;
   /* background-image: url("../../assets/landing/main.jpg"); */
-}
-.landingImage {
-  position: absolute;
-  z-index: 1;
-  top:0;
-  left:60%;
-  transform:translateX(-50%);
-  max-height: 100%;
 }
 
 .centered {
@@ -45,16 +41,29 @@
 .centered p {
   margin-top:16px;
   margin-bottom:0;
+  color:white;
 }
 
+.LandingHeaderText, .centered p {
+  color:white;
+}
 .LandingTucanLogo {
   margin-bottom:40px;
+  width:90%;
 }
 .LandingSubheading {
   margin-bottom:16px;
 }
 .LandingAboutButton {
   margin-top:8px;
+}
+.landingImage {
+  position: absolute;
+  z-index: 1;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  max-width: 100%;
 }
 
 /*

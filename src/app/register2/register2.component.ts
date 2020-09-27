@@ -299,6 +299,11 @@ export class Register2Component implements OnInit {
     this.ResetForms();
   }
 
+  SwitchToLogin = () => {
+    this.closeDialog();
+    this.modalService.open('custom-modal-1');
+  }
+
   openModal(id: string) {
     const data = (id == 'custom-modal-3') ? {price:this.d.price,race_id:this.d.raceID,hasJoined:this.d.hasJoined,hasStarted:this.d.hasStarted,hasTags: this.d.has_entry_tags} : null;
     console.log("MODAL DATA", data);

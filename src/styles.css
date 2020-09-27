@@ -6,6 +6,7 @@
   --mobile_width: 600px;
 
   --main-background-color: #36343C;
+  --primary-darkgrey: #36343C;
 }
 * {
   -webkit-transition: all ease 0.5s;
@@ -42,6 +43,35 @@ h6, .h6 {
 }
 .h7 {
   font-size:12px;
+}
+
+button, .button {
+  padding:4px 8px 4px 8px;
+  box-sizing: border-box;
+
+  border-radius: 8px !important;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(200,200,200);
+
+  background-color:inherit;
+}
+button.darkButton, .button.darkButton {
+  background-color: var(--primary-darkgrey);
+  border-color:white;
+  color:white;
+}
+button.fatButton, .button.fatButton {
+  padding: 8px 16px 8px 16px;
+}
+button.shadowButton, .button.shadowButton {
+  box-shadow: 0px 0px 1px 1px rgba(100,100,100,0.5);
+}
+button:hover, .button:hover {
+  cursor:pointer;
+}
+button.shadowButton:hover, .button.shadowButton:hover {
+  box-shadow: 0px 0px 5px 1px rgba(100,100,100,0.5);
 }
 
 /* ---- General Use ---- */
@@ -209,13 +239,16 @@ h1.PageHeaderSegmentTitle {
   flex-grow:1;
   flex-basis: 32px;
 
-  margin-bottom:32px;
+  margin-bottom:8px;
 
   display:flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-end;
   flex-wrap: wrap;
+}
+.SlideshowButton {
+  margin-right:8px;
 }
 
 .SlideshowSlide {
@@ -326,7 +359,6 @@ h1.PageHeaderSegmentTitle {
         transform:translate(-50%,-50%);
         margin:0;
       }
-
 
 
 /* .mat-drawer-backdrop.mat-drawer-shown {

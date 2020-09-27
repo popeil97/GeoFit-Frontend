@@ -104,6 +104,11 @@ export class Login2Component implements OnInit {
     this.modalService.close(this.id);
   }
 
+  SwitchToSignup = () => {
+    this.closeDialog();
+    this.modalService.open('custom-modal-2');
+  }
+
 }
 
 
