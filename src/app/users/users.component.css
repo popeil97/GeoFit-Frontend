@@ -10,6 +10,7 @@
 
 .split {
   position:relative;
+  z-index: 2;
   width:50%;
 
   padding-left:16px;
@@ -18,8 +19,17 @@
 }
 
 .split.right {
-  background-image: url("../../assets/landing/main.jpg");
-  
+  position: relative;
+  overflow:hidden;
+  /* background-image: url("../../assets/landing/main.jpg"); */
+}
+.landingImage {
+  position: absolute;
+  z-index: 1;
+  top:0;
+  left:60%;
+  transform:translateX(-50%);
+  max-height: 100%;
 }
 
 .centered {

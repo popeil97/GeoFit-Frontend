@@ -47,7 +47,22 @@
               </a>
           </div>
 
-         <div *ngIf="this._authService.isLoggedIn()">
+         <div *ngIf="this._authService.isLoggedIn(); else NavButtonsBlock">
+          <div class='dropdown NavProfileDropdown' [ngClass]="{dropdownOpen : this.profileOpen}" (click)="this.ToggleProfileDropdown()">
+            <div class='dropdownSelected'>
+              <img class='NavProfileImg' src= "{{this.picURL}}" style="border-radius:50%;width:20px;" />
+              <span>My Profile</span>
+            </div>
+            <div class='dropdownContents NavDropdownContents'>
+              <div class="dropdownItem NavDropdownItem">
+                <a [routerLink]="['/profile', {username: this._authService.username}]">My profile</a>
+              </div>
+              <div class="dropdownItem NavDropdownItem">
+                <a (click)="logout()">Log out {{this._authService.username}}</a>
+              </div>
+            </div>
+          </div>
+          <!--
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="NavItemClick()">
               <img src= "{{this.picURL}}" style="border-radius:50%;width:20px;"> My Profile
             </a>
@@ -56,24 +71,22 @@
                   <div class="dropdown-divider"></div>
                   <a class="dropdown-item" (click)="logout()">Log out {{this._authService.username}}</a>
               </div>
+          -->
           </div>
-
-          <div *ngIf="!this._authService.isLoggedIn()">
+          <ng-template #NavButtonsBlock>
             <!--
             <app-login (click)="NavItemClick()"></app-login>
             -->
             <button (click)="openModal('custom-modal-1')">Log In</button>
             <!-- <app-dialog-skeleton type=1 (click)="NavItemClick()"></app-dialog-skeleton> <!--login-->
-          </div>
-          
-          <div *ngIf="!this._authService.isLoggedIn()">
+
             <!--
               <app-register (click)="NavItemClick()"></app-register>
             -->
             <button (click)="openModal('custom-modal-2')">Sign Up</button>
             <!--<app-register></app-register>-->
             <!--  <app-dialog-skeleton type=2 (click)="NavItemClick()"></app-dialog-skeleton> <!--register-->
-          </div>
+          </ng-template>
         </div>
       </div>
     </div>

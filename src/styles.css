@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,700;1,400&display=swap');
+
 :root {
   --partial_mobile_width: 992px;
   --mobile_width: 600px;
+
+  --main-background-color: #36343C;
 }
 * {
   -webkit-transition: all ease 0.5s;
@@ -14,7 +18,7 @@ html, body {
 }
 body { 
   margin: 0; 
-  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  font-family: 'Mulish', Roboto, "Helvetica Neue", sans-serif !important; 
   font-size: 16px;
 }
 
@@ -98,6 +102,46 @@ body.custom-modal-open {
   color:red !important;
 }
 
+.dropdown {
+  position:relative;
+  overflow:hidden;
+}
+  .dropdown:hover {
+    cursor:pointer;
+  }
+  .dropdown.dropdownVisible {
+    overflow:initial;
+  }
+.dropdown .dropdownContents {
+  position:absolute;
+  top:100%;
+  left:0;
+  height:0;
+  overflow:hidden;
+  width:max-content;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items:stretch;
+  flex-wrap: nowrap;
+}
+.dropdown.dropdownOpen, .dropdown:hover {
+  overflow:visible;
+}
+.dropdown.dropdownVisible .dropdownContents, .dropdown:hover .dropdownContents, .dropdown.dropdownOpen .dropdownContents {
+  height:auto;
+}
+.dropdownItem {
+  display:block;
+  padding:8px 16px 8px 16px;
+  box-sizing: border-box;
+  border-bottom:1px solid rgb(200,200,200);
+}
+.dropdownItem:last-child {
+  border-bottom:none;
+}
+
 /* ---- Global Elements ---- */
 .TucanLogo {
   width:280px;
@@ -106,15 +150,7 @@ body.custom-modal-open {
   position:relative;
 
   height:auto;
-  width:75%;
-  min-width: 360px;
-  max-width: 800px;
-  margin-left:auto;
-  margin-right:auto;
-
-  padding-left:16px;
-  padding-right:16px;
-  box-sizing: border-box;
+  width:100%;
 
   display:flex;
   flex-direction:column;
@@ -124,21 +160,72 @@ body.custom-modal-open {
 }
 .PageSegment {
   position:relative;
-  padding-top:16px;
-  padding-bottom:16px;
+  padding:16px;
+  box-sizing: border-box;
+
+  width:100%;
+  min-width: 360px;
+  max-width: 800px;
+  margin-left:auto;
+  margin-right:auto;
 }
 .PageHeaderSegment {
-  height:360px;
+  height:auto;
+  min-height: 120px;
+  max-width: 100%;
+  margin-left:0;
+  margin-right:0;
+  margin-bottom:32px;
+
   display:flex;
   flex-direction:column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex-wrap: nowrap;
+
+  background-color: var(--main-background-color);
+  color:white;
 }
 h1.PageHeaderSegmentTitle {
   margin-top:16px;
   margin-bottom:0;
-  text-align: center;
+  font-weight: bold;
+}
+
+.Slideshow {
+  position: relative;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+.SlideshowHeader {
+  flex-shrink:0;
+  flex-grow:1;
+  flex-basis: 32px;
+
+  margin-bottom:32px;
+
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.SlideshowSlide {
+  height:0;
+  visibility: hidden;
+  opacity:0;
+
+  overflow:hidden;
+}
+.SlideshowSlide.Slideshow-CurrentSlide {
+  height:auto;
+  visibility: visible;
+  opacity:1;
 }
 
 /* .mat-drawer-backdrop.mat-drawer-shown {

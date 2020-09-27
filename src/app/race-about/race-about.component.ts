@@ -46,12 +46,17 @@ export class RaceAboutComponent implements OnInit {
 
   public num_users:any;
 
+  private currentScreen = 'map';
+  private acceptedScreens = ['map','info','locations'];
 
-  constructor(private raceService:RaceService, 
-              private route:ActivatedRoute, 
-              private router:Router, 
-              public _authService: AuthService,
-              private modalService: ModalService,) { }
+
+  constructor(
+    private raceService:RaceService, 
+    private route:ActivatedRoute, 
+    private router:Router, 
+    public _authService: AuthService,
+    private modalService: ModalService,
+  ) {}
 
   ngAfterViewInit(): void {
     while(!this.aboutData);
@@ -115,6 +120,12 @@ export class RaceAboutComponent implements OnInit {
 
   closeModal(id: string) {
       this.modalService.close(id);
+  }
+
+  SwitchSlideshow = (to:string = null) => {
+    if (to == null || this.acceptedScreens.indexOf(to) == -1) return;
+    this.currentScreen = to;
+    return;
   }
 
   trySignup(): void {

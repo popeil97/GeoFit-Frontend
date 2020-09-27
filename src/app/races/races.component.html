@@ -1,6 +1,6 @@
 <div class='PageContainer'>
   <div class="PageSegment PageHeaderSegment">
-    <img src= "../../assets/landing/tucan_main.png" class="TucanLogo" />
+    <!-- <img src= "../../assets/landing/tucan_main.png" class="TucanLogo" /> -->
     <h1 class="PageHeaderSegmentTitle">Public Races</h1>
     <app-loader [isActive]="loading"></app-loader>
   </div>
@@ -29,9 +29,8 @@
             <p>{{race.start_date}} to {{race.end_date}}</p>
             <h6>Distance:</h6>
             <p>{{race.distance}}</p>
-            <h3>Entry Fee:</h3>
+            <h6>Entry Fee:</h6>
             <p>$ {{race.raceSettings.price}}</p>
-
           </div>
         </div>
         <div class='TucanRaceItemButtons'>

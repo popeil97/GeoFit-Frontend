@@ -9,7 +9,7 @@ import {
 } from '@angular/core';
 // import { MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
 // import { first } from 'rxjs/operators';
@@ -95,6 +95,12 @@ export class Login2Component implements OnInit {
 
   closeDialog() {
     if (this.id == null) return;
+    this.loginForm.reset();
+    this.loginForm.markAsPristine();
+    this.loginForm.markAsUntouched();
+    this.loginForm.updateValueAndValidity();
+    this.loading = false;
+    this.submitted = false;
     this.modalService.close(this.id);
   }
 

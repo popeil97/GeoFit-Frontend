@@ -21,6 +21,7 @@ export class NavComponent implements OnInit {
   userData: UserData;
   picURL:any;
   navigationOpen : boolean = false;
+  profileOpen : boolean = false;
 
   constructor(
     private _notificationService:NotificationsService,
@@ -68,7 +69,13 @@ export class NavComponent implements OnInit {
 
   ToggleNavigation() {
     this.navigationOpen = !this.navigationOpen;
-    console.log(this.navigationOpen);
+    if (!this.navigationOpen) {
+      this.profileOpen = false;
+    }
+  }
+
+  ToggleProfileDropdown() {
+    this.profileOpen = !this.profileOpen;
   }
 
   NavItemClick() {

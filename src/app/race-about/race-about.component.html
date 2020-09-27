@@ -24,10 +24,46 @@
   
   <div class='PageSegment'>
     <h3>Race Details</h3>
-    <div class='MapPreview'>
-      <div class='MapContainer'>
-        <app-map [raceIDs]="raceID" [displayUsers]="false" zoom="true"></app-map>
+    <div class='Slideshow'>
+      <div class="SlideshowHeader">
+        <button class="SlideshowButton" (click)="SwitchSlideshow('map')">Route Map</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('info')">Information</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('locations')">Locations and Dates</button>
       </div>
+      <div class="SlideshowContents">
+        <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'map'}">
+          <div class='MapContainer'>
+            <app-map [raceIDs]="raceID" [displayUsers]="false" zoom="true"></app-map>
+          </div>
+        </div>
+        <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'info'}">
+          <h6>Race Type</h6> <button (click)="openModal('custom-modal-4')">What does this mean?</button>
+          <p *ngIf="aboutData.is_hybrid">Hybrid </p>
+          <p *ngIf="!aboutData.is_hybrid">Virtual</p>
+          <h6>Entry Fee</h6>
+          <p>${{raceSettings.price}}</p>
+        </div>
+        <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'locations'}">
+          <h6>Important Locations</h6>
+          <p>
+            {{aboutData.start_loc}}
+            <br />- to -<br />
+            {{aboutData.end_loc}}
+          </p>
+          <h6>Important Dates</h6>
+          <p>
+            {{aboutData.start_date}}
+            <br />- to -<br />
+            {{aboutData.end_date}}
+          </p>
+          <h6 *ngIf="aboutData.num_children>1">Number of trails </h6>
+          <p *ngIf="aboutData.num_children>1">{{aboutData.num_children}}</p>
+        </div>
+      </div>
+    </div>
+    <!--
+    <div class='MapPreview'>
+      
       <div class='RaceLocationsContainer'>
         <h6>Important Locations</h6>
         <p>
@@ -41,19 +77,13 @@
           <br />- to -<br />
           {{aboutData.end_date}}
         </p>
-        <h6>Race Type</h6> <button (click)="openModal('custom-modal-4')">What does this mean?</button>
-        <p *ngIf="aboutData.is_hybrid">Hybrid </p>
-        <p *ngIf="!aboutData.is_hybrid">Virtual</p>
-        
-
-        <h6>Entry Fee</h6>
-        <p>${{raceSettings.price}}</p>
-
         <h6 *ngIf="aboutData.num_children>1">Number of trails </h6>
         <p *ngIf="aboutData.num_children>1">{{aboutData.num_children}}</p>
       </div>
     </div>
   </div>
+  -->
+</div>
   
   <div class='PageSegment'>
     <h3>Action Items</h3>
@@ -74,7 +104,6 @@
    <!-- <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag> -->
   </div>
 
-</div>
 
 
 

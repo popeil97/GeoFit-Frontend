@@ -1,21 +1,23 @@
 .UserProfileContainer {
     position: relative;
     width:100%;
-    height:auto;
-    min-height: 100%;
-    overflow-y:auto;
-    padding-left:320px;
-    box-sizing: border-box;
+    height: calc(100vh - 64px);
+
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: nowrap;
 }
 .UserProfileUserInfoContainer {
-    position: fixed;
-    left:0;
-    top:0;
-    height:100vh;
-    width:320px;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 240px;
+
+    height:100%;
+    width:240px;
     background-color:grey;
 
-    padding-top: 64px;
     box-sizing: border-box;
 }
 .UserProfileUserInfoInnerContainer, .UserProfileMainContentContainer {
@@ -33,39 +35,7 @@
         align-items: stretch;
         flex-wrap: nowrap;
     }
-
-.Slideshow {
-    position: relative;
-
-    display:flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    flex-wrap: nowrap;
-}
-.SlideshowHeader {
-    flex-shrink:0;
-    flex-grow:1;
-    flex-basis: 32px;
-
-    margin-bottom:32px;
-
-    display:flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-end;
-    flex-wrap: wrap;
-}
-
-.SlideshowSlide {
-    height:0;
-    visibility: hidden;
-    opacity:0;
-
-    overflow:hidden;
-}
-.SlideshowSlide.Slideshow-CurrentSlide {
-    height:auto;
-    visibility: visible;
-    opacity:1;
+.UserProfileMainContentContainer {
+    height:100%;
+    overflow-y:auto;
 }
