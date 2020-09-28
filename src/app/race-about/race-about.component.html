@@ -38,25 +38,50 @@
       <i *ngIf="aboutData.race_type == 2" class="material-icons">directions_bike</i> 
     </ng-template>
   </div>
+
+  <div class='PageSegment'>
+    <h3>Interested in Participating?</h3>
+    <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceActionsBlock">
+      <p>Waiting for race data...</p>
+    </ng-template>
+    <ng-template #RaceActionsBlock>
+      <div class='RaceButtonsContainer'>
+        <button (click)="this.viewRace()" *ngIf="this.hasStarted && this.hasJoined">Go to Race</button>
+        <button (click)="this.viewRace()" *ngIf="this.hasStarted && !this.hasJoined ">Preview Race</button>
+        <button (click)="this.goToRaceDashboard()" *ngIf="this.isOwner || this.isModerator">GO TO DASHBOARD</button>      
+  
+        <button *ngIf="!this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-2')">Register for Race</button>
+        <button *ngIf="this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-3')">Register for Race</button>
+
+        <p *ngIf="this._authService.isLoggedIn() && this.hasJoined" class='margin-bottom-8px'>You've registered for this race.</p>
+        <p *ngIf=" !hasStarted" class='margin-bottom-8px italics'>Come back on race day ({{aboutData.start_date.month}}, {{aboutData.start_date.day}}).</p>
+      </div>
+
+      <!-- test this by going into the "swag" module in the backend and adding swag to your race -->
+    <!-- <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag> -->
+    </ng-template>
+  </div>
     
   <div class='PageSegment'>
     <h3>Race Details</h3>
 
     <div class='Slideshow'>
       <div class="SlideshowHeader">
-        <button class="SlideshowButton" (click)="SwitchSlideshow('map')">Route Map</button>
-        <!--<button class="SlideshowButton" (click)="SwitchSlideshow('info')">Information</button>-->
-        <button class="SlideshowButton" (click)="SwitchSlideshow('logistics')">Logistics</button>
-        <button class="SlideshowButton" (click)="SwitchSlideshow('race_director')">Race Director</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('map')">Route Details</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('logistics')">Rules &amp; Requirements</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('race_director')">About the Race Director</button>
       </div>
-      <div class="SlideshowContents">
+      <div class="SlideshowContents RaceSlideshowContents">
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'map'}">
           <div class='MapContainer'>
             <app-map [raceIDs]="raceID" [displayUsers]="false" zoom="true"></app-map>
-            <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceLogisticsBlock">
+          </div>
+          <div class="RaceRoutesContainer">
+            <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceRoutesBlock">
               <p>Loading race details...</p>
             </ng-template>
-            <ng-template #RaceLogisticsBlock>
+            <ng-template #RaceRoutesBlock>
+              
               <div class='RaceLocationsContainer'>
                 <p class='RaceLocation'>{{aboutData.start_loc}}</p>
                 <div class='RaceDistanceLine'>
@@ -64,6 +89,17 @@
                 </div>
                 <p class='RaceLocation'>{{aboutData.end_loc}}</p>
               </div>
+              
+              <div class='RaceRouteInfo margin-bottom-8px'>
+                <h6 class='margin-bottom-4px'>Number of trails:</h6>
+                <ng-template [ngIf]="aboutData.num_children>1" [ngIfElse]="OneChildBlock">
+                  <p class='h7 margin-bottom-0px'>{{aboutData.num_children}}</p>
+                </ng-template>
+                <ng-template #OneChildBlock>
+                  <p class='h7 margin-bottom-0px'>1</p>
+                </ng-template>
+              </div>
+
             </ng-template>
           </div>
         </div>
@@ -89,80 +125,65 @@
 
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'logistics'}">
 
-          <p>
-            <span class='h6'>Race Type: </span>
-            <span *ngIf="this.aboutData.is_hybrid; else VirtualText">Hybrid</span>
-            <ng-template #VirtualText><span>Virtual</span></ng-template>
-          </p>
-          <button (click)="this.openModal('custom-modal-4')">What does this mean?</button>
+          <div class='margin-bottom-16px'>
+            <h6 class='margin-bottom-4px'>Race Type:</h6>
+            <ng-template [ngIf]="this.aboutData.is_hybrid" [ngIfElse]="VirtualText">
+              <p class='h7 margin-bottom-0px'>Hybrid</p>
+            </ng-template>
+            <ng-template #VirtualText>
+              <p class='h7 margin-bottom-0px'>Virtual</p>
+            </ng-template>
+            <button (click)="this.openModal('custom-modal-4')">What does this mean?</button>
+          </div>
 
-          <p>
-            <span class='h6'>Race Requirements: </span>
-            <span *ngIf="this.raceSettings.isManualEntry; else ManualText">NONE however, the Strava mobile app is highly recommended for tracking fitness activities!</span>
-            <ng-template #ManualText><span>Download Strava from the app store to track your fitness activities</span></ng-template>
-          </p>
+          <div class='margin-bottom-16px'>
+            <h6 class='margin-bottom-4px'>Race Requirements:</h6>
+            <ng-template [ngIf]="this.raceSettings.isManualEntry" [ngIfElse]="ManualText">
+              <p class='h7 margin-bottom-0px'>NONE however, the Strava mobile app is highly recommended for tracking fitness activities!</p>
+            </ng-template>
+            <ng-template #ManualText>
+              <p class='h7 margin-bottom-0px'>Download Strava from the app store to track your fitness activities</p>
+            </ng-template>
+          </div>
 
-          <p *ngIf="this.raceSettings.allowTeams">
-            <span class='h6'>Teams: </span>
-            <span>Teams of up to {{this.raceSettings.max_team_size}} can be formed on race day.</span>
-          </p>
+          <div class='margin-bottom-16px'>
+            <h6 class=margin-bottom-4px>Teams:</h6>
+            <ng-template [ngIf]="this.raceSettings.allowTeams" [ngIfElse]="NoTeamsBlock">
+              <p class='h7 margin-bottom-0px'>Teams of up to {{this.raceSettings.max_team_size}} can be formed on race day.</p>
+            </ng-template>
+            <ng-template #NoTeamsBlock>
+              <p class='h7 margin-bottom-0px'>No teams are allowed for this race.</p>
+            </ng-template>
+          </div>
 
-          <p>     
-            <span class='h6'>Number of trails: </span>
-            <span *ngIf="aboutData.num_children>1;else OneChildBlock">{{aboutData.num_children}}</span>
-            <ng-template #OneChildBlock><span>1</span></ng-template>
-          </p>
-
-          
-          <h6>Entry Fee</h6>
-          <p *ngIf="this.raceSettings != null; else LoadingRaceSettings">${{raceSettings.price}}</p>
-
-          <ng-template #LoadingRaceSettings>
-            <p>Loading Race Settings</p>
-          </ng-template>
+          <div class='margin-bottom-16px'>
+            <h6 class='margin-bottom-4px'>Entry Fee</h6>
+            <ng-template [ngIf]="this.raceSettings != null" [ngIfElse]="LoadingRaceSettings">
+              <p class='h7 margin-bottom-0px'>${{raceSettings.price}}</p>
+            </ng-template>
+            <ng-template #LoadingRaceSettings>
+              <p class='h7 margin-bottom-0px italics'>Loading Race Settings</p>
+            </ng-template>
+          </div>
         </div>
 
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'race_director'}">
-          <p>
-            <span class='h6'>Race Director: </span>
-            <span>{{this.userData.first_name}} {{this.userData.last_name}}</span>
-          </p>
+          
+          <div class='margin-bottom-16px'>
+            <h6 class='margin-bottom-4px'>Race Director:</h6>
+            <p class='h7 margin-bottom-0px'>{{this.userData.first_name}} {{this.userData.last_name}}</p>
+            <a [href]='this.userData.email_mailto' class='h7 margin-bottom-0px'>{{this.userData.email}}</a>
+          </div>
 
-          <p>
-            <span class='h6'>Email: </span>
-            <span>{{this.userData.email}}</span>
-          </p>
-          <p>
-            <span class='h6'>About: </span>
-            <span>{{this.userData.description}}</span>
-          </p>
+          <div class='margin-bottom-16px'>
+            <h6 class='margin-bottom-4px'>About the Director:</h6>
+            <p class='h7 margin-bottom-0px'>{{this.userData.description}}</p>
             <img class="UserProfileImage img-responsive" src="{{this.userData.profile_url}}" alt=""> 
+          </div>
+
         </div>
       </div>
     </div>
-  </div>
-    
-  <div class='PageSegment'>
-    <h3>Action Items</h3>
-
-    <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceActionsBlock">
-      <p>Waiting for race data...</p>
-    </ng-template>
-    <ng-template #RaceActionsBlock>
-      <div class='RaceButtonsContainer'>
-        <a class="btn"  (click)="this.viewRace()" *ngIf="this.hasStarted && this.hasJoined">Go to Race</a>
-        <a class="btn"  (click)="this.viewRace()" *ngIf="this.hasStarted && !this.hasJoined ">Preview Race</a>
-        <a class="btn"  mat-button (click)="this.goToRaceDashboard()" *ngIf="this.isOwner || this.isModerator">GO TO DASHBOARD</a>      
-  
-        <button *ngIf="!this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-2')">Register for Race</button>
-        <button *ngIf="this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-3')">Register for Race</button>
-
-        <b *ngIf="this._authService.isLoggedIn() && this.hasJoined">You've registered for this race.</b><b *ngIf=" !hasStarted"> Come back on race day ({{aboutData.start_date}}).</b>
-      </div>
-
-      <!-- test this by going into the "swag" module in the backend and adding swag to your race -->
-    <!-- <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag> -->
-    </ng-template>
   </div>
 </div>
 
