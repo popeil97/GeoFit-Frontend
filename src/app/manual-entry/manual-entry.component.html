@@ -37,29 +37,6 @@
   </div>
 
 
-
-
-
-
-
-    <!--
-
-    <div class="form-group">
-      <b><mat-label name="distanceType">Distance Units</mat-label></b>
-      <mat-select formControlName="distanceType">
-        <mat-option value="MI">Miles</mat-option>
-        <mat-option value="KM">Kilometers</mat-option>
-      </mat-select>
-      <br>
-      <div *ngIf="manualEntryForm.get('distanceType').invalid && (manualEntryForm.get('distanceType').dirty || manualEntryForm.get('distanceType').touched)"
-    class="alert alert-danger">
-    
-    <div *ngIf="manualEntryForm.get('distanceType').errors.required">
-       Distance Units is required.
-    </div>
-    </div>
-    </div> -->
-
     <div class="form-group" style="border-color:#ced4da;">
             <input matInput [matDatepicker]="picker" formControlName="activityDate" placeholder="Activity Date (MM/DD/YYYY) *" [ngClass]="{ 'is-invalid': submitted && f.date_of_birth.errors }">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -125,7 +102,7 @@
     
 
     <div style="position: relative; text-align:center;">
-    <button class="btn btn-primary btn-mobile" style="background-color:#2C00A5;" mat-raised-button (click)="upload()">Add Activity</button>
+    <button (click)="upload()">Add Activity</button>
     </div>
   </form>
 </div>

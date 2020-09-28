@@ -9,6 +9,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { StoryDialogComponent } from '../story-dialog/story-dialog.component';
 import { ReportFormComponent } from '../report-form/report-form.component';
 import { StoryDeleteDialogComponent } from '../story-delete-dialog/story-delete-dialog.component';
+import { ModalService } from '../modalServices';
 
 declare var $: any
 
@@ -67,7 +68,7 @@ export class FeedComponent implements OnInit {
   constructor(private _userProfileService: UserProfileService, 
               private _raceFeedService: RaceFeedService,
               public _authService: AuthService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,private modalService: ModalService,) {
   }
 
   ngOnInit() {
@@ -243,6 +244,26 @@ export class FeedComponent implements OnInit {
       }
     });
   }
+
+    openModal(id: string) {
+    var data = (id == 'custom-modal-6') ? {raceID:this.ID, callbackFunction:null} : {};
+     data.callbackFunction = this.testFunction;
+
+    this.modalService.open(id,data);
+  }
+
+  testFunction = (incomingData = null) => {
+  //  const toAlert = (incomingData != null) ? incomingData : this.testString;
+  if(incomingData != null){
+    this.newStoryPosted();
+    console.log("PARENT",incomingData);
+      }
+
+  }
+
+  
+    
+
 }
 
 

@@ -1,24 +1,25 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { StoryService } from '../story.service';
 import { ImageService } from '../image.service';
-
+import { ModalService } from '../modalServices';
 
 @Component({
-  selector: 'app-story-form',
-  templateUrl: './story-form.component.html',
-  styleUrls: ['./story-form.component.css']
+  selector: 'app-story-form-standalone',
+  templateUrl: './story-form-standalone.component.html',
+  styleUrls: ['./story-form-standalone.component.css']
 })
-export class StoryFormComponent implements OnInit {
-  @Input() raceID:number;
+export class StoryFormStandaloneComponent implements OnInit {
+	@Input() id: string;
+ // @Input() raceID:number;
 
-  @Output() storyPostedEvent = new EventEmitter();
+  //@Output() storyPostedEvent = new EventEmitter();
 
   private storyText: string;
 
   private storyImage:any;
 
   constructor(private storyService: StoryService,
-              private _imageService: ImageService) { }
+              private _imageService: ImageService,private modalService: ModalService) { }
 
   ngOnInit() {
   }
@@ -50,12 +51,13 @@ export class StoryFormComponent implements OnInit {
         this.storyImage = data;
      //    console.log(this.storyImage);
         //Upload story via service
-        this.uploadStoryWithService(this.raceID, this.storyImage, this.storyText, withLastStory);
+        this.uploadStoryWithService(this.d.raceID, this.storyImage, this.storyText, withLastStory);
       });
     }
     else {
-      this.uploadStoryWithService(this.raceID, this.storyImage, this.storyText, withLastStory);
+      this.uploadStoryWithService(this.d.raceID, this.storyImage, this.storyText, withLastStory);
     }
+    this.closeDialog();
     
   }
 
@@ -64,14 +66,21 @@ export class StoryFormComponent implements OnInit {
       {
       //   console.log("Uploaded story");
         //Emit event to refresh feed
-        this.storyPostedEvent.emit();
-
+       // this.storyPostedEvent.emit();
+       	this.modalService.callbackModal(this.id,"test");
         //Clear input fields
         (<HTMLInputElement>document.getElementById("storyImage")).value = '';
         (<HTMLInputElement>document.getElementById("storyImageCaption")).value = '';
         this.storyText = null;
         this.storyImage = null;
       });
+  }
+
+    get d() { return this.modalService.modalsData[this.id]}
+
+  closeDialog() {
+    if (this.id == null) return;
+    this.modalService.close(this.id);
   }
 
 }

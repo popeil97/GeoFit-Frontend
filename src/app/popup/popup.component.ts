@@ -12,10 +12,12 @@ export class PopupComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+
   }
 
   followStatusChanged() {
     this.userData.follows = !this.userData.follows;
+    console.log("POPUP DATA",this.userData);
   }
 
 }

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
+import { ModalService } from '../modalServices';
 
 @Injectable()
 export class RaceFeedService {
@@ -34,4 +35,8 @@ export class RaceFeedService {
   public resetFeed(){
     this.refresh_ts = null;
   }
+
+
+  
+
 }

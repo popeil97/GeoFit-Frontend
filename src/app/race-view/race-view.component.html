@@ -23,16 +23,20 @@
           
         </ng-template>
 
-<!--
-        <button (click)="openModal('custom-modal-5')">Log Activity</button>
+        <br><br><br><br><br>
+        <button *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities>0" matBadge="{{num_activities}}"  matBadgePosition="after" matBadgeColor="accent" (click)="openModal('custom-modal-5')" >Log Activity</button>
+        <button *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities==0" (click)="openModal('custom-modal-5')" >Log Activity</button>
 
-        <button (click)="toggleTeamForm()" *ngIf="!showTeamForm">Add Team</button>
+
+
+<!--        <button (click)="toggleTeamForm()" *ngIf="!showTeamForm">Add Team</button> -->
 
         <button (click)="openModal('custom-modal-5')">Settings</button>
+        <button (click)="viewAbout()">About Race</button>
 
-        <button (click)="openModal('custom-modal-5')">Make a Post</button>
+        
 
-       <button (click)="openModal('custom-modal-6')">Map Settings</button> -->
+       <!-- <button (click)="openModal('custom-modal-6')">Map Settings</button> -->
 
         <div style="text-align:center;">
           <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Activity Feed</b></h3></b>
@@ -46,75 +50,7 @@
         <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed> <br><br><br><br><br><br>
       </mat-tab>
 
-      <mat-tab *ngIf="this.progress && this._authService.isLoggedIn() && this.userRegistered">
-        <ng-template mat-tab-label style="background-color: rgba(256,256, 256,1);">
-        <!--  <mat-icon>add_circle_outline </mat-icon> <div *ngIf="num_activities>0" style="background-color: #F6BF78; border-radius: 5px;padding-left:2px;padding-right:2px;">{{num_activities}} </div> -->
-
-          <mat-icon *ngIf="num_activities>0"  matBadge="{{num_activities}}" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below">add_circle_outline</mat-icon> 
-           <mat-icon *ngIf="num_activities==0" >add_circle_outline</mat-icon>
-
-          <div class="tabs1">Add Activity </div>
-          
-
-        </ng-template>
-
-        <div *ngIf="!raceSettings.isManualEntry">
-            <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
-            <h4 *ngIf="userRaceSettings.isAutomaticImport" style="text-align:center;font-family:Roboto; color:#2C007E;"> You have auto import turned on!</h4>
-            <app-activities-menu *ngIf="this.progress" [distance_unit]="progress.distance_type" [race_id]="raceID" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-activities-menu><br><br><br><br><br><br>
-        </div>
-
-        <div *ngIf="num_activities==0">
-        <mat-tab-group [selectedIndex]="1" class='tab-subtitled'>
-          <mat-tab *ngIf="raceSettings.isManualEntry">
-            <ng-template mat-tab-label>
-              <mat-icon>cloud_download</mat-icon>
-              <div class="tabs1">Strava</div>
-            </ng-template>
-            <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
-             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
-             <h4 *ngIf="userRaceSettings.isAutomaticImport" style="text-align:center;font-family:Roboto; color:#2C007E;"> You have auto import turned on!</h4>
-             <app-activities-menu *ngIf="this.progress" [distance_unit]="progress.distance_type" [race_id]="raceID" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-activities-menu><br><br><br><br><br><br>
-          </mat-tab>
-          <mat-tab *ngIf="raceSettings.isManualEntry">
-            <ng-template mat-tab-label>
-              <mat-icon>add_circle_outline</mat-icon>
-              <div class="tabs1">Manual</div>
-            </ng-template>
-             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Add Activity</b></h3></b>
-            <app-manual-entry [race_type]="raceType" (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
-          </mat-tab>
-        </mat-tab-group>
-      </div>
-
-      <div *ngIf="num_activities>0">
-        <mat-tab-group [selectedIndex]="0" class='tab-subtitled'>
-          <mat-tab *ngIf="raceSettings.isManualEntry">
-            <ng-template mat-tab-label>
-
-              <mat-icon>cloud_download</mat-icon>
-              <div style="font-size:10px;">Strava</div>
-            </ng-template>
-            <!--  <app-user-progress *ngIf="this._authService.token && this.progress" [progress]="progress"></app-user-progress> 
-            <br><br><br><br><br><br><br><br><br><br><br><br><br><br> -->
-             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>My Activities</b></h3></b>
-             <h4 *ngIf="userRaceSettings.isAutomaticImport" style="text-align:center;font-family:Roboto; color:#2C007E;"> You have auto import turned on!</h4>
-             <app-activities-menu *ngIf="this.progress" [distance_unit]="progress.distance_type" [race_id]="raceID" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-activities-menu><br><br><br><br><br><br>
-          </mat-tab>
-          <mat-tab *ngIf="raceSettings.isManualEntry">
-            <ng-template mat-tab-label>
-              <mat-icon>add_circle_outline</mat-icon>
-              <div style="font-size:10px;">Manual</div>
-            </ng-template>
-             <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Add Activity</b></h3></b>
-            <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
-          </mat-tab>
-        </mat-tab-group>
-      </div>
-
-      </mat-tab>
-
+      
       
 
             <mat-tab>
@@ -155,6 +91,8 @@
      </mat-tab-group>
 
       </mat-tab>
+
+      <!--
         <mat-tab *ngIf="this._authService.isLoggedIn() && this.userRegistered">
         <ng-template mat-tab-label>
           <mat-icon>group</mat-icon>
@@ -171,7 +109,9 @@
             <div *ngIf="showTeamForm">
               <app-team-form (callback)="refreshAllComponents($event)" [teamEditForm]="teamEditForm"></app-team-form><br><br><br><br><br><br>
             </div>
-      </mat-tab>
+      </mat-tab> -->
+
+
       <mat-tab *ngIf="this._authService.isLoggedIn() && this.userRegistered">
 
         <ng-template mat-tab-label>

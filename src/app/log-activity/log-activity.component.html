@@ -6,14 +6,22 @@
 
     <div class='Slideshow'>
       <div class="SlideshowHeader">
-        <button class="SlideshowButton" (click)="SwitchSlideshow('strava')">Strava</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('strava')" *ngIf="this.d.manualEntry" >Strava</button>
         <!--<button class="SlideshowButton" (click)="SwitchSlideshow('info')">Information</button>-->
-        <button class="SlideshowButton" (click)="SwitchSlideshow('manual')">Manual</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('manual')" *ngIf="this.d.manualEntry">Manual</button>
       </div>
       <div class="SlideshowContents">
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'strava'}">
          <!-- <app-activities-menu *ngIf="this.progress" [distance_unit]="progress.distance_type" [race_id]="raceID" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-activities-menu> -->
-         Strava
+         <app-activities-menu *ngIf="!this.d.automaticImport && stravaData.authorized" [distance_unit]="this.d.distance_unit" [race_id]="this.d.race_id" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-activities-menu>
+
+         <b *ngIf="this.d.automaticImport">Automatic import is turned on.</b>
+
+          <div *ngIf="!stravaData.authorized">
+              <b> You don't have your account connected to Strava </b>
+              <app-stravauth></app-stravauth>
+          </div>
+
         </div>
 
         <!--
@@ -35,8 +43,8 @@
         </div>
         -->
 
-        <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'manual'}">
-          <app-manual-entry [race_type]="this.d.raceType" (uploadManualEntry2)="uploadManualEntry($event)"></app-manual-entry>
+        <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'manual'}" *ngIf="this.d.manualEntry">
+          <app-manual-entry [race_type]="this.d.raceType" (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
         </div>
 
 

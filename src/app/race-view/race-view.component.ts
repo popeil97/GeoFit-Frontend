@@ -89,7 +89,6 @@ export class RaceViewComponent implements OnInit {
   entryTagType: TagType = TagType.ENTRY;
   selectedTagFilterID = -1;
 
-  public test = "from_parent";
 
   varcolors = ['#bb0000', '#ffffff'];
 
@@ -120,27 +119,47 @@ export class RaceViewComponent implements OnInit {
     
 
     this.getRaceState();
+    this.getActivities();
   }
 
   openModal(id: string) {
-    var data = (id == 'custom-modal-5') ? {race_type:this.raceType}: null;
-    console.log("MODAL DATA", data);
+    console.log("DATA SENT TO CHILD", this.progress.distance_type, this.raceID);
+    var data = (id == 'custom-modal-5') ? {raceType:this.raceType, distance_unit: this.progress.distance_type, race_id:this.raceID, numActivities : this.num_activities, manualEntry:this.raceSettings.isManualEntry, automaticImport: this.userRaceSettings.isAutomaticImport, callbackFunction:null} : {};
+     data.callbackFunction = this.uploadActivity;
 
-   // data.callbackFunction = this.testFunction;
+     data.callbackFunction = this.uploadActivity;
 
     this.modalService.open(id,data);
   }
 
-  
-  testFunction = () =>{
+  uploadActivity = (incomingData = null) => {
+  //  const toAlert = (incomingData != null) ? incomingData : this.testString;
+  if(incomingData != null){
+    console.log("PARENT",incomingData.type);
 
-    console.log(this.test);
+    if(incomingData.type == "manual")
+    {
+      this.uploadManualEntry(incomingData.entry);
+    }
+
+    if(incomingData.type == "strava")
+    {
+      this.refreshStatComponents();
+    }
   }
+    
+  }
+
 
 
   closeModal(id: string) {
       this.modalService.close(id);
       console.log(this.modalService.getModalData(id));
+  }
+
+
+  viewAbout() {
+    this.router.navigate(['/about',{name:this.race.name,id:this.race.id}]);
   }
 
   setLeaderboardRouteFilter(route:ChildRaceData) {
@@ -210,6 +229,7 @@ export class RaceViewComponent implements OnInit {
     // leaderboards
     // user stats
     // personal race stat
+    this.setLoaderState(true);
     this.getRaceState();
     
     //this.mapChild.getMapData();
@@ -280,6 +300,17 @@ export class RaceViewComponent implements OnInit {
     this.activitiesService.uploadManualEntry(entry,this.selectedRaceID).then((resp) => {
       this.refreshStatComponents();
     });
+  }
+
+  getActivities() {
+    this.activitiesService.getActivities(this.raceID).then((data:any) => {
+     
+      console.log("RACE VIEW ACTIVITIES", data);
+       this.activities = data.activities;
+      this.num_activities = data.activities.length;
+      console.log("HELLO???",this.num_activities);
+    });
+    console.log("HELLO2???",this.num_activities);
   }
 
 

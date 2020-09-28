@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter,OnChanges } from '@angular/core';
 import { ModalService } from '../modalServices';
+import { StravauthService } from '../stravauth/stravauth.service';
+
 @Component({
   selector: 'app-log-activity',
   templateUrl: './log-activity.component.html',
@@ -7,16 +9,20 @@ import { ModalService } from '../modalServices';
 })
 export class LogActivityComponent implements OnInit {
   @Input() id: string;
-  @Output() uploadManualEntry2: EventEmitter<any> = new EventEmitter();
 
   modalData: any;
   private currentScreen = 'strava';
   private acceptedScreens = ['strava','manual'];
+  public stravaData: StravaData;
 
-  constructor(private modalService: ModalService) { }
+  constructor(private modalService: ModalService,private _stravauthService: StravauthService) { }
 
   ngOnInit() {
   	console.log("hi", this.d);
+
+    this._stravauthService.getStravaInfo().then( data => {
+      this.stravaData = data as StravaData;
+    })
 
   }
 
@@ -31,13 +37,27 @@ export class LogActivityComponent implements OnInit {
 
   closeDialog() {
     if (this.id == null) return;
+    
+   // this.modalService.callbackModal(this.id,'FROM CHILD');
     this.modalService.close(this.id);
   }
 
 
   uploadManualEntry(entry:any) {
-  	console.log(entry);
-  	//this.uploadManualEntry2.emit(entry);
+  	console.log("FROM CHILD entry uploadManualEntry",{type:"manual",entry:entry});
+  	this.modalService.callbackModal(this.id,{type:"manual",entry:entry});
+    
+  }
+
+  setLoaderState(entry:any) {
+    console.log("FROM CHILD entry setLoaderState",entry);
+    this.modalService.callbackModal(this.id,{type:"strava",entry:entry});
+    
+  }
+
+  refreshStatComponents(entry:any) {
+    console.log("FROM CHILD entry refreshStatComponents",entry);
+    this.modalService.callbackModal(this.id,{type:"strava",entry:entry});
     
   }
 
@@ -46,4 +66,9 @@ export class LogActivityComponent implements OnInit {
 
   }
 
+}
+
+interface StravaData{
+  authorized: boolean;
+  ID: number;
 }

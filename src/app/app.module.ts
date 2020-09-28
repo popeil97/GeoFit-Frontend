@@ -116,6 +116,7 @@ import { Signup2Component } from './signup2/signup2.component';
 import { RaceTypeComponent } from './race-type/race-type.component';
 import { UserRaceComponent } from './user-race/user-race.component';
 import { LogActivityComponent } from './log-activity/log-activity.component';
+import { StoryFormStandaloneComponent } from './story-form-standalone/story-form-standalone.component';
 
 
 @NgModule({
@@ -213,6 +214,7 @@ import { LogActivityComponent } from './log-activity/log-activity.component';
     RaceTypeComponent,
     UserRaceComponent,
     LogActivityComponent,
+    StoryFormStandaloneComponent,
       ],
 
   imports: [
