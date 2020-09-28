@@ -39,6 +39,7 @@ export class UserPageComponent implements OnInit {
     this.showEdit = false;
 
     this.route.paramMap.subscribe(params => {
+      console.log('User Page - params',params);
       this.username = params['params']['username'];
       this.getUserData();
       console.log(this.username);

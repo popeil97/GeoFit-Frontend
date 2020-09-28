@@ -4,19 +4,20 @@
   <div class="UserProfileUserInfoContainer">
     <div class="TucanContainer UserProfileUserInfoInnerContainer">
       <div *ngIf="userData != null; else profileLoadingMessage">
-        <img class="UserProfileImage img-responsive" src="{{userData.profile_url}}" alt=""> 
-        <h3>{{userData.first_name}} {{userData.last_name}}</h3>
-        <p *ngIf="userData.email_visibility||userData.is_me">{{ userData.email }}</p>
+        <div class="UserProfileIdentityContainer">
+          <img class="UserProfileImage img-responsive" src="{{userData.profile_url}}" alt=""> 
+          <h3 class="UserProfileName">{{userData.first_name}} {{userData.last_name}}</h3>
+          <p class="UserProfileEmail" *ngIf="userData.email_visibility||userData.is_me">{{ userData.email }}</p>
+        </div>
 
         <div *ngIf="userData.about_visibility||userData.location_visibility||userData.is_me">
-          <h6>About:</h6>
           <div>
-            <p *ngIf="userData.about_visibility && userData.description!='N/A'; else descriptionDefault">{{ userData.description }}</p> 
-            <ng-template #descriptionDefault>No description available</ng-template>
+            <p class='h7' *ngIf="userData.about_visibility && userData.description!='N/A'; else descriptionDefault" class="UserProfileDescription">{{ userData.description }}</p> 
+            <ng-template #descriptionDefault><p class='italics h7'>No description available</p></ng-template>
           </div>
           <div>
-            <p *ngIf="userData.location_visibility && userData.location != 'N/A'; else locationDefault">{{ userData.location }}</p>  
-            <ng-template #locationDefault>No location info available</ng-template>
+            <span class='h7' *ngIf="userData.location_visibility && userData.location != 'N/A'; else locationDefault">{{ userData.location }}</span>  
+            <ng-template #locationDefault><span class='italics h7'>No location info available</span></ng-template>
           </div>
         </div>
 
@@ -43,11 +44,9 @@
       </div>
       <ng-template #profileLoadingMessage><p>Loading...</p></ng-template>
 
-      <div *ngIf="userData != null && this._authService.isLoggedIn()">
-        <div *ngIf="userData.is_me">
-          <a class="btn" (click)="toggleEditView()">EDIT</a>
-          <a class="btn" (click)="logout()">Log out</a>
-        </div>
+      <div class='UserProfileActions' *ngIf="userData != null && this._authService.isLoggedIn() && userData.is_me">
+        <a class="button darkButton" (click)="toggleEditView()">Edit Details</a>
+        <a class="button darkButton" (click)="logout()">Log out</a>
       </div>
 
     </div>

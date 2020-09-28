@@ -12,22 +12,49 @@
 .UserProfileUserInfoContainer {
     flex-shrink: 0;
     flex-grow: 0;
-    flex-basis: 240px;
+    flex-basis: 320px;
 
     height:100%;
-    width:240px;
-    background-color:grey;
+    width:320px;
+    background-color:var(--primary-darkgrey);
 
     box-sizing: border-box;
 }
+    .UserProfileUserInfoContainer h2,
+    .UserProfileUserInfoContainer h3,
+    .UserProfileUserInfoContainer h6,
+    .UserProfileUserInfoContainer p, 
+    .UserProfileUserInfoContainer span {
+        color:white;
+    }
+    .UserProfileUserInfoContainer p {
+        margin-bottom:0;
+    }
+    .UserProfileActions {
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
 .UserProfileUserInfoInnerContainer, .UserProfileMainContentContainer {
-    padding:16px;
+    padding:32px;
     box-sizing: border-box;
 }
-    img.UserProfileImage {
-        width:100%;
-        /* width:150px;height:150px; */
+    .UserProfileIdentityContainer {
+        margin-bottom:16px;
     }
+        img.UserProfileImage {
+            width:100%;
+            margin-bottom:16px;
+            /* width:150px;height:150px; */
+        }
+        .UserProfileName {
+            margin-bottom:4px;
+        }
+        .UserProfileEmail {
+            margin-bottom:0;
+        }
     .UserProfileUserInfoInnerContainer {
         display:flex;
         flex-direction: column;
