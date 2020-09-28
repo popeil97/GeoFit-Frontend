@@ -10,8 +10,8 @@ import { ModalService } from '../modalServices';
 export class ManualEntryComponent implements OnInit {
 
   manualEntryForm:FormGroup;
-  @Input() id: string;
- // @Input() race_type:number;
+ // @Input() id: string;
+  @Input() race_type:number;
   @Output() uploadManualEntry: EventEmitter<any> = new EventEmitter();
   activityOptions:any[];
   defaultActivityString:string;
@@ -23,16 +23,16 @@ export class ManualEntryComponent implements OnInit {
   ngOnInit() {
    // console.log("RACE TYPE", this.race_type);
     this.defaultActivityString = "Run";
-    if(this.d.race_type==1) //run/walk
+    if(this.race_type==1) //run/walk
     {
       this.activityOptions = ['Run', 'Walk'];
     }
-    if(this.d.race_type==2) // bike
+    if(this.race_type==2) // bike
     {
       this.defaultActivityString = "Ride";
       this.activityOptions = ['Ride'];
     }
-    if(this.d.race_type==3) //all
+    if(this.race_type==3) //all
     {
       this.activityOptions = ['Run', 'Walk', 'Ride', 'Other'];
     }
@@ -83,7 +83,7 @@ export class ManualEntryComponent implements OnInit {
       this.uploadManualEntry.emit(formClean);
     }
      this.defaultActivityString = "Run";
-      if(this.d.race_type==2) // bike
+      if(this.race_type==2) // bike
       {
         this.defaultActivityString = "Ride";
       }
@@ -98,13 +98,6 @@ export class ManualEntryComponent implements OnInit {
    // console.log('VALUE:',entry.value);
     let value = entry.value;
  //   this.manualEntryForm.get('distanceType').setValue(DistanceType[value])
-  }
-
-  get d() { return this.modalService.modalsData[this.id]}
-
-  closeDialog() {
-    if (this.id == null) return;
-    this.modalService.close(this.id);
   }
 
   
