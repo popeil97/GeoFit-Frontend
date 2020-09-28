@@ -115,6 +115,7 @@ import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderbo
 import { Signup2Component } from './signup2/signup2.component';
 import { RaceTypeComponent } from './race-type/race-type.component';
 import { UserRaceComponent } from './user-race/user-race.component';
+import { LogActivityComponent } from './log-activity/log-activity.component';
 
 
 @NgModule({
@@ -211,6 +212,7 @@ import { UserRaceComponent } from './user-race/user-race.component';
     Signup2Component,
     RaceTypeComponent,
     UserRaceComponent,
+    LogActivityComponent,
       ],
 
   imports: [

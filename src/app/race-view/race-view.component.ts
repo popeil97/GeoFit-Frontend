@@ -14,6 +14,7 @@ import { AuthService } from '../auth.service';
 import { UserProfileService } from '../userprofile.service';
 import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
 import * as confetti from 'canvas-confetti';
+import { ModalService } from '../modalServices';
 
 declare var $: any;
 import * as _ from 'lodash';
@@ -88,6 +89,8 @@ export class RaceViewComponent implements OnInit {
   entryTagType: TagType = TagType.ENTRY;
   selectedTagFilterID = -1;
 
+  public test = "from_parent";
+
   varcolors = ['#bb0000', '#ffffff'];
 
   constructor(private raceService:RaceService,
@@ -96,7 +99,8 @@ export class RaceViewComponent implements OnInit {
                   private _userProfileService: UserProfileService,
                   private router:Router,
                   private storyService: StoryService,
-                  public _authService: AuthService) {
+                  public _authService: AuthService,
+                  private modalService: ModalService,) {
     this.modalData = {};
   }
 
@@ -116,6 +120,27 @@ export class RaceViewComponent implements OnInit {
     
 
     this.getRaceState();
+  }
+
+  openModal(id: string) {
+    var data = (id == 'custom-modal-5') ? {race_type:this.raceType}: null;
+    console.log("MODAL DATA", data);
+
+   // data.callbackFunction = this.testFunction;
+
+    this.modalService.open(id,data);
+  }
+
+  
+  testFunction = () =>{
+
+    console.log(this.test);
+  }
+
+
+  closeModal(id: string) {
+      this.modalService.close(id);
+      console.log(this.modalService.getModalData(id));
   }
 
   setLeaderboardRouteFilter(route:ChildRaceData) {
@@ -198,7 +223,7 @@ export class RaceViewComponent implements OnInit {
   getRaceState(): void {
     this.loading = true;
     this.raceService.getRace(this.raceID).subscribe(data => {
-     //  console.log(data);
+      console.log(data);
       this.showTeamForm=false;
       let raceData = data as RaceData;
       this.userRegistered = raceData.user_stat!=null;
@@ -251,11 +276,12 @@ export class RaceViewComponent implements OnInit {
   // this.mapChild.panToIsrael();
   // }
 
-  uploadManualEntry(entry:any) {
+  uploadManualEntry(entry) {
     this.activitiesService.uploadManualEntry(entry,this.selectedRaceID).then((resp) => {
       this.refreshStatComponents();
     });
   }
+
 
   // panToUserMarker(user_id){
   //   //Call map pan function

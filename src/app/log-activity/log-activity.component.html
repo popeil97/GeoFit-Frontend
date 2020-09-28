@@ -1,0 +1,47 @@
+<!--<div class='PageContainer' *ngIf="this.aboutData != null; else LoadingRaceBlock">-->
+<div class="PageContainer">
+    
+  <div class='PageSegment'>
+    <h3>Log Activity</h3>
+
+    <div class='Slideshow'>
+      <div class="SlideshowHeader">
+        <button class="SlideshowButton" (click)="SwitchSlideshow('strava')">Strava</button>
+        <!--<button class="SlideshowButton" (click)="SwitchSlideshow('info')">Information</button>-->
+        <button class="SlideshowButton" (click)="SwitchSlideshow('manual')">Manual</button>
+      </div>
+      <div class="SlideshowContents">
+        <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'strava'}">
+         <!-- <app-activities-menu *ngIf="this.progress" [distance_unit]="progress.distance_type" [race_id]="raceID" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-activities-menu> -->
+         Strava
+        </div>
+
+        <!--
+        <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'info'}">
+          <ng-template [ngIf]="this.aboutData == null">
+            <p>Loading race details...</p>
+          </ng-template>
+          <h6>Race Type</h6>
+          <button (click)="this.openModal('custom-modal-4')">What does this mean?</button>
+          <p *ngIf="this.aboutData.is_hybrid; else VirtualText">Hybrid </p>
+          <ng-template #VirtualText>
+            <p>Virtual</p>
+          </ng-template>
+          <h6>Entry Fee</h6>
+          <p *ngIf="this.raceSettings != null; else LoadingRaceSettings">${{raceSettings.price}}</p>
+          <ng-template #LoadingRaceSettings>
+            <p>Loading Race Settings</p>
+          </ng-template>
+        </div>
+        -->
+
+        <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'manual'}">
+          <app-manual-entry [race_type]="this.d.raceType" (uploadManualEntry2)="uploadManualEntry($event)"></app-manual-entry>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+<button class="CloseLogin" (click)="closeDialog()">Close</button> 
+</div>

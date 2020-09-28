@@ -4,26 +4,6 @@
   <mat-sidenav  md-disable-backdrop='true' #menu mode="over"  opened="true"> 
      <div class="sidenav-scroll">
 
-     <div class="row" style="padding-top:12px;" *ngIf="this._authService.isLoggedIn() && this.userRegistered">
-      <div class="column-split0">
-      </div>
-      <div class="column-split1">
-        <img style="width:80px;height:80px;border-radius: 50%;" src="{{userStat.profile_url}}" class="img-responsive" alt=""> <!--<a class="btn" [routerLink]="['/profile', {username: this._authService.username}]"></a> -->       
-      </div>
-
-
-      <div class="column-split2">
-         <app-user-progress *ngIf="this.progress" [progress]="progress"></app-user-progress>
-         <div class="row" *ngIf="this.raceID==0">
-          <div class="column">
-            <a class="btn btn-mobile2" style="background-color:#2C007E;color:#FFFFFF;" (click)="USA()">Jump to USA</a>
-          </div>
-          <div class="column">
-            <a class="btn btn-mobile2" style="background-color:#2C007E;color:#FFFFFF;"(click)="Israel()">Jump to Israel</a>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div *ngIf="this.childRaceData.length > 1">
       <div class="container">
@@ -42,7 +22,17 @@
           <div class="tabs1">Social</div>
           
         </ng-template>
-        
+
+        <button (click)="openModal('custom-modal-5')">Log Activity</button>
+
+        <button (click)="toggleTeamForm()" *ngIf="!showTeamForm">Add Team</button>
+
+        <button (click)="openModal('custom-modal-5')">Settings</button>
+
+        <button (click)="openModal('custom-modal-5')">Make a Post</button>
+
+       <!-- <button (click)="openModal('custom-modal-6')">Map Settings</button> -->
+
         <div style="text-align:center;">
           <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Activity Feed</b></h3></b>
           Only show people I follow:
@@ -64,6 +54,7 @@
 
           <div class="tabs1">Add Activity </div>
           
+
         </ng-template>
 
         <div *ngIf="!raceSettings.isManualEntry">
@@ -152,7 +143,7 @@
           <app-leaderboard [raceID]="raceID" [use]="'individual'" [allowFollow]="true" [tagID]="selectedTagFilterID"></app-leaderboard><br><br><br><br><br><br>
           </mat-tab>
           
-          <mat-tab label="not teams" *ngIf="selectedTagFilterID != 0">
+          <mat-tab label="not teams" *ngIf="selectedTagFilterID != 0 && raceSettings.allowTeams">
             <ng-template mat-tab-label>
               <mat-icon>group</mat-icon>
               <div class="tabs1">Teams</div>
