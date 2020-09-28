@@ -34,4 +34,10 @@ export class ModalService {
         if (typeof d === 'undefined') return null;
         return d;
     }
+
+    callbackModal = (id:string, toPass:any) => {
+        if (this.modalsData[id] && this.modalsData[id].callbackFunction) {
+            this.modalsData[id].callbackFunction(toPass);
+        }
+    }
 }
