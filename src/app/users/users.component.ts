@@ -17,6 +17,9 @@ export class UsersComponent implements OnInit {
    */
   public user: any;
   public coords:any;
+
+  private testString = "From Parent";
+
   constructor(private _authService: AuthService, private modalService: ModalService) { }
 
   ngOnInit() {
@@ -103,8 +106,14 @@ export class UsersComponent implements OnInit {
   }
 
   openModal(id: string) {
-    const data = (id == 'custom-modal-3') ? {race_id:'HELLO'} : null;
+    var data = (id == 'custom-modal-3') ? {race_id:'HELLO',callbackFunction:null} : {};
+    data.callbackFunction = this.testFunction;
     this.modalService.open(id,data);
+  }
+
+  testFunction = (incomingData = null) => {
+    const toAlert = (incomingData != null) ? incomingData : this.testString;
+    console.log(toAlert);
   }
 
   closeModal(id: string) {

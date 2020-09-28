@@ -53,6 +53,7 @@ export class Login2Component implements OnInit {
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
+
     // Catch for submission
     this.submitted = true;
 
@@ -95,6 +96,9 @@ export class Login2Component implements OnInit {
 
   closeDialog() {
     if (this.id == null) return;
+    
+    this.modalService.callbackModal(this.id,'FROM CHILD');
+    
     this.loginForm.reset();
     this.loginForm.markAsPristine();
     this.loginForm.markAsUntouched();
