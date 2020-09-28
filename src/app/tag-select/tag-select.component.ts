@@ -33,7 +33,7 @@ export class TagSelectComponent implements OnInit {
 
     this._tagService.getTags(this.raceID,this.tagType).then((resp:any) => {
       this.tags = resp['tags'];
-      console.log('TAGS:',this.tags);
+    //   console.log('TAGS:',this.tags);
 
       this.tags.push(this.noneTag);
 
@@ -48,7 +48,7 @@ export class TagSelectComponent implements OnInit {
     callbackBody.success = true;
     callbackBody.data = {id:tag.id} as any;
     callbackBody.type = "TAG";
-    console.log(tag);
+   //  console.log(tag);
     this.emitState.emit(callbackBody);
   }
 

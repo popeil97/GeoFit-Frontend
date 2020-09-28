@@ -53,10 +53,10 @@ export class Register2Component implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      console.log('PARAMS:',params);
+    //   console.log('PARAMS:',params);
       if(params['params'] && params['params']['params']) {
         let inputs = JSON.parse(params['params']['params']);
-        console.log('INPUTS:',inputs);
+     //    console.log('INPUTS:',inputs);
         this.redirectParams = inputs['redirectParams'];
         this.redirectUrl = inputs['redirectUrl']  
       }
@@ -69,7 +69,7 @@ export class Register2Component implements OnInit {
 
   onKeyUpEvent(event:any) {
     const {target} = event;
-    console.log(target.name,target.value);
+   //  console.log(target.name,target.value);
   }
 
   onCredentialsSubmit(event:any) {
@@ -79,7 +79,7 @@ export class Register2Component implements OnInit {
       event.stopPropagation();
     }
     */
-    console.log('Credentials Check Processing');
+   //  console.log('Credentials Check Processing');
     this.credentialsSubmitted = true;
     this.credentialsLoading = true;
     if (this.credentialsForm.invalid) {
@@ -105,12 +105,12 @@ export class Register2Component implements OnInit {
 
     // stop here if form is invalid
     if (this.personalForm.invalid) {
-      console.log('Personal Check - something is wrong');
+    //   console.log('Personal Check - something is wrong');
       this.personalLoading = false;
       return;
     }
 
-    console.log("BIRTH. " ,this.personalForm.value.month_of_birth, this.personalForm.value.day_of_birth,this.personalForm.value.year_of_birth);
+   //  console.log("BIRTH. " ,this.personalForm.value.month_of_birth, this.personalForm.value.day_of_birth,this.personalForm.value.year_of_birth);
     const momentDate = new Date(
       this.personalForm.value.year_of_birth,
       this.personalForm.value.month_of_birth-1,
@@ -157,7 +157,7 @@ export class Register2Component implements OnInit {
                 }
                 else
                 {
-                  console.log("WELCOME");
+            //       console.log("WELCOME");
                   this.router.navigate(['/welcome']);
                 }
             }
@@ -166,15 +166,15 @@ export class Register2Component implements OnInit {
         err => {
           this.loading = false;
           this.errors = err['error'];
-          console.log(this.errors);
+     //      console.log(this.errors);
         });
         
       },
       err => {
-        console.log(err);
+   //      console.log(err);
         this.loading = false;
         this.errors = err['error'];
-        console.log(this.errors);
+    //     console.log(this.errors);
       });
   }
 
@@ -193,12 +193,12 @@ export class Register2Component implements OnInit {
       this.acceptedTerms = true;
       // stop here if form is invalid
       if (this.registerForm.invalid) {
-        console.log('onSubmit - something is wrong');
+    //     console.log('onSubmit - something is wrong');
         return;
       }
 
       this.loading = true;
-      console.log("BIRTH. " ,this.registerForm.value.month_of_birth, this.registerForm.value.day_of_birth,this.registerForm.value.year_of_birth);
+  //     console.log("BIRTH. " ,this.registerForm.value.month_of_birth, this.registerForm.value.day_of_birth,this.registerForm.value.year_of_birth);
       //Convert date field to Django-compatible format (YYYY-MM-DD)
       const momentDate = new Date(this.registerForm.value.year_of_birth,this.registerForm.value.month_of_birth-1,this.registerForm.value.day_of_birth);
       const formattedDate = moment(momentDate).format("YYYY-MM-DD");
@@ -239,7 +239,7 @@ export class Register2Component implements OnInit {
           err => {
             this.loading = false;
             this.errors = err['error'];
-            console.log(this.errors);
+     //        console.log(this.errors);
           });
           
         },
@@ -247,7 +247,7 @@ export class Register2Component implements OnInit {
           console.log(err);
           this.loading = false;
           this.errors = err['error'];
-          console.log(this.errors);
+     //      console.log(this.errors);
         });
   }
 
@@ -306,7 +306,7 @@ export class Register2Component implements OnInit {
 
   openModal(id: string) {
     const data = (id == 'custom-modal-3') ? {price:this.d.price,race_id:this.d.raceID,hasJoined:this.d.hasJoined,hasStarted:this.d.hasStarted,hasTags: this.d.has_entry_tags} : null;
-    console.log("MODAL DATA", data);
+  //   console.log("MODAL DATA", data);
     this.modalService.open(id,data);
   }
 }

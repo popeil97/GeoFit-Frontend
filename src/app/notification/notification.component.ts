@@ -27,7 +27,7 @@ export class NotificationComponent implements OnInit {
   approve() {
     // general approval action, backend will sort out what the notifcation is for
     this._notificationService.submitAction(this.notification.not_id,NotifactionAction.APPROVE).then((resp) => {
-      console.log('APPROVE RESP: ',resp);
+    //  console.log('APPROVE RESP: ',resp);
       this._snackbar.openFromComponent(SnackbarComponent,{duration: 5000,horizontalPosition: 'left',
       verticalPosition: 'bottom',data:{message:'Action has been approved!'}});
       this.removeNotification.emit(this.notification.not_id);
@@ -36,7 +36,7 @@ export class NotificationComponent implements OnInit {
 
   decline() {
     this._notificationService.submitAction(this.notification.not_id,NotifactionAction.DECLINE).then((resp) => {
-      console.log('APPROVE RESP: ',resp);
+  //    console.log('APPROVE RESP: ',resp);
       this._snackbar.openFromComponent(SnackbarComponent,{duration: 5000,horizontalPosition: 'center',
       verticalPosition: 'bottom',data:{message:'Action has been declined'}});
       this.removeNotification.emit(this.notification.not_id);
@@ -45,7 +45,7 @@ export class NotificationComponent implements OnInit {
 
   hide() {
     this._notificationService.submitAction(this.notification.not_id,NotifactionAction.HIDE).then((resp) => {
-      console.log('HIDE RESP: ',resp);
+     //  console.log('HIDE RESP: ',resp);
     });
     this.removeNotification.emit(this.notification.not_id);
   }
@@ -72,7 +72,7 @@ export class NotificationComponent implements OnInit {
     // need to get story from API, then display in dialog
     let storyData = null;
     this._storyService.getStoryModalData(this.notification.context_id).then((storyData) => {
-      console.log("In dialogue function");
+     //  console.log("In dialogue function");
       let dialogRef = this.dialog.open(StoryDialogComponent, {
         data: { 
           'element': storyData,

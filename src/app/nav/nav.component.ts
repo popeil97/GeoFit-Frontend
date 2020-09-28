@@ -49,9 +49,9 @@ export class NavComponent implements OnInit {
     Observable.interval(60000) // make much larger in production
     .switchMap(() => this._notificationService.getNotifications())
     .subscribe((resp:NotificationResp) => {
-      console.log(resp);
+      //console.log(resp);
       this.notifications = resp.notifications;
-      console.log(this.notifications);
+      //console.log(this.notifications);
     });
 
     if (localStorage.getItem('access_token')){
@@ -85,7 +85,7 @@ export class NavComponent implements OnInit {
   getNotifications() {
 
     this._notificationService.getNotifications().toPromise().then((resp:NotificationResp) => {
-      console.log(resp);
+      //console.log(resp);
       this.notifications = resp.notifications;
     });
 
@@ -115,11 +115,11 @@ export class NavComponent implements OnInit {
   }
 
   showNotifications(): void {
-    console.log('openming')
+    //console.log('openming')
     this._bottomSheet.open(NotificationPanelComponent,{data:{notifications:this.notifications}});
 
     this._bottomSheet._openedBottomSheetRef.afterDismissed().subscribe((data) => {
-      console.log('sheet closed');
+      //console.log('sheet closed');
       this.getNotifications();
     })
   }

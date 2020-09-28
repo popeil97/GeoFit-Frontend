@@ -1,0 +1,37 @@
+<div *ngIf="this.userData != null; else RaceLoadingMessage">
+	<h2 *ngIf="this.userData.is_me; else otherUserRaces">Your Races</h2>
+	<ng-template #otherUserRaces><h2>{{this.userData.first_name}}'s Races</h2></ng-template>
+	<div *ngIf="userRaces==null"></div>
+	<div *ngIf="userRaces!=null&&userRaces.length>0; else noRacesDisplay">
+	  <div *ngFor="let race of userRaces">
+	    <div *ngIf="userRaces.length>0 &&this._authService.isLoggedIn()">  
+	      <h3>Race Type:</h3>
+	      <div *ngIf="race.race_type == 1">
+	        <i class="material-icons" style="color:#BC164D;">directions_run</i> 
+	      </div>
+	      <div *ngIf="race.race_type == 2">
+	        <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
+	      </div>
+	      <div *ngIf="race.race_type == 3">
+	        <i class="material-icons" style="color:#BC164D;">directions_run</i> <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
+	      </div>
+	      <h3 >Race img:</h3>
+	      <img mat-card-image style="width: 255px;" src="{{race.race_image}}" alt="Race">
+	      <h3>Start Location:</h3>
+	      <p>{{race.start_loc}}</p>
+	      <h3>End Location:</h3>
+	      <p>{{race.end_loc}}</p>
+	      <h3>Start Date:</h3>
+	      <p>{{race.start_date}}</p>
+	      <h3>End Date:</h3>
+	      <p>{{race.end_date}}</p>
+	      <h3>Distance:</h3>
+	      <p>{{race.distance}}</p>
+	      <a class="btn"(click)="viewRace(race)" *ngIf="race.has_started">GO TO RACE</a>
+	      <p *ngIf="!race.has_started">Come back on race day ({{race.start_date}})! </p>
+	      <a class="btn" (click)="viewAbout(race)">ABOUT RACE</a>
+	    </div>
+	  </div>
+	</div>
+	<ng-template #noRacesDisplay><p>You currently do not have any races under your belt. To find races you may be interested in, head over to <a routerLink='/races'>Public Races</a>.</p></ng-template>
+</div>

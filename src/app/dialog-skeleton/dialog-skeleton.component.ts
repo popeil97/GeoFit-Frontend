@@ -23,7 +23,7 @@ export class DialogSkeletonComponent implements OnInit {
     private router:Router) { }
 
   ngOnInit() {
-  	console.log("TYPE", this.type);
+//  	console.log("TYPE", this.type);
   }
 
   openDialog() {

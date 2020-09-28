@@ -78,7 +78,7 @@ export class FeedComponent implements OnInit {
       this._feedService = this._userProfileService;
     }
 
-    console.log("feed service: ", this._feedService);
+//    console.log("feed service: ", this._feedService);
 
     this._feedService.ID = this.ID;
 
@@ -114,7 +114,7 @@ export class FeedComponent implements OnInit {
   }
 
   showStoryModal(storyID): void {
-    console.log("open story modal!");
+  //  console.log("open story modal!");
 
     //WE CAN EITHER EMIT STORY MODAL CLICK OUTPUT
     //OR CALL IT DIRECTLY TO THE CHILD MODAL
@@ -127,7 +127,7 @@ export class FeedComponent implements OnInit {
   }
 
   showStoryDialog(element: FeedObj){
-    console.log("In dialogue function");
+  //  console.log("In dialogue function");
     let dialogRef = this.dialog.open(StoryDialogComponent, {
       data: { 
         'element': element,
@@ -143,8 +143,8 @@ export class FeedComponent implements OnInit {
       this.page_number += 1;
     }
 
-    console.log(getNextPage);
-    console.log("Getting page num ", this.page_number);
+//    console.log(getNextPage);
+ //   console.log("Getting page num ", this.page_number);
 
     this._feedService.refreshFeed(this.page_number, this.items_per_page, !this.initialized).then(payload => {
       var newFeedObjs: Array<FeedObj> = [];
@@ -204,7 +204,7 @@ export class FeedComponent implements OnInit {
   }
 
   public resetFeed(){
-    console.log(this._feedService);
+ //   console.log(this._feedService);
     this._feedService.resetFeed();
   }
 
@@ -219,7 +219,7 @@ export class FeedComponent implements OnInit {
 
   newCommentPosted(storyID){
     //Feed items after comment posted
-    console.log(this.feedItems);
+ //   console.log(this.feedItems);
     this.refreshFeed(storyID);
   }
 

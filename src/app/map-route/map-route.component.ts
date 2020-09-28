@@ -81,20 +81,20 @@ export class MapRouteComponent implements OnChanges {
         switch(propName) {
           case 'coordinates':
             if (this.coordinates){
-              console.log("coordinates: ", this.coordinates);
+            //  console.log("coordinates: ", this.coordinates);
               this.applyCoordinates();
             }
 
           case 'routePins':
             if (this.routePins && this.displayUsers){
-              console.log("route pins: ", this.routePins);
+          //    console.log("route pins: ", this.routePins);
               this.createRoutePins();
             }
 
           case 'userData':
             if (this.userData && this.displayUsers){
-              console.log("NEW USER DATA IN MAP-ROUTE COMP:");
-              console.log("userData: ", this.userData);
+          //    console.log("NEW USER DATA IN MAP-ROUTE COMP:");
+          //    console.log("userData: ", this.userData);
               this.createUserPins(false);
             }
             
@@ -107,7 +107,7 @@ export class MapRouteComponent implements OnChanges {
   public panToUserMarker(user_id, showPopUp=true){
     //Do this to pan *and* zoom
     var markerBounds = L.latLngBounds([this.markersByUserID[user_id.toString()]['latLng']]);
-    console.log("In pan to user marker for user ID ", user_id);
+  //  console.log("In pan to user marker for user ID ", user_id);
     
     //Gotta do an event up to map to pan to the bounds in var above
   }
@@ -236,10 +236,10 @@ export class MapRouteComponent implements OnChanges {
         femaleIDs = this.getIDsByGender('Female');
       }
 
-      console.log("female IDs: ", femaleIDs);
+   //   console.log("female IDs: ", femaleIDs);
       
       unionIDs = maleIDs.concat(femaleIDs);
-      console.log("Union IDs: ", unionIDs);
+   //   console.log("Union IDs: ", unionIDs);
 
     }
 
@@ -264,7 +264,7 @@ export class MapRouteComponent implements OnChanges {
       }
     }
 
-    console.log("Union IDs: ", unionIDs);
+ //  console.log("Union IDs: ", unionIDs);
 
     this.showPinsByID(unionIDs, false);
   }
@@ -380,7 +380,7 @@ export class MapRouteComponent implements OnChanges {
   //Updates the logged in users stat and recreates *all* pins
   public updateMyUserStatAndCreatePins(){
     //Update our user data item in array
-    console.log("Getting new user stat for race ID ", this.raceID);
+  //  console.log("Getting new user stat for race ID ", this.raceID);
     this._raceService.getTeamOrUserStat(this.raceID).then((data) => {
       let userData = data as UserData;
       this.userData[this.myUserDataIdx] = userData;
@@ -396,7 +396,7 @@ export class MapRouteComponent implements OnChanges {
     this.clearUserPins();
     this.clearOrgPins();
 
-    console.log("USER DATA IN MAP ROUTE COMP: ", this.userData);
+ //   console.log("USER DATA IN MAP ROUTE COMP: ", this.userData);
 
     //Set max number of markers in a cluster and set up clustering
     var maxMarkersInCluster = 4;
@@ -476,7 +476,7 @@ export class MapRouteComponent implements OnChanges {
 
   
   public createOrgPins() {
-    console.log("Creating org pins");
+  //  console.log("Creating org pins");
 
     //Clear all user and org pins
     this.clearUserPins();
@@ -488,7 +488,7 @@ export class MapRouteComponent implements OnChanges {
 
     //Iterate over user data, create and show pins and retain map of leaflet ID -> user idx
     for (var i = 0; i < this.orgData.length; i++){
-      console.log("Creating pin with data ", this.orgData[i]);
+    //  console.log("Creating pin with data ", this.orgData[i]);
       let user_leaflet_id = this.createPin(this.orgData[i], true);
       this.layerIDsToOrgIndices[user_leaflet_id] = i;
     }

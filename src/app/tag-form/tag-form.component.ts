@@ -46,7 +46,7 @@ export class TagFormComponent implements OnInit {
     let formClean = this.tagForm.value as any;
     formClean.tag_img = this.uploadedUrl;
     
-    console.log(this.tagForm);
+   // console.log(this.tagForm);
     let isValid: Boolean = this.tagForm.valid;
 
     if(isValid && formClean.name != '') {

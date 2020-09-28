@@ -114,6 +114,7 @@ import { RouteSelectComponent } from './route-select/route-select.component';
 import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderboard.component';
 import { Signup2Component } from './signup2/signup2.component';
 import { RaceTypeComponent } from './race-type/race-type.component';
+import { UserRaceComponent } from './user-race/user-race.component';
 
 
 @NgModule({
@@ -209,6 +210,7 @@ import { RaceTypeComponent } from './race-type/race-type.component';
     HybridLeaderboardComponent,
     Signup2Component,
     RaceTypeComponent,
+    UserRaceComponent,
       ],
 
   imports: [

@@ -24,18 +24,18 @@ export class StravauthService {
     //window.location.href='https://app.strava.com/oauth/authorize?client_id=49168&redirect_uri=http://localhost:8000/strava-login/&response_type=code&approval_prompt=auto&scope=write/';
     this.http.get(environment.apiUrl + '/api/strava-login/').subscribe(
       data => {
-        console.log(data['url']);
-        console.log("Going to this url....");
+       //  console.log(data['url']);
+       //  console.log("Going to this url....");
         if (data.hasOwnProperty('url')){
             window.location.href=data['url'];
         } 
       },
       err => {
-        console.log(err);
+    //     console.log(err);
         this.errors = err['error'];
       }
     );
-    console.log("called authenticate()");
+  //   console.log("called authenticate()");
   }
 
   public getStravaInfo() {

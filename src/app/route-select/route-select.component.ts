@@ -34,7 +34,7 @@ export class RouteSelectComponent implements OnInit {
   }
 
   onRouteSelect(route:ChildRaceData) {
-    console.log(route)
+  //   console.log(route)
     this.selectedRoute = route;
     this.routeChanged.emit(this.selectedRoute);
   }

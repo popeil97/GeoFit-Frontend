@@ -100,7 +100,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
   }
 
   public getUserPinData(raceID:number,page:number) {
-    console.log('getting user data')
+    //console.log('getting user data')
     return this._raceService.getUserRacestats(raceID,page).then((data:any) =>{
       this.routeData[raceID].userData = data.users_data;
 
@@ -186,11 +186,11 @@ export class MapComponent implements AfterViewInit,OnChanges {
       child.clearOrgPins();
     });
 
-    console.log("Race IDs in map comp: ", this.raceIDs);
+    //console.log("Race IDs in map comp: ", this.raceIDs);
 
     for (let i = 0; i < this.raceIDs.length; i++) {
       let raceID = this.raceIDs[i];
-      console.log(raceID);
+    //  //console.log(raceID);
 
       this.routeData[raceID] = (): RouteData => ({
         name: '',
@@ -206,7 +206,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
       })
       
       this._mapService.getMapData(raceID).then((data) => {
-        console.log(data);
+        //console.log(data);
         let mapData = data as RouteData;
 
         this.routeData[raceID].coords = mapData.coords;
@@ -214,7 +214,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
           
         // this._raceService.getUserRacestats(raceID).then((data:any) => {
         //   this.routeData[raceID].userData = data.users_data;
-        //   console.log("User pin data: ", this.routeData[raceID].userData)
+        //   //console.log("User pin data: ", this.routeData[raceID].userData)
           
         //   this.loading=false;
         // });
@@ -222,7 +222,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
       let workers = [] as any;
 
       this._mapService.getUserPinSize(raceID).then((resp) => {
-        console.log('USER PIN SIZE RESP:',resp);
+        //console.log('USER PIN SIZE RESP:',resp);
         let pages = resp['pages'];
 
         for(var page = 1; page <= pages; page++) {
@@ -230,7 +230,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
           workers.push(worker);
         }
 
-        console.log('WORKERS:',workers)
+        //console.log('WORKERS:',workers)
 
       });
 

@@ -72,7 +72,7 @@ export class ActivitiesMenuComponent implements OnInit {
       this.selectedRows.push(row.id);
     }
 
-    console.log(this.selectedRows);
+//    console.log(this.selectedRows);
   }
 
   getActivities() {

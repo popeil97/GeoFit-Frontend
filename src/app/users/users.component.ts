@@ -90,7 +90,7 @@ export class UsersComponent implements OnInit {
         -101.1181641,
         40.9505991
       ]], "distance": 2602029.176518327}};
-    console.log('LANDING COORDS:',this.coords);
+ //    console.log('LANDING COORDS:',this.coords);
     //If we already store a JWT locally, set it in memory
     if (localStorage.getItem('access_token')){
       this._authService.token = localStorage.getItem('access_token');

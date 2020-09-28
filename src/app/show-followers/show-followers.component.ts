@@ -26,7 +26,7 @@ export class ShowFollowersComponent implements OnInit {
       this.userData = data as UserData;
       this.picURL = this.userData.profile_url;
       this.follows = this.userData.follows;
-      console.log("FOLLOW New user data: ", this.userData);
+    //   console.log("FOLLOW New user data: ", this.userData);
     });
   }
 

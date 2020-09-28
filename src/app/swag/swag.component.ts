@@ -48,7 +48,7 @@ export class SwagComponent implements OnInit {
   ngOnInit() {
     this._swagService.getSwagForm(this.race_id).then((resp:SwagForm) => {
       this.swagModelForm = resp['form'];
-      console.log('SWAG STUFF:',this.swagModelForm);
+    //   console.log('SWAG STUFF:',this.swagModelForm);
       this.initForm();
     });
     
@@ -74,7 +74,7 @@ export class SwagComponent implements OnInit {
     const dialogRef = this.dialog.open(SwagDialogContent,{disableClose: true, data:{price:this.swagModelForm.price,race_id:this.race_id,imageUrl:this.swagModelForm.image} as MatDialogConfig});
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+   //    console.log(`Dialog result: ${result}`);
 
       if(result) {
         this.signupCallback.emit();
@@ -98,10 +98,10 @@ export class SwagComponent implements OnInit {
       // call swag service to update model
       // then call function to get new about data
       cleanForm.merchImg = this.uploadedUrl;
-      console.log('CLEAN:',cleanForm);
+    //   console.log('CLEAN:',cleanForm);
 
       this._swagService.updateSwagForm(this.race_id,cleanForm).then((resp:any) => {
-        console.log('UPDATED SWAG FORM:',resp);
+      //   console.log('UPDATED SWAG FORM:',resp);
         this.swagModelForm = resp['form'] as SwagForm;
         this.initForm();
         this.toggleForm()
@@ -171,7 +171,7 @@ export class SwagDialogContent {
       let data = callbackResp.data;
 
       if(callbackResp.type == 'PAYMENT') {
-        console.log('PAYMENT DATA:',data);
+      //   console.log('PAYMENT DATA:',data);
         this.completeOrder.payment_id = data.payment_id;
         this.paymentForm.controls['complete'].setValue(true);
         this.stepper.next();
@@ -186,7 +186,7 @@ export class SwagDialogContent {
     // this is last step so submit
     this._orderService.submitOrder(this.completeOrder).then((resp) => {
       this.stepper.next();
-      console.log('ORDER:',this.completeOrder);
+   //    console.log('ORDER:',this.completeOrder);
     })
     
   }

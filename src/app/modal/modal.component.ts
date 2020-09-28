@@ -35,7 +35,7 @@ export class ModalComponent implements OnInit {
 
     // close modal on background click
     this.element.addEventListener('click', function (e: any) {
-      console.log(e.target.className);
+     // console.log(e.target.className);
       if (e.target.className === 'custom-modal') {
           modal.close();
       }

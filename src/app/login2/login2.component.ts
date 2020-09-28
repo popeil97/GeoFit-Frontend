@@ -79,7 +79,7 @@ export class Login2Component implements OnInit {
       },
       err => {
         this.loading = false;
-        console.log(err);
+//        console.log(err);
         this.errors = err['error'];
       }
     );

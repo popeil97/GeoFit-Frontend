@@ -47,6 +47,7 @@
         <button class="SlideshowButton" (click)="SwitchSlideshow('map')">Route Map</button>
         <!--<button class="SlideshowButton" (click)="SwitchSlideshow('info')">Information</button>-->
         <button class="SlideshowButton" (click)="SwitchSlideshow('logistics')">Logistics</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('race_director')">Race Director</button>
       </div>
       <div class="SlideshowContents">
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'map'}">
@@ -54,6 +55,7 @@
             <app-map [raceIDs]="raceID" [displayUsers]="false" zoom="true"></app-map>
           </div>
         </div>
+
         <!--
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'info'}">
           <ng-template [ngIf]="this.aboutData == null">
@@ -72,6 +74,7 @@
           </ng-template>
         </div>
         -->
+
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'logistics'}">
           <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceLogisticsBlock">
             <p>Loading race details...</p>
@@ -80,27 +83,60 @@
             <div class='RaceLocationsContainer'>
               <p class='RaceLocation'>{{aboutData.start_loc}}</p>
               <div class='RaceDistanceLine'>
-                <p class='h7'>{{aboutData.distance}}km</p>
+                <p class='h7'>{{aboutData.distance}}mi</p>
               </div>
               <p class='RaceLocation'>{{aboutData.end_loc}}</p>
             </div>
           </ng-template>
-          <p>
-            <span class='h6'>Number of trails: </span>
-            <span *ngIf="aboutData.num_children>1;else OneChildBlock">{{aboutData.num_children}}</span>
-            <ng-template #OneChildBlock><span>1</span></ng-template>
-          </p>
+
           <p>
             <span class='h6'>Race Type: </span>
             <span *ngIf="this.aboutData.is_hybrid; else VirtualText">Hybrid</span>
             <ng-template #VirtualText><span>Virtual</span></ng-template>
           </p>
           <button (click)="this.openModal('custom-modal-4')">What does this mean?</button>
+
+          <p>
+            <span class='h6'>Race Requirements: </span>
+            <span *ngIf="this.raceSettings.isManualEntry; else ManualText">NONE however, the Strava mobile app is highly recommended for tracking fitness activities!</span>
+            <ng-template #ManualText><span>Download Strava from the app store to track your fitness activities</span></ng-template>
+          </p>
+
+          <p *ngIf="this.raceSettings.allowTeams">
+            <span class='h6'>Teams: </span>
+            <span>Teams of up to {{this.raceSettings.max_team_size}} can be formed on race day.</span>
+          </p>
+
+          <p>     
+            <span class='h6'>Number of trails: </span>
+            <span *ngIf="aboutData.num_children>1;else OneChildBlock">{{aboutData.num_children}}</span>
+            <ng-template #OneChildBlock><span>1</span></ng-template>
+          </p>
+
+          
           <h6>Entry Fee</h6>
           <p *ngIf="this.raceSettings != null; else LoadingRaceSettings">${{raceSettings.price}}</p>
+
           <ng-template #LoadingRaceSettings>
             <p>Loading Race Settings</p>
           </ng-template>
+        </div>
+
+        <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'race_director'}">
+          <p>
+            <span class='h6'>Race Director: </span>
+            <span>{{this.userData.first_name}} {{this.userData.last_name}}</span>
+          </p>
+
+          <p>
+            <span class='h6'>Email: </span>
+            <span>{{this.userData.email}}</span>
+          </p>
+          <p>
+            <span class='h6'>About: </span>
+            <span>{{this.userData.description}}</span>
+          </p>
+            <img class="UserProfileImage img-responsive" src="{{this.userData.profile_url}}" alt=""> 
         </div>
       </div>
     </div>

@@ -120,7 +120,7 @@ export class RaceViewComponent implements OnInit {
 
   setLeaderboardRouteFilter(route:ChildRaceData) {
     this.leaderboardRouteFilter = route;
-    console.log('ROTUE CHANGED TO ', this.leaderboardRouteFilter);
+  //   console.log('ROTUE CHANGED TO ', this.leaderboardRouteFilter);
   }
 
   setLeaderboardTagID(tagFilterStruct:any): void {
@@ -198,7 +198,7 @@ export class RaceViewComponent implements OnInit {
   getRaceState(): void {
     this.loading = true;
     this.raceService.getRace(this.raceID).subscribe(data => {
-      console.log(data);
+     //  console.log(data);
       this.showTeamForm=false;
       let raceData = data as RaceData;
       this.userRegistered = raceData.user_stat!=null;

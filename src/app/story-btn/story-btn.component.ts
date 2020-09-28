@@ -48,7 +48,7 @@ export class StoryBtnComponent implements OnInit {
   }
 
   deleteStory(){
-    console.log("Deleting story");
+//     console.log("Deleting story");
     this._storyService.deleteStory(this.storyID);
   }
 

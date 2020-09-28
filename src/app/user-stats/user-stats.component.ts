@@ -18,9 +18,9 @@ export class UserStatsComponent implements OnInit {
   ngOnInit() {
     this._usersService.getUserStats(this.userID)
       .then((res)=>{
-      console.log("USER", this.userID,"STATS: ", res);
+     //  console.log("USER", this.userID,"STATS: ", res);
       this.userStats = res as UserStats;
-      console.log("STATS",this.userStats);
+     //  console.log("STATS",this.userStats);
       //this.userStats.mycolors
       this.showChart(this.userStats.mydates,this.userStats.run_dists,this.userStats.walk_dists, this.userStats.bike_dists, this.userStats.other_dists);
       })
@@ -73,7 +73,7 @@ export class UserStatsComponent implements OnInit {
             borderWidth: 1
           });
         }
-        console.log("DATA", data);
+      //   console.log("DATA", data);
     this.chart = new Chart('lineCharts', {
       type: 'bar',
       data: {

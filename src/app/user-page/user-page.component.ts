@@ -39,10 +39,10 @@ export class UserPageComponent implements OnInit {
     this.showEdit = false;
 
     this.route.paramMap.subscribe(params => {
-      console.log('User Page - params',params);
+    //   console.log('User Page - params',params);
       this.username = params['params']['username'];
       this.getUserData();
-      console.log(this.username);
+    //   console.log(this.username);
     });
 
     this.raceService.getRaces({}).subscribe(
@@ -53,14 +53,14 @@ export class UserPageComponent implements OnInit {
             return race;
           }
         });
-        console.log("USER RACES PROFILE", this.userRaces);
+       //  console.log("USER RACES PROFILE", this.userRaces);
       }
     )
 
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('changes:',changes);
+   //  console.log('changes:',changes);
 
     for(const propName in changes) {
       if(changes.hasOwnProperty(propName)) {
@@ -77,10 +77,10 @@ export class UserPageComponent implements OnInit {
 
   getUserData(){
     //Call a to-be-created service which gets user data, feed, statistics etc
-    console.log('user-page - getUserData()',this.username);
+  //   console.log('user-page - getUserData()',this.username);
     this._userProfileService.getUserProfile(this.username).then((data) => {
       this.userData = data as UserData;
-      console.log("New user data profPage: ", this.userData);
+    //   console.log("New user data profPage: ", this.userData);
 
       if (this.userData.location == "") {
         this.userData.location = "N/A";
@@ -97,11 +97,11 @@ export class UserPageComponent implements OnInit {
   }
   toggleEditView(): void{
     this.showEdit = !this.showEdit;
-    console.log("EDIT .", this.showEdit);
+   //  console.log("EDIT .", this.showEdit);
   }
 
   viewRace(race:any) {
-    console.log('SELECTED RACE:',race);
+  //   console.log('SELECTED RACE:',race);
 
     // set race in race service
 

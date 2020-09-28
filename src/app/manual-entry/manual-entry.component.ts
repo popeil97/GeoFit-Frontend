@@ -19,7 +19,7 @@ export class ManualEntryComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("RACE TYPE", this.race_type);
+   // console.log("RACE TYPE", this.race_type);
     this.defaultActivityString = "Run";
     if(this.race_type==1) //run/walk
     {
@@ -70,7 +70,7 @@ export class ManualEntryComponent implements OnInit {
   upload(): void {
     
     let formClean = this.manualEntryForm.value as any;
-    console.log(this.manualEntryForm);
+   // console.log(this.manualEntryForm);
     let isValid: Boolean = this.manualEntryForm.valid;
 
     if(isValid) {
@@ -93,7 +93,7 @@ export class ManualEntryComponent implements OnInit {
   }
 
   parseDistanceType(entry:any) {
-    console.log('VALUE:',entry.value);
+   // console.log('VALUE:',entry.value);
     let value = entry.value;
  //   this.manualEntryForm.get('distanceType').setValue(DistanceType[value])
   }

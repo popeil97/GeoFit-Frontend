@@ -27,13 +27,13 @@ export class UserFollowComponent implements OnInit {
   }
 
   changeLikeStatus(){
-    console.log("clicked!");
+  //   console.log("clicked!");
     if (this.follows){
-      console.log("unfollowing user ", this.userID);
+     //  console.log("unfollowing user ", this.userID);
       this._userService.unfollowUserWithID(this.userID);
     }
     else {
-      console.log("following user ", this.userID);
+    //   console.log("following user ", this.userID);
 
       this._userService.followUserWithID(this.userID);
     }

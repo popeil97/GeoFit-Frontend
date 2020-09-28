@@ -25,12 +25,12 @@ export class RaceService {
 
 
   getRace(race_id:number) {
-    console.log(race_id)
+  //   console.log(race_id)
     return this.http.post(environment.apiUrl + '/api/race/',{race_id:race_id});
   }
 
   joinRace(registrationBody:any) {
-    console.log('Attempting to join race:',registrationBody);
+  //   console.log('Attempting to join race:',registrationBody);
     return this.http.post(environment.apiUrl + '/api/join/',registrationBody).toPromise();
   }
 
@@ -43,7 +43,7 @@ export class RaceService {
   }
 
   createRace(raceForm:any) {
-    console.log('SERVICE FILE:',raceForm)
+  //   console.log('SERVICE FILE:',raceForm)
     return this.http.post(environment.apiUrl + '/api/create/',{form:raceForm}).toPromise();
   }
 

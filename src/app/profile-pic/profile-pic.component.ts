@@ -82,7 +82,7 @@ export class ProfilePicComponent implements OnInit, OnChanges {
   }
 
   populateForm(): void {
-    console.log("User data: ", this.userData);
+   //  console.log("User data: ", this.userData);
   }
 
   updateProfile(): void{

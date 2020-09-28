@@ -64,7 +64,7 @@ export class RegisterDialogContent {
         console.log('PARAMS:',params);
         if(params['params']) {
           let inputs = JSON.parse(params['params']['params']);
-          console.log('INPUTS:',inputs);
+        //   console.log('INPUTS:',inputs);
           this.redirectParams = inputs['redirectParams'];
           this.redirectUrl = inputs['redirectUrl']
           
@@ -100,14 +100,14 @@ export class RegisterDialogContent {
     onSubmit() {
         this.submitted = true;
         this.acceptedTerms = true;
-        console.log('REEE',this.acceptedTerms);
+     //    console.log('REEE',this.acceptedTerms);
         // stop here if form is invalid
         if (this.registerForm.invalid) {
             return;
         }
 
         this.loading = true;
-        console.log("BIRTH. " ,this.registerForm.value.month_of_birth, this.registerForm.value.day_of_birth,this.registerForm.value.year_of_birth);
+   //      console.log("BIRTH. " ,this.registerForm.value.month_of_birth, this.registerForm.value.day_of_birth,this.registerForm.value.year_of_birth);
         //Convert date field to Django-compatible format (YYYY-MM-DD)
         const momentDate = new Date(this.registerForm.value.year_of_birth,this.registerForm.value.month_of_birth-1,this.registerForm.value.day_of_birth);
         const formattedDate = moment(momentDate).format("YYYY-MM-DD");
@@ -139,7 +139,7 @@ export class RegisterDialogContent {
             err => {
               this.loading = false;
               this.errors = err['error'];
-              console.log(this.errors);
+      //         console.log(this.errors);
             });
             
           },
@@ -147,7 +147,7 @@ export class RegisterDialogContent {
             console.log(err);
             this.loading = false;
             this.errors = err['error'];
-            console.log(this.errors);
+      //       console.log(this.errors);
           });
 
     }

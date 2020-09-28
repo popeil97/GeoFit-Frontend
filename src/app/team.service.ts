@@ -17,7 +17,7 @@ export class TeamService {
   }
 
   createTeam(teamForm:TeamForm,race_id:number,isUpdate:Boolean,team_id?:number) {
-    console.log('SERVICE RACEID:',race_id);
+//     console.log('SERVICE RACEID:',race_id);
     return this.http.post(environment.apiUrl + '/api/create-team/',{team_form:teamForm,race_id:race_id,isUpdate:isUpdate,team_id:team_id}).toPromise();
   }
 

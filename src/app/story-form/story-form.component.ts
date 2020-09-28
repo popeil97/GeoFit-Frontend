@@ -36,8 +36,8 @@ export class StoryFormComponent implements OnInit {
   }
 
   uploadStory(): void{
-    console.log("uploading story");
-    console.log("Story image: ", this.storyImage);
+ //    console.log("uploading story");
+//     console.log("Story image: ", this.storyImage);
     let withLastStory = false;
 
     //Get text field input (image already uploaded via eventListener)
@@ -47,7 +47,7 @@ export class StoryFormComponent implements OnInit {
     if (this.storyImage){
       this._imageService.resizeImage(this.storyImage, 800, 800).then((data) => {
         this.storyImage = data;
-        console.log(this.storyImage);
+     //    console.log(this.storyImage);
         //Upload story via service
         this.uploadStoryWithService(this.raceID, this.storyImage, this.storyText, withLastStory);
       });
@@ -61,7 +61,7 @@ export class StoryFormComponent implements OnInit {
   uploadStoryWithService(raceID, storyImage, storyText, withLastStory){
     this.storyService.uploadStory(raceID, storyImage, storyText, withLastStory).then( data =>
       {
-        console.log("Uploaded story");
+      //   console.log("Uploaded story");
         //Emit event to refresh feed
         this.storyPostedEvent.emit();
 

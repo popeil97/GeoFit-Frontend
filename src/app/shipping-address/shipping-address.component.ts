@@ -32,9 +32,9 @@ export class ShippingAddressComponent implements OnInit {
 
   getUserAddresses(){
     this._shippingService.getUserAddresses().then( data => {
-      console.log(data);
+  //     console.log(data);
       this.userAddresses = data as Address[];
-      console.log(this.userAddresses);
+     //  console.log(this.userAddresses);
     })
   }
 

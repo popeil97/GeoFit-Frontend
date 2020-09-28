@@ -74,15 +74,15 @@ export class RacesComponent implements OnInit {
         });
         */
         this.racesData = data;
-        console.log('RACE DATA:',this.racesData);
+       //  console.log('RACE DATA:',this.racesData);
         this.races = _.filter(this.racesData.races,(race:any) => {
             race.raceSettings = this.getRaceSettings(race);
             race.start_date = this.ProcessDate(race.start_date);
             race.end_date = this.ProcessDate(race.end_date);
-            console.log("RACE SET",race);
+        //    console.log("RACE SET",race);
             return race;    
         });
-        console.log('RACES:',this.races)
+     //    console.log('RACES:',this.races)
         this.userRaces = _.filter(this.racesData.races,(race:any) => {
           return race.joined;
         });
@@ -93,7 +93,7 @@ export class RacesComponent implements OnInit {
 
     // this.races = this.racesData.races;
 
-    console.log('CONTR:',this.racesData);
+    // console.log('CONTR:',this.racesData);
 
     if (localStorage.getItem('loggedInUsername')){
       this._authService.username = localStorage.getItem('loggedInUsername');
@@ -126,7 +126,7 @@ export class RacesComponent implements OnInit {
       resp = resp as any;
       this.raceSettings = resp['race_settings'];
       race.raceSettings = this.raceSettings;
-      console.log("RACE SETTINGS", this.raceSettings);
+    //   console.log("RACE SETTINGS", this.raceSettings);
       return this.raceSettings;
     });
   }
@@ -139,7 +139,7 @@ export class RacesComponent implements OnInit {
   }
   
   viewRace(race:any) {
-    console.log('SELECTED RACE:',race);
+//     console.log('SELECTED RACE:',race);
 
     // set race in race service
 
@@ -149,9 +149,9 @@ export class RacesComponent implements OnInit {
   joinRace(race:any) {
     this.loading = true;
     let race_id = race.id;
-    console.log('attemptiong to join race:',race);
+ //    console.log('attemptiong to join race:',race);
     this.raceService.joinRace(race_id).then((res) => {
-      console.log('RES FROM JOIN:',res);
+   //    console.log('RES FROM JOIN:',res);
       this.loading = false;
       this.router.navigate(['/race',{name:race.name,id:race.id}]);
     });
@@ -162,9 +162,9 @@ export class RacesComponent implements OnInit {
   }
 
  openModal(id: string,race:any) {
-    console.log("MODAL RACE", race);
+//     console.log("MODAL RACE", race);
     const data = (id == 'custom-modal-2') ? {register:true, price:race.raceSettings.price,race_id:race.id,hasTags: race.raceSettings.has_entry_tags} :(id == 'custom-modal-3') ? {price:race.raceSettings.price,race_id:race.id,hasTags: race.raceSettings.has_entry_tags} : null;
-    console.log("MODAL DATA", data);
+   //  console.log("MODAL DATA", data);
     this.modalService.open(id,data);
   }
   closeModal(id: string) {

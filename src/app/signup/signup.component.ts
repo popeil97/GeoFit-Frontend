@@ -40,10 +40,10 @@ export class SignupComponent implements OnInit {
 
   openDialog() {
 
-    console.log('PRICE FORM PARENT:',this.price)
+   //  console.log('PRICE FORM PARENT:',this.price)
     if(!(this.price == null || this.price == undefined) && !this.hasPaid) {
       this.price = this.price.toString();
-      console.log('price after tostring:',this.price)
+    //   console.log('price after tostring:',this.price)
     }
 
     else {
@@ -53,7 +53,7 @@ export class SignupComponent implements OnInit {
     const dialogRef = this.dialog.open(SignupDialogContent,{disableClose: true, data:{price:this.price,isLoggedIn:this._authService.isLoggedIn(),race_id:this.race_id,aboutData:this.aboutData,hasStarted:this.hasStarted,hasTags:this.hasTags} as MatDialogConfig});
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+     //  console.log(`Dialog result: ${result}`);
 
       if(result) {
         this.signupCallback.emit();
@@ -66,7 +66,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("DATA FROM RBOT", this.price, this.race_id, this.hasPaid, this.aboutData, this.hasStarted, this.hasTags);
+  //   console.log("DATA FROM RBOT", this.price, this.race_id, this.hasPaid, this.aboutData, this.hasStarted, this.hasTags);
   }
 
 }
@@ -125,10 +125,10 @@ export class SignupDialogContent {
       if(this.price != null && this.price != undefined) {
         this.needsPayment = true;
       }
-      console.log('PRICE:',this.price)
-      console.log('NEEDS PAYMENT:',this.needsPayment);
-      console.log('ABOUT DATA FROM CHILD:',data.aboutData);
-      console.log('hasStarted:',this.hasStarted);
+   //    console.log('PRICE:',this.price)
+     //  console.log('NEEDS PAYMENT:',this.needsPayment);
+     //  console.log('ABOUT DATA FROM CHILD:',data.aboutData);
+     //  console.log('hasStarted:',this.hasStarted);
     }
 
   // onNoClick(): void {
@@ -141,7 +141,7 @@ export class SignupDialogContent {
     
     let type = callbackStruct.type;
 
-    console.log(callbackStruct);
+  //   console.log(callbackStruct);
 
     if(success) {
       console.log('STEPPER INDEX:',this.stepper.selectedIndex);

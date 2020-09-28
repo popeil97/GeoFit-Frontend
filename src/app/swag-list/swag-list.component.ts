@@ -29,14 +29,14 @@ export class SwagListComponent implements OnInit {
 
     if(this.isCart) {
       this._swagService.getCart(this.raceID).then((resp) => {
-        console.log('ORDERS:',resp['cart']);
+    //     console.log('ORDERS:',resp['cart']);
         this.cart = resp['cart'];
       })
     }
 
     else {
       this._swagService.getItems(this.raceID).then((resp:any) => {
-        console.log('Items for sale:',resp['items']);
+     //    console.log('Items for sale:',resp['items']);
         this.items = resp['items'];
       });
     }

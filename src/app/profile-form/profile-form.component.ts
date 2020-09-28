@@ -72,7 +72,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   }
 
   populateForm(): void {
-    console.log("User data prof: ", this.userData);
+//     console.log("User data prof: ", this.userData);
 
     this.profileForm.get('FirstName').setValue(this.userData.first_name);
     this.profileForm.get('LastName').setValue(this.userData.last_name);

@@ -3,6 +3,7 @@ import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { RaceService } from '../race.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { UserProfileService } from '../userprofile.service';
 declare var $: any
 import { MapComponent } from '../map/map.component';
 import { SignupComponent } from '../signup/signup.component';
@@ -45,9 +46,10 @@ export class RaceAboutComponent implements OnInit {
   tagType = TagType.ENTRY;
 
   public num_users:any;
+  userData: UserData;
 
   private currentScreen = 'map';
-  private acceptedScreens = ['map','info','logistics'];
+  private acceptedScreens = ['map','logistics','race_director'];
 
   private monthKey = {
     '1':'Jan.',
@@ -71,12 +73,13 @@ export class RaceAboutComponent implements OnInit {
     private router:Router, 
     public _authService: AuthService,
     private modalService: ModalService,
+    private _userProfileService:UserProfileService,
   ) {}
 
   ngAfterViewInit(): void {
     while(!this.aboutData);
     if(this.popup && this._authService.isLoggedIn()) {
-      console.log('in here');
+      //console.log('in here');
       this.signupChild.openDialog();
     }
   }
@@ -93,8 +96,8 @@ export class RaceAboutComponent implements OnInit {
       _this.popup = params['params']['popup'];
 
       // Console.log debug
-      console.log('Race ID', _this.raceID);
-      console.log('POPUP:', _this.popup);
+      //console.log('Race ID', _this.raceID);
+      //console.log('POPUP:', _this.popup);
 
       // I HOPE YOU REALIZE THAT this.raceID IS SET ONLY INSIDE OF THE PROMISE RESULT OF paramMap.subscribe AND THUS HAS TO BE PUT INSIDE THE PROMISE OUTPUT FUNCTION...
       // Get information about this race
@@ -103,13 +106,13 @@ export class RaceAboutComponent implements OnInit {
         let raceData = data as RaceData;
         _this.followedIDs = raceData.followedIDs;
         _this.raceIDs = raceData.race_IDs;
-        console.log("Race IDs: ", _this.raceIDs);
+        //console.log("Race IDs: ", _this.raceIDs);
       });
       
       // Get information about this particular rase
       _this.raceService.getRaceAbout(_this.raceID).then((resp) => {
         resp = resp as any;
-        console.log('RESP FROM ABOUT SERVER:',resp);
+        //console.log('RESP FROM ABOUT SERVER:',resp);
   
         _this.aboutData = resp['about_info'] as AboutData;
         _this.aboutData.start_date = _this.ProcessDate(_this.aboutData.start_date);
@@ -124,6 +127,7 @@ export class RaceAboutComponent implements OnInit {
         _this.hasMerch = _this.raceSettings.has_swag;
   
         _this.initializeForm();
+        _this.getOwnerData();
       });
     });
   }
@@ -140,7 +144,7 @@ export class RaceAboutComponent implements OnInit {
 
   openModal(id: string) {
     const data = (id == 'custom-modal-2') ? {register:true, price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} :(id == 'custom-modal-3') ? {price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} : null;
-    console.log("MODAL DATA", data);
+    //console.log("MODAL DATA", data);
     this.modalService.open(id,data);
   }
 
@@ -149,6 +153,7 @@ export class RaceAboutComponent implements OnInit {
   }
 
   SwitchSlideshow = (to:string = null) => {
+    //console.log("to", to, this.acceptedScreens.indexOf(to));
     if (to == null || this.acceptedScreens.indexOf(to) == -1) return;
     this.currentScreen = to;
     return;
@@ -191,6 +196,15 @@ export class RaceAboutComponent implements OnInit {
 
   }
 
+  getOwnerData(){
+    //Call a to-be-created service which gets user data, feed, statistics etc
+    //console.log('race-about - getUserData()',this.aboutData.owner);
+    this._userProfileService.getUserProfile(this.aboutData.owner.username).then((data) => {
+      this.userData = data as UserData;
+      //console.log("New user data race about pg: ", this.userData);
+    });
+  }
+
   viewRace() {
     // set race in race service
 
@@ -199,7 +213,7 @@ export class RaceAboutComponent implements OnInit {
 
   
   showModal(id:string): void {
-    console.log(id);
+    //console.log(id);
     ($(id) as any).modal('show');
   }
 
@@ -209,9 +223,9 @@ export class RaceAboutComponent implements OnInit {
 
   // confirmRegistration(user:any): void {
   //   // login user
-  //   console.log('USER CONFIRMED:',user);
+  //   //console.log('USER CONFIRMED:',user);
   //   this._authService.login(user).subscribe(data => {
-  //     console.log(data);
+  //     //console.log(data);
   //     localStorage.setItem('access_token', data['token']);
   //     localStorage.setItem('loggedInUsername', user.username);
   //     this.joinRace();
@@ -230,7 +244,7 @@ export class RaceAboutComponent implements OnInit {
     }
 
     this.raceService.joinRace(registrationBody).then((res) => {
-      console.log('RES FROM JOIN:',res);
+      //console.log('RES FROM JOIN:',res);
       // this.router.navigate(['/race',{name:this.raceName,id:race_id}]);
     });
   }
@@ -239,7 +253,7 @@ export class RaceAboutComponent implements OnInit {
     // prompt for swag
     // then join race
 
-    console.log('IN CALL BACK');
+    //console.log('IN CALL BACK');
 
     this.joinRace(registrationBody);
 
@@ -252,12 +266,12 @@ export class RaceAboutComponent implements OnInit {
 
   update(): void {
     let formClean = this.AboutForm.value as any;
-    console.log(this.AboutForm);
+    //console.log(this.AboutForm);
     let isValid: Boolean = this.AboutForm.valid;
 
     formClean.raceImage = this.uploadeUrl;
     formClean.rules.race_id = this.raceSettings.race_id;
-    console.log('IS VALID:',formClean);
+    //console.log('IS VALID:',formClean);
     //this.coords = this._raceview.coords;
 
     if(!formClean.rules.paymentRequired) {
@@ -272,6 +286,7 @@ export class RaceAboutComponent implements OnInit {
         this.hasMerch = this.raceSettings.has_swag;
         this.initializeForm();
         this.toggleForm();
+        //console.log("RACE ABOUT", this.aboutData);
       });
     }
   }
@@ -351,4 +366,21 @@ interface FeedObj {
   last_distance:number;
   message: string;
   created_ts:number;
+}
+
+
+interface UserData {
+  user_id:number;
+  profile_url:string;
+  email:string;
+  description: string;
+  location:string;
+  first_name:string;
+  last_name:string;
+  follows:boolean;
+  distance_type: string;
+  is_me: boolean;
+  location_visibility:boolean;
+  about_visibility:boolean;
+  email_visibility:boolean;
 }

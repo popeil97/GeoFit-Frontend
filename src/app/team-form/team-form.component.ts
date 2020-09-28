@@ -44,14 +44,14 @@ export class TeamFormComponent implements AfterViewInit,OnChanges {
     return;
   }
   ngOnChanges(changes: SimpleChanges): void {
-    console.log('changes:',changes);
+   //  console.log('changes:',changes);
 
     for(const propName in changes) {
       if(changes.hasOwnProperty(propName)) {
 
         switch(propName) {
           case 'teamEditForm':
-            console.log('IS_EDIT CHANGED');
+          //   console.log('IS_EDIT CHANGED');
             if(changes.teamEditForm.currentValue != undefined) {
               
               if(this.teamEditForm.isEdit) {
@@ -78,7 +78,7 @@ export class TeamFormComponent implements AfterViewInit,OnChanges {
     });
 
     this._userService.getFollowersAndFollowed().then((resp:FollowersResp) => {
-      console.log('RESP:',resp);
+     //  console.log('RESP:',resp);
       this.followerOptions = resp.follwers_and_followed;
     });
   }
@@ -90,7 +90,7 @@ export class TeamFormComponent implements AfterViewInit,OnChanges {
     this._teamService.getTeam(this.teamEditForm.team_id).then((resp:any) => {
       teamState = resp.team;
 
-      console.log('TEAM STATE:',teamState);
+    //   console.log('TEAM STATE:',teamState);
 
       this.teamForm = new FormGroup({
         name: new FormControl(teamState.name,[
@@ -118,7 +118,7 @@ export class TeamFormComponent implements AfterViewInit,OnChanges {
         formClean.invited = this.followersInvited.map((follower) => follower.user_id);
 
         this._teamService.createTeam(formClean,this.raceID,false,null).then((resp:TeamFormResp) => {
-          console.log('TEAM FORM RESP:',resp);
+        //   console.log('TEAM FORM RESP:',resp);
           // this.router.navigate(['/race',{id:this.raceID,name:this.raceName}]);
 
           if(!resp.success) {
@@ -145,7 +145,7 @@ export class TeamFormComponent implements AfterViewInit,OnChanges {
       formClean.invited = this.followersInvited.map((follower) => follower.user_id);
 
       this._teamService.createTeam(formClean,this.raceID,true,team_id).then((resp:TeamFormResp) => {
-        console.log('TEAM FORM RESP:',resp);
+      //   console.log('TEAM FORM RESP:',resp);
         // this.router.navigate(['/race',{id:this.raceID,name:this.raceName}]);
 
         if(!resp.success) {
@@ -167,19 +167,19 @@ export class TeamFormComponent implements AfterViewInit,OnChanges {
       return;
     }
 
-    console.log('option:',option);
+  //   console.log('option:',option);
     this.followersInvited.push(option);
 
-    console.log(this.teamForm.value);
+ //    console.log(this.teamForm.value);
     this.teamForm.controls['invited'].setValue('');
-    console.log(this.teamForm.value);
+ //    console.log(this.teamForm.value);
   }
 
   removeFollower(id:number) {
     this.followersInvited = this.followersInvited.filter((follower) => {
       return follower.user_id != id;
     });
-    console.log(this.followersInvited);
+  //   console.log(this.followersInvited);
   }
 
   onSelectFile(event) {
