@@ -16,13 +16,14 @@ export class NotificationComponent implements OnInit {
   @Input() notification:Notification;
   @Output() removeNotification: EventEmitter<any> = new EventEmitter();
   
+  constructor(
+    private _notificationService:NotificationsService,
+    private _snackbar:MatSnackBar,
+    public dialog: MatDialog,
+    private _storyService:StoryService
+  ) {}
 
-  constructor(private _notificationService:NotificationsService,private _snackbar:MatSnackBar,public dialog: MatDialog, private _storyService:StoryService) { }
-
-  ngOnInit() {
-
-
-}
+  ngOnInit() {}
 
   approve() {
     // general approval action, backend will sort out what the notifcation is for
@@ -51,21 +52,22 @@ export class NotificationComponent implements OnInit {
   }
 
   showButton(name:string,type:NotificationType): Boolean {
-    if(name=='Accept' && (type == NotificationType.TEAM_JOIN || type == NotificationType.FOLLOW_REQUEST)) {
-      return true;
+    var returnValue = false;
+    switch(name) {
+      case('Accept'):
+        returnValue = (type == NotificationType.TEAM_JOIN || type == NotificationType.FOLLOW_REQUEST);
+        break;
+      case('Decline'):
+        returnValue = (type == NotificationType.TEAM_JOIN || type == NotificationType.FOLLOW_REQUEST);
+        break;
+      case('Hide'):
+        returnValue = (type != NotificationType.TEAM_JOIN && type != NotificationType.FOLLOW_REQUEST);
+        break;
+      case('View'):
+        returnValue = (type == NotificationType.COMMENT);
+        break;
     }
-
-    else if(name=='Decline' && (type == NotificationType.TEAM_JOIN || type == NotificationType.FOLLOW_REQUEST)) {
-      return true;
-    }
-
-    else if(name == 'Hide' && (type != NotificationType.TEAM_JOIN && type != NotificationType.FOLLOW_REQUEST)) {
-      return true;
-    }
-
-    else if (name=='View' && (type == NotificationType.COMMENT)) {
-      return true;
-    }
+    return returnValue;
   }
 
   viewStory(storyID:number): void {

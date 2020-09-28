@@ -36,23 +36,45 @@ export class NavComponent implements OnInit {
   public path:any;
 
   ngOnInit() {
-    
     // copy pasta from stack overflow yahooooooo
     $(document).on('click', '.dropdown-menu', function (e) {
       e.stopPropagation();
     });
 
+    // THIS SHOULDN'T BE THE WAY, BUT LET'S GO WITH IT FOR NOW
+    Observable.interval(1*1000) // make much larger in production
+      .switchMap(() => {
+        if (!this._authService.isLoggedIn()) return [];
+        return this._notificationService.getNotifications();
+      })
+      .subscribe((resp:NotificationResp) => {
+        //console.log(resp);
+        this.notifications = resp.notifications;
+        //console.log(this.notifications);
+      });
+    
+    if (localStorage.getItem('access_token')){
+        this._authService.token = localStorage.getItem('access_token');
+    }
+  
+    if (localStorage.getItem('loggedInUsername')){
+        this._authService.username = localStorage.getItem('loggedInUsername');
+        this.getUserPic();
+    }
+    this.path=window.location.pathname;
+    
+    /*
     try{this.getNotifications();}
     catch{console.log("Couldnt get notifs");}
-    
-
+  
+    /*
     Observable.interval(60000) // make much larger in production
-    .switchMap(() => this._notificationService.getNotifications())
-    .subscribe((resp:NotificationResp) => {
-      //console.log(resp);
-      this.notifications = resp.notifications;
-      //console.log(this.notifications);
-    });
+      .switchMap(() => this._notificationService.getNotifications())
+      .subscribe((resp:NotificationResp) => {
+        //console.log(resp);
+        this.notifications = resp.notifications;
+        //console.log(this.notifications);
+      });
 
     if (localStorage.getItem('access_token')){
       this._authService.token = localStorage.getItem('access_token');
@@ -63,7 +85,7 @@ export class NavComponent implements OnInit {
       this.getUserPic();
     }
     this.path=window.location.pathname;
-
+    */
 
   }
 
@@ -83,11 +105,13 @@ export class NavComponent implements OnInit {
   }
 
   getNotifications() {
-
     this._notificationService.getNotifications().toPromise().then((resp:NotificationResp) => {
       //console.log(resp);
       this.notifications = resp.notifications;
-    });
+    }).catch(err=>{
+      console.error('GET NOTIFICATIONS ERROR:',err)
+      throw(err);
+    })
 
   }
 

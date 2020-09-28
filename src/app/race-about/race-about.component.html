@@ -53,6 +53,18 @@
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'map'}">
           <div class='MapContainer'>
             <app-map [raceIDs]="raceID" [displayUsers]="false" zoom="true"></app-map>
+            <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceLogisticsBlock">
+              <p>Loading race details...</p>
+            </ng-template>
+            <ng-template #RaceLogisticsBlock>
+              <div class='RaceLocationsContainer'>
+                <p class='RaceLocation'>{{aboutData.start_loc}}</p>
+                <div class='RaceDistanceLine'>
+                  <p class='h7'>{{aboutData.distance}}mi</p>
+                </div>
+                <p class='RaceLocation'>{{aboutData.end_loc}}</p>
+              </div>
+            </ng-template>
           </div>
         </div>
 
@@ -76,18 +88,6 @@
         -->
 
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'logistics'}">
-          <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceLogisticsBlock">
-            <p>Loading race details...</p>
-          </ng-template>
-          <ng-template #RaceLogisticsBlock>
-            <div class='RaceLocationsContainer'>
-              <p class='RaceLocation'>{{aboutData.start_loc}}</p>
-              <div class='RaceDistanceLine'>
-                <p class='h7'>{{aboutData.distance}}mi</p>
-              </div>
-              <p class='RaceLocation'>{{aboutData.end_loc}}</p>
-            </div>
-          </ng-template>
 
           <p>
             <span class='h6'>Race Type: </span>

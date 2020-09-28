@@ -11,9 +11,12 @@ export class NotificationPanelComponent {
 
   public notifications:any[] = [];
 
-  constructor(private _bottomSheetRef: MatBottomSheetRef<NotificationPanelComponent>,@Inject(MAT_BOTTOM_SHEET_DATA) public data: any) {
+  constructor(
+    private _bottomSheetRef: MatBottomSheetRef<NotificationPanelComponent>,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
+  ) {
     this.notifications = data.notifications;
-  //  console.log(this.notifications.length);
+    //console.log(this.notifications.length);
   }
 
   removeNotification(not_id:number) {

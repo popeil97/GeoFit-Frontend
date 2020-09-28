@@ -44,7 +44,7 @@
           <div *ngIf="this._authService.isLoggedIn()">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="showNotifications()">
                 <mat-icon *ngIf="notifications.length>0" class="roboto-purple" matBadge="{{notifications.length}}" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below">circle_notifications</mat-icon> 
-                 <mat-icon *ngIf="notifications.length==0" class="roboto-purple" >circle_notifications</mat-icon>
+                <mat-icon *ngIf="notifications.length==0" class="roboto-purple" >circle_notifications</mat-icon>
                 Notifications
               </a>
           </div>
@@ -57,7 +57,7 @@
             </div>
             <div class='dropdownContents NavDropdownContents'>
               <div class="dropdownItem NavDropdownItem">
-                <a [routerLink]="['/profile', {username: this._authService.username}]">My profile</a>
+                <a [routerLink]="['/profile', {username: this._authService.username}]">Go to Profile</a>
               </div>
               <div class="dropdownItem NavDropdownItem">
                 <a (click)="logout()">Log out {{this._authService.username}}</a>
