@@ -21,8 +21,12 @@ export class SwagItemComponent implements OnInit {
   ngOnInit() {}
 
   onSizeSelect(size:string) {
+    console.log("SELECT SIZE", this.btnDisabled);
+
     this.btnDisabled=false;
     this.selectedSize = size;
+
+    console.log("SELECT SIZE2" , this.btnDisabled);
   }
 
   addToCart() {

@@ -65,5 +65,25 @@
     }
 .UserProfileMainContentContainer {
     height:100%;
-    overflow-y:auto;
+    
 }
+
+.RaceContainer {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    border-bottom: 1px solid var(--primary-darkgrey);
+}
+
+.FeedContainer {
+    width:30%;
+    overflow-y:auto;
+    height:200px;
+}
+
+.StatsContainer {
+    width:70%;
+}
+

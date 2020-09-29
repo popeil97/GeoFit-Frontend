@@ -1,11 +1,14 @@
 <div *ngFor="let race of userRaces" class="TucanRaceItem">
+  <div class = "TucanRaceItem">
         <div class='TucanRaceItemContents'>
           
           <div class='TucanRaceItemHeader'>
-            <h2>{{race.name}}</h2>
-            <img class="TucanRaceItemImage" *ngIf="race.race_image != null" src="{{race.race_image}}" height="100" width="100" />
+            <h4>{{race.name}}</h4>
           </div>
-          
+          <div class='TucanRaceItemImageContainer'>
+            <img class="TucanRaceItemImageSmall" *ngIf="race.race_image != null" src="{{race.race_image}}" />
+           </div>
+           <br>
 
           <div class='TucanRaceItemDetails'>
             <div class='TucanRaceItemSpecificInfo'>
@@ -36,13 +39,14 @@
               -->
             </div>
             <div class='TucanRaceItemButtons'>
-              <a class="btn"  (click)="viewRace(race)" *ngIf="race.has_started">Go to Race</a>
-              <a class="btn"  (click)="viewRace(race)" *ngIf="!race.has_started">Preview Race</a>
+              <button  (click)="viewRace(race)" *ngIf="race.has_started">Go to Race</button>
+              <button  (click)="viewRace(race)" *ngIf="!race.has_started">Preview Race</button>
 
-               <a class="btn"  (click)="viewAbout(race)" *ngIf="race.has_started">Race Details</a>
+               <button  (click)="viewAbout(race)" *ngIf="race.has_started">Race Details</button>
 
               <b *ngIf="!race.has_started">Come back on race day ({{race.start_date.month}} {{race.start_date.day}}).</b>
             </div>
           </div>
         </div>
-      </div>
+    </div>
+ </div>

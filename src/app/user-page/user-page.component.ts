@@ -41,8 +41,8 @@ export class UserPageComponent implements OnInit {
     private modalService: ModalService,
   ) {}
 
-  private currentScreen = 'stats';
-  private acceptedScreens = ['stats','races','feed'];
+  private currentScreen = 'home';
+  private acceptedScreens = ['home','stats','feed','races'];
 
   ngOnInit() {
     //Don't show edit page by default
@@ -66,6 +66,9 @@ export class UserPageComponent implements OnInit {
        //  console.log("USER RACES PROFILE", this.userRaces);
       }
     )
+
+    document.getElementById('home-btn').style.backgroundColor = "#36343c";
+     document.getElementById('home-btn').style.color = "#FFFFFF";
 
   }
 
@@ -171,6 +174,52 @@ export class UserPageComponent implements OnInit {
   SwitchSlideshow = (to:string = null) => {
     if (to == null || this.acceptedScreens.indexOf(to) == -1) return;
     this.currentScreen = to;
+
+     document.getElementById(to+'-btn').style.backgroundColor = "#36343c";
+     document.getElementById(to+'-btn').style.color = "#FFFFFF";
+
+    switch(to) { 
+     case 'home': { 
+     //  document.getElementById('races-btn').style.backgroundColor = "#FFFFFF";
+     //  document.getElementById('races-btn').style.color = "#000000";
+       document.getElementById('feed-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('feed-btn').style.color = "#000000";
+       document.getElementById('stats-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('stats-btn').style.color = "#000000";
+        break; 
+     } 
+     case 'stats': { 
+    //   document.getElementById('races-btn').style.backgroundColor = "#FFFFFF";
+     //  document.getElementById('races-btn').style.color = "#000000";
+       document.getElementById('feed-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('feed-btn').style.color = "#000000";
+       document.getElementById('home-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('home-btn').style.color = "#000000";
+        break; 
+     } 
+     case 'feed': { 
+        document.getElementById('stats-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('stats-btn').style.color = "#000000";
+     //  document.getElementById('races-btn').style.backgroundColor = "#FFFFFF";
+      // document.getElementById('races-btn').style.color = "#000000";
+       document.getElementById('home-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('home-btn').style.color = "#000000";
+        break; 
+     } 
+     case 'races': { 
+         document.getElementById('stats-btn').style.backgroundColor = "#FFFFFF";
+         document.getElementById('stats-btn').style.color = "#000000";
+         document.getElementById('feed-btn').style.backgroundColor = "#FFFFFF";
+          document.getElementById('feed-btn').style.color = "#000000";
+          document.getElementById('home-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('home-btn').style.color = "#000000";
+        break; 
+     } 
+     default: { 
+        break; 
+     } 
+   }
+
     return;
   }
 

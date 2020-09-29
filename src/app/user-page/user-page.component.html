@@ -62,11 +62,43 @@
 
     <div class="Slideshow">
       <div class="SlideshowHeader">
-        <button class="SlideshowButton" (click)="SwitchSlideshow('stats')">Stats</button>
-        <button *ngIf="!showEdit" class="SlideshowButton" (click)="SwitchSlideshow('feed')">Feed</button>
-        <button class="SlideshowButton" (click)="SwitchSlideshow('races')">Races</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('home')" id="home-btn">Home</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('stats')" id="stats-btn">Stats</button>
+        <button *ngIf="!showEdit" class="SlideshowButton" (click)="SwitchSlideshow('feed')" id="feed-btn">Feed</button>
+    <!--    <button class="SlideshowButton" (click)="SwitchSlideshow('races')" id="races-btn">Races</button> -->
       </div>
       <div class="SlideshowContents">
+
+        <div id='statsContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'home'}">
+          <div *ngIf="userData != null; else HomeLoadingMessage">
+            <h2 *ngIf="userData.is_me; else otherHome">Home</h2>
+
+            <ng-template #otherHome><h2>{{userData.first_name}}'s Profile</h2></ng-template>
+            <div class="RaceContainer PageSegment">
+                <div *ngIf="userData != null; else RaceLoadingMessage">
+                  <div *ngIf="userRaces==null"></div>
+                  <div *ngIf="userRaces!=null&&userRaces.length>0; else noRacesDisplay">
+                    <app-user-race></app-user-race>
+                  </div>
+                  <ng-template #noRacesDisplay><p>You currently do not have any races under your belt. To find races you may be interested in, head over to <a routerLink='/races'>Public Races</a>.</p></ng-template>
+            </div>
+            <ng-template #RaceLoadingMessage><p>Loading user data...</p></ng-template>
+            </div>
+
+            <!--
+            <div class="RaceContainer PageSegment">
+              <div class="FeedContainer">
+                <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
+              </div>
+              <div class="StatsContainer">
+                <app-user-stats [userID]="userData.user_id"></app-user-stats>
+              </div>
+            </div>
+          </div> -->
+          <ng-template #HomeLoadingMessage><p>Retrieving user data...</p></ng-template>
+        </div>
+      </div>
+
         <div id='statsContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'stats'}">
           <div *ngIf="userData != null; else StatsLoadingMessage">
             <h2 *ngIf="userData.is_me; else otherUserStats">Your Stats</h2>
