@@ -20,7 +20,7 @@
       <div class="TucanFormSegment">
         <div class="form-group">
           <label name="FirstName">First Name</label>
-          <input class="form-control" type="text" placeholder="First Name" formControlName="FirstName">
+          <input class="form-control" type="text" placeholder="First Name" value="{{this.d.userData.first_name}}" formControlName="FirstName">
           <br>
           <div *ngIf="profileForm.get('FirstName').invalid && (profileForm.get('FirstName').dirty || profileForm.get('FirstName').touched)"
             class="alert alert-danger">
@@ -36,7 +36,7 @@
       <div class="TucanFormSegment">
         <div class="form-group">
       <label name="LastName">Last Name</label>
-      <input class="form-control" type="text" placeholder="Last Name" formControlName="LastName">
+      <input class="form-control" type="text" placeholder="Last Name" value="{{this.d.userData.last_name}}" formControlName="LastName">
       <br>
       <div *ngIf="profileForm.get('LastName').invalid && (profileForm.get('LastName').dirty || profileForm.get('LastName').touched)"
         class="alert alert-danger">
@@ -53,8 +53,8 @@
     
     <div class="TucanContainer">
         <div class="form-group">
-          <label name="About">About <mat-slide-toggle formControlName="aboutToggle" style="padding-left:25px;">Show</mat-slide-toggle></label>
-          <textarea class="form-control" formControlName="About" rows="3" placeholder="About" required ></textarea>
+          <label name="About">About <mat-slide-toggle formControlName="aboutToggle"  style="padding-left:25px;">Show</mat-slide-toggle></label>
+          <textarea class="form-control" formControlName="About" rows="3" placeholder="About" value="{{this.d.userData.description}}"  required ></textarea>
         </div>
    </div>
 
@@ -62,8 +62,8 @@
    <div class="TucanFormSegmentContainer">
     <div class="TucanFormSegment">
     <div class="form-group">
-      <label name="Location">Location <mat-slide-toggle formControlName="locationToggle" style="padding-left:25px;">Show</mat-slide-toggle></label>
-      <input class="form-control" type="text" placeholder="Location" formControlName="Location">
+      <label name="Location">Location <mat-slide-toggle formControlName="locationToggle"  style="padding-left:25px;">Show</mat-slide-toggle></label>
+      <input class="form-control" type="text" placeholder="Location" value="{{this.d.userData.location}}"  formControlName="Location">
       <br>
       <div *ngIf="profileForm.get('Location').invalid && (profileForm.get('Location').dirty || profileForm.get('Location').touched)"
         class="alert alert-danger">
@@ -75,7 +75,7 @@
     </div>
   </div>
   <div class="TucanFormSegment">
-     <label name="Email">Email <mat-slide-toggle formControlName="emailToggle" style="padding-left:25px;">Show</mat-slide-toggle></label>
+     <label name="Email">Email <mat-slide-toggle formControlName="emailToggle"  style="padding-left:25px;">Show</mat-slide-toggle></label>
     <input class="form-control" type="text" placeholder="{{this.d.userData.email}}" formControlName="Email" readonly>
     
   </div>
