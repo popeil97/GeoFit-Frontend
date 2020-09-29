@@ -23,7 +23,8 @@
 
         <div *ngIf="this._authService.isLoggedIn()">
           <div *ngIf="userData.is_me">
-            <app-view-follow></app-view-follow>
+            <a (click)="openFollowersDialog()">Followers: {{this.followersData.numFollowers}} | Following: {{this.followersData.numFollowing}}</a>
+            <!--<app-view-follow></app-view-follow>-->
             <div>
               <h6>Strava Authentication</h6>
               <app-stravauth></app-stravauth>

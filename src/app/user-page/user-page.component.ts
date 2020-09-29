@@ -5,6 +5,7 @@ import { UserProfileService } from '../userprofile.service';
 import { AuthService } from '../auth.service';
 import { RaceService } from '../race.service';
 import { UsersService } from '../users.service';
+import { ModalService } from '../modalServices';
 import * as _ from 'lodash';
 
 declare var $: any;
@@ -22,6 +23,14 @@ export class UserPageComponent implements OnInit {
   public racesData:any;
   showEdit: boolean;
 
+  public followersData: any = {
+    followers:[],
+    followed: [],
+    follow_bool:[],
+    numFollowers:0,
+    numFollowing:0,
+  }
+
   constructor(
     private route:ActivatedRoute, 
     private router:Router,
@@ -29,6 +38,7 @@ export class UserPageComponent implements OnInit {
     private _userService:UsersService,
     public _authService: AuthService,
     private raceService: RaceService,
+    private modalService: ModalService,
   ) {}
 
   private currentScreen = 'stats';
@@ -75,21 +85,35 @@ export class UserPageComponent implements OnInit {
     }
   }
 
-  getUserData(){
+  getUserData() {
     //Call a to-be-created service which gets user data, feed, statistics etc
   //   console.log('user-page - getUserData()',this.username);
     this._userProfileService.getUserProfile(this.username).then((data) => {
       this.userData = data as UserData;
-    //   console.log("New user data profPage: ", this.userData);
-
+      //console.log("New user data profPage: ", this.userData);
       if (this.userData.location == "") {
         this.userData.location = "N/A";
       }
-
       if (this.userData.description == "") {
         this.userData.description = "N/A";
       }
+
+      this._userService.getFollowersAndFollowedSeperate().then((resp:FollowersResp) => {
+        this.followersData.followers = resp.followers;
+        this.followersData.followed = resp.followed;
+        this.followersData.numFollowers = this.followersData.followers.length;
+        this.followersData.numFollowing = this.followersData.followed.length;
+      });
+
     });
+  }
+
+  openFollowersDialog = () => {
+    const data = {
+      username:this.username,
+      followersData: this.followersData,
+    }
+    this.modalService.open('followersModal',data);
   }
 
   logout() {
@@ -142,4 +166,9 @@ interface UserData {
   location_visibility:boolean;
   about_visibility:boolean;
   email_visibility:boolean;
+}
+
+interface FollowersResp {
+  followed: any[];
+  followers:any[];
 }

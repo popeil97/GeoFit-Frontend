@@ -1,1 +1,42 @@
-<button mat-button (click)="openDialog()" type='button'>Followers: {{this.numFollowers}} | Following: {{this.numFollowing}}</button>
+<!--<a (click)="openDialog()">Followers: {{this.numFollowers}} | Following: {{this.numFollowing}}</a>-->
+<div class='TucanContainer'>
+    <div class='margin-bottom-16px'>
+        <button (click)="closeDialog()">Close</button>
+    </div>
+    
+    <ng-template [ngIf]="d != null" [ngIfElse]="LoadingFollowers">
+        <div class='Slideshow'>
+            <div class="SlideshowHeader">
+                <button class="SlideshowButton" (click)="SwitchSlideshow('followers')">Followers: {{d.followersData.numFollowers}}</button>
+                <button class="SlideshowButton" (click)="SwitchSlideshow('following')">Following: {{d.followersData.numFollowing}}</button>
+            </div>
+            <div class="SlideshowContents">
+                <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'followers'}">
+                    <h3>Followers</h3>
+                    <ng-template [ngIf]='d.followersData.numFollowers > 0' [ngIfElse]='NoFollowersBlock'>
+                        <div *ngFor="let person of d.followersData.followers">
+                            <app-show-followers [person]="person"></app-show-followers>
+                        </div>
+                    </ng-template>
+                    <ng-template #NoFollowersBlock>
+                        <p>No followers.</p>
+                    </ng-template>
+                </div>
+                <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'following'}">
+                    <h3>Following</h3>
+                    <ng-template [ngIf]='d.followersData.numFollowing > 0' [ngIfElse]='NoFollowingBlock'>
+                        <div *ngFor="let person of d.followersData.following">
+                            <app-show-followers [person]="person"></app-show-followers>
+                        </div>
+                    </ng-template>
+                    <ng-template #NoFollowingBlock>
+                        <p>Not following anybody.</p>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+    <ng-template #LoadingFollowers>
+        <p>Loading followers data...</p>
+    </ng-template>
+</div>

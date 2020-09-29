@@ -22,12 +22,16 @@
 
     width:75%;
     max-width:640px;
+    height:auto;
+    max-height: 75%;
 
     padding: 20px;
     box-sizing: border-box;
 
     background: #fff;
     border-radius: 16px;
+
+    overflow-y:auto;
 }
 
 .custom-modal-background {
