@@ -141,7 +141,31 @@ export class UserPageComponent implements OnInit {
     this.getUserData();
 
     //Switch back to main view
-    this.toggleEditView();
+    //this.toggleEditView();
+  }
+
+  openModal(id: string) {
+   
+    var data = (id == 'profileModal') ? {userData:this.userData, callbackFunction:null} : {};
+    console.log("DATA SENT TO CHILD", data);
+    data.callbackFunction = this.testee;
+    this.modalService.open(id,data);
+  }
+
+  testee = (incomingData = null) => {
+  //  const toAlert = (incomingData != null) ? incomingData : this.testString;
+  if(incomingData != null){
+    this.profileUpdated(null);
+    console.log("INCOMING!!!");
+  }
+    
+  }
+
+
+
+  closeModal(id: string) {
+      this.modalService.close(id);
+      console.log(this.modalService.getModalData(id));
   }
 
   SwitchSlideshow = (to:string = null) => {

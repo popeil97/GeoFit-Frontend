@@ -1,7 +1,6 @@
 <div class="container">
-
   <form [formGroup]="profileForm">
-
+    <button  (click)="populateForm()">Update</button>
     <div class="form-group" style="text-align: left; padding: 5px;">
       <label name="ProfilePic">Profile Picture</label>
       <br>
@@ -10,25 +9,32 @@
 
       <br>
       <div class="wrapper" *ngIf="profilePicURL">
-        <img [src]="uploadedProfPicSrc()" width="300px">
+        <img [src]="uploadedProfPicSrc()" width="100px">
+      </div>
+      <div class="wrapper" *ngIf="!profilePicURL && this.d.userData.profile_url">
+        <img [src]="this.d.userData.profile_url" width="100px">
       </div>
     </div>
 
-    <div class="form-group" style="text-align: left; padding: 5px;">
-      <label name="FirstName">First Name</label>
-      <input class="form-control" type="text" placeholder="First Name" formControlName="FirstName">
-      <br>
-      <div *ngIf="profileForm.get('FirstName').invalid && (profileForm.get('FirstName').dirty || profileForm.get('FirstName').touched)"
-        class="alert alert-danger">
+    <div class="TucanFormSegmentContainer">
+      <div class="TucanFormSegment">
+        <div class="form-group">
+          <label name="FirstName">First Name</label>
+          <input class="form-control" type="text" placeholder="First Name" formControlName="FirstName">
+          <br>
+          <div *ngIf="profileForm.get('FirstName').invalid && (profileForm.get('FirstName').dirty || profileForm.get('FirstName').touched)"
+            class="alert alert-danger">
 
-        <div *ngIf="profileForm.get('FirstName').errors.required">
-          First Name is required.
+            <div *ngIf="profileForm.get('FirstName').errors.required">
+              First Name is required.
+            </div>
+
+          </div>
         </div>
-
       </div>
-    </div>
-
-    <div class="form-group" style="text-align: left; padding: 5px;">
+  
+      <div class="TucanFormSegment">
+        <div class="form-group">
       <label name="LastName">Last Name</label>
       <input class="form-control" type="text" placeholder="Last Name" formControlName="LastName">
       <br>
@@ -40,14 +46,23 @@
         </div>
       </div>
     </div>
-
-    <div class="form-group" style="text-align: left; padding: 5px;">
-      <label name="About">About</label>
-      <input class="form-control" type="text" placeholder="About" formControlName="About">
+      </div>
     </div>
 
-    <div class="form-group" style="text-align: left; padding: 5px;">
-      <label name="Location">Location</label>
+
+    
+    <div class="TucanContainer">
+        <div class="form-group">
+          <label name="About">About <mat-slide-toggle formControlName="aboutToggle" style="padding-left:25px;">Show</mat-slide-toggle></label>
+          <textarea class="form-control" formControlName="About" rows="3" placeholder="About" required ></textarea>
+        </div>
+   </div>
+
+
+   <div class="TucanFormSegmentContainer">
+    <div class="TucanFormSegment">
+    <div class="form-group">
+      <label name="Location">Location <mat-slide-toggle formControlName="locationToggle" style="padding-left:25px;">Show</mat-slide-toggle></label>
       <input class="form-control" type="text" placeholder="Location" formControlName="Location">
       <br>
       <div *ngIf="profileForm.get('Location').invalid && (profileForm.get('Location').dirty || profileForm.get('Location').touched)"
@@ -58,7 +73,15 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="TucanFormSegment">
+     <label name="Email">Email <mat-slide-toggle formControlName="emailToggle" style="padding-left:25px;">Show</mat-slide-toggle></label>
+    <input class="form-control" type="text" placeholder="{{this.d.userData.email}}" formControlName="Email" readonly>
+    
+  </div>
+  </div>
 
+<!--
     <div class="form-group" style="text-align: left; padding: 5px;">
       <label name="DistanceType">Distance Type</label>
       <select class="form-control" formControlName="DistanceType">
@@ -67,15 +90,12 @@
         </option>
       </select>
     </div>
-
-    <!-- these dont do anything yet -->
-    <mat-slide-toggle formControlName="emailToggle" style="padding-left:25px;">Email Visible</mat-slide-toggle>
-    <mat-slide-toggle formControlName="locationToggle" style="padding-left:25px;">Location Visible</mat-slide-toggle>
-    <mat-slide-toggle formControlName="aboutToggle" style="padding-left:25px;">About Visible</mat-slide-toggle>
-
-    <div style="padding: 5px; position: relative; float: left;">
-      <button class="btn btn-primary" mat-raised-button (click)="updateProfile()">Update</button>
-    </div>
+-->
+   
+    
+    
+      <button  (click)="updateProfile()">Update</button>
+    <button class="CloseLogin" (click)="closeDialog()">Close</button>
 
   </form>
 </div>

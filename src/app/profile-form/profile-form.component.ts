@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserProfileService } from '../userprofile.service';
 import { ImageService } from '../image.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ModalService } from '../modalServices';
 
 @Component({
   selector: 'app-profile-form',
@@ -10,9 +11,10 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./profile-form.component.css']
 })
 export class ProfileFormComponent implements OnInit, OnChanges {
-  @Input() userData: UserData;
+ // @Input() userData: UserData;
+ @Input() id: string;
 
-  @Output() formUpdated: EventEmitter<void> = new EventEmitter();
+ // @Output() formUpdated: EventEmitter<void> = new EventEmitter();
 
   profileForm: FormGroup;
   profilePicURL: any;
@@ -20,7 +22,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
 
   constructor(private _userProfileService: UserProfileService, 
               private sanitizer:DomSanitizer,
-              private _imageService: ImageService) {
+              private _imageService: ImageService,private modalService: ModalService) {
     this.distanceTypeOptions = ['Mi', 'KM'];
     this.profilePicURL = null;
 
@@ -38,7 +40,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
       Location: new FormControl('',[
         Validators.maxLength(30)
       ]),
-      DistanceType: new FormControl(''),
+     // DistanceType: new FormControl(''),
       emailToggle: new FormControl(false, [
         Validators.required,
       ]),
@@ -53,14 +55,15 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.populateForm();
+    console.log("INIT PROFILE-FORM");
+    //this.populateForm();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
+    console.log("CHANGES");
     for(const propName in changes) {
       if(changes.hasOwnProperty(propName)) {
-
+        console.log("PROP", propName);
         switch(propName) {
           case 'userData':
             if(changes.userData.currentValue != undefined) {
@@ -73,14 +76,14 @@ export class ProfileFormComponent implements OnInit, OnChanges {
 
   populateForm(): void {
 //     console.log("User data prof: ", this.userData);
-
-    this.profileForm.get('FirstName').setValue(this.userData.first_name);
-    this.profileForm.get('LastName').setValue(this.userData.last_name);
-    this.profileForm.get('About').setValue(this.userData.description);
-    this.profileForm.get('Location').setValue(this.userData.location);
-    this.profileForm.get('locationToggle').setValue(this.userData.location_visibility);
-    this.profileForm.get('aboutToggle').setValue(this.userData.about_visibility);
-    this.profileForm.get('emailToggle').setValue(this.userData.email_visibility);
+    console.log("CHILD D",this.d);
+    this.profileForm.get('FirstName').setValue(this.d.userData.first_name);
+    this.profileForm.get('LastName').setValue(this.d.userData.last_name);
+    this.profileForm.get('About').setValue(this.d.userData.description);
+    this.profileForm.get('Location').setValue(this.d.userData.location);
+    this.profileForm.get('locationToggle').setValue(this.d.userData.location_visibility);
+    this.profileForm.get('aboutToggle').setValue(this.d.userData.about_visibility);
+    this.profileForm.get('emailToggle').setValue(this.d.userData.email_visibility);
   }
 
   updateProfile(): void{
@@ -98,14 +101,14 @@ export class ProfileFormComponent implements OnInit, OnChanges {
 
           //call service to update form
           this._userProfileService.updateProfile(formClean).then((data) => {
-            this.formUpdated.emit();
+            this.modalService.callbackModal(this.id,"profile-done");
           })
         });
       }
       else{
         //call service to update form
         this._userProfileService.updateProfile(formClean).then((data) => {
-          this.formUpdated.emit();
+         this.modalService.callbackModal(this.id,"profile-done");
         })
       }
 
@@ -136,6 +139,13 @@ export class ProfileFormComponent implements OnInit, OnChanges {
 
     //Clear uploaded file
     this.profilePicURL = null;
+  }
+
+   get d() { return this.modalService.modalsData[this.id]}
+
+  closeDialog() {
+    if (this.id == null) return;
+    this.modalService.close(this.id);
   }
 
 }

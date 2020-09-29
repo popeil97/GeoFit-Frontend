@@ -1,4 +1,4 @@
-<div *ngIf="!showEdit" class='UserProfileContainer'>
+<div class='UserProfileContainer'>
   
   <!-- user profile info -->
   <div class="UserProfileUserInfoContainer">
@@ -52,7 +52,7 @@
       <ng-template #profileLoadingMessage><p>Loading...</p></ng-template>
 
       <div class='UserProfileActions' *ngIf="userData != null && this._authService.isLoggedIn() && userData.is_me">
-        <a class="button darkButton" (click)="toggleEditView()">Edit Details</a>
+        <button class="darkButton" (click)="openModal('profileModal')" >Edit</button>
         <a class="button darkButton" (click)="logout()">Log out</a>
       </div>
 
@@ -99,8 +99,4 @@
       </div>
     </div>
   </div>
-</div>
-
-<div *ngIf="showEdit">
-  <app-profile-form  [userData]="userData" (formUpdated)="profileUpdated($event)"></app-profile-form>
 </div>
