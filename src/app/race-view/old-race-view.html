@@ -1,0 +1,156 @@
+<div> 
+<app-loader [isActive]="loading"></app-loader>
+<mat-sidenav-container hasBackdrop="false">
+  <mat-sidenav  md-disable-backdrop='true' #menu mode="over"  opened="true"> 
+     <div class="sidenav-scroll">
+
+
+    <div *ngIf="this.childRaceData.length > 1">
+      <div class="container">
+        <label>Select Route</label>
+        <select [(ngModel)]="selectedRaceID">
+            <option *ngFor="let x of this.childRaceData" [value]="x.id" [selected]="selectedRaceID == x.id">{{x.name}}</option>
+        </select>
+      </div>
+    </div>
+
+
+    <mat-tab-group class='tab-subtitled'>
+      <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>emoji_people</mat-icon>
+          <div class="tabs1">Social</div>
+          
+        </ng-template>
+
+        <br><br><br><br><br>
+        <button *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities>0" matBadge="{{num_activities}}"  matBadgePosition="after" matBadgeColor="accent" (click)="openModal('custom-modal-5')" >Log Activity</button>
+        <button *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities==0" (click)="openModal('custom-modal-5')" >Log Activity</button>
+
+
+
+<!--        <button (click)="toggleTeamForm()" *ngIf="!showTeamForm">Add Team</button> -->
+
+        <button (click)="openModal('custom-modal-5')">Settings</button>
+        <button (click)="viewAbout()">About Race</button>
+
+        
+
+       <!-- <button (click)="openModal('custom-modal-6')">Map Settings</button> -->
+
+        <div style="text-align:center;">
+          <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Activity Feed</b></h3></b>
+          Only show people I follow:
+          <input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/>
+           
+          Only show stories: 
+          <input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/>
+        </div>
+
+        <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed> <br><br><br><br><br><br>
+      </mat-tab>
+
+      
+      
+
+            <mat-tab>
+        <ng-template mat-tab-label>
+          <mat-icon>format_list_numbered_rtl</mat-icon>
+          <div class="tabs1">Leaderboard</div>
+        </ng-template>
+        
+        
+        <app-tag-select *ngIf="raceSettings.has_entry_tags && !race.is_hybrid" [raceID]="raceID" [tagType]="entryTagType" [hasAll]="true" [title]="'Filter by Org'" (emitState)="setLeaderboardTagID($event)"></app-tag-select>
+        <app-route-select *ngIf="race.is_hybrid && childRaceData.length > 0" [routes]="childRaceData" [title]="'Filter by Route'" (routeChanged)="setLeaderboardRouteFilter($event)"></app-route-select>
+        <app-hybrid-leaderboard *ngIf="race.is_hybrid" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard>
+        <div *ngIf="selectedTagFilterID == 0 && raceSettings.has_entry_tags">
+          <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Org Leaderboard</b></h3></b>
+          
+          <app-leaderboard *ngIf="!race.is_hybrid" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
+          <br><br><br><br><br><br>
+        </div>
+      <mat-tab-group class='tab-subtitled' *ngIf="!race.is_hybrid">
+
+        
+        
+
+        <mat-tab label="Teams" *ngIf="selectedTagFilterID != 0">
+          <ng-template mat-tab-label>
+            <mat-icon>directions_run</mat-icon>
+            <div class="tabs1">Individuals</div>
+          </ng-template>
+          <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Leaderboard</b></h3></b>
+          <app-leaderboard [raceID]="raceID" [use]="'individual'" [allowFollow]="true" [tagID]="selectedTagFilterID"></app-leaderboard><br><br><br><br><br><br>
+          </mat-tab>
+          
+          <mat-tab label="not teams" *ngIf="selectedTagFilterID != 0 && raceSettings.allowTeams">
+            <ng-template mat-tab-label>
+              <mat-icon>group</mat-icon>
+              <div class="tabs1">Teams</div>
+            </ng-template>
+            <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Teams Leaderboard</b></h3></b>
+            <app-leaderboard [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard><br><br><br><br><br><br>
+          </mat-tab>
+     </mat-tab-group>
+
+      </mat-tab>
+
+      <!--
+        <mat-tab *ngIf="this._authService.isLoggedIn() && this.userRegistered">
+        <ng-template mat-tab-label>
+          <mat-icon>group</mat-icon>
+          <div class="tabs1">Teams</div>
+        </ng-template>
+
+        <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Teams</b></h3></b>
+        <button class="btn btn-primary btn-mobile" style="width: 100%; text-align: center; background-color:#2C00A5;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">Add Team</button>
+            <button class="btn btn-danger" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm('clear')" *ngIf="showTeamForm">Cancel</button>
+            <div *ngIf="!showTeamForm">   
+              <app-team-list [race_id]="raceID" [userStat]="userStat" (callback)="refreshAllComponents($event)" (edit)="editTeamForm($event)"></app-team-list>
+            </div>
+
+            <div *ngIf="showTeamForm">
+              <app-team-form (callback)="refreshAllComponents($event)" [teamEditForm]="teamEditForm"></app-team-form><br><br><br><br><br><br>
+            </div>
+      </mat-tab> -->
+
+
+      <mat-tab *ngIf="this._authService.isLoggedIn() && this.userRegistered">
+
+        <ng-template mat-tab-label>
+          <mat-icon>settings</mat-icon>
+          <div class="tabs1">Settings</div>
+        </ng-template>
+        <b><h3 style="text-align:center;font-family:Roboto; color:#2C007E;"><b>Race Settings</b></h3></b>
+        <app-race-settings [userSettings]="userRaceSettings"></app-race-settings>
+        
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  </mat-sidenav>
+
+   
+  <mat-sidenav-content id="testCanvas">
+    <app-map [raceIDs]="raceIDs" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
+    <div  *ngIf="changeArrow">
+    <a class="button-container" role="button" (click)="menu.toggle()" (click)="toggleNavButton()" style="left: 0px;">
+        <br>
+      <i class="material-icons md-18" style="color:#2C007E;">keyboard_arrow_right</i>
+    </a>
+    </div>
+
+
+      <div  *ngIf="!changeArrow">
+        <a class="button-container btn-left" role="button" (click)="menu.toggle()" (click)="toggleNavButton()">
+        <br>
+      <i class="material-icons md-18" style="color:#2C007E; ">keyboard_arrow_left</i>
+      </a>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+</div>
+
+<!-----STORY MODAL-->
+<app-story-modal></app-story-modal>
