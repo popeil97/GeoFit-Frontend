@@ -24,7 +24,8 @@
     .UserProfileUserInfoContainer h3,
     .UserProfileUserInfoContainer h6,
     .UserProfileUserInfoContainer p, 
-    .UserProfileUserInfoContainer span {
+    .UserProfileUserInfoContainer span,
+    .UserProfileUserInfoContainer a {
         color:white;
     }
     .UserProfileUserInfoContainer p {

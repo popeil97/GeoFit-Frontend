@@ -52,6 +52,10 @@ h6, .h6 {
   font-size:12px;
 }
 
+button:hover, .button:hover, a:hover {
+  cursor:pointer;
+}
+
 button, .button {
   display:inline-block;
   padding:4px 8px 4px 8px;

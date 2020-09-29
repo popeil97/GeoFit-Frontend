@@ -57,7 +57,8 @@
             </div>
             <div class='dropdownContents NavDropdownContents'>
               <div class="dropdownItem NavDropdownItem">
-                <a [routerLink]="['/profile', {username: this._authService.username}]">Go to Profile</a>
+                <!--<a [routerLink]="['/profile', {username: this._authService.username}]">Go to Profile</a>-->
+                <a [routerLink]="['/']">Go to Profile</a>
               </div>
               <div class="dropdownItem NavDropdownItem">
                 <a (click)="logout()">Log out {{this._authService.username}}</a>
