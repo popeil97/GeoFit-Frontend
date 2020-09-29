@@ -91,7 +91,7 @@ export class Login2Component implements OnInit {
   }
 
   public continueAsMe(username?:string){
-    this.router.navigate(['/profile', {username: username}]);
+    // this.router.navigate(['/profile', {username: username}]);
   }
 
   closeDialog() {
