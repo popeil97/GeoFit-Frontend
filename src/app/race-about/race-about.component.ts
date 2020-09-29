@@ -108,7 +108,7 @@ export class RaceAboutComponent implements OnInit {
         let raceData = data as RaceData;
         _this.followedIDs = raceData.followedIDs;
         _this.raceIDs = raceData.race_IDs;
-        //console.log("Race IDs: ", _this.raceIDs);
+        console.log("Race IDs: ", _this.raceIDs);
       });
       
       // Get information about this particular rase
