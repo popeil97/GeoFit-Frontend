@@ -251,4 +251,19 @@ background-color: #2C00A5;
     flex-direction: column;
     align-items: stretch;
   }
+
+  .TucanRaceItemDetails {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  .TucanRaceItemSpecificInfo {
+    width:100%;
+  }
+
+  .TucanRaceItemButtons {
+    
+    width:100%;
+  }
 }

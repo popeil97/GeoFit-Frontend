@@ -10,13 +10,13 @@
 <!--<div class='PageContainer' *ngIf="this.aboutData != null; else LoadingRaceBlock">-->
 <div class="PageContainer">
   <div class='PageSegment'>
-    <a class="nav-link" routerLink='/races'><- Return to Public Races</a>
+    <a class="nav-link" routerLink='/races'><span class="material-icons" inline=true>keyboard_arrow_left</span> <span class="aligned-with-icon">Return to Public Races</span></a>
     <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceHeaderBlock">
       <p>Loading race description and dates...</p>
     </ng-template>
     <ng-template #RaceHeaderBlock>
       <div class='RaceHeader'>
-        <h1>{{aboutData.name}}</h1>
+        <h1>{{aboutData.name}} </h1>
         <div class='CalendarDaysContainer'>
           <div class='CalendarDay'>
             <div class='CalendarDayM'><p class='h7'>{{aboutData.start_date.month}}</p></div>
@@ -34,8 +34,6 @@
       <p>{{aboutData.description}}</p>
       <!-- icon to indicate race type : 1-run;2-bike;3-all -->
       <!--<i *ngIf="aboutData.race_type == 3" class="material-icons">directions_run</i> <i class="material-icons" >directions_bike</i>--> 
-      <i *ngIf="aboutData.race_type == 1" class="material-icons">directions_run</i>
-      <i *ngIf="aboutData.race_type == 2" class="material-icons">directions_bike</i> 
     </ng-template>
   </div>
 
@@ -126,14 +124,16 @@
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'logistics'}">
 
           <div class='margin-bottom-16px'>
-            <h6 class='margin-bottom-4px'>Race Type:</h6>
+            <h6 class='margin-bottom-4px'>Race Type <button class="smallButton" (click)="this.openModal('custom-modal-4')">What does this mean?</button>:</h6>
             <ng-template [ngIf]="this.aboutData.is_hybrid" [ngIfElse]="VirtualText">
-              <p class='h7 margin-bottom-0px'>Hybrid</p>
+              <p  *ngIf="aboutData.race_type == 1" class='h7 margin-bottom-0px'>Hybrid Run</p>
+              <p  *ngIf="aboutData.race_type == 2" class='h7 margin-bottom-0px'>Hybrid Bike</p>
             </ng-template>
             <ng-template #VirtualText>
-              <p class='h7 margin-bottom-0px'>Virtual</p>
+              <p *ngIf="aboutData.race_type == 1" class='h7 margin-bottom-0px'>Virtual Run</p>
+              <p *ngIf="aboutData.race_type == 2" class='h7 margin-bottom-0px'>Virtual Bike</p>
             </ng-template>
-            <button (click)="this.openModal('custom-modal-4')">What does this mean?</button>
+            
           </div>
 
           <div class='margin-bottom-16px'>
@@ -168,17 +168,22 @@
         </div>
 
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'race_director'}">
-          
-          <div class='margin-bottom-16px'>
-            <h6 class='margin-bottom-4px'>Race Director:</h6>
-            <p class='h7 margin-bottom-0px'>{{this.userData.first_name}} {{this.userData.last_name}}</p>
-            <a [href]='this.userData.email_mailto' class='h7 margin-bottom-0px'>{{this.userData.email}}</a>
-          </div>
+          <div class="RaceDirectorContainer">
+              <div class='margin-bottom-16px RaceDirectorPic'>
+                <img class="UserProfileImage img-responsive" src="{{this.userData.profile_url}}" alt=""> 
+              </div>
+              <div class="RaceDirectorInfo">
+                <div class='margin-bottom-16px'>
+                  <h6 class='margin-bottom-4px'>Race Director:</h6>
+                  <p class='h7 margin-bottom-0px'>{{this.userData.first_name}} {{this.userData.last_name}}</p>
+                  <a [href]='this.userData.email_mailto' class='h7 margin-bottom-0px'>{{this.userData.email}}</a>
+                </div>
 
-          <div class='margin-bottom-16px'>
-            <h6 class='margin-bottom-4px'>About the Director:</h6>
-            <p class='h7 margin-bottom-0px'>{{this.userData.description}}</p>
-            <img class="UserProfileImage img-responsive" src="{{this.userData.profile_url}}" alt=""> 
+                <div class='margin-bottom-16px'>
+                  <h6 class='margin-bottom-4px'>About the Director:</h6>
+                  <p class='h7 margin-bottom-0px'>{{this.userData.description}}</p>
+                </div>
+              </div>
           </div>
 
         </div>

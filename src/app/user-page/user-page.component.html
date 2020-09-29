@@ -10,6 +10,13 @@
           <p class="UserProfileEmail" *ngIf="userData.email_visibility||userData.is_me">{{ userData.email }}</p>
         </div>
 
+         <div *ngIf="this._authService.isLoggedIn()" class='margin-bottom-16px'>
+          <div *ngIf="userData.is_me">
+            <button class='darkButton shadowButton' (click)="openFollowersDialog()">Followers: {{this.followersData.numFollowers}} | Following: {{this.followersData.numFollowing}}</button>
+            <!--<app-view-follow></app-view-follow>-->
+          </div>
+        </div>
+
         <div *ngIf="userData.about_visibility||userData.location_visibility||userData.is_me" class='margin-bottom-16px'>
           <div>
             <p class='h7' *ngIf="userData.about_visibility && userData.description!='N/A'; else descriptionDefault" class="UserProfileDescription">{{ userData.description }}</p> 
@@ -23,8 +30,7 @@
 
         <div *ngIf="this._authService.isLoggedIn()" class='margin-bottom-16px'>
           <div *ngIf="userData.is_me">
-            <a (click)="openFollowersDialog()">Followers: {{this.followersData.numFollowers}} | Following: {{this.followersData.numFollowing}}</a>
-            <!--<app-view-follow></app-view-follow>-->
+          
             <div>
               <h6>Strava Authentication</h6>
               <app-stravauth></app-stravauth>

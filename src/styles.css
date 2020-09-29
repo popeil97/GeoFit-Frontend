@@ -74,6 +74,11 @@ button.darkButton, .button.darkButton {
   border-color:white;
   color:white;
 }
+
+button.smallButton, .button.small {
+  font-size: 12px;
+}
+
 button.lightButton, .button.lightButton {
   background-color:white;
 }
@@ -374,7 +379,7 @@ h1.PageHeaderSegmentTitle {
   }
     .CalendarDay .CalendarDayM {
       flex-shrink: 0;
-      background-color:red;
+      background-color: var(--primary-darkgrey);
       color:white;
     }
       .CalendarDay .CalendarDayM p {
