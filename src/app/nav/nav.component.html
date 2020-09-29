@@ -24,11 +24,11 @@
           </div>
            
           <div class="NavItem active" (click)="NavItemClick()">
-            <a class="NavLink" routerLink='/about-tucan'>About Tucan<span class="sr-only">(current)</span></a>
+            <a class="NavLink" routerLink='/about-tucan'>ABOUT<span class="sr-only">(current)</span></a>
           </div>
           
           <div class="NavItem active" (click)="NavItemClick()">
-            <a class="NavLink" routerLink='/races'>Public Races <span class="sr-only">(current)</span></a>
+            <a class="NavLink" routerLink='/races'>PUBLIC RACES<span class="sr-only">(current)</span></a>
           </div>
           
           <div class="NavItem active" (click)="NavItemClick()">
@@ -36,7 +36,7 @@
           </div>
 
           <div class="NavItem active" (click)="NavItemClick()">
-            <a class="NavLink" routerLink='/contact'>Contact Us<span class="sr-only">(current)</span></a>
+            <a class="NavLink" routerLink='/contact'>CONTACT<span class="sr-only">(current)</span></a>
           </div>
         </div>
 
@@ -45,7 +45,6 @@
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="showNotifications()">
                 <mat-icon *ngIf="notifications.length>0" matBadge="{{notifications.length}}" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below">circle_notifications</mat-icon> 
                 <mat-icon *ngIf="notifications.length==0" >circle_notifications</mat-icon>
-                Notifications
               </a>
           </div>
 
@@ -53,7 +52,7 @@
           <div class='dropdown NavProfileDropdown' [ngClass]="{dropdownOpen : this.profileOpen}" (click)="this.ToggleProfileDropdown()">
             <div class='dropdownSelected'>
               <img class='NavProfileImg' src= "{{this.picURL}}" style="border-radius:50%;width:20px;" />
-              <span>My Profile</span>
+              <span>MY PROFILE</span>
             </div>
             <div class='dropdownContents NavDropdownContents'>
               <div class="dropdownItem NavDropdownItem">
