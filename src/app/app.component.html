@@ -66,5 +66,7 @@
 </custom-modal>
 
 <custom-modal class='custom-modal-container' id="profileModal">
-    <app-profile-form id="profileModal" ></app-profile-form>
+    <ng-template [ngIf]="this.modalService.checkIfOpen('profileModal')">
+        <app-profile-form id="profileModal" ></app-profile-form>
+    </ng-template>
 </custom-modal>

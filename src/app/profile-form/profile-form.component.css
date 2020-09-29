@@ -9,6 +9,19 @@
   align-items: flex-start;
   flex-wrap: nowrap;
 }
+
+.LocationExtraInfoContainer {
+  display:flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+.LocationCurrentLength {
+  flex-shrink: 0;
+  flex-basis: auto;
+}
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;

@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 export class ModalService {
     private modals: any[] = [];
     public modalsData = {};
+    public openModals = [];
 
     add(modal: any) {
         // add modal to array of active modals
@@ -20,13 +21,21 @@ export class ModalService {
         let modal: any = this.modals.filter(x => x.id === id)[0];
         if (modal == null || modal == false) return;
         this.modalsData[id] = data;
+        if (this.openModals.indexOf(id) == -1) this.openModals.push(id);
         modal.open();
     }
 
     close(id: string) {
         // close modal specified by id
         let modal: any = this.modals.filter(x => x.id === id)[0];
-        modal.close();
+        this.openModals = this.openModals.filter(x=>x!=id);
+        if (modal != null || modal != false) {
+            modal.close();
+        }
+    }
+
+    checkIfOpen = (id :string) => {
+        return this.openModals.indexOf(id) > -1;
     }
 
     getModalData = (id:string) => {

@@ -93,7 +93,9 @@ export class UserPageComponent implements OnInit {
   //   console.log('user-page - getUserData()',this.username);
     this._userProfileService.getUserProfile(this.username).then((data) => {
       this.userData = data as UserData;
-      //console.log("New user data profPage: ", this.userData);
+      
+      console.log("New user data profPage: ", this.userData);
+      
       if (this.userData.location == "") {
         this.userData.location = "N/A";
       }
@@ -151,20 +153,17 @@ export class UserPageComponent implements OnInit {
    
     var data = (id == 'profileModal') ? {userData:this.userData, callbackFunction:null} : {};
     console.log("DATA SENT TO CHILD", data);
-    data.callbackFunction = this.testee;
+    data.callbackFunction = this.updateProfile;
     this.modalService.open(id,data);
   }
 
-  testee = (incomingData = null) => {
-  //  const toAlert = (incomingData != null) ? incomingData : this.testString;
-  if(incomingData != null){
-    this.profileUpdated(null);
-    console.log("INCOMING!!!");
-  }
+  updateProfile = (incomingData = null) => {
+    if(incomingData != null){
+      this.profileUpdated(null);
+      this.closeModal('profileModal');
+    }
     
   }
-
-
 
   closeModal(id: string) {
       this.modalService.close(id);
