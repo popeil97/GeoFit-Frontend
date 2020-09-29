@@ -16,7 +16,7 @@ export class ActivitiesMenuComponent implements OnInit {
   @Output() setLoaderState: EventEmitter<boolean> = new EventEmitter();
   @Output() refreshStatComponents: EventEmitter<void> = new EventEmitter();
   
-  columns:string[] = ['Name','Distance'];
+  columns:string[] = ['Name','Distance','Date'];
   selectedRows:number[] = [];
 
 
@@ -72,12 +72,13 @@ export class ActivitiesMenuComponent implements OnInit {
       this.selectedRows.push(row.id);
     }
 
-    console.log(this.selectedRows);
+//    console.log(this.selectedRows);
   }
 
   getActivities() {
     this._activitiesService.getActivities(this.race_id).then((resp) => {
       this.activities = resp['activities'];
+      console.log("ACTIVITIES", this.activities);
     });
   }
 

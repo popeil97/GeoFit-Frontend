@@ -1,0 +1,60 @@
+.SignUpForm {
+  margin-top:32px;
+}
+.LoginSignupHeader {
+  width:100%;
+  
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+
+.page-section {
+    padding: 1rem 0;
+    border-radius: 25px;
+  }
+  
+  .column-login{
+      width: 46%;
+      margin: 8px;
+    }
+  
+  .form-pretty{
+      background: rgba(0, 0, 0, 0.2);
+      border-style: hidden;
+      color:white;
+        }
+  
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(217, 212, 212);
+    opacity: 1; /* Firefox */
+  }
+  
+  .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-flex;
+    vertical-align: top;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+  }

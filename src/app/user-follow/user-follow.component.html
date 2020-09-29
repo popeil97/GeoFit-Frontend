@@ -1,3 +1,7 @@
-<button type="button" class="btn btn-primary btn-sm" style="width:70px;max-width: 70px;display: inline-block; background-color:#2C00A5;border-color:#2C00A5" (click)="changeLikeStatus()">
+<button (click)="changeLikeStatus()" class="darkButton" *ngIf="!this.light">
+  <span class="ui-button-text">{{follows ? 'Unfollow' : 'Follow'}}</span>
+</button>
+
+<button (click)="changeLikeStatus()" *ngIf="this.tempLight">
   <span class="ui-button-text">{{follows ? 'Unfollow' : 'Follow'}}</span>
 </button>

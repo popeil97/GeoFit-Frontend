@@ -1,8 +1,72 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<div class='TucanBody'>
+	<app-nav></app-nav>
+	<div class="MainContainer">
+		<router-outlet></router-outlet>
+	</div>
+	<!--
+	<footer>
+	    <div class="TucanContainer">
+	        <div class="position_absolute_middle">
+	            <p>Copyright © 2020 Tucan Fitness</p>
+	        </div>
+	    </div>
+	</footer>
+	-->
+</div>
 
-  <app-nav></app-nav>
 
-<!-- <div class="container" style="top:50%"> -->
-  <router-outlet></router-outlet>
-<!-- </div> -->
+<custom-modal class='custom-modal-container' id="custom-modal-1">
+    <!--
+    <h1>A Custom Modal!</h1>
+    <p>Home page text: <input type="text" [(ngModel)]="bodyText" /></p>
+    <button (click)="closeModal('custom-modal-1');">Close</button>
+    -->
+    <app-login2 id="custom-modal-1"></app-login2>
+</custom-modal>
 
+<custom-modal class='custom-modal-container' id="custom-modal-2">
+    <!--
+    <h1>A Custom Modal!</h1>
+    <p>Home page text: <input type="text" [(ngModel)]="bodyText" /></p>
+    <button (click)="closeModal('custom-modal-1');">Close</button>
+    -->
+    <app-register2 id="custom-modal-2"></app-register2>
+</custom-modal>
+
+<custom-modal class='custom-modal-container' id="custom-modal-3">
+    <app-signup2 id="custom-modal-3"></app-signup2>
+</custom-modal>
+
+<custom-modal class='custom-modal-container' id="custom-modal-4">
+    <!--
+    <h1>A Custom Modal!</h1>
+    <p>Home page text: <input type="text" [(ngModel)]="bodyText" /></p>
+    <button (click)="closeModal('custom-modal-1');">Close</button>
+    -->
+    <app-race-type id="custom-modal-4"></app-race-type>
+</custom-modal>
+
+
+<custom-modal class='custom-modal-container' id="custom-modal-5">
+    <!--
+    <h1>A Custom Modal!</h1>
+    <p>Home page text: <input type="text" [(ngModel)]="bodyText" /></p>
+    <button (click)="closeModal('custom-modal-1');">Close</button>
+    -->
+    <app-log-activity id="custom-modal-5" ></app-log-activity>
+</custom-modal>
+
+<custom-modal class='custom-modal-container' id="custom-modal-6">
+    <app-story-form-standalone id="custom-modal-6" ></app-story-form-standalone>
+</custom-modal>
+
+<custom-modal class="custom-modal-container" id="followersModal">
+    <app-view-follow id='followersModal'></app-view-follow>
+</custom-modal>
+
+<custom-modal class='custom-modal-container' id="profileModal">
+    <ng-template [ngIf]="this.modalService.checkIfOpen('profileModal')">
+        <app-profile-form id="profileModal" ></app-profile-form>
+    </ng-template>
+</custom-modal>

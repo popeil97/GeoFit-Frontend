@@ -1,124 +1,141 @@
-<!--<div class="container" *ngIf="!this._authService.token">
-  <div class="row">
-    <div class="column-43">
-    </div>
+<div class='UserProfileContainer'>
+  
+  <!-- user profile info -->
+  <div class="UserProfileUserInfoContainer">
+    <div class="TucanContainer UserProfileUserInfoInnerContainer">
+      <div *ngIf="userData != null; else profileLoadingMessage">
+        <div class="UserProfileIdentityContainer">
+          <img class="UserProfileImage img-responsive" src="{{userData.profile_url}}" alt=""> 
+          <h3 class="UserProfileName">{{userData.first_name}} {{userData.last_name}}</h3>
+          <ng-template [ngIf]="userData.email_visibility || userData.is_me">
+            <p class="h7 UserProfileEmail"><span *ngIf="!userData.email_visibility">(hidden) </span>{{ userData.email }}</p>
+          </ng-template>
+        </div>
 
-    <div class="column-44">
-      <div class="centered">
-      <mat-card class="example-card roboto-purple rounded-card">
-                <mat-card-header> 
-                    
-                  <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-         <!--       </mat-card-header>
-                <mat-card-content>
-                    <h3 class="text-uppercase roboto-purple"><b>Log in to view profiles</b></h3>
-                        <hr class="divider my-4" />
-                    
-                  <app-login></app-login>
-                </mat-card-content>
-              </mat-card>
-            </div>
-    </div>
-
-    <div class="column-43">
-    </div>
-
-  </div>
-</div> -->
-
-<div class="container">
-  <div class="row">
-    <div class="column-31" *ngIf="!showEdit">
-        <mat-card class="example-card" >
-            <mat-card-header>
-            <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}});
-  background-size: cover;"></div> -->
-        
-              <mat-card-title >{{userData.first_name}} {{userData.last_name}}</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-             <img style="width:150px;height:150px;" src="{{userData.profile_url}}" class="img-responsive" alt="">
-             
-          <p> <span class="material-icons" style="color:#BC164D;">location_on </span> {{ userData.location }}</p>
-
-          <p><span class="material-icons" style="color:#BC164D;">textsms</span> {{ userData.description }}</p>
-
-          <div  *ngIf="this._authService.isLoggedIn()">
+         <div *ngIf="this._authService.isLoggedIn()" class='margin-bottom-16px'>
           <div *ngIf="userData.is_me">
-               <b>Trophies</b>
-              <b>Strava Authentication</b>
-              <p>
+            <button class='darkButton shadowButton' (click)="openFollowersDialog()">Followers: {{this.followersData.numFollowers}} | Following: {{this.followersData.numFollowing}}</button>
+            <!--<app-view-follow></app-view-follow>-->
+          </div>
+        </div>
+
+        <div *ngIf="userData.about_visibility||userData.location_visibility||userData.is_me" class='margin-bottom-16px'>
+          <div *ngIf="this.userData.about_visibility || userData.is_me ">
+            <ng-template [ngIf]="this.userData.description!='N/A'" [ngIfElse]="descriptionDefault">
+              <p class="h7 UserProfileDescription"><span *ngIf="!this.userData.about_visibility">(hidden) </span>{{this.userData.description}}</p> 
+            </ng-template>
+            <ng-template #descriptionDefault><p class='italics h7'>No description available</p></ng-template>
+          </div>
+          <div *ngIf="userData.location_visibility || userData.is_me ">
+            <ng-template [ngIf]="userData.location != 'N/A'" [ngIfElse]="locationDefault">
+              <p class='h7'><span *ngIf="!this.userData.location_visibility">(hidden) </span>{{ userData.location }}</p>  
+            </ng-template>
+            <ng-template #locationDefault>
+              <span class='italics h7'>No location info available</span>
+            </ng-template>
+          </div>
+        </div>
+
+        <div *ngIf="this._authService.isLoggedIn()" class='margin-bottom-16px'>
+          <div *ngIf="userData.is_me">
+            <div>
+              <h6>Strava Authentication</h6>
               <app-stravauth></app-stravauth>
-            </p>
-          </div>
-          </div>
-            </mat-card-content>
-             <div  *ngIf="this._authService.isLoggedIn()">
-            <mat-card-actions>
-              <button mat-button *ngIf="userData.is_me" (click)="toggleEditView()">EDIT</button>
-              <app-user-follow *ngIf="!userData.is_me" [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
-            </mat-card-actions>
-          </div>
-            
-          </mat-card>
-
-  </div>
-
-  <div class="column-32" id="feedContent" *ngIf="!showEdit">
-        <!---<app-user-stats [userID]="userData.user_id"></app-user-stats>-->
-        
-         <mat-card class="example-card">
-            <mat-card-header>
-            <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}});
-  background-size: cover;"></div> -->
-            <div *ngIf="this._authService.isLoggedIn()">
-              <mat-card-title *ngIf="userData.is_me">My Stats</mat-card-title>
-              <mat-card-title *ngIf="!userData.is_me">{{userData.first_name}}'s Stats</mat-card-title>
             </div>
-            <mat-card-title *ngIf="!this._authService.isLoggedIn()">{{userData.first_name}}'s Stats</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
+          </div>
+        </div>
+        <div *ngIf="!userData.is_me" >
+          <app-user-follow [tempLight]="false" [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
+        </div>
 
-             <app-user-stats [userID]="userData.user_id"></app-user-stats>
+        <!--
+        <div *ngIf="userData.location_visibility||userData.is_me">
+          <h6>Location:</h6>
+          <p *ngIf="userData.location != 'N/A'; else locationDefault">{{ userData.location }}</p>  
+          <ng-template #locationDefault>No location info available</ng-template>
+        </div>
+      -->
+      </div>
+      <ng-template #profileLoadingMessage><p>Loading...</p></ng-template>
 
-            </mat-card-content>
-          </mat-card>
-
-           <br>
-        
-        <mat-card class="example-card">
-          <mat-card-header>
-            <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}});
-  background-size: cover;"></div> -->
-              <div *ngIf="this._authService.isLoggedIn()">
-              <mat-card-title *ngIf="userData.is_me">My Feed</mat-card-title>
-              <mat-card-title *ngIf="!userData.is_me">{{userData.first_name}}'s Feed</mat-card-title>
-            </div>
-              <mat-card-title *ngIf="!this._authService.isLoggedIn()">{{userData.first_name}}'s Feed</mat-card-title>
-            </mat-card-header>
-            
-          <div style="max-height:60vh;overflow: auto;">
-            
-            <mat-card-content>
-
-             <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
-
-            </mat-card-content>
-            </div>
-          </mat-card>
-        
-
-     
-
-
-  </div>
-
-  </div>
-
- <div>
-        <!----<app-user-stats *ngIf="!showEdit" [userID]="userData.user_id"></app-user-stats>---->
-        <app-profile-form *ngIf="showEdit" [userData]="userData" (formUpdated)="profileUpdated($event)"></app-profile-form>
-        
+      <div class='UserProfileActions' *ngIf="userData != null && this._authService.isLoggedIn() && userData.is_me">
+        <button class="darkButton" (click)="openModal('profileModal')" >Edit</button>
+        <a class="button darkButton" (click)="logout()">Log out</a>
       </div>
 
+    </div>
+  </div>
+  <div class="UserProfileMainContentContainer">
+
+    <div class="Slideshow">
+      <div class="SlideshowHeader">
+        <button class="SlideshowButton" (click)="SwitchSlideshow('home')" id="home-btn">Home</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('stats')" id="stats-btn">Stats</button>
+        <button *ngIf="!showEdit" class="SlideshowButton" (click)="SwitchSlideshow('feed')" id="feed-btn">Feed</button>
+    <!--    <button class="SlideshowButton" (click)="SwitchSlideshow('races')" id="races-btn">Races</button> -->
+      </div>
+      <div class="SlideshowContents">
+
+        <div id='statsContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'home'}">
+          <div *ngIf="userData != null; else HomeLoadingMessage">
+            <h2 *ngIf="userData.is_me; else otherHome">Home</h2>
+
+            <ng-template #otherHome><h2>{{userData.first_name}}'s Profile</h2></ng-template>
+            <div class="RaceContainer PageSegment">
+                <div *ngIf="userData != null; else RaceLoadingMessage">
+                  <div *ngIf="userRaces==null"></div>
+                  <div *ngIf="userRaces!=null&&userRaces.length>0; else noRacesDisplay">
+                    <app-user-race></app-user-race>
+                  </div>
+                  <ng-template #noRacesDisplay><p>You currently do not have any races under your belt. To find races you may be interested in, head over to <a routerLink='/races'>Public Races</a>.</p></ng-template>
+            </div>
+            <ng-template #RaceLoadingMessage><p>Loading user data...</p></ng-template>
+            </div>
+
+            <!--
+            <div class="RaceContainer PageSegment">
+              <div class="FeedContainer">
+                <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
+              </div>
+              <div class="StatsContainer">
+                <app-user-stats [userID]="userData.user_id"></app-user-stats>
+              </div>
+            </div>
+          </div> -->
+          <ng-template #HomeLoadingMessage><p>Retrieving user data...</p></ng-template>
+        </div>
+      </div>
+
+        <div id='statsContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'stats'}">
+          <div *ngIf="userData != null; else StatsLoadingMessage">
+            <h2 *ngIf="userData.is_me; else otherUserStats">Your Stats</h2>
+
+            <ng-template #otherUserStats><h2>{{userData.first_name}}'s Stats</h2></ng-template>
+            <app-user-stats [userID]="userData.user_id"></app-user-stats>
+          </div>
+          <ng-template #StatsLoadingMessage><p>Retrieving user data...</p></ng-template>
+        </div>
+        <div *ngIf="!showEdit" id='feedContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'feed'}">
+          <div *ngIf="userData != null; else FeedLoadingMessage">
+            <h2 *ngIf="userData.is_me; else otherUserFeed">Your Feed</h2>
+            <ng-template #otherUserFeed><h2>{{userData.first_name}}'s Feed</h2></ng-template>
+            <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
+          </div>
+          <ng-template #FeedLoadingMessage><p>Retrieving user data...</p></ng-template>
+        </div>
+        <div id='raceContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'races'}">
+          <div *ngIf="userData != null; else RaceLoadingMessage">
+            <h2 *ngIf="userData.is_me; else otherUserRaces">Your Races</h2>
+            <ng-template #otherUserRaces><h2>{{userData.first_name}}'s Races</h2></ng-template>
+            <div *ngIf="userRaces==null"></div>
+            <div *ngIf="userRaces!=null&&userRaces.length>0; else noRacesDisplay">
+              <app-user-race></app-user-race>
+            </div>
+            <ng-template #noRacesDisplay><p>You currently do not have any races under your belt. To find races you may be interested in, head over to <a routerLink='/races'>Public Races</a>.</p></ng-template>
+          </div>
+          <ng-template #RaceLoadingMessage><p>Loading user data...</p></ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

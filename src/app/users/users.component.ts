@@ -3,6 +3,8 @@ import {AuthService} from '../auth.service';
 import {throwError} from 'rxjs';
 import $ from "jquery";
 
+import { ModalService } from '../modalServices';
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -15,7 +17,10 @@ export class UsersComponent implements OnInit {
    */
   public user: any;
   public coords:any;
-  constructor(private _authService: AuthService) { }
+
+  private testString = "From Parent";
+
+  constructor(private _authService: AuthService, private modalService: ModalService) { }
 
   ngOnInit() {
     this.user = {
@@ -88,7 +93,7 @@ export class UsersComponent implements OnInit {
         -101.1181641,
         40.9505991
       ]], "distance": 2602029.176518327}};
-    console.log('LANDING COORDS:',this.coords);
+ //    console.log('LANDING COORDS:',this.coords);
     //If we already store a JWT locally, set it in memory
     if (localStorage.getItem('access_token')){
       this._authService.token = localStorage.getItem('access_token');
@@ -100,6 +105,20 @@ export class UsersComponent implements OnInit {
     this._authService.logout();
   }
 
+  openModal(id: string) {
+    var data = (id == 'custom-modal-3') ? {race_id:'HELLO',callbackFunction:null} : {};
+    data.callbackFunction = this.testFunction;
+    this.modalService.open(id,data);
+  }
+
+  testFunction = (incomingData = null) => {
+    const toAlert = (incomingData != null) ? incomingData : this.testString;
+    console.log(toAlert);
+  }
+
+  closeModal(id: string) {
+      this.modalService.close(id);
+  }
 
 /**
 * Template Name: Mamba - v2.3.0

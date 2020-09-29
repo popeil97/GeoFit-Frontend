@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, Output, EventEmitter, Input } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -13,35 +14,57 @@ import { UserProfileService } from '../userprofile.service';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
-    registerForm: FormGroup;
-    loading = false;
-    submitted = false;
-    errors: any = [];
+export class RegisterComponent {
+    constructor(public dialog: MatDialog,) {
 
-    redirectParams: any = null;
-    redirectUrl:string;
-    genderOptions:any[];
+    }
 
-    acceptedTerms:Boolean = true;
+    openDialog() {
+      const dialogRef = this.dialog.open(RegisterDialogContent,{disableClose: false, data:{} as MatDialogConfig});
+    }
 
-    constructor(
+
+}
+
+@Component({
+  selector: 'app-register-dialog-content',
+  templateUrl: './register-dialog-content.html',
+})
+
+export class RegisterDialogContent {
+
+  public type: any
+  registerForm: FormGroup;
+  formSegmentIndex = 0;
+  loading = false;
+  submitted = false;
+  errors: any = [];
+
+  redirectParams: any = null;
+  redirectUrl:string;
+  genderOptions:any[];
+
+  acceptedTerms:Boolean = true;
+
+   constructor(
         private formBuilder: FormBuilder,
         private router: Router,
         private route:ActivatedRoute,
         private _authService: AuthService,
         private _userProfileService:UserProfileService,
-    ) {
+        public dialogRef: MatDialogRef<RegisterDialogContent>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {
       this.genderOptions = ['Male', 'Female', 'Non-binary'];
     }
 
-    ngOnInit() {
+
+      ngOnInit() {
 
       this.route.paramMap.subscribe(params => {
         console.log('PARAMS:',params);
         if(params['params']) {
           let inputs = JSON.parse(params['params']['params']);
-          console.log('INPUTS:',inputs);
+        //   console.log('INPUTS:',inputs);
           this.redirectParams = inputs['redirectParams'];
           this.redirectUrl = inputs['redirectUrl']
           
@@ -52,10 +75,11 @@ export class RegisterComponent implements OnInit {
       this.registerForm = this.formBuilder.group({
           first_name: ['', Validators.required],
           last_name: ['', Validators.required],
-          date_of_birth: ['', Validators.required],
+          month_of_birth: ['', Validators.required],
+          day_of_birth: ['', Validators.required],
+          year_of_birth: ['', Validators.required],
           gender: ['', Validators.required],
           email: ['', [Validators.required, Validators.email]], //Validators.pattern("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$")
-          terms_of_service: [false, [Validators.requiredTrue]],
           password: ['', [Validators.required, Validators.minLength(6)]],
           confirmPassword: ['', Validators.required]
         }, {
@@ -65,22 +89,27 @@ export class RegisterComponent implements OnInit {
         );
     }
 
+    ChangeFormSegment(n:number) {
+      if (n == null) return;
+      this.formSegmentIndex = n;
+    }
+
     // convenience getter for easy access to form fields
     get f() { return this.registerForm.controls; }
 
     onSubmit() {
         this.submitted = true;
-        this.acceptedTerms = this.registerForm.value.terms_of_service;
-        console.log('REEE',this.acceptedTerms);
+        this.acceptedTerms = true;
+     //    console.log('REEE',this.acceptedTerms);
         // stop here if form is invalid
         if (this.registerForm.invalid) {
             return;
         }
 
         this.loading = true;
-
+   //      console.log("BIRTH. " ,this.registerForm.value.month_of_birth, this.registerForm.value.day_of_birth,this.registerForm.value.year_of_birth);
         //Convert date field to Django-compatible format (YYYY-MM-DD)
-        const momentDate = new Date(this.registerForm.value.date_of_birth);
+        const momentDate = new Date(this.registerForm.value.year_of_birth,this.registerForm.value.month_of_birth-1,this.registerForm.value.day_of_birth);
         const formattedDate = moment(momentDate).format("YYYY-MM-DD");
         this.registerForm.value.date_of_birth = formattedDate;
 
@@ -103,13 +132,14 @@ export class RegisterComponent implements OnInit {
                   this.router.navigate([this.redirectUrl,this.redirectParams]);
                 }
                 else {
-                  this._userProfileService.goToUserProfile(data['username']);
+                  this.router.navigate(['/welcome']);
                 }
+                this.closeDialog();
               },
             err => {
               this.loading = false;
               this.errors = err['error'];
-              console.log(this.errors);
+      //         console.log(this.errors);
             });
             
           },
@@ -117,8 +147,12 @@ export class RegisterComponent implements OnInit {
             console.log(err);
             this.loading = false;
             this.errors = err['error'];
-            console.log(this.errors);
+      //       console.log(this.errors);
           });
 
     }
+    closeDialog() {
+    this.dialogRef.close(RegisterDialogContent);
+  }
+
 }

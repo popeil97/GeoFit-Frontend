@@ -23,9 +23,9 @@ export class PaypalComponent implements AfterViewChecked {
     this.paypalConfig = {
       env:'production',
       createOrder: (data,actions) => {
-        console.log('WAS PAYMENT');
+       //  console.log('WAS PAYMENT');
         return this.getOrderID().then((resp) => {
-          console.log('PAYMENT ID IS:',resp['id']);
+       //    console.log('PAYMENT ID IS:',resp['id']);
           return resp['id'];
         })
       },

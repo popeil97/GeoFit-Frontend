@@ -1,11 +1,424 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,700;1,400&display=swap');
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+  --partial_mobile_width: 992px;
+  --mobile_width: 600px;
+
+  --main-background-color: #36343C;
+  --primary-darkgrey: #36343C;
+
+  --tucan-orange:#ed6a11;
+  --tucan-green:#7FCC92;
+  --slate-tint:#36343c;
+}
+* {
+  -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+}
+
+html, body { 
+  height: 100%;
+  color: var(--primary-darkgrey);
+}
+body { 
+  margin: 0; 
+  font-family: 'Mulish', Roboto, "Helvetica Neue", sans-serif !important; 
+  font-size: 16px;
+}
+
+
+h1, .h1 {  
+  font-size: 64px !important;
+}
+h2, .h2 {
+  font-size: 33.75px !important;
+  color: var(--tucan-orange);
+}
+h3, .h3 {
+  font-size: 26px !important;
+  color: var(--tucan-orange);
+}
+h4, .h4 {
+  font-size: 24px !important;
+}
+h5, .h5 {
+  font-size: 22px !important;
+}
+h6, .h6 {
+  font-size: 20px !important;
+}
+.h7 {
+  font-size:12px;
+}
+
+button:hover, .button:hover, a:hover {
+  cursor:pointer;
+}
+
+button, .button {
+  display:inline-block;
+  padding:4px 8px 4px 8px;
+  box-sizing: border-box;
+
+  border-radius: 8px !important;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(200,200,200);
+
+  background-color:inherit;
+  color: var(--primary-darkgrey);
+}
+button.darkButton, .button.darkButton {
+  background-color: var(--primary-darkgrey);
+  border-color:white;
+  color:white;
+}
+
+button.smallButton, .button.small {
+  font-size: 12px;
+}
+
+button.lightButton, .button.lightButton {
+  background-color:white;
+}
+button.fatButton, .button.fatButton {
+  padding: 8px 16px 8px 16px;
+}
+button.shadowButton, .button.shadowButton {
+  box-shadow: 0px 0px 1px 1px rgba(100,100,100,0.5);
+}
+button:hover, .button:hover {
+  cursor:pointer;
+}
+button.shadowButton:hover, .button.shadowButton:hover {
+  box-shadow: 0px 0px 5px 1px rgba(100,100,100,0.5);
+}
+button.buttonWithIcon, .button.buttonWithIcon {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.margin-bottom-0px {
+  margin-bottom:0px !important;
+}
+.margin-bottom-4px {
+  margin-bottom:4px !important;
+}
+.margin-bottom-8px {
+  margin-bottom:8px !important;
+}
+.margin-bottom-16px {
+  margin-bottom: 16px !important;
+}
+
+/* ---- General Use ---- */
+.TucanContainer {
+  position:relative;
+  width:100%;
+  height:100%;
+}
+.position_absolute_middle {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+.TucanFormSegmentContainer, .TucanFormSegment {
+  margin-bottom:24px;
+}
+.TucanFormSegment {
+  width:100%;
+}
+.TucanFormLabelSegment {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+.TucanFormSegmentContainer {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+  .TucanFormSegmentContainer .TucanFormSegment {
+    flex-shrink:1;
+    margin-left:16px;
+    margin-right:16px;
+    margin-bottom:0;
+  }
+  .TucanFormSegmentContainer .TucanFormSegment:first-child {
+    margin-left:0;
+  }
+  .TucanFormSegmentContainer .TucanFormSegment:last-child {
+    margin-right:0;
+  }
+.InputLabel {
+  margin-top:0px;
+  margin-bottom:8px;
+}
+
+.custom-modal-container {
+  /* modals are hidden by default */
+  display: none;
+}
+body.custom-modal-open {
+  /* body overflow is hidden to hide main scrollbar when modal window is open */
+  overflow: hidden;
+}
+
+.redText {
+  color:red !important;
+}
+.italics {
+  font-style: italic;
+}
+
+.dropdown {
+  position:relative;
+  overflow:hidden;
+}
+  .dropdown:hover {
+    cursor:pointer;
+  }
+  .dropdown.dropdownVisible {
+    overflow:initial;
+  }
+.dropdown .dropdownContents {
+  position:absolute;
+  top:100%;
+  left:0;
+  height:0;
+  overflow:hidden;
+  width:max-content;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items:stretch;
+  flex-wrap: nowrap;
+}
+.dropdown.dropdownOpen, .dropdown:hover {
+  overflow:visible;
+}
+.dropdown.dropdownVisible .dropdownContents, .dropdown:hover .dropdownContents, .dropdown.dropdownOpen .dropdownContents {
+  height:auto;
+}
+.dropdownItem {
+  display:block;
+  padding:8px 16px 8px 16px;
+  box-sizing: border-box;
+  border-bottom:1px solid rgb(200,200,200);
+}
+.dropdownItem:last-child {
+  border-bottom:none;
+}
+
+/* ---- Global Elements ---- */
+.TucanLogo {
+  width:280px;
+}
+.PageContainer {
+  position:relative;
+
+  height:auto;
+  width:100%;
+  margin-bottom:64px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+.PageSegment {
+  position:relative;
+  padding:16px;
+  box-sizing: border-box;
+
+  width:100%;
+  min-width: 360px;
+  max-width: 800px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.PageHeaderSegment {
+  height:auto;
+  min-height: 154px;
+  max-width: 100%;
+  margin-left:0;
+  margin-right:0;
+  margin-bottom:32px;
+
+  display:flex;
+  flex-direction:column;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+
+  background-color: var(--main-background-color);
+  color:white;
+}
+h1.PageHeaderSegmentTitle {
+  margin-top:16px;
+  margin-bottom:0;
+  font-weight: bold;
+}
+
+.Slideshow {
+  position: relative;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+.SlideshowHeader {
+  flex-shrink:0;
+  flex-grow:1;
+  flex-basis: 32px;
+
+  margin-bottom:16px;
+
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+.SlideshowButton {
+  margin-right:8px;
+  
+}
+
+.SlideshowSlide {
+  height:0;
+  visibility: hidden;
+  opacity:0;
+
+  overflow:hidden;
+}
+.SlideshowSlide.Slideshow-CurrentSlide {
+  height:auto;
+  visibility: visible;
+  opacity:1;
+}
+
+.RaceLocationsContainer {
+  position:relative;
+  padding-top:16px;
+  padding-bottom:16px;
+
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+  .RaceLocationsContainer .RaceLocation {
+    position: relative;
+    z-index: 2;
+    flex-grow:0;
+    flex-shrink: 1;
+    flex-basis:30%;
+
+    margin-bottom:0;
+  }
+  .RaceLocationsContainer .RaceDistanceLine {
+    flex-grow: 1;
+    width:100%;
+    border-bottom:1px solid rgb(200,200,200);
+    margin-left:32px;
+    margin-right:32px;
+  }
+    .RaceLocationsContainer .RaceDistanceLine p {
+      text-align:center;
+      margin:0 !important;
+      opacity:0.5;
+    }
+
+.CalendarDaysContainer {
+  position:relative;
+
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+  .CalendarDaysLine {
+    flex-grow: 1;
+    width:100%;
+    border-bottom:1px solid rgb(200,200,200);
+    margin-left:32px;
+    margin-right:32px;
+  }
+    .CalendarDaysLine p {
+      text-align:center;
+      margin:0 !important;
+      opacity:0.5;
+    }
+  .CalendarDay {
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis:48px;
+    
+    position: relative;
+    background-color: white;
+    border: 1px solid rgb(200,200,200);
+    border-radius: 8px;
+
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: nowrap;
+
+    overflow:hidden;
+
+    width:48px;
+    height:48px;
+  }
+    .CalendarDay .CalendarDayM {
+      flex-shrink: 0;
+      background-color: var(--primary-darkgrey);
+      color:white;
+    }
+      .CalendarDay .CalendarDayM p {
+        text-align: center;
+        margin:0;
+      }
+    .CalendarDay .CalendarDayD {
+      position: relative;
+      flex-grow: 1;
+    }
+      .CalendarDay .CalendarDayD p {
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        margin:0;
+      }
+
+
 /* .mat-drawer-backdrop.mat-drawer-shown {
     background: none;
 } */
-
+.btn-outline{
+ border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 10px 22px;
+  font-size: 16px;
+  cursor: pointer;
+}
 /****** Leaflet Icons *****/
 .location-pin img {
     width: 46px;

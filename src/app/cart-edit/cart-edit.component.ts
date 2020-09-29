@@ -18,7 +18,7 @@ export class CartEditComponent implements OnInit {
   }
 
   refreshCart() {
-    console.log('GONNA CALL INIT ON CART');
+  //  console.log('GONNA CALL INIT ON CART');
     this.cartList.init();
   }
 

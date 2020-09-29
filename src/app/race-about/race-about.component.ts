@@ -3,11 +3,13 @@ import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { RaceService } from '../race.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { UserProfileService } from '../userprofile.service';
 declare var $: any
 import { MapComponent } from '../map/map.component';
 import { SignupComponent } from '../signup/signup.component';
 import { SwagComponent } from '../swag/swag.component';
 import { TagType } from '../tags.service';
+import { ModalService } from '../modalServices';
 
 @Component({
   selector: 'app-race-about',
@@ -19,9 +21,11 @@ export class RaceAboutComponent implements OnInit {
   @ViewChild(SignupComponent) signupChild: SignupComponent;
   @ViewChild(SwagComponent) swagChild: SwagComponent;
   public AboutForm: FormGroup;
-  aboutData:AboutData;
-  raceSettings:RaceSettings = {} as RaceSettings;
+  aboutData:AboutData = null;
+  raceSettings:RaceSettings = null as RaceSettings;
   showForm: Boolean;
+  
+  count:number=1;
 
   //Race info
   raceName:string;
@@ -44,61 +48,152 @@ export class RaceAboutComponent implements OnInit {
   tagType = TagType.ENTRY;
 
   public num_users:any;
+  userData: UserData;
 
-  constructor(private raceService:RaceService, 
-              private route:ActivatedRoute, 
-              private router:Router, 
-              public _authService: AuthService,) { }
+  private currentScreen = 'map';
+  private acceptedScreens = ['map','logistics','race_director'];
+
+  private monthKey = {
+    '1':'Jan.',
+    '2':'Feb.',
+    '3':'Mar.',
+    '4':'Apr.',
+    '5':'May',
+    '6':'June',
+    '7':'July',
+    '8':'Aug.',
+    '9':'Sep.',
+    '10':'Oct.',
+    '11':'Nov.',
+    '12':'Dec.',
+  }
+
+
+  constructor(
+    private raceService:RaceService, 
+    private route:ActivatedRoute, 
+    private router:Router, 
+    public _authService: AuthService,
+    private modalService: ModalService,
+    private _userProfileService:UserProfileService,
+  ) {}
 
   ngAfterViewInit(): void {
     while(!this.aboutData);
     if(this.popup && this._authService.isLoggedIn()) {
-      console.log('in here');
+      //console.log('in here');
       this.signupChild.openDialog();
     }
   }
 
   ngOnInit() {
-
+    // Debugging
+    var _this = this;
+    // Hides some kind of form. Dunno what it is yet, but we'll figure it out
     this.showForm = false;
-
+    // I still don't know what this does, but I suspect it's to parse the parameters of the current URL
     this.route.paramMap.subscribe(params => {
-      this.raceName = params['params']['name'];
-      this.raceID = params['params']['id'];
-      this.popup = params['params']['popup'];
+      _this.raceName = params['params']['name'];
+      _this.raceID = params['params']['id'];
+      _this.popup = params['params']['popup'];
 
-      console.log('POPUP:',this.popup);
+      // Console.log debug
+      //console.log('Race ID', _this.raceID);
+      //console.log('POPUP:', _this.popup);
 
+      // I HOPE YOU REALIZE THAT this.raceID IS SET ONLY INSIDE OF THE PROMISE RESULT OF paramMap.subscribe AND THUS HAS TO BE PUT INSIDE THE PROMISE OUTPUT FUNCTION...
+      // Get information about this race
+      //... I'm confused about the difference between getRace and getRaceAbout. Shouldn't they be within the same API call?
+      _this.raceService.getRace(_this.raceID).subscribe(data => {
+        let raceData = data as RaceData;
+        _this.followedIDs = raceData.followedIDs;
+        _this.raceIDs = raceData.race_IDs;
+        //console.log("Race IDs: ", _this.raceIDs);
+      });
       
+      // Get information about this particular rase
+      _this.raceService.getRaceAbout(_this.raceID).then((resp) => {
+        resp = resp as any;
+        //console.log('RESP FROM ABOUT SERVER:',resp);
+  
+        _this.aboutData = resp['about_info'] as AboutData;
+        _this.aboutData.start_date = _this.ProcessDate(_this.aboutData.start_date);
+        _this.aboutData.end_date = _this.ProcessDate(_this.aboutData.end_date);
+  
+        _this.raceSettings = resp['race_settings'];
+        _this.isOwner = resp['isOwner'];
+        _this.isModerator = resp['isModerator'];
+        _this.hasJoined = resp['hasJoined'];
+        // _this.hasPaid = resp['hasPaid'];
+        _this.hasStarted = resp['hasStarted'];
+        _this.hasMerch = _this.raceSettings.has_swag;
+  
+        _this.initializeForm();
+        _this.getOwnerData();
+      });
     });
 
-    this.raceService.getRace(this.raceID).subscribe(data => {
+    document.getElementById('map-btn').style.backgroundColor = "#36343c";
+    document.getElementById('map-btn').style.color = "#FFFFFF";
+  }
 
-      let raceData = data as RaceData;
-      this.followedIDs = raceData.followedIDs;
-      this.raceIDs = raceData.race_IDs;
-      console.log("Race IDs: ", this.raceIDs);
-    });
+  ProcessDate = (date = null) => {
+    if (date == null) return {month:null,day:date}
+    var d = new Date(date);
+    var month = '' + (d.getMonth() + 1),
+        day = '' + d.getDate(),
+        year = d.getFullYear();
+    return {month:this.monthKey[month],day:day}
+  }
 
 
-    this.raceService.getRaceAbout(this.raceID).then((resp) => {
-      resp = resp as any;
-      console.log('RESP FROM SERVER:',resp);
-      this.aboutData = resp['about_info'] as AboutData;
-      this.raceSettings = resp['race_settings'];
-      this.isOwner = resp['isOwner'];
-      this.isModerator = resp['isModerator'];
-      this.hasJoined = resp['hasJoined'];
-      // this.hasPaid = resp['hasPaid'];
-      this.hasStarted = resp['hasStarted'];
-      this.hasMerch = this.raceSettings.has_swag;
+  openModal(id: string) {
+    const data = (id == 'custom-modal-2') ? {register:true, price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} :(id == 'custom-modal-3') ? {price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} : null;
+    //console.log("MODAL DATA", data);
+    this.modalService.open(id,data);
+  }
 
-      this.initializeForm();
-    });
+  closeModal(id: string) {
+      this.modalService.close(id);
+  }
 
-    
+  
+  SwitchSlideshow = (to:string = null) => {
+    //console.log("to", to, this.acceptedScreens.indexOf(to));
+    if (to == null || this.acceptedScreens.indexOf(to) == -1) return;
+    this.currentScreen = to;
 
-    
+     document.getElementById(to+'-btn').style.backgroundColor = "#36343c";
+     document.getElementById(to+'-btn').style.color = "#FFFFFF";
+
+    switch(to) { 
+     case 'map': { 
+       document.getElementById('logistics-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('logistics-btn').style.color = "#000000";
+       document.getElementById('race_director-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('race_director-btn').style.color = "#000000";
+        break; 
+     } 
+     case 'logistics': { 
+        document.getElementById('map-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('map-btn').style.color = "#000000";
+       document.getElementById('race_director-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('race_director-btn').style.color = "#000000";
+        break; 
+     } 
+     case 'race_director': { 
+         document.getElementById('logistics-btn').style.backgroundColor = "#FFFFFF";
+         document.getElementById('logistics-btn').style.color = "#000000";
+         document.getElementById('map-btn').style.backgroundColor = "#FFFFFF";
+          document.getElementById('map-btn').style.color = "#000000";
+        break; 
+     } 
+     default: { 
+        break; 
+     } 
+   }
+
+    return;
   }
 
   trySignup(): void {
@@ -113,7 +208,7 @@ export class RaceAboutComponent implements OnInit {
   }
 
 
-  initializeForm(): void {
+  initializeForm = () => {
     this.AboutForm = new FormGroup({
       name: new FormControl(this.aboutData.name,[
         Validators.required,
@@ -138,6 +233,16 @@ export class RaceAboutComponent implements OnInit {
 
   }
 
+  getOwnerData(){
+    //Call a to-be-created service which gets user data, feed, statistics etc
+    //console.log('race-about - getUserData()',this.aboutData.owner);
+    this._userProfileService.getUserProfile(this.aboutData.owner.username).then((data) => {
+      this.userData = data as UserData;
+      this.userData.email_mailto = `mailto:${this.userData.email}`;
+      //console.log("New user data race about pg: ", this.userData);
+    });
+  }
+
   viewRace() {
     // set race in race service
 
@@ -146,7 +251,7 @@ export class RaceAboutComponent implements OnInit {
 
   
   showModal(id:string): void {
-    console.log(id);
+    //console.log(id);
     ($(id) as any).modal('show');
   }
 
@@ -156,9 +261,9 @@ export class RaceAboutComponent implements OnInit {
 
   // confirmRegistration(user:any): void {
   //   // login user
-  //   console.log('USER CONFIRMED:',user);
+  //   //console.log('USER CONFIRMED:',user);
   //   this._authService.login(user).subscribe(data => {
-  //     console.log(data);
+  //     //console.log(data);
   //     localStorage.setItem('access_token', data['token']);
   //     localStorage.setItem('loggedInUsername', user.username);
   //     this.joinRace();
@@ -177,7 +282,7 @@ export class RaceAboutComponent implements OnInit {
     }
 
     this.raceService.joinRace(registrationBody).then((res) => {
-      console.log('RES FROM JOIN:',res);
+      //console.log('RES FROM JOIN:',res);
       // this.router.navigate(['/race',{name:this.raceName,id:race_id}]);
     });
   }
@@ -186,7 +291,7 @@ export class RaceAboutComponent implements OnInit {
     // prompt for swag
     // then join race
 
-    console.log('IN CALL BACK');
+    //console.log('IN CALL BACK');
 
     this.joinRace(registrationBody);
 
@@ -199,12 +304,12 @@ export class RaceAboutComponent implements OnInit {
 
   update(): void {
     let formClean = this.AboutForm.value as any;
-    console.log(this.AboutForm);
+    //console.log(this.AboutForm);
     let isValid: Boolean = this.AboutForm.valid;
 
     formClean.raceImage = this.uploadeUrl;
     formClean.rules.race_id = this.raceSettings.race_id;
-    console.log('IS VALID:',formClean);
+    //console.log('IS VALID:',formClean);
     //this.coords = this._raceview.coords;
 
     if(!formClean.rules.paymentRequired) {
@@ -219,6 +324,7 @@ export class RaceAboutComponent implements OnInit {
         this.hasMerch = this.raceSettings.has_swag;
         this.initializeForm();
         this.toggleForm();
+        //console.log("RACE ABOUT", this.aboutData);
       });
     }
   }
@@ -239,6 +345,7 @@ export class RaceAboutComponent implements OnInit {
     this.router.navigate(['/dashboard',{name:this.raceName,id:this.raceID}]);
   }
 
+
 }
 
 export interface AboutData {
@@ -253,6 +360,8 @@ export interface AboutData {
   distance_type:any;
   start_date:any;
   end_date:any;
+  num_children:any;
+  is_hybrid:any;
 }
 
 interface Event {
@@ -295,4 +404,22 @@ interface FeedObj {
   last_distance:number;
   message: string;
   created_ts:number;
+}
+
+
+interface UserData {
+  user_id:number;
+  profile_url:string;
+  email:string;
+  description: string;
+  location:string;
+  first_name:string;
+  last_name:string;
+  follows:boolean;
+  distance_type: string;
+  is_me: boolean;
+  location_visibility:boolean;
+  about_visibility:boolean;
+  email_visibility:boolean;
+  email_mailto:string;
 }

@@ -36,7 +36,7 @@ export class UserProfileService {
   }
 
   getUserProfile(username:string){
-    console.log("from service username", username);
+  //   console.log("from service username", username);
     return this.http.post(environment.apiUrl + '/api/user-profile/',{'username':username}).toPromise();
   }
 

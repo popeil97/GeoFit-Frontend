@@ -1,11 +1,73 @@
 /****** NavBar *****/
 
+.navbar {
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index: 10; 
+
+  width:100%;
+  height:80px;
+  padding:8px;
+  box-sizing: border-box;
+  /* background:rgba(256,256,256,0.7); */
+  background-color: var(--main-background-color);
+  border-bottom:1px solid white;
+
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.NavItem {
+  padding-right: 12px;
+  padding-left: 8px;
+}
+.NavLink {
+  font-family: 'Mulish' !important; 
+  font-size: 19px;
+}
+
+.TucanNavigationLogo img {
+  width:118px;
+}
+.TucanNavigationToggler {
+  display:none;
+}
+.TucanNavigationContents {
+  width:100%;
+}
+.TucanNavigationBlackTransparent {
+  display:none;
+}
+.TucanNavigationButtons {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.TucanNavigationButtonSegment {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+
+
 a.navbar-brand {
     padding-top: 0px ; 
     padding-bottom: 0px ;
  }
 
-.navbar a {border-bottom:none;}
+.navbar a {
+  border-bottom:none;
+  color:white;
+}
 
 .navbar ul li a {border-bottom:none;}
 
@@ -23,11 +85,6 @@ a.navbar-brand {
 
 .navbar-nav {
 }
-
-.nav-link {
-    padding-right: .5rem !important;
-    padding-left: .5rem !important;
-  }
   
   /* Fixes dropdown menus placed on the right side */
   .ml-auto .dropdown-menu {
@@ -65,7 +122,7 @@ a.navbar-brand {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
+  font-size: 35px;  /* Preferred icon size */
   display: inline-flex;
   vertical-align: top;
   line-height: 1;
@@ -85,4 +142,76 @@ a.navbar-brand {
 
   /* Support for IE. */
   font-feature-settings: 'liga';
+}
+
+@media only screen and (max-width: 600px) {
+  .TucanNavigationLogo img {
+    width:100px;
+  }
+  .TucanNavigationToggler {
+    display:block;
+  }
+  .TucanNavigationContents {
+    position:fixed;
+    left:0;
+    top:0;
+    width:0;
+    height:100vh;
+    overflow:hidden;
+  }
+  .TucanNavigationContents.open {
+    width:100vw;
+  }
+  .TucanNavigationBlackTransparent {
+    position:absolute;
+    z-index: 1;
+
+    display:block;
+    width:100%;
+    height:100%;
+
+    background-color: rgba(0,0,0,0.5);
+  }
+  .TucanNavigationButtons {
+    position:relative;
+    z-index: 2;
+
+    width:auto;
+    max-width: 60%;
+    height:100%;
+
+    padding:8px;
+    box-sizing: border-box;
+
+    background-color: var(--main-background-color);
+
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .TucanNavigationButtonSegment {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+.NavProfileDropdown {
+  padding:8px;
+  color:white
+}
+.NavProfileImg {
+  margin-right:8px;
+}
+.NavDropdownContents {
+  right:0;
+  left:initial;
+  background-color: var(--main-background-color);
+  box-shadow: 0 4px 10px -2px black;
+}
+
+@media only screen and (max-width: 600px) {
+  .NavDropdownContents {
+    left:0;
+    right:initial;
+    top:initial;
+    bottom:100%;
+  }
 }

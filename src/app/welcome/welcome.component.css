@@ -1,0 +1,38 @@
+.WelcomeContainer {
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: nowrap;
+	border-bottom: 1px solid var(--primary-darkgrey);
+}
+
+.WelcomeMain {
+	width:100%;
+}
+.WelcomeImg {
+	width:30%;
+}
+
+.WelcomeInfo {
+	width:70%;
+}
+
+.FaqImg{
+	max-height: 40%;
+    max-width: 40%;
+}
+
+
+
+@media only screen and (max-width: 600px) {
+	.WelcomeInfo {
+		width:100%;
+	}
+	.WelcomeContainer {
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: stretch;
+	}
+
+}

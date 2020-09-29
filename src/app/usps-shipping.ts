@@ -87,7 +87,7 @@ export class USPSShippingService {
  
     const doc = create(obj);
     const xml = doc.end({ prettyPrint: true });
-    console.log(xml);
+  //  console.log(xml);
     
     return encodeURI(xml);
   }
@@ -95,10 +95,10 @@ export class USPSShippingService {
   validateAddress(form){
     var body = this.getBodyFromQuery(form);
 
-    console.log(body);
+   //  console.log(body);
 
     const url = 'http://production.shippingapis.com/ShippingAPI.dll?API=Verify&XML='+body;
-    console.log(url);
+   //  console.log(url);
 
     return this.http.post(environment.apiUrl + '/api/shipping-val/', {'url': url},  this.httpOptions).toPromise()
 

@@ -59,10 +59,10 @@ export class ShippingAddressFormComponent implements OnInit {
       formClean = this.addressForm.value;
 
       this._shippingService.validateAddress(formClean).then(response => {
-        console.log("Response from USPS");
-        console.log(response);
-        this.pendingAddress = response['address'] as Address;
-        console.log(this.pendingAddress);
+      //   console.log("Response from USPS");
+      //   console.log(response);
+       //  this.pendingAddress = response['address'] as Address;
+        // console.log(this.pendingAddress);
 
         this.showPendingAddress = true;
 

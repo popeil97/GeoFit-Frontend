@@ -1,0 +1,10 @@
+ <h3>Followers</h3>
+ <div *ngFor="let person of data.followers">
+ 	<app-show-followers [person]="person"></app-show-followers>
+ </div>
+
+<h3>Following</h3>
+  <div *ngFor="let person of data.following">
+ 	<app-show-followers [person]="person"></app-show-followers>
+ </div>
+<div class="btn" (click)="closeDialog()">Close</div>

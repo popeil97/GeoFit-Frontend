@@ -27,13 +27,13 @@ export class TeamListComponent implements OnInit {
   getTeams(): void {
     this._teamService.getTeamsList(this.race_id).then((resp) => {
       this.teams = resp['team_stats'];
-      console.log('TEAMS COMPONENT:',this.teams);
+     //  console.log('TEAMS COMPONENT:',this.teams);
     });
   }
 
   joinRequest(team:any): void {
 
-    console.log('TEAM:',team);
+ //    console.log('TEAM:',team);
 
     let form = {
       type:NotificationType.TEAM_JOIN,
@@ -41,7 +41,7 @@ export class TeamListComponent implements OnInit {
     }
 
     this._notificationService.createNotification(form).then((resp) => {
-      console.log('NOTIFICATION RESP:',resp);
+    //   console.log('NOTIFICATION RESP:',resp);
       this._snackbar.openFromComponent(SnackbarComponent,{duration: 5000,horizontalPosition: 'center',
         verticalPosition: 'bottom',data:{message:"Request has been sent"}})
     });
@@ -49,7 +49,7 @@ export class TeamListComponent implements OnInit {
 
   quitTeam(team:any): void {
     this._teamService.quitTeam(team.race_id,team.team_id).then((resp) => {
-      console.log('RESP FROM TEAM QUIT',resp);
+   //    console.log('RESP FROM TEAM QUIT',resp);
       this.getTeams();
       this.callback.emit();
     });

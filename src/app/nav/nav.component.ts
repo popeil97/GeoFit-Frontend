@@ -6,6 +6,8 @@ import { UserProfileService } from '../userprofile.service';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { NotificationPanelComponent } from '../notification-panel/notification-panel.component';
 
+import { ModalService } from '../modalServices';
+
 declare var $: any
 
 @Component({
@@ -16,37 +18,63 @@ declare var $: any
 
 
 export class NavComponent implements OnInit {
+  userData: UserData;
+  picURL:any;
+  navigationOpen : boolean = false;
+  profileOpen : boolean = false;
 
-userData: UserData;
-picURL:any;
-
-  constructor(private _notificationService:NotificationsService,
-              public _authService: AuthService,
-              private _userProfileService: UserProfileService,
-              private _bottomSheet: MatBottomSheet) { }
+  constructor(
+    private _notificationService:NotificationsService,
+    public _authService: AuthService,
+    private _userProfileService: UserProfileService,
+    private _bottomSheet: MatBottomSheet,
+    private modalService: ModalService,
+  ) {}
 
   public notifications:any[] = [];
   public isPurple:Boolean = false;
   public path:any;
 
   ngOnInit() {
-    
     // copy pasta from stack overflow yahooooooo
     $(document).on('click', '.dropdown-menu', function (e) {
       e.stopPropagation();
     });
 
+    // THIS SHOULDN'T BE THE WAY, BUT LET'S GO WITH IT FOR NOW
+    Observable.interval(1*1000) // make much larger in production
+      .switchMap(() => {
+        if (!this._authService.isLoggedIn()) return [];
+        return this._notificationService.getNotifications();
+      })
+      .subscribe((resp:NotificationResp) => {
+        //console.log(resp);
+        this.notifications = resp.notifications;
+        //console.log(this.notifications);
+      });
+    
+    if (localStorage.getItem('access_token')){
+        this._authService.token = localStorage.getItem('access_token');
+    }
+  
+    if (localStorage.getItem('loggedInUsername')){
+        this._authService.username = localStorage.getItem('loggedInUsername');
+        this.getUserPic();
+    }
+    this.path=window.location.pathname;
+    
+    /*
     try{this.getNotifications();}
     catch{console.log("Couldnt get notifs");}
-    
-
+  
+    /*
     Observable.interval(60000) // make much larger in production
-    .switchMap(() => this._notificationService.getNotifications())
-    .subscribe((resp:NotificationResp) => {
-      console.log(resp);
-      this.notifications = resp.notifications;
-      console.log(this.notifications);
-    });
+      .switchMap(() => this._notificationService.getNotifications())
+      .subscribe((resp:NotificationResp) => {
+        //console.log(resp);
+        this.notifications = resp.notifications;
+        //console.log(this.notifications);
+      });
 
     if (localStorage.getItem('access_token')){
       this._authService.token = localStorage.getItem('access_token');
@@ -57,23 +85,33 @@ picURL:any;
       this.getUserPic();
     }
     this.path=window.location.pathname;
+    */
 
-    if(this.path == "/")
-    {
-      this.isPurple = false;
-    }
-    else
-    {
-      this.isPurple = true;
+  }
+
+  ToggleNavigation() {
+    this.navigationOpen = !this.navigationOpen;
+    if (!this.navigationOpen) {
+      this.profileOpen = false;
     }
   }
 
-  getNotifications() {
+  ToggleProfileDropdown() {
+    this.profileOpen = !this.profileOpen;
+  }
 
+  NavItemClick() {
+    if (this.navigationOpen) this.ToggleNavigation();
+  }
+
+  getNotifications() {
     this._notificationService.getNotifications().toPromise().then((resp:NotificationResp) => {
-      console.log(resp);
+      //console.log(resp);
       this.notifications = resp.notifications;
-    });
+    }).catch(err=>{
+      console.error('GET NOTIFICATIONS ERROR:',err)
+      throw(err);
+    })
 
   }
 
@@ -101,11 +139,11 @@ picURL:any;
   }
 
   showNotifications(): void {
-    console.log('openming')
+    //console.log('openming')
     this._bottomSheet.open(NotificationPanelComponent,{data:{notifications:this.notifications}});
 
     this._bottomSheet._openedBottomSheetRef.afterDismissed().subscribe((data) => {
-      console.log('sheet closed');
+      //console.log('sheet closed');
       this.getNotifications();
     })
   }
@@ -116,16 +154,20 @@ picURL:any;
 
   purpleTrue(action?:string) {
     this.isPurple = true;
-   
   }
 
   purpleFalse(action?:string) {
     this.isPurple = false;
-   
   }
 
   getPath(action?:string){
     this.path = window.location.pathname;
+  }
+
+  openModal(id: string) {
+    const data = (id == 'custom-modal-1') ? {register:false}:(id == 'custom-modal-2') ? {register:false} : null;
+    this.modalService.open(id, data);
+    this.NavItemClick();
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter,OnChanges } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
+import { ModalService } from '../modalServices';
 
 @Component({
   selector: 'app-manual-entry',
@@ -9,17 +10,18 @@ import { FormControl,FormGroup, Validators } from '@angular/forms';
 export class ManualEntryComponent implements OnInit {
 
   manualEntryForm:FormGroup;
+ // @Input() id: string;
   @Input() race_type:number;
   @Output() uploadManualEntry: EventEmitter<any> = new EventEmitter();
   activityOptions:any[];
   defaultActivityString:string;
 
-  constructor() { 
+  constructor( private modalService: ModalService,) { 
     
   }
 
   ngOnInit() {
-    console.log("RACE TYPE", this.race_type);
+   // console.log("RACE TYPE", this.race_type);
     this.defaultActivityString = "Run";
     if(this.race_type==1) //run/walk
     {
@@ -68,13 +70,13 @@ export class ManualEntryComponent implements OnInit {
   }
 
   upload(): void {
-    
+    this.modalService.callbackModal("custom-modal-5",null);
     let formClean = this.manualEntryForm.value as any;
-    console.log(this.manualEntryForm);
+   // console.log(this.manualEntryForm);
     let isValid: Boolean = this.manualEntryForm.valid;
 
     if(isValid) {
-      formClean.distanceType = DistanceType[formClean.distanceType];
+      formClean.distanceType = DistanceType['MI'];
 
       this.manualEntryForm.reset();
 
@@ -93,10 +95,12 @@ export class ManualEntryComponent implements OnInit {
   }
 
   parseDistanceType(entry:any) {
-    console.log('VALUE:',entry.value);
+   // console.log('VALUE:',entry.value);
     let value = entry.value;
  //   this.manualEntryForm.get('distanceType').setValue(DistanceType[value])
   }
+
+  
 
 }
 

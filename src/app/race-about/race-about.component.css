@@ -1,129 +1,96 @@
-  .column-about{
-    width: 33%;
-    margin: 1px;
-  }
-.center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+.AboutRaceImageContainer {
+	position:relative;
+	height:280px;
+	overflow:hidden;
 }
-    .column-about1{
-    width: 66%;
-    margin: 1px;
-  }
+.AboutRaceImage {
+	display:block;
+	width:100%;
 
-  .column-merch{
-    width: 49%;
-    margin: 1px;
-  }
-  .column-merch1{
-    width: 51%;
-    margin: 1px;
-  }
-
-
-  .column-map{
-    width: 49%;
-    margin: 1px;
-  }
-
-  .row {
-  display: flex;
-  flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
+	margin-left:auto;
+	margin-right:auto;
+}
+.RaceHeader {
+	display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+	flex-wrap: wrap;
+	
+	margin-bottom:16px;
 }
 
-.maincode:hover .maintooltip { /* NEW */
-    display: block;
+.RaceSlideshowContents {
+	border-left:2px solid rgb(200,200,200);
+	margin-left:16px;
+	padding-left:8px;
+	box-sizing: border-box;
 }
 
-.button {
-  text-decoration: none;
-  color: rgba(255, 255, 255, 1);
-  box-shadow: 0 5px 15px rgba(145, 92, 182, .4);
-  background: #2C00A5;
-  border-radius: 4px;
-  font-weight: normal;
-  text-transform: uppercase;
-  transition: all 0.2s ease-in-out;
-  width:90px;
-}
-.glow-button:hover {
-  color: rgba(255, 255, 255, 1);
-  box-shadow: 0 5px 15px rgba(145, 92, 182, .7);
+.MapPreview {
+	position: relative;
+	width:100%;
+	height:auto;
+
+	display:flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-wrap: nowrap;
 }
 
-.maintooltip {
-    display: none;
-    color: #403d58;
-    margin-left: 2px; /* moves the tooltip to the right */
-    margin-top: 12px; /* moves it down */
-    position: absolute;
-    padding:4px;
-    z-index: 1000;
-    background: #fafafa;
-    border-radius: 15px;
+.MapContainer {
+	width:100%;
+	height:320px;
+}
+.RaceLocationsContainer, .RaceRouteInfo {
+	width:80%;
 }
 
-.maincode {
-    margin:1px;
+.RaceButtonsContainer {
+	display:flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.RaceButtonsContainer button, .RaceButtonsContainer .button {
+	margin-right:8px;
+	margin-bottom:8px;
 }
 
-  .hero-image {
- /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
- /* background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url(); */
-
- /* Set a specific height */
- height: 50%;
- /* Position and center the image to scale nicely on all screens */
- background-position: center;
- /*background-repeat: no-repeat;
- background-size: cover; */
- position: relative;
+.aligned-with-icon{
+    position: relative;
+    top: -5px;
+    margin-left: 5px; /* optional */
 }
 
-/* Place text in the middle of the image */
-.hero-text {
- text-align: center;
- position: absolute;
- top: 50%;
- left: 50%;
- transform: translate(-50%, -50%);
- color: white;
+.RaceDirectorContainer {
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: nowrap;
+}
+.RaceDirectorPic {
+	width:20%;
+}
+.RaceDirectorInfo {
+	width:60%;
 }
 
-/* Centered text */
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+@media only screen and (max-width: 600px) {
+	.RaceDirectorContainer {
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: stretch;
+	}
 
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
-  display: inline-flex;
-  vertical-align: top;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
+	.RaceDirectorPic {
+		width:100%;
+	}
+	.RaceDirectorInfo {
+		width:100%;
+	}
 
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
-  font-feature-settings: 'liga';
 }

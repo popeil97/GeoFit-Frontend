@@ -20,5 +20,8 @@
     ],
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
+    "paths": {
+      "@angular/*": ["./node_modules/@angular/*"]
+    },
   }
 }

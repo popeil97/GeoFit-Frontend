@@ -35,7 +35,7 @@ export class PasswordChangeComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.slug = params['params']['slug'];
-      console.log(this.slug);
+//       console.log(this.slug);
     });
   }
 

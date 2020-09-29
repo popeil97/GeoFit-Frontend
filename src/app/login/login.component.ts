@@ -1,4 +1,5 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, Output, EventEmitter, Input } from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
@@ -11,7 +12,27 @@ import { UserProfileService } from '../userprofile.service';
   styleUrls: ['./login.component.css']
 })
 
-export class LoginComponent implements OnInit {
+export class LoginComponent {
+  constructor(
+      public dialog: MatDialog,
+  ) {}
+
+  openDialog() {
+    const dialogRef = this.dialog.open(LoginDialogContent,{disableClose: false, data:{} as MatDialogConfig});
+  }
+
+  
+}
+
+@Component({
+  selector: 'app-login-dialog-content',
+  templateUrl: './login-dialog-content.html',
+  styleUrls:['./login-dialog-content.css']
+})
+
+export class LoginDialogContent implements OnInit {
+
+  public type: any
   loginForm: FormGroup;
   loading = false;
   submitted = false;
@@ -21,19 +42,21 @@ export class LoginComponent implements OnInit {
 
   @Output() loggedInAsUsernameEvent = new EventEmitter();
 
-  constructor(
+   constructor(
       private formBuilder: FormBuilder,
       private route: ActivatedRoute,
       private router: Router,
       private _authService: AuthService,
       private _userProfileService: UserProfileService,
-  ) {}
+      public dialog: MatDialog,
+      public dialogRef: MatDialogRef<LoginDialogContent>,
+    @Inject(MAT_DIALOG_DATA) public data: any)
+  {}
 
-  ngOnInit() {
+   ngOnInit() {
       this.loginForm = this.formBuilder.group({
-        email: ['', [Validators.required,
-          Validators.email]], //Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
-          password: ['', Validators.required]
+        email: ['', [Validators.required, Validators.email]], //Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
+        password: ['', Validators.required]
       });
 
       // get return url from route parameters or default to '/'
@@ -65,12 +88,13 @@ export class LoginComponent implements OnInit {
           this.loggedInAsUsernameEvent.emit(data['username']);
 
           if (data['success']){
-            this.continueAsMe();
+            this.continueAsMe(data['username']);
+            this.closeDialog();
           }
         },
         err => {
           this.loading = false;
-          console.log(err);
+//          console.log(err);
           this.errors = err['error'];
         }
       );
@@ -81,7 +105,16 @@ export class LoginComponent implements OnInit {
    
   }
 
-  public continueAsMe(){
-    this.router.navigate(['/races']);
+  public continueAsMe(username?:string){
+
+    this.router.navigate(['/profile', {username: username}]);
+
   }
+
+  closeDialog() {
+    this.dialogRef.close(LoginDialogContent);
+  }
+
+
+
 }

@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserProfileService } from '../userprofile.service';
 import { ImageService } from '../image.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-profile-pic',
@@ -10,28 +11,60 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./profile-pic.component.css']
 })
 export class ProfilePicComponent implements OnInit, OnChanges {
+  
   @Input() userData: UserData;
-
   @Output() formUpdated: EventEmitter<void> = new EventEmitter();
 
   profileForm: FormGroup;
   profilePicURL: any;
   distanceTypeOptions: any[];
+  public profileUpdated:boolean;
 
-  constructor(private _userProfileService: UserProfileService, 
-              private sanitizer:DomSanitizer,
-              private _imageService: ImageService) {
+  constructor(
+    private _userProfileService: UserProfileService, 
+    private sanitizer:DomSanitizer,
+    private _imageService: ImageService,
+    private _authService: AuthService,
+  ) {
     this.distanceTypeOptions = ['Mi', 'KM'];
     this.profilePicURL = null;
 
     this.profileForm = new FormGroup({
-      ProfilePic: new FormControl(''), });
+      ProfilePic: new FormControl(''),
+    });
   }
 
   ngOnInit() {
-    console.log("Calling populate form");
+
+    console.log('Welcome:',this._authService);
+
+    //this.route.paramMap.subscribe(params => {
+    //  this.username = params['params']['username'];
+    //  this.getUserData();
+    //  console.log(this.username);
+    //});
+
     this.populateForm();
+    this.profileUpdated = false;
   }
+
+  /*
+  getUserData(){
+    //Call a to-be-created service which gets user data, feed, statistics etc
+    this._userProfileService.getUserProfile(this.username).then((data) => {
+      this.userData = data as UserData;
+      console.log("New user data: ", this.userData);
+
+      if (this.userData.location == "") {
+        this.userData.location = "N/A";
+      }
+
+      if (this.userData.description == "") {
+        this.userData.description = "N/A";
+      }
+    });
+  }
+  */
 
   ngOnChanges(changes: SimpleChanges): void {
 
@@ -49,25 +82,38 @@ export class ProfilePicComponent implements OnInit, OnChanges {
   }
 
   populateForm(): void {
-    console.log("User data: ", this.userData);
+   //  console.log("User data: ", this.userData);
   }
 
   updateProfile(): void{
-    let formClean: ProfileForm;
+    let formClean: ProfilePic;
 
     if (this.profileForm.valid){
       formClean = this.profileForm.value;
 
-      //Resize image to handle large files
+      //Crop image, and resize image to handle large files
       if (this.profilePicURL){
-        formClean.ProfilePic = this._imageService.resizeImage(this.profilePicURL, 350, 350);
+        this.profilePicURL = this._imageService.squareCropImage(this.profilePicURL);
+        
+        this._imageService.resizeImage(this.profilePicURL, 350, 350).then((data) => {
+          formClean.ProfilePic = data;
+
+          //call service to update form
+          this._userProfileService.updateProfile(formClean).then((data) => {
+            this.formUpdated.emit();
+          })
+        });
+      }
+      else{
+        //call service to update form
+        this._userProfileService.updateProfile(formClean).then((data) => {
+          this.formUpdated.emit();
+        })
       }
 
-      //call service to update form
-      this._userProfileService.updateProfile(formClean).then((data) => {
-        this.formUpdated.emit();
-      })
+      
     }
+    this.profileUpdated = true;
   }
 
   onSelectFile(event) {
@@ -97,7 +143,7 @@ export class ProfilePicComponent implements OnInit, OnChanges {
 
 }
 
-export interface ProfileForm {
+export interface ProfilePic {
   ProfilePic: any;
   FirstName: string;
   LastName: string;

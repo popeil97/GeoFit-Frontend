@@ -1,0 +1,60 @@
+<!--<div class='PageContainer' *ngIf="this.aboutData != null; else LoadingRaceBlock">-->
+<div class="PageContainer">
+    
+  <div class='PageSegment'>
+    <h3>Log Activity</h3>
+
+    <ng-template [ngIf]="this.d != null" [ngIfElse]="LoadingLogActivity">
+      <div class='Slideshow'>
+        <div class="SlideshowHeader">
+          <button class="SlideshowButton" (click)="SwitchSlideshow('strava')" *ngIf="this.d.manualEntry" >Strava</button>
+          <!--<button class="SlideshowButton" (click)="SwitchSlideshow('info')">Information</button>-->
+          <button class="SlideshowButton" (click)="SwitchSlideshow('manual')" *ngIf="this.d.manualEntry">Manual</button>
+        </div>
+        <div class="SlideshowContents">
+          <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'strava'}">
+           <!-- <app-activities-menu *ngIf="this.progress" [distance_unit]="progress.distance_type" [race_id]="raceID" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-activities-menu> -->
+           <app-activities-menu *ngIf="!this.d.automaticImport && stravaData.authorized" [distance_unit]="this.d.distance_unit" [race_id]="this.d.race_id" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-activities-menu>
+  
+           <b *ngIf="this.d.automaticImport">Automatic import is turned on.</b>
+  
+            <div *ngIf="!stravaData.authorized">
+                <b> You don't have your account connected to Strava </b>
+                <app-stravauth></app-stravauth>
+            </div>
+  
+          </div>
+  
+          <!--
+          <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'info'}">
+            <ng-template [ngIf]="this.aboutData == null">
+              <p>Loading race details...</p>
+            </ng-template>
+            <h6>Race Type</h6>
+            <button (click)="this.openModal('custom-modal-4')">What does this mean?</button>
+            <p *ngIf="this.aboutData.is_hybrid; else VirtualText">Hybrid </p>
+            <ng-template #VirtualText>
+              <p>Virtual</p>
+            </ng-template>
+            <h6>Entry Fee</h6>
+            <p *ngIf="this.raceSettings != null; else LoadingRaceSettings">${{raceSettings.price}}</p>
+            <ng-template #LoadingRaceSettings>
+              <p>Loading Race Settings</p>
+            </ng-template>
+          </div>
+          -->
+  
+          <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'manual'}" *ngIf="this.d.manualEntry">
+            <app-manual-entry [race_type]="this.d.raceType" (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
+          </div>
+  
+  
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #LoadingLogActivity>
+      <p>Loading Logging Activity...</p>
+    </ng-template>
+  </div>
+  <button class="CloseLogin" (click)="closeDialog()">Close</button> 
+</div>

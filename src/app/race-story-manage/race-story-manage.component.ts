@@ -42,7 +42,7 @@ export class RaceStoryManageComponent implements OnChanges {
     this._raceService.getReportedStories(this.raceID).then((data) => {
       let stories = data as Story[];
       this.reportedStories = stories;
-      console.log("Reported stories: ", this.reportedStories);
+    //   console.log("Reported stories: ", this.reportedStories);
     })
   }
 

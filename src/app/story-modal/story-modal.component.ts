@@ -19,7 +19,7 @@ export class StoryModalComponent implements OnInit {
   }
 
   showModal(storyID):void {
-    console.log("querying with ID: ", storyID);
+  //   console.log("querying with ID: ", storyID);
     this._storyService.getStoryModalData(storyID).then((data) => {
       this.storyItem = data as FeedObj;
       $("#storyModal").modal('show');

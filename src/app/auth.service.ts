@@ -29,7 +29,7 @@ export class AuthService {
  
   // Uses http.post() to register user from REST API endpoint
   public register(registerForm) {
-    console.log(registerForm);
+//    console.log(registerForm);
     return this.http.post(environment.apiUrl + '/api/register/', registerForm, this.httpOptions);
   }
 
@@ -48,7 +48,7 @@ export class AuthService {
  
   // Refreshes the JWT token, to extend the time the user is logged in
   public refreshToken() {
-    console.log(JSON.stringify({token: this.token}));
+  //  console.log(JSON.stringify({token: this.token}));
     this.http.post(environment.apiUrl + '/api-token-refresh/', JSON.stringify({token: this.token}), this.httpOptions).subscribe(
       data => {
         this.updateData(data['token']);
@@ -79,7 +79,7 @@ export class AuthService {
  
   private updateData(token) {
     this.token = token;
-    console.log("Set token to ", this.token);
+  //  console.log("Set token to ", this.token);
     this.errors = [];
  
     // decode the token to read the username and expiration timestamp
@@ -94,8 +94,8 @@ export class AuthService {
   }
 
   public changePassword(password: string, slug: string){
-    console.log(password);
-    console.log(slug);
+  //  console.log(password);
+ //   console.log(slug);
     return this.http.post(environment.apiUrl + '/api/password-change/', JSON.stringify({'password': password, 'slug': slug}), this.httpOptions);
   }
  

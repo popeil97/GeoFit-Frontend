@@ -1,44 +1,21 @@
-
+<p *ngIf="userStats==null">Nothing yet! Check back when you start logging activities.</p>
 <div class="row">
     <div class="column2">
-        <mat-card class="example-card">
-            <mat-card-header>
-            <!--  <div mat-card-avatar style = "background-image: url({{userData.profile_url}}</b>);
-  background-size: cover;"></div> -->
-              <mat-card-title>Activities</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-              <br>
-              <div>
-                <div *ngIf="userStats.run_tot_activities == 0 && userStats.ride_tot_activities==0">
-                  No running or cycling activities.
-                </div>
-             <canvas id="lineCharts"></canvas>
-           </div>
-             <br>
-            </mat-card-content>
-          </mat-card>
+        <canvas id="lineCharts"></canvas>
     </div>
-
+    
 
     <div class="column2">
-        <mat-card class="example-card">
-            <mat-card-header>
-            <!--  <div mat-card-avatar style = "background-image: url(<b>{{userData.profile_url}}</b>);
-  background-size: cover;"></div> -->
-              <mat-card-title>Stats</mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
 
             <div class="tab">
-          <button *ngIf="userStats.run_tot_activities > 0" style="background-color:rgba(0, 51, 204,0.2);" class="tablinks" (click)="openStats(event, 'run_stats')">Run Stats</button>
-          <button *ngIf="userStats.walk_tot_activities > 0" style="background-color:rgba(153, 204, 255,0.2);" class="tablinks" (click)="openStats(event, 'walk_stats')">Walk Stats</button>
-          <button *ngIf="userStats.ride_tot_activities > 0" style="background-color:rgba(204, 0, 204,0.2);" class="tablinks" (click)="openStats(event, 'ride_stats')">Ride Stats</button>
+          <button *ngIf="userStats!=null && userStats.run_tot_activities > 0" style="background-color:rgba(0, 51, 204,0.2);" class="tablinks" (click)="openStats(event, 'run_stats')">Run Stats</button>
+          <button *ngIf="userStats!=null && userStats.walk_tot_activities > 0" style="background-color:rgba(153, 204, 255,0.2);" class="tablinks" (click)="openStats(event, 'walk_stats')">Walk Stats</button>
+          <button *ngIf="userStats!=null && userStats.ride_tot_activities > 0" style="background-color:rgba(204, 0, 204,0.2);" class="tablinks" (click)="openStats(event, 'ride_stats')">Ride Stats</button>
         </div>
 
         <!-- Tab content -->
 
-        <div id="run_stats" class="tabcontent" style="display:block" *ngIf="userStats.run_tot_activities > 0">
+        <div id="run_stats" class="tabcontent" style="display:block" *ngIf="userStats!=null && userStats.run_tot_activities > 0">
         <div class="row">
           <div class="column1">
             <p>Total Runs</p>
@@ -91,7 +68,7 @@
           </div>
 
 
-          <div id="walk_stats" class="tabcontent" style="display:block;" *ngIf="userStats.walk_tot_activities > 0">
+          <div id="walk_stats" class="tabcontent" style="display:block;" *ngIf="userStats!=null && userStats.walk_tot_activities > 0">
         <div class="row">
           <div class="column1">
             <p>Total Walks</p>
@@ -145,7 +122,7 @@
 
 
 
-          <div id="ride_stats" class="tabcontent" *ngIf="userStats.ride_tot_activities > 0">
+          <div id="ride_stats" class="tabcontent" *ngIf="userStats!=null && userStats.ride_tot_activities > 0">
 
                          <div class="row">
           <div class="column1">
@@ -196,10 +173,8 @@
           </div>
 
           </div>
-          </div>
+       </div>
 
-            </mat-card-content>
-          </mat-card>
+           
     </div>
-
 </div>

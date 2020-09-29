@@ -53,7 +53,7 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
 
         switch(propName) {
           case 'userSettings':
-            console.log('SETTINGS CHANGED');
+          //   console.log('SETTINGS CHANGED');
             if(changes.userSettings.currentValue != undefined) {
               this.initForm();
             }
@@ -132,8 +132,8 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
   }
 
   initForm(): void {
-    console.log('Automatic import value:',this.userSettings.isAutomaticImport);
-    console.log('Heatmap value:',this.userSettings.heatMapOn);
+   //  console.log('Automatic import value:',this.userSettings.isAutomaticImport);
+   //  console.log('Heatmap value:',this.userSettings.heatMapOn);
     this.settingsForm = new FormGroup({
       isAutomaticImport: new FormControl(this.userSettings.isAutomaticImport,[
         Validators.required,
@@ -162,7 +162,7 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
     //Disable age control by default
     this.settingsForm.get('ageRange').disable();
 
-    console.log('form value:',this.settingsForm);
+  //   console.log('form value:',this.settingsForm);
   }
 
 }

@@ -1,0 +1,62 @@
+.AboutTucanValuesContainer {
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: nowrap;
+}
+
+.AboutTucanFeaturesContainer {
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: nowrap;
+}
+
+.AboutTucanFeatureImg{
+	max-height: 60%;
+    max-width: 60%;
+}
+
+.AboutTucanValue {
+	width:30%;
+}
+
+.AboutTucanFeatures {
+	width:25%;
+}
+.AboutTucanTeam {
+	display:flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: flex-start;
+	flex-wrap: nowrap;
+}
+.AboutTucanMember {
+	width:22.5%;
+}
+	.AboutTucanMember img {
+		width:100%;
+	}
+
+@media only screen and (max-width: 600px) {
+	.AboutTucanValuesContainer {
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: stretch;
+	}
+
+		.AboutTucanValue {
+			width:100%;
+		}
+		.AboutTucanFeatures {
+			width:100%;
+		}
+		.AboutTucanFeatureImg{
+			max-height: 25%;
+		    max-width: 25%;
+		}
+
+}
+

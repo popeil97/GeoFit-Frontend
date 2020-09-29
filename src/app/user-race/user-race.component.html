@@ -1,0 +1,52 @@
+<div *ngFor="let race of userRaces" class="TucanRaceItem">
+  <div class = "TucanRaceItem">
+        <div class='TucanRaceItemContents'>
+          
+          <div class='TucanRaceItemHeader'>
+            <h4>{{race.name}}</h4>
+          </div>
+          <div class='TucanRaceItemImageContainer'>
+            <img class="TucanRaceItemImageSmall" *ngIf="race.race_image != null" src="{{race.race_image}}" />
+           </div>
+           <br>
+
+          <div class='TucanRaceItemDetails'>
+            <div class='TucanRaceItemSpecificInfo'>
+              <div class='CalendarDaysContainer'>
+              <div class='CalendarDay'>
+                <div class='CalendarDayM'><p class='h7'>{{race.start_date.month}}</p></div>
+                <div class='CalendarDayD'><p>{{race.start_date.day}}</p></div>
+              </div>
+              <div class='CalendarDaysLine'>
+                <p class='h7'>to</p>
+              </div>
+              <div class='CalendarDay'>
+                <div class='CalendarDayM'><p class='h7'>{{race.end_date.month}}</p></div>
+                <div class='CalendarDayD'><p>{{race.end_date.day}}</p></div>
+              </div>
+            </div>
+
+              <div class='RaceLocationsContainer'>
+                <p class='RaceLocation'>{{race.start_loc}}</p>
+                <div class='RaceDistanceLine'>
+                  <p class='h7'>{{race.distance}} {{race.distance_type}} </p>
+                </div>
+                <p class='RaceLocation'>{{race.end_loc}}</p>
+              </div>
+              <!--
+              <h6>Entry Fee:</h6>
+              <p>$ {{race.raceSettings.price}}</p>
+              -->
+            </div>
+            <div class='TucanRaceItemButtons'>
+              <button  (click)="viewRace(race)" *ngIf="race.has_started">Go to Race</button>
+              <button  (click)="viewRace(race)" *ngIf="!race.has_started">Preview Race</button>
+
+               <button  (click)="viewAbout(race)" *ngIf="race.has_started">Race Details</button>
+
+              <b *ngIf="!race.has_started">Come back on race day ({{race.start_date.month}} {{race.start_date.day}}).</b>
+            </div>
+          </div>
+        </div>
+    </div>
+ </div>

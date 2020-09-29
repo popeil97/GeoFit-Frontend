@@ -1,0 +1,11 @@
+.ContactTitle {
+	margin-top:32px;
+	margin-bottom:0;
+	text-align: center;
+	line-height: initial !important
+}
+
+.ContactTucanImg{
+	max-height: 20%;
+    max-width: 20%;
+}

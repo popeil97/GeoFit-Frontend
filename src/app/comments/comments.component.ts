@@ -27,7 +27,7 @@ export class CommentsComponent implements OnInit {
   }
 
   getNewCommentData(){
-    console.log("getting new comment data");
+ //   console.log("getting new comment data");
 
     //call story service and update Comments data
     this._storyService.getComments(this.storyID).then((data) => {
@@ -40,7 +40,7 @@ export class CommentsComponent implements OnInit {
         commentData[i].created_ts = new_ts;
       }
 
-      console.log("Comment data: ", commentData);
+  //    console.log("Comment data: ", commentData);
       this.comments = commentData;
     })
   }

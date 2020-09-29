@@ -1,0 +1,98 @@
+.cartItem, .orderItem {
+    margin-bottom:8px;
+}
+.cartItem:last-child, .orderItem:last-child {
+    margin-bottom:0;
+}
+.cartItemContents {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+.cartItemImage {
+    flex-shrink: 0;
+    width:160px;
+    margin-right:16px;
+}
+.cartItemDescription {
+    flex-grow: 1;
+    flex-basis: auto;
+    width:auto;
+
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: nowrap;
+}
+.cartDescriptionPriceContainer {
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-basis: 100%;
+    width:100%;
+
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.cardPriceContainer {
+    margin-left:8px;
+    
+    flex-shrink:0;
+    flex-grow:0;
+    flex-basis: auto;
+    width:auto;
+}
+.cartSizeContainer {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.cartSelectSize {
+    margin-left:8px;
+    margin-right:8px;
+}
+.addButtonDisabled {
+    opacity:0.5
+}
+.addButtonDisabled:hover {
+    cursor:initial;
+}
+
+
+.orderItemContents {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: nowrap;
+}
+.orderItemImage {
+    flex-shrink: 0;
+    flex-basis: 80px;
+    width:80px;
+    margin-right:16px;
+}
+.orderItemDescription {
+    flex-grow:1;
+    flex-basis: auto;
+    margin-left:16px;
+    margin-right:16px;
+}
+.removeButtonContainer {
+    flex-grow:0;
+    flex-shrink: 0;
+    flex-basis: auto;
+
+    display:flex;
+    flex-direction: row;
+    justify-content:flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}

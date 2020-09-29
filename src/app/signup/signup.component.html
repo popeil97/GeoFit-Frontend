@@ -1,1 +1,1 @@
-<button mat-button (click)="openDialog()">SIGN UP</button>
+<button mat-button *ngIf="this._authService.isLoggedIn()" (click)="openDialog()">Register for the race</button>

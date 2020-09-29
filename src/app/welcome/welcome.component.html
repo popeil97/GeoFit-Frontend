@@ -1,0 +1,44 @@
+<div class='PageContainer'>
+  <div class='PageSegment PageHeaderSegment'>
+    <h1 class="PageHeaderSegmentTitle">Welcome to Tucan Fitness!</h1>
+  </div>
+  
+    <div class='WelcomeContainer PageSegment'>
+      <div class='WelcomeMain'>
+         <h2>How does this all work?</h2>
+          <p>Welcome to Tucan Fitness! When your race starts, you will have access to a digital race where you can strive to win, interact with other racers, and visualize yours and others progress on a virtual map. We integrate with Strava to allow easy access to your fitness activities.
+
+          Until race day begins and you have access to the race on your profile, you can sit back and relax (or train like crazy). <b>We recommend that you use this time to do the action items below to best prep for race day.</b>
+          </p>
+      </div>
+     <!-- <div class='WelcomeImg'>
+      </div> -->
+    </div>
+
+  <div class='WelcomeContainer PageSegment'>
+    <div class='WelcomeInfo'>
+      <h2>Upload a profile pic</h2>
+      <p>Let other people in your race know who you are!</p>
+      <app-profile-pic [userData]="this.userData"></app-profile-pic>
+    </div>
+    <div class='WelcomeInfo'>
+      <h3>Read our FAQs</h3>
+      <p>Find out more about our platform and business</p>
+      <img src= "../../assets/faq.PNG" class='FaqImg'>
+      <br>
+      <button routerLink='/faqs'>FAQs</button>
+    </div>
+  </div>
+  
+  <div class='WelcomeContainer PageSegment'>
+    <div  *ngIf="this._authService.isLoggedIn()">
+  <h3>Integrate Strava</h3>
+  <p>Import your fitness activities from your favorite fitness app! If you don’t have Strava already, download it onto your phone from the app store, and make an account on your phone. Once you have an account, press the button below to connect it to our platform. This will allow your Strava activities to show up into the race. Only activities recorded after race start will be counted towards your race. Before race day, if you aren’t familiar with Strava, make sure you know how to <a href="https://support.strava.com/hc/en-us/articles/216917397-Recording-an-Activity" target="_blank">record your activities on your phone</a>. </p>
+    <app-stravauth></app-stravauth>
+  </div>
+    
+  </div>
+
+  <div class='PageSegment'>
+  <button  [routerLink]="['/']">Go to my profile</button>
+</div>

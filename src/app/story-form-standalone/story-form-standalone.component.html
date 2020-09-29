@@ -1,0 +1,14 @@
+<div>
+
+  <input type="text" id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="Type anything here..." style="width:100%;">
+
+  <input type="file" id="storyImage" name="storyImageField" accept="image/*" (change)="onSelectFile($event)">
+
+      <div class="wrapper" *ngIf="storyImage">
+        <img [src]="this.storyImage" width="100px">
+      </div>
+
+  
+  <button (click)="uploadStory()">Add Story</button>
+  <button class="CloseLogin" (click)="closeDialog()">Close</button> 
+</div>

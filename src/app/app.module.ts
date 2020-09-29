@@ -54,13 +54,14 @@ import { CommentsFormComponent } from './comments-form/comments-form.component';
 import { RaceSettingsComponent } from './race-settings/race-settings.component';
 import { StoryFormComponent } from './story-form/story-form.component';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { LoginComponent, LoginDialogContent } from './login/login.component';
+import { RegisterComponent, RegisterDialogContent} from './register/register.component';
 import { PaypalComponent } from './paypal/paypal.component';
 import { SignupComponent } from './signup/signup.component';
 import { SignupDialogContent } from './signup/signup.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
 import { SwagComponent, SwagDialogContent } from './swag/swag.component';
+
 
 import { createCustomElement } from '@angular/elements';
 import { PopupComponent } from './popup/popup.component';
@@ -90,12 +91,35 @@ import { ReportFormComponent } from './report-form/report-form.component';
 import { StoryDeleteDialogComponent } from './story-delete-dialog/story-delete-dialog.component';
 import { RaceDashboardComponent } from './race-dashboard/race-dashboard.component';
 import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.component';
+
+import { WelcomeComponent } from './welcome/welcome.component';
+import { AboutTucanComponent } from './about-tucan/about-tucan.component';
+import { FaqPageComponent } from './faq-page/faq-page.component';
+import { ContactPageComponent } from './contact-page/contact-page.component';
+import { DialogSkeletonComponent,DialogSkeletonDialogContent } from './dialog-skeleton/dialog-skeleton.component';
+import { WhyInfoComponent,WhyInfoDialogContent} from './why-info/why-info.component';
+
 import { SwagListComponent } from './swag-list/swag-list.component';
 import { SwagItemComponent } from './swag-item/swag-item.component';
 import { CartEditComponent } from './cart-edit/cart-edit.component';
 import { MapRouteComponent } from './map-route/map-route.component';
+
+import { 
+  ViewFollowComponent, 
+  ///ViewFollowDialogContent 
+} from './view-follow/view-follow.component';
+import { ShowFollowersComponent } from './show-followers/show-followers.component';
+import { ModalComponent } from './modal/modal.component';
+import { Login2Component } from './login2/login2.component';
+import { Register2Component } from './register2/register2.component';
+
 import { RouteSelectComponent } from './route-select/route-select.component';
 import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderboard.component';
+import { Signup2Component } from './signup2/signup2.component';
+import { RaceTypeComponent } from './race-type/race-type.component';
+import { UserRaceComponent } from './user-race/user-race.component';
+import { LogActivityComponent } from './log-activity/log-activity.component';
+import { StoryFormStandaloneComponent } from './story-form-standalone/story-form-standalone.component';
 
 
 @NgModule({
@@ -131,7 +155,9 @@ import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderbo
     StoryFormComponent,
     ProfileFormComponent,
     LoginComponent,
+    LoginDialogContent,
     RegisterComponent,
+    RegisterDialogContent,
     PaypalComponent,
     SignupComponent,
     SignupDialogContent,
@@ -166,13 +192,34 @@ import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderbo
     StoryDeleteDialogComponent,
     RaceDashboardComponent,
     RaceStoryManageComponent,
+    WelcomeComponent,
+    AboutTucanComponent,
+    FaqPageComponent,
+    ContactPageComponent,
+    DialogSkeletonComponent,
+    DialogSkeletonDialogContent,
+    WhyInfoComponent,
+    WhyInfoDialogContent,
+
     SwagListComponent,
     SwagItemComponent,
     CartEditComponent,
     MapRouteComponent,
+    ViewFollowComponent,
+    //ViewFollowDialogContent,
+    ShowFollowersComponent,
+    ModalComponent,
+    Login2Component,
+    Register2Component,
     RouteSelectComponent,
     HybridLeaderboardComponent,
+    Signup2Component,
+    RaceTypeComponent,
+    UserRaceComponent,
+    LogActivityComponent,
+    StoryFormStandaloneComponent,
       ],
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -210,7 +257,13 @@ import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderbo
                   SnackbarComponent, 
                   StoryDialogComponent,
                   ReportFormComponent,
-                  StoryDeleteDialogComponent] 
+                  StoryDeleteDialogComponent,
+                  LoginDialogContent,
+                  RegisterDialogContent,
+                  DialogSkeletonDialogContent,
+                  WhyInfoDialogContent,
+                  //ViewFollowDialogContent
+                  ] 
 })
 export class AppModule { 
   constructor(private injector: Injector) {

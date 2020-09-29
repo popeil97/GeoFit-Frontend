@@ -4,21 +4,12 @@
   <div *ngIf="use=='race' && this._authService.isLoggedIn() && this.progress">
     <table class="mat-table" style="background-color:rgba(44, 0, 126,0.08);">
       <tr class="mat-row">
-        <ng-container matColumnDef="ProfilePic" style="padding: 10px;">
-          <td mat-cell>
-            <img width="50px" src="{{ progress.profile_url }}">
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="Data" style="padding: 10px;">
-          <td mat-cell>
-            <app-user-profile-nav [username]=progress.username [displayName]=progress.display_name></app-user-profile-nav><b style="">: Post a Story</b>
-            <app-story-form [raceID]="ID" (storyPostedEvent)="newStoryPosted($event)"></app-story-form>
-          </td>
-        </ng-container>
+       <button (click)="openModal('custom-modal-6')">Make a Post</button>
       </tr>
     </table>
   </div>
-  
+
+  <p *ngIf="feedItems.length==0">Nothing yet! </p>
   <table mat-table [dataSource]="feedItems" class="feedTable">
     
     <ng-container matColumnDef="ProfilePic" style="padding: 10px;">

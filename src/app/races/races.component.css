@@ -1,3 +1,145 @@
+.TucanRaceItem {
+  display:block;
+  /*
+  padding:16px;
+  box-sizing: border-box;
+  */
+  margin-bottom:8px;
+  
+  box-shadow: 0px 0px 5px 2px rgb(200,200,200);
+}
+
+.TucanRaceItemContents {
+  position: relative;
+  width:100%;
+  height:auto;
+  padding:32px;
+  box-sizing: border-box;
+}
+  .TucanRaceItemHeader {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    margin-bottom:16px;
+  }
+  .TucanRaceItemDescription {
+    margin-bottom:16px;
+  }
+  .TucanRaceItemDetails {
+    width:100%;
+    height:auto;
+    margin-bottom:16px;
+
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: nowrap;
+  }
+    .TucanRaceItemSpecificInfo {
+      flex-grow:1;
+
+      display:flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: stretch;
+      flex-wrap: nowrap;
+    }
+      .TucanRaceItemRaceInfoBlock {
+        position:relative;
+
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+      }
+        .TucanRaceItemRaceInfoBlockItem {
+          position: relative;
+          z-index: 2;
+          flex-grow:0;
+          flex-shrink:0;
+        }
+        .TucanRaceItemRaceLine {
+          flex-grow: 1;
+          width:100%;
+          border-bottom:1px solid rgb(200,200,200);
+          margin-left:32px;
+          margin-right:32px;
+        }
+          .TucanRaceItemRaceLine p {
+            text-align:center;
+            margin:0 !important;
+            opacity:0.5;
+          }
+    .TucanRaceItemButtons {
+      flex-shrink:0;
+      flex-grow: 0;
+      flex-basis: 200px;
+      margin-left:32px;
+
+      display:flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+      flex-wrap: nowrap;
+    }
+    .TucanRaceItemButtons button, .TucanRaceItemButtons .button {
+      margin-bottom:8px;
+    }
+
+    .TucanRaceItemBasicInfo, .TucanRaceItemBasicButtons {}
+    .TucanRaceItemSpecificButtons {
+      flex-shrink: 0;
+      width:25%;
+      min-width:240px;
+
+      margin-right:8px;
+      box-sizing: border-box;
+    }
+
+.TucanRaceItemImageContainer {
+  position: relative;
+  width:100%;
+  height:80px;
+  overflow:hidden;
+}
+    .TucanRaceItemImage {
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      /*
+      width:160px;
+      margin-left:16px;
+      float:right;
+      */
+    }
+
+    .TucanRaceItemImageSmall {
+      position:absolute;
+      top:0;
+      left:0;
+      width:40%;
+      /*
+      width:160px;
+      margin-left:16px;
+      float:right;
+      */
+    }
+    .TucanRaceItemSpecificInfo h3 {
+      margin:0;
+      font-weight: bold;
+    }
+    .TucanRaceItemSpecificInfo p {
+      margin-top:0;
+      margin-bottom:8px;
+    }
+
+
 table {
     width: 100%;
   }
@@ -114,3 +256,26 @@ background-color: #2C00A5;
   .example-header-image {
     background-size: cover;
   }
+
+
+@media only screen and (max-width: 992px) {
+  .TucanRaceItemDescription {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .TucanRaceItemDetails {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+  .TucanRaceItemSpecificInfo {
+    width:100%;
+  }
+
+  .TucanRaceItemButtons {
+    
+    width:100%;
+  }
+}
