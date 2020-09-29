@@ -20,6 +20,13 @@
 	margin-bottom:16px;
 }
 
+.RaceSlideshowContents {
+	border-left:2px solid rgb(200,200,200);
+	margin-left:16px;
+	padding-left:8px;
+	box-sizing: border-box;
+}
+
 .MapPreview {
 	position: relative;
 	width:100%;
@@ -36,15 +43,18 @@
 	width:100%;
 	height:320px;
 }
-.RaceLocationsContainer {
-	width:100%;
-	margin-bottom:16px;
+.RaceLocationsContainer, .RaceRouteInfo {
+	width:80%;
 }
 
 .RaceButtonsContainer {
 	display:flex;
 	flex-direction: row;
 	justify-content: flex-start;
-	align-items: flex-start;
+	align-items: center;
 	flex-wrap: wrap;
+}
+.RaceButtonsContainer button, .RaceButtonsContainer .button {
+	margin-right:8px;
+	margin-bottom:8px;
 }

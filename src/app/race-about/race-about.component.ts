@@ -201,6 +201,7 @@ export class RaceAboutComponent implements OnInit {
     //console.log('race-about - getUserData()',this.aboutData.owner);
     this._userProfileService.getUserProfile(this.aboutData.owner.username).then((data) => {
       this.userData = data as UserData;
+      this.userData.email_mailto = `mailto:${this.userData.email}`;
       //console.log("New user data race about pg: ", this.userData);
     });
   }
@@ -383,4 +384,5 @@ interface UserData {
   location_visibility:boolean;
   about_visibility:boolean;
   email_visibility:boolean;
+  email_mailto:string;
 }

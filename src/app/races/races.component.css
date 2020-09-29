@@ -78,6 +78,7 @@
     .TucanRaceItemButtons {
       flex-shrink:0;
       flex-grow: 0;
+      flex-basis: 200px;
       margin-left:32px;
 
       display:flex;
@@ -86,9 +87,11 @@
       align-items: stretch;
       flex-wrap: nowrap;
     }
-
-    .TucanRaceItemBasicInfo, .TucanRaceItemBasicButtons {
+    .TucanRaceItemButtons button, .TucanRaceItemButtons .button {
+      margin-bottom:8px;
     }
+
+    .TucanRaceItemBasicInfo, .TucanRaceItemBasicButtons {}
     .TucanRaceItemSpecificButtons {
       flex-shrink: 0;
       width:25%;

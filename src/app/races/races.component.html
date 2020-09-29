@@ -43,7 +43,7 @@
               <div class='RaceLocationsContainer'>
                 <p class='RaceLocation'>{{race.start_loc}}</p>
                 <div class='RaceDistanceLine'>
-                  <p class='h7'>{{race.distance}}km</p>
+                  <p class='h7'>{{race.distance}}mi</p>
                 </div>
                 <p class='RaceLocation'>{{race.end_loc}}</p>
               </div>
@@ -53,15 +53,20 @@
               -->
             </div>
             <div class='TucanRaceItemButtons'>
-              <a class="btn" (click)="viewAbout(race)">View Race Details</a>
-              <a class="btn"  (click)="viewRace(race)" *ngIf="race.has_started && race.joined">Go to Race</a>
-              <a class="btn"  (click)="viewRace(race)" *ngIf="race.has_started && !race.joined ">Preview Race</a>
+              <button (click)="viewAbout(race)">View Race Details</button>
+              <button (click)="viewRace(race)" *ngIf="race.has_started && race.joined">Go to Race</button>
+              <button (click)="viewRace(race)" *ngIf="race.has_started && !race.joined ">Preview Race</button>
               <!-- this is just temporary for now, have to come back in and fix the inputs -->
               <!--   <app-signup [price]="race.raceSettings.price" [hasTags]="race.raceSettings.has_entry_tags"[race_id]="race.id" (signupCallback)="signupCallback($event)" (click)="trySignup()"></app-signup> -->
-  
-              <button *ngIf="!this._authService.isLoggedIn(); else OtherRegisterButton" (click)="openModal('custom-modal-2',race)">Register for Race</button>
-              <ng-template #OtherRegisterButton><button *ngIf="!race.joined" (click)="openModal('custom-modal-3',race)">Register for Race</button></ng-template>
-              <b *ngIf="race.joined">You've registered for this race. </b><b *ngIf="!race.has_started">Come back on race day ({{race.start_date.month}} {{race.start_date.day}}).</b>
+              
+              <ng-template [ngIf]="!this._authService.isLoggedIn()" [ngIfElse]="OtherRegisterButton">
+                <button (click)="openModal('custom-modal-2',race)">Register for Race</button>
+              </ng-template>
+              <ng-template #OtherRegisterButton>
+                <button *ngIf="!race.joined" (click)="openModal('custom-modal-3',race)">Register for Race</button>
+              </ng-template>
+              <p *ngIf="race.joined" class='h7'>You've registered for this race.</p>
+              <p *ngIf="!race.has_started" class='h7'>Come back on race day ({{race.start_date.month}} {{race.start_date.day}}).</p>
             </div>
           </div>
         </div>
