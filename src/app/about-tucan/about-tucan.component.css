@@ -5,9 +5,27 @@
 	align-items: flex-start;
 	flex-wrap: nowrap;
 }
-	.AboutTucanValue {
-		width:30%;
-	}
+
+.AboutTucanFeaturesContainer {
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: nowrap;
+}
+
+.AboutTucanFeatureImg{
+	max-height: 100%;
+    max-width: 100%;
+}
+
+.AboutTucanValue {
+	width:30%;
+}
+
+.AboutTucanFeatures {
+	width:25%;
+}
 .AboutTucanTeam {
 	display:flex;
 	flex-direction: row;
@@ -28,8 +46,16 @@
 		justify-content: flex-start;
 		align-items: stretch;
 	}
+
 		.AboutTucanValue {
 			width:100%;
+		}
+		.AboutTucanFeatures {
+			width:100%;
+		}
+		.AboutTucanFeatureImg{
+			max-height: 25%;
+		    max-width: 25%;
 		}
 
 }

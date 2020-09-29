@@ -43,8 +43,8 @@
         <div class="TucanNavigationButtonSegment">
           <div *ngIf="this._authService.isLoggedIn()">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="showNotifications()">
-                <mat-icon *ngIf="notifications.length>0" class="roboto-purple" matBadge="{{notifications.length}}" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below">circle_notifications</mat-icon> 
-                <mat-icon *ngIf="notifications.length==0" class="roboto-purple" >circle_notifications</mat-icon>
+                <mat-icon *ngIf="notifications.length>0" matBadge="{{notifications.length}}" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below">circle_notifications</mat-icon> 
+                <mat-icon *ngIf="notifications.length==0" >circle_notifications</mat-icon>
                 Notifications
               </a>
           </div>
