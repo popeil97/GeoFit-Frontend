@@ -1,0 +1,14 @@
+<form>
+  <div class="form-group" style="text-align: left; padding: 5px;">
+    <h4>{{title}}</h4>
+    <!-- <input class="form-control" type="text" formControlName="tag" [matAutocomplete]="maxTeamSizeAuto"/> -->
+    <mat-form-field appearance="fill">
+      <mat-select [(value)]="selectedRoute">
+        <mat-option *ngFor="let route of routes" [value]="route" (click)="onRouteSelect(route)">
+          {{ route.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+  </div>
+</form>

@@ -47,4 +47,8 @@ export class LeaderboardService {
     return this.http.post(environment.apiUrl + '/api/organization-leaderboard/',{race_id:this.raceID}).toPromise();
   }
 
+  public getHybridLeaderboard(race_id:number,page:number) {
+    return this.http.post(environment.apiUrl + '/api/hybrid-leaderboard/',{race_id:race_id,page:page}).toPromise();
+  }
+
 }

@@ -99,9 +99,85 @@ export class MapComponent implements AfterViewInit,OnChanges {
     this.initialized = true;
   }
 
+  public getUserPinData(raceID:number,page:number) {
+    console.log('getting user data')
+    return this._raceService.getUserRacestats(raceID,page).then((data:any) =>{
+      this.routeData[raceID].userData = data.users_data;
+
+      this.loading = false;
+    });
+  }
+
 
   public getMapData(){
     this.loading=true;
+
+  //   this.userData = [];
+  //   let workers = [] as any;
+
+  //   this._mapService.getUserPinSize(this.raceID).then((resp) => {
+  //     console.log('USER PIN SIZE RESP:',resp);
+  //     let pages = resp['pages'];
+
+  //     for(var page = 1; page <= pages; page++) {
+  //       let worker = this.getUserPinData(page);
+  //       workers.push(worker);
+  //     }
+
+  //     console.log('WORKERS:',workers)
+
+  //     // Promise.all(workers).then((vals:any) => {
+  //     //   console.log('DONE LOADING PINS:',vals)
+  //     //   vals.forEach((val) => {
+  //     //     this.userData = this.userData.concat(val['users_data']);
+  //     //   });
+
+  //     //   console.log('ALL USERS DATA:',this.userData)
+
+  //     //   if (this.displayUsers){
+  //     //     this.createUserPins(false);
+  //     //   }
+  //     //   this.loading = false;
+  //     // })
+  //   });
+
+    
+
+  //   this._mapService.getOrgPinStats(this.raceID).then((data) => {
+  //     console.log('ORG PINSSSS DATAAAAA',data);
+  //     let orgPinData = data as OrgPinData;
+  //     this.orgData = orgPinData.org_pins;
+  //   })
+    
+  //   this._mapService.getMapData(this.raceID).then((data) => {
+  //     let mapData = data as MapData;
+
+  //     //Get and apply coordinates
+  //     this.coordinates = mapData.coords;
+  //     this.applyCoordinates();
+
+  //     //Get and apply route pins
+  //     this.routePins = mapData.route_pins;
+      
+
+  //     this.loading=true;
+
+      
+  //   });
+
+  // }
+
+  // public getUserPinData(page:number) {
+  //   console.log('getting user data')
+  //   return this._raceService.getUserRacestats(this.raceID,page).then((data) =>{
+  //     this.userData = this.userData.concat(data['users_data']);
+
+  //     if (this.displayUsers){
+  //       this.createUserPins(false);
+  //     }
+  //     this.loading = false;
+  //   });
+  // }
 
     //To prevent old data from remaining on map if MapRouteComponent child
     //is deleted, pre-emptively clear pins
@@ -136,12 +212,30 @@ export class MapComponent implements AfterViewInit,OnChanges {
         this.routeData[raceID].coords = mapData.coords;
         this.routeData[raceID].route_pins = mapData.route_pins;
           
-        this._raceService.getUserRacestats(raceID).then((data:any) => {
-          this.routeData[raceID].userData = data.users_data;
-          console.log("User pin data: ", this.routeData[raceID].userData)
+        // this._raceService.getUserRacestats(raceID).then((data:any) => {
+        //   this.routeData[raceID].userData = data.users_data;
+        //   console.log("User pin data: ", this.routeData[raceID].userData)
           
-          this.loading=false;
-        });
+        //   this.loading=false;
+        // });
+
+      let workers = [] as any;
+
+      this._mapService.getUserPinSize(raceID).then((resp) => {
+        console.log('USER PIN SIZE RESP:',resp);
+        let pages = resp['pages'];
+
+        for(var page = 1; page <= pages; page++) {
+          let worker = this.getUserPinData(raceID,page);
+          workers.push(worker);
+        }
+
+        console.log('WORKERS:',workers)
+
+      });
+
+
+
         
       });
     };

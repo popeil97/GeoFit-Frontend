@@ -37,7 +37,7 @@ export class RaceAboutComponent implements OnInit {
   public coords:any;
   public all_user_data:Array<FeedObj>;
   public followedIDs:number[];
-  hasPaid:Boolean;
+  // hasPaid:Boolean;
   hasMerch:Boolean;
   popup:Boolean;
   hasStarted:Boolean;
@@ -89,7 +89,7 @@ export class RaceAboutComponent implements OnInit {
       this.isOwner = resp['isOwner'];
       this.isModerator = resp['isModerator'];
       this.hasJoined = resp['hasJoined'];
-      this.hasPaid = resp['hasPaid'];
+      // this.hasPaid = resp['hasPaid'];
       this.hasStarted = resp['hasStarted'];
       this.hasMerch = this.raceSettings.has_swag;
 

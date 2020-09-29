@@ -26,4 +26,11 @@ export class MapService {
     return this.http.post(environment.apiUrl + '/api/get-org-pins/',{race_id:raceID}).toPromise();
   }
 
+  public getUserPinSize(raceID:number) {
+    let headers = new HttpHeaders();
+    let url = '/api/get-userpin-size/?race_id=%s';
+    let url_formatted = url.replace('%s',raceID.toString());
+    return this.http.get(environment.apiUrl + url_formatted).toPromise();
+  }
+
 }

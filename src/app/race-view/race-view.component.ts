@@ -41,10 +41,11 @@ export class RaceViewComponent implements OnInit {
   raceID:number;
 
   //Child race IDs (same as parent if no child IDs)
-  public raceIDs:number[];
+  public raceIDs:number[] = [];
 
   //Info of all child races if present (else just parent race)
-  public childRaceData: ChildRaceData[];
+  public childRaceData: ChildRaceData[] = [];
+  public leaderboardRouteFilter: ChildRaceData = {id:this.raceID,name:"All"};
 
   //Current race ID selected by user. If race has no children, this always equals
   //ID of parent race
@@ -70,6 +71,8 @@ export class RaceViewComponent implements OnInit {
     isEdit:false,
     team_id:null
   };
+
+  public race:any;
 
   //User access permissions
   public userRegistered:Boolean = false;
@@ -113,6 +116,11 @@ export class RaceViewComponent implements OnInit {
     
 
     this.getRaceState();
+  }
+
+  setLeaderboardRouteFilter(route:ChildRaceData) {
+    this.leaderboardRouteFilter = route;
+    console.log('ROTUE CHANGED TO ', this.leaderboardRouteFilter);
   }
 
   setLeaderboardTagID(tagFilterStruct:any): void {
@@ -195,19 +203,20 @@ export class RaceViewComponent implements OnInit {
       let raceData = data as RaceData;
       this.userRegistered = raceData.user_stat!=null;
       this.progress = raceData.progress;
+      this.race = raceData.race;
 
-      if(this.progress.distance_remaining <= 0)
-      {
-          confetti.create()({
-          particleCount: 5000,
-          spread: 900,
+      // if(this.progress.distance_remaining <= 0)
+      // {
+      //     confetti.create()({
+      //     particleCount: 5000,
+      //     spread: 900,
           
-          origin: {
-              y: (1),
-              x: (0.5)
-          }
-        });
-      }
+      //     origin: {
+      //         y: (1),
+      //         x: (0.5)
+      //     }
+      //   });
+      // }
 
       this.num_activities = 0;
       this.followedIDs = raceData.followedIDs;
@@ -219,6 +228,7 @@ export class RaceViewComponent implements OnInit {
       this.userStat = raceData.user_stat;
       this.isOwnerOrModerator = raceData.is_mod_or_owner;
       this.childRaceData = raceData.child_race_dict;
+      this.childRaceData.unshift({id:this.raceID,name:'All'});
 
       this.loading = false;
 
@@ -285,7 +295,7 @@ interface RaceData {
   child_race_dict: ChildRaceData[];
 }
 
-interface ChildRaceData {
+export interface ChildRaceData {
   id: number,
   name: string,
 }

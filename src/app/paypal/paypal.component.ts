@@ -14,8 +14,7 @@ export class PaypalComponent implements AfterViewChecked {
   loading: Boolean = false;
   @Output() transactionAlert: EventEmitter<any> = new EventEmitter();
   @Input() price:string;
-  @Input() race_id: number;
-  @Input() paymentType: PaymentType;
+  @Input() race_id:number = 1;
   paypalConfig:any;
   paymentError:Boolean;
 
@@ -23,48 +22,25 @@ export class PaypalComponent implements AfterViewChecked {
 
     this.paypalConfig = {
       env:'production',
-      client: {
-        production: 'AQTMOSPwrQ-akqB85-nh8HKgQajoyuXC-AebVOzbqpeQYkXNLCqvV_Y5Bx6NasZxra8GGT_VU4n4M4xy'
-      },
-      commit:true,
       createOrder: (data,actions) => {
-        
-        console.log('PAYMENT TYPE:',this.paymentType);
-        return actions.order.create({
-          purchase_units: [{
-            amount: { value: this.price, currency:'USD' }
-          }]
-        });
+        console.log('WAS PAYMENT');
+        return this.getOrderID().then((resp) => {
+          console.log('PAYMENT ID IS:',resp['id']);
+          return resp['id'];
+        })
       },
+
   
       onApprove: (data,actions) => {
-        return actions.order.capture().then((details) => {
-          console.log('PAYMENT AUTH:',details)
-          let compStr = "COMPLETED";
-          this.loading = false;
-          
-          if(details.status.localeCompare("COMPLETED") == 0) {
-            let payment:Payment = {} as Payment
-            payment.status = details.status;
-            payment.paid = details.purchase_units[0].amount.value;
-            payment.currency = details.purchase_units[0].amount.currency_code;
-            payment.payment_id = details.id;
-            payment.race_id = Number(this.race_id);
-            payment.payment_type = this.paymentType;
-            console.log('PAYMENT OBJ:',payment);
-            this.savePayment(payment).then((resp) => {
-              console.log('CONFIRMED FROM SERVER:',resp);
-              let payment_id = resp['id'];
-              this.transactionAlert.emit({data:{payment_id:payment_id},success:true,type:'PAYMENT'} as SignupCallbackStruct);
-              
-            });
-            
+        console.log('WAS AUTHORIZED',data);
+        this._paymentsService.captureOrder(this.race_id,data['orderID']).then((resp) => {
+          // GO GATORS
+          if(resp['success']) {
+            let successCallback = {} as any;
+            successCallback.success = true;
+            successCallback.type = 'PAYMENT';
+            this.transactionAlert.emit(successCallback);
           }
-  
-          else {
-            this.transactionAlert.emit({data:{},success:false,type:'PAYMENT'} as SignupCallbackStruct);
-          }
-  
         });
       },
 
@@ -75,6 +51,10 @@ export class PaypalComponent implements AfterViewChecked {
     }
 
 
+  }
+
+  getOrderID():Promise<any> {
+    return this._paymentsService.getOrderID(this.price);
   }
 
   
