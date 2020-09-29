@@ -1,4 +1,7 @@
 import { Component, OnInit,Input } from '@angular/core';
+import { RaceService } from '../race.service';
+import * as _ from 'lodash';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-user-race',
@@ -7,11 +10,69 @@ import { Component, OnInit,Input } from '@angular/core';
 })
 export class UserRaceComponent implements OnInit {
   @Input() userData: UserData;
-  constructor() { }
+  constructor(private raceService: RaceService,private router:Router,) { }
+
+  public races:any[] = null;
+  public userRaces:any[];
+  public racesData:any;
+
+  private monthKey = {
+    '1':'Jan.',
+    '2':'Feb.',
+    '3':'Mar.',
+    '4':'Apr.',
+    '5':'May',
+    '6':'June',
+    '7':'July',
+    '8':'Aug.',
+    '9':'Sep.',
+    '10':'Oct.',
+    '11':'Nov.',
+    '12':'Dec.',
+  }
 
   ngOnInit() {
-  	console.log(this.userData);
+  	 this.raceService.getRaces({}).subscribe(
+      data => {
 
+        this.racesData = data;
+        console.log('USER RACE DATA:',this.racesData);
+        this.races = _.filter(this.racesData.races,(race:any) => {
+            race.start_date = this.ProcessDate(race.start_date);
+            race.end_date = this.ProcessDate(race.end_date);
+        //    console.log("RACE SET",race);
+            return race;    
+        });
+         
+       this.userRaces = _.filter(this.racesData.races,(race:any) => {
+          console.log(race,race.joined);
+          if(race.joined) {
+            return race;
+          }
+        });
+        console.log('USER RACES:',this.userRaces);
+        
+      }
+    )
+
+  }
+
+  ProcessDate = (date = null) => {
+    if (date == null) return {month:null,day:date}
+    const dateComponents = date.split('-');
+    return {month:this.monthKey[dateComponents[0]],day:dateComponents[1]}
+  }
+
+  viewRace(race:any) {
+//     console.log('SELECTED RACE:',race);
+
+    // set race in race service
+
+    this.router.navigate(['/race',{name:race.name,id:race.id}]);
+  }
+
+  viewAbout(race:any) {
+    this.router.navigate(['/about',{name:race.name,id:race.id}]);
   }
 
 }

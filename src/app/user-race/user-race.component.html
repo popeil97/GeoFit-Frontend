@@ -1,37 +1,48 @@
-<div *ngIf="this.userData != null; else RaceLoadingMessage">
-	<h2 *ngIf="this.userData.is_me; else otherUserRaces">Your Races</h2>
-	<ng-template #otherUserRaces><h2>{{this.userData.first_name}}'s Races</h2></ng-template>
-	<div *ngIf="userRaces==null"></div>
-	<div *ngIf="userRaces!=null&&userRaces.length>0; else noRacesDisplay">
-	  <div *ngFor="let race of userRaces">
-	    <div *ngIf="userRaces.length>0 &&this._authService.isLoggedIn()">  
-	      <h3>Race Type:</h3>
-	      <div *ngIf="race.race_type == 1">
-	        <i class="material-icons" style="color:#BC164D;">directions_run</i> 
-	      </div>
-	      <div *ngIf="race.race_type == 2">
-	        <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
-	      </div>
-	      <div *ngIf="race.race_type == 3">
-	        <i class="material-icons" style="color:#BC164D;">directions_run</i> <i class="material-icons" style="color:#BC164D;">directions_bike</i> 
-	      </div>
-	      <h3 >Race img:</h3>
-	      <img mat-card-image style="width: 255px;" src="{{race.race_image}}" alt="Race">
-	      <h3>Start Location:</h3>
-	      <p>{{race.start_loc}}</p>
-	      <h3>End Location:</h3>
-	      <p>{{race.end_loc}}</p>
-	      <h3>Start Date:</h3>
-	      <p>{{race.start_date}}</p>
-	      <h3>End Date:</h3>
-	      <p>{{race.end_date}}</p>
-	      <h3>Distance:</h3>
-	      <p>{{race.distance}}</p>
-	      <a class="btn"(click)="viewRace(race)" *ngIf="race.has_started">GO TO RACE</a>
-	      <p *ngIf="!race.has_started">Come back on race day ({{race.start_date}})! </p>
-	      <a class="btn" (click)="viewAbout(race)">ABOUT RACE</a>
-	    </div>
-	  </div>
-	</div>
-	<ng-template #noRacesDisplay><p>You currently do not have any races under your belt. To find races you may be interested in, head over to <a routerLink='/races'>Public Races</a>.</p></ng-template>
-</div>
+<div *ngFor="let race of userRaces" class="TucanRaceItem">
+        <div class='TucanRaceItemContents'>
+          
+          <div class='TucanRaceItemHeader'>
+            <h2>{{race.name}}</h2>
+            <img class="TucanRaceItemImage" *ngIf="race.race_image != null" src="{{race.race_image}}" height="100" width="100" />
+          </div>
+          
+
+          <div class='TucanRaceItemDetails'>
+            <div class='TucanRaceItemSpecificInfo'>
+              <div class='CalendarDaysContainer'>
+              <div class='CalendarDay'>
+                <div class='CalendarDayM'><p class='h7'>{{race.start_date.month}}</p></div>
+                <div class='CalendarDayD'><p>{{race.start_date.day}}</p></div>
+              </div>
+              <div class='CalendarDaysLine'>
+                <p class='h7'>to</p>
+              </div>
+              <div class='CalendarDay'>
+                <div class='CalendarDayM'><p class='h7'>{{race.end_date.month}}</p></div>
+                <div class='CalendarDayD'><p>{{race.end_date.day}}</p></div>
+              </div>
+            </div>
+
+              <div class='RaceLocationsContainer'>
+                <p class='RaceLocation'>{{race.start_loc}}</p>
+                <div class='RaceDistanceLine'>
+                  <p class='h7'>{{race.distance}} {{race.distance_type}} </p>
+                </div>
+                <p class='RaceLocation'>{{race.end_loc}}</p>
+              </div>
+              <!--
+              <h6>Entry Fee:</h6>
+              <p>$ {{race.raceSettings.price}}</p>
+              -->
+            </div>
+            <div class='TucanRaceItemButtons'>
+              <a class="btn"  (click)="viewRace(race)" *ngIf="race.has_started">Go to Race</a>
+              <a class="btn"  (click)="viewRace(race)" *ngIf="!race.has_started">Preview Race</a>
+
+               <a class="btn"  (click)="viewAbout(race)" *ngIf="race.has_started">Race Details</a>
+
+              <b *ngIf="!race.has_started">Come back on race day ({{race.start_date.month}} {{race.start_date.day}}).</b>
+            </div>
+          </div>
+        </div>
+      </div>
