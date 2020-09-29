@@ -2,7 +2,7 @@
   <button (click)="closeDialog()">Cancel</button>
 
   <ng-template [ngIf]='this.d != null' [ngIfElse]='LoadingFormBlock'>
-    <form class='EditProfileForm' [formGroup]="profileForm">
+    <form class='EditProfileForm' [formGroup]="this.profileForm" (ngSubmit)="this.updateProfile()" novalidate>
       <h2>Edit Profile Info</h2>
       <div class="TucanFormSegment">
         <h6 class='InputLabel'>Profile Picture</h6>
@@ -18,18 +18,25 @@
   
       <div class="TucanFormSegmentContainer">
         <div class="TucanFormSegment">
-          <h6 class='InputLabel'>First Name</h6>
-          <input class="form-control" type="text" placeholder="First Name" value="{{this.d.userData.first_name}}" formControlName="FirstName">
+          <h6 class='InputLabel'>First Name<sup class='h7 red-text'>*</sup></h6>
+          <!--<input class="form-control" type="text" placeholder="First Name" value="{{this.d.userData.first_name}}" formControlName="FirstName">-->
+          <input class="form-control" type="text" placeholder="First Name" formControlName="FirstName">
+          <div *ngIf="profileForm.get('FirstName').invalid && (profileForm.get('FirstName').dirty || profileForm.get('FirstName').touched)">
+            <p *ngIf="f.FirstName.errors.required" class='h7 redText margin-bottom-0px'>First name is required.</p>
+          </div>
+          <!--
           <div *ngIf="profileForm.get('FirstName').invalid && (profileForm.get('FirstName').dirty || profileForm.get('FirstName').touched)">
             <div *ngIf="profileForm.get('FirstName').errors.required">First Name is required.</div>
           </div>
+          -->
         </div>
     
         <div class="TucanFormSegment">
-          <h6 class='InputLabel'>Last Name</h6>
-          <input class="form-control" type="text" placeholder="Last Name" value="{{this.d.userData.last_name}}" formControlName="LastName">
-          <div *ngIf="profileForm.get('LastName').invalid && (profileForm.get('LastName').dirty || profileForm.get('LastName').touched)" class="alert alert-danger">
-            <div *ngIf="profileForm.get('LastName').errors.required">Last Name is required.</div>
+          <h6 class='InputLabel'>Last Name<sup class='h7 red-text'>*</sup></h6>
+          <!--<input class="form-control" type="text" placeholder="Last Name" value="{{this.d.userData.last_name}}" formControlName="LastName">-->
+          <input class="form-control" type="text" placeholder="Last Name" formControlName="LastName">
+          <div *ngIf="profileForm.get('LastName').invalid && (profileForm.get('LastName').dirty || profileForm.get('LastName').touched)">
+            <p *ngIf="profileForm.get('LastName').errors.required" class='h7 redText margin-bottom-0px'>Last Name is required.</p>
           </div>
         </div>
       </div>
@@ -37,9 +44,10 @@
       <div class="TucanFormSegment">
         <div class='SegmentHeaderWithSlider'>
           <h6 class='InputLabel'>About</h6>
-          <mat-slide-toggle formControlName="aboutToggle" style="padding-left:25px;">Show</mat-slide-toggle>
+          <mat-slide-toggle formControlName="aboutToggle">Show</mat-slide-toggle>
         </div>
-        <textarea class="form-control" formControlName="About" rows="3" placeholder="About" value="{{this.d.userData.description}}"  required ></textarea>
+        <!--<textarea class="form-control" formControlName="About" rows="3" placeholder="About" value="{{this.d.userData.description}}"  required ></textarea>-->
+        <textarea class="form-control" formControlName="About" rows="3" placeholder="About" required></textarea>
      </div>
   
   
@@ -47,19 +55,20 @@
       <div class="TucanFormSegment">
         <div class='SegmentHeaderWithSlider'>
           <h6 class='InputLabel'>Location</h6>
-          <mat-slide-toggle formControlName="locationToggle"  style="padding-left:25px;">Show</mat-slide-toggle>
+          <mat-slide-toggle formControlName="locationToggle">Show</mat-slide-toggle>
         </div>
-        <input class="form-control" type="text" placeholder="Location" value="{{this.d.userData.location}}"  formControlName="Location">
-        <div *ngIf="profileForm.get('Location').invalid && (profileForm.get('Location').dirty || profileForm.get('Location').touched)" class="alert alert-danger">
-          <div *ngIf="profileForm.get('Location').errors.required">Location is required.</div>
+        <!--<input class="form-control" type="text" placeholder="Location" value="{{this.d.userData.location}}"  formControlName="Location">-->
+        <input class="form-control" type="text" placeholder="Location" formControlName="Location">
+        <div *ngIf="profileForm.get('Location').invalid && (profileForm.get('Location').dirty || profileForm.get('Location').touched)">
+          <p *ngIf="profileForm.get('Location').errors.maxlength" class='h7 redText margin-bottom-0px'>This must be no more than 30 characters.</p>
         </div>
       </div>
       <div class="TucanFormSegment">
         <div class='SegmentHeaderWithSlider'>
           <h6 class='InputLabel'>Email</h6>
-          <mat-slide-toggle formControlName="emailToggle"  style="padding-left:25px;">Show</mat-slide-toggle>
+          <mat-slide-toggle formControlName="emailToggle">Show</mat-slide-toggle>
         </div>
-        <input class="form-control" type="text" placeholder="{{this.d.userData.email}}" formControlName="Email" readonly>
+        <input class="form-control" type="text" placeholder="{{this.d.userData.email}}" readonly>
       </div>
     </div>
   
@@ -73,7 +82,7 @@
         </select>
       </div>
   -->
-      <button  (click)="updateProfile()">Update</button>
+      <button  (click)="this.updateProfile()">Update</button>
     </form>
   </ng-template>
   <ng-template #LoadingFormBlock>

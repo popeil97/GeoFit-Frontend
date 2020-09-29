@@ -7,7 +7,9 @@
         <div class="UserProfileIdentityContainer">
           <img class="UserProfileImage img-responsive" src="{{userData.profile_url}}" alt=""> 
           <h3 class="UserProfileName">{{userData.first_name}} {{userData.last_name}}</h3>
-          <p class="UserProfileEmail" *ngIf="userData.email_visibility||userData.is_me">{{ userData.email }}</p>
+          <ng-template [ngIf]="userData.email_visibility || userData.is_me">
+            <p class="h7 UserProfileEmail"><span *ngIf="!userData.email_visibility">(hidden) </span>{{ userData.email }}</p>
+          </ng-template>
         </div>
 
          <div *ngIf="this._authService.isLoggedIn()" class='margin-bottom-16px'>
@@ -18,19 +20,24 @@
         </div>
 
         <div *ngIf="userData.about_visibility||userData.location_visibility||userData.is_me" class='margin-bottom-16px'>
-          <div>
-            <p class='h7' *ngIf="userData.about_visibility && userData.description!='N/A'; else descriptionDefault" class="UserProfileDescription">{{ userData.description }}</p> 
+          <div *ngIf="this.userData.about_visibility || userData.is_me ">
+            <ng-template [ngIf]="this.userData.description!='N/A'" [ngIfElse]="descriptionDefault">
+              <p class="h7 UserProfileDescription"><span *ngIf="!this.userData.about_visibility">(hidden) </span>{{this.userData.description}}</p> 
+            </ng-template>
             <ng-template #descriptionDefault><p class='italics h7'>No description available</p></ng-template>
           </div>
-          <div>
-            <span class='h7' *ngIf="userData.location_visibility && userData.location != 'N/A'; else locationDefault">{{ userData.location }}</span>  
-            <ng-template #locationDefault><span class='italics h7'>No location info available</span></ng-template>
+          <div *ngIf="userData.location_visibility || userData.is_me ">
+            <ng-template [ngIf]="userData.location != 'N/A'" [ngIfElse]="locationDefault">
+              <p class='h7'><span *ngIf="!this.userData.location_visibility">(hidden) </span>{{ userData.location }}</p>  
+            </ng-template>
+            <ng-template #locationDefault>
+              <span class='italics h7'>No location info available</span>
+            </ng-template>
           </div>
         </div>
 
         <div *ngIf="this._authService.isLoggedIn()" class='margin-bottom-16px'>
           <div *ngIf="userData.is_me">
-          
             <div>
               <h6>Strava Authentication</h6>
               <app-stravauth></app-stravauth>

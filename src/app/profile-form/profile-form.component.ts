@@ -20,6 +20,8 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   profilePicURL: any;
   distanceTypeOptions: any[];
 
+  public submitted = false;
+
   constructor(
     private _userProfileService: UserProfileService, 
     private sanitizer:DomSanitizer,
@@ -28,6 +30,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   ) {
     this.distanceTypeOptions = ['Mi', 'KM'];
     this.profilePicURL = null;
+
     this.profileForm = new FormGroup({
       ProfilePic: new FormControl(''),
       FirstName: new FormControl('',[
@@ -46,9 +49,6 @@ export class ProfileFormComponent implements OnInit, OnChanges {
       emailToggle: new FormControl(false, [
         Validators.required,
       ]),
-      Email: new FormControl('',[
-        Validators.required,
-      ]),
       locationToggle: new FormControl(false, [
         Validators.required,
       ]),
@@ -59,12 +59,12 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log("INIT PROFILE-FORM");
-    //this.populateForm();
+    //console.log("INIT PROFILE-FORM");
+    this.populateForm();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log("CHANGES");
+    //console.log("CHANGES");
     for(const propName in changes) {
       if(changes.hasOwnProperty(propName)) {
         console.log("PROP", propName);
@@ -80,22 +80,39 @@ export class ProfileFormComponent implements OnInit, OnChanges {
 
   populateForm(): void {
 //     console.log("User data prof: ", this.userData);
-    console.log("CHILD D",this.d);
-    this.profileForm.get('FirstName').setValue(this.d.userData.first_name);
+    //console.log("CHILD D",this.d);
+
+    this.profileForm.controls['FirstName'].patchValue(this.d.userData.first_name);
+    this.profileForm.controls['FirstName'].updateValueAndValidity();
+
     this.profileForm.get('LastName').setValue(this.d.userData.last_name);
+    this.profileForm.get('LastName').updateValueAndValidity();
+
     this.profileForm.get('About').setValue(this.d.userData.description);
+    this.profileForm.get('About').updateValueAndValidity();
+
     this.profileForm.get('Location').setValue(this.d.userData.location);
+    this.profileForm.get('Location').updateValueAndValidity();
+
     this.profileForm.get('locationToggle').setValue(this.d.userData.location_visibility);
+    this.profileForm.get('locationToggle').updateValueAndValidity();
+
     this.profileForm.get('aboutToggle').setValue(this.d.userData.about_visibility);
+    this.profileForm.get('aboutToggle').updateValueAndValidity();
+
     this.profileForm.get('emailToggle').setValue(this.d.userData.email_visibility);
+    this.profileForm.get('emailToggle').updateValueAndValidity();
   }
 
-  updateProfile(): void{
+  get f() { return this.profileForm.controls; }
+
+  updateProfile() {
+
+    this.submitted = true;
     let formClean: ProfileForm;
 
     if (this.profileForm.valid){
       formClean = this.profileForm.value;
-
       //Crop image, and resize image to handle large files
       if (this.profilePicURL){
         this.profilePicURL = this._imageService.squareCropImage(this.profilePicURL);
@@ -114,9 +131,7 @@ export class ProfileFormComponent implements OnInit, OnChanges {
         this._userProfileService.updateProfile(formClean).then((data) => {
          this.modalService.callbackModal(this.id,"profile-done");
         })
-      }
-
-      
+      } 
     }
   }
 
