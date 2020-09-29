@@ -25,7 +25,7 @@
                 <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'following'}">
                     <h3>Following</h3>
                     <ng-template [ngIf]='d.followersData.numFollowing > 0' [ngIfElse]='NoFollowingBlock'>
-                        <div *ngFor="let person of d.followersData.following">
+                        <div *ngFor="let person of d.followersData.followed">
                             <app-show-followers [person]="person"></app-show-followers>
                         </div>
                     </ng-template>

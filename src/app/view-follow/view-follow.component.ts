@@ -50,7 +50,9 @@ export class ViewFollowComponent implements OnInit {
   }
 
   get d() {
+
     const data = this.modalService.getModalData(this.id);
+    console.log("DATA", data);
     return data;
   }
 
