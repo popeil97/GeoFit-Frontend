@@ -128,7 +128,7 @@ button.buttonWithIcon, .button.buttonWithIcon {
   transform:translate(-50%,-50%);
 }
 .TucanFormSegmentContainer, .TucanFormSegment {
-  margin-bottom:16px;
+  margin-bottom:24px;
 }
 .TucanFormSegment {
   width:100%;

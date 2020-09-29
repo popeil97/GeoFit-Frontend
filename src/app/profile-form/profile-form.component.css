@@ -1,3 +1,14 @@
+.EditProfileForm {
+  margin-top:32px;
+  margin-bottom:32px;
+}
+.SegmentHeaderWithSlider {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;

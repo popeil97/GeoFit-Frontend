@@ -20,12 +20,14 @@ export class ProfileFormComponent implements OnInit, OnChanges {
   profilePicURL: any;
   distanceTypeOptions: any[];
 
-  constructor(private _userProfileService: UserProfileService, 
-              private sanitizer:DomSanitizer,
-              private _imageService: ImageService,private modalService: ModalService) {
+  constructor(
+    private _userProfileService: UserProfileService, 
+    private sanitizer:DomSanitizer,
+    private _imageService: ImageService,
+    private modalService: ModalService
+  ) {
     this.distanceTypeOptions = ['Mi', 'KM'];
     this.profilePicURL = null;
-
     this.profileForm = new FormGroup({
       ProfilePic: new FormControl(''),
       FirstName: new FormControl('',[
@@ -44,7 +46,9 @@ export class ProfileFormComponent implements OnInit, OnChanges {
       emailToggle: new FormControl(false, [
         Validators.required,
       ]),
-    
+      Email: new FormControl('',[
+        Validators.required,
+      ]),
       locationToggle: new FormControl(false, [
         Validators.required,
       ]),
