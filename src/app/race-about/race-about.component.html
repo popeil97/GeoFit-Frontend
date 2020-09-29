@@ -65,9 +65,9 @@
 
     <div class='Slideshow'>
       <div class="SlideshowHeader">
-        <button class="SlideshowButton" (click)="SwitchSlideshow('map')">Route Details</button>
-        <button class="SlideshowButton" (click)="SwitchSlideshow('logistics')">Rules &amp; Requirements</button>
-        <button class="SlideshowButton" (click)="SwitchSlideshow('race_director')">About the Race Director</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('map')" id="map-btn">Route Details</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('logistics')" id="logistics-btn">Rules &amp; Requirements</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('race_director')" id="race_director-btn">About the Race Director</button>
       </div>
       <div class="SlideshowContents RaceSlideshowContents">
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'map'}">

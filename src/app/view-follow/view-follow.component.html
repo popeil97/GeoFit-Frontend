@@ -7,8 +7,8 @@
     <ng-template [ngIf]="d != null" [ngIfElse]="LoadingFollowers">
         <div class='Slideshow'>
             <div class="SlideshowHeader">
-                <button class="SlideshowButton" (click)="SwitchSlideshow('followers')">Followers: {{d.followersData.numFollowers}}</button>
-                <button class="SlideshowButton" (click)="SwitchSlideshow('following')">Following: {{d.followersData.numFollowing}}</button>
+                <button class="SlideshowButton" (click)="SwitchSlideshow('followers')" id="followers-btn">Followers: {{d.followersData.numFollowers}}</button>
+                <button class="SlideshowButton" (click)="SwitchSlideshow('following')" id="following-btn">Following: {{d.followersData.numFollowing}}</button>
             </div>
             <div class="SlideshowContents">
                 <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'followers'}">

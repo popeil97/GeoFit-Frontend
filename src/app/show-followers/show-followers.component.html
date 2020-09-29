@@ -1,3 +1,3 @@
 <img src="{{this.picURL}}"  width="30" height="30">
 <app-user-profile-nav [username]=person.username [displayName]=person.full_name></app-user-profile-nav>
-<app-user-follow [userID]=person.user_id [follows]="userData.follows"></app-user-follow>
+<app-user-follow [light]="true" [userID]=person.user_id [follows]="userData.follows"></app-user-follow>

@@ -37,6 +37,7 @@ export class ViewFollowComponent implements OnInit {
       this.numFollowing = this.followed.length;
     });
     */
+
   }
   
   /*
@@ -47,12 +48,32 @@ export class ViewFollowComponent implements OnInit {
 
   SwitchSlideshow = (slide:string) => {
     if (this.slides.indexOf(slide) > -1) this.currentScreen = slide;
+
+     document.getElementById(slide+'-btn').style.backgroundColor = "#36343c";
+     document.getElementById(slide+'-btn').style.color = "#FFFFFF";
+
+    switch(slide) { 
+     case 'followers': { 
+       document.getElementById('following-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('following-btn').style.color = "#000000";
+        break; 
+     } 
+     case 'following': { 
+        document.getElementById('followers-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('followers-btn').style.color = "#000000";
+        break; 
+     } 
+   
+     default: { 
+        break; 
+     } 
+   }
   }
 
   get d() {
 
     const data = this.modalService.getModalData(this.id);
-    console.log("DATA", data);
+    //console.log("DATA", data);
     return data;
   }
 

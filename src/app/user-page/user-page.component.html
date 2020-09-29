@@ -37,8 +37,8 @@
             </div>
           </div>
         </div>
-        <div *ngIf="!userData.is_me">
-          <app-user-follow [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
+        <div *ngIf="!userData.is_me" >
+          <app-user-follow [light]="false" [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
         </div>
 
         <!--

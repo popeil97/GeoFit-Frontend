@@ -24,6 +24,8 @@ export class RaceAboutComponent implements OnInit {
   aboutData:AboutData = null;
   raceSettings:RaceSettings = null as RaceSettings;
   showForm: Boolean;
+  
+  count:number=1;
 
   //Race info
   raceName:string;
@@ -130,6 +132,9 @@ export class RaceAboutComponent implements OnInit {
         _this.getOwnerData();
       });
     });
+
+    document.getElementById('map-btn').style.backgroundColor = "#36343c";
+    document.getElementById('map-btn').style.color = "#FFFFFF";
   }
 
   ProcessDate = (date = null) => {
@@ -152,10 +157,42 @@ export class RaceAboutComponent implements OnInit {
       this.modalService.close(id);
   }
 
+  
   SwitchSlideshow = (to:string = null) => {
     //console.log("to", to, this.acceptedScreens.indexOf(to));
     if (to == null || this.acceptedScreens.indexOf(to) == -1) return;
     this.currentScreen = to;
+
+     document.getElementById(to+'-btn').style.backgroundColor = "#36343c";
+     document.getElementById(to+'-btn').style.color = "#FFFFFF";
+
+    switch(to) { 
+     case 'map': { 
+       document.getElementById('logistics-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('logistics-btn').style.color = "#000000";
+       document.getElementById('race_director-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('race_director-btn').style.color = "#000000";
+        break; 
+     } 
+     case 'logistics': { 
+        document.getElementById('map-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('map-btn').style.color = "#000000";
+       document.getElementById('race_director-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('race_director-btn').style.color = "#000000";
+        break; 
+     } 
+     case 'race_director': { 
+         document.getElementById('logistics-btn').style.backgroundColor = "#FFFFFF";
+         document.getElementById('logistics-btn').style.color = "#000000";
+         document.getElementById('map-btn').style.backgroundColor = "#FFFFFF";
+          document.getElementById('map-btn').style.color = "#000000";
+        break; 
+     } 
+     default: { 
+        break; 
+     } 
+   }
+
     return;
   }
 
