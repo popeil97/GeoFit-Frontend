@@ -13,16 +13,17 @@ export class UserFollowComponent implements OnInit {
   // TRUE if we follow them, FALSE if we do not follow them
   @Input() follows: boolean;
 
-  @Input() light:boolean;
+  @Input() tempLight:boolean;
 
   @Output() followStatusChanged: EventEmitter<void> = new EventEmitter();
 
-  constructor(private _userService:UsersService,
-              public cdRef: ChangeDetectorRef) {
-  }
+  constructor(
+    private _userService:UsersService,
+    public cdRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
-  console.log("LIGHT",this.light);
+    console.log("LIGHT",this.tempLight);
   }
 
   ngAfterViewInit() {

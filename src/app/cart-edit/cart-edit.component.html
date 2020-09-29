@@ -1,8 +1,11 @@
-<h2>Items for Sale</h2>
+<h4>Items for Sale</h4>
 <app-swag-list [raceID]="raceID" [isCart]="false" (refreshCart)="refreshCart($event)"></app-swag-list>
 
-<h2>Your Cart</h2>
- <app-swag-list #cart [raceID]="raceID" [isCart]="true" (refreshCart)="refreshCart($event)"></app-swag-list>
+<hr />
 
+<h4>Your Cart</h4>
+<app-swag-list #cart [raceID]="raceID" [isCart]="true" (refreshCart)="refreshCart($event)"></app-swag-list>
 
-<button class="btn" (click)="checkout()">Checkout<mat-icon>shopping_bag</mat-icon></button>
+<div class='CheckoutButtonContainer'>
+    <button class="buttonWithIcon" (click)="checkout()">Checkout<mat-icon>shopping_bag</mat-icon></button>
+</div>

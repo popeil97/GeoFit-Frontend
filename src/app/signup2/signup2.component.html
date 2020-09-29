@@ -1,24 +1,30 @@
-<h2 mat-dialog-title>Register for Race!</h2>
-<div *ngIf="d !== null; else loadingMessage">
-  <mat-dialog-content>
-    <mat-horizontal-stepper [linear]="true" #stepper>
-      <mat-step [editable]="true" [stepControl]="tagForm" *ngIf="d.hasTags">
-        <ng-template matStepLabel aria-disabled="true">Select Organizational/Athletic Tag</ng-template>
-        <app-tag-select [raceID]="d.race_id" [tagType]="tagType" (emitState)="stepCallback($event)"></app-tag-select>
-        
-      </mat-step>
-      <mat-step [editable]="true" [stepControl]="cartForm">
-        <ng-template matStepLabel aria-disabled="true">Select Items</ng-template>
-        <app-cart-edit [raceID]="d.race_id" (checkoutAlert)="stepCallback($event)"></app-cart-edit>
-      </mat-step>
-      <mat-step [editable]="false" [stepControl]="paymentForm">
-        <ng-template matStepLabel aria-disabled="true">Pay Signup Fee</ng-template>
-        <app-paypal (transactionAlert)="stepCallback($event)" [price]="d.price" [race_id]="d.race_id"></app-paypal>
-      </mat-step>
-    </mat-horizontal-stepper>
-  </mat-dialog-content>
-  <mat-dialog-actions align="end">
+<div class="TucanContainer">
+  <div class='RegisterHeader'>
     <button class="CloseLogin" (click)="closeDialog()">Cancel</button>
-  </mat-dialog-actions>
+  </div>
+  <h2 mat-dialog-title>Race Registration</h2>
+  <div *ngIf="d !== null; else loadingMessage">
+    <mat-dialog-content>
+      <mat-horizontal-stepper [linear]="true" #stepper>
+        <mat-step [editable]="true" [stepControl]="tagForm" *ngIf="d.hasTags">
+          <ng-template matStepLabel aria-disabled="true">Select Organizational/Athletic Tag</ng-template>
+          <app-tag-select [raceID]="d.race_id" [tagType]="tagType" (emitState)="stepCallback($event)"></app-tag-select>
+        </mat-step>
+        <mat-step [editable]="true" [stepControl]="cartForm">
+          <ng-template matStepLabel aria-disabled="true">Select Items</ng-template>
+          <app-cart-edit [raceID]="d.race_id" (checkoutAlert)="stepCallback($event)"></app-cart-edit>
+        </mat-step>
+        <mat-step [editable]="false" [stepControl]="paymentForm">
+          <ng-template matStepLabel aria-disabled="true">Pay Signup Fee</ng-template>
+          <app-paypal (transactionAlert)="stepCallback($event)" [price]="d.price" [race_id]="d.race_id"></app-paypal>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </mat-dialog-content>
+    <!--
+    <mat-dialog-actions align="end">
+      <button class="CloseLogin" (click)="closeDialog()">Cancel</button>
+    </mat-dialog-actions>
+    -->
+  </div>
+  <ng-template #loadingMessage><p>Loading...</p></ng-template>
 </div>
-<ng-template #loadingMessage><p>Loading...</p></ng-template>

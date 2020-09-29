@@ -1,16 +1,33 @@
+<ng-template [ngIf]="!isCart" [ngIfElse]="IsCartBlock">
+  <ng-template [ngIf]='items != null' [ngIfElse]="LoadingItemsBlock">
+    <div class='itemsForSaleContainer'>
+      <div *ngFor="let item of items">
+        <app-swag-item [item]="item" [isOrder]="isCart" (refreshState)="refreshCallback($event)"></app-swag-item>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #LoadingItemsBlock>
+    <p class='h7 italics'>Loading items...</p>
+  </ng-template>
+</ng-template>
 
-<div *ngIf="!isCart">
-  <div *ngFor="let item of items">
-    <app-swag-item [item]="item" [isOrder]="isCart" (refreshState)="refreshCallback($event)"></app-swag-item>
-  </div>
-</div>
-
-<div *ngIf="isCart">
-  <div *ngFor="let order of cart.orders">
-    <app-swag-item [order]="order" [isOrder]="isCart" (refreshState)="refreshCallback($event)"></app-swag-item>
-    <br>
-  </div>
-  <h6 style="float: right;">Total: ${{cart.price}}</h6>
-  
-</div>
-
+<ng-template #IsCartBlock>
+  <ng-template [ngIf]="cart != null" [ngIfElse]="LoadingCartBlock">
+    <div class='itemsInCartContainer'>
+      <ng-template [ngIf]="cart.orders.length > 0" [ngIfElse]="NothingInCartBlock">
+        <div *ngFor="let order of cart.orders">
+          <app-swag-item [order]="order" [isOrder]="isCart" (refreshState)="refreshCallback($event)"></app-swag-item>
+        </div>
+      </ng-template>
+      <ng-template #NothingInCartBlock>
+        <p class='italics margin-bottom-0px'>Nothing is currently in your cart!</p>
+      </ng-template>
+    </div> 
+    <div class='TotalDisplay'>
+      <h6 class='margin-bottom-0px'>Total: ${{cart.price}}</h6>
+    </div>
+  </ng-template>
+  <ng-template #LoadingCartBlock>
+    <p class='h7 italics'>Loading cart...</p>
+  </ng-template>
+</ng-template>

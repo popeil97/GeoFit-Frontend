@@ -1,39 +1,38 @@
-  <div class="row" *ngIf="!isOrder">
-    <img style="height: 15%; width: 15%;" src={{item.image}}>
-    <div class="column" style="padding-left: 10%;">
-      <p>{{item.name}} - ${{item.price}}</p>
-      <p>{{item.description}}</p>
-    </div>
-
-    <div class="column">
-      
-      <h6>Size:</h6>
-      <mat-form-field appearance="fill">
-        <mat-select [(ngModel)]="selectedSize">
-          <mat-option *ngFor="let size of sizes" [value]="size" (click)="onSizeSelect(size)">
-            {{ size }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <br>
-      <button class="btn" [disabled]="btnDisabled" (click)="addToCart()">Add to Cart <mat-icon>shopping_cart</mat-icon></button>
-    </div>
-    
-  </div>
-
-
-
-  <div class="row" *ngIf="isOrder">
-    <img style="height: 15%; width: 15%;" src={{order.item.image}}/>
-    <div class="col-md-3" style="padding-left: 10%;">
-      <p>{{order.item.name}} - ${{order.item.price}}</p>
-    </div>
-
-    <div class="col-md-3" *ngIf="isOrder">       
-      <p>Size: {{order.details}}</p>  
-    </div>
-    <div class="col-md-2" *ngIf="isOrder">      
-      <button class="btn" (click)="removeFromCart()">Remove<mat-icon>shopping_cart</mat-icon></button> 
+<div class="cartItem" *ngIf="!isOrder">
+  <div class='cartItemContents'>
+    <img class='cartItemImage' src={{item.image}} alt={{item.name}}>
+    <div class='cartItemDescription'>
+      <div class='cartNameContainer'>
+        <h6 class='margin-bottom-0px'>{{item.name}}</h6>
+      </div>
+      <div class='cartDescriptionPriceContainer'>
+        <p class='margin-bottom-4px'>{{item.description}}</p>
+        <div class='cardPriceContainer'>
+          <h6 class='margin-bottom-0px'>${{item.price}}</h6>
+        </div>
+      </div>
+      <div class='cartSizeContainer'>
+        <p class='margin-bottom-0px'>Size:</p>
+        <select class='cartSelectSize' [(ngModel)]="selectedSize">
+          <option *ngFor="let size of sizes" [value]="size" (click)="onSizeSelect(size)">{{size}}</option>
+        </select>
+        <button class='h7 buttonWithIcon' [ngClass]="{'addButtonDisabled':btnDisabled}" [disabled]="btnDisabled" (click)="addToCart()">Add to Cart <mat-icon>shopping_cart</mat-icon></button>
+      </div>
     </div>
   </div>
+</div>
+
+
+<div class="orderItem" *ngIf="isOrder">
+  <div class='orderItemContents'>
+    <img class='orderItemImage' src={{order.item.image}} alt={{order.item.name}}>
+    <div class='orderItemDescription'>
+      <h6 class='margin-bottom-0px'>{{order.item.name}} - {{order.details}}</h6>
+      <p class='margin-bottom-0px'>${{order.item.price}}</p>
+    </div>
+    <div class='removeButtonContainer'>      
+      <button class='h7 lightButton buttonWithIcon' (click)="removeFromCart()">Remove<mat-icon>shopping_cart</mat-icon></button> 
+    </div>
+  </div>
+</div>
   

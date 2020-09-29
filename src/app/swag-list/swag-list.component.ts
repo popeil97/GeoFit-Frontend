@@ -12,21 +12,16 @@ export class SwagListComponent implements OnInit {
   @Input() isCart:Boolean;
   @Output() refreshCart: EventEmitter<any> = new EventEmitter();
 
-  public items:Item[];
-  public cart:Cart;
+  public items:any = null;
+  public cart:any = null;
 
   constructor(private _swagService:SwagService) { }
 
   ngOnInit() {
-
-    
     this.init();
-    
-
   }
 
   init() {
-
     if(this.isCart) {
       this._swagService.getCart(this.raceID).then((resp) => {
     //     console.log('ORDERS:',resp['cart']);

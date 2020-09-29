@@ -94,6 +94,13 @@ button:hover, .button:hover {
 button.shadowButton:hover, .button.shadowButton:hover {
   box-shadow: 0px 0px 5px 1px rgba(100,100,100,0.5);
 }
+button.buttonWithIcon, .button.buttonWithIcon {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+}
 
 .margin-bottom-0px {
   margin-bottom:0px !important;

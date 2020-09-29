@@ -18,8 +18,7 @@ export class SwagItemComponent implements OnInit {
 
   constructor(private _swagService:SwagService) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onSizeSelect(size:string) {
     this.btnDisabled=false;
