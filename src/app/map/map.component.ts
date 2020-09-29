@@ -122,12 +122,12 @@ export class MapComponent implements AfterViewInit,OnChanges {
         route_pins: [],
         userData: [],
         org_pins: [],
-      })
+      });
 
       this._mapService.getOrgPinStats(raceID).then((data) => {
         let orgPinData = data as OrgPinData;
         this.routeData[raceID].org_pins = orgPinData.org_pins;
-      })
+      });
       
       this._mapService.getMapData(raceID).then((data) => {
         console.log(data);
