@@ -104,7 +104,10 @@ import { SwagItemComponent } from './swag-item/swag-item.component';
 import { CartEditComponent } from './cart-edit/cart-edit.component';
 import { MapRouteComponent } from './map-route/map-route.component';
 
-import { ViewFollowComponent, ViewFollowDialogContent } from './view-follow/view-follow.component';
+import { 
+  ViewFollowComponent, 
+  ///ViewFollowDialogContent 
+} from './view-follow/view-follow.component';
 import { ShowFollowersComponent } from './show-followers/show-followers.component';
 import { ModalComponent } from './modal/modal.component';
 import { Login2Component } from './login2/login2.component';
@@ -203,7 +206,7 @@ import { StoryFormStandaloneComponent } from './story-form-standalone/story-form
     CartEditComponent,
     MapRouteComponent,
     ViewFollowComponent,
-    ViewFollowDialogContent,
+    //ViewFollowDialogContent,
     ShowFollowersComponent,
     ModalComponent,
     Login2Component,
@@ -259,7 +262,7 @@ import { StoryFormStandaloneComponent } from './story-form-standalone/story-form
                   RegisterDialogContent,
                   DialogSkeletonDialogContent,
                   WhyInfoDialogContent,
-                  ViewFollowDialogContent
+                  //ViewFollowDialogContent
                   ] 
 })
 export class AppModule { 
