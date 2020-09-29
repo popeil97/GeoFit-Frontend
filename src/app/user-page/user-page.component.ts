@@ -41,8 +41,8 @@ export class UserPageComponent implements OnInit {
     private modalService: ModalService,
   ) {}
 
-  private currentScreen = 'home';
-  private acceptedScreens = ['home','stats','feed','races'];
+  public currentScreen = 'home';
+  public acceptedScreens = ['home','stats','feed','races'];
 
   ngOnInit() {
     //Don't show edit page by default

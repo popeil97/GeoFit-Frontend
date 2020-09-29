@@ -54,12 +54,12 @@ export class FeedComponent implements OnInit {
 
   private _feedService: any;
   private initialized: boolean;
-  private loading = false;
+  public loading = false;
 
   //Variables for pagination
   private page_number = 1;
   private items_per_page = 10;
-  private canRefresh: boolean = false;
+  public canRefresh: boolean = false;
   
   public dataSource: any;
 

@@ -274,7 +274,7 @@ export class RaceViewComponent implements OnInit {
       this.isOwnerOrModerator = raceData.is_mod_or_owner;
       this.childRaceData = raceData.child_race_dict;
       this.childRaceData.unshift({id:this.raceID,name:'All'});
-
+      console.log("race-view RACE IDs",this.raceIDs);
       this.loading = false;
 
       //Default to first race ID if not set
@@ -314,10 +314,10 @@ export class RaceViewComponent implements OnInit {
   }
 
 
-  // panToUserMarker(user_id){
+   panToUserMarker(user_id){
   //   //Call map pan function
   //   this.mapChild.panToUserMarker(user_id);
-  // }
+   }
 
   clearUserPins(){
     this.mapChild.clearUserPins();

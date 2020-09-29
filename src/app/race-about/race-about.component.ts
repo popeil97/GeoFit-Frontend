@@ -50,8 +50,8 @@ export class RaceAboutComponent implements OnInit {
   public num_users:any;
   userData: UserData;
 
-  private currentScreen = 'map';
-  private acceptedScreens = ['map','logistics','race_director'];
+  public currentScreen = 'map';
+  public acceptedScreens = ['map','logistics','race_director'];
 
   private monthKey = {
     '1':'Jan.',
@@ -135,6 +135,7 @@ export class RaceAboutComponent implements OnInit {
 
     document.getElementById('map-btn').style.backgroundColor = "#36343c";
     document.getElementById('map-btn').style.color = "#FFFFFF";
+    console.log("race-about:race-id", this.raceID);
   }
 
   ProcessDate = (date = null) => {
@@ -148,6 +149,7 @@ export class RaceAboutComponent implements OnInit {
 
 
   openModal(id: string) {
+
     const data = (id == 'custom-modal-2') ? {register:true, price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} :(id == 'custom-modal-3') ? {price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} : null;
     //console.log("MODAL DATA", data);
     this.modalService.open(id,data);

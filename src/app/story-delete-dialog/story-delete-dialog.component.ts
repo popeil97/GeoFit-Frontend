@@ -27,7 +27,7 @@ export class StoryDeleteDialogComponent implements OnInit {
     })
   }
 
-  private closeDialog(deleted: boolean){
+  public closeDialog(deleted: boolean){
     this.dialogRef.close({'deleted': deleted});
   }
 

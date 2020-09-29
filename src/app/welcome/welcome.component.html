@@ -16,7 +16,7 @@
     </div>
 
   <div class='WelcomeContainer PageSegment'>
-    <div class='WelcomeInfo'>
+    <div class='WelcomeInfo' *ngIf="this._authService.isLoggedIn()">
       <h2>Upload a profile pic</h2>
       <p>Let other people in your race know who you are!</p>
       <app-profile-pic [userData]="this.userData"></app-profile-pic>
@@ -30,8 +30,8 @@
     </div>
   </div>
   
-  <div class='WelcomeContainer PageSegment'>
-    <div  *ngIf="this._authService.isLoggedIn()">
+  <div class='WelcomeContainer PageSegment' *ngIf="this._authService.isLoggedIn()">
+    <div  >
   <h3>Integrate Strava</h3>
   <p>Import your fitness activities from your favorite fitness app! If you don’t have Strava already, download it onto your phone from the app store, and make an account on your phone. Once you have an account, press the button below to connect it to our platform. This will allow your Strava activities to show up into the race. Only activities recorded after race start will be counted towards your race. Before race day, if you aren’t familiar with Strava, make sure you know how to <a href="https://support.strava.com/hc/en-us/articles/216917397-Recording-an-Activity" target="_blank">record your activities on your phone</a>. </p>
     <app-stravauth></app-stravauth>
@@ -40,5 +40,5 @@
   </div>
 
   <div class='PageSegment'>
-  <button  [routerLink]="['/']">Go to my profile</button>
+  <button  *ngIf="this._authService.isLoggedIn()" [routerLink]="['/']">Go to my profile</button>
 </div>

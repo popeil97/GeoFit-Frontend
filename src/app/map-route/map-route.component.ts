@@ -77,7 +77,7 @@ export class MapRouteComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     for(const propName in changes) {
       if(changes.hasOwnProperty(propName)) {
-
+         console.log("map-route:race-id", this.raceID);
         switch(propName) {
           case 'coordinates':
             if (this.coordinates){

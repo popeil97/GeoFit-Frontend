@@ -77,7 +77,7 @@
       <div class="SlideshowContents">
 
         <div id='statsContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'home'}">
-          <div *ngIf="userData != null; else HomeLoadingMessage">
+          <div *ngIf="userData != null; else RaceLoadingMessage">
             <h2 *ngIf="userData.is_me; else otherHome">Home</h2>
 
             <ng-template #otherHome><h2>{{userData.first_name}}'s Profile</h2></ng-template>
@@ -102,7 +102,6 @@
               </div>
             </div>
           </div> -->
-          <ng-template #HomeLoadingMessage><p>Retrieving user data...</p></ng-template>
         </div>
       </div>
 

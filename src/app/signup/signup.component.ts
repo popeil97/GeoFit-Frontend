@@ -27,7 +27,7 @@ interface SignupDialogData {
 })
 export class SignupComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private _authService: AuthService,private route:ActivatedRoute, 
+  constructor(public dialog: MatDialog, public _authService: AuthService,private route:ActivatedRoute, 
     private router:Router) { }
 
   @Output() signupCallback: EventEmitter<any> = new EventEmitter();

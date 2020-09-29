@@ -78,6 +78,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
             case 'raceIDs':
               if (!_.isEqual(changes.raceIDs.currentValue, changes.raceIDs.previousValue)){
                 this.getMapData();
+                console.log("map:race-id", this.raceIDs);
               }
           }
         }

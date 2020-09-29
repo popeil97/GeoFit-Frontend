@@ -1,4 +1,4 @@
-<button (click)="changeLikeStatus()" class="darkButton" *ngIf="!this.light">
+<button (click)="changeLikeStatus()" class="darkButton" *ngIf="!this.tempLight">
   <span class="ui-button-text">{{follows ? 'Unfollow' : 'Follow'}}</span>
 </button>
 

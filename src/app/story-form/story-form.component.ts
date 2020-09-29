@@ -15,7 +15,7 @@ export class StoryFormComponent implements OnInit {
 
   private storyText: string;
 
-  private storyImage:any;
+  public storyImage:any;
 
   constructor(private storyService: StoryService,
               private _imageService: ImageService) { }

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter,OnChanges } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { ModalService } from '../modalServices';
+import {ErrorStateMatcher} from '@angular/material/core';
 
 @Component({
   selector: 'app-manual-entry',
@@ -16,12 +17,15 @@ export class ManualEntryComponent implements OnInit {
   activityOptions:any[];
   defaultActivityString:string;
 
+  submitted = false;
+
   constructor( private modalService: ModalService,) { 
     
   }
 
   ngOnInit() {
    // console.log("RACE TYPE", this.race_type);
+   this.submitted = false;
     this.defaultActivityString = "Run";
     if(this.race_type==1) //run/walk
     {
@@ -92,6 +96,7 @@ export class ManualEntryComponent implements OnInit {
     this.manualEntryForm.get('hours').setValue(0);
     this.manualEntryForm.get('minutes').setValue(0);
     this.manualEntryForm.get('seconds').setValue(0);
+    this.submitted = true;
   }
 
   parseDistanceType(entry:any) {
@@ -99,6 +104,8 @@ export class ManualEntryComponent implements OnInit {
     let value = entry.value;
  //   this.manualEntryForm.get('distanceType').setValue(DistanceType[value])
   }
+
+  get f() { return this.manualEntryForm.controls; }
 
   
 

@@ -20,7 +20,7 @@ export class UsersComponent implements OnInit {
 
   private testString = "From Parent";
 
-  constructor(private _authService: AuthService, private modalService: ModalService) { }
+  constructor(public _authService: AuthService, private modalService: ModalService) { }
 
   ngOnInit() {
     this.user = {

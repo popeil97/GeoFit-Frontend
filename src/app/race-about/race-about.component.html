@@ -11,7 +11,7 @@
 <div class="PageContainer">
   <div class='PageSegment'>
     <a class="nav-link" routerLink='/races'><span class="material-icons" inline=true>keyboard_arrow_left</span> <span class="aligned-with-icon">Return to Public Races</span></a>
-    <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceHeaderBlock">
+    <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceHeaderBlock" >
       <p>Loading race description and dates...</p>
     </ng-template>
     <ng-template #RaceHeaderBlock>
