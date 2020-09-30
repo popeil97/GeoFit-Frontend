@@ -1,12 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
 import { SwagService, Item, Order, Cart } from '../swag.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-swag-list',
   templateUrl: './swag-list.component.html',
   styleUrls: ['./swag-list.component.css']
 })
-export class SwagListComponent implements OnInit {
+export class SwagListComponent implements OnInit,OnChanges {
 
   @Input() raceID:number;
   @Input() isCart:Boolean;
@@ -19,6 +20,19 @@ export class SwagListComponent implements OnInit {
 
   ngOnInit() {
     this.init();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    for(const propName in changes) {
+      if(changes.hasOwnProperty(propName)) {
+        switch(propName) {
+          case 'raceID':
+            if (!_.isEqual(changes.raceID.currentValue, changes.raceID.previousValue) && changes.raceID.currentValue != undefined){
+              this.init();
+            }
+        }
+      }
+    }
   }
 
   init() {
