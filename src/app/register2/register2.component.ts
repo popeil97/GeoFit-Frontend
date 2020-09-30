@@ -304,8 +304,8 @@ export class Register2Component implements OnInit {
   }
 
   openModal(id: string) {
-    const data = (id == 'custom-modal-3') ? {price:this.d.price,race_id:this.d.raceID,hasJoined:this.d.hasJoined,hasStarted:this.d.hasStarted,hasTags: this.d.has_entry_tags} : null;
-  //   console.log("MODAL DATA", data);
+    const data = (id == 'custom-modal-3') ? {price:this.d.price,race_id:this.d.race_id,hasJoined:this.d.hasJoined,hasStarted:this.d.hasStarted,hasTags: this.d.hasTags} : null;
+    console.log("REG MODAL DATA", data);
     this.modalService.open(id,data);
   }
 }
