@@ -66,6 +66,8 @@ export class RaceViewComponent implements OnInit {
   public followedIDs:number[];
   public isManualEntry:Boolean = false;
 
+  public feedOptions:Boolean = false;
+
   //Team edit form
   public showTeamForm:Boolean = false;
   public teamEditForm:TeamEditBody = {
@@ -150,7 +152,9 @@ export class RaceViewComponent implements OnInit {
     
   }
 
-
+  public toggleOptions(){
+    this.feedOptions = !this.feedOptions;
+  }
 
   closeModal(id: string) {
       this.modalService.close(id);

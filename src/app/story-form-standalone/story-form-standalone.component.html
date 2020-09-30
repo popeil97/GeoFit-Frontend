@@ -1,14 +1,13 @@
-<div>
+<h3>Share an Update</h3>
+<textarea  id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="What's on your mind?"  required style="width:100%;"></textarea>
 
-  <input type="text" id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="Type anything here..." style="width:100%;">
+<input type="file" id="storyImage" name="storyImageField" accept="image/*" (change)="onSelectFile($event)">
 
-  <input type="file" id="storyImage" name="storyImageField" accept="image/*" (change)="onSelectFile($event)">
+  <div class="wrapper" *ngIf="storyImage">
+    <img [src]="this.storyImage" width="100px">
+  </div>
 
-      <div class="wrapper" *ngIf="storyImage">
-        <img [src]="this.storyImage" width="100px">
-      </div>
 
-  
-  <button (click)="uploadStory()">Add Story</button>
-  <button class="CloseLogin" (click)="closeDialog()">Close</button> 
-</div>
+<button (click)="uploadStory()">Add Story</button>
+<button class="CloseLogin" (click)="closeDialog()">Close</button> 
+

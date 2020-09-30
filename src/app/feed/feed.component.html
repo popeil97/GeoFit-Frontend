@@ -1,35 +1,31 @@
-<div class="table-container ex3" style="overflow:hidden;">
+<div class="table-container ex3" style="overflow:auto; max-height:420px;">
 
   <!---If we are in race view AND we are authenticated, display form to post new stories-->
   <div *ngIf="use=='race' && this._authService.isLoggedIn() && this.progress">
-    <table class="mat-table" style="background-color:rgba(44, 0, 126,0.08);">
-      <tr class="mat-row">
-       <button (click)="openModal('custom-modal-6')">Make a Post</button>
-      </tr>
-    </table>
+    <button (click)="openModal('custom-modal-6')">Make a Post</button>
   </div>
 
   <p *ngIf="feedItems.length==0">Nothing yet! </p>
   <table mat-table [dataSource]="feedItems" class="feedTable">
     
-    <ng-container matColumnDef="ProfilePic" style="padding: 10px;">
+    <ng-container matColumnDef="ProfilePic" >
       <td mat-cell *matCellDef="let element" (click)="clickedOnFeedItem(element)" [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">
         <img width="50px" src="{{ element.profile_url }}">
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="Data" style="padding: 10px;">
-      <td mat-cell *matCellDef="let element" [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">
+    <ng-container matColumnDef="Data" >
+      <td mat-cell *matCellDef="let element" [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)" class="h7">
         <app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav>
         {{ element.message }}
         <small>{{ this.get_created_ts(element.created_ts) }}</small>
         <br>
         <div class="center" *ngIf="element.story">
           <div class="container" *ngIf="element.story_image">
-            <img width="200px" src="{{ element.story_image }}" (click)="showStoryDialog(element)">
+            <img width="120px" src="{{ element.story_image }}" (click)="showStoryDialog(element)">
           </div>
           <div class="container" *ngIf="element.story_text">
-            <p>{{ element.story_text }}</p>
+            {{ element.story_text }}
           </div>
 
           <!---If parent component inputs TRUE, we have a story modal component as a child-->
@@ -42,7 +38,7 @@
         <div class="container" style="display:flex;align-content: right;right:0;">
           <app-story-btn style="padding-top:5px;" *ngIf="this._authService.isLoggedIn()" [use]="'like'" [storyID]=element.story_id [likes]=element.likes [likesCount]=element.likes_count [likesUsers]=element.likes_users></app-story-btn>
           
-          <div role="button" (click)="element.show_comments=!element.show_comments"> <i class="material-icons" style="color:#BC164D;padding-top:5px;padding-left:15px">comment</i> {{ element.comments.length }} 
+          <div role="button" (click)="element.show_comments=!element.show_comments"> <i class="material-icons" style="color:rgba(169,169,169,80%);padding-top:5px;padding-left:15px">comment</i> {{ element.comments.length }} 
             <!-- <i style = "color:#2C00A5;" *ngIf="element.comments.length>0 && !element.show_comments">View comments</i> 
             <i style = "color:#2C00A5;" *ngIf="element.comments.length>0 && element.show_comments">Collapse comments</i>
             <i style = "color:#2C00A5;" *ngIf="element.comments.length==0">Add comment</i> -->
@@ -50,21 +46,21 @@
 
          <div class="nav-item dropdown">
 
-            <a class="nav-link dropdown-toggle" style="color:#BC164D;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="material-icons roboto-purple">more_horiz</i>
+            <a class="nav-link dropdown-toggle" style="color:rgba(169,169,169,80%);" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="material-icons">more_horiz</i>
             </a>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-              <div role="button" (click)="openReportDialog(element.story_id)"> <i class="material-icons" style="color:#BC164D;padding-left:15px">report</i>
-                <i style = "color:#2C00A5;font-size:15px;">Report Story</i> 
+              <div role="button" (click)="openReportDialog(element.story_id)"> <i class="material-icons">report</i>
+                <i>Report Story</i> 
               </div>
 
               <div *ngIf="element.is_mine">
                 <div class="dropdown-divider"></div>
 
-                <div role="button" (click)="openDeleteStoryDialog(element.story_id)"> <i class="material-icons" style="color:#BC164D;padding-left:15px">delete</i>
-                  <i style = "color:#2C00A5;font-size:15px;">Delete Story</i> 
+                <div role="button" (click)="openDeleteStoryDialog(element.story_id)"> <i class="material-icons">delete</i>
+                  <i>Delete Story</i> 
                 </div>
 
               </div>

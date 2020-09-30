@@ -10,7 +10,7 @@
 
   --tucan-orange:#ed6a11;
   --tucan-green:#7FCC92;
-  --slate-tint:#36343c;
+  --slate-tint:#C4C4C4;
 }
 * {
   -webkit-transition: all ease 0.5s;
@@ -72,6 +72,12 @@ button, .button {
 }
 button.darkButton, .button.darkButton {
   background-color: var(--primary-darkgrey);
+  border-color:white;
+  color:white;
+}
+
+button.transparentWhiteButton, .button.darkButton {
+  background-color:inherit;
   border-color:white;
   color:white;
 }

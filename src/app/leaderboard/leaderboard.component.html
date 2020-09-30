@@ -1,38 +1,33 @@
-<!-- <div style="height: 50%;">
-    <table mat-table [dataSource]="leaderboard" class="leaderboardTable">
-      <ng-container matColumnDef="Rank" style="padding: 5px;">
-        <td mat-cell *matCellDef="let element"> {{element.rank}} </td>
-      </ng-container>
+<div style="overflow:auto; max-height:200px;">
+<div *ngFor="let group of leaderboard; let i=index">
+  <div [ngClass]="{'LeaderboardItem' : i>2, 'LeaderboardGold':i==0,'LeaderboardSilver':i==1,'LeaderboardBronze':i==2}" *ngIf="!group.isTeam" (click)="toggleDetails()">
 
-      <ng-container matColumnDef="ProfilePic" style="padding: 10px;">
-        <td mat-cell *matCellDef="let element"> <img width="50px" src="{{element.profile_url}}"> </td>
-      </ng-container>
+    <b *ngIf="i>=9">{{i+1}}</b>
+    <b *ngIf="i<9">0{{i+1}}</b>
+    <img src="{{group.profile_url}}" width="30" height="30">
+    <app-user-profile-nav [username]="group.username" [displayName]="group.display_name"></app-user-profile-nav>
+    <i style="right:0;">{{group.total_distance}} {{group.distance_type}}</i>
 
-      <ng-container matColumnDef="Name" style="padding: 10px;">
-        <td mat-cell *matCellDef="let element"> {{element.display_name}} </td>
-      </ng-container>
+    <mat-card *ngFor="let member of group.child_user_stats">
+      <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + member.profile_url + ')'}" style="position: relative; float:left;"></div>
+      <div style="padding-left: 50px;">{{member.display_name}}</div>
+      <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div>
+    </mat-card>
 
-      <ng-container matColumnDef="Distance" style="padding: 5px;">
-        <td mat-cell *matCellDef="let element"> {{element.total_distance}} </td>
-      </ng-container>
+    <app-user-follow [userID]=group.user_id [follows]=group.follows *ngIf="showMore"></app-user-follow>
 
-      <ng-container matColumnDef="Follow" style="padding: 5px;">
-        <td mat-cell *matCellDef="let element">
-          <app-user-follow [userID]="element.user_id" [follows]="element.follows">
-          </app-user-follow>
-        </td>
-      </ng-container>
+  </div>
+</div>
 
-    </table>
-
-  </div> -->
-
-
-  <mat-accordion>
+<span class="link" style="display:table;
+    margin:0 auto;" (click)="getNextLeaderboardPage()">Show More</span>
+</div>
+<!--
+  <mat-accordion >
     <div *ngFor="let group of leaderboard; let i=index">
 
       <div *ngIf="i%2==0">
-      <mat-expansion-panel [disabled]="!group.isTeam" style="background-color:#EFFAF7;">
+      <mat-expansion-panel [disabled]="!group.isTeam">
         <mat-expansion-panel-header>
           <div class="column-lb-small">
             <div *ngIf="i<3">
@@ -134,7 +129,7 @@
   </mat-accordion>
 
 
-
+-->
   <!-- 
  <mat-accordion>
     <div *ngFor="let group of leaderboard; let i=index">

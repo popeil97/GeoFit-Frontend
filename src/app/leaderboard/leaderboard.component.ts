@@ -20,7 +20,7 @@ export class LeaderboardComponent implements OnInit,OnChanges {
 
   private initialized: boolean = false;
   private page:number = 1;
-
+  public showMore = false;
   constructor(private _leaderboardService: LeaderboardService) {
   }
 
@@ -55,6 +55,11 @@ export class LeaderboardComponent implements OnInit,OnChanges {
       }
     }
 
+  }
+
+  toggleDetails()
+  {
+    this.showMore = !this.showMore;
   }
 
   getLeaderboard(){

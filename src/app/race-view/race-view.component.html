@@ -1,4 +1,42 @@
-<app-map [raceIDs]="raceIDs" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
+<div> 
+<app-loader [isActive]="loading"></app-loader>
+<div class="RaceViewContainer">
+	 <div class="MapContainer">
+	 	<app-map [raceIDs]="raceIDs" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
+
+	 	<div class="ActionsContainer">
+	 		<h4 class="RaceViewSegmentTitle">Action Items</h4>
+		    <button class="transparentWhiteButton">Search</button>
+		    <button class="transparentWhiteButton">Settings</button>
+		    <button class="transparentWhiteButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities>0" matBadge="{{num_activities}}"  matBadgePosition="after" matBadgeColor="accent" (click)="openModal('custom-modal-5')" >Log Activity</button>
+		    <button class="transparentWhiteButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities==0" (click)="openModal('custom-modal-5')" >Log Activity</button>
+		    <button class="transparentWhiteButton" (click)="viewAbout()">About Race</button>
+	 	</div>
+	 	
+	 	 <div class = "feedContainer">
+	 		  <h3>Social Feed <button class="smallButton" (click)="toggleOptions()">{{feedOptions ? 'Hide Options' : 'Show Options'}}</button></h3>
+	 		  
+	 		  <div *ngIf="feedOptions">
+		 		  Only show people I follow
+	        	  <input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/>
+	           	  <br>
+		          Only show stories
+		          <input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/>
+		       </div>
+	          <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed> 
+	 	 </div>
+
+	 	 <div class = "leaderboardContainer">
+	 	 	<h3>Leaderboard</h3>
+	 		<app-leaderboard [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
+	 	 </div>
+	 </div>
+
+		
+	
+</div>
+
+</div>
 
 <!-----STORY MODAL-->
 <app-story-modal></app-story-modal>
