@@ -126,10 +126,9 @@ export class RaceViewComponent implements OnInit {
 
   openModal(id: string) {
     console.log("DATA SENT TO CHILD", this.progress.distance_type, this.raceID);
-    var data = (id == 'custom-modal-5') ? {raceType:this.raceType, distance_unit: this.progress.distance_type, race_id:this.raceID, numActivities : this.num_activities, manualEntry:this.raceSettings.isManualEntry, automaticImport: this.userRaceSettings.isAutomaticImport, callbackFunction:null} : {};
-    // data.callbackFunction = this.uploadActivity;
-
-     data.callbackFunction = this.uploadActivity;
+    var data = (id=='raceSettingsModal') ? {userSettings:this.userRaceSettings,callbackFunction:null}:(id == 'custom-modal-5') ? {raceType:this.raceType, distance_unit: this.progress.distance_type, race_id:this.raceID, numActivities : this.num_activities, manualEntry:this.raceSettings.isManualEntry, automaticImport: this.userRaceSettings.isAutomaticImport, callbackFunction:null} : {};
+    console.log("RACE VIEW USER RACE SETTINGS", this.userRaceSettings);
+    data.callbackFunction = this.uploadActivity;
 
     this.modalService.open(id,data);
   }

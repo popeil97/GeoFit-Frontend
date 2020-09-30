@@ -7,7 +7,7 @@
 	 	<div class="ActionsContainer">
 	 		<h4 class="RaceViewSegmentTitle">Action Items</h4>
 		    <button class="transparentWhiteButton">Search</button>
-		    <button class="transparentWhiteButton">Settings</button>
+		    <button class="transparentWhiteButton"  (click)="openModal('raceSettingsModal')">Settings</button>
 		    <button class="transparentWhiteButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities>0" matBadge="{{num_activities}}"  matBadgePosition="after" matBadgeColor="accent" (click)="openModal('custom-modal-5')" >Log Activity</button>
 		    <button class="transparentWhiteButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities==0" (click)="openModal('custom-modal-5')" >Log Activity</button>
 		    <button class="transparentWhiteButton" (click)="viewAbout()">About Race</button>
