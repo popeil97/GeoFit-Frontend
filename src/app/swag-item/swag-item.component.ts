@@ -12,7 +12,7 @@ export class SwagItemComponent implements OnInit {
   @Input() order:Order;
   @Input() isOrder:Boolean = false;
   @Output() refreshState: EventEmitter<any> = new EventEmitter();
-  sizes:string[] = ['S','M','L','XL','2XL','3XL'];
+  sizes:string[] = ['XS','S','M','L','XL'];
   btnDisabled:Boolean = true;
   selectedSize:string;
 

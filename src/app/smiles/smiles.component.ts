@@ -10,7 +10,7 @@ export class SmilesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    window.location.replace('https://tucan.fitness/about;name=sMILEs%20for%20Adam;id=1');
+    window.location.replace('https://tucan.fitness/about;name=Idaho%20100k;id=1');
   }
 
 }

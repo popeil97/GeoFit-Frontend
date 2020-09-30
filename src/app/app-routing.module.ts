@@ -32,7 +32,7 @@ const routes: Routes = [
   {path: 'teams',component:TeamFormComponent},
   {path: 'register', component:RegisterComponent},
   {path: 'shipping', component:ShippingAddressComponent },
-  {path: 'smiles', component:SmilesComponent },
+  {path: 'idaho100k', component:SmilesComponent },
   {path: 'login', component:LoginComponent },
   {path: 'password-request', component:PasswordRequestComponent},
   {path: 'password-change', component:PasswordChangeComponent},
