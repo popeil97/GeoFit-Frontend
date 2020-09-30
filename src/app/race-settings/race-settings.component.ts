@@ -2,6 +2,7 @@ import { Component, OnInit, Input, AfterViewInit, OnChanges, SimpleChanges } fro
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../users.service';
 import { RaceViewComponent } from '../race-view/race-view.component';
+import { ModalService } from '../modalServices';
 
 @Component({
   selector: 'app-race-settings',
@@ -9,13 +10,13 @@ import { RaceViewComponent } from '../race-view/race-view.component';
   styleUrls: ['./race-settings.component.css']
 })
 export class RaceSettingsComponent implements AfterViewInit,OnChanges {
-  @Input() userSettings:UserSettings = {} as UserSettings;
+  @Input() id : string;
   settingsForm:FormGroup;
   successfulUpdate:Boolean = false;
 
   ageRangeOptions: any[];
 
-  constructor(private _usersService:UsersService, private _raceview:RaceViewComponent) { 
+  constructor(private _usersService:UsersService, private _raceview:RaceViewComponent,private modalService: ModalService) { 
 
     this.settingsForm = new FormGroup({
       isAutomaticImport: new FormControl('',[
@@ -94,6 +95,13 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
     
   }
 
+  get d() { return this.modalService.modalsData[this.id]}
+
+  closeDialog() {
+    if (this.id == null) return;
+    this.modalService.close(this.id);
+  }
+
   apply(): void {
     let formClean = this.settingsForm.value as UserSettings;
     console.log(this.settingsForm);
@@ -101,7 +109,7 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
 
     if(isValid) {
       
-      formClean.race_id = this.userSettings.race_id;
+      formClean.race_id = this.d.userSettings.race_id;
 
       console.log('clean:',formClean);
 
@@ -135,7 +143,7 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
    //  console.log('Automatic import value:',this.userSettings.isAutomaticImport);
    //  console.log('Heatmap value:',this.userSettings.heatMapOn);
     this.settingsForm = new FormGroup({
-      isAutomaticImport: new FormControl(this.userSettings.isAutomaticImport,[
+      isAutomaticImport: new FormControl(this.d.userSettings.isAutomaticImport,[
         Validators.required,
       ]),
       heatMapOn: new FormControl(false,[

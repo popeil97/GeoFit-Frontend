@@ -44,25 +44,24 @@
 
  .leaderboardContainer {
     position: absolute;
-    padding: 20px;
     right: 0;
     top: 150px;
 
     z-index: 500;
     width: 19%;
     background-color: rgba(255,255,255,95%);
-    padding-bottom: 3.5rem;
+    padding-bottom: 1rem;
  }
 
   .feedContainer {
     position: absolute;
-    padding: 20px;
+
     left: 0;
     top: 150px;
     z-index: 500;
     width: 23%;
     background-color: rgba(255,255,255,95%);
-    padding-bottom: 3.5rem;
+    padding-bottom: 1rem;
 
  }
 
