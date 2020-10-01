@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://api-dev.tucan.fitness'
+  apiUrl: 'https://api.tucan.fitness'
 };
