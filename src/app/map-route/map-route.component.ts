@@ -152,7 +152,7 @@ export class MapRouteComponent implements OnChanges {
       shadowUrl: 'leaflet/marker-shadow.png',
     })}).addTo(this.map);
 
-    this.marker_start.bindPopup(this.popupService.makePopup({name:'Start',state:'Jerusalem'}));
+   // this.marker_start.bindPopup(this.popupService.makePopup({name:'Start',state:''}));
 
     this.marker_end = L.marker(end_coord,{icon: L.icon({
       iconSize: [ 38, 36 ],
@@ -162,7 +162,7 @@ export class MapRouteComponent implements OnChanges {
       shadowUrl: 'leaflet/marker-shadow.png',
     })}).addTo(this.map);
 
-    this.marker_end.bindPopup(this.popupService.makePopup({name:'End',state:'Philadelphia'}));
+  //  this.marker_end.bindPopup(this.popupService.makePopup({name:'End',state:''}));
 
     if(this.zoom)
     {
