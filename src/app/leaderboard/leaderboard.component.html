@@ -1,6 +1,6 @@
 <div style="overflow:auto; max-height:200px;">
 <div *ngFor="let group of leaderboard; let i=index">
-  <div [ngClass]="{'LeaderboardItem' : i>2, 'LeaderboardGold':i==0,'LeaderboardSilver':i==1,'LeaderboardBronze':i==2}" *ngIf="!group.isTeam" (click)="toggleDetails()">
+  <div class="LeaderboardItem"  *ngIf="!group.isTeam" (click)="toggleDetails()"> <!--[ngClass]="{'LeaderboardItem' : i>2, 'LeaderboardGold':i==0,'LeaderboardSilver':i==1,'LeaderboardBronze':i==2}"-->
 
     <b *ngIf="i>=9">{{i+1}}</b>
     <b *ngIf="i<9">0{{i+1}}</b>
