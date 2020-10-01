@@ -143,10 +143,7 @@ export class FeedComponent implements OnInit {
     if (getNextPage){
       this.page_number += 1;
     }
-
-//    console.log(getNextPage);
- //   console.log("Getting page num ", this.page_number);
-
+    console.log("getting feeditems");
     this._feedService.refreshFeed(this.page_number, this.items_per_page, !this.initialized).then(payload => {
       var newFeedObjs: Array<FeedObj> = [];
       var get_created_ts = this.get_created_ts;
@@ -171,6 +168,7 @@ export class FeedComponent implements OnInit {
       //viewComponent.feedItems = newFeedObjs.concat(viewComponent.feedItems);
       //Continue to explore ways to refresh feed. In meantime, get all feed objs every time
       viewComponent.feedItems = newFeedObjs;
+      console.log("New feeditems: ", viewComponent.feedItems);
       this.loading = false;
     });
 
@@ -288,6 +286,7 @@ interface FeedObj {
   comments: Comment[];
   show_comments: boolean;
   follows: boolean;
+  hot: boolean;
 }
 
 interface FeedPayload {

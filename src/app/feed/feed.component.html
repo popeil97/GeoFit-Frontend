@@ -39,6 +39,11 @@
 
         </div>
 
+        <!---- KATIE THIS IS FOR YOUUUUUU :)-->
+        <div>
+          Hot: {{ element.hot }}
+        </div>
+
         <div class="container" style="display:flex;align-content: right;right:0;">
           <app-story-btn style="padding-top:5px;" *ngIf="this._authService.isLoggedIn()" [use]="'like'" [storyID]=element.story_id [likes]=element.likes [likesCount]=element.likes_count [likesUsers]=element.likes_users></app-story-btn>
           
