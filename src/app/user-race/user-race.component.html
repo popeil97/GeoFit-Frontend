@@ -1,4 +1,3 @@
-
 <div class="TucanContainer">
   <h2 *ngIf="userData.is_me; else otherUserRaces">Your Races</h2>
   <ng-template #otherUserRaces><h2>{{userData.first_name}}'s Races</h2></ng-template>
@@ -32,13 +31,8 @@
             <div class='RaceDistanceLine'>
               <p class='h7'>{{race.distance}} {{race.distance_type}} </p>
             </div>
-
-            <div class='TucanRaceItemButtons'>
-              <button  (click)="viewRace(race)" *ngIf="race.has_started">Go to Race</button>
-              <button  (click)="viewAbout(race)">Race Details</button>
             <p class='RaceLocation'>{{race.end_loc}}</p>
           </div>
-
 
           <div class='UserRaceItemButtons'>
             <button  (click)="viewRace(race)" *ngIf="race.has_started">Go to Race</button>
