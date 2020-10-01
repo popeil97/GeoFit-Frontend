@@ -9,6 +9,7 @@ import {Chart} from 'chart.js';
 })
 export class UserStatsComponent implements OnInit {
   
+  @Input() userData;
   @Input() userID: number;
   userStats: UserStats;
   private chart: Chart;
