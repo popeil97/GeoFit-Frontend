@@ -13,7 +13,7 @@ export class UserRaceComponent implements OnInit {
   constructor(private raceService: RaceService,private router:Router,) { }
 
   public races:any[] = null;
-  public userRaces:any[];
+  public userRaces:any[] = null;
   public racesData:any;
 
   private monthKey = {
