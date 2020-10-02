@@ -8,10 +8,11 @@
 	 		<h3 class="RaceViewSegmentTitle">{{this.raceName}}</h3>
 		    <button class="transparentWhiteButton">Search</button>
 		  <!--  <button class="transparentWhiteButton"  (click)="openModal('raceSettingsModal')">Settings</button> -->
-		    <button class="transparentWhiteButton"  (click)="openModal('mapSettingsModal')">Settings</button>
+		    <button class="transparentWhiteButton"  *ngIf="this._authService.isLoggedIn() && this.userRegistered"  (click)="openModal('mapSettingsModal')">Settings</button>
 		    <button class="transparentWhiteButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities>0" matBadge="{{num_activities}}"  matBadgePosition="after" matBadgeColor="accent" (click)="openModal('custom-modal-5')" >Log Activity</button>
 		    <button class="transparentWhiteButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities==0" (click)="openModal('custom-modal-5')" >Log Activity</button>
-		    <button class="transparentWhiteButton" (click)="viewAbout()">About Race</button>
+		    <button class="transparentWhiteButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="viewAbout()">About Race</button>
+		    <button class="transparentWhiteButton" *ngIf="!this._authService.isLoggedIn()" (click)="viewAbout()">Join Race</button>
 	 	</div>
 	 	
 	 	 <div class = "feedContainer">

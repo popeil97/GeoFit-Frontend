@@ -62,8 +62,12 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
       }
     }
 
+    console.log('on changes');
+
     this.settingsForm.get('allAgesOn').valueChanges
       .subscribe(value => {
+
+        console.log("allAgesOn", value);
           if (value == true) {
             this.settingsForm.get('ageRange').disable();
           }
