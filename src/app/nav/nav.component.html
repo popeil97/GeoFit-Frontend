@@ -41,40 +41,45 @@
         </div>
 
         <div class="TucanNavigationButtonSegment">
-          <div *ngIf="this._authService.isLoggedIn()">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="showNotifications()">
-                <mat-icon *ngIf="notifications.length>0" matBadge="{{notifications.length}}" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below">circle_notifications</mat-icon> 
-                <mat-icon *ngIf="notifications.length==0">circle_notifications</mat-icon>
+          <ng-template [ngIf]="this._authService.isLoggedIn()" [ngIfElse]="NavButtonsBlock">
+              <a class="NavItem dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="showNotifications()">
+                <div class='NavNotifImgContainer'>
+                  <ng-template [ngIf]="notifications.length>0" [ngIfElse]="NoNotificationsIcon">
+                    <mat-icon class='NavNotifImg' matBadge="{{notifications.length}}" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below">circle_notifications</mat-icon>
+                  </ng-template>
+                  <ng-template #NoNotificationsIcon>
+                    <mat-icon class='NavNotifIm'>circle_notifications</mat-icon>
+                  </ng-template>
+                </div>
               </a>
-          </div>
-
-         <div *ngIf="this._authService.isLoggedIn(); else NavButtonsBlock">
-          <div class='dropdown NavProfileDropdown' [ngClass]="{dropdownOpen : this.profileOpen}" (click)="this.ToggleProfileDropdown()">
-            <div class='dropdownSelected'>
-              <img class='NavProfileImg' src= "{{this.picURL}}" style="border-radius:50%;width:35px;" />
-              <span class="NavLink" >MY PROFILE</span>
-            </div>
-            <div class='dropdownContents NavDropdownContents'>
-              <div class="dropdownItem NavDropdownItem">
-                <!--<a [routerLink]="['/profile', {username: this._authService.username}]">Go to Profile</a>-->
-                <a [routerLink]="['/']">Go to Profile</a>
+              <div class='NavItem dropdown NavProfileDropdown' [ngClass]="{dropdownOpen : this.profileOpen}" (click)="this.ToggleProfileDropdown()">
+                <div class='dropdownSelected NavProfileDropdownSelected'>
+                  <div class='NavProfileImgContainer'>
+                    <img class='NavProfileImg' src= "{{this.picURL}}" />
+                  </div>
+                  <span class="NavLink" >MY PROFILE</span>
+                </div>
+                <div class='dropdownContents NavDropdownContents'>
+                  <div class="dropdownItem NavDropdownItem">
+                    <!--<a [routerLink]="['/profile', {username: this._authService.username}]">Go to Profile</a>-->
+                    <a [routerLink]="['/']">Go to Profile</a>
+                  </div>
+                  <div class="dropdownItem NavDropdownItem">
+                    <a (click)="logout()">Log out {{this._authService.username}}</a>
+                  </div>
+                </div>
               </div>
-              <div class="dropdownItem NavDropdownItem">
-                <a (click)="logout()">Log out {{this._authService.username}}</a>
-              </div>
-            </div>
-          </div>
-          <!--
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="NavItemClick()">
-              <img src= "{{this.picURL}}" style="border-radius:50%;width:20px;"> My Profile
-            </a>
-             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" [routerLink]="['/profile', {username: this._authService.username}]">My profile</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="dropdown-item" (click)="logout()">Log out {{this._authService.username}}</a>
-              </div>
-          -->
-          </div>
+              <!--
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="NavItemClick()">
+                  <img src= "{{this.picURL}}" style="border-radius:50%;width:20px;"> My Profile
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <a class="dropdown-item" [routerLink]="['/profile', {username: this._authService.username}]">My profile</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" (click)="logout()">Log out {{this._authService.username}}</a>
+                  </div>
+              -->
+          </ng-template>
           <ng-template #NavButtonsBlock>
             <div class='NavItem'>
               <button class='darkButton' (click)="openModal('custom-modal-1')">Log In</button>

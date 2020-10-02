@@ -120,6 +120,7 @@ import { RaceTypeComponent } from './race-type/race-type.component';
 import { UserRaceComponent } from './user-race/user-race.component';
 import { LogActivityComponent } from './log-activity/log-activity.component';
 import { StoryFormStandaloneComponent } from './story-form-standalone/story-form-standalone.component';
+import { MapSettingsComponent } from './map-settings/map-settings.component';
 
 
 @NgModule({
@@ -218,6 +219,7 @@ import { StoryFormStandaloneComponent } from './story-form-standalone/story-form
     UserRaceComponent,
     LogActivityComponent,
     StoryFormStandaloneComponent,
+    MapSettingsComponent,
       ],
 
   imports: [

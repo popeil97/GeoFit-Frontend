@@ -51,8 +51,9 @@
         <button *ngIf="!this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-2')">Register for Race</button>
         <button *ngIf="this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-3')">Register for Race</button>
 
-        <p *ngIf="this._authService.isLoggedIn() && this.hasJoined" class='margin-bottom-8px'>You've registered for this race.</p>
-        <p *ngIf=" !hasStarted" class='margin-bottom-8px italics'>Come back on race day ({{aboutData.start_date.month}}, {{aboutData.start_date.day}}).</p>
+        <p *ngIf="this._authService.isLoggedIn() && this.hasJoined" class='margin-bottom-8px'><b>You've registered for this race.</b></p>
+        <p *ngIf=" !hasStarted && this.hasJoined" class='margin-bottom-8px italics'> Come back on race day ({{aboutData.start_date.month}}, {{aboutData.start_date.day}}).</p>
+        <p *ngIf=" !hasStarted && !this.hasJoined" class='margin-bottom-8px italics'>Join by race day ({{aboutData.start_date.month}}, {{aboutData.start_date.day}}).</p>
       </div>
 
       <!-- test this by going into the "swag" module in the backend and adding swag to your race -->

@@ -26,11 +26,37 @@
     margin: 2px;
   }
 
+  .winner-column{
+    width: 33%;
+    text-align: center ;
+  }
+  .winner-column-lowered{
+    width: 33%;
+    text-align: center ;
+    margin-top:10px;
+  }
+
+  .oneImage
+  {
+    border-radius: 50%;
+    border: 1px solid #FFD700;
+  }
+
+  .twoImage
+  {
+    border-radius: 50%;
+    border: 1px solid #C0C0C0;
+  }
+
+    .threeImage 
+  {
+    border-radius: 50%;
+    border: 1px solid #cd7f32;
+  }
+
   .row {
   display: flex;
   flex-wrap: wrap;
-  margin-right: -15px;
-  margin-left: -15px;
 }
 
 span:hover{

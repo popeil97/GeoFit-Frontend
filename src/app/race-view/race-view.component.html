@@ -5,9 +5,10 @@
 	 	<app-map [raceIDs]="raceIDs" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
 
 	 	<div class="ActionsContainer">
-	 		<h4 class="RaceViewSegmentTitle">Action Items</h4>
+	 		<h3 class="RaceViewSegmentTitle">{{this.raceName}}</h3>
 		    <button class="transparentWhiteButton">Search</button>
-		    <button class="transparentWhiteButton"  (click)="openModal('raceSettingsModal')">Settings</button>
+		  <!--  <button class="transparentWhiteButton"  (click)="openModal('raceSettingsModal')">Settings</button> -->
+		    <button class="transparentWhiteButton"  (click)="openModal('mapSettingsModal')">Settings</button>
 		    <button class="transparentWhiteButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities>0" matBadge="{{num_activities}}"  matBadgePosition="after" matBadgeColor="accent" (click)="openModal('custom-modal-5')" >Log Activity</button>
 		    <button class="transparentWhiteButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities==0" (click)="openModal('custom-modal-5')" >Log Activity</button>
 		    <button class="transparentWhiteButton" (click)="viewAbout()">About Race</button>

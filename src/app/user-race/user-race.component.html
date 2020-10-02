@@ -1,18 +1,17 @@
-<div *ngFor="let race of userRaces" class="TucanRaceItem">
-  <div class = "TucanRaceItem">
-        <div class='TucanRaceItemContents'>
-          
-          <div class='TucanRaceItemHeader'>
-            <h4>{{race.name}}</h4>
-          </div>
-          <div class='TucanRaceItemImageContainer'>
-            <img class="TucanRaceItemImageSmall" *ngIf="race.race_image != null" src="{{race.race_image}}" />
-           </div>
-           <br>
+<div class="TucanContainer">
+  <h2 *ngIf="userData.is_me; else otherUserRaces">Your Races</h2>
+  <ng-template #otherUserRaces><h2>{{userData.first_name}}'s Races</h2></ng-template>
 
-          <div class='TucanRaceItemDetails'>
-            <div class='TucanRaceItemSpecificInfo'>
-              <div class='CalendarDaysContainer'>
+  <ng-template [ngIf]='userRaces != null' [ngIfElse]="LoadingUserRacesBlock">
+    <ng-template [ngIf]="userRaces.length > 0" [ngIfElse]="NoUserRacesBlock">
+      <div *ngFor="let race of userRaces" class="UserRaceItem">
+        <div class='UserRaceItemContents'>
+          <div class='UserRaceItemHeader'>
+            <img class="UserRaceItemImage" *ngIf="race.race_image != null" src="{{race.race_image}}" />
+            <div class="UserRaceItemNameContainer">
+              <h4 class="UserRaceItemName">{{race.name}}</h4>
+            </div>
+            <div class='CalendarDaysContainer UserRaceItemCalendarDaysContainer'>
               <div class='CalendarDay'>
                 <div class='CalendarDayM'><p class='h7'>{{race.start_date.month}}</p></div>
                 <div class='CalendarDayD'><p>{{race.start_date.day}}</p></div>
@@ -25,26 +24,35 @@
                 <div class='CalendarDayD'><p>{{race.end_date.day}}</p></div>
               </div>
             </div>
-
-              <div class='RaceLocationsContainer'>
-                <p class='RaceLocation'>{{race.start_loc}}</p>
-                <div class='RaceDistanceLine'>
-                  <p class='h7'>{{race.distance}} {{race.distance_type}} </p>
-                </div>
-                <p class='RaceLocation'>{{race.end_loc}}</p>
-              </div>
-              <!--
-              <h6>Entry Fee:</h6>
-              <p>$ {{race.raceSettings.price}}</p>
-              -->
-            </div>
-            <div class='TucanRaceItemButtons'>
-              <button  (click)="viewRace(race)" *ngIf="race.has_started">Go to Race</button>
-               <button  (click)="viewAbout(race)">Race Details</button>
-
-              <b *ngIf="!race.has_started">Come back on race day ({{race.start_date.month}} {{race.start_date.day}}).</b>
-            </div>
           </div>
+            
+          <div class='RaceLocationsContainer UserRaceItemLocationsContainer'>
+            <p class='RaceLocation'>{{race.start_loc}}</p>
+            <div class='RaceDistanceLine'>
+              <p class='h7'>{{race.distance}} {{race.distance_type}} </p>
+            </div>
+            <p class='RaceLocation'>{{race.end_loc}}</p>
+          </div>
+
+          <div class='UserRaceItemButtons'>
+            <button  (click)="viewRace(race)" *ngIf="race.has_started">Go to Race</button>
+            <button  (click)="viewAbout(race)" *ngIf="race.has_started">Race Details</button>
+            <p *ngIf="!race.has_started" class='h7'>Come back on race day ({{race.start_date.month}} {{race.start_date.day}}).</p>
+          </div>
+
         </div>
-    </div>
- </div>
+      </div>
+    </ng-template>
+    <ng-template #NoUserRacesBlock>
+      <ng-template [ngIf]="userData.is_me" [ngIfElse]="OtherUserNoRaces">
+        <p>You currently do not have any races under your belt. To find races you may be interested in, head over to <a routerLink='/races'>Public Races</a>.</p>
+      </ng-template>
+      <ng-template #OtherUserNoRaces>
+        <p>{{userData.first_name}} is not signed up to any races for now.</p>
+      </ng-template>
+    </ng-template>
+  </ng-template>
+  <ng-template #LoadingUserRacesBlock>
+    <p>Loading user races...</p>
+  </ng-template>
+</div>

@@ -38,31 +38,40 @@
     opacity: 0.8;
     z-index: 500;
     width: 100%;
-    background-color: rgba(169,169,169,50%);
+    background-color: rgba(91, 90, 92,50%);
     padding-bottom: 3.5rem;
  }
 
+ .LeftActions {
+    left: 0;
+    top: 0;
+ }
+  .RightActions {
+    right: 0;
+    top: 0;
+ }
+
+
  .leaderboardContainer {
     position: absolute;
-    padding: 20px;
     right: 0;
     top: 150px;
 
     z-index: 500;
     width: 19%;
     background-color: rgba(255,255,255,95%);
-    padding-bottom: 3.5rem;
+    padding-bottom: 1rem;
  }
 
   .feedContainer {
     position: absolute;
-    padding: 20px;
+
     left: 0;
     top: 150px;
     z-index: 500;
     width: 23%;
     background-color: rgba(255,255,255,95%);
-    padding-bottom: 3.5rem;
+    padding-bottom: 1rem;
 
  }
 

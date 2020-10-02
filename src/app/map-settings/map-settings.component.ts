@@ -4,19 +4,22 @@ import { UsersService } from '../users.service';
 import { RaceViewComponent } from '../race-view/race-view.component';
 import { ModalService } from '../modalServices';
 
+
 @Component({
-  selector: 'app-race-settings',
-  templateUrl: './race-settings.component.html',
-  styleUrls: ['./race-settings.component.css']
+  selector: 'app-map-settings',
+  templateUrl: './map-settings.component.html',
+  styleUrls: ['./map-settings.component.css']
 })
-export class RaceSettingsComponent implements AfterViewInit,OnChanges {
-  @Input() id : string;
+export class MapSettingsComponent implements OnInit,OnChanges {
+
+  @Input() id: string;
+  modalData: any;
   settingsForm:FormGroup;
   successfulUpdate:Boolean = false;
 
   ageRangeOptions: any[];
 
-  constructor(private _usersService:UsersService, private _raceview:RaceViewComponent,private modalService: ModalService) { 
+   constructor(private _usersService:UsersService,private modalService: ModalService) { //, private _raceview:RaceViewComponent
 
     this.settingsForm = new FormGroup({
       isAutomaticImport: new FormControl('',[
@@ -91,8 +94,8 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
       })
     
   }
-  ngAfterViewInit(): void {
-    
+  ngOnInit(): void {
+    this.initForm();
   }
 
   get d() { return this.modalService.modalsData[this.id]}
@@ -103,10 +106,11 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
   }
 
   apply(): void {
+  	console.log("APPLY!");
     let formClean = this.settingsForm.value as UserSettings;
     console.log(this.settingsForm);
     let isValid: Boolean = this.settingsForm.valid;
-
+    console.log("isValid",isValid);
     if(isValid) {
       
       formClean.race_id = this.d.userSettings.race_id;
@@ -134,16 +138,21 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
         }
       }
 
-      this._raceview.showPinsFromSettings(pinSettings);
+    console.log("FROM CHILD map-settings", pinSettings);
+    this.modalService.callbackModal(this.id,{type:"map",pinSettings:pinSettings});
+
+      //this._raceview.showPinsFromSettings(pinSettings);
 
     }
   }
 
   initForm(): void {
+  //	console.log("INIT!");
    //  console.log('Automatic import value:',this.userSettings.isAutomaticImport);
    //  console.log('Heatmap value:',this.userSettings.heatMapOn);
+   //his.d.userSettings.isAutomaticImport,
     this.settingsForm = new FormGroup({
-      isAutomaticImport: new FormControl(this.d.userSettings.isAutomaticImport,[
+      isAutomaticImport: new FormControl(false,[
         Validators.required,
       ]),
       heatMapOn: new FormControl(false,[
@@ -166,7 +175,7 @@ export class RaceSettingsComponent implements AfterViewInit,OnChanges {
         Validators.required,
       ]),
     });
-
+    console.log("INIT!",this.settingsForm);
     //Disable age control by default
     this.settingsForm.get('ageRange').disable();
 
