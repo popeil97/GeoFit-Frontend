@@ -18,11 +18,6 @@ div.ex3 {
   overflow: auto;
 }
 
-.h7
-{
-  font-size:10px;
-}
-
 .paginate-button { 
   width:auto;
   margin-left:0;
@@ -35,4 +30,21 @@ div.ex3 {
 
 .material-icons{
   font-size: 18px;
+  color:rgba(169,169,169,80%);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main-col {
+  width:62%;
+}
+
+.side-col {
+  width:38%;
+  display:flex;
+  align-content: right;
+  right:0;
 }

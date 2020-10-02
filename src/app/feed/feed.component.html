@@ -10,68 +10,66 @@
     
     <ng-container matColumnDef="ProfilePic" >
       <td mat-cell *matCellDef="let element" (click)="clickedOnFeedItem(element)" [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">
-        <img width="50px" src="{{ element.profile_url }}">
+        <img width="35px" src="{{ element.profile_url }}" style="padding-right:20px;">
       </td>
     </ng-container>
 
     <ng-container matColumnDef="Data" >
-      <td mat-cell *matCellDef="let element" [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)" class="h7">
-        <app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav>
-        {{ element.message }}  {{ element.hot? '🔥🔥🔥' : ' ' }}
-        <small>{{ this.get_created_ts(element.created_ts) }}</small>
-        <br>
-        <div class="center" *ngIf="element.story">
-          <div class="container" *ngIf="element.story_image">
-            <img width="120px" src="{{ element.story_image }}" (click)="showStoryDialog(element)">
-          </div>
-          <div class="container" *ngIf="element.story_text">
-            {{ element.story_text }}
-          </div>
+      <td mat-cell *matCellDef="let element" [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">
 
-          <!---If parent component inputs TRUE, we have a story modal component as a child-->
-          <div *ngIf="this.hasStoryModalChild">
-            <app-story-modal></app-story-modal>
-          </div>
+        <div class="row">
+          <div class = "main-col">
+             <div *ngIf="element.message.length < 20"> <!-- NO STORY : FITNESS UPDATE -->
+              <app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav>
+              {{ element.message }}  <small>{{ this.get_created_ts(element.created_ts) }}</small>
+            </div>
 
+            <div *ngIf="element.message.length >= 20"> <!-- STORY-->
+              <app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav>
+              {{ element.story_text }}  {{ element.hot? '🔥🔥🔥' : ' ' }}  <small>{{ this.get_created_ts(element.created_ts) }}</small>
+
+              <div class="container" *ngIf="element.story_image">
+                <img width="60px" src="{{ element.story_image }}" (click)="showStoryDialog(element)">
+              </div>
+            </div>
+
+          </div>
+          <div class = "side-col">
+             <app-story-btn style="padding-top:5px;" *ngIf="this._authService.isLoggedIn()" [use]="'like'" [storyID]=element.story_id [likes]=element.likes [likesCount]=element.likes_count [likesUsers]=element.likes_users></app-story-btn>
+
+             <div role="button" (click)="element.show_comments=!element.show_comments"> <i class="material-icons" style="padding-top:5px;padding-left:5px">comment</i> {{ element.comments.length }} 
+             </div>
+
+             <div class="nav-item dropdown">
+
+                <a class="nav-link dropdown-toggle" style="font-size:8px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="material-icons">more_horiz</i>
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+                  <div role="button" (click)="openReportDialog(element.story_id)"> <i class="material-icons">report</i>
+                    <i>Report Story</i> 
+                  </div>
+
+                  <div *ngIf="element.is_mine">
+                    <div class="dropdown-divider"></div>
+
+                    <div role="button" (click)="openDeleteStoryDialog(element.story_id)"> <i class="material-icons">delete</i>
+                      <i>Delete Story</i> 
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+          </div>
         </div>
+       
+
 
         <!---- KATIE THIS IS FOR YOUUUUUU :)-->
-
-
-        <div class="container" style="display:flex;align-content: right;right:0;">
-          <app-story-btn style="padding-top:5px;" *ngIf="this._authService.isLoggedIn()" [use]="'like'" [storyID]=element.story_id [likes]=element.likes [likesCount]=element.likes_count [likesUsers]=element.likes_users></app-story-btn>
-          
-          <div role="button" (click)="element.show_comments=!element.show_comments"> <i class="material-icons" style="color:rgba(169,169,169,80%);padding-top:5px;padding-left:15px">comment</i> {{ element.comments.length }} 
-            <!-- <i style = "color:#2C00A5;" *ngIf="element.comments.length>0 && !element.show_comments">View comments</i> 
-            <i style = "color:#2C00A5;" *ngIf="element.comments.length>0 && element.show_comments">Collapse comments</i>
-            <i style = "color:#2C00A5;" *ngIf="element.comments.length==0">Add comment</i> -->
-         </div>
-
-         <div class="nav-item dropdown">
-
-            <a class="nav-link dropdown-toggle" style="color:rgba(169,169,169,80%);" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="material-icons">more_horiz</i>
-            </a>
-
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-
-              <div role="button" (click)="openReportDialog(element.story_id)"> <i class="material-icons">report</i>
-                <i>Report Story</i> 
-              </div>
-
-              <div *ngIf="element.is_mine">
-                <div class="dropdown-divider"></div>
-
-                <div role="button" (click)="openDeleteStoryDialog(element.story_id)"> <i class="material-icons">delete</i>
-                  <i>Delete Story</i> 
-                </div>
-
-              </div>
-
-            </div>
-          </div>
-
-        </div>
 
         <div *ngIf="element.show_comments">
           <app-comments [comments]="element.comments" [storyID]="element.story_id" (commentPosted)="newCommentPosted($event)"></app-comments>
