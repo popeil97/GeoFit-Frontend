@@ -12,23 +12,17 @@
         <mat-slide-toggle formControlName="heatMapOn">Heat Map On</mat-slide-toggle>
       </div> -->
 
+      <!--
       <h4>Organization Pins</h4>
       <div class="form-group toggleShift">
         <mat-slide-toggle formControlName="showOrgPins">Organization Pins Only</mat-slide-toggle>
-      </div>
+      </div> -->
       
       <h4>Gender</h4>
       <div class="form-group toggleShift">
         <mat-slide-toggle formControlName="malePinsOn">Male Pins</mat-slide-toggle>
         <mat-slide-toggle formControlName="femalePinsOn" style="padding-left:10px;">Female Pins</mat-slide-toggle>
-         <div style="display: inline-block">
-          <select class="form-control" formControlName="ageRange" style="display: inline-block">
-            <option class="dropdown-placeholder" style="display: none" value="-1">Select Age</option>
-            <option *ngFor="let ageRange of ageRangeOptions" [value]="ageRange">
-              {{ ageRange }}
-            </option>
-          </select>
-        </div>
+         
       </div>
 
       <h4>Age</h4>
@@ -55,12 +49,12 @@
       <button  (click)="apply()">Apply</button>
       
       <div>
-      	<div *ngIf="successfulUpdate" class="alert alert-primary">
-	  	  <div>
-	       Successfully Applied
-	    	</div>
-    	</div>
- 	 </div>
+        <div *ngIf="successfulUpdate" class="alert alert-primary">
+        <div>
+         Successfully Applied
+        </div>
+      </div>
+   </div>
 
   </div>
 

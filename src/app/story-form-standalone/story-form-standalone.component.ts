@@ -67,6 +67,7 @@ export class StoryFormStandaloneComponent implements OnInit {
       //   console.log("Uploaded story");
         //Emit event to refresh feed
        // this.storyPostedEvent.emit();
+       console.log("TEST SENT");
        	this.modalService.callbackModal(this.id,"test");
         //Clear input fields
         (<HTMLInputElement>document.getElementById("storyImage")).value = '';

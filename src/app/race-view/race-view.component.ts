@@ -252,7 +252,7 @@ export class RaceViewComponent implements OnInit {
 
   getRaceState(): void {
     this.loading = true;
-    this.raceService.getRace(this.raceID).subscribe(data => {
+    this.raceService.getRace(this.raceID).subscribe((data) => {
       console.log(data);
       this.showTeamForm=false;
       let raceData = data as RaceData;
@@ -279,6 +279,7 @@ export class RaceViewComponent implements OnInit {
       this.raceIDs = raceData.race_IDs;
       this.userRaceSettings = raceData.settings;
       this.raceSettings = raceData.race_settings;
+      console.log("RACE VIEW RACE SETTINGS", this.raceSettings);
       this.isManualEntry = this.raceSettings.isManualEntry;
       this.userStat = raceData.user_stat;
       this.isOwnerOrModerator = raceData.is_mod_or_owner;
@@ -413,3 +414,5 @@ interface UserData {
   distance_type: string;
   is_me: boolean;
 }
+
+

@@ -65,6 +65,8 @@ export class MapSettingsComponent implements OnInit,OnChanges {
       }
     }
 
+    console.log("ON CHANGES");
+
     this.settingsForm.get('allAgesOn').valueChanges
       .subscribe(value => {
           if (value == true) {
@@ -106,7 +108,7 @@ export class MapSettingsComponent implements OnInit,OnChanges {
   }
 
   apply(): void {
-  	console.log("APPLY!");
+    console.log("APPLY!");
     let formClean = this.settingsForm.value as UserSettings;
     console.log(this.settingsForm);
     let isValid: Boolean = this.settingsForm.valid;
@@ -147,7 +149,7 @@ export class MapSettingsComponent implements OnInit,OnChanges {
   }
 
   initForm(): void {
-  //	console.log("INIT!");
+  //  console.log("INIT!");
    //  console.log('Automatic import value:',this.userSettings.isAutomaticImport);
    //  console.log('Heatmap value:',this.userSettings.heatMapOn);
    //his.d.userSettings.isAutomaticImport,
@@ -177,7 +179,7 @@ export class MapSettingsComponent implements OnInit,OnChanges {
     });
     console.log("INIT!",this.settingsForm);
     //Disable age control by default
-    this.settingsForm.get('ageRange').disable();
+    this.settingsForm.get('ageRange').enable();
 
   //   console.log('form value:',this.settingsForm);
   }
