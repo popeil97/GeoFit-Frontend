@@ -40,9 +40,7 @@
             </div>
             <div class='TucanRaceItemButtons'>
               <button  (click)="viewRace(race)" *ngIf="race.has_started">Go to Race</button>
-              <button  (click)="viewRace(race)" *ngIf="!race.has_started">Preview Race</button>
-
-               <button  (click)="viewAbout(race)" *ngIf="race.has_started">Race Details</button>
+               <button  (click)="viewAbout(race)">Race Details</button>
 
               <b *ngIf="!race.has_started">Come back on race day ({{race.start_date.month}} {{race.start_date.day}}).</b>
             </div>
