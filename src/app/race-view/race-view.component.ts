@@ -65,6 +65,8 @@ export class RaceViewComponent implements OnInit {
   public userStat:any = {};
   public followedIDs:number[];
   public isManualEntry:Boolean = false;
+  public hasEntryTags:Boolean = false;
+  public isHybrid: Boolean = false;
 
   public feedOptions:Boolean = false;
 
@@ -285,6 +287,8 @@ export class RaceViewComponent implements OnInit {
       this.childRaceData.unshift({id:this.raceID,name:'All'});
       console.log("race-view RACE IDs",this.raceIDs);
       this.loading = false;
+      this.hasEntryTags = this.raceSettings.has_entry_tags;
+      this.isHybrid = this.race.is_hybrid;
 
       //Default to first race ID if not set
       if (this.selectedRaceID == undefined){
