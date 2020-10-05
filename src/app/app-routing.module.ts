@@ -21,6 +21,7 @@ import {ContactPageComponent} from './contact-page/contact-page.component'
 import { SwagListComponent } from './swag-list/swag-list.component';
 import { CartEditComponent } from './cart-edit/cart-edit.component';
 import { PaypalComponent } from './paypal/paypal.component';
+import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
   {path: 'race', component:RaceViewComponent},
@@ -42,6 +43,7 @@ const routes: Routes = [
   {path: 'about-tucan', component:AboutTucanComponent},
   {path: 'faqs', component:FaqPageComponent},
   {path: 'contact', component:ContactPageComponent},
+  {path: 'search', component:SearchComponent},
 ];
 
 @NgModule({

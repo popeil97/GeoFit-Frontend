@@ -1,0 +1,9 @@
+<div class="form-group" style="text-align: left; padding: 5px;">
+  <!--    <label name="start_loc">Start Location</label>-->
+     <input class="form-control" type="text" placeholder="Racer Name" [matAutocomplete]="racerFilterAuto" (keyup)="filter()" [(ngModel)]="query" />
+     <mat-autocomplete #racerFilterAuto="matAutocomplete">
+       <mat-option *ngFor="let option of searchResults" [value]="option">
+         {{ option.first_name }} {{ option.last_name }}
+       </mat-option>
+     </mat-autocomplete>
+   </div>
