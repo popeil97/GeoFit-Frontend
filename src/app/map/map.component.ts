@@ -86,7 +86,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }
   }
 
-
   ngAfterViewInit(): void {
     if(this.map == undefined) {
       this.initMap();

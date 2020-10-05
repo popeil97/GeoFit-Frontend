@@ -78,7 +78,7 @@ button.darkButton, .button.darkButton {
   color:white;
 }
 
-button.transparentWhiteButton, .button.darkButton {
+button.transparentWhiteButton, button.darkButton, .button.darkButton {
   background-color:inherit;
   border-color:white;
   color:white;
