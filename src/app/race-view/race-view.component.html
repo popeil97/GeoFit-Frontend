@@ -10,13 +10,19 @@
 		    <button class="transparentWhiteButton">Search</button>
 		  <!--  <button class="transparentWhiteButton"  (click)="openModal('raceSettingsModal')">Settings</button> -->
 		    <button class="transparentWhiteButton"  *ngIf="this._authService.isLoggedIn() && this.userRegistered"  (click)="openModal('mapSettingsModal')">Settings</button>
-		    <button class="transparentWhiteButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities>0" matBadge="{{num_activities}}"  matBadgePosition="after" matBadgeColor="accent" (click)="openModal('custom-modal-5')" >Log Activity</button>
-		    <button class="transparentWhiteButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities==0" (click)="openModal('custom-modal-5')" >Log Activity</button>
+
 		    <button class="transparentWhiteButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="viewAbout()">About Race</button>
 		    <button class="transparentWhiteButton" *ngIf="!this._authService.isLoggedIn()" (click)="viewAbout()">Join Race</button>
 	 	</div>
 	 	
 	 	 <div class = "feedContainer">
+	 	 	<div class = "logActivity" *ngIf="this._authService.isLoggedIn() && this.userRegistered">
+	 	 		 <p>Add your Progress</p>
+		    <button *ngIf="num_activities>0" matBadge="{{num_activities}}"  matBadgePosition="after" matBadgeColor="accent" (click)="openModal('custom-modal-5')" >Log Activity</button>
+		    <button *ngIf="num_activities==0" (click)="openModal('custom-modal-5')" >Log Activity</button>
+	 	 	</div>
+	 	 	
+
 	 	 	 <div class='Slideshow'>
 		      <div class="SlideshowHeader">
 		        <button class="SlideshowButton" (click)="SwitchSlideshow('feed')" id="feed-btn">Social</button>
@@ -24,14 +30,7 @@
 		      </div>
 		      <div class="SlideshowContents RaceSlideshowContents">
 		        <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'feed'}">
-		          <button class="smallButton" (click)="toggleOptions()">{{feedOptions ? 'Hide Options' : 'Show Options'}}</button>
-		 		  <div *ngIf="feedOptions">
-			 		  Only show people I follow
-		        	  <input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/>
-		           	  <br>
-			          Only show stories
-			          <input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/>
-			       </div>
+		          
 
 			        <div class="row-status" *ngIf="this._authService.isLoggedIn()">
 					    <div class="me-col">
@@ -42,6 +41,15 @@
 					      <app-story-form  [raceID]="raceID" (logActivityEvent)="logActivity($event)" (storyPostedEvent)="newStoryPosted($event)"></app-story-form>
 					    </div>
 				  </div>
+
+				  <button class="smallButton" (click)="toggleOptions()">{{feedOptions ? 'Hide Options' : 'Show Options'}}</button>
+		 		  <div *ngIf="feedOptions">
+			 		  Only show people I follow
+		        	  <input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/>
+		           	  <br>
+			          Only show stories
+			          <input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/>
+			       </div>
   
 		          <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
 		        </div>
@@ -60,7 +68,7 @@
 		    </div>
 	 	 </div>
 
-	 	 
+
 	 </div>
 
 		

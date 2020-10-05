@@ -106,6 +106,7 @@ export class MapRouteComponent implements OnChanges {
 
   public panToUserMarker(user_id, showPopUp=true){
     //Do this to pan *and* zoom
+    console.log("ZOOM ZOOM IN MAP-ROUTE");
     var markerBounds = L.latLngBounds([this.markersByUserID[user_id.toString()]['latLng']]);
   //  console.log("In pan to user marker for user ID ", user_id);
     
