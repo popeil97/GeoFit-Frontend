@@ -37,3 +37,60 @@ span:hover{
   text-decoration:underline;
   cursor:pointer;
 }
+
+.LeaderboardItem {
+  display:block;
+  /*
+  padding:16px;
+  box-sizing: border-box;
+  */
+  margin-bottom:3px;
+  
+  box-shadow: 0px 0px 5px 2px rgb(200,200,200);
+}
+
+.LeaderboardGold{
+  display:block;
+  /*
+  padding:16px;
+  box-sizing: border-box;
+  */
+  margin-bottom:3px;
+  box-shadow: 0px 0px 5px 2px rgb(255, 242, 0);
+}
+
+  .winner-column{
+    width: 33%;
+    text-align: center ;
+  }
+  .winner-column-lowered{
+    width: 33%;
+    text-align: center ;
+    margin-top:10px;
+  }
+
+.LeaderboardSilver{
+  display:block;
+  /*
+  padding:16px;
+  box-sizing: border-box;
+  */
+  margin-bottom:3px;
+  box-shadow: 0px 0px 5px 2px rgb(115, 115, 115);
+}
+
+
+.LeaderboardBronze{
+  display:block;
+  /*
+  padding:16px;
+  box-sizing: border-box;
+  */
+  margin-bottom:3px;
+  box-shadow: 0px 0px 5px 2px rgb(176, 100, 0);
+}
+
+
+.winnerColumn{
+  width:33%;
+}

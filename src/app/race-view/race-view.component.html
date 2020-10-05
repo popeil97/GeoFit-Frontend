@@ -7,7 +7,7 @@
 
 	 	<div class="leaderboardContainer" style="background-color: black;">
 	 		<h3 class="RaceViewSegmentTitle">{{this.raceName}}</h3>
-		    <button class="transparentWhiteButton">Search</button>
+		    <app-search [raceID]="raceID"></app-search>
 		  <!--  <button class="transparentWhiteButton"  (click)="openModal('raceSettingsModal')">Settings</button> -->
 		    <button class="transparentWhiteButton"  *ngIf="this._authService.isLoggedIn() && this.userRegistered"  (click)="openModal('mapSettingsModal')">Settings</button>
 

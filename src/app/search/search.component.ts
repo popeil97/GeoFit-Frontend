@@ -10,7 +10,7 @@ export class SearchComponent implements OnInit {
 
   query:string;
   searchResults: any[];
-  @Input() raceID: number = 6;
+  @Input() raceID: number;
 
   constructor(private _searchService:SearchService) { }
 

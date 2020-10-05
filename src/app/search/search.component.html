@@ -3,7 +3,8 @@
      <input class="form-control" type="text" placeholder="Racer Name" [matAutocomplete]="racerFilterAuto" (keyup)="filter()" [(ngModel)]="query" />
      <mat-autocomplete #racerFilterAuto="matAutocomplete">
        <mat-option *ngFor="let option of searchResults" [value]="option">
-         {{ option.first_name }} {{ option.last_name }}
+       	 <app-user-profile-nav [username]=option.username [displayName]=option.display_name></app-user-profile-nav>
+         <app-user-follow [userID]=option.user_id [follows]=option.follows></app-user-follow>
        </mat-option>
      </mat-autocomplete>
    </div>
