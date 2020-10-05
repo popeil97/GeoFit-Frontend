@@ -45,7 +45,7 @@
               <a class="NavItem dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="showNotifications()">
                 <div class='NavNotifImgContainer'>
                   <ng-template [ngIf]="notifications.length>0" [ngIfElse]="NoNotificationsIcon">
-                    <mat-icon class='NavNotifImg' matBadge="{{notifications.length}}" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below">circle_notifications</mat-icon>
+                    <mat-icon matBadge="{{notifications.length}}" matBadgeColor="warn" matBadgeSize="small" matBadgePosition="below">circle_notifications</mat-icon>
                   </ng-template>
                   <ng-template #NoNotificationsIcon>
                     <mat-icon class='NavNotifIm'>circle_notifications</mat-icon>

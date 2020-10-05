@@ -220,10 +220,18 @@ a.navbar-brand {
 .NavProfileImgContainer {
   margin-right:8px;
 }
-.NavNotifImg, .NavProfileImg {
+.NavProfileImg {
   position: absolute;
   top:50%;
   left:50%;
+  transform:translate(-50%,-50%);
+  width:100%;
+}
+
+.NavNotifImg {
+  position: absolute;
+  top:1%;
+  left:10%;
   transform:translate(-50%,-50%);
   width:100%;
 }
