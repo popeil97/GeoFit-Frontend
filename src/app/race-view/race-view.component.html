@@ -4,18 +4,13 @@
 
 		<div class="MapSidebar">
 			<div class="MapHeaderContainer">
-				<h3 class="MapHeaderTitle">{{this.raceName}}dsmfnsa s sdfsd fsdfl s</h3>
+				<h3 class="MapHeaderTitle">{{this.raceName}}</h3>
 				<div class="MapHeaderButtonsContainer">
-					<button class="whiteButton MapHeaderButton">Search Map</button>
-					<button class="whiteButton smallButton" (click)="toggleOptions()">{{feedOptions ? 'Hide Options' : 'Show Options'}}</button>
+					<app-search [raceID]="raceID"></app-search>
+					 <button class="whiteButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="viewAbout()">About Race</button>
+					
 				</div>
-				<div *ngIf="feedOptions">
-					Only show people I follow
-					<input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/>
-					<br>
-					Only show stories
-					<input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/>
-				</div>
+
 			</div>
 			<div class='MapActionsContainer'>
 				<!--  <button class="transparentWhiteButton"  (click)="openModal('raceSettingsModal')">Settings</button> -->
@@ -49,6 +44,15 @@
 								<div class="story-col">
 									<app-story-form  [raceID]="raceID" (logActivityEvent)="logActivity($event)" (storyPostedEvent)="newStoryPosted($event)"></app-story-form>
 								</div>
+							</div>
+
+							<button class="whiteButton smallButton" (click)="toggleOptions()">{{feedOptions ? 'Hide Options' : 'Show Options'}}</button>
+							<div *ngIf="feedOptions">
+								Only show people I follow
+								<input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/>
+								<br>
+								Only show stories
+								<input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/>
 							</div>
 							<app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
 					   </div>
