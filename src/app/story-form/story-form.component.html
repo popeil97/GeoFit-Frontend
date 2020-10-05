@@ -1,14 +1,43 @@
-<div>
+<textarea  id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="What's on your mind?"  required style="width:100%;"></textarea>
 
-  <input type="text" id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="Type anything here..." style="width:100%;">
 
-  <input type="file" id="storyImage" name="storyImageField" accept="image/*" (change)="onSelectFile($event)">
 
-      <div class="wrapper" *ngIf="storyImage">
-        <img [src]="this.storyImage" width="100px">
-      </div>
+<button type="button" (click)="fileInput.click()">
+  <span class="material-icons">
+	portrait
+  </span>
+  <input #fileInput type="file"   id="storyImage" name="storyImageField" (change)="onSelectFile($event)" style="display:none;" />
+</button> 
 
-  
-  <button type="button" class="btn btn-primary btn-sm btn-mobile" style="background-color:#2C00A5; border-color:#2C00A5;" (click)="uploadStory()">Add Story</button>
+  <div class="wrapper" *ngIf="storyImage">
+    <img [src]="this.storyImage" width="100px">
+  </div>
 
-</div>
+<button (click)="uploadStory()">Post</button>
+
+
+<!--
+	<div class="row">
+	<div class = "status-col">
+		<textarea  id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="What's on your mind?"  required style="width:100%;"></textarea>
+	</div>
+
+	<div class = "pic-col">
+		<button type="button" (click)="fileInput.click()">
+		  <span class="material-icons">
+			portrait
+		  </span>
+		  <input #fileInput type="file"   id="storyImage" name="storyImageField" (change)="onSelectFile($event)" style="display:none;" />
+		</button> 
+
+	  <div class="wrapper" *ngIf="storyImage">
+	    <img [src]="this.storyImage" width="100px">
+	  </div>
+
+	</div>
+ </div>
+
+
+<button (click)="uploadStory()">Add Story</button>
+
+-->

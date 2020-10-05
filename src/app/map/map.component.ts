@@ -244,6 +244,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
   }
 
   public panToMarkerBounds(markerBounds){
+    console.log("PPAN1")
     var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
     this.map.fitBounds(markerBounds, options);
   }

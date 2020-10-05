@@ -1,5 +1,5 @@
 .RaceViewContainer {
-    position: relative;
+    position:relative;
     overflow:hidden;
     top: 0;
     left: 0;
@@ -55,7 +55,7 @@
  .leaderboardContainer {
     position: absolute;
     right: 0;
-    top: 150px;
+    top: 10px;
 
     z-index: 500;
     width: 19%;
@@ -67,12 +67,41 @@
     position: absolute;
 
     left: 0;
-    top: 150px;
+    top: 20px;
     z-index: 500;
     width: 23%;
     background-color: rgba(255,255,255,90%);
-    padding-bottom: 1rem;
-
+    
  }
 
 
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row-status {
+  padding:20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.me-col {
+  width:30%;
+}
+
+.story-col {
+  width:70%;
+}
+
+
+.main-col {
+  width:62%;
+}
+
+.side-col {
+  width:38%;
+  display:flex;
+  align-content: right;
+  right:0;
+}

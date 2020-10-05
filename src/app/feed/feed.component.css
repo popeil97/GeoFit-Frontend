@@ -38,6 +38,21 @@ div.ex3 {
   flex-wrap: wrap;
 }
 
+.row-status {
+  padding:20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.me-col {
+  width:30%;
+}
+
+.story-col {
+  width:70%;
+}
+
+
 .main-col {
   width:62%;
 }

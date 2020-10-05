@@ -1,10 +1,11 @@
 <div> 
 <app-loader [isActive]="loading"></app-loader>
 <div class="RaceViewContainer">
-	 <div class="MapContainer">
-	 	<app-map [raceIDs]="raceIDs" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>
 
-	 	<div class="ActionsContainer">
+	 <div class="MapContainer">
+	 	<app-map [raceIDs]="raceIDs" [displayUsers]="true" [followedIDs]="followedIDs" [zoom]="false"></app-map>
+
+	 	<div class="leaderboardContainer" style="background-color: black;">
 	 		<h3 class="RaceViewSegmentTitle">{{this.raceName}}</h3>
 		    <button class="transparentWhiteButton">Search</button>
 		  <!--  <button class="transparentWhiteButton"  (click)="openModal('raceSettingsModal')">Settings</button> -->
@@ -16,29 +17,50 @@
 	 	</div>
 	 	
 	 	 <div class = "feedContainer">
-	 		  <h3>Social Feed <button class="smallButton" (click)="toggleOptions()">{{feedOptions ? 'Hide Options' : 'Show Options'}}</button></h3>
-	 		  
-	 		  <div *ngIf="feedOptions">
-		 		  Only show people I follow
-	        	  <input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/>
-	           	  <br>
-		          Only show stories
-		          <input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/>
-		       </div>
-	          <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed> 
+	 	 	 <div class='Slideshow'>
+		      <div class="SlideshowHeader">
+		        <button class="SlideshowButton" (click)="SwitchSlideshow('feed')" id="feed-btn">Social</button>
+		        <button class="SlideshowButton" (click)="SwitchSlideshow('leaderboard')" id="leaderboard-btn">Leaderboard</button>
+		      </div>
+		      <div class="SlideshowContents RaceSlideshowContents">
+		        <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'feed'}">
+		          <button class="smallButton" (click)="toggleOptions()">{{feedOptions ? 'Hide Options' : 'Show Options'}}</button>
+		 		  <div *ngIf="feedOptions">
+			 		  Only show people I follow
+		        	  <input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/>
+		           	  <br>
+			          Only show stories
+			          <input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/>
+			       </div>
+
+			        <div class="row-status" *ngIf="this._authService.isLoggedIn()">
+					    <div class="me-col">
+					       <img width="70px" src="{{userData.profile_url}}">
+					      
+					    </div>
+					    <div class="story-col">
+					      <app-story-form  [raceID]="raceID" (logActivityEvent)="logActivity($event)" (storyPostedEvent)="newStoryPosted($event)"></app-story-form>
+					    </div>
+				  </div>
+  
+		          <app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
+		        </div>
+
+		        <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'leaderboard'}">
+		        	<app-tag-select *ngIf="hasEntryTags && !isHybrid" [raceID]="raceID" [tagType]="entryTagType" [hasAll]="true" [title]="'Filter by Org'" (emitState)="setLeaderboardTagID($event)"></app-tag-select>
+		      		<app-route-select *ngIf="isHybrid && childRaceData.length > 0" [routes]="childRaceData" [title]="'Filter by Route'" (routeChanged)="setLeaderboardRouteFilter($event)"></app-route-select>
+
+			 		<app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
+
+			 		<app-leaderboard *ngIf="selectedTagFilterID != 0 && raceSettings.allowTeams" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
+
+			 		<app-hybrid-leaderboard *ngIf="isHybrid" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard>
+		        </div>
+		      </div>
+		    </div>
 	 	 </div>
 
-	 	 <div class = "leaderboardContainer">
-	 	 	<h3>Leaderboard</h3>
-	 			<app-tag-select *ngIf="hasEntryTags && !isHybrid" [raceID]="raceID" [tagType]="entryTagType" [hasAll]="true" [title]="'Filter by Org'" (emitState)="setLeaderboardTagID($event)"></app-tag-select>
-      		<app-route-select *ngIf="isHybrid && childRaceData.length > 0" [routes]="childRaceData" [title]="'Filter by Route'" (routeChanged)="setLeaderboardRouteFilter($event)"></app-route-select>
-
-	 		<app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
-
-	 		<app-leaderboard *ngIf="selectedTagFilterID != 0 && raceSettings.allowTeams" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
-
-	 		<app-hybrid-leaderboard *ngIf="isHybrid" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard>
-	 	 </div>
+	 	 
 	 </div>
 
 		

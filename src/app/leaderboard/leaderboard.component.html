@@ -32,9 +32,9 @@
     </div>
   </div>
 
-  <button (click)="toggleLeaderboardOpen()">{{leaderboardOpen ? 'Hide More' : 'Show More'}}</button>
+ <!-- <button (click)="toggleLeaderboardOpen()">{{leaderboardOpen ? 'Hide More' : 'Show More'}}</button> -->
 
-  <div *ngIf="leaderboardOpen" style="overflow:auto; max-height:600px;">
+  <div  style="overflow:auto; max-height:600px;"> <!-- *ngIf="leaderboardOpen" -->
     <div *ngFor="let group of leaderboard; let i=index">
       <div class="LeaderboardItem"  *ngIf="!group.isTeam" (click)="toggleDetails()"> <!--[ngClass]="{'LeaderboardItem' : i>2, 'LeaderboardGold':i==0,'LeaderboardSilver':i==1,'LeaderboardBronze':i==2}"-->
 

@@ -96,6 +96,9 @@ export class RaceViewComponent implements OnInit {
 
   varcolors = ['#bb0000', '#ffffff'];
 
+  public currentScreen = 'feed';
+  public acceptedScreens = ['feed','leaderboard'];
+
   constructor(private raceService:RaceService,
                   private activitiesService:ActivitiesService,
                   private route: ActivatedRoute,
@@ -124,6 +127,14 @@ export class RaceViewComponent implements OnInit {
 
     this.getRaceState();
     this.getActivities();
+
+    document.getElementById('feed-btn').style.backgroundColor = "#36343c";
+    document.getElementById('feed-btn').style.color = "#FFFFFF";
+  }
+  newStoryPosted(event: any)
+  {
+    console.log("new story");
+    this.feedChild.refreshFeed();
   }
 
   openModal(id: string) {
@@ -156,6 +167,11 @@ export class RaceViewComponent implements OnInit {
     }
   }
     
+  }
+
+  logActivity(event:any)
+  {
+    console.log("RV", event);
   }
 
   public toggleOptions(){
@@ -347,6 +363,33 @@ export class RaceViewComponent implements OnInit {
 
   showPinsFromSettings(settings: PinSettings){
     this.mapChild.showPinsFromSettings(settings);
+  }
+
+  SwitchSlideshow = (to:string = null) => {
+    //console.log("to", to, this.acceptedScreens.indexOf(to));
+    if (to == null || this.acceptedScreens.indexOf(to) == -1) return;
+    this.currentScreen = to;
+
+     document.getElementById(to+'-btn').style.backgroundColor = "#36343c";
+     document.getElementById(to+'-btn').style.color = "#FFFFFF";
+
+    switch(to) { 
+     case 'feed': { 
+       document.getElementById('leaderboard-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('leaderboard-btn').style.color = "#000000";
+        break; 
+     } 
+     case 'leaderboard': { 
+       document.getElementById('feed-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('feed-btn').style.color = "#000000";
+        break; 
+     }  
+     default: { 
+        break; 
+     } 
+   }
+
+    return;
   }
 
 }

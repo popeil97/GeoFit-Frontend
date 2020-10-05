@@ -166,6 +166,7 @@ export class MapRouteComponent implements OnChanges {
 
     if(this.zoom)
     {
+      console.log("ZOOM ZOOM IN MAP");
       this.map.setZoom(9);
     }
     

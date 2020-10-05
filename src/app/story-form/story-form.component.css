@@ -4,3 +4,18 @@
 	 	font-size:50px;left-padding:8px;right-padding:8px
 	 }
 	}
+
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.status-col {
+  width:80%;
+}
+
+.pic-col {
+  width:20%;
+}

@@ -1,16 +1,18 @@
 <div class="table-container ex3" style="overflow:auto; max-height:420px;">
 
   <!---If we are in race view AND we are authenticated, display form to post new stories-->
-  <div *ngIf="use=='race' && this._authService.isLoggedIn() && this.progress">
+ <!-- <div *ngIf="use=='race' && this._authService.isLoggedIn() && this.progress">
     <button (click)="openModal('custom-modal-6')">Make a Post</button>
-  </div>
+  </div> -->
+
+
 
   <p *ngIf="feedItems.length==0">Nothing yet! </p>
   <table mat-table [dataSource]="feedItems" class="feedTable">
     
     <ng-container matColumnDef="ProfilePic" >
       <td mat-cell *matCellDef="let element" (click)="clickedOnFeedItem(element)" [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">
-        <img width="35px" src="{{ element.profile_url }}" style="padding-right:20px;">
+        <img width="40px" src="{{ element.profile_url }}" style="padding-right:20px;">
       </td>
     </ng-container>
 
@@ -29,7 +31,7 @@
               {{ element.story_text }}  {{ element.hot? '🔥🔥🔥' : ' ' }}  <small>{{ this.get_created_ts(element.created_ts) }}</small>
 
               <div class="container" *ngIf="element.story_image">
-                <img width="60px" src="{{ element.story_image }}" (click)="showStoryDialog(element)">
+                <img width="100px" src="{{ element.story_image }}" (click)="showStoryDialog(element)">
               </div>
             </div>
 

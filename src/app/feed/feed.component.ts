@@ -30,6 +30,8 @@ export class FeedComponent implements OnInit {
   //ID of race or user
   @Input() ID:number;
 
+  //@Input() profile_pic:any;
+
   //Items on feed to display
   @Input() feedItems: Array<FeedObj>;
 
@@ -82,12 +84,12 @@ export class FeedComponent implements OnInit {
 //    console.log("feed service: ", this._feedService);
 
     this._feedService.ID = this.ID;
-
     //If no feedItems provided as input, reset and refresh feed
     if (!this.feedItems){
       this.resetFeed();
       this.refreshFeed();
     }
+    
   }
 
   ngOnChanges(changes: SimpleChanges) {

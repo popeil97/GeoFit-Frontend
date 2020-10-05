@@ -13,9 +13,11 @@ export class StoryFormComponent implements OnInit {
 
   @Output() storyPostedEvent = new EventEmitter();
 
+  @Output() logActivityEvent = new EventEmitter();
+
   private storyText: string;
 
-  public storyImage:any;
+  private storyImage:any;
 
   constructor(private storyService: StoryService,
               private _imageService: ImageService) { }
@@ -64,6 +66,7 @@ export class StoryFormComponent implements OnInit {
       {
       //   console.log("Uploaded story");
         //Emit event to refresh feed
+        console.log("EMIT STORY POST");
         this.storyPostedEvent.emit();
 
         //Clear input fields
@@ -72,6 +75,12 @@ export class StoryFormComponent implements OnInit {
         this.storyText = null;
         this.storyImage = null;
       });
+  }
+
+  logActivity()
+  {
+    console.log("hi emittingg...");
+    this.logActivityEvent.emit("emitting");
   }
 
 }
