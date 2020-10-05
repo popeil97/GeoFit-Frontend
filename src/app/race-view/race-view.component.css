@@ -1,10 +1,79 @@
-.RaceViewContainer {
-    position:relative;
-    overflow:hidden;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;   
+.MapContainer {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.MapSidebar {
+  position: relative;
+  height:100%;
+  width:20%;
+  min-width: 320px;
+  background-color: grey;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+  .MapHeaderContainer, .MapFeedContainer, .MapActionsContainer {
+    padding:16px;
+    box-sizing: border-box;
+    background-color:white;
+  }
+  .MapHeaderContainer, .MapActionsContainer {
+    border-bottom:1px solid grey;
+  }
+    .MapHeaderTitle {
+      margin-bottom:16px;
+      
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .MapHeaderButtonsContainer {
+      margin-bottom:16px;
+
+      display:flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+      .MapHeaderButton {
+        margin-left:8px;
+        margin-right:8px;
+      }
+      .MapHeaderButton:first-child {
+        margin-left:0;
+      }
+      .MapHeaderButton:last-child {
+        margin-right:0;
+      }
+  .MapActionsContainer {
+
+  }
+  .MapFeedContainer {
+    flex-grow: 1;
+    flex-basis: 0;
+  }
+
+.MapGreaterContainer {
+  flex-grow:1;
+  flex-shrink: 0;
+  flex-basis: 0;
+
+  position: relative;
+  width:auto;
+  height:100%;
 }
 
 .row {
@@ -29,13 +98,6 @@
   width:80%;
 }
 
-.MapContainer {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    position: fixed;
-}
-
 
 .ActionsContainer {
     position: absolute;
@@ -56,29 +118,6 @@
   .RightActions {
     right: 0;
     top: 0;
- }
-
-
- .leaderboardContainer {
-    position: absolute;
-    right: 0;
-    top: 10px;
-
-    z-index: 500;
-    width: 19%;
-    background-color: rgba(255,255,255,95%);
-    padding-bottom: 1rem;
- }
-
-  .feedContainer {
-    position: absolute;
-
-    left: 0;
-    top: 20px;
-    z-index: 500;
-    width: 23%;
-    background-color: rgba(255,255,255,90%);
-    
  }
 
 

@@ -6,7 +6,7 @@
 	flex-wrap: nowrap;
 }
 .MainContainer {
-	padding-top:64px;
+	padding-top:80px;
 	/*min-height: calc(100vh - 80px);*/
 	min-height: 100vh;
 }
