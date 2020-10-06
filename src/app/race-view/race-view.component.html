@@ -4,30 +4,30 @@
 
 		<div class="MapSidebar" [ngClass]="{MapSidebarWidthBig: isOpen, MapSidebarWidthSmall: !isOpen}">
 			<div class="MapHeaderContainer">
-				<h3 class="MapHeaderTitle">{{this.raceName}}</h3>
-				<div class="MapHeaderButtonsContainer">
-									
-				</div>
-
-			</div>
-			<div class='MapActionsContainer'>
-				<ng-template [ngIf]="this._authService.isLoggedIn() && this.userRegistered" [ngIfElse]="NotLoggedInBlock">
-						<button class="whiteButton" (click)="viewAbout()">About</button>
+				<span class="MapHeaderTitle">
+					{{this.raceName}}
+					<ng-template [ngIf]="this._authService.isLoggedIn() && this.userRegistered" [ngIfElse]="NotLoggedInBlock">
+						<button class="whiteButton" (click)="viewAbout()"><span class="material-icons">info</span></button>
+						<button (click)="toggleSearch()"><span class="material-icons">search</span></button>
 						<button class="whiteButton" *ngIf="this.userRegistered" (click)="openModal('mapSettingsModal')"><span class="material-icons">settings</span></button>
-						<app-search [raceID]="raceID"></app-search>
+						
+					<app-search *ngIf="searchOn" [raceID]="raceID"></app-search>
 				</ng-template>
 				<ng-template #NotLoggedInBlock>
-					<button class="whiteButton" (click)="viewAbout()">Join Race</button>
+					<button class="whiteButton" (click)="viewAbout()">Join</button>
 				</ng-template>
+
+				</span>
+
 			</div>
+
+			<!--
+			<div class='MapActionsContainer'  *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities>0" matBadge="{{num_activities}}"  matBadgePosition="after" matBadgeColor="accent" (click)="openModal('custom-modal-5')" >LOG ACTIVITY</div> -->
+			
+			<div  class='LogContainer'  *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('custom-modal-5')" >LOG ACTIVITY</div>
 				
 			<div class = "MapFeedContainer">
-				<div class = "logActivity" *ngIf="this._authService.isLoggedIn() && this.userRegistered">
-					<p>Add your Progress</p>
-					<button *ngIf="num_activities>0" matBadge="{{num_activities}}"  matBadgePosition="after" matBadgeColor="accent" (click)="openModal('custom-modal-5')" >Log Activity</button>
-					<button *ngIf="num_activities==0" (click)="openModal('custom-modal-5')" >Log Activity</button>
-				</div>
-
+				
 				<div class='Slideshow'>
 					<div class="SlideshowHeader">
 						<button class="SlideshowButton" (click)="SwitchSlideshow('feed')" id="feed-btn">Social</button>
@@ -44,7 +44,7 @@
 								</div>
 							</div>
 
-							<button class="whiteButton smallButton" (click)="toggleOptions()">{{feedOptions ? 'Hide Options' : 'Show Options'}}</button>
+							<button class="whiteButton smallButton" (click)="toggleOptions()"><span class="material-icons">filter_list</span></button>
 							<div *ngIf="feedOptions">
 								Only show people I follow
 								<input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/>

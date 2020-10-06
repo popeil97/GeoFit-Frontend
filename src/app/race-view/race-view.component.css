@@ -37,6 +37,14 @@
     background-color:white;
   }
 
+    .LogContainer {
+    padding:12px;
+    box-sizing: border-box;
+    background-color:var(--tucan-green);
+    color:white;
+    text-align: center;
+  }
+
   .buttonContainer {
     position: absolute;
     left: 0;
@@ -45,11 +53,8 @@
     z-index: 500;
  }
 
-  .MapHeaderContainer, .MapActionsContainer {
-    border-bottom:1px solid grey;
-  }
     .MapHeaderTitle {
-      margin-bottom:16px;
+      margin-bottom:12px;
       
       overflow:hidden;
       text-overflow: ellipsis;
@@ -143,7 +148,7 @@
 }
 
 .row-status {
-  padding:20px;
+  padding:4px;
   display: flex;
   flex-wrap: wrap;
 }
@@ -166,4 +171,8 @@
   display:flex;
   align-content: right;
   right:0;
+}
+
+.material-icons{
+  font-size:14px;
 }

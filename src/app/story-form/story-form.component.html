@@ -1,4 +1,21 @@
-<textarea #input  id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="What's on your mind?"  required style="width:100%;"></textarea>
+<div class="row">
+	<div class="status-col">
+		<textarea #input  id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="What's on your mind?"  required style="width:100%;"></textarea>
+
+	</div>
+	<div class="pic-col">
+		<button type="button" (click)="fileInput.click()">
+		  <span class="material-icons">
+			filter
+		  </span>
+		  <input #fileInput type="file"   id="storyImage" name="storyImageField" (change)="onSelectFile($event)" style="display:none;" />
+		</button> 
+
+		  <div class="wrapper" *ngIf="storyImage">
+		    <img [src]="this.storyImage" width="30px">
+		  </div>
+	</div>
+</div>
 
 <div *ngIf="this.emojis">
 	<span *ngFor="let element of this.acceptedEmojis"  layout="row" layout-align="center center">
@@ -6,46 +23,7 @@
 	</span>
 </div>
 
-<button type="button" (click)="fileInput.click()">
-  <span class="material-icons">
-	portrait
-  </span>
-  <input #fileInput type="file"   id="storyImage" name="storyImageField" (change)="onSelectFile($event)" style="display:none;" />
-</button> 
-
-  <div class="wrapper" *ngIf="storyImage">
-    <img [src]="this.storyImage" width="100px">
-  </div>
-
-
-<button (click)="toggleEmojis()">😊</button>
-
-<button (click)="uploadStory()">Post</button>
-
-
-
-<!--
-	<div class="row">
-	<div class = "status-col">
-		<textarea  id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="What's on your mind?"  required style="width:100%;"></textarea>
-	</div>
-
-	<div class = "pic-col">
-		<button type="button" (click)="fileInput.click()">
-		  <span class="material-icons">
-			portrait
-		  </span>
-		  <input #fileInput type="file"   id="storyImage" name="storyImageField" (change)="onSelectFile($event)" style="display:none;" />
-		</button> 
-
-	  <div class="wrapper" *ngIf="storyImage">
-	    <img [src]="this.storyImage" width="100px">
-	  </div>
-
-	</div>
- </div>
-
-
-<button (click)="uploadStory()">Add Story</button>
-
--->
+<div class="buttonContainer">
+	<button (click)="toggleEmojis()">😊</button>
+	<button class="orangeButton" (click)="uploadStory()">POST</button>
+</div>

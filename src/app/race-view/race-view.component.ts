@@ -51,7 +51,7 @@ export class RaceViewComponent implements OnInit {
   //Current race ID selected by user. If race has no children, this always equals
   //ID of parent race
   public selectedRaceID: number;
-
+  public searchOn : boolean = false;
   private modalData:any;
 
   public progress:Progress = {} as Progress;
@@ -141,6 +141,11 @@ export class RaceViewComponent implements OnInit {
   toggleMenu()
   {
     this.isOpen = !this.isOpen;
+  }
+
+  toggleSearch()
+  {
+    this.searchOn = !this.searchOn;
   }
   openModal(id: string) {
     var data = (id=='mapSettingsModal') ? {userSettings:this.userRaceSettings,callbackFunction:null}:(id == 'custom-modal-5') ? {raceType:this.raceType, distance_unit: this.progress.distance_type, race_id:this.raceID, numActivities : this.num_activities, manualEntry:this.raceSettings.isManualEntry, automaticImport: this.userRaceSettings.isAutomaticImport, callbackFunction:null} : {};

@@ -9,6 +9,7 @@
 .row {
   display: flex;
   flex-wrap: wrap;
+  background-color: #EBEBEB;
 }
 
 
@@ -18,4 +19,19 @@
 
 .pic-col {
   width:20%;
+}
+textarea {
+  resize: none;
+  height:60px;
+  border:none;
+  outline-width: 0;
+  background-color: #EBEBEB;
+}
+
+.buttonContainer{
+	align-items:right;
+}
+
+.material-icons{
+  font-size:14px;
 }

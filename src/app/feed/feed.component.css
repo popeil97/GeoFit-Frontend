@@ -14,6 +14,16 @@
   justify-content: center;
 }
 
+.mat-row:nth-child(even){
+      background-color:white;
+      border:none;
+      }
+
+.mat-row:nth-child(odd){
+      background-color:#EBEBEB;
+      border:none;
+      }
+
 div.ex3 {
   overflow: auto;
 }
