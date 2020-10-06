@@ -13,3 +13,7 @@
 .mat-column-Data {
   justify-content: left;
 }
+
+.mat-table{
+	background-color:inherit;
+}
