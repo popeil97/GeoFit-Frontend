@@ -19,10 +19,16 @@ export class StoryFormComponent implements OnInit {
 
   private storyImage:any;
 
+  public acceptedEmojis = ['😁','😊','🤪','😂','🥳','😲','😉','😭',
+                           '🤟','💪','👏','❤️','🔥','🍻','🏃‍','🏃‍♀️',
+                          '🚴‍♂️','👟','🍂','🌲','☀️','❄️','🌄','🌇'];
+  emojis: Boolean;
+
   constructor(private storyService: StoryService,
               private _imageService: ImageService) { }
 
   ngOnInit() {
+    this.emojis=false;
   }
 
   onSelectFile(event){
@@ -37,7 +43,15 @@ export class StoryFormComponent implements OnInit {
     }
   }
 
-
+  addText(element:any)
+  {
+    this.storyText = (<HTMLInputElement>document.getElementById("storyImageCaption")).value;
+    (<HTMLInputElement>document.getElementById("storyImageCaption")).value = this.storyText + element;
+  }
+  toggleEmojis()
+  {
+    this.emojis = !this.emojis;
+  }
   uploadStory(): void{
  //    console.log("uploading story");
 //     console.log("Story image: ", this.storyImage);

@@ -12,6 +12,7 @@ export class HybridLeaderboardComponent implements OnInit,OnChanges {
 
   public leaderboard:any[];
   private page:number = 1;
+  public showMore = false;
 
   constructor(private _leaderboardService:LeaderboardService) { }
 
@@ -33,6 +34,11 @@ export class HybridLeaderboardComponent implements OnInit,OnChanges {
 
   ngOnInit() {
 
+  }
+
+  toggleDetails()
+  {
+    this.showMore = !this.showMore;
   }
 
   public getLeaderboard() {

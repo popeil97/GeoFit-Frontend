@@ -1,6 +1,10 @@
-<textarea  id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="What's on your mind?"  required style="width:100%;"></textarea>
+<textarea #input  id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="What's on your mind?"  required style="width:100%;"></textarea>
 
-
+<div *ngIf="this.emojis">
+	<span *ngFor="let element of this.acceptedEmojis"  layout="row" layout-align="center center">
+		<button (click)="addText(element)">{{element}}</button>
+	</span>
+</div>
 
 <button type="button" (click)="fileInput.click()">
   <span class="material-icons">
@@ -13,7 +17,11 @@
     <img [src]="this.storyImage" width="100px">
   </div>
 
+
+<button (click)="toggleEmojis()">😊</button>
+
 <button (click)="uploadStory()">Post</button>
+
 
 
 <!--

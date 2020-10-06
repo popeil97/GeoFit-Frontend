@@ -122,6 +122,7 @@ import { LogActivityComponent } from './log-activity/log-activity.component';
 import { StoryFormStandaloneComponent } from './story-form-standalone/story-form-standalone.component';
 import { MapSettingsComponent } from './map-settings/map-settings.component';
 import { SearchComponent } from './search/search.component';
+import { RouteInfoComponent } from './route-info/route-info.component';
 
 
 @NgModule({
@@ -222,6 +223,7 @@ import { SearchComponent } from './search/search.component';
     StoryFormStandaloneComponent,
     MapSettingsComponent,
     SearchComponent,
+    RouteInfoComponent,
       ],
 
   imports: [

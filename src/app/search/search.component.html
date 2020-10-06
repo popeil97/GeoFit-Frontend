@@ -1,8 +1,8 @@
 <div class="form-group" style="text-align: left; padding: 5px;">
   <!--    <label name="start_loc">Start Location</label>-->
-     <input class="form-control" type="text" placeholder="Racer Name" [matAutocomplete]="racerFilterAuto" (keyup)="filter()" [(ngModel)]="query" />
+     <input class="form-control" type="text" placeholder="Search Racer" [matAutocomplete]="racerFilterAuto" (keyup)="filter()" [(ngModel)]="query" />
        <mat-option *ngFor="let option of searchResults" [value]="option">
        	 <app-user-profile-nav [username]=option.username [displayName]=option.display_name></app-user-profile-nav>
-         <app-user-follow *ngIf="!option.isMe" [userID]=option.user_id [follows]=option.follows></app-user-follow>
+         <app-user-follow *ngIf="!option.isMe" [userID]=option.user_id [tempLight]="false" [follows]=option.follows></app-user-follow>
        </mat-option>
    </div>

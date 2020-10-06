@@ -10,11 +10,17 @@ import { StoryService } from '../story.service';
 export class CommentsFormComponent implements OnInit {
   //ID of story to post comments to
   @Input() storyID: number;
+  private storyText: string;
 
   //Emit when new comment posted by user
   @Output() commentPosted: EventEmitter<any> = new EventEmitter();
 
   commentForm: FormGroup;
+
+  public acceptedEmojis = ['😁','🤩','🤪','😂','🥳','😲','😉','😭',
+                           '🤟','💪','👏','❤️','🔥','🍻','🏃‍','🏃‍♀️',
+                          '🚴‍♂️','👟','🍂','🌲','☀️','❄️','🌄','🌇'];
+  emojis: Boolean;
 
   constructor(private _storyService: StoryService) {
     this.commentForm = new FormGroup({
@@ -28,12 +34,23 @@ export class CommentsFormComponent implements OnInit {
   ngOnInit() {
   }
 
+  addText(element:any)
+  {
+    this.storyText = (<HTMLInputElement>document.getElementById("storyCommentCaption")).value;
+    console.log("STRY",this.storyText);
+    (<HTMLInputElement>document.getElementById("storyCommentCaption")).value = this.storyText + element;
+  }
+  toggleEmojis()
+  {
+    this.emojis = !this.emojis;
+  }
+
   submitCommentForm(){
     let formClean = this.commentForm.value as CommentForm;
     let isValid: Boolean = this.commentForm.valid;
 
     var commentPosted = this.commentPosted;
-
+    console.log("COMMENT",this.commentPosted,isValid);
     if (isValid){
       this._storyService.postComment(this.storyID, formClean).then((data) => {
         commentPosted.emit();

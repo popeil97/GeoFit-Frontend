@@ -1,29 +1,29 @@
 <div style="max-height:600px;">
     <div class="row">
        <div class = "winner-column-lowered" *ngIf="leaderboard.length >= 1">
-        <p><b>2</b><img class = "twoImage" src="{{leaderboard[1].profile_url}}" width="30" height="30">
+        <p><b>🥈</b><img class = "twoImage" src="{{leaderboard[1].profile_url}}" width="30" height="30">
           <br>
-          <app-user-profile-nav [username]="leaderboard[1].username" [displayName]="leaderboard[1].display_name"></app-user-profile-nav>
-          <br>
-          {{leaderboard[1].total_distance}} {{leaderboard[1].distance_type}}
+          <app-user-profile-nav [username]="leaderboard[1].username" [displayName]="leaderboard[1].display_name" [nameBreak]="true"></app-user-profile-nav>
+           <i>{{leaderboard[1].total_distance}} {{leaderboard[1].distance_type}}</i><br>
+           <app-user-follow [userID]=leaderboard[1].user_id [follows]=leaderboard[1].follows></app-user-follow>
         </p>  
       </div>
 
       <div class = "winner-column" *ngIf="leaderboard.length >= 2">
-        <p><b>1</b><img class = "oneImage" src="{{leaderboard[0].profile_url}}" width="30" height="30">
+        <p><b>🥇</b><img class = "oneImage" src="{{leaderboard[0].profile_url}}" width="30" height="30">
           <br>
-          <app-user-profile-nav [username]="leaderboard[0].username" [displayName]="leaderboard[0].display_name"></app-user-profile-nav>
-          <br>
-          {{leaderboard[0].total_distance}} {{leaderboard[0].distance_type}}
+          <app-user-profile-nav [username]="leaderboard[0].username" [displayName]="leaderboard[0].display_name" [nameBreak]="true"></app-user-profile-nav>
+           <i>{{leaderboard[0].total_distance}} {{leaderboard[0].distance_type}}</i><br>
+           <app-user-follow [userID]=leaderboard[0].user_id [follows]=leaderboard[0].follows></app-user-follow>
         </p>
       </div>
 
       <div class = "winner-column-lowered" *ngIf="leaderboard.length >= 3">
-        <p><b>3</b><img class = "threeImage" src="{{leaderboard[2].profile_url}}" width="30" height="30">
+        <p><b>🥉</b><img class = "threeImage" src="{{leaderboard[2].profile_url}}" width="30" height="30">
           <br>
-          <app-user-profile-nav [username]="leaderboard[2].username" [displayName]="leaderboard[2].display_name"></app-user-profile-nav>
-          <br>
-          {{leaderboard[2].total_distance}} {{leaderboard[2].distance_type}}
+          <app-user-profile-nav [username]="leaderboard[2].username" [displayName]="leaderboard[2].display_name"  [nameBreak]="true"></app-user-profile-nav>
+          <i>{{leaderboard[2].total_distance}} {{leaderboard[2].distance_type}}</i><br>
+           <app-user-follow [userID]=leaderboard[2].user_id [follows]=leaderboard[2].follows></app-user-follow>
         </p>
       </div>
   </div>
@@ -32,27 +32,54 @@
  <div *ngIf="leaderboard.length >= 3">
   <div  style="overflow:auto; max-height:600px;"> <!-- *ngIf="leaderboardOpen" -->
     <div *ngFor="let group of leaderboard; let i=index">
+      <div *ngIf="i>2">
       <div class="LeaderboardItem"  *ngIf="!group.isTeam" (click)="toggleDetails()"> <!--[ngClass]="{'LeaderboardItem' : i>2, 'LeaderboardGold':i==0,'LeaderboardSilver':i==1,'LeaderboardBronze':i==2}"-->
 
-        <div *ngIf="i>2">
-          <b *ngIf="i>=9">{{i+1}}</b>
-          <b *ngIf="i<9">0{{i+1}}</b>
-          <img src="{{group.profile_url}}" width="30" height="30">
-          <app-user-profile-nav [username]="group.username" [displayName]="group.display_name"></app-user-profile-nav>
-          <i style="right:0;">{{group.total_distance}} {{group.distance_type}}</i>
+        
+          <div class="row">
+              <div class="NumCol">
+                <b *ngIf="i>=9">{{i+1}}</b>
+                <b *ngIf="i<9">0{{i+1}}</b>
+              </div>
+              <div class="PicCol">
+                <img src="{{group.profile_url}}" width="30" height="30">
+              </div>
+              <div class="NameCol">
+                <app-user-profile-nav [username]="group.username" [displayName]="group.display_name"></app-user-profile-nav>
+              </div>
+              <div class="DistanceCol">
+                <i style="right:0;">{{group.total_distance}} {{group.distance_type}}</i>
+              </div>
+              <div class="FollowCol">
+                <app-user-follow [userID]=group.user_id [follows]=group.follows></app-user-follow>
+              </div>
+        </div>
+          
+          
+          
+        <div *ngIf="showMore">
+          <div class="LeaderboardItem" *ngFor="let member of group.child_user_stats">
+            <div class="PicCol">
+                <img src="{{member.profile_url}}" width="30" height="30">
+              </div>
+              <div class="NameCol">
+                <app-user-profile-nav [username]="member.username" [displayName]="member.display_name"></app-user-profile-nav>
+              </div>
+              <div class="DistanceCol">
+                <i style="right:0;">{{member.total_distance}} {{member.distance_type}}</i>
+              </div>
+              <div class="FollowCol">
+                <app-user-follow [userID]=member.user_id [follows]=member.follows></app-user-follow>
+              </div>
+          </div>
+        </div>
 
-          <mat-card *ngFor="let member of group.child_user_stats">
-            <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + member.profile_url + ')'}" style="position: relative; float:left;"></div>
-            <div style="padding-left: 50px;">{{member.display_name}}</div>
-            <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div>
-          </mat-card>
-
-          <app-user-follow [userID]=group.user_id [follows]=group.follows *ngIf="showMore"></app-user-follow>
+          
       </div>
       </div>
     </div>
 
-    <span class="link" style="display:table; margin:0 auto;" (click)="getNextLeaderboardPage()">Show More</span>
+    <span class="link" style="display:table; margin:0 auto;" (click)="getNextLeaderboardPage()">Load More...</span>
   </div>
 </div>
 </div>

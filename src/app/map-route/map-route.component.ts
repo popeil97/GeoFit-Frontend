@@ -81,13 +81,13 @@ export class MapRouteComponent implements OnChanges {
         switch(propName) {
           case 'coordinates':
             if (this.coordinates){
-            //  console.log("coordinates: ", this.coordinates);
+             // console.log("coordinates: ", this.coordinates);
               this.applyCoordinates();
             }
 
           case 'routePins':
             if (this.routePins && this.displayUsers){
-          //    console.log("route pins: ", this.routePins);
+             // console.log("route pins: ", this.routePins);
               this.createRoutePins();
             }
 

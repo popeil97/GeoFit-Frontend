@@ -93,6 +93,7 @@ export class RaceViewComponent implements OnInit {
   entryTagType: TagType = TagType.ENTRY;
   selectedTagFilterID = -1;
 
+  isOpen = true;
 
   varcolors = ['#bb0000', '#ffffff'];
 
@@ -137,6 +138,10 @@ export class RaceViewComponent implements OnInit {
     this.feedChild.refreshFeed();
   }
 
+  toggleMenu()
+  {
+    this.isOpen = !this.isOpen;
+  }
   openModal(id: string) {
     var data = (id=='mapSettingsModal') ? {userSettings:this.userRaceSettings,callbackFunction:null}:(id == 'custom-modal-5') ? {raceType:this.raceType, distance_unit: this.progress.distance_type, race_id:this.raceID, numActivities : this.num_activities, manualEntry:this.raceSettings.isManualEntry, automaticImport: this.userRaceSettings.isAutomaticImport, callbackFunction:null} : {};
     console.log("DATA SENT TO CHILD", data);

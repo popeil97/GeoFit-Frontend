@@ -78,7 +78,7 @@ button.darkButton, .button.darkButton {
   color:white;
 }
 
-button.transparentWhiteButton, button.darkButton, .button.darkButton {
+button.transparentWhiteButton{
   background-color:inherit;
   border-color:white;
   color:white;
@@ -554,3 +554,22 @@ h1.PageHeaderSegmentTitle {
 .pos3of4 { transform: rotate(-90deg) translate(14px) rotate(90deg); }
 
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #C4C4C4; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #36343C; 
+}

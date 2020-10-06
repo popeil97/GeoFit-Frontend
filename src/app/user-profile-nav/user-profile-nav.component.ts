@@ -11,12 +11,24 @@ declare var $: any;
 export class UserProfileNavComponent implements OnInit {
   @Input() username: string;
   @Input() displayName: string;
+  @Input() nameBreak :Boolean;
 
   @Output() clickedOn: EventEmitter<void> = new EventEmitter();
 
   constructor(private _userProfileService: UserProfileService) { }
 
+  private first:string;
+  private last:string;
+
   ngOnInit() {
+    if(this.nameBreak)
+    {
+      console.log("Hi....");
+      let split = this.displayName.split(" ");
+      console.log("SPLIT",split);
+      this.first=split[0];
+      this.last =split[1];
+    }
   }
 
   goToUserProfile(){

@@ -1,10 +1,10 @@
-<h2 mat-dialog-title>Report</h2>
+<h3 mat-dialog-title>Make a Report</h3>
 <mat-dialog-content>
 
   <div *ngIf="!this.reportSuccess">
-    <h3>
-      You can report the post by checking the box next to the most applicable offence and clicking Report.
-    </h3>
+    <p>
+      You can report the post by checking the box next to the most applicable offence and clicking Report. The person who is being reported will not get a notification from you.
+    </p>
     
     <br>
   
@@ -26,9 +26,9 @@
   </div>
 
   <div *ngIf="this.reportSuccess">
-    <h3>
+    <p>
       Your report has been received successfully. Thanks for helping to keep our community safe!
-    </h3>
+    </p>
   </div>
 
 </mat-dialog-content>

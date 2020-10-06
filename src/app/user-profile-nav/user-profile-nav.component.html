@@ -1,1 +1,3 @@
-<span class="link" (click)="goToUserProfile()"><b>{{ displayName }}</b></span>
+<span *ngIf="!this.nameBreak" class="link" (click)="goToUserProfile()"><b>{{ displayName }}</b></span>
+
+<p *ngIf="this.nameBreak" class="link" (click)="goToUserProfile()"><b>{{ first }} <br> {{last}}</b></p>

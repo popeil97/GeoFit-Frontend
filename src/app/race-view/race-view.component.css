@@ -14,8 +14,6 @@
 .MapSidebar {
   position: relative;
   height:100%;
-  width:20%;
-  min-width: 320px;
   background-color: grey;
 
   display:flex;
@@ -24,11 +22,29 @@
   align-items: stretch;
   flex-wrap: nowrap;
 }
+
+.MapSidebarWidthBig{
+   width:28%;
+/*  min-width: 320px; */
+}
+
+.MapSidebarWidthSmall{
+   width:0%;
+}
   .MapHeaderContainer, .MapFeedContainer, .MapActionsContainer {
     padding:16px;
     box-sizing: border-box;
     background-color:white;
   }
+
+  .buttonContainer {
+    position: absolute;
+    left: 0;
+    top: 2px;
+
+    z-index: 500;
+ }
+
   .MapHeaderContainer, .MapActionsContainer {
     border-bottom:1px solid grey;
   }

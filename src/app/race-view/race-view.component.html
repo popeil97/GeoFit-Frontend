@@ -2,21 +2,19 @@
 	<!--<app-loader [isActive]="loading"></app-loader>-->
 	<div class="MapContainer">
 
-		<div class="MapSidebar">
+		<div class="MapSidebar" [ngClass]="{MapSidebarWidthBig: isOpen, MapSidebarWidthSmall: !isOpen}">
 			<div class="MapHeaderContainer">
 				<h3 class="MapHeaderTitle">{{this.raceName}}</h3>
 				<div class="MapHeaderButtonsContainer">
-					<app-search [raceID]="raceID"></app-search>
-					 <button class="whiteButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="viewAbout()">About Race</button>
-					
+									
 				</div>
 
 			</div>
 			<div class='MapActionsContainer'>
-				<!--  <button class="transparentWhiteButton"  (click)="openModal('raceSettingsModal')">Settings</button> -->
-				<ng-template [ngIf]="this._authService.isLoggedIn()" [ngIfElse]="NotLoggedInBlock">
-					<button class="whiteButton" *ngIf="this.userRegistered" (click)="openModal('mapSettingsModal')">Settings</button>
-					<button class="darkButton" *ngIf="this.userRegistered" (click)="viewAbout()">About Race</button>
+				<ng-template [ngIf]="this._authService.isLoggedIn() && this.userRegistered" [ngIfElse]="NotLoggedInBlock">
+						<button class="whiteButton" (click)="viewAbout()">About</button>
+						<button class="whiteButton" *ngIf="this.userRegistered" (click)="openModal('mapSettingsModal')"><span class="material-icons">settings</span></button>
+						<app-search [raceID]="raceID"></app-search>
 				</ng-template>
 				<ng-template #NotLoggedInBlock>
 					<button class="whiteButton" (click)="viewAbout()">Join Race</button>
@@ -59,6 +57,8 @@
 					   <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'leaderboard'}">
 							<app-tag-select *ngIf="hasEntryTags && !isHybrid" [raceID]="raceID" [tagType]="entryTagType" [hasAll]="true" [title]="'Filter by Org'" (emitState)="setLeaderboardTagID($event)"></app-tag-select>
 							<app-route-select *ngIf="isHybrid && childRaceData.length > 0" [routes]="childRaceData" [title]="'Filter by Route'" (routeChanged)="setLeaderboardRouteFilter($event)"></app-route-select>
+							<button class="whiteButton"  *ngIf="isHybrid && childRaceData.length > 0" (click)="openModal('route-info')">What does this mean?</button>
+
 							<app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
 							<app-leaderboard *ngIf="selectedTagFilterID != 0 && raceSettings.allowTeams" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
 							<app-hybrid-leaderboard *ngIf="isHybrid" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard>
@@ -69,6 +69,10 @@
 		</div>
 		<div class='MapGreaterContainer'>
 			<app-map [raceIDs]="raceIDs" [displayUsers]="true" [followedIDs]="followedIDs" [zoom]="false"></app-map>
+			<div class="buttonContainer">
+				<button *ngIf="isOpen" (click)="toggleMenu()"><span class="material-icons">keyboard_arrow_left</span></button>
+				<button *ngIf="!isOpen" (click)="toggleMenu()"><span class="material-icons">keyboard_arrow_right</span></button>
+			</div>
 		</div>
 	</div>
 </div>

@@ -38,6 +38,9 @@ export class ViewFollowComponent implements OnInit {
     });
     */
 
+    console.log("BEEEEEp");
+    document.getElementById('followers-btn').style.backgroundColor = "#36343c";
+    document.getElementById('followers-btn').style.color = "#FFFFFF";
   }
   
   /*
