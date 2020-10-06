@@ -1,3 +1,61 @@
+.StoryFormInputContainer {
+	position: relative;
+	width:100%;
+	margin-bottom:8px;
+
+	padding:8px 16px 8px 16px;
+	box-sizing: border-box;
+
+	border-radius: 10px;
+	border:0.5px solid grey;
+	background-color:var(--input-background-color);
+	overflow:hidden;
+
+	display:flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+	flex-wrap: nowrap;
+}
+.StoryFormInput {
+	width:100%;
+	height: min-content;
+	overflow:auto;
+	border:none;
+	resize: none;
+	margin-bottom:8px;
+}
+.StoryFormInput:hover {
+	outline:none;
+}
+.StoryFormInputImageWrapper {
+	text-align: center;
+	margin-bottom:8px;
+}
+
+.StoryFormInputExtraButtonsContainer {
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+	.StoryFormImageButton {
+		flex-grow:1;
+		flex-basis: 100px;
+		margin-left:8px;
+	}
+.StoryFormInputEmojisButtonsContainer {
+	margin-bottom:8px;
+}
+.StoryFormInputSubmitButtonContainer {
+	display:flex;
+	flex-direction: row-reverse;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+
 @media only screen and (max-width:1024px) {
   	.btn-mobile
 	 {

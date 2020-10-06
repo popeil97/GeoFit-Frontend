@@ -24,8 +24,8 @@
 }
 
 .MapSidebarWidthBig{
-   width:28%;
-/*  min-width: 320px; */
+  width:28%;
+  min-width: 320px;
 }
 
 .MapSidebarWidthSmall{
@@ -53,6 +53,11 @@
     z-index: 500;
  }
 
+  .MapHeaderContainer, .MapActionsContainer {
+    /* border-bottom:1px solid grey; */
+    text-align:center;
+  }
+
     .MapHeaderTitle {
       margin-bottom:12px;
       
@@ -61,11 +66,9 @@
       white-space: nowrap;
     }
     .MapHeaderButtonsContainer {
-      margin-bottom:16px;
-
       display:flex;
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       flex-wrap: nowrap;
     }
@@ -80,12 +83,49 @@
         margin-right:0;
       }
   .MapActionsContainer {
-
+    background-color: var(--tucan-green);
   }
   .MapFeedContainer {
     flex-grow: 1;
     flex-basis: 0;
   }
+    .MapFeedInputContainer {
+      margin-bottom:16px;
+      
+      display:flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: stretch;
+      flex-wrap: nowrap;
+    }
+      .MapFeedInputProfileContainer {
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 70px;
+
+        position: relative;
+        display:block;
+        width:70px;
+        height:70px;
+        background-color:grey;
+        border-radius: 50%;
+
+        overflow:hidden;
+
+        margin-right:8px;
+      }
+      .MapFeedInputProfile {
+        position: absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        width:100%;
+      }
+      .MapFeedInputTextContainer {
+        flex-grow: 1;
+        flex-basis: 0;
+        position: relative;
+      }
 
 .MapGreaterContainer {
   flex-grow:1;

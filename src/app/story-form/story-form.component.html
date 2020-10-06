@@ -1,7 +1,32 @@
-<div class="row">
-	<div class="status-col">
-		<textarea #input  id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="What's on your mind?"  required style="width:100%;"></textarea>
+<div class='StoryFormInputContainer'>
+	<textarea class='StoryFormInput' #input id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="What's on your mind?" required></textarea>
+	<div class="StoryFormInputImageWrapper" *ngIf="storyImage">
+		<img [src]="this.storyImage" width="100px">
+	</div>
+	<div class='StoryFormInputExtraButtonsContainer'>
+		<button [ngClass]="{'darkButton':this.emojis,'lightButton':!this.emojis}" class='StoryFormEmojiToggleButton' (click)="toggleEmojis()">😊</button>
+		<button class='lightButton StoryFormImageButton italics' (click)="fileInput.click()">
+			<!--<span class="material-icons">portrait</span>-->
+			Upload image
+		</button>
+		<input #fileInput type="file" id="storyImage" name="storyImageField" (change)="onSelectFile($event)" style="display:none;" />
+	</div>
+</div>
+<div class='StoryFormInputEmojisButtonsContainer'>
+	<ng-template [ngIf]="this.emojis">
+		<span *ngFor="let element of this.acceptedEmojis" layout="row" layout-align="center center">
+			<button class='lightButton' (click)="addText(element)">{{element}}</button>
+		</span>
+	</ng-template>
+</div>
+<div class='StoryFormInputSubmitButtonContainer'>
+	<button class='lightButton' (click)="uploadStory()">Post</button>
+</div>
 
+<!--
+	<div class="row">
+	<div class = "status-col">
+		<textarea  id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="What's on your mind?"  required style="width:100%;"></textarea>
 	</div>
 	<div class="pic-col">
 		<button type="button" (click)="fileInput.click()">
@@ -27,3 +52,4 @@
 	<button (click)="toggleEmojis()">😊</button>
 	<button class="orangeButton" (click)="uploadStory()">POST</button>
 </div>
+-->

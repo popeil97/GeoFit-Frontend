@@ -11,6 +11,7 @@
   --tucan-orange:#ed6a11;
   --tucan-green:#7FCC92;
   --slate-tint:#C4C4C4;
+  --input-background-color: #EBEBEB;
 
   --common-box-shadow: 0px 0px 5px 2px rgb(200,200,200);
 }
@@ -53,6 +54,10 @@ h6, .h6 {
 }
 .h7 {
   font-size:12px;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=number], input[type=date], input[type=url], input[type=time], input[type=tel], input[type=search], textarea {
+  background-color: var(--input-background-color);
 }
 
 button:hover, .button:hover, a:hover {
@@ -116,6 +121,14 @@ button.buttonWithIcon, .button.buttonWithIcon {
   justify-content: flex-start;
   align-items: center;
   flex-wrap: nowrap;
+}
+button.wideButton, .button.wideButton {
+  padding-left:64px;
+  padding-right:64px;
+}
+
+.color-white {
+  color:white;
 }
 
 .margin-bottom-0px {

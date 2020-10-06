@@ -100,14 +100,16 @@ export class RaceViewComponent implements OnInit {
   public currentScreen = 'feed';
   public acceptedScreens = ['feed','leaderboard'];
 
-  constructor(private raceService:RaceService,
-                  private activitiesService:ActivitiesService,
-                  private route: ActivatedRoute,
-                  private _userProfileService: UserProfileService,
-                  private router:Router,
-                  private storyService: StoryService,
-                  public _authService: AuthService,
-                  private modalService: ModalService,) {
+  constructor(
+    private raceService:RaceService,
+    private activitiesService:ActivitiesService,
+    private route: ActivatedRoute,
+    private _userProfileService: UserProfileService,
+    private router:Router,
+    private storyService: StoryService,
+    public _authService: AuthService,
+    private modalService: ModalService,
+  ) {
     this.modalData = {};
   }
 
@@ -118,35 +120,31 @@ export class RaceViewComponent implements OnInit {
       this.raceID = params['params']['id'];
     });
 
-    if(this._authService.isLoggedIn())
-    {
+    if(this._authService.isLoggedIn()) {
       this._userProfileService.getUserProfile(this._authService.username).then((data) => {
-      this.userData = data as UserData;
-    });
+        this.userData = data as UserData;
+      });
     }
     
-
     this.getRaceState();
     this.getActivities();
 
     document.getElementById('feed-btn').style.backgroundColor = "#36343c";
     document.getElementById('feed-btn').style.color = "#FFFFFF";
   }
-  newStoryPosted(event: any)
-  {
+  newStoryPosted(event: any) {
     console.log("new story");
     this.feedChild.refreshFeed();
   }
 
-  toggleMenu()
-  {
+  toggleMenu() {
     this.isOpen = !this.isOpen;
   }
 
-  toggleSearch()
-  {
+  toggleSearch() {
     this.searchOn = !this.searchOn;
   }
+
   openModal(id: string) {
     var data = (id=='mapSettingsModal') ? {userSettings:this.userRaceSettings,callbackFunction:null}:(id == 'custom-modal-5') ? {raceType:this.raceType, distance_unit: this.progress.distance_type, race_id:this.raceID, numActivities : this.num_activities, manualEntry:this.raceSettings.isManualEntry, automaticImport: this.userRaceSettings.isAutomaticImport, callbackFunction:null} : {};
     console.log("DATA SENT TO CHILD", data);
@@ -156,31 +154,40 @@ export class RaceViewComponent implements OnInit {
   }
 
   uploadActivity = (incomingData = null) => {
-  //  const toAlert = (incomingData != null) ? incomingData : this.testString;
-  if(incomingData != null){
-    console.log("PARENT INCOMING DATA",incomingData.type);
-
-    if(incomingData.type == "manual")
-    {
-      this.uploadManualEntry(incomingData.entry);
-    }
-
-    if(incomingData.type == "strava")
-    {
-      this.refreshStatComponents();
-    }
-
-    if(incomingData.type == "map")
-    {
-      console.log("MAP DATA INCOMING!")
-      this.showPinsFromSettings(incomingData.pinSettings);
-    }
-  }
+    // const toAlert = (incomingData != null) ? incomingData : this.testString;
+    if (incomingData == null || typeof incomingData === 'undefined') return;
     
+    console.log("PARENT INCOMING DATA",incomingData.type);
+    switch(incomingData.type) {
+      case('manual'):
+        this.uploadManualEntry(incomingData.entry);
+        break;
+      case('strava'):
+        this.refreshStatComponents();
+        break;
+      case('map'):
+        console.log("MAP DATA INCOMING!")
+        this.showPinsFromSettings(incomingData.pinSettings);
+        break;
+    }
+    /*
+    if(incomingData != null){
+      console.log("PARENT INCOMING DATA",incomingData.type);
+      if(incomingData.type == "manual") {
+        this.uploadManualEntry(incomingData.entry);
+      }
+      if(incomingData.type == "strava") {
+        this.refreshStatComponents();
+      }
+      if(incomingData.type == "map") {
+        console.log("MAP DATA INCOMING!")
+        this.showPinsFromSettings(incomingData.pinSettings);
+      }
+    }
+    */
   }
 
-  logActivity(event:any)
-  {
+  logActivity(event:any) {
     console.log("RV", event);
   }
 
@@ -189,10 +196,9 @@ export class RaceViewComponent implements OnInit {
   }
 
   closeModal(id: string) {
-      this.modalService.close(id);
-      console.log(this.modalService.getModalData(id));
+    this.modalService.close(id);
+    console.log(this.modalService.getModalData(id));
   }
-
 
   viewAbout() {
     this.router.navigate(['/about',{name:this.race.name,id:this.race.id}]);
@@ -209,7 +215,6 @@ export class RaceViewComponent implements OnInit {
 
   toggleNavButton(action?:string) {
     this.changeArrow = !this.changeArrow;
-   
   }
 
   toggleTeamForm(action?:string) {
@@ -343,9 +348,8 @@ export class RaceViewComponent implements OnInit {
 
   getActivities() {
     this.activitiesService.getActivities(this.raceID).then((data:any) => {
-     
       console.log("RACE VIEW ACTIVITIES", data);
-       this.activities = data.activities;
+      this.activities = data.activities;
       this.num_activities = data.activities.length;
       console.log("HELLO???",this.num_activities);
     });
@@ -380,28 +384,21 @@ export class RaceViewComponent implements OnInit {
     if (to == null || this.acceptedScreens.indexOf(to) == -1) return;
     this.currentScreen = to;
 
-     document.getElementById(to+'-btn').style.backgroundColor = "#36343c";
-     document.getElementById(to+'-btn').style.color = "#FFFFFF";
+    document.getElementById(to+'-btn').style.backgroundColor = "#36343c";
+    document.getElementById(to+'-btn').style.color = "#FFFFFF";
 
     switch(to) { 
-     case 'feed': { 
-       document.getElementById('leaderboard-btn').style.backgroundColor = "#FFFFFF";
-       document.getElementById('leaderboard-btn').style.color = "#000000";
+      case 'feed':
+        document.getElementById('leaderboard-btn').style.backgroundColor = "#FFFFFF";
+        document.getElementById('leaderboard-btn').style.color = "#000000";
         break; 
-     } 
-     case 'leaderboard': { 
-       document.getElementById('feed-btn').style.backgroundColor = "#FFFFFF";
-       document.getElementById('feed-btn').style.color = "#000000";
+      case 'leaderboard':
+        document.getElementById('feed-btn').style.backgroundColor = "#FFFFFF";
+        document.getElementById('feed-btn').style.color = "#000000";
         break; 
-     }  
-     default: { 
-        break; 
-     } 
-   }
-
+    }
     return;
   }
-
 }
 
 interface RaceData {
