@@ -14,6 +14,10 @@ export class UserStatsComponent implements OnInit {
   userStats: UserStats;
   private chart: Chart;
   
+  public currentScreen = 'run';
+  public acceptedScreens = ['run','walk','bike'];
+
+
   constructor(private _usersService:UsersService) { }
 
   ngOnInit() {
@@ -29,6 +33,9 @@ export class UserStatsComponent implements OnInit {
         console.log("CACHMEOUSIDE");
         console.error(err);
       })
+
+      document.getElementById('run-btn').style.backgroundColor = "#36343c";
+      document.getElementById('run-btn').style.color = "#FFFFFF";
   }
 
    private showChart(mydates,run_dists,walk_dists,bike_dists,other_dists) {
@@ -38,8 +45,8 @@ export class UserStatsComponent implements OnInit {
           data.push({
             label: 'Run',
             data: run_dists,
-            backgroundColor: 'rgba(0, 51, 204,0.2)',
-            borderColor: 'rgba(0, 51, 204,1)',
+            backgroundColor: 'rgba(127 , 204 ,146,0.2)',
+            borderColor: 'rgba(127 , 204 ,146,1)',
             borderWidth: 1
           });
         }
@@ -48,8 +55,8 @@ export class UserStatsComponent implements OnInit {
           data.push({
             label: 'Walk',
             data: walk_dists,
-            backgroundColor: 'rgba(153, 204, 255,0.2)',
-            borderColor: 'rgba(153, 204, 255,1)',
+            backgroundColor: 'rgba(54, 52 , 60,0.2)',
+            borderColor: 'rgba(54 ,52 , 60,1)',
             borderWidth: 1
           });
         }
@@ -58,8 +65,8 @@ export class UserStatsComponent implements OnInit {
           data.push({
            label: 'Ride',
             data: bike_dists,
-            backgroundColor: 'rgba(204, 0, 204,0.2)',
-            borderColor: 'rgba(204, 0, 204,1)',
+            backgroundColor: 'rgba( 237 ,106 ,17,0.2)',
+            borderColor: 'rgba( 237 ,106 ,17,1)',
             borderWidth: 1
           });
         }
@@ -116,7 +123,49 @@ export class UserStatsComponent implements OnInit {
 	private openTab() {
 	  document.getElementById("defaultOpen").click();
 	}
+
+  SwitchSlideshow = (to:string = null) => {
+    //console.log("to", to, this.acceptedScreens.indexOf(to));
+    if (to == null || this.acceptedScreens.indexOf(to) == -1) return;
+    this.currentScreen = to;
+
+     document.getElementById(to+'-btn').style.backgroundColor = "#36343c";
+     document.getElementById(to+'-btn').style.color = "#FFFFFF";
+
+    switch(to) { 
+     case 'run': { 
+       document.getElementById('walk-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('walk-btn').style.color = "#000000";
+       document.getElementById('bike-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('bike-btn').style.color = "#000000";
+        break; 
+     } 
+     case 'walk': { 
+        document.getElementById('run-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('run-btn').style.color = "#000000";
+       document.getElementById('bike-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('bike-btn').style.color = "#000000";
+        break; 
+     } 
+     case 'bike': { 
+         document.getElementById('walk-btn').style.backgroundColor = "#FFFFFF";
+         document.getElementById('walk-btn').style.color = "#000000";
+         document.getElementById('run-btn').style.backgroundColor = "#FFFFFF";
+          document.getElementById('run-btn').style.color = "#000000";
+        break; 
+     } 
+     default: { 
+        break; 
+     } 
+   }
+
+    return;
+  }
+
 }
+
+
+
 
 interface UserStats {
 

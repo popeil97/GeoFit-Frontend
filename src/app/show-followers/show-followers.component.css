@@ -1,0 +1,17 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin:10px;
+}
+
+.col-pic{
+	width:20%;
+	padding-left:20px;
+}
+.col-name{
+	width:50%;
+}
+
+.col-btn{
+	width:20%;
+}

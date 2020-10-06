@@ -7,6 +7,21 @@
   height: 80px; /* Should be removed. Only for demonstration */
 }
 
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 2px;
+}
+/*
+.tr:nth-child(even) 
+{
+  background-color: #FFFFFF;
+}*/
+
 .material-icons {
   font-family: 'Material Icons';
   font-weight: normal;
@@ -103,4 +118,12 @@
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
+}
+
+.stats-col {
+  width:60%;
+}
+
+.table-col {
+  width:35%;
 }

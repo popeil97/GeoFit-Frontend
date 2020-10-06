@@ -65,6 +65,7 @@ div.ex3 {
 
 .main-col {
   width:62%;
+   word-wrap: break-word;
 }
 
 .side-col {

@@ -23,7 +23,7 @@
 			<!--
 			<div class='MapActionsContainer'  *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities>0" matBadge="{{num_activities}}"  matBadgePosition="after" matBadgeColor="accent" (click)="openModal('custom-modal-5')" >LOG ACTIVITY</div> -->
 			
-			<div  class='LogContainer'  *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('custom-modal-5')" >LOG ACTIVITY</div>
+			<button  class='LogContainer'  *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('custom-modal-5')" >LOG ACTIVITY</button>
 
 			<div class="MapFeedContainer">
 				<div class="logActivity" *ngIf="this._authService.isLoggedIn() && this.userRegistered">

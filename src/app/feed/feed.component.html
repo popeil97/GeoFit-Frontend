@@ -22,12 +22,12 @@
         <div class="row">
           <div class = "main-col">
              <div *ngIf="element.message.length < 20"> <!-- NO STORY : FITNESS UPDATE -->
-              <app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav>
+              <b><app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav></b>
               {{ element.message }}  <small>{{ this.get_created_ts(element.created_ts) }}</small>
             </div>
 
             <div *ngIf="element.message.length >= 20"> <!-- STORY-->
-              <app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav>
+               <b><app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav></b>
               {{ element.story_text }}  {{ element.hot? '🔥🔥🔥' : ' ' }}  <small>{{ this.get_created_ts(element.created_ts) }}</small>
 
               <div class="container" *ngIf="element.story_image">
