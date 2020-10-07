@@ -6,6 +6,69 @@
   </div> -->
 
   <ng-template [ngIf]='feedItems.length > 0' [ngIfElse]="NothingInFeedBlock">
+    <div class='Feed'>
+      <div *ngFor="let element of feedItems" class='FeedItem'>
+        <div class='FeedProfileImgCell'>
+          <div class='FeedProfileImgContainer'>
+            <img class="FeedProfileImg" src="{{ element.profile_url }}">
+          </div>
+        </div>
+        <div class='FeedProfileContentCell'>
+          <div>
+              <ng-template [ngIf]="element.message.length < 20" [ngIfElse]="FeedMessageIsStoryBlock">
+                <!-- NO STORY : FITNESS UPDATE -->
+                <div class='FeedMessageHeader'>
+                  <p class='FeedMessageName'><app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav></p>
+                  <span class='h7'>{{ this.get_created_ts(element.created_ts) }}</span>
+                </div>
+                <div class='FeedMessageContent'>
+                  <p class='margin-bottom-4px'>{{ element.message }}</p>
+                </div>
+              </ng-template>
+              <ng-template #FeedMessageIsStoryBlock>
+                <!-- STORY-->
+                <div class='FeedMessageHeader'>
+                  <p class='FeedMessageName'><app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav></p>
+                  <div class='FeedmessageOtherInfo'>
+                    <span class='h7 margin-right-4px'>{{ element.hot? '🔥🔥🔥' : ' ' }}</span>
+                    <span class='h7'>{{ this.get_created_ts(element.created_ts) }}</span>
+                  </div>
+                </div>
+                <div class='FeedMessageContent'>
+                  <p class='margin-bottom-4px'>{{ element.story_text }}</p>
+                  <img *ngIf="element.story_image" src="{{ element.story_image }}" (click)="showStoryDialog(element)" width="100px" class='margin-bottom-4px'>
+                </div>
+              </ng-template>
+          </div>
+          <div class='FeedMessageActionsContainer'>
+            <div class='FeedMessageActionsSocialContainer'>
+              <app-story-btn class="likeButton" *ngIf="this._authService.isLoggedIn()" [use]="'like'" [storyID]=element.story_id [likes]=element.likes [likesCount]=element.likes_count [likesUsers]=element.likes_users></app-story-btn>
+              <div class="commentButton" role="button" (click)="element.show_comments=!element.show_comments"> <i class="material-icons" >comment</i> {{ element.comments.length }}</div>
+            </div>
+            <div class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" style="font-size:8px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="material-icons">more_horiz</i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div role="button" (click)="openReportDialog(element.story_id)"> 
+                      <p>Report Post</p> 
+                    </div>
+                    <div *ngIf="element.is_mine">
+                      <div class="dropdown-divider"></div>
+                      <div role="button" (click)="openDeleteStoryDialog(element.story_id)">
+                        <p>Delete Post</p> 
+                      </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div *ngIf="element.show_comments">
+            <app-comments [comments]="element.comments" [storyID]="element.story_id" (commentPosted)="newCommentPosted($event)"></app-comments>
+          </div>
+        </div>
+      </div>
+    </div>
+<!--
     <table mat-table [dataSource]="feedItems" class="feedTable">
       <ng-container matColumnDef="ProfilePic" >
         <td mat-cell *matCellDef="let element" (click)="clickedOnFeedItem(element)" [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">
@@ -16,17 +79,20 @@
       </ng-container>
       <ng-container matColumnDef="Data" >
         <td mat-cell *matCellDef="let element" [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">
-  
           <div class="row">
             <div class = "main-col">
                <div *ngIf="element.message.length < 20"> 
+-->
                  <!-- NO STORY : FITNESS UPDATE -->
+<!--
                 <b><app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav></b>
                 {{ element.message }}  <small>{{ this.get_created_ts(element.created_ts) }}</small>
               </div>
   
               <div *ngIf="element.message.length >= 20"> 
+-->
                 <!-- STORY-->
+<!--
                  <b><app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav></b>
                 {{ element.story_text }}  {{ element.hot? '🔥🔥🔥' : ' ' }}  <small>{{ this.get_created_ts(element.created_ts) }}</small>
   
@@ -67,7 +133,9 @@
   
             </div>
           </div>
+-->
           <!-- KATIE THIS IS FOR YOUUUUUU :) -->
+<!--
           <div *ngIf="element.show_comments">
             <app-comments [comments]="element.comments" [storyID]="element.story_id" (commentPosted)="newCommentPosted($event)"></app-comments>
           </div>
@@ -75,6 +143,7 @@
       </ng-container>
       <tr mat-row *matRowDef="let myRowData; columns: columns"></tr>
     </table>
+-->
   </ng-template>
   <ng-template #NothingInFeedBlock>
     <p>Nothing yet!</p>

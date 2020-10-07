@@ -133,7 +133,13 @@ button.wideButton, .button.wideButton {
 .color-white {
   color:white;
 }
+.bold-text {
+  font-weight: bold;
+}
 
+.margin-right-4px {
+  margin-right:4px !important;
+}
 .margin-bottom-0px {
   margin-bottom:0px !important;
 }
