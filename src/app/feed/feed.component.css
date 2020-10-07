@@ -1,9 +1,38 @@
+.profileImg{
+  position: relative;
+  display:block;
+  width:30px;
+  height:30px;
+  border-radius: 50%;
+
+  overflow:hidden;
+
+  margin-right:8px;
+
+}
+
+.likeButton{
+  padding-top:5px;
+}
+
+.commentButton{
+  padding-top:5px;
+  padding-left:5px;
+}
+
 .mat-row {
   height: auto;
 }
 
+.table-container{
+ overflow:auto; 
+ max-height:300px;
+}
+
 .mat-cell {
-  padding: 1px 1px 1px 0;
+  padding-left: 10px;
+  padding-right: 10px;
+  max-width:340px;
 }
 
 .mat-column-ProfilePic {
@@ -73,4 +102,8 @@ div.ex3 {
   display:flex;
   align-content: right;
   right:0;
+}
+
+.refreshSection{
+   width:100%;
 }
