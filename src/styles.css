@@ -15,11 +15,14 @@
 
   --common-box-shadow: 0px 0px 5px 2px rgb(200,200,200);
 }
+
+/*
 * {
   -webkit-transition: all ease 0.5s;
   -moz-transition: all ease 0.5s;
   transition: all ease 0.5s;
 }
+*/
 
 html, body { 
   height: 100%;
