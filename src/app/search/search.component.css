@@ -1,0 +1,20 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin:10px;
+}
+
+.followCol{
+	width:35%;
+	padding:15px;
+}
+
+.nameCol{
+	width:65%;
+	padding:15px;
+}
+.searchResult{
+	background-color:white;
+	border-bottom-width: 1px;
+	border-bottom-color: var(--slate-tint);
+}

@@ -144,6 +144,19 @@
   margin-left: -15px;
 }
 
+.titleCol{
+  width:60%;
+}
+.aboutCol{
+  width:28%;
+  right:0;
+  left:0;
+}
+.settingsCol{
+  width:8%;
+  right:0;
+}
+
 .logActivity{
   height:80px;
   width:100%;
@@ -159,6 +172,15 @@
   width:80%;
 }
 
+ .searchContainer {
+    position: absolute;
+    right: 50px;
+    top: 0;
+
+    z-index: 500;
+    width: 19%;
+
+ }
 
 .ActionsContainer {
     position: absolute;

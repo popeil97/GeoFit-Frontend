@@ -4,33 +4,44 @@
 
 		<div class="MapSidebar" [ngClass]="{MapSidebarWidthBig: isOpen, MapSidebarWidthSmall: !isOpen}">
 			<div class="MapHeaderContainer">
-				<h3 class="MapHeaderTitle">{{this.raceName}}</h3>
-				<div class="MapHeaderButtonsContainer">
-					<button class="lightButton wideButton" (click)="viewAbout()">About the Race</button>
+				<div class="row">
+					<div class="titleCol">
+						<h3 class="MapHeaderTitle">{{this.raceName}}</h3>
+					</div>
+					<div class="aboutCol">
+						<button (click)="viewAbout()">ABOUT</button>
+					</div>
+					<div class="settingsCol">
+						<button class="lightButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('mapSettingsModal')"><span class="material-icons">settings</span></button>
+					</div>
 				</div>
 			</div>
+
+			<button  class='LogContainer'  *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('custom-modal-5')" >LOG ACTIVITY</button>
+
+			<div class='MapActionsContainer' *ngIf="!this._authService.isLoggedIn() && !this.userRegistered">
+					<p class='color-white'>Join the race and become a participant!</p>
+					<button class="lightButton wideButton" (click)="viewAbout()">JOIN</button>
+			</div>
+
+<!--
 			<div class='MapActionsContainer'>
 				<ng-template [ngIf]="this._authService.isLoggedIn() && this.userRegistered" [ngIfElse]="NotLoggedInBlock">
-					<button class="lightButton" *ngIf="this.userRegistered" (click)="openModal('mapSettingsModal')"><span class="material-icons">settings</span></button>
-					<app-search [raceID]="raceID"></app-search>
+					<button class="lightButton wideButton" (click)="openModal('custom-modal-5')" >LOG ACTIVITY</button>
 				</ng-template>
 				<ng-template #NotLoggedInBlock>
 					<p class='color-white'>Join the race and become a participant!</p>
-					<button class="lightButton wideButton" (click)="viewAbout()">Join Race</button>
+					<button class="lightButton wideButton" (click)="viewAbout()">JOIN</button>
 				</ng-template>
 			</div>
-
+ -->
 			<!--
 			<div class='MapActionsContainer'  *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities>0" matBadge="{{num_activities}}"  matBadgePosition="after" matBadgeColor="accent" (click)="openModal('custom-modal-5')" >LOG ACTIVITY</div> -->
 			
-			<button  class='LogContainer'  *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('custom-modal-5')" >LOG ACTIVITY</button>
+			
 
 			<div class="MapFeedContainer">
-				<div class="logActivity" *ngIf="this._authService.isLoggedIn() && this.userRegistered">
-					<p>Add your Progress</p>
-					<button *ngIf="num_activities>0" matBadge="{{num_activities}}"  matBadgePosition="after" matBadgeColor="accent" (click)="openModal('custom-modal-5')" >Log Activity</button>
-					<button *ngIf="num_activities==0" (click)="openModal('custom-modal-5')" >Log Activity</button>
-				</div>
+
 				
 				<div class='Slideshow'>
 					<div class="SlideshowHeader">
@@ -76,6 +87,9 @@
 		</div>
 		<div class='MapGreaterContainer'>
 			<app-map [raceIDs]="raceIDs" [displayUsers]="true" [followedIDs]="followedIDs" [zoom]="false"></app-map>
+			<div class="searchContainer">
+				<app-search [raceID]="raceID"></app-search>
+			</div>
 			<div class="buttonContainer">
 				<button *ngIf="isOpen" (click)="toggleMenu()"><span class="material-icons">keyboard_arrow_left</span></button>
 				<button *ngIf="!isOpen" (click)="toggleMenu()"><span class="material-icons">keyboard_arrow_right</span></button>
