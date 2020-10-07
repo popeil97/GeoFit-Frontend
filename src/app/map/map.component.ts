@@ -346,7 +346,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     tiles.addTo(this.map);
 
-    new L.Control.Zoom({ position: "topright" }).addTo(this.map);
+    new L.Control.Zoom({ position: "bottomright" }).addTo(this.map);
 
     //An extract of address points from the LINZ bulk extract: http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde
 //Should be this data set: http://data.linz.govt.nz/#/layer/779-nz-street-address-electoral/
