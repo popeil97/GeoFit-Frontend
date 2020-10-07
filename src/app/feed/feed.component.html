@@ -45,26 +45,19 @@
               <app-story-btn class="likeButton" *ngIf="this._authService.isLoggedIn()" [use]="'like'" [storyID]=element.story_id [likes]=element.likes [likesCount]=element.likes_count [likesUsers]=element.likes_users></app-story-btn>
               <div class="commentButton" role="button" (click)="element.show_comments=!element.show_comments"> <i class="material-icons" >comment</i> {{ element.comments.length }}</div>
             </div>
-            <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" style="font-size:8px;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="material-icons">more_horiz</i>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <div role="button" (click)="openReportDialog(element.story_id)"> 
-                      <p>Report Post</p> 
-                    </div>
-                    <div *ngIf="element.is_mine">
-                      <div class="dropdown-divider"></div>
-                      <div role="button" (click)="openDeleteStoryDialog(element.story_id)">
-                        <p>Delete Post</p> 
-                      </div>
-                    </div>
+            <div class="dropdown dropdownVisible FeedMessageOptionsDropdown" [ngClass]="{dropdownOpen : element.show_options}" (click)="ToggleStoryOptions(element.story_id)">
+              <span class="material-icons">more_horiz</span>
+              <div class="dropdownContents FeedMessageOptions">
+                <div class='FeedMessageOptionsContent'>
+                  <p class='FeedMessageOption' (click)="openReportDialog(element.story_id)">Report Post</p> 
+                  <p *ngIf="element.is_mine" class='FeedMessageOption' (click)="openDeleteStoryDialog(element.story_id)">Delete Post</p> 
                 </div>
+              </div>
             </div>
           </div>
-          <div *ngIf="element.show_comments">
+          <ng-template [ngIf]="element.show_comments">
             <app-comments [comments]="element.comments" [storyID]="element.story_id" (commentPosted)="newCommentPosted($event)"></app-comments>
-          </div>
+          </ng-template>
         </div>
       </div>
     </div>

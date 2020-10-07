@@ -7,6 +7,7 @@
 
   --main-background-color: #36343C;
   --primary-darkgrey: #36343C;
+  --primary-lightgrey: rgb(200,200,200);
 
   --tucan-orange:#ed6a11;
   --tucan-green:#7FCC92;
@@ -224,9 +225,6 @@ body.custom-modal-open {
   .dropdown:hover {
     cursor:pointer;
   }
-  .dropdown.dropdownVisible {
-    overflow:initial;
-  }
 .dropdown .dropdownContents {
   position:absolute;
   top:100%;
@@ -241,10 +239,16 @@ body.custom-modal-open {
   align-items:stretch;
   flex-wrap: nowrap;
 }
-.dropdown.dropdownOpen, .dropdown:hover {
-  overflow:visible;
+.dropdown.dropdownOpen, .dropdown:hover, .dropdown.dropdownVisible.dropdownOpen {
+  overflow:visible !important;
 }
-.dropdown.dropdownVisible .dropdownContents, .dropdown:hover .dropdownContents, .dropdown.dropdownOpen .dropdownContents {
+.dropdown.dropdownVisible:hover {
+  overflow:hidden;
+}
+.dropdown.dropdownVisible:hover .dropdownContents {
+  height:0;
+}
+.dropdown:hover .dropdownContents, .dropdown.dropdownOpen .dropdownContents, .dropdown.dropdownVisible.dropdownOpen .dropdownContents {
   height:auto;
 }
 .dropdownItem {

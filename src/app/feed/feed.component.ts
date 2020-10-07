@@ -152,9 +152,13 @@ export class FeedComponent implements OnInit {
       var data = payload.serialized_feed;
       this.canRefresh = payload.can_refresh;
 
+      // I'm replacing the code below with a reduce function, to prevent duplicate entries from appearing
+      // Why are duplicates appearing? Please stop sending back duplicates. Why are there duplicates?? 
+      // Back end should not be producing duplicates! Why is there no check for this???
+      /*
       Object.keys(data).map(function(feedItemIndex){
         let feedItem: FeedObj = data[feedItemIndex];
-
+        feedItem.show_options = false;
         //By default don't open comment fields
         //Unless we have just posted a comment
         if (feedItem.story_id == openStoryIDComments){
@@ -166,6 +170,19 @@ export class FeedComponent implements OnInit {
 
         newFeedObjs.push(feedItem);
       });
+      */
+
+      newFeedObjs = Object.keys(data).reduce((accumulator, feedItemIndex) => {
+        let feedItem: FeedObj = data[feedItemIndex];
+        if (accumulator.findIndex(a=>{return a.story_id == feedItem.story_id}) > -1) return accumulator;
+        feedItem.show_options = false;
+        //By default don't open comment fields
+        //Unless we have just posted a comment
+        // Booleans can be stored like this. Doing an if-else just to add "true" or "false" is sub-optimal
+        feedItem.show_comments = (feedItem.story_id == openStoryIDComments);  
+        accumulator.push(feedItem);
+        return accumulator;
+      },[]);
 
       //viewComponent.feedItems = newFeedObjs.concat(viewComponent.feedItems);
       //Continue to explore ways to refresh feed. In meantime, get all feed objs every time
@@ -261,6 +278,16 @@ export class FeedComponent implements OnInit {
 
   }
 
+  ToggleStoryOptions(story_id:number = null) {
+    console.log('Togglestoryoptions - received story_id',story_id);
+    if (!story_id) return;
+    var itemIndex = this.feedItems.findIndex(f=>{return f.story_id == story_id});
+    console.log('Togglestoryoptions - found item index',itemIndex);
+    if (itemIndex == -1) return;
+    this.feedItems[itemIndex].show_options = !this.feedItems[itemIndex].show_options;
+    return;
+  }
+
   
     
 
@@ -287,6 +314,7 @@ interface FeedObj {
   is_mine:boolean;
   comments: Comment[];
   show_comments: boolean;
+  show_options: boolean;
   follows: boolean;
   hot: boolean;
 }
