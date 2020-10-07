@@ -11,3 +11,13 @@
 .post-col{
 	width:25%;
 }
+
+.PostContainer {
+    margin-top:8px;
+
+    display:flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}
