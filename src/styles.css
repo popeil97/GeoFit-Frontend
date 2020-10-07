@@ -333,13 +333,14 @@ h1.PageHeaderSegmentTitle {
   height:0;
   visibility: hidden;
   opacity:0;
-
   overflow:hidden;
+  display:none;
 }
 .SlideshowSlide.Slideshow-CurrentSlide {
   height:auto;
   visibility: visible;
   opacity:1;
+  display:initial;
 }
 
 .RaceLocationsContainer {

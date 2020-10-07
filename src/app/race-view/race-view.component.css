@@ -1,8 +1,8 @@
 .MapContainer {
-  height: 100%;
+  position: fixed;
+  height: calc(100% - 80px);
   width: 100%;
   overflow: hidden;
-  position: fixed;
 
   display:flex;
   flex-direction: row;
@@ -14,7 +14,7 @@
 .MapSidebar {
   position: relative;
   height:100%;
-  background-color: grey;
+  border-right: 0.5px solid black;
 
   display:flex;
   flex-direction: column;
@@ -57,10 +57,18 @@
     /* border-bottom:1px solid grey; */
     text-align:center;
   }
+  .MapHeaderContainer {
+    margin-bottom:12px;
 
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
     .MapHeaderTitle {
-      margin-bottom:12px;
-      
+      margin-bottom:0;
+      margin-right:8px;
       overflow:hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -89,43 +97,76 @@
     flex-grow: 1;
     flex-basis: 0;
   }
-    .MapFeedInputContainer {
-      margin-bottom:16px;
-      
-      display:flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: stretch;
-      flex-wrap: nowrap;
+    .MapFeedSlideshowHeader {
+      flex-grow: 0;
     }
-      .MapFeedInputProfileContainer {
-        flex-grow: 0;
-        flex-shrink: 0;
-        flex-basis: 70px;
-
-        position: relative;
-        display:block;
-        width:70px;
-        height:70px;
-        background-color:grey;
-        border-radius: 50%;
-
-        overflow:hidden;
-
-        margin-right:8px;
-      }
-      .MapFeedInputProfile {
-        position: absolute;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
-        width:100%;
-      }
-      .MapFeedInputTextContainer {
+      .MapFeedSlide, .MapLeaderboardSlide {
         flex-grow: 1;
         flex-basis: 0;
-        position: relative;
       }
+      .MapFeedSlide {
+        display:flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        flex-wrap: nowrap;
+      }
+      .MapFeedInputContainer {
+        margin-bottom:16px;
+        
+        display:flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: stretch;
+        flex-wrap: nowrap;
+      }
+        .MapFeedInputProfileContainer {
+          flex-grow: 0;
+          flex-shrink: 0;
+          flex-basis: 70px;
+
+          position: relative;
+          display:block;
+          width:70px;
+          height:70px;
+          background-color:grey;
+          border-radius: 50%;
+
+          overflow:hidden;
+
+          margin-right:8px;
+        }
+        .MapFeedInputProfile {
+          position: absolute;
+          top:50%;
+          left:50%;
+          transform:translate(-50%,-50%);
+          width:100%;
+        }
+        .MapFeedInputTextContainer {
+          flex-grow: 1;
+          flex-basis: 0;
+          position: relative;
+        }
+      .MapFeedMainContainer {
+        flex-grow: 1;
+        flex-basis: 0;
+
+        display:flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        flex-wrap: nowrap;
+      }
+        .MapFeed {
+          flex-grow: 1;
+          flex-basis: 0;
+
+          position:relative;
+          z-index: 1;
+
+          overflow-y:auto;
+        }
 
 .MapGreaterContainer {
   flex-grow:1;
@@ -135,6 +176,40 @@
   position: relative;
   width:auto;
   height:100%;
+}
+
+.MapFeedSettingsButtonContainer {
+  display:flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  margin-bottom:8px;
+}
+  .MapFeedSettingsContainer {
+    position: relative;
+  }
+    .MapFeedOptionsContainer {
+      position: absolute;
+      right:0;
+      top:100%;
+      width:max-content;
+      z-index: 2;
+
+      background-color:white;
+      padding:8px;
+      box-sizing: border-box;
+      border:0.5px solid black;
+    }
+.MapFeedSlideshowContents {
+  flex-grow: 1;
+  flex-basis: 0;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
 }
 
 .row {
