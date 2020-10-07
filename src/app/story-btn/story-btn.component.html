@@ -1,6 +1,6 @@
 <div *ngIf="use=='like'">
     <div role="button" (click)="changeLikeStatus()" title="{{ likesUsersString }}">
-    <span *ngIf="likes" matTooltip="Tooltips in Angular" ><i class="material-icons" style="color:red">favorite</i> </span>
+    <span *ngIf="likes" matTooltip="Tooltips in Angular" ><i class="material-icons" style="color:var(--primary-darkgrey)">favorite</i> </span>
     <span *ngIf="!likes" matTooltip="Tooltips in Angular" ><i class="material-icons" style="color:rgba(169,169,169,80%);">favorite_border</i> </span>
     <span>{{ likesCount }}</span>
   

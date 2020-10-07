@@ -2,38 +2,89 @@
   position: relative;
   overflow-y:auto;
 }
+
+.small{
+  font-size:10px;
+  }
+
   .Feed { /* empty for now, just to show parenting of elements in this code */ }
     .FeedItem {
+      padding:2px;
+      box-sizing: border-box;
+
       display:flex;
       flex-direction: row;
       justify-content: flex-start;
       align-items: stretch;
       flex-wrap: nowrap;
+      font-size:12px;
     }
-      .FeedProfileImgContainer {
-        position: relative;
+    .FeedItem:nth-child(2n) {
+      background-color:#EBEBEB
+    }
+      .FeedProfileImgCell {
+        flex-grow: 0;
+        flex-shrink: 0;
+        flex-basis: 30px;
+
         width:30px;
         height:30px;
-        border-radius: 15px;
-        margin-right: 8px;
-        overflow:hidden;
+        margin-right:8px;
       }
-        .FeedProfileImg{
-          position: absolute;
-          width:100%;
-          top:50%;
-          left:50%;
-          transform:translate(-50%,-50%);
+        .FeedProfileImgContainer {
+          position: relative;
+          width:30px;
+          height:30px;
+          border-radius: 15px;
+          overflow:hidden;
+
+          border:0.5px solid grey;
+          box-sizing: border-box;
         }
+          .FeedProfileImg {
+            position: absolute;
+            width:100%;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+          }
+      .FeedProfileContentCell {
+        flex-grow: 1;
+        flex-basis: 0;
 
-.likeButton{
-  padding-top:5px;
-}
-
-.commentButton{
-  padding-top:5px;
-  padding-left:5px;
-}
+        display:flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        flex-wrap: nowrap;
+      }
+        .FeedMessageHeader {
+          display:flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: nowrap;
+        }
+          .FeedMessageName {
+            font-weight:bold;
+            margin-bottom:0;
+          }
+        .FeedMessageContent {}
+        .FeedMessageActionsContainer {
+          display:flex;
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          flex-wrap: nowrap;
+        }
+          .FeedMessageActionsSocialContainer {
+            display:flex;
+            flex-direction: row;
+            justify-content: flex-start;
+            align-items: center;
+            flex-wrap: nowrap;
+          }
+  
 
 .mat-row {
   height: auto;

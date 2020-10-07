@@ -32,13 +32,13 @@
    width:0%;
 }
   .MapHeaderContainer, .MapFeedContainer, .MapActionsContainer {
-    padding:16px;
+    padding:4px;
     box-sizing: border-box;
     background-color:white;
   }
 
     .LogContainer {
-    padding:12px;
+    padding:8px;
     box-sizing: border-box;
     background-color:var(--tucan-green);
     color:white;
@@ -58,7 +58,7 @@
     text-align:center;
   }
   .MapHeaderContainer {
-    margin-bottom:12px;
+    margin-bottom:8px;
 
     display:flex;
     flex-direction: row;
@@ -68,7 +68,7 @@
   }
     .MapHeaderTitle {
       margin-bottom:0;
-      margin-right:8px;
+      margin-right:4px;
       overflow:hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -76,7 +76,6 @@
     .MapHeaderButtonsContainer {
       display:flex;
       flex-direction: row;
-      justify-content: center;
       align-items: center;
       flex-wrap: nowrap;
     }
@@ -112,7 +111,7 @@
         flex-wrap: nowrap;
       }
       .MapFeedInputContainer {
-        margin-bottom:16px;
+        margin-bottom:4px;
         
         display:flex;
         flex-direction: row;
@@ -311,5 +310,5 @@
 }
 
 .material-icons{
-  font-size:14px;
+  font-size:12px;
 }

@@ -694,7 +694,10 @@ interface UserData {
   isMe: boolean,
   gender: string,
   age: number,
+
+  email:string,
   description: string,
+  location:string,
 }
 
 interface OrgPinData {

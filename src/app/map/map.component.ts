@@ -103,6 +103,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     //console.log('getting user data')
     return this._raceService.getUserRacestats(raceID,page).then((data:any) =>{
       this.routeData[raceID].userData = data.users_data;
+      console.log("MAP USER DATA",data.users_data);
 
       this.loading = false;
     });
@@ -395,7 +396,10 @@ interface UserData {
   isMe: boolean,
   gender: string,
   age: number,
+
+  email:string,
   description: string,
+  location:string,
 }
 
 interface OrgPinData {

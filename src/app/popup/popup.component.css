@@ -1,0 +1,34 @@
+.text{
+	font-size:14px;
+	font-family:"Mulish";
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left:16px;
+  padding-right:16px;
+  padding-top:4px;
+  padding-bottom:4px;
+}
+
+.name{
+	width:80%;
+}
+
+.dash{
+	width:20%;
+}
+.distance{
+	width:20%;
+	text-align:center;
+}
+
+.butt{
+	width:100%;
+	font-size:14px;
+	font-family:"Mulish";
+}
+
+
+
