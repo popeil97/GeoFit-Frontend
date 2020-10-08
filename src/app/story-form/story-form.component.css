@@ -5,10 +5,11 @@
 	padding:8px 16px 8px 16px;
 	box-sizing: border-box;
 
+	/**
 	border-radius: 10px;
 	border:0.5px solid grey;
 	background-color:var(--input-background-color);
-	overflow:hidden;
+	overflow:hidden; **/
 
 	display:flex;
 	flex-direction: column;
@@ -22,7 +23,8 @@
 	overflow:auto;
 	border:none;
 	resize: none;
-	margin-bottom:8px;
+	margin-bottom:4px;
+	font-size:12px;
 }
 .StoryFormInput:hover {
 	outline:none;
@@ -39,11 +41,27 @@
 	align-items: center;
 	flex-wrap: nowrap;
 }
-	.StoryFormImageButton {
-		flex-grow:1;
-		flex-basis: 100px;
+
+.StoryFormEmojiToggleButton{
+	flex-grow:1;
+		flex-basis: 40px;
 		margin-left:8px;
+		font-size:12px;
+}
+	.StoryFormImageButton  {
+		flex-grow:1;
+		flex-basis: 40px;
+		margin-left:8px;
+		font-size:10px;
 	}
+
+	.StoryFormPostButton  {
+		flex-grow:1;
+		flex-basis: 170px;
+		margin-left:8px;
+		font-size:14px;
+	}
+
 .StoryFormInputEmojisButtonsContainer {
 	margin-bottom:8px;
 }
@@ -92,3 +110,16 @@ textarea {
 .material-icons{
   font-size:14px;
 }
+
+.StoryEmojisContainer {
+      position: absolute;
+      right:0;
+      top:100%;
+      width:max-content;
+      z-index: 2;
+
+      background-color:white;
+      padding:8px;
+      box-sizing: border-box;
+      border:0.5px solid black;
+    }

@@ -11,6 +11,11 @@
   flex-wrap: nowrap;
 }
 
+.textControl{
+  font-family:"Mulish";
+  font-size:12px;
+}
+
 .MapSidebar {
   position: relative;
   height:100%;
@@ -24,7 +29,7 @@
 }
 
 .MapSidebarWidthBig{
-  width:28%;
+  width:20%;
   min-width: 320px;
 }
 
@@ -32,13 +37,14 @@
    width:0%;
 }
   .MapHeaderContainer, .MapFeedContainer, .MapActionsContainer {
-    padding:16px;
+    padding:4px;
     box-sizing: border-box;
     background-color:white;
   }
 
     .LogContainer {
-    padding:12px;
+    padding:2px;
+    margin:4px;
     box-sizing: border-box;
     background-color:var(--tucan-green);
     color:white;
@@ -58,7 +64,7 @@
     text-align:center;
   }
   .MapHeaderContainer {
-    margin-bottom:12px;
+    margin-bottom:8px;
 
     display:flex;
     flex-direction: row;
@@ -68,7 +74,7 @@
   }
     .MapHeaderTitle {
       margin-bottom:0;
-      margin-right:8px;
+      margin-right:4px;
       overflow:hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -76,7 +82,6 @@
     .MapHeaderButtonsContainer {
       display:flex;
       flex-direction: row;
-      justify-content: center;
       align-items: center;
       flex-wrap: nowrap;
     }
@@ -103,22 +108,27 @@
       .MapFeedSlide, .MapLeaderboardSlide {
         flex-grow: 1;
         flex-basis: 0;
-      }
-      .MapFeedSlide {
-        display:flex;
+
         flex-direction: column;
         justify-content: flex-start;
         align-items: stretch;
         flex-wrap: nowrap;
       }
+      .SlideshowSlide.Slideshow-CurrentSlide.MapFeedSlide, .SlideshowSlide.Slideshow-CurrentSlide.MapLeaderboardSlide {
+        display:flex;
+      }
       .MapFeedInputContainer {
-        margin-bottom:16px;
+        margin-bottom:4px;
         
         display:flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: stretch;
         flex-wrap: nowrap;
+        border-bottom:1px solid var(--primary-darkgrey);;
+
+        background-color:var(--input-background-color);
+        overflow:hidden;
       }
         .MapFeedInputProfileContainer {
           flex-grow: 0;
@@ -135,6 +145,7 @@
           overflow:hidden;
 
           margin-right:8px;
+          margin-top:16px;
         }
         .MapFeedInputProfile {
           position: absolute;
@@ -249,11 +260,11 @@
 
  .searchContainer {
     position: absolute;
-    right: 50px;
+    right: 4px;
     top: 0;
 
     z-index: 500;
-    width: 19%;
+    width: 15%;
 
  }
 
@@ -311,5 +322,5 @@
 }
 
 .material-icons{
-  font-size:14px;
+  font-size:12px;
 }

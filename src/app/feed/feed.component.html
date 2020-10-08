@@ -19,10 +19,10 @@
                 <!-- NO STORY : FITNESS UPDATE -->
                 <div class='FeedMessageHeader'>
                   <p class='FeedMessageName'><app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav></p>
-                  <span class='h7'>{{ this.get_created_ts(element.created_ts) }}</span>
+                  <span class='small'>{{ this.get_created_ts(element.created_ts) }}</span>
                 </div>
                 <div class='FeedMessageContent'>
-                  <p class='margin-bottom-4px'>{{ element.message }}</p>
+                  <p>{{ element.message }}</p>
                 </div>
               </ng-template>
               <ng-template #FeedMessageIsStoryBlock>
@@ -30,8 +30,9 @@
                 <div class='FeedMessageHeader'>
                   <p class='FeedMessageName'><app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav></p>
                   <div class='FeedmessageOtherInfo'>
-                    <span class='h7 margin-right-4px'>{{ element.hot? '🔥🔥🔥' : ' ' }}</span>
-                    <span class='h7'>{{ this.get_created_ts(element.created_ts) }}</span>
+                    <span class='small margin-right-4px'>{{ element.hot? '🔥🔥🔥' : ' ' }}</span>
+                    <span class='small'>{{ this.get_created_ts(element.created_ts) }}</span>
+
                   </div>
                 </div>
                 <div class='FeedMessageContent'>
@@ -147,5 +148,3 @@
     <button paginate-button mat-button (click)="refreshFeed(null, true)">Load more...</button>
   </div>
 </div>
-
-

@@ -2,9 +2,14 @@
   position: relative;
   overflow-y:auto;
 }
+
+.small{
+  font-size:10px;
+  }
+
   .Feed { /* empty for now, just to show parenting of elements in this code */ }
     .FeedItem {
-      padding:8px;
+      padding:2px;
       box-sizing: border-box;
 
       display:flex;
@@ -12,6 +17,7 @@
       justify-content: flex-start;
       align-items: stretch;
       flex-wrap: nowrap;
+      font-size:12px;
     }
     .FeedItem:nth-child(2n) {
       background-color:#EBEBEB
@@ -78,6 +84,7 @@
             align-items: center;
             flex-wrap: nowrap;
           }
+
         .FeedMessageOptionsDropdown {
           position: relative;
         }

@@ -88,6 +88,15 @@ button.darkButton, .button.darkButton {
   color:white;
 }
 
+button.strippedWhite{
+  display:inline-block;
+  padding:1px;
+  border-width: 0px;
+  
+  background-color:white;
+  color: var(--primary-darkgrey);
+}
+
 button.orangeButton, .button.orangeButton {
   background-color: var(--tucan-orange);
   color:black;
@@ -326,7 +335,7 @@ h1.PageHeaderSegmentTitle {
   flex-grow:1;
   flex-basis: 32px;
 
-  margin-bottom:16px;
+  margin-bottom:12px;
 
   display:flex;
   flex-direction: row;
@@ -337,6 +346,8 @@ h1.PageHeaderSegmentTitle {
 .SlideshowButton {
   margin-right:8px;
   outline-width: 0;
+  font-family:"Mulish";
+  font-size:14px;
 }
 
 .SlideshowSlide {

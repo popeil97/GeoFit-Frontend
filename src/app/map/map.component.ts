@@ -103,6 +103,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     //console.log('getting user data')
     return this._raceService.getUserRacestats(raceID,page).then((data:any) =>{
       this.routeData[raceID].userData = data.users_data;
+      console.log("MAP USER DATA",data.users_data);
 
       this.loading = false;
     });
@@ -338,8 +339,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
     // });
 
     // tiles.addTo(this.map);
-
-    const tiles = L.tileLayer('http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    var map_tiles =  'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+    const tiles = L.tileLayer(map_tiles, {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
@@ -395,7 +396,10 @@ interface UserData {
   isMe: boolean,
   gender: string,
   age: number,
+
+  email:string,
   description: string,
+  location:string,
 }
 
 interface OrgPinData {

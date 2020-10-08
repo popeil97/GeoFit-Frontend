@@ -11,7 +11,7 @@
 				</div>
 			</div>
 
-			<button  class='LogContainer'  *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('custom-modal-5')" >LOG ACTIVITY</button>
+			<button  class='LogContainer' *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('custom-modal-5')" >LOG ACTIVITY </button>
 
 			<div class='MapActionsContainer' *ngIf="!this._authService.isLoggedIn() || !this.userRegistered">
 					<p class='color-white'>Join the race and become a participant!</p>
@@ -53,7 +53,7 @@
 							<div class='MapFeedMainContainer'>
 								<div class='MapFeedSettingsButtonContainer'>
 									<div class='MapFeedSettingsContainer'>
-										<button class="whiteButton smallButton" (click)="toggleOptions()"><span class="material-icons">filter_list</span></button>
+										<button class="strippedWhite" (click)="toggleOptions()"><span class="material-icons">filter_list</span></button>
 										<div *ngIf="feedOptions" class='MapFeedOptionsContainer'>
 											Only show people I follow
 											<input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/>

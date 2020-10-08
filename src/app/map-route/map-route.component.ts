@@ -172,14 +172,14 @@ export class MapRouteComponent implements OnChanges {
     }
     
     
-    var color = "blue";
+    var color = "#7FCC92";
 
     //Add each path to map independently
     _.forEach(temp_routes_flipped,(route) => {
       this.line = L.polyline(route,{
         color: color,
-        weight: 8,
-        opacity: 0.65
+        weight: 10,
+        opacity: 0.95
       }).addTo(this.map);
     });
 
@@ -694,7 +694,10 @@ interface UserData {
   isMe: boolean,
   gender: string,
   age: number,
+
+  email:string,
   description: string,
+  location:string,
 }
 
 interface OrgPinData {

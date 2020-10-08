@@ -1,14 +1,15 @@
 <div class='StoryFormInputContainer'>
 	<textarea class='StoryFormInput' #input id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="What's on your mind?" required></textarea>
 	<div class="StoryFormInputImageWrapper" *ngIf="storyImage">
+		<i class="material-icons" (click)="deletePic()">close</i>
 		<img [src]="this.storyImage" width="100px">
 	</div>
 	<div class='StoryFormInputExtraButtonsContainer'>
 		<button [ngClass]="{'darkButton':this.emojis,'lightButton':!this.emojis}" class='StoryFormEmojiToggleButton' (click)="toggleEmojis()">😊</button>
 		<button class='lightButton StoryFormImageButton italics' (click)="fileInput.click()">
-			<!--<span class="material-icons">portrait</span>-->
-			Upload image
+			<span class="material-icons">filter</span>
 		</button>
+		<button class='lightButton StoryFormPostButton' (click)="uploadStory()">POST</button>
 		<input #fileInput type="file" id="storyImage" name="storyImageField" (change)="onSelectFile($event)" style="display:none;" />
 	</div>
 </div>
@@ -19,10 +20,6 @@
 		</span>
 	</ng-template>
 </div>
-<div class='StoryFormInputSubmitButtonContainer'>
-	<button class='lightButton' (click)="uploadStory()">POST</button>
-</div>
-
 <!--
 	<div class="row">
 	<div class = "status-col">

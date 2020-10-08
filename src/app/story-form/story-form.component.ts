@@ -97,4 +97,9 @@ export class StoryFormComponent implements OnInit {
     this.logActivityEvent.emit("emitting");
   }
 
+  deletePic() {
+    //Clear uploaded file
+    this.storyImage = null;
+  }
+
 }

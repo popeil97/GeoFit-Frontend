@@ -17,6 +17,8 @@ export class UserFollowComponent implements OnInit {
 
   @Output() followStatusChanged: EventEmitter<void> = new EventEmitter();
 
+  @Input() wide:boolean;
+
   constructor(
     private _userService:UsersService,
     public cdRef: ChangeDetectorRef

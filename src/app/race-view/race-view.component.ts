@@ -390,7 +390,7 @@ export class RaceViewComponent implements OnInit,AfterViewInit {
     //console.log("to", to, this.acceptedScreens.indexOf(to));
     if (to == null || this.acceptedScreens.indexOf(to) == -1) return;
     this.currentScreen = to;
-
+    console.log("CURRENT SCREEN", this.currentScreen );
     document.getElementById(to+'-btn').style.backgroundColor = "#36343c";
     document.getElementById(to+'-btn').style.color = "#FFFFFF";
 

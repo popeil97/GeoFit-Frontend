@@ -1,16 +1,12 @@
 <form [formGroup]="commentForm">
   <input id="storyCommentCaption" class="form-control h7" type="text" placeholder="Write a comment.." formControlName="body" />
  <!--   <div *ngIf="this.emojis">
-		<span *ngFor="let element of this.acceptedEmojis"  layout="row" layout-align="center center">
-			<button (click)="addText(element)">{{element}}</button>
-		</span>
-	</div>
-
+    <span *ngFor="let element of this.acceptedEmojis"  layout="row" layout-align="center center">
+      <button (click)="addText(element)">{{element}}</button>
+    </span>
+  </div>
     <button (click)="toggleEmojis()">😁</button> -->
   <div class='PostContainer'>
     <button class='h7 lightButton' (click)="submitCommentForm()">Post</button>
   </div>
 </form>
-
-
-
