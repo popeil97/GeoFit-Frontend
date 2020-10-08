@@ -172,14 +172,14 @@ export class MapRouteComponent implements OnChanges {
     }
     
     
-    var color = "#7FCC92";
+    var color = "#36343C";
 
     //Add each path to map independently
     _.forEach(temp_routes_flipped,(route) => {
       this.line = L.polyline(route,{
         color: color,
-        weight: 10,
-        opacity: 0.95
+        weight: 8,
+        opacity: 0.8
       }).addTo(this.map);
     });
 
@@ -533,6 +533,7 @@ export class MapRouteComponent implements OnChanges {
   public createPin(userData: UserData, isTag: boolean=false){
     var img_html = "<img src=\"" + userData.profile_url + "\";\"><div class=\"pin\"></div><div class=\"pulse\"></div>";
 
+    
     var userIcon = L.divIcon({
       className: 'location-pin',
       html: img_html,
