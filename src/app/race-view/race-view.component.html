@@ -84,7 +84,7 @@
 		</div>
 		<div class='MapGreaterContainer'>
 			<app-map [raceIDs]="raceIDs" [displayUsers]="true" [followedIDs]="followedIDs" [zoom]="false"></app-map>
-			<div class="searchContainer"  *ngIf="this._authService.isLoggedIn() && this.userRegistered">
+			<div *ngIf="this._authService.isLoggedIn() && this.userRegistered"[ngClass]="{searchContainer: isOpen, searchContainerSmall: !isOpen}">
 				<app-search [raceID]="raceID"></app-search>
 			</div>
 			<div class="buttonContainer">

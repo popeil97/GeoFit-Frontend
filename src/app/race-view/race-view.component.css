@@ -260,9 +260,21 @@
     top: 0;
 
     z-index: 500;
-    width: 15%;
+    width: 18%;
 
  }
+
+ .searchContainerSmall {
+    position: absolute;
+    right: 4px;
+    top: 0;
+
+    z-index: 500;
+    width: 18%;
+    min-width:180px;
+
+ }
+
 
 .ActionsContainer {
     position: absolute;

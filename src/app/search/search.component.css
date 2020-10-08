@@ -13,15 +13,16 @@
 
 .followCol{
 	width:30%;
+  margin:2px;
 }
 
 .nameCol{
-	width:70%;
+	width:65%;
+  margin:2px;
 }
 .searchResult{
 	background-color:white;
-	border-bottom-width: 1px;
-	border-bottom-color: var(--slate-tint);
+  border-bottom: 1px solid var(--slate-tint);
 	margin-bottom:1px;
 	border-radius:3px;
 }
