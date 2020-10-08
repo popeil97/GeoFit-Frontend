@@ -3,11 +3,11 @@
   <ng-template #otherUserStats><h2>{{userData.first_name}}'s Stats</h2></ng-template>
 
   <ng-template [ngIf]='userStats!= null' [ngIfElse]="LoadingUserStatsBlock">
-      <div class="row">
-        <div class="stats-col">
+      <div class="UserStatsContentContainer">
+        <div class="UserStatsCanvasContainer">
           <canvas id="lineCharts"></canvas>
         </div>
-        <div class="table-col">
+        <div class="UserStatsTableContainer">
           <div class='Slideshow'>
             <div class="SlideshowHeader">
               <button class="SlideshowButton" (click)="SwitchSlideshow('run')" id="run-btn">Run</button>

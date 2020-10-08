@@ -53,11 +53,11 @@
 
   .buttonContainer {
     position: absolute;
-    left: 0;
-    top: 2px;
-
+    left: 8px;
+    top: 8px;
     z-index: 500;
- }
+  }
+    .MapFeedToggleButton {}
 
   .MapHeaderContainer, .MapActionsContainer {
     /* border-bottom:1px solid grey; */
@@ -185,7 +185,6 @@
   width:auto;
   height:100%;
 }
-
 .MapFeedSettingsButtonContainer {
   display:flex;
   flex-direction: row-reverse;

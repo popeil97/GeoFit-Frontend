@@ -1,3 +1,7 @@
+.StoryCommentInput {
+  font-size: var(--h7) !important;
+}
+
 .row {
   display: flex;
   flex-wrap: wrap;

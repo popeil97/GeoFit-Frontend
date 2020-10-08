@@ -15,6 +15,14 @@
   --input-background-color: #EBEBEB;
 
   --common-box-shadow: 0px 0px 5px 2px rgb(200,200,200);
+
+  --h1:64px;
+  --h2:33.75px;
+  --h3:26px;
+  --h4:24px;
+  --h5:22px;
+  --h6:20px;
+  --h7:12px;
 }
 
 /*

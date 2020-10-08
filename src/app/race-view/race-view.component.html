@@ -88,8 +88,10 @@
 				<app-search [raceID]="raceID"></app-search>
 			</div>
 			<div class="buttonContainer">
-				<button *ngIf="isOpen" (click)="toggleMenu()"><span class="material-icons">keyboard_arrow_left</span></button>
-				<button *ngIf="!isOpen" (click)="toggleMenu()"><span class="material-icons">keyboard_arrow_right</span></button>
+				<button class='lightButton MapFeedToggleButton' (click)="toggleMenu()">
+					<span *ngIf="isOpen" class="material-icons">keyboard_arrow_left</span>
+					<span *ngIf="!isOpen" class="material-icons">keyboard_arrow_right</span>
+				</button>
 			</div>
 		</div>
 	</div>

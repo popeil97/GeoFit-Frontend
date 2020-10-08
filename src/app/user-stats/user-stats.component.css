@@ -1,3 +1,21 @@
+.UserStatsContentContainer {
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+
+  .UserStatsCanvasContainer {
+    width:100%;
+  }
+/*
+  .UserStatsTableContainer {
+    width:35%;
+  }
+*/
+
+
 /* Create three equal columns that floats next to each other */
 .column {
   float: left;
@@ -115,12 +133,4 @@ th, td {
   padding: 6px 12px;
   border: 1px solid #ccc;
   border-top: none;
-}
-
-.stats-col {
-  width:60%;
-}
-
-.table-col {
-  width:35%;
 }
