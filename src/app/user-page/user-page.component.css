@@ -37,6 +37,9 @@
     .UserProfileUserInfoContainer p {
         margin-bottom:0;
     }
+    .UserProfileStravaContainer {
+        display:inline-block;
+    }
     .UserProfileActions {
         display:flex;
         flex-direction: row;
@@ -52,6 +55,7 @@
         margin-bottom:16px;
     }
         img.UserProfileImage {
+            display:block;
             width:100%;
             margin-bottom:16px;
         }
@@ -119,5 +123,42 @@
     .HomeContainer {
         flex-direction: column;
         align-items: stretch;
+    }
+}
+@media only screen and (max-width:600px) {
+    .UserProfileContainer {
+        flex-direction: column;
+    }
+    .UserProfileUserInfoContainer {
+        position: relative;
+        left:unset;
+        top:unset;
+        height:auto;
+        width:100%;
+    }
+        img.UserProfileImage {
+            width:50%;
+            min-width: 240px;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        .UserProfileName, .UserProfileEmail, .UserProfileDescription, .UserProfileLocation, .UserProfileStravaContent {
+            text-align:center;
+        }
+        .FollowersButton {
+            display:block;
+            margin-left:auto;
+            margin-right:auto;
+        }
+        .UserProfileActions {
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+        }
+        .UserProfileActions button {
+            margin-bottom:8px;
+        }
+    .UserProfileMainContentContainer {
+        padding-left:32px;
     }
 }
