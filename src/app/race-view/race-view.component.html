@@ -73,9 +73,9 @@
 							<app-route-select *ngIf="isHybrid && childRaceData.length > 0" [routes]="childRaceData" [title]="'Filter by Route'" (routeChanged)="setLeaderboardRouteFilter($event)"></app-route-select>
 							<button class="whiteButton"  *ngIf="isHybrid && childRaceData.length > 0" (click)="openModal('route-info')">What does this mean?</button>
 
-							<app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
-							<app-leaderboard *ngIf="selectedTagFilterID != 0 && raceSettings.allowTeams" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
-							<app-hybrid-leaderboard *ngIf="isHybrid" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard>
+							<!-- <app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard> -->
+							<!-- <app-leaderboard *ngIf="selectedTagFilterID != 0 && raceSettings.allowTeams" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard> -->
+							<!-- <app-hybrid-leaderboard *ngIf="isHybrid" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard> -->
 						</div>
 					</div>
 					

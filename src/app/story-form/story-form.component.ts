@@ -17,7 +17,7 @@ export class StoryFormComponent implements OnInit {
 
   private storyText: string;
 
-  private storyImage:any;
+  public storyImage:any;
 
   public acceptedEmojis = ['😁','😊','🤪','😂','🥳','😲','😉','😭',
                            '🤟','💪','👏','❤️','🔥','🍻','🏃‍','🏃‍♀️',
