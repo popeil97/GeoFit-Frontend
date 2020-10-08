@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList, AfterViewChecked, AfterViewInit } from '@angular/core';
 import * as bootstrap from "bootstrap";
 import { RaceService } from '../race.service';
 import { StoryService } from '../story.service'
@@ -19,6 +19,8 @@ import { ModalService } from '../modalServices';
 declare var $: any;
 import * as _ from 'lodash';
 import { TagType, Tag } from '../tags.service';
+import { RouteSelectComponent } from '../route-select/route-select.component';
+import { HybridLeaderboardComponent } from '../hybrid-leaderboard/hybrid-leaderboard.component';
 
 
 @Component({
@@ -26,7 +28,7 @@ import { TagType, Tag } from '../tags.service';
   templateUrl: './race-view.component.html',
   styleUrls: ['./race-view.component.css'],
 })
-export class RaceViewComponent implements OnInit {
+export class RaceViewComponent implements OnInit,AfterViewInit {
   @ViewChild(MapComponent) mapChild: MapComponent;
   @ViewChild(FeedComponent) feedChild: FeedComponent;
   @ViewChild(StoryModalComponent) storyModal: StoryModalComponent;
@@ -46,7 +48,7 @@ export class RaceViewComponent implements OnInit {
 
   //Info of all child races if present (else just parent race)
   public childRaceData: ChildRaceData[] = [];
-  public leaderboardRouteFilter: ChildRaceData = {id:this.raceID,name:"All"};
+  public leaderboardRouteFilter: ChildRaceData = {id:null,name:"Null"};
 
   //Current race ID selected by user. If race has no children, this always equals
   //ID of parent race
@@ -132,6 +134,11 @@ export class RaceViewComponent implements OnInit {
     document.getElementById('feed-btn').style.backgroundColor = "#36343c";
     document.getElementById('feed-btn').style.color = "#FFFFFF";
   }
+
+  ngAfterViewInit(): void {
+    this.setLeaderboardRouteFilter({id:this.raceID,name:'All'});
+  }
+
   newStoryPosted(event: any) {
     console.log("new story");
     this.feedChild.refreshFeed();
@@ -206,7 +213,7 @@ export class RaceViewComponent implements OnInit {
 
   setLeaderboardRouteFilter(route:ChildRaceData) {
     this.leaderboardRouteFilter = route;
-  //   console.log('ROTUE CHANGED TO ', this.leaderboardRouteFilter);
+    console.log('ROTUE CHANGED TO ', this.leaderboardRouteFilter);
   }
 
   setLeaderboardTagID(tagFilterStruct:any): void {
