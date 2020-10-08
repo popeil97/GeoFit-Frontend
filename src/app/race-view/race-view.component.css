@@ -110,11 +110,14 @@
         flex-basis: 0;
       }
       .MapFeedSlide {
-        display:flex;
+        display:none;
         flex-direction: column;
         justify-content: flex-start;
         align-items: stretch;
         flex-wrap: nowrap;
+      }
+      .SlideshowSlide.Slideshow-CurrentSlide.MapFeedSlide, .SlideshowSlide.Slideshow-CurrentSlide.MapLeaderboardSlide {
+        display:flex;
       }
       .MapFeedInputContainer {
         margin-bottom:4px;
