@@ -71,7 +71,7 @@ background: linear-gradient(90deg, rgba(56,56,56,1) 0%, rgba(226,221,215,1) 100%
 }
 
 .NumCol{
-  width:10%;
+  width:8%;
   padding:10px;
 }
 .PicCol{
@@ -79,7 +79,7 @@ background: linear-gradient(90deg, rgba(56,56,56,1) 0%, rgba(226,221,215,1) 100%
   padding:10px;
 }
 .NameCol{
-  width:30%;
+  width:35%;
   padding:10px;
 }
 .DistanceCol{

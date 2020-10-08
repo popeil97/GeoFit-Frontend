@@ -169,7 +169,7 @@
         align-items: stretch;
         flex-wrap: nowrap;
       }
-        .MapFeed {
+        .MapFeed , .LeaderboardFeed{
           flex-grow: 1;
           flex-basis: 0;
 
