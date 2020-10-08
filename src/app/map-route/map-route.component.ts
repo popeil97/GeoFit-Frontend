@@ -178,8 +178,8 @@ export class MapRouteComponent implements OnChanges {
     _.forEach(temp_routes_flipped,(route) => {
       this.line = L.polyline(route,{
         color: color,
-        weight: 8,
-        opacity: 0.65
+        weight: 10,
+        opacity: 0.95
       }).addTo(this.map);
     });
 
