@@ -36,9 +36,9 @@ export class CommentsFormComponent implements OnInit {
 
   addText(element:any)
   {
-    this.storyText = (<HTMLInputElement>document.getElementById("storyCommentCaption")).value;
+    this.storyText = (<HTMLInputElement>document.getElementById("storyCommentCaption"+this.storyID)).value;
     console.log("STRY",this.storyText);
-    (<HTMLInputElement>document.getElementById("storyCommentCaption")).value = this.storyText + element;
+    (<HTMLInputElement>document.getElementById("storyCommentCaption"+this.storyID)).value = this.storyText + element;
   }
   toggleEmojis()
   {

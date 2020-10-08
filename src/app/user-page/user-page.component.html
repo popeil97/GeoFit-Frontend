@@ -13,36 +13,41 @@
         </div>
 
          <div *ngIf="this._authService.isLoggedIn()" class='margin-bottom-16px'>
-          <div *ngIf="userData.is_me">
-            <button class='darkButton shadowButton' (click)="openFollowersDialog()">Followers: {{this.followersData.numFollowers}} | Following: {{this.followersData.numFollowing}}</button>
+          <ng-template [ngIf]="userData.is_me">
+            <button class='darkButton shadowButton FollowersButton' (click)="openFollowersDialog()">Followers: {{this.followersData.numFollowers}} | Following: {{this.followersData.numFollowing}}</button>
             <!--<app-view-follow></app-view-follow>-->
-          </div>
+          </ng-template>
         </div>
 
         <div *ngIf="userData.about_visibility||userData.location_visibility||userData.is_me" class='margin-bottom-16px'>
-          <div *ngIf="this.userData.about_visibility || userData.is_me ">
+          <ng-template [ngIf]="this.userData.about_visibility || userData.is_me">
             <ng-template [ngIf]="this.userData.description!='N/A'" [ngIfElse]="descriptionDefault">
               <p class="h7 UserProfileDescription"><span *ngIf="!this.userData.about_visibility">(hidden) </span>{{this.userData.description}}</p> 
             </ng-template>
-            <ng-template #descriptionDefault><p class='italics h7'>No description available</p></ng-template>
-          </div>
-          <div *ngIf="userData.location_visibility || userData.is_me ">
+            <ng-template #descriptionDefault>
+              <p class='italics h7 UserProfileDescription'>No description available</p>
+            </ng-template>
+          </ng-template>
+          <ng-template [ngIf]="userData.location_visibility || userData.is_me ">
             <ng-template [ngIf]="userData.location != 'N/A'" [ngIfElse]="locationDefault">
-              <p class='h7'><span *ngIf="!this.userData.location_visibility">(hidden) </span>{{ userData.location }}</p>  
+              <p class='h7 UserProfileLocation'>
+                <span *ngIf="!this.userData.location_visibility">(hidden) </span>
+                {{ userData.location }}
+              </p>  
             </ng-template>
             <ng-template #locationDefault>
-              <span class='italics h7'>No location info available</span>
+              <p class='italics h7 UserProfileLocation'>No location info available</p>
             </ng-template>
-          </div>
+          </ng-template>
         </div>
 
-        <div *ngIf="this._authService.isLoggedIn()" class='margin-bottom-16px'>
-          <div *ngIf="userData.is_me">
-            <div>
-              <h6>Strava Authentication</h6>
+        <div *ngIf="this._authService.isLoggedIn()" class='UserProfileStravaContent margin-bottom-16px'>
+          <ng-template [ngIf]="userData.is_me">
+            <h6 class='UserProfileStravaHeader'>Strava Authentication</h6>
+            <div class='UserProfileStravaContainer'>
               <app-stravauth></app-stravauth>
             </div>
-          </div>
+          </ng-template>
         </div>
         <div *ngIf="!userData.is_me" >
           <app-user-follow [tempLight]="true" [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
@@ -60,7 +65,7 @@
 
       <div class='UserProfileActions' *ngIf="userData != null && this._authService.isLoggedIn() && userData.is_me">
         <button class="darkButton" (click)="openModal('profileModal')" >Edit</button>
-        <a class="button darkButton" (click)="logout()">Log out</a>
+        <button class="darkButton" (click)="logout()">Log out</button>
       </div>
 
     </div>

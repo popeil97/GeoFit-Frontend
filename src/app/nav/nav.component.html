@@ -1,22 +1,11 @@
-<nav 
-  class="navbar navbar-expand-lg navbar-light" 
->
-  <button 
-    class="TucanNavigationToggler"
-    (click)="ToggleNavigation()"
-  >
+<nav class="navbar navbar-expand-lg navbar-light">
+  <button class="lightButton TucanNavigationToggler" (click)="ToggleNavigation()">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div 
-    class="TucanNavigationContents"
-    [ngClass]="navigationOpen ? 'open' : ''"
-  >
+  <div class="TucanNavigationContents" [ngClass]="navigationOpen ? 'open' : ''">
     <div class='TucanContainer'>
-      <div 
-        class="TucanNavigationBlackTransparent"
-        (click)="ToggleNavigation()"
-      ></div>
+      <div class="TucanNavigationBlackTransparent" (click)="ToggleNavigation()"></div>
       <div class="TucanNavigationButtons">
         <div class="TucanNavigationButtonSegment">
           <div class='NavItem'>

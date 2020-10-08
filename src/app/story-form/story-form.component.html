@@ -1,8 +1,10 @@
 <div class='StoryFormInputContainer'>
 	<textarea class='StoryFormInput' #input id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="What's on your mind?" required></textarea>
 	<div class="StoryFormInputImageWrapper" *ngIf="storyImage">
-		<i class="material-icons" (click)="deletePic()">close</i>
-		<img [src]="this.storyImage" width="100px">
+		<img [src]="this.storyImage" class='StoryFormInputImagePreview'>
+		<div class='button darkButton StoryFormInputImageDeleteButton'>
+			<span class="material-icons" (click)="deletePic()">close</span>
+		</div>
 	</div>
 	<div class='StoryFormInputExtraButtonsContainer'>
 		<button [ngClass]="{'darkButton':this.emojis,'lightButton':!this.emojis}" class='StoryFormEmojiToggleButton' (click)="toggleEmojis()">😊</button>

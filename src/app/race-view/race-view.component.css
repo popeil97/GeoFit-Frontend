@@ -37,7 +37,7 @@
    width:0%;
 }
   .MapHeaderContainer, .MapFeedContainer, .MapActionsContainer {
-    padding:4px;
+    padding:8px;
     box-sizing: border-box;
     background-color:white;
   }
@@ -53,11 +53,11 @@
 
   .buttonContainer {
     position: absolute;
-    left: 0;
-    top: 2px;
-
+    left: 8px;
+    top: 8px;
     z-index: 500;
- }
+  }
+    .MapFeedToggleButton {}
 
   .MapHeaderContainer, .MapActionsContainer {
     /* border-bottom:1px solid grey; */
@@ -117,17 +117,15 @@
       .SlideshowSlide.Slideshow-CurrentSlide.MapFeedSlide, .SlideshowSlide.Slideshow-CurrentSlide.MapLeaderboardSlide {
         display:flex;
       }
-      .MapFeedInputContainer {
-        margin-bottom:4px;
-        
+      .MapFeedInputContainer {        
         display:flex;
         flex-direction: row;
         justify-content: flex-start;
         align-items: stretch;
         flex-wrap: nowrap;
-        border-bottom:1px solid var(--primary-darkgrey);;
-
-        background-color:var(--input-background-color);
+        padding:8px;
+        box-sizing: border-box;
+        border-bottom:1px solid var(--primary-lightgrey);;
         overflow:hidden;
       }
         .MapFeedInputProfileContainer {
@@ -145,7 +143,6 @@
           overflow:hidden;
 
           margin-right:8px;
-          margin-top:16px;
         }
         .MapFeedInputProfile {
           position: absolute;
@@ -169,7 +166,7 @@
         align-items: stretch;
         flex-wrap: nowrap;
       }
-        .MapFeed {
+        .MapFeed , .LeaderboardFeed{
           flex-grow: 1;
           flex-basis: 0;
 
@@ -188,7 +185,6 @@
   width:auto;
   height:100%;
 }
-
 .MapFeedSettingsButtonContainer {
   display:flex;
   flex-direction: row-reverse;
