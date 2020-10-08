@@ -108,9 +108,7 @@
       .MapFeedSlide, .MapLeaderboardSlide {
         flex-grow: 1;
         flex-basis: 0;
-      }
-      .MapFeedSlide {
-        display:none;
+
         flex-direction: column;
         justify-content: flex-start;
         align-items: stretch;
