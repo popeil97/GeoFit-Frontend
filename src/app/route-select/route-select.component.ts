@@ -7,7 +7,7 @@ import { ChildRaceData } from '../race-view/race-view.component';
   templateUrl: './route-select.component.html',
   styleUrls: ['./route-select.component.css']
 })
-export class RouteSelectComponent implements OnInit,OnChanges {
+export class RouteSelectComponent implements OnInit {
 
   @Input() routes:ChildRaceData[] = [];
   @Input() title:string;
@@ -17,26 +17,20 @@ export class RouteSelectComponent implements OnInit,OnChanges {
 
   constructor() { }
 
-  ngOnChanges(changes: SimpleChanges) {
-    for(const propName in changes) {
-      if(changes.hasOwnProperty(propName)) {
-        switch(propName) {
-          case 'routes':
-            if (changes.routes.currentValue != changes.routes.previousValue){
-              this.initializeRouteSelect();
-            }
-        }
-      }
-    }
-  }
+  // ngOnChanges(changes: SimpleChanges) {
+  //   for(const propName in changes) {
+  //     if(changes.hasOwnProperty(propName)) {
+  //       switch(propName) {
+  //         case 'routes':
+  //           if (this.routes == null){
+  //             this.getMapData();
+  //           }
+  //       }
+  //     }
+  //   }
+  // }
 
   ngOnInit() {
-  }
-
-  initializeRouteSelect() {
-    let all = this.routes.filter(route => route.name == 'All') as any;
-    this.onRouteSelect(all);
-    console.log('INITIALIZE SELECT:',all);
   }
 
   onRouteSelect(route:ChildRaceData) {
