@@ -172,7 +172,7 @@ export class MapRouteComponent implements OnChanges {
     }
     
     
-    var color = "blue";
+    var color = "#7FCC92";
 
     //Add each path to map independently
     _.forEach(temp_routes_flipped,(route) => {

@@ -339,8 +339,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
     // });
 
     // tiles.addTo(this.map);
-
-    const tiles = L.tileLayer('http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    var map_tiles =  'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+    const tiles = L.tileLayer(map_tiles, {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });

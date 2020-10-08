@@ -11,7 +11,7 @@
 				</div>
 			</div>
 
-			<button  class='LogContainer' style="border-radius:0px;"  *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('custom-modal-5')" >LOG ACTIVITY </button>
+			<button  class='LogContainer' *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('custom-modal-5')" >LOG ACTIVITY </button>
 
 			<div class='MapActionsContainer' *ngIf="!this._authService.isLoggedIn() || !this.userRegistered">
 					<p class='color-white'>Join the race and become a participant!</p>

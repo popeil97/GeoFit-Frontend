@@ -335,7 +335,7 @@ h1.PageHeaderSegmentTitle {
   flex-grow:1;
   flex-basis: 32px;
 
-  margin-bottom:16px;
+  margin-bottom:12px;
 
   display:flex;
   flex-direction: row;
@@ -346,6 +346,8 @@ h1.PageHeaderSegmentTitle {
 .SlideshowButton {
   margin-right:8px;
   outline-width: 0;
+  font-family:"Mulish";
+  font-size:14px;
 }
 
 .SlideshowSlide {

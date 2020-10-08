@@ -1,20 +1,36 @@
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin:10px;
+  margin:2px;
+  font-family:"Mulish";
+  font-size:12px;
+}
+
+.textInput{
+  font-family:"Mulish";
+  font-size:12px;
 }
 
 .followCol{
-	width:35%;
-	padding:15px;
+	width:30%;
 }
 
 .nameCol{
-	width:65%;
-	padding:15px;
+	width:70%;
 }
 .searchResult{
 	background-color:white;
 	border-bottom-width: 1px;
 	border-bottom-color: var(--slate-tint);
+	margin-bottom:1px;
+	border-radius:3px;
+}
+
+.form-control + button  {
+    position: absolute;
+    left: -32px;
+    top: 5px;
+    border: 0;
+    background-color: transparent;
+    box-shadow: none;
 }

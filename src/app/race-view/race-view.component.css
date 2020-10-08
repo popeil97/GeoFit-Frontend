@@ -11,6 +11,11 @@
   flex-wrap: nowrap;
 }
 
+.textControl{
+  font-family:"Mulish";
+  font-size:12px;
+}
+
 .MapSidebar {
   position: relative;
   height:100%;
@@ -24,7 +29,7 @@
 }
 
 .MapSidebarWidthBig{
-  width:28%;
+  width:20%;
   min-width: 320px;
 }
 
@@ -38,7 +43,8 @@
   }
 
     .LogContainer {
-    padding:8px;
+    padding:2px;
+    margin:4px;
     box-sizing: border-box;
     background-color:var(--tucan-green);
     color:white;
@@ -118,6 +124,10 @@
         justify-content: flex-start;
         align-items: stretch;
         flex-wrap: nowrap;
+        border-bottom:1px solid var(--primary-darkgrey);;
+
+        background-color:var(--input-background-color);
+        overflow:hidden;
       }
         .MapFeedInputProfileContainer {
           flex-grow: 0;
@@ -134,6 +144,7 @@
           overflow:hidden;
 
           margin-right:8px;
+          margin-top:16px;
         }
         .MapFeedInputProfile {
           position: absolute;
@@ -248,11 +259,11 @@
 
  .searchContainer {
     position: absolute;
-    right: 50px;
+    right: 4px;
     top: 0;
 
     z-index: 500;
-    width: 19%;
+    width: 15%;
 
  }
 
