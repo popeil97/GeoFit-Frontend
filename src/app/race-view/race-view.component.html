@@ -50,22 +50,20 @@
 									<app-story-form  [raceID]="raceID" (logActivityEvent)="logActivity($event)" (storyPostedEvent)="newStoryPosted($event)"></app-story-form>
 								</div>
 							</div>
-							<div class='MapFeedMainContainer'>
-								<div class='MapFeedSettingsButtonContainer'>
-									<div class='MapFeedSettingsContainer'>
-										<button class="strippedWhite" (click)="toggleOptions()"><span class="material-icons">filter_list</span></button>
-										<div *ngIf="feedOptions" class='MapFeedOptionsContainer'>
-											Only show people I follow
-											<input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/>
-											<br>
-											Only show stories
-											<input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/>
-										</div>
+							<div class='MapFeedSettingsButtonContainer'>
+								<div class='MapFeedSettingsContainer'>
+									<button class="strippedWhite h7" (click)="toggleOptions()">Filter Chat <span class="material-icons">filter_list</span></button>
+									<div *ngIf="feedOptions" class='MapFeedOptionsContainer'>
+										Only show people I follow
+										<input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/>
+										<br>
+										Only show stories
+										<input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/>
 									</div>
 								</div>
-								<div class='MapFeed'>
-									<app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
-								</div>	
+							</div>
+							<div class='MapFeed'>
+								<app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
 							</div>
 						</div>
 						
