@@ -38,7 +38,7 @@ export class RaceViewComponent implements OnInit,AfterViewInit {
   public activities:any[];
   public num_activities:any;
 
-  private raceName:string;
+  public raceName:string;
 
   //Parent race ID
   raceID:number;
