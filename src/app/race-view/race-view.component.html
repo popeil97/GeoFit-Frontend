@@ -54,11 +54,8 @@
 							<div class='MapFeedSettingsContainer'>
 								<button class="strippedWhite h7" (click)="toggleOptions()">Filter Chat <span class="material-icons">filter_list</span></button>
 								<div *ngIf="feedOptions" class='MapFeedOptionsContainer'>
-									Only show people I follow
-									<input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/>
-									<br>
-									Only show stories
-									<input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/>
+									<p class="textControl">Only show people I follow <input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/></p>
+									<p class="textControl">Only show stories <input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/> </p>
 								</div>
 							</div>
 						</div>
@@ -73,9 +70,9 @@
 							<app-route-select *ngIf="isHybrid && childRaceData.length > 0" [routes]="childRaceData" [title]="'Filter by Route'" (routeChanged)="setLeaderboardRouteFilter($event)"></app-route-select>
 							<button class="whiteButton"  *ngIf="isHybrid && childRaceData.length > 0" (click)="openModal('route-info')">What does this mean?</button>
 
-							<!-- <app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard> -->
-							<!-- <app-leaderboard *ngIf="selectedTagFilterID != 0 && raceSettings.allowTeams" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard> -->
-							<!-- <app-hybrid-leaderboard *ngIf="isHybrid" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard> -->
+							<app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard> 
+							<app-leaderboard *ngIf="selectedTagFilterID != 0 && raceSettings.allowTeams" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
+							<app-hybrid-leaderboard *ngIf="isHybrid" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard>
 						</div>
 					</div>
 					

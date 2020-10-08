@@ -332,3 +332,18 @@
 .material-icons{
   font-size:12px;
 }
+
+
+
+.box {
+  background: #666666;
+  color: #ffffff;
+  width: 250px;
+  padding: 10px;
+  margin: 1em auto;
+}
+p {
+  margin: 1.5em 0;
+  padding: 0;
+}
+

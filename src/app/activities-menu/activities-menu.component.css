@@ -1,13 +1,19 @@
 .activitiesTable {
     width: 100%;
+    font-size:12px;
+    font-family:"Mulish";
 }
 
+.textControl{
+  font-size:14px;
+    font-family:"Mulish";
+}
 .mat-row:hover {
- background-color:cyan;
+ background-color:var(--tucan-green);
 }
 
 .highlight{
-    background: cyan;
+    background: var(--tucan-green);
   }
 
   .table-container {

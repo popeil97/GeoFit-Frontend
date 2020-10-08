@@ -2,7 +2,7 @@
     <div class="row">
        <div class = "winner-column-lowered" *ngIf="leaderboard.length >= 2">
         <p><b>🥈</b><img class = "twoImage" src="{{leaderboard[1].profile_url}}" width="30" height="30">
-          <br>
+          
           <app-user-profile-nav [username]="leaderboard[1].username" [displayName]="leaderboard[1].display_name" [nameBreak]="true"></app-user-profile-nav>
            <i>{{leaderboard[1].total_distance}} {{leaderboard[1].distance_type}}</i><br>
            <app-user-follow [userID]=leaderboard[1].user_id [follows]=leaderboard[1].follows></app-user-follow>
@@ -11,7 +11,7 @@
 
       <div class = "winner-column" *ngIf="leaderboard.length >= 1">
         <p><b>🥇</b><img class = "oneImage" src="{{leaderboard[0].profile_url}}" width="30" height="30">
-          <br>
+          
           <app-user-profile-nav [username]="leaderboard[0].username" [displayName]="leaderboard[0].display_name" [nameBreak]="true"></app-user-profile-nav>
            <i>{{leaderboard[0].total_distance}} {{leaderboard[0].distance_type}}</i><br>
            <app-user-follow [userID]=leaderboard[0].user_id [follows]=leaderboard[0].follows></app-user-follow>
@@ -20,7 +20,7 @@
 
       <div class = "winner-column-lowered" *ngIf="leaderboard.length >= 3">
         <p><b>🥉</b><img class = "threeImage" src="{{leaderboard[2].profile_url}}" width="30" height="30">
-          <br>
+          
           <app-user-profile-nav [username]="leaderboard[2].username" [displayName]="leaderboard[2].display_name"  [nameBreak]="true"></app-user-profile-nav>
           <i>{{leaderboard[2].total_distance}} {{leaderboard[2].distance_type}}</i><br>
            <app-user-follow [userID]=leaderboard[2].user_id [follows]=leaderboard[2].follows></app-user-follow>
@@ -41,7 +41,7 @@
                 <b>{{i+1}}</b>
               </div>
               <div class="PicCol">
-                <img src="{{group.profile_url}}" width="30" height="30">
+                <img src="{{group.profile_url}}" width="30" height="30" class="roundImg">
               </div>
               <div class="NameCol">
                 <app-user-profile-nav [username]="group.username" [displayName]="group.display_name"></app-user-profile-nav>
@@ -87,7 +87,6 @@
 <!--
   <mat-accordion >
     <div *ngFor="let group of leaderboard; let i=index">
-
       <div *ngIf="i%2==0">
       <mat-expansion-panel [disabled]="!group.isTeam">
         <mat-expansion-panel-header>
@@ -126,16 +125,13 @@
             <app-user-follow [userID]=group.user_id [follows]=group.follows *ngIf="allowFollow"></app-user-follow>
           </div>
        </mat-expansion-panel-header>
-
        <mat-card *ngFor="let member of group.child_user_stats">
         <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + member.profile_url + ')'}" style="position: relative; float:left;"></div>
         <div style="padding-left: 50px;">{{member.display_name}}</div>
         <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div>
       </mat-card>
-
       </mat-expansion-panel>
     </div>
-
     <div *ngIf="i%2==1">
       <mat-expansion-panel [disabled]="!group.isTeam">
         <mat-expansion-panel-header>
@@ -174,23 +170,17 @@
             <app-user-follow [userID]=group.user_id [follows]=group.follows></app-user-follow>
           </div>
        </mat-expansion-panel-header>
-
        <mat-card *ngFor="let member of group.child_user_stats">
         <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + member.profile_url + ')'}" style="position: relative; float:left;"></div>
         <div style="padding-left: 50px;">{{member.display_name}}</div>
         <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div>
       </mat-card>
-
       </mat-expansion-panel>
     </div>
-
     </div>
-
     <span class="link" style="display:table;
     margin:0 auto;" (click)="getNextLeaderboardPage()">Show More</span>
   </mat-accordion>
-
-
 -->
   <!-- 
  <mat-accordion>
@@ -214,13 +204,7 @@
           <div style="padding-left: 50px;">{{member.display_name}}</div>
           <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div>
         </mat-card>
-
       </mat-expansion-panel>
-
-
-
     </div>
   <mat-accordion>
-
-
   -->
