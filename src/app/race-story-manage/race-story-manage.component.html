@@ -2,6 +2,10 @@
   <h2>Reported Stories</h2>
 
   <div class="table-container ex3" style="overflow:hidden;">
+
+      <div *ngIf="!this.reportedStories.length">
+        If a user in this race reports a story, it will appear here for you to review and take action. You will be able to either delete the post or close the case.
+      </div>
   
       <table mat-table [dataSource]="reportedStories" class="feedTable">
         

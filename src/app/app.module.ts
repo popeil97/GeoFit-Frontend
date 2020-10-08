@@ -123,6 +123,7 @@ import { StoryFormStandaloneComponent } from './story-form-standalone/story-form
 import { MapSettingsComponent } from './map-settings/map-settings.component';
 import { SearchComponent } from './search/search.component';
 import { RouteInfoComponent } from './route-info/route-info.component';
+import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/race-dashboard-racer-list.component';
 
 
 @NgModule({
@@ -224,6 +225,7 @@ import { RouteInfoComponent } from './route-info/route-info.component';
     MapSettingsComponent,
     SearchComponent,
     RouteInfoComponent,
+    RaceDashboardRacerListComponent,
       ],
 
   imports: [
