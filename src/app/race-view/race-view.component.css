@@ -117,9 +117,7 @@
       .SlideshowSlide.Slideshow-CurrentSlide.MapFeedSlide, .SlideshowSlide.Slideshow-CurrentSlide.MapLeaderboardSlide {
         display:flex;
       }
-      .MapFeedInputContainer {
-        margin-bottom:4px;
-        
+      .MapFeedInputContainer {        
         display:flex;
         flex-direction: row;
         justify-content: flex-start;
