@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+/*
 @font-face {
 	font-family:Mulish;
 	src:url(./fonts/Mulish/Mulish-Regular.ttf);
@@ -11,6 +12,7 @@
 	font-family:Mulish-Bold;
 	src:url(./fonts/Mulish/Mulish-Bold.ttf);
 }
+*/
 
 :root {
   --partial_mobile_width: 992px;
@@ -365,7 +367,6 @@ h1.PageHeaderSegmentTitle {
 .SlideshowButton {
   margin-right:8px;
   outline-width: 0;
-  font-family:"Mulish";
   font-size:14px;
 }
 
