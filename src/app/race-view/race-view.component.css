@@ -226,6 +226,22 @@
   margin-left: -15px;
 }
 
+.routeRow {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.routeCol{
+  width:70%;
+}
+.qCol{
+  padding-top:10px;
+  width:30%;
+  align-content: left;
+}
+
+
+
 .titleCol{
   width:60%;
 }

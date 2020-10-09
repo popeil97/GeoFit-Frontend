@@ -67,8 +67,17 @@
 					<div class="SlideshowSlide MapLeaderboardSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'leaderboard'}">
 						<div class='LeaderboardFeed'>
 							<app-tag-select *ngIf="hasEntryTags && !isHybrid" [raceID]="raceID" [tagType]="entryTagType" [hasAll]="true" [title]="'Filter by Org'" (emitState)="setLeaderboardTagID($event)"></app-tag-select>
-							<app-route-select *ngIf="isHybrid && childRaceData.length > 0" [routes]="childRaceData" [title]="'Filter by Route'" (routeChanged)="setLeaderboardRouteFilter($event)"></app-route-select>
-							<button class="whiteButton"  *ngIf="isHybrid && childRaceData.length > 0" (click)="openModal('route-info')">What does this mean?</button>
+
+							<div class="routeRow" *ngIf="isHybrid && childRaceData.length > 0">
+								<div class="routeCol">
+									<app-route-select  [routes]="childRaceData" [title]="'Filter by Route'" (routeChanged)="setLeaderboardRouteFilter($event)"></app-route-select>
+								</div>
+								<div class="qCol">
+									<button class="whiteButton smallButton" (click)="openModal('route-info')">?</button>
+								</div>
+							</div>
+							
+							
 
 							<app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard> 
 							<app-leaderboard *ngIf="selectedTagFilterID != 0 && raceSettings.allowTeams" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>

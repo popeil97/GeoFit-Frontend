@@ -113,6 +113,11 @@ span:hover{
   font-size:12px;
 }
 
+.textControl{
+   font-size:12px;
+   font-family:"Mulish";
+}
+
 .LeaderboardGold{
   display:block;
   /*
