@@ -7,15 +7,12 @@ import { RaceCreateComponent } from './race-create/race-create.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { RaceAboutComponent } from './race-about/race-about.component';
 import { TeamFormComponent } from './team-form/team-form.component';
-import { RegisterComponent } from './register/register.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
-import { SmilesComponent } from './smiles/smiles.component';
-import { LoginComponent } from './login/login.component';
 import { PasswordRequestComponent } from './password-request/password-request.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { RaceDashboardComponent } from './race-dashboard/race-dashboard.component';
 import {WelcomeComponent} from './welcome/welcome.component'
-import {AboutTucanComponent} from './about-tucan/about-tucan.component'
+import {AboutTucanPageComponent} from './about-tucan-page/about-tucan-page.component'
 import {FaqPageComponent} from './faq-page/faq-page.component'
 import {ContactPageComponent} from './contact-page/contact-page.component'
 import { SwagListComponent } from './swag-list/swag-list.component';
@@ -31,16 +28,13 @@ const routes: Routes = [
   {path: 'profile',component:UserPageComponent},
   {path: 'about',component:RaceAboutComponent},
   {path: 'teams',component:TeamFormComponent},
-  {path: 'register', component:RegisterComponent},
   {path: 'shipping', component:ShippingAddressComponent },
-  {path: 'smiles', component:SmilesComponent },
-  {path: 'login', component:LoginComponent },
   {path: 'password-request', component:PasswordRequestComponent},
   {path: 'password-change', component:PasswordChangeComponent},
   {path: 'test',component:PaypalComponent},
   {path: 'dashboard', component:RaceDashboardComponent },
   {path: 'welcome', component:WelcomeComponent},
-  {path: 'about-tucan', component:AboutTucanComponent},
+  {path: 'about-tucan', component:AboutTucanPageComponent},
   {path: 'faqs', component:FaqPageComponent},
   {path: 'contact', component:ContactPageComponent},
   {path: 'search', component:SearchComponent},

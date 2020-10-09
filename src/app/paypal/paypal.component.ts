@@ -1,5 +1,4 @@
 import { Component, AfterViewChecked, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
-import { SignupCallbackStruct } from '../signup/signup.component';
 import { PaymentsService, Payment, PaymentType } from '../payments.service';
 declare let paypal: any;
 
