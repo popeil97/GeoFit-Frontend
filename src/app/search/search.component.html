@@ -6,7 +6,7 @@
     <button type="submit"><span class="material-icons">search</span></button>
   </div>
 
-       <div *ngFor="let option of searchResults"  class="searchResult">
+       <div *ngFor="let option of searchResults"  class="FeedItem">
        	<div class="row">
        		<div class="nameCol">
        			 <app-user-profile-nav [username]=option.username [displayName]=option.display_name></app-user-profile-nav>

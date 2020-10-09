@@ -35,3 +35,14 @@
     background-color: transparent;
     box-shadow: none;
 }
+
+.FeedItem {
+      
+      box-sizing: border-box;
+
+      font-size:12px;
+      background-color:#FFFFFF;
+    }
+    .FeedItem:nth-child(2n) {
+      background-color:#EBEBEB
+    }
