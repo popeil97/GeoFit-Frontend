@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RaceViewComponent } from './race-view.component';
+import { RaceViewPageComponent } from './race-view-page.component';
 
-describe('RaceViewComponent', () => {
-  let component: RaceViewComponent;
-  let fixture: ComponentFixture<RaceViewComponent>;
+describe('RaceViewPageComponent', () => {
+  let component: RaceViewPageComponent;
+  let fixture: ComponentFixture<RaceViewPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RaceViewComponent ]
+      declarations: [ RaceViewPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RaceViewComponent);
+    fixture = TestBed.createComponent(RaceViewPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

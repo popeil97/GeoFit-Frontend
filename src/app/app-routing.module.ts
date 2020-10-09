@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RacesComponent } from './races/races.component';
-import { RaceViewComponent } from './race-view/race-view.component';
-import { UsersComponent } from './users/users.component';
+import { PublicRacesPageComponent } from './public-races-page/public-races-page.component';
+import { RaceViewPageComponent } from './race-view-page/race-view-page.component';
+import { LandingPageComponent  } from './landing-page/landing-page.component';
 import { RaceCreateComponent } from './race-create/race-create.component';
 import { UserPageComponent } from './user-page/user-page.component';
-import { RaceAboutComponent } from './race-about/race-about.component';
+import { RaceAboutPageComponent } from './race-about-page/race-about-page.component';
 import { TeamFormComponent } from './team-form/team-form.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { PasswordRequestComponent } from './password-request/password-request.component';
@@ -21,12 +21,12 @@ import { PaypalComponent } from './paypal/paypal.component';
 import { SearchComponent } from './search/search.component';
 
 const routes: Routes = [
-  {path: 'race', component:RaceViewComponent},
-  {path: 'races', component:RacesComponent},
-  {path: '', component:UsersComponent},
+  {path: 'race', component:RaceViewPageComponent},
+  {path: 'races', component:PublicRacesPageComponent},
+  {path: '', component:LandingPageComponent},
   {path: 'create', component:RaceCreateComponent},
   {path: 'profile',component:UserPageComponent},
-  {path: 'about',component:RaceAboutComponent},
+  {path: 'about',component:RaceAboutPageComponent},
   {path: 'teams',component:TeamFormComponent},
   {path: 'shipping', component:ShippingAddressComponent },
   {path: 'password-request', component:PasswordRequestComponent},

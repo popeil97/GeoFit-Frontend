@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ActivitiesMenuComponent } from './activities-menu.component';
+import { RaceAboutPageComponent } from './race-about-page.component';
 
-describe('ActivitiesMenuComponent', () => {
-  let component: ActivitiesMenuComponent;
-  let fixture: ComponentFixture<ActivitiesMenuComponent>;
+describe('RaceAboutPageComponent', () => {
+  let component: RaceAboutPageComponent;
+  let fixture: ComponentFixture<RaceAboutPageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ActivitiesMenuComponent ]
+      declarations: [ RaceAboutPageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ActivitiesMenuComponent);
+    fixture = TestBed.createComponent(RaceAboutPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -18,11 +18,11 @@ import { UserProfileService } from '../userprofile.service';
 import { ModalService } from '../modalServices';
 
 @Component({
-  selector: 'app-login2',
-  templateUrl: './login2.component.html',
-  styleUrls: ['./login2.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class Login2Component implements OnInit {
+export class LoginComponent implements OnInit {
 
   @Input() id: string;
   loginForm: FormGroup;

@@ -7,7 +7,7 @@ import { environment } from './../environments/environment';
 })
 export class RaceDashboardService {
 
-  // used to communicate with race-view component
+  // used to communicate with race-view-page component
 
   // http options used for making API calls
   private httpOptions: any;

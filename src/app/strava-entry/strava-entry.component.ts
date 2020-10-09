@@ -3,11 +3,11 @@ import { ActivitiesService } from '../activities.service';
 
 
 @Component({
-  selector: 'app-activities-menu',
-  templateUrl: './activities-menu.component.html',
-  styleUrls: ['./activities-menu.component.css']
+  selector: 'app-strava-entry',
+  templateUrl: './strava-entry.component.html',
+  styleUrls: ['./strava-entry.component.css']
 })
-export class ActivitiesMenuComponent implements OnInit {
+export class StravaEntryComponent implements OnInit {
 
   activities:Activity[] = [];
   public actsToImport:number[] = [];

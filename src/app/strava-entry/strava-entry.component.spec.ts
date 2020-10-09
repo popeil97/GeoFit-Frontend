@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProfilePicComponent } from './profile-pic.component';
+import { ActivitiesMenuComponent } from './strava-entry.component';
 
-describe('ProfilePicComponent', () => {
-  let component: ProfilePicComponent;
-  let fixture: ComponentFixture<ProfilePicComponent>;
+describe('ActivitiesMenuComponent', () => {
+  let component: ActivitiesMenuComponent;
+  let fixture: ComponentFixture<ActivitiesMenuComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ProfilePicComponent ]
+      declarations: [ ActivitiesMenuComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProfilePicComponent);
+    fixture = TestBed.createComponent(ActivitiesMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

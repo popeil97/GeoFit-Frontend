@@ -8,7 +8,7 @@ import { ActivitiesService } from '../activities.service';
 import { MapComponent } from '../map/map.component';
 import { FeedComponent } from '../feed/feed.component';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
-import { RaceSettings } from '../race-about/race-about.component';
+import { RaceSettings } from '../race-about-page/race-about-page.component';
 import { TeamFormComponent } from '../team-form/team-form.component';
 import { AuthService } from '../auth.service';
 import { UserProfileService } from '../userprofile.service';
@@ -23,12 +23,13 @@ import { RouteSelectComponent } from '../route-select/route-select.component';
 import { HybridLeaderboardComponent } from '../hybrid-leaderboard/hybrid-leaderboard.component';
 
 
+
 @Component({
-  selector: 'app-race-view',
-  templateUrl: './race-view.component.html',
-  styleUrls: ['./race-view.component.css'],
+  selector: 'app-race-view-page',
+  templateUrl: './race-view-page.component.html',
+  styleUrls: ['./race-view-page.component.css'],
 })
-export class RaceViewComponent implements OnInit,AfterViewInit {
+export class RaceViewPageComponent implements OnInit,AfterViewInit {
   @ViewChild(MapComponent) mapChild: MapComponent;
   @ViewChild(FeedComponent) feedChild: FeedComponent;
   @ViewChild(StoryModalComponent) storyModal: StoryModalComponent;
@@ -323,7 +324,7 @@ export class RaceViewComponent implements OnInit,AfterViewInit {
       this.isOwnerOrModerator = raceData.is_mod_or_owner;
       this.childRaceData = raceData.child_race_dict;
       this.childRaceData.unshift({id:this.raceID,name:'All'});
-      console.log("race-view RACE IDs",this.raceIDs);
+      console.log("race-view-page RACE IDs",this.raceIDs);
       this.loading = false;
       this.hasEntryTags = this.raceSettings.has_entry_tags;
       this.isHybrid = this.race.is_hybrid;

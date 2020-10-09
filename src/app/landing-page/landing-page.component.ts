@@ -6,11 +6,11 @@ import $ from "jquery";
 import { ModalService } from '../modalServices';
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-landing-page',
+  templateUrl: './landing-page.component.html',
+  styleUrls: ['./landing-page.component.css']
 })
-export class UsersComponent implements OnInit {
+export class LandingPageComponent implements OnInit {
 
   /**
    * An object representing the user for the login form

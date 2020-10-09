@@ -8,10 +8,12 @@ import { UserProfileService } from '../userprofile.service';
 import { SignupComponent } from '../signup/signup.component';
 import { ModalService } from '../modalServices';
 
+
+
 @Component({
-  selector: 'app-races',
-  templateUrl: './races.component.html',
-  styleUrls: ['./races.component.css'],
+  selector: 'app-public-races-page',
+  templateUrl: './public-races-page.component.html',
+  styleUrls: ['./public-races-page.component.css'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({height: '0px', minHeight: '0'})),
@@ -21,7 +23,7 @@ import { ModalService } from '../modalServices';
   ],
 })
 
-export class RacesComponent implements OnInit {
+export class PublicRacesPageComponent implements OnInit {
   
   @ViewChild(SignupComponent) signupChild: SignupComponent;
   

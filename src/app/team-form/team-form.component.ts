@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TeamService } from '../team.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../users.service';
-import { TeamEditBody } from '../race-view/race-view.component';
+import { TeamEditBody } from '../race-view-page/race-view-page.component';
 
 @Component({
   selector: 'app-team-form',

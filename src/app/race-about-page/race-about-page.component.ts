@@ -12,15 +12,16 @@ import { TagType } from '../tags.service';
 import { ModalService } from '../modalServices';
 
 @Component({
-  selector: 'app-race-about',
-  templateUrl: './race-about.component.html',
-  styleUrls: ['./race-about.component.css']
+  selector: 'app-race-about-page',
+  templateUrl: './race-about-page.component.html',
+  styleUrls: ['./race-about-page.component.css']
 })
-export class RaceAboutComponent implements OnInit {
+export class RaceAboutPageComponent implements OnInit {
   @ViewChild(MapComponent) mapChild: MapComponent;
   @ViewChild(SignupComponent) signupChild: SignupComponent;
   @ViewChild(SwagComponent) swagChild: SwagComponent;
   public AboutForm: FormGroup;
+  
   aboutData:AboutData = null;
   raceSettings:RaceSettings = null as RaceSettings;
   showForm: Boolean;
@@ -135,7 +136,7 @@ export class RaceAboutComponent implements OnInit {
 
     document.getElementById('map-btn').style.backgroundColor = "#36343c";
     document.getElementById('map-btn').style.color = "#FFFFFF";
-    console.log("race-about:race-id", this.raceID);
+    console.log("race-about-page:race-id", this.raceID);
   }
 
   ProcessDate = (date = null) => {
@@ -237,7 +238,7 @@ export class RaceAboutComponent implements OnInit {
 
   getOwnerData(){
     //Call a to-be-created service which gets user data, feed, statistics etc
-    //console.log('race-about - getUserData()',this.aboutData.owner);
+    //console.log('race-about-page - getUserData()',this.aboutData.owner);
     this._userProfileService.getUserProfile(this.aboutData.owner.username).then((data) => {
       this.userData = data as UserData;
       this.userData.email_mailto = `mailto:${this.userData.email}`;

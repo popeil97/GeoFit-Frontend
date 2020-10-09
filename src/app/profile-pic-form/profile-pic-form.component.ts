@@ -6,11 +6,11 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { AuthService } from '../auth.service';
 
 @Component({
-  selector: 'app-profile-pic',
-  templateUrl: './profile-pic.component.html',
-  styleUrls: ['./profile-pic.component.css']
+  selector: 'app-profile-pic-form',
+  templateUrl: './profile-pic-form.component.html',
+  styleUrls: ['./profile-pic-form.component.css']
 })
-export class ProfilePicComponent implements OnInit, OnChanges {
+export class ProfilePicFormComponent implements OnInit, OnChanges {
   
   @Input() userData: UserData;
   @Output() formUpdated: EventEmitter<void> = new EventEmitter();
