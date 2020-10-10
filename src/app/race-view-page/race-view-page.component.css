@@ -1,0 +1,365 @@
+.MapContainer {
+  position: fixed;
+  height: calc(100% - 80px);
+  width: 100%;
+  overflow: hidden;
+
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.textControl{
+  font-family:"Mulish";
+  font-size:12px;
+}
+
+.MapSidebar {
+  position: relative;
+  height:100%;
+  border-right: 0.5px solid black;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+
+.MapSidebarWidthBig{
+  width:20%;
+  min-width: 320px;
+}
+
+.MapSidebarWidthSmall{
+   width:0%;
+}
+  .MapHeaderContainer, .MapFeedContainer, .MapActionsContainer {
+    padding:8px;
+    box-sizing: border-box;
+    background-color:white;
+  }
+
+    .LogContainer {
+    padding:2px;
+    margin:4px;
+    box-sizing: border-box;
+    background-color:var(--tucan-green);
+    color:white;
+    text-align: center;
+  }
+
+  .buttonContainer {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    z-index: 500;
+  }
+    .MapFeedToggleButton {}
+
+  .MapHeaderContainer, .MapActionsContainer {
+    /* border-bottom:1px solid grey; */
+    text-align:center;
+  }
+  .MapHeaderContainer {
+    margin-bottom:8px;
+
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+    .MapHeaderTitle {
+      margin-bottom:0;
+      margin-right:4px;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .MapHeaderButtonsContainer {
+      display:flex;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+      .MapHeaderButton {
+        margin-left:8px;
+        margin-right:8px;
+      }
+      .MapHeaderButton:first-child {
+        margin-left:0;
+      }
+      .MapHeaderButton:last-child {
+        margin-right:0;
+      }
+  .MapActionsContainer {
+    background-color: var(--tucan-green);
+  }
+  .MapFeedContainer {
+    flex-grow: 1;
+    flex-basis: 0;
+  }
+    .MapFeedSlideshowHeader {
+      flex-grow: 0;
+    }
+      .MapFeedSlide, .MapLeaderboardSlide {
+        flex-grow: 1;
+        flex-basis: 0;
+
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        flex-wrap: nowrap;
+      }
+      .SlideshowSlide.Slideshow-CurrentSlide.MapFeedSlide, .SlideshowSlide.Slideshow-CurrentSlide.MapLeaderboardSlide {
+        display:flex;
+      }
+      .MapFeedInputContainer {        
+        display:flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: stretch;
+        flex-wrap: nowrap;
+        padding:8px;
+        box-sizing: border-box;
+        border-bottom:1px solid var(--primary-lightgrey);;
+        overflow:hidden;
+      }
+        .MapFeedInputProfileContainer {
+          flex-grow: 0;
+          flex-shrink: 0;
+          flex-basis: 70px;
+
+          position: relative;
+          display:block;
+          width:70px;
+          height:70px;
+          background-color:grey;
+          border-radius: 50%;
+
+          overflow:hidden;
+
+          margin-right:8px;
+        }
+        .MapFeedInputProfile {
+          position: absolute;
+          top:50%;
+          left:50%;
+          transform:translate(-50%,-50%);
+          width:100%;
+        }
+        .MapFeedInputTextContainer {
+          flex-grow: 1;
+          flex-basis: 0;
+          position: relative;
+        }
+      .MapFeedMainContainer {
+        flex-grow: 1;
+        flex-basis: 0;
+
+        display:flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: stretch;
+        flex-wrap: nowrap;
+      }
+        .MapFeed , .LeaderboardFeed{
+          flex-grow: 1;
+          flex-basis: 0;
+
+          position:relative;
+          z-index: 1;
+
+          overflow-y:auto;
+        }
+
+.MapGreaterContainer {
+  flex-grow:1;
+  flex-shrink: 0;
+  flex-basis: 0;
+
+  position: relative;
+  width:auto;
+  height:100%;
+}
+.MapFeedSettingsButtonContainer {
+  display:flex;
+  flex-direction: row-reverse;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  margin-bottom:8px;
+}
+  .MapFeedSettingsContainer {
+    position: relative;
+  }
+    .MapFeedOptionsContainer {
+      position: absolute;
+      right:0;
+      top:100%;
+      width:max-content;
+      z-index: 2;
+
+      background-color:white;
+      padding:8px;
+      box-sizing: border-box;
+      border:0.5px solid black;
+    }
+.MapFeedSlideshowContents {
+  flex-grow: 1;
+  flex-basis: 0;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.routeRow {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.routeCol{
+  width:70%;
+}
+.qCol{
+  padding-top:10px;
+  width:30%;
+  align-content: left;
+}
+
+
+
+.titleCol{
+  width:60%;
+}
+.aboutCol{
+  width:28%;
+  right:0;
+  left:0;
+}
+.settingsCol{
+  width:8%;
+  right:0;
+}
+
+.logActivity{
+  height:80px;
+  width:100%;
+  background-color:var(--tucan-green);
+  text-align:center;
+}
+
+.leaderboard-col{
+  width:20%;
+}
+
+.map-col{
+  width:80%;
+}
+
+ .searchContainer {
+    position: absolute;
+    right: 4px;
+    top: 0;
+
+    z-index: 500;
+    width: 18%;
+
+ }
+
+ .searchContainerSmall {
+    position: absolute;
+    right: 4px;
+    top: 0;
+
+    z-index: 500;
+    width: 18%;
+    min-width:180px;
+
+ }
+
+
+.ActionsContainer {
+    position: absolute;
+    padding: 20px;
+    left: 0;
+    top: 0;
+    opacity: 0.8;
+    z-index: 500;
+    width: 100%;
+    background-color: rgba(91, 90, 92,50%);
+    padding-bottom: 3.5rem;
+ }
+
+ .LeftActions {
+    left: 0;
+    top: 0;
+ }
+  .RightActions {
+    right: 0;
+    top: 0;
+ }
+
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row-status {
+  padding:4px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.me-col {
+  width:30%;
+}
+
+.story-col {
+  width:70%;
+}
+
+
+.main-col {
+  width:62%;
+}
+
+.side-col {
+  width:38%;
+  display:flex;
+  align-content: right;
+  right:0;
+}
+
+.material-icons{
+  font-size:12px;
+}
+
+
+
+.box {
+  background: #666666;
+  color: #ffffff;
+  width: 250px;
+  padding: 10px;
+  margin: 1em auto;
+}
+p {
+  margin: 1.5em 0;
+  padding: 0;
+}
+

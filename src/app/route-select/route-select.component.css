@@ -1,0 +1,18 @@
+mat-form-field {
+    font-size: 12px;
+    font-family:"Mulish";
+}
+
+
+::ng-deep mat-form-field.mat-form-field-appearance-outline .mat-form-field-outline .mat-form-field-wrapper {
+    margin: 0;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: .5em;
+}
+
+::ng-deep .form-group {
+    margin-bottom: 0rem;
+}
+

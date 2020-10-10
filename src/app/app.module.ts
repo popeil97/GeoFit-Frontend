@@ -6,11 +6,10 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
-import { RacesComponent } from './races/races.component';
-import { UsersComponent } from './users/users.component';
-import { RaceComponent } from './race/race.component';
+import { PublicRacesPageComponent } from './public-races-page/public-races-page.component';
+import { LandingPageComponent  } from './landing-page/landing-page.component';
 import { MapComponent } from './map/map.component';
-import { RaceViewComponent } from './race-view/race-view.component';
+import { RaceViewPageComponent } from './race-view-page/race-view-page.component';
 import { UserProgressComponent } from './user-progress/user-progress.component';
 import { RaceMenuComponent } from './race-menu/race-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -21,7 +20,7 @@ import { RaceCreateComponent } from './race-create/race-create.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService} from './auth.service';
-import {TokenInterceptorService} from './users/tokeninterceptorservice';
+import {TokenInterceptorService} from './landing-page/tokeninterceptorservice';
 import { StravauthService } from './stravauth/stravauth.service';
 import { RaceFeedService } from './feed/race-feed.service';
 import { FeedComponent } from './feed/feed.component';
@@ -38,10 +37,10 @@ import {
 import { StravauthComponent } from './stravauth/stravauth.component';
 import { fromEventPattern } from 'rxjs';
 import { LoaderComponent } from './loader/loader.component';
-import { ActivitiesMenuComponent } from './activities-menu/activities-menu.component';
+import { StravaEntryComponent } from './strava-entry/strava-entry.component';
 import { ManualEntryComponent } from './manual-entry/manual-entry.component';
 import { UserPageComponent } from './user-page/user-page.component';
-import { RaceAboutComponent } from './race-about/race-about.component';
+import { RaceAboutPageComponent } from './race-about-page/race-about-page.component';
 import { UserFollowComponent } from './user-follow/user-follow.component';
 import { StoryBtnComponent } from './story-btn/story-btn.component';
 import { TeamFormComponent } from './team-form/team-form.component';
@@ -51,14 +50,10 @@ import { NotificationComponent } from './notification/notification.component';
 import { StoryModalComponent } from './story-modal/story-modal.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentsFormComponent } from './comments-form/comments-form.component';
-import { RaceSettingsComponent } from './race-settings/race-settings.component';
 import { StoryFormComponent } from './story-form/story-form.component';
 import { ProfileFormComponent } from './profile-form/profile-form.component';
-import { LoginComponent, LoginDialogContent } from './login/login.component';
-import { RegisterComponent, RegisterDialogContent} from './register/register.component';
+
 import { PaypalComponent } from './paypal/paypal.component';
-import { SignupComponent } from './signup/signup.component';
-import { SignupDialogContent } from './signup/signup.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
 import { SwagComponent, SwagDialogContent } from './swag/swag.component';
 
@@ -67,17 +62,12 @@ import { createCustomElement } from '@angular/elements';
 import { PopupComponent } from './popup/popup.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { ShippingAddressFormComponent } from './shipping-address-form/shipping-address-form.component';
-import { SmilesComponent } from './smiles/smiles.component';
+
 import { TermsOfServiceComponent, TermsOfServiceDialogContent } from './terms-of-service/terms-of-service.component';
 import { PasswordRequestComponent } from './password-request/password-request.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
-import { RaceDayComponent, RaceDayDialogContent} from './race-day/race-day.component';
 import { StravaInstructionsComponent } from './strava-instructions/strava-instructions.component';
-import { ManualInstructionsComponent} from './manual-instructions/manual-instructions.component';
-import { ProfilePicComponent } from './profile-pic/profile-pic.component';
-import { FaqHelpComponent,FaqHelpDialogContent } from './faq-help/faq-help.component';
-import { ContactHelpComponent,ContactHelpDialogContent } from './contact-help/contact-help.component';
-import { TeamInstructionsComponent } from './team-instructions/team-instructions.component';
+import { ProfilePicFormComponent } from './profile-pic-form/profile-pic-form.component';
 import { RoutePinDialogComponent } from './route-pin-dialog/route-pin-dialog.component';
 
 import { OwlModule } from 'ngx-owl-carousel';
@@ -93,10 +83,9 @@ import { RaceDashboardComponent } from './race-dashboard/race-dashboard.componen
 import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.component';
 
 import { WelcomeComponent } from './welcome/welcome.component';
-import { AboutTucanComponent } from './about-tucan/about-tucan.component';
+import { AboutTucanPageComponent } from './about-tucan-page/about-tucan-page.component';
 import { FaqPageComponent } from './faq-page/faq-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
-import { DialogSkeletonComponent,DialogSkeletonDialogContent } from './dialog-skeleton/dialog-skeleton.component';
 import { WhyInfoComponent,WhyInfoDialogContent} from './why-info/why-info.component';
 
 import { SwagListComponent } from './swag-list/swag-list.component';
@@ -110,7 +99,7 @@ import {
 } from './view-follow/view-follow.component';
 import { ShowFollowersComponent } from './show-followers/show-followers.component';
 import { ModalComponent } from './modal/modal.component';
-import { Login2Component } from './login2/login2.component';
+import { LoginComponent } from './login/login.component';
 import { Register2Component } from './register2/register2.component';
 
 import { RouteSelectComponent } from './route-select/route-select.component';
@@ -130,22 +119,21 @@ import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/rac
   declarations: [
     AppComponent,
     NavComponent,
-    RacesComponent,
-    UsersComponent,
-    RaceComponent,
+    PublicRacesPageComponent,
+    LandingPageComponent,
     MapComponent,
-    RaceViewComponent,
+    RaceViewPageComponent,
     UserProgressComponent,
     RaceMenuComponent,
     RaceCreateComponent,
     LeaderboardComponent,
     StravauthComponent,
     LoaderComponent,
-    ActivitiesMenuComponent,
+    StravaEntryComponent,
     FeedComponent,
     ManualEntryComponent,
     UserPageComponent,
-    RaceAboutComponent,
+    RaceAboutPageComponent,
     UserFollowComponent,
     StoryBtnComponent,
     TeamFormComponent,
@@ -155,37 +143,21 @@ import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/rac
     StoryModalComponent,
     CommentsComponent,
     CommentsFormComponent,
-    RaceSettingsComponent,
     StoryFormComponent,
     ProfileFormComponent,
-    LoginComponent,
-    LoginDialogContent,
-    RegisterComponent,
-    RegisterDialogContent,
     PaypalComponent,
-    SignupComponent,
-    SignupDialogContent,
     UserStatsComponent,
     SwagComponent,
     SwagDialogContent,
     PopupComponent,
     ShippingAddressComponent,
     ShippingAddressFormComponent,
-    SmilesComponent,
     TermsOfServiceComponent,
     TermsOfServiceDialogContent,
     PasswordRequestComponent,
     PasswordChangeComponent,
-    RaceDayComponent,
-    RaceDayDialogContent,
     StravaInstructionsComponent,
-    ManualInstructionsComponent,
-    ProfilePicComponent,
-    FaqHelpComponent,
-    FaqHelpDialogContent,
-    ContactHelpComponent,
-    ContactHelpDialogContent,
-    TeamInstructionsComponent,
+    ProfilePicFormComponent,
     RoutePinDialogComponent,
     NotificationPanelComponent,
     SnackbarComponent,
@@ -197,11 +169,9 @@ import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/rac
     RaceDashboardComponent,
     RaceStoryManageComponent,
     WelcomeComponent,
-    AboutTucanComponent,
+    AboutTucanPageComponent,
     FaqPageComponent,
     ContactPageComponent,
-    DialogSkeletonComponent,
-    DialogSkeletonDialogContent,
     WhyInfoComponent,
     WhyInfoDialogContent,
 
@@ -213,7 +183,7 @@ import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/rac
     //ViewFollowDialogContent,
     ShowFollowersComponent,
     ModalComponent,
-    Login2Component,
+    LoginComponent,
     Register2Component,
     RouteSelectComponent,
     HybridLeaderboardComponent,
@@ -254,21 +224,16 @@ import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/rac
     MapService,
   ],
   bootstrap: [AppComponent],
-  entryComponents:[SignupDialogContent,
+  entryComponents:[
                   PopupComponent,
                   SwagDialogContent,
                   TermsOfServiceDialogContent,
-                  RaceDayDialogContent, 
-                  FaqHelpDialogContent,ContactHelpDialogContent,
                   RoutePinDialogComponent,
                   NotificationPanelComponent,
                   SnackbarComponent, 
                   StoryDialogComponent,
                   ReportFormComponent,
                   StoryDeleteDialogComponent,
-                  LoginDialogContent,
-                  RegisterDialogContent,
-                  DialogSkeletonDialogContent,
                   WhyInfoDialogContent,
                   //ViewFollowDialogContent
                   ] 

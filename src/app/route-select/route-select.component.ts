@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
 import { LeaderboardService } from '../leaderboard.service';
-import { ChildRaceData } from '../race-view/race-view.component';
+import { ChildRaceData } from '../race-view-page/race-view-page.component';
 
 @Component({
   selector: 'app-route-select',

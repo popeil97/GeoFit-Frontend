@@ -102,8 +102,9 @@ export class UserStatsComponent implements OnInit {
           yAxes: [
             {
               gridLines: {
-                display: false
+                display: false,
               }
+
             }
           ]
         }

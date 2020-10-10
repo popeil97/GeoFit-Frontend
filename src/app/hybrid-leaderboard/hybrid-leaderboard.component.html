@@ -2,7 +2,7 @@
     <div class="row">
        <div class = "winner-column-lowered" *ngIf="leaderboard.length >= 2">
         <p><b>🥈</b><img class = "twoImage" src="{{leaderboard[1].profile_url}}" width="30" height="30">
-          <br>
+          
           <app-user-profile-nav [username]="leaderboard[1].username" [displayName]="leaderboard[1].display_name" [nameBreak]="true"></app-user-profile-nav>
            <i *ngIf="leaderboard[1].isParent">{{leaderboard[1].total_distance}} {{leaderboard[1].distance_type}}</i><br>
            <i *ngIf="!leaderboard[1].isParent">{{leaderboard[1].display_time}}</i><br>
@@ -12,7 +12,7 @@
 
       <div class = "winner-column" *ngIf="leaderboard.length >= 1">
         <p><b>🥇</b><img class = "oneImage" src="{{leaderboard[0].profile_url}}" width="30" height="30">
-          <br>
+          
           <app-user-profile-nav [username]="leaderboard[0].username" [displayName]="leaderboard[0].display_name" [nameBreak]="true"></app-user-profile-nav>
             <i *ngIf="leaderboard[0].isParent">{{leaderboard[0].total_distance}} {{leaderboard[0].distance_type}}</i><br>
            <i *ngIf="!leaderboard[0].isParent">{{leaderboard[0].display_time}}</i><br>
@@ -22,7 +22,7 @@
 
       <div class = "winner-column-lowered" *ngIf="leaderboard.length >= 3">
         <p><b>🥉</b><img class = "threeImage" src="{{leaderboard[2].profile_url}}" width="30" height="30">
-          <br>
+          
           <app-user-profile-nav [username]="leaderboard[2].username" [displayName]="leaderboard[2].display_name"  [nameBreak]="true"></app-user-profile-nav>
             <i *ngIf="leaderboard[2].isParent">{{leaderboard[2].total_distance}} {{leaderboard[2].distance_type}}</i><br>
            <i *ngIf="!leaderboard[2].isParent">{{leaderboard[2].display_time}}</i><br>
@@ -45,7 +45,7 @@
                 <b *ngIf="i<9">0{{i+1}}</b>
               </div>
               <div class="PicCol">
-                <img src="{{group.profile_url}}" width="30" height="30">
+                <img src="{{group.profile_url}}" width="30" height="30" class="roundImg">
               </div>
               <div class="NameCol">
                 <app-user-profile-nav [username]="group.username" [displayName]="group.display_name"></app-user-profile-nav>
@@ -78,7 +78,7 @@
       </div>
     </div>
 
-    <span class="link" style="display:table; margin:0 auto;" (click)="getNextPage()">Load More...</span>
+    <span class="link textControl" style="display:table; margin:0 auto;" (click)="getNextPage()">Load More...</span>
   </div>
 </div>
 </div>

@@ -19,7 +19,7 @@
     <div class='WelcomeInfo' *ngIf="this._authService.isLoggedIn()">
       <h2>Upload a profile pic</h2>
       <p>Let other people in your race know who you are!</p>
-      <app-profile-pic [userData]="this.userData"></app-profile-pic>
+      <app-profile-pic-form [userData]="this.userData"></app-profile-pic-form>
     </div>
     <div class='WelcomeInfo'>
       <h3>Read our FAQs</h3>

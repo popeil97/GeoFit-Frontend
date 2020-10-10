@@ -13,15 +13,16 @@
 
 .followCol{
 	width:30%;
+  margin:2px;
 }
 
 .nameCol{
-	width:70%;
+	width:65%;
+  margin:2px;
 }
 .searchResult{
 	background-color:white;
-	border-bottom-width: 1px;
-	border-bottom-color: var(--slate-tint);
+  border-bottom: 1px solid var(--slate-tint);
 	margin-bottom:1px;
 	border-radius:3px;
 }
@@ -34,3 +35,14 @@
     background-color: transparent;
     box-shadow: none;
 }
+
+.FeedItem {
+      
+      box-sizing: border-box;
+
+      font-size:12px;
+      background-color:#FFFFFF;
+    }
+    .FeedItem:nth-child(2n) {
+      background-color:#EBEBEB
+    }

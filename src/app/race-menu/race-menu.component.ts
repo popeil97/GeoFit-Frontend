@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Activity } from '../activities-menu/activities-menu.component';
+import { Activity } from '../strava-entry/strava-entry.component';
 
 @Component({
   selector: 'app-race-menu',

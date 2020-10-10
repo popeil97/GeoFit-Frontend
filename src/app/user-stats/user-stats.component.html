@@ -1,11 +1,11 @@
 <div class="TucanContainer">
   <h2 *ngIf="userData.is_me; else otherUserStats">Your Stats</h2>
   <ng-template #otherUserStats><h2>{{userData.first_name}}'s Stats</h2></ng-template>
-
+ 
   <ng-template [ngIf]='userStats!= null' [ngIfElse]="LoadingUserStatsBlock">
       <div class="UserStatsContentContainer">
         <div class="UserStatsCanvasContainer">
-          <canvas id="lineCharts"></canvas>
+          <canvas id="lineCharts" height="120px"></canvas>
         </div>
         <div class="UserStatsTableContainer">
           <div class='Slideshow'>
@@ -16,7 +16,7 @@
             </div>
             <div class="SlideshowContents RaceSlideshowContents">
               <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'run'}">
-              <table class="table table-striped">
+              <table class="table table-striped textControl">
                   <thead>
                   <tr>
                     <th scope="col"></th>

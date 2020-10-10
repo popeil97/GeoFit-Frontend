@@ -1,35 +1,122 @@
-import { Component, OnInit, Inject, ViewChild, Output, EventEmitter, Input } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
+import { 
+  Component, 
+  OnInit, 
+  //Inject, 
+  //ViewChild, 
+  Output, 
+  EventEmitter, 
+  Input 
+} from '@angular/core';
+// import { MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
-import { first } from 'rxjs/operators';
+// import { first } from 'rxjs/operators';
 import { UserProfileService } from '../userprofile.service';
+
+import { ModalService } from '../modalServices';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+export class LoginComponent implements OnInit {
 
-export class LoginComponent {
+  @Input() id: string;
+  loginForm: FormGroup;
+  loading = false;
+  submitted = false;
+  errors: any = [];
+  public registerMe:boolean = false;
+
+  @Output() loggedInAsUsernameEvent = new EventEmitter();
+
   constructor(
-      public dialog: MatDialog,
-  ) {}
+    private modalService: ModalService,
+    private formBuilder: FormBuilder, 
+    private route: ActivatedRoute,
+    private router: Router,
+    private _authService: AuthService,
+    private _userProfileService: UserProfileService,
+  ) { }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(LoginDialogContent,{disableClose: false, data:{} as MatDialogConfig});
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]], //Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")
+      password: ['', Validators.required]
+    });
   }
 
-  
+  // convenience getter for easy access to form fields
+  get f() { return this.loginForm.controls; }
+
+  onSubmit() {
+
+    // Catch for submission
+    this.submitted = true;
+
+    // stop here if form is invalid
+    if (this.loginForm.invalid) { return; }
+
+    this.loading = true;
+
+    var email = this.f.email.value.toLowerCase();
+
+    this._authService.login({'email': email, 'password': this.f.password.value}).subscribe(
+      data => {
+        localStorage.setItem('access_token', data['token']);
+        localStorage.setItem('loggedInUsername', data['username']);
+        this._authService.username = data['username'];
+
+        //Emit
+        this.loggedInAsUsernameEvent.emit(data['username']);
+
+        if (data['success']){
+          this.continueAsMe(data['username']);
+          this.closeDialog();
+        }
+      },
+      err => {
+        this.loading = false;
+//        console.log(err);
+        this.errors = err['error'];
+      }
+    );
+  }
+
+  toggleRegister(action?:string) {
+    this.registerMe = !this.registerMe;
+  }
+
+  public continueAsMe(username?:string){
+    // this.router.navigate(['/profile', {username: username}]);
+  }
+
+  closeDialog() {
+    if (this.id == null) return;
+    
+    this.modalService.callbackModal(this.id,'FROM CHILD');
+    
+    this.loginForm.reset();
+    this.loginForm.markAsPristine();
+    this.loginForm.markAsUntouched();
+    this.loginForm.updateValueAndValidity();
+    this.loading = false;
+    this.submitted = false;
+    this.modalService.close(this.id);
+  }
+
+  SwitchToSignup = () => {
+    this.closeDialog();
+    this.modalService.open('custom-modal-2');
+  }
+
 }
 
-@Component({
-  selector: 'app-login-dialog-content',
-  templateUrl: './login-dialog-content.html',
-  styleUrls:['./login-dialog-content.css']
-})
 
+/*
 export class LoginDialogContent implements OnInit {
 
   public type: any
@@ -94,7 +181,7 @@ export class LoginDialogContent implements OnInit {
         },
         err => {
           this.loading = false;
-//          console.log(err);
+          console.log(err);
           this.errors = err['error'];
         }
       );
@@ -115,6 +202,5 @@ export class LoginDialogContent implements OnInit {
     this.dialogRef.close(LoginDialogContent);
   }
 
-
-
 }
+*/
