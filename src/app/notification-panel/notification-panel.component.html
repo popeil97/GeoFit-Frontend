@@ -1,9 +1,9 @@
 <mat-nav-list *ngIf="notifications.length > 0">
-  <app-notification *ngFor="let not of notifications" (removeNotification)="removeNotification($event)" [notification]="not"></app-notification>
+ <div  *ngFor="let not of notifications" class='FeedItem'>
+ 	 <app-notification (removeNotification)="removeNotification($event)" [notification]="not"></app-notification>
+ </div>
 </mat-nav-list>
 
 <mat-nav-list *ngIf="notifications.length == 0">
-  <a mat-list-item>
     <span mat-line>No Notifications</span>
-  </a>
 </mat-nav-list>

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../users.service';
-import { RaceViewComponent } from '../race-view/race-view.component';
+import { RaceViewPageComponent } from '../race-view-page/race-view-page.component';
 import { ModalService } from '../modalServices';
 
 
@@ -19,7 +19,7 @@ export class MapSettingsComponent implements OnInit,OnChanges {
 
   ageRangeOptions: any[];
 
-   constructor(private _usersService:UsersService,private modalService: ModalService) { //, private _raceview:RaceViewComponent
+   constructor(private _usersService:UsersService,private modalService: ModalService) { //, private _raceview:RaceViewPageComponent
 
     this.settingsForm = new FormGroup({
       isAutomaticImport: new FormControl('',[

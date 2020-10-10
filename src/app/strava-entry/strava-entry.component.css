@@ -1,0 +1,28 @@
+.activitiesTable {
+    width: 100%;
+    font-size:12px;
+    font-family:"Mulish";
+}
+
+.textControl{
+  font-size:14px;
+    font-family:"Mulish";
+}
+.mat-row:hover {
+ background-color:var(--tucan-green);
+}
+
+.highlight{
+    background: var(--tucan-green);
+  }
+
+  .table-container {
+    
+  }
+
+  @media only screen and (max-width:1024px) {
+  	.btn-mobile
+	 {
+	 	font-size:50px;padding:20px;
+	 }
+	}

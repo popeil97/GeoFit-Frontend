@@ -5,7 +5,7 @@ import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentType } from '../payments.service';
-import { AboutData } from '../race-about/race-about.component';
+import { AboutData } from '../race-about-page/race-about-page.component';
 import { TagType } from '../tags.service';
 import { RaceService } from '../race.service';
 import { Cart } from '../swag.service';

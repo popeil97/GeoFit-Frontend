@@ -6,6 +6,7 @@
   flex-wrap: nowrap;
 }
 
+
   .UserStatsCanvasContainer {
     width:100%;
   }
@@ -25,6 +26,10 @@
   height: 80px; /* Should be removed. Only for demonstration */
 }
 
+.textControl{
+  font-size:14px;
+  font-family:"Mulish";
+}
 
 
 th, td {
