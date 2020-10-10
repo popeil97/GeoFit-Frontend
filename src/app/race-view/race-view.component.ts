@@ -177,21 +177,6 @@ export class RaceViewComponent implements OnInit,AfterViewInit {
         this.showPinsFromSettings(incomingData.pinSettings);
         break;
     }
-    /*
-    if(incomingData != null){
-      console.log("PARENT INCOMING DATA",incomingData.type);
-      if(incomingData.type == "manual") {
-        this.uploadManualEntry(incomingData.entry);
-      }
-      if(incomingData.type == "strava") {
-        this.refreshStatComponents();
-      }
-      if(incomingData.type == "map") {
-        console.log("MAP DATA INCOMING!")
-        this.showPinsFromSettings(incomingData.pinSettings);
-      }
-    }
-    */
   }
 
   logActivity(event:any) {
@@ -312,40 +297,34 @@ export class RaceViewComponent implements OnInit,AfterViewInit {
       // }
 
       this.num_activities = 0;
-      this.followedIDs = raceData.followedIDs;
-      this.raceType = raceData.race.race_type;
+
+      // Child race data
       this.raceIDs = raceData.race_IDs;
-      this.userRaceSettings = raceData.settings;
-      this.raceSettings = raceData.race_settings;
-      console.log("RACE VIEW RACE SETTINGS", this.raceSettings);
-      this.isManualEntry = this.raceSettings.isManualEntry;
-      this.userStat = raceData.user_stat;
-      this.isOwnerOrModerator = raceData.is_mod_or_owner;
       this.childRaceData = raceData.child_race_dict;
       this.childRaceData.unshift({id:this.raceID,name:'All'});
-      console.log("race-view RACE IDs",this.raceIDs);
-      this.loading = false;
+      
+      // Race-specific info
+      this.raceSettings = raceData.race_settings;
+      this.raceType = raceData.race.race_type;
       this.hasEntryTags = this.raceSettings.has_entry_tags;
+      this.isManualEntry = this.raceSettings.isManualEntry;
       this.isHybrid = this.race.is_hybrid;
+
+      // User specific-info
+      this.userRaceSettings = raceData.settings;
+      this.userStat = raceData.user_stat;
+      this.isOwnerOrModerator = raceData.is_mod_or_owner;
+      this.followedIDs = raceData.followedIDs;
+
+      this.loading = false;
 
       //Default to first race ID if not set
       if (this.selectedRaceID == undefined){
         this.selectedRaceID = this.raceIDs[0];
       }
 
-      //Handle case of race having child races
-
     });
   }
-
-  // USA(action?:string) {
-  // console.log("USA");
-  // this.mapChild.panToUSA();
-  // }
-
-  // Israel(action?:string) {
-  // this.mapChild.panToIsrael();
-  // }
 
   uploadManualEntry(entry) {
     this.activitiesService.uploadManualEntry(entry,this.selectedRaceID).then((resp) => {
@@ -355,12 +334,9 @@ export class RaceViewComponent implements OnInit,AfterViewInit {
 
   getActivities() {
     this.activitiesService.getActivities(this.raceID).then((data:any) => {
-      console.log("RACE VIEW ACTIVITIES", data);
       this.activities = data.activities;
       this.num_activities = data.activities.length;
-      console.log("HELLO???",this.num_activities);
     });
-    console.log("HELLO2???",this.num_activities);
   }
 
 
@@ -390,7 +366,6 @@ export class RaceViewComponent implements OnInit,AfterViewInit {
     //console.log("to", to, this.acceptedScreens.indexOf(to));
     if (to == null || this.acceptedScreens.indexOf(to) == -1) return;
     this.currentScreen = to;
-    console.log("CURRENT SCREEN", this.currentScreen );
     document.getElementById(to+'-btn').style.backgroundColor = "#36343c";
     document.getElementById(to+'-btn').style.color = "#FFFFFF";
 

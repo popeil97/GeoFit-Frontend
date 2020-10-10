@@ -87,7 +87,7 @@ export class MapRouteComponent implements OnChanges {
 
           case 'routePins':
             if (this.routePins && this.displayUsers){
-             // console.log("route pins: ", this.routePins);
+              console.log("route pins: ", this.routePins);
               this.createRoutePins();
             }
 
