@@ -24,6 +24,14 @@
   <b>No new activities to import</b>
 </div>
 
+<div *ngIf="invalidImport"
+    class="alert alert-danger">
+    
+    <div>
+       <p>Your activity did not go through, try again. If you continue to have issues contact your race director or email us at admin@tucan.fitness</p>
+    </div>
+    </div>
+
   <div *ngIf="activities.length > 0">
     <div style="padding: 5px; position: relative; text-align:center;">
     <button (click)="importSelectedActs()">Add</button>

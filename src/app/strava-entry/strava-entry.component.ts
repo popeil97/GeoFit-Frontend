@@ -18,6 +18,7 @@ export class StravaEntryComponent implements OnInit {
   
   columns:string[] = ['Name','Distance','Date'];
   selectedRows:number[] = [];
+  invalidImport:Boolean = false;
 
 
   constructor(private _activitiesService:ActivitiesService) { }
@@ -42,8 +43,13 @@ export class StravaEntryComponent implements OnInit {
 
   importSelectedActs(): void {
     // this.loading = true; // switch to toggleFunction that communicates with parent
+    this.invalidImport = false
     this.setLoaderState.emit(true);
     this._activitiesService.importActivities(this.actsToImport,this.race_id).then((res) => {
+      if(!res['success']) {
+        this.invalidImport = true;
+      }
+      console.log('IMPORT RESP:',res);
       this.actsToImport = [];
       this.setLoaderState.emit(false);
       // this.getRaceState(); // change eventually
