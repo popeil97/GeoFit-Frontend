@@ -155,6 +155,56 @@ a.navbar-brand {
   font-feature-settings: 'liga';
 }
 
+.NavProfileDropdown {
+  padding:8px;
+  color:white
+}
+.NavNotifImgContainer, .NavProfileImgContainer {
+  position: relative;
+  display:inline-block;
+  border-radius:50%;
+  width:35px;
+  height:35px;
+  overflow:hidden;
+}
+.NavProfileImgContainer {
+  margin-right:8px;
+}
+.NavProfileImg {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:100%;
+}
+
+.NavNotifImg {
+  position: absolute;
+  top:1%;
+  left:10%;
+  transform:translate(-50%,-50%);
+  width:100%;
+}
+
+.NavDropdownContents {
+  right:0;
+  left:initial;
+  background-color: var(--main-background-color);
+  box-shadow: 0 4px 10px -2px black;
+}
+.NavDropdownContents {
+  left:0;
+  right:initial;
+  top:initial;
+  bottom:100%;
+}
+
+@media only screen and (max-width: 900px) {
+  .TucanNavigationLogo img {
+    width:90px;
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .TucanNavigationLogo img {
     width:100px;
@@ -203,49 +253,15 @@ a.navbar-brand {
     flex-direction: column;
     align-items: stretch;
   }
-}
-.NavProfileDropdown {
-  padding:8px;
-  color:white
-}
-.NavNotifImgContainer, .NavProfileImgContainer {
-  position: relative;
-  display:inline-block;
-  border-radius:50%;
-  width:35px;
-  height:35px;
-  overflow:hidden;
-}
-.NavProfileImgContainer {
-  margin-right:8px;
-}
-.NavProfileImg {
-  position: absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:100%;
-}
-
-.NavNotifImg {
-  position: absolute;
-  top:1%;
-  left:10%;
-  transform:translate(-50%,-50%);
-  width:100%;
-}
-.NavDropdownContents {
-  right:0;
-  left:initial;
-  background-color: var(--main-background-color);
-  box-shadow: 0 4px 10px -2px black;
-}
-
-@media only screen and (max-width: 600px) {
   .NavDropdownContents {
     left:0;
     right:initial;
     top:initial;
     bottom:100%;
+  }
+  .NavItem {
+    margin-top:8px;
+    margin-bottom:8px;
+    
   }
 }

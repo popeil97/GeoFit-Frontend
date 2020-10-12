@@ -124,6 +124,14 @@
         align-items: stretch;
     }
 }
+@media only screen and (max-width:900px) {
+    .UserProfileUserInfoContainer {
+        width:240px;
+    }
+    .UserProfileMainContentContainer {
+        padding-left:272px;
+    }
+}
 @media only screen and (max-width:600px) {
     .UserProfileContainer {
         flex-direction: column;
