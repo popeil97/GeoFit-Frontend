@@ -4,7 +4,6 @@ import { MatStepper } from '@angular/material/stepper';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { SwagService } from '../swag.service';
 import { PaymentType } from '../payments.service';
-import { SignupCallbackStruct } from '../signup/signup.component';
 import { Order, OrderService } from '../order.service';
 
 interface SwagDialogData {
@@ -166,7 +165,7 @@ export class SwagDialogContent {
       this.imageUrl = data.imageUrl;
   }
 
-  stepCallback(callbackResp:SignupCallbackStruct) {
+  stepCallback(callbackResp:any) {
     if(callbackResp.success) {
       let data = callbackResp.data;
 

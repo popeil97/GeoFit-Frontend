@@ -5,7 +5,6 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import * as _ from 'lodash';
 import { AuthService } from '../auth.service';
 import { UserProfileService } from '../userprofile.service';
-import { SignupComponent } from '../signup/signup.component';
 import { ModalService } from '../modalServices';
 
 
@@ -24,9 +23,7 @@ import { ModalService } from '../modalServices';
 })
 
 export class PublicRacesPageComponent implements OnInit {
-  
-  @ViewChild(SignupComponent) signupChild: SignupComponent;
-  
+    
   userData: UserData;
   public races:any[] = null;
   public userRaces:any[];
@@ -135,7 +132,6 @@ export class PublicRacesPageComponent implements OnInit {
 
   trySignup(): void {
     if(!this._authService.isLoggedIn()) {
-      this.signupChild.closeDialog();
      // this.router.navigate(['/register',{params:JSON.stringify({redirectParams: {name:this.raceName,id:this.raceID,popup:true}, redirectUrl:'/about'})}]);
     }
   }

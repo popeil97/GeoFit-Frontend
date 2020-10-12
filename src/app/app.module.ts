@@ -27,6 +27,8 @@ import { FeedComponent } from './feed/feed.component';
 import { StoryService } from './story.service';
 import { ImageService } from './image.service';
 import { LeaderboardService } from './leaderboard.service';
+import { RegisterComponent } from './register/register.component'
+import { RegisterDialogContent } from './register/register.component'
 
 import {
   HttpRequest,
@@ -196,6 +198,8 @@ import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/rac
     SearchComponent,
     RouteInfoComponent,
     RaceDashboardRacerListComponent,
+    RegisterComponent,
+    RegisterDialogContent,
       ],
 
   imports: [

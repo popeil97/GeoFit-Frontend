@@ -6,7 +6,6 @@ import { AuthService } from '../auth.service';
 import { UserProfileService } from '../userprofile.service';
 declare var $: any
 import { MapComponent } from '../map/map.component';
-import { SignupComponent } from '../signup/signup.component';
 import { SwagComponent } from '../swag/swag.component';
 import { TagType } from '../tags.service';
 import { ModalService } from '../modalServices';
@@ -18,7 +17,6 @@ import { ModalService } from '../modalServices';
 })
 export class RaceAboutPageComponent implements OnInit {
   @ViewChild(MapComponent) mapChild: MapComponent;
-  @ViewChild(SignupComponent) signupChild: SignupComponent;
   @ViewChild(SwagComponent) swagChild: SwagComponent;
   public AboutForm: FormGroup;
   
@@ -83,7 +81,7 @@ export class RaceAboutPageComponent implements OnInit {
     while(!this.aboutData);
     if(this.popup && this._authService.isLoggedIn()) {
       //console.log('in here');
-      this.signupChild.openDialog();
+      // this.signupChild.openDialog();
     }
   }
 
@@ -201,7 +199,7 @@ export class RaceAboutPageComponent implements OnInit {
 
   trySignup(): void {
     if(!this._authService.isLoggedIn()) {
-      this.signupChild.closeDialog();
+      // this.signupChild.closeDialog();
       this.router.navigate(['/register',{params:JSON.stringify({redirectParams: {name:this.raceName,id:this.raceID,popup:true}, redirectUrl:'/about'})}]);
     }
   }

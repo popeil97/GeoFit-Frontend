@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl,FormGroup, Validators} from '@angular/forms';
 import { Tag, TagType, TagsService } from '../tags.service';
-import { SignupCallbackStruct } from '../signup/signup.component';
 
 @Component({
   selector: 'app-tag-select',
