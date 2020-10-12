@@ -57,9 +57,7 @@ body {
 }
 
 
-h1, .h1 {  
-  font-size: 64px !important;
-}
+h1, .h1 {	font-size: 64px;	}
 h2, .h2 {
   font-size: 33.75px !important;
   color: var(--tucan-orange);
@@ -336,10 +334,13 @@ body.custom-modal-open {
   background-color: var(--main-background-color);
   color:white;
 }
+img.PageHeaderSegmentImage {
+	width:160px;
+}
 h1.PageHeaderSegmentTitle {
-  margin-top:16px;
-  margin-bottom:0;
-  font-weight: bold;
+	margin-top:8px;
+	margin-bottom:0;
+	font-weight: bold;
 }
 
 .Slideshow {
@@ -645,6 +646,7 @@ h1.PageHeaderSegmentTitle {
 		align-items: center;
 	}
 	h1.PageHeaderSegmentTitle {
-
+		font-size:24px;
+		font-weight: 550;	/* semi-bold */
 	}
 }
