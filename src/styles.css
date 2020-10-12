@@ -638,3 +638,13 @@ h1.PageHeaderSegmentTitle {
 ::-webkit-scrollbar-thumb:hover {
   background: #36343C; 
 }
+
+
+@media only screen and (max-width: 600px) {
+	.PageHeaderSegment {
+		align-items: center;
+	}
+	h1.PageHeaderSegmentTitle {
+
+	}
+}
