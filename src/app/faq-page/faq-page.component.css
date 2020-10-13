@@ -1,3 +1,27 @@
 img.PageHeaderSegmentImage.FAQsHeaderImage {
     width:100px;
 }
+
+.faqAccordian {
+    margin-bottom:16px;
+}
+.faqHeader {
+    margin-bottom:8px;
+}
+    .faqHeader:hover {
+        cursor:pointer;
+        text-decoration: underline;
+    }
+.faqContent {
+    padding-left:16px;
+    border-left: 0.5px solid rgb(200,200,200);
+    box-sizing: border-box;
+
+    height:0;
+    overflow:hidden;
+}
+.faqContent.open {
+    height:auto;
+    padding-top:8px;
+    padding-bottom:8px;
+}
