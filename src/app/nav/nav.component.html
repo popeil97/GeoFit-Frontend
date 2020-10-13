@@ -29,7 +29,7 @@
           </div>
         </div>
 
-        <div class="TucanNavigationButtonSegment">
+        <div class="TucanNavigationButtonSegment" id='NavLoginButtons'>
           <ng-template [ngIf]="this._authService.isLoggedIn()" [ngIfElse]="NavButtonsBlock">
               <a class="NavItem dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (click)="showNotifications()">
                 <div class='NavNotifImgContainer'>

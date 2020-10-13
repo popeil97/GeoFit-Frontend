@@ -265,6 +265,9 @@ a.navbar-brand {
     .TucanNavigationButtonSegment .NavItem button, .TucanNavigationButtonSegment .NavItem .button {
       width:100%;
     }
+  .TucanNavigationButtonSegment.safariBrowser {
+    margin-bottom:69px;
+  }
   .NavDropdownContents {
     left:0;
     right:initial;

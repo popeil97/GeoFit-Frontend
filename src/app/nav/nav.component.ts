@@ -41,6 +41,21 @@ export class NavComponent implements OnInit {
       e.stopPropagation();
     });
 
+    var ua = window.navigator.userAgent;
+    var iOS = !!ua.match(/iP(ad|od|hone)/i);
+    var webkit = !!ua.match(/WebKit/i);
+    var iOSSafari = 
+      iOS && 
+      webkit && 
+      !ua.match(/CriOS/i) 
+      && !ua.match(/OPiOS/i) 
+      && !ua.match(/EdgiOS/i);
+    
+    if (iOSSafari) {
+      document.getElementById('NavLoginButtons').classList.add('safariBrowser');
+    }
+
+
     // THIS SHOULDN'T BE THE WAY, BUT LET'S GO WITH IT FOR NOW
     Observable.interval(1*1000) // make much larger in production
       .switchMap(() => {
