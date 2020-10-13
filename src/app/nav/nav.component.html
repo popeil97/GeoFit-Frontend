@@ -12,20 +12,24 @@
             <a class="TucanNavigationLogo" routerLink='/'><img src= "../../assets/logos/logo-white-headOnly-small.png"></a>
           </div>
            
-          <div class="NavItem active" (click)="NavItemClick()">
-            <a class="NavLink" routerLink='/about-tucan'>ABOUT<span class="sr-only">(current)</span></a>
+          <div class="NavItem active" (click)="NavItemClick('/about-tucan')">
+            <!-- <a class="NavLink" routerLink='/about-tucan'>ABOUT<span class="sr-only">(current)</span></a> -->
+            <p class="NavLink">ABOUT<span class="sr-only">(current)</span></p>
           </div>
           
-          <div class="NavItem active" (click)="NavItemClick()">
-            <a class="NavLink" routerLink='/races'>PUBLIC RACES<span class="sr-only">(current)</span></a>
+          <div class="NavItem active" (click)="NavItemClick('/races')">
+            <!-- <a class="NavLink" routerLink='/races'>PUBLIC RACES<span class="sr-only">(current)</span></a> -->
+            <p class="NavLink">PUBLIC RACES<span class="sr-only">(current)</span></p>
           </div>
           
-          <div class="NavItem active" (click)="NavItemClick()">
-            <a class="NavLink" routerLink='/faqs'>FAQs<span class="sr-only">(current)</span></a>
+          <div class="NavItem active" (click)="NavItemClick('/faqs')">
+            <!-- <a class="NavLink" routerLink='/faqs'>FAQs<span class="sr-only">(current)</span></a> -->
+            <p class="NavLink">FAQs<span class="sr-only">(current)</span></p>
           </div>
 
-          <div class="NavItem active" (click)="NavItemClick()">
-            <a class="NavLink" routerLink='/contact'>CONTACT<span class="sr-only">(current)</span></a>
+          <div class="NavItem active" (click)="NavItemClick('/contact')">
+            <!-- <a class="NavLink" routerLink='/contact'>CONTACT<span class="sr-only">(current)</span></a> -->
+            <p class="NavLink">CONTACT<span class="sr-only">(current)</span></p>
           </div>
         </div>
 
@@ -41,8 +45,8 @@
                   </ng-template>
                 </div>
               </a>
-              <div class='NavItem dropdown dropdownVisible NavProfileDropdown' [ngClass]="{dropdownOpen : this.profileOpen}" (click)="this.ToggleProfileDropdown()">
-                <div class='dropdownSelected NavProfileDropdownSelected'>
+              <div class='NavItem dropdown dropdownVisible NavProfileDropdown' [ngClass]="{dropdownOpen : this.profileOpen}">
+                <div class='dropdownSelected NavProfileDropdownSelected' (click)="this.ToggleProfileDropdown()">
                   <div class='NavProfileImgContainer'>
                     <img class='NavProfileImg' src= "{{this.picURL}}" />
                   </div>
@@ -51,10 +55,16 @@
                 <div class='dropdownContents NavDropdownContents'>
                   <div class="dropdownItem NavDropdownItem">
                     <!--<a [routerLink]="['/profile', {username: this._authService.username}]">Go to Profile</a>-->
-                    <a [routerLink]="['/']">Go to Profile</a>
+                    <div class='NavLink' (click)="NavDropdownItemClick('/')">
+                      <!-- <a [routerLink]="['/']">Go to Profile</a> -->
+                      <p class='margin-bottom-0px'>Go to Profile</p>
+                    </div>
                   </div>
                   <div class="dropdownItem NavDropdownItem">
-                    <a (click)="logout()">Log out {{this._authService.username}}</a>
+                    <div class='NavLink' (click)="NavDropdownLogout()">
+                      <!-- <a (click)="logout()">Log out {{this._authService.username}}</a> -->
+                      <p class='margin-bottom-0px'>Log out {{this._authService.username}}</p>
+                    </div>
                   </div>
                 </div>
               </div>

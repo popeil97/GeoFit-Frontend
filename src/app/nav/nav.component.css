@@ -30,9 +30,18 @@
   padding-right: 12px;
   padding-left: 8px;
 }
-.NavLink {
-  font-size: 19px;
-}
+  .NavLink {
+    margin-top:0;
+    margin-bottom: 0;
+    font-size: 19px;
+    color:white;
+  }
+  .NavItem:hover {
+    cursor: pointer;
+  }
+    .NavItem:hover .NavLink {
+      text-decoration: underline;
+    }
 .NavProfileDropdownSelected {
   display:flex;
   flex-direction: row;
