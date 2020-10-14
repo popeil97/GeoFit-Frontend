@@ -115,6 +115,7 @@ import { MapSettingsComponent } from './map-settings/map-settings.component';
 import { SearchComponent } from './search/search.component';
 import { RouteInfoComponent } from './route-info/route-info.component';
 import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/race-dashboard-racer-list.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 
 @NgModule({
@@ -200,6 +201,7 @@ import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/rac
     RaceDashboardRacerListComponent,
     RegisterComponent,
     RegisterDialogContent,
+    ContactFormComponent,
       ],
 
   imports: [
