@@ -205,12 +205,6 @@ a.navbar-brand {
   background-color: var(--main-background-color);
   box-shadow: 0 4px 10px -2px black;
 }
-.NavDropdownContents {
-  left:0;
-  right:initial;
-  top:initial;
-  bottom:100%;
-}
 
 @media only screen and (max-width: 900px) {
   .TucanNavigationLogo img {
