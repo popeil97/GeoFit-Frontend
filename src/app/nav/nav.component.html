@@ -45,7 +45,7 @@
                   </ng-template>
                 </div>
               </a>
-              <div class='NavItem dropdown dropdownVisible NavProfileDropdown' [ngClass]="{dropdownOpen : this.profileOpen}">
+              <div class='NavItem dropdown dropdownVisible NavProfileDropdown' [ngClass]="{'dropdownOpen' : this.profileOpen}">
                 <div class='dropdownSelected NavProfileDropdownSelected' (click)="this.ToggleProfileDropdown()">
                   <div class='NavProfileImgContainer'>
                     <img class='NavProfileImg' src= "{{this.picURL}}" />
