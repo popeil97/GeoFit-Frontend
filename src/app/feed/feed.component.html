@@ -7,7 +7,7 @@
 
   <ng-template [ngIf]='feedItems.length > 0' [ngIfElse]="NothingInFeedBlock">
     <div class='Feed'>
-      <div *ngFor="let element of feedItems" class='FeedItem'>
+      <div *ngFor="let element of feedItems" class='FeedItem' [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">
         <div class='FeedProfileImgCell'>
           <div class='FeedProfileImgContainer'>
             <img class="FeedProfileImg" src="{{ element.profile_url }}">
@@ -15,7 +15,7 @@
         </div>
         <div class='FeedProfileContentCell'>
           <div>
-              <ng-template [ngIf]="element.message.length < 20" [ngIfElse]="FeedMessageIsStoryBlock">
+              <ng-template [ngIf]='(element.message.includes("ran") || element.message.includes("walked") || element.message.includes("biked") || element.message.includes("cycled") )' [ngIfElse]="FeedMessageIsStoryBlock">
                 <!-- NO STORY : FITNESS UPDATE -->
                 <div class='FeedMessageHeader'>
                   <p class='FeedMessageName'><app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav></p>

@@ -3,17 +3,25 @@
 	<div class="MapContainer">
 
 		<div class="MapSidebar" [ngClass]="{MapSidebarWidthBig: isOpen, MapSidebarWidthSmall: !isOpen}">
-			<div class="MapHeaderContainer">
+			<div class="MapHeaderContainer" *ngIf="isOpen">
 				<h3 class="MapHeaderTitle">{{this.raceName}}</h3>
 				<div class='MapHeaderButtonsContainer'>
-					<button (click)="viewAbout()">ABOUT</button>
-					<button class="lightButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('mapSettingsModal')"><span class="material-icons">settings</span></button>
+					<button class="smallButton"(click)="viewAbout()">ABOUT</button>
+					<button class="lightButton smallButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('mapSettingsModal')"><span class="material-icons">settings</span></button>
+          <span (click)="toggleMenu()" *ngIf="isOpen" class="material-icons">close</span>
+
+
 				</div>
+         
 			</div>
 
-			<button  class='LogContainer' *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('custom-modal-5')" >LOG ACTIVITY </button>
+      <div class="MapHeaderContainer" *ngIf="!isOpen">
+       <button *ngIf="!isOpen" (click)="toggleMenu()"><span class="material-icons">menu</span></button>
+     </div>
 
-			<div class='MapActionsContainer' *ngIf="!this._authService.isLoggedIn() || !this.userRegistered">
+			<button  class='LogContainer' *ngIf="this._authService.isLoggedIn() && this.userRegistered && isOpen" (click)="openModal('custom-modal-5')" >LOG ACTIVITY </button>
+
+			<div class='MapActionsContainer' *ngIf="(!this._authService.isLoggedIn() || !this.userRegistered) && isOpen">
 					<p class='color-white'>Join the race and become a participant!</p>
 					<button class="lightButton wideButton" (click)="viewAbout()">JOIN</button>
 			</div>
@@ -34,8 +42,8 @@
 			
 			
 
-			<div class="Slideshow MapFeedContainer">
-				<div class="SlideshowHeader MapFeedSlideshowHeader">
+			<div class="Slideshow MapFeedContainer"  *ngIf="isOpen">
+				<div class="SlideshowHeader MapFeedSlideshowHeader" >
 					<button class="SlideshowButton" (click)="SwitchSlideshow('feed')" id="feed-btn">Social Feed</button>
 					<button class="SlideshowButton" (click)="SwitchSlideshow('leaderboard')" id="leaderboard-btn">Leaderboard</button>
 				</div>
@@ -55,7 +63,7 @@
 								<button class="strippedWhite h7" (click)="toggleOptions()">Filter Chat <span class="material-icons">filter_list</span></button>
 								<div *ngIf="feedOptions" class='MapFeedOptionsContainer'>
 									<p class="textControl">Only show people I follow <input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/></p>
-									<p class="textControl">Only show stories <input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/> </p>
+									<p class="textControl">Only show status updates <input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/> </p>
 								</div>
 							</div>
 						</div>
@@ -93,12 +101,7 @@
 			<div *ngIf="this._authService.isLoggedIn() && this.userRegistered"[ngClass]="{searchContainer: isOpen, searchContainerSmall: !isOpen}">
 				<app-search [raceID]="raceID"></app-search>
 			</div>
-			<div class="buttonContainer">
-				<button class='lightButton MapFeedToggleButton' (click)="toggleMenu()">
-					<span *ngIf="isOpen" class="material-icons">keyboard_arrow_left</span>
-					<span *ngIf="!isOpen" class="material-icons">keyboard_arrow_right</span>
-				</button>
-			</div>
+			
 		</div>
 	</div>
 </div>
