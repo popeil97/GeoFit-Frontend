@@ -8,7 +8,7 @@
 
   width:100%;
   height:80px;
-  padding:8px;
+  padding:16px;
   box-sizing: border-box;
   /* background:rgba(256,256,256,0.7); */
   background-color: var(--main-background-color);
@@ -30,9 +30,18 @@
   padding-right: 12px;
   padding-left: 8px;
 }
-.NavLink {
-  font-size: 19px;
-}
+  .NavLink {
+    margin-top:0;
+    margin-bottom: 0;
+    font-size: 19px;
+    color:white;
+  }
+  .NavItem:hover {
+    cursor: pointer;
+  }
+    .NavItem:hover .NavLink {
+      text-decoration: underline;
+    }
 .NavProfileDropdownSelected {
   display:flex;
   flex-direction: row;
@@ -41,8 +50,12 @@
   flex-wrap: nowrap;
 }
 
+.TucanNavigationLogo {
+  width:auto;
+  height:30px;
+}
 .TucanNavigationLogo img {
-  width:118px;
+  height:100%;
 }
 .TucanNavigationToggler {
   display:none;
@@ -155,9 +168,58 @@ a.navbar-brand {
   font-feature-settings: 'liga';
 }
 
-@media only screen and (max-width: 600px) {
+.NavProfileDropdown {
+  padding:8px;
+  color:white
+}
+.NavNotifImgContainer, .NavProfileImgContainer {
+  position: relative;
+  display:inline-block;
+  border-radius:50%;
+  width:35px;
+  height:35px;
+  overflow:hidden;
+}
+.NavProfileImgContainer {
+  margin-right:8px;
+}
+.NavProfileImg {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:100%;
+}
+
+.NavNotifImg {
+  position: absolute;
+  top:1%;
+  left:10%;
+  transform:translate(-50%,-50%);
+  width:100%;
+}
+
+.NavDropdownContents {
+  right:0;
+  left:initial;
+  background-color: var(--main-background-color);
+  box-shadow: 0 4px 10px -2px black;
+}
+
+@media only screen and (max-width: 900px) {
   .TucanNavigationLogo img {
-    width:100px;
+    width:90px;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .TucanNavigationLogo {
+    height:auto;
+    width:90px;
+  }
+  .TucanNavigationLogo img {
+    height:auto;
+    width:100%;
   }
   .TucanNavigationToggler {
     display:block;
@@ -191,7 +253,7 @@ a.navbar-brand {
     max-width: 60%;
     height:100%;
 
-    padding:8px;
+    padding:16px;
     box-sizing: border-box;
 
     background-color: var(--main-background-color);
@@ -203,49 +265,21 @@ a.navbar-brand {
     flex-direction: column;
     align-items: stretch;
   }
-}
-.NavProfileDropdown {
-  padding:8px;
-  color:white
-}
-.NavNotifImgContainer, .NavProfileImgContainer {
-  position: relative;
-  display:inline-block;
-  border-radius:50%;
-  width:35px;
-  height:35px;
-  overflow:hidden;
-}
-.NavProfileImgContainer {
-  margin-right:8px;
-}
-.NavProfileImg {
-  position: absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%,-50%);
-  width:100%;
-}
-
-.NavNotifImg {
-  position: absolute;
-  top:1%;
-  left:10%;
-  transform:translate(-50%,-50%);
-  width:100%;
-}
-.NavDropdownContents {
-  right:0;
-  left:initial;
-  background-color: var(--main-background-color);
-  box-shadow: 0 4px 10px -2px black;
-}
-
-@media only screen and (max-width: 600px) {
+    .TucanNavigationButtonSegment .NavItem button, .TucanNavigationButtonSegment .NavItem .button {
+      width:100%;
+    }
+  .TucanNavigationButtonSegment.safariBrowser {
+    margin-bottom:79px;
+  }
   .NavDropdownContents {
     left:0;
     right:initial;
     top:initial;
     bottom:100%;
+  }
+  .NavItem {
+    padding-left:0;
+    padding-right:0;
+    margin-bottom:8px;
   }
 }

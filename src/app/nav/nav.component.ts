@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Rx';
 import { UserProfileService } from '../userprofile.service';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { NotificationPanelComponent } from '../notification-panel/notification-panel.component';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { ModalService } from '../modalServices';
 
@@ -28,6 +29,7 @@ export class NavComponent implements OnInit {
     public _authService: AuthService,
     private _userProfileService: UserProfileService,
     private _bottomSheet: MatBottomSheet,
+    private router:Router,
     private modalService: ModalService,
   ) {}
 
@@ -40,6 +42,21 @@ export class NavComponent implements OnInit {
     $(document).on('click', '.dropdown-menu', function (e) {
       e.stopPropagation();
     });
+
+    var ua = window.navigator.userAgent;
+    var iOS = !!ua.match(/iP(ad|od|hone)/i);
+    var webkit = !!ua.match(/WebKit/i);
+    var iOSSafari = 
+      iOS && 
+      webkit && 
+      !ua.match(/CriOS/i) 
+      && !ua.match(/OPiOS/i) 
+      && !ua.match(/EdgiOS/i);
+    
+    if (iOSSafari) {
+      document.getElementById('NavLoginButtons').classList.add('safariBrowser');
+    }
+
 
     // THIS SHOULDN'T BE THE WAY, BUT LET'S GO WITH IT FOR NOW
     Observable.interval(1*1000) // make much larger in production
@@ -97,11 +114,19 @@ export class NavComponent implements OnInit {
   }
 
   ToggleProfileDropdown() {
+    console.log("Profile dropdown currently set to: " + this.profileOpen);
     this.profileOpen = !this.profileOpen;
+    console.log("Profile dropdown now set to: " + this.profileOpen);
   }
 
-  NavItemClick() {
+  NavItemClick(url:string = null) {
     if (this.navigationOpen) this.ToggleNavigation();
+    if (url != null) this.router.navigate([url]);
+  }
+  NavDropdownItemClick = (url:any = null) => {
+    this.ToggleProfileDropdown();
+    this.ToggleNavigation();
+    this.NavItemClick(url);
   }
 
   getNotifications() {
@@ -146,6 +171,11 @@ export class NavComponent implements OnInit {
       //console.log('sheet closed');
       this.getNotifications();
     })
+  }
+
+  NavDropdownLogout = () => {
+    this.NavDropdownItemClick();
+    this.logout();
   }
 
   logout() {

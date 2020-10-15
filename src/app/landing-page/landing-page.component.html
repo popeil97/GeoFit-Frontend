@@ -3,7 +3,7 @@
     <div class="masthead" id="race">
         <div class="split left">
             <div class='TucanContainer'>
-                <div class="centered">
+                <div class="LandingMain">
                     <img src= "../../assets/logos/logo-white.png" class="TucanLogo LandingTucanLogo">
                     <h3 class='LandingHeaderText'>We bring community to virtual racing</h3>
                     <div class='LandingSubheading'>
@@ -11,9 +11,8 @@
                         <a class="button lightButton LandingAboutButton" routerLink='/about-tucan'>About Tucan Fitness</a>
                     </div>
     
-                    <div *ngIf="!this._authService.isLoggedIn()">
+                    <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
                         <button class='darkButton shadowButton' (click)="openModal('custom-modal-1')">Log In</button>
-                         
                         <button class='darkButton shadowButton' (click)="openModal('custom-modal-2')">Sign Up</button>
                     </div>
                 </div>

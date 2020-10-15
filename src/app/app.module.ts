@@ -27,6 +27,8 @@ import { FeedComponent } from './feed/feed.component';
 import { StoryService } from './story.service';
 import { ImageService } from './image.service';
 import { LeaderboardService } from './leaderboard.service';
+import { RegisterComponent } from './register/register.component'
+import { RegisterDialogContent } from './register/register.component'
 
 import {
   HttpRequest,
@@ -115,6 +117,7 @@ import { RouteInfoComponent } from './route-info/route-info.component';
 import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/race-dashboard-racer-list.component';
 import { RaceDashboardRacerRowComponent } from './race-dashboard-racer-row/race-dashboard-racer-row.component';
 import { ActivityListComponent } from './activity-list/activity-list.component';
+import { ContactFormComponent } from './contact-form/contact-form.component';
 
 
 @NgModule({
@@ -199,6 +202,9 @@ import { ActivityListComponent } from './activity-list/activity-list.component';
     RaceDashboardRacerListComponent,
     RaceDashboardRacerRowComponent,
     ActivityListComponent,
+    RegisterComponent,
+    RegisterDialogContent,
+    ContactFormComponent,
       ],
 
   imports: [

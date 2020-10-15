@@ -34,6 +34,7 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
   @ViewChild(FeedComponent) feedChild: FeedComponent;
   @ViewChild(StoryModalComponent) storyModal: StoryModalComponent;
   @ViewChildren(LeaderboardComponent) leaderboardChildren: QueryList<LeaderboardComponent>;
+  @ViewChildren(HybridLeaderboardComponent) hybridLeaderboardChildren: QueryList<HybridLeaderboardComponent>;
 
   public followers:any[];
   public activities:any[];
@@ -255,6 +256,12 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
       child.getLeaderboard();
     });
 
+    if(this.hybridLeaderboardChildren.length >= 1) {
+      _.forEach(this.hybridLeaderboardChildren.toArray(),(child:HybridLeaderboardComponent) => {
+        child.getLeaderboard();
+      });
+    }
+
   }
 
   refreshStatComponents(): void {
@@ -271,6 +278,12 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     _.forEach(this.leaderboardChildren.toArray(),(child:LeaderboardComponent) => {
       child.getLeaderboard();
     });
+
+    if(this.hybridLeaderboardChildren.length >= 1) {
+      _.forEach(this.hybridLeaderboardChildren.toArray(),(child:HybridLeaderboardComponent) => {
+        child.getLeaderboard();
+      });
+    }
   }
 
   getRaceState(): void {

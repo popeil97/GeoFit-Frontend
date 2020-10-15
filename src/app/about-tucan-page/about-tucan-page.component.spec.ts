@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AboutTucanPageComponent } from './about-tucan.component';
+import { AboutTucanPageComponent } from './about-tucan-page.component';
 
 describe('AboutTucanPageComponent', () => {
   let component: AboutTucanPageComponent;
