@@ -19,6 +19,7 @@ export class RaceDashboardService {
   }
 
   getRacerList(race_id:number) {
+    console.log("Getting racer list with ID ", race_id);
     return this.http.post(environment.apiUrl + '/api/race-dashboard-racer-list/',{race_id:race_id}).toPromise();
   }
 

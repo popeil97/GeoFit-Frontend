@@ -8,9 +8,10 @@ import { RaceDashboardService } from '../race-dashboard.service';
 })
 export class RaceDashboardRacerListComponent implements OnInit {
   @Input() raceID: number;
+  @Input() raceName: string;
 
-  public columns:string[] = ['ProfilePic','Data','Distance','Actions'];
-  public dataSource: any;
+  //public columns:string[] = ['ProfilePic','Data','Distance','Actions'];
+  //public dataSource: any;
 
   public racersList:RacerItem[];
 
@@ -20,7 +21,9 @@ export class RaceDashboardRacerListComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getRaceList();
+    if (this.raceID){
+      this.getRaceList();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -30,7 +33,7 @@ export class RaceDashboardRacerListComponent implements OnInit {
 
         switch(propName) {
           case 'raceID':
-            if(changes.raceID.currentValue != undefined) {
+            if(this.raceID != undefined) {
               this.getRaceList();
             }
         }
@@ -39,6 +42,7 @@ export class RaceDashboardRacerListComponent implements OnInit {
   }
 
   private getRaceList(){
+    console.log("getting racer list with ID: ", this.raceID);
     this._dashboardService.getRacerList(this.raceID).then((data) => {
       this.racersList = data as RacerItem[];
       console.log("Racers list: ", this.racersList);
@@ -46,9 +50,7 @@ export class RaceDashboardRacerListComponent implements OnInit {
   }
 
   public removeUserByID(user_id:number){
-    console.log("Removing user id.. ", user_id)
     this._dashboardService.removeUserFromRaceByID(this.raceID, user_id).then((data) => {
-      console.log(data);
       if (data['success']){
         console.log("Successfully removed user!");
         this.getRaceList();
@@ -68,4 +70,15 @@ interface RacerItem{
   distance:number;
   distance_type:string;
   child_user_stats: RacerItem[];
+  activities: ActivityItem[];
+}
+
+interface ActivityItem {
+  id:number;
+  name:string;
+  distance:string;
+  moving_time:number;
+  start_date:string;
+  type:string;
+  is_manual:boolean;
 }

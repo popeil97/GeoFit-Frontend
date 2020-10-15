@@ -18,6 +18,15 @@
 					<button class="lightButton wideButton" (click)="viewAbout()">JOIN</button>
 			</div>
 
+			<div *ngIf="this.childRaceData.length > 1">
+				<div class="container">
+				  <label>Select Route</label>
+				  <select [(ngModel)]="selectedRaceID">
+					  <option *ngFor="let x of this.childRaceData" [value]="x.id" [selected]="selectedRaceID == x.id">{{x.name}}</option>
+				  </select>
+				</div>
+			  </div>
+
 <!--
 			<div class='MapActionsContainer'>
 				<ng-template [ngIf]="this._authService.isLoggedIn() && this.userRegistered" [ngIfElse]="NotLoggedInBlock">

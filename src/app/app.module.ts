@@ -113,6 +113,8 @@ import { MapSettingsComponent } from './map-settings/map-settings.component';
 import { SearchComponent } from './search/search.component';
 import { RouteInfoComponent } from './route-info/route-info.component';
 import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/race-dashboard-racer-list.component';
+import { RaceDashboardRacerRowComponent } from './race-dashboard-racer-row/race-dashboard-racer-row.component';
+import { ActivityListComponent } from './activity-list/activity-list.component';
 
 
 @NgModule({
@@ -174,7 +176,6 @@ import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/rac
     ContactPageComponent,
     WhyInfoComponent,
     WhyInfoDialogContent,
-
     SwagListComponent,
     SwagItemComponent,
     CartEditComponent,
@@ -196,6 +197,8 @@ import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/rac
     SearchComponent,
     RouteInfoComponent,
     RaceDashboardRacerListComponent,
+    RaceDashboardRacerRowComponent,
+    ActivityListComponent,
       ],
 
   imports: [
