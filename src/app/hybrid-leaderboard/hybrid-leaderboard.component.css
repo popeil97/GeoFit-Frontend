@@ -79,25 +79,30 @@ background: linear-gradient(90deg, rgba(56,56,56,1) 0%, rgba(226,221,215,1) 100%
 }
 
 .NumCol{
-  width:8%;
-  padding:10px;
+  width:5%;
+  padding:4px;
 }
 .PicCol{
-  width:10%;
-  padding:10px;
+  width:16%;
+  padding:4px;
 }
 .NameCol{
-  width:35%;
-  text-align:center;
-  padding:10px;
+  width:40%;
+  
+  padding:4px;
 }
 .DistanceCol{
-  width:15%;
-  padding:10px;
+  width:12%;
+  padding:4px;
 }
 .FollowCol{
-  width:15%;
-  padding:10px;
+  width:17%;
+  padding:4px;
+}
+
+.dropDownCol{
+  width: 10%;
+  padding:4px;
 }
 
 
@@ -113,7 +118,7 @@ span:hover{
   box-sizing: border-box;
   */
   margin:3px;
-  padding-left:10px; padding-right:10px;
+  padding-left:10px; padding-right:2px;
   box-shadow: 0px 0px 2px 1px rgb(200,200,200);
   font-size:12px;
 }

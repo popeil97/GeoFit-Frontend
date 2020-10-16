@@ -6,9 +6,9 @@
 			<div class="MapHeaderContainer" *ngIf="isOpen">
 				<h3 class="MapHeaderTitle">{{this.raceName}}</h3>
 				<div class='MapHeaderButtonsContainer'>
-					<button class="smallButton"(click)="viewAbout()">ABOUT</button>
+					<button class="smallButton" style="margin-right:3px;" (click)="viewAbout()">ABOUT</button>
 					<button class="lightButton smallButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('mapSettingsModal')"><span class="material-icons">settings</span></button>
-          <span (click)="toggleMenu()" *ngIf="isOpen" class="material-icons">close</span>
+          <span (click)="toggleMenu()" style="font-size:20px;" *ngIf="isOpen" class="material-icons">close</span>
 
 
 				</div>
@@ -26,7 +26,7 @@
 					<button class="lightButton wideButton" (click)="viewAbout()">JOIN</button>
 			</div>
 
-			<div *ngIf="this.childRaceData.length > 1">
+			<div *ngIf="this.childRaceData.length > 1 && isOpen">
 				<div class="container">
 				  <label>Select Route</label>
 				  <select [(ngModel)]="selectedRaceID">

@@ -1,6 +1,7 @@
 .FeedContainer {
   position: relative;
   overflow-y:auto;
+  padding-bottom:75px;
 }
 
 .small{

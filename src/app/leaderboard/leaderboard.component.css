@@ -74,25 +74,25 @@ background: linear-gradient(90deg, rgba(56,56,56,1) 0%, rgba(226,221,215,1) 100%
 }
 
 .NumCol{
-  width:8%;
-  padding:10px;
+  width:5%;
+  padding:4px;
 }
 .PicCol{
-  width:10%;
-  padding:10px;
+  width:16%;
+  padding:4px;
 }
 .NameCol{
-  width:35%;
-  text-align:center;
-  padding:10px;
+  width:40%;
+  
+  padding:4px;
 }
 .DistanceCol{
-  width:15%;
-  padding:10px;
+  width:12%;
+  padding:4px;
 }
 .FollowCol{
-  width:15%;
-  padding:10px;
+  width:17%;
+  padding:4px;
 }
 
 
