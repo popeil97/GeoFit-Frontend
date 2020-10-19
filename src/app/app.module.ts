@@ -118,6 +118,7 @@ import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/rac
 import { RaceDashboardRacerRowComponent } from './race-dashboard-racer-row/race-dashboard-racer-row.component';
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { StoryPopupComponent } from './story-popup/story-popup.component';
 
 
 @NgModule({
@@ -205,6 +206,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     RegisterComponent,
     RegisterDialogContent,
     ContactFormComponent,
+    StoryPopupComponent,
       ],
 
   imports: [
