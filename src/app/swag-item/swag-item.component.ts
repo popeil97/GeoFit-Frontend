@@ -12,13 +12,16 @@ export class SwagItemComponent implements OnInit {
   @Input() order:Order;
   @Input() isOrder:Boolean = false;
   @Output() refreshState: EventEmitter<any> = new EventEmitter();
-  sizes:string[] = ['S','M','L','XL','2XL','3XL'];
+  sizes:string[] = ['S','M','L','XL','2XL','3XL','S (youth)','M (youth)','L (youth)'];
   btnDisabled:Boolean = true;
   selectedSize:string;
 
   constructor(private _swagService:SwagService) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+      console.log("ITEM", this.item);
+
+  }
 
   onSizeSelect(size:string) {
     console.log("SELECT SIZE", this.btnDisabled);
@@ -30,6 +33,14 @@ export class SwagItemComponent implements OnInit {
   }
 
   addToCart() {
+    this._swagService.addToCart(this.item.id,this.selectedSize).then((resp) => {
+      this.init();
+      this.refreshState.emit();
+    })
+  }
+
+  addEntryToCart() {
+    this.selectedSize = 'S';
     this._swagService.addToCart(this.item.id,this.selectedSize).then((resp) => {
       this.init();
       this.refreshState.emit();

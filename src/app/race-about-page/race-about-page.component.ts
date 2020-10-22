@@ -9,6 +9,7 @@ import { MapComponent } from '../map/map.component';
 import { SwagComponent } from '../swag/swag.component';
 import { TagType } from '../tags.service';
 import { ModalService } from '../modalServices';
+import { MapService } from '../map.service';
 
 @Component({
   selector: 'app-race-about-page',
@@ -19,7 +20,7 @@ export class RaceAboutPageComponent implements OnInit {
   @ViewChild(MapComponent) mapChild: MapComponent;
   @ViewChild(SwagComponent) swagChild: SwagComponent;
   public AboutForm: FormGroup;
-  
+  public routeData = {};
   aboutData:AboutData = null;
   raceSettings:RaceSettings = null as RaceSettings;
   showForm: Boolean;
@@ -75,6 +76,7 @@ export class RaceAboutPageComponent implements OnInit {
     public _authService: AuthService,
     private modalService: ModalService,
     private _userProfileService:UserProfileService,
+    private _mapService: MapService,
   ) {}
 
   ngAfterViewInit(): void {
@@ -131,6 +133,15 @@ export class RaceAboutPageComponent implements OnInit {
         _this.getOwnerData();
       });
     });
+
+/**
+    this._mapService.getMapData(_this.raceID).then((data) => {
+        //console.log(data);
+        let mapData = data as RouteData;
+        console.log("MAP DATA",this.mapData);
+       
+      }); **/
+
 
     document.getElementById('map-btn').style.backgroundColor = "#36343c";
     document.getElementById('map-btn').style.color = "#FFFFFF";
@@ -347,6 +358,11 @@ export class RaceAboutPageComponent implements OnInit {
   }
 
 
+}
+
+interface RouteData {
+  name: string;
+  coords: any;
 }
 
 export interface AboutData {
