@@ -115,7 +115,10 @@ import { MapSettingsComponent } from './map-settings/map-settings.component';
 import { SearchComponent } from './search/search.component';
 import { RouteInfoComponent } from './route-info/route-info.component';
 import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/race-dashboard-racer-list.component';
+import { RaceDashboardRacerRowComponent } from './race-dashboard-racer-row/race-dashboard-racer-row.component';
+import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
+import { StoryPopupComponent } from './story-popup/story-popup.component';
 
 
 @NgModule({
@@ -177,7 +180,6 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     ContactPageComponent,
     WhyInfoComponent,
     WhyInfoDialogContent,
-
     SwagListComponent,
     SwagItemComponent,
     CartEditComponent,
@@ -199,9 +201,12 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
     SearchComponent,
     RouteInfoComponent,
     RaceDashboardRacerListComponent,
+    RaceDashboardRacerRowComponent,
+    ActivityListComponent,
     RegisterComponent,
     RegisterDialogContent,
     ContactFormComponent,
+    StoryPopupComponent,
       ],
 
   imports: [

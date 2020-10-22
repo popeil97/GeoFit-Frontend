@@ -1,4 +1,4 @@
-<h4>Items for Sale</h4>
+<h4>Select Items</h4>
 <app-swag-list #items [raceID]="raceID" [isCart]="false" (refreshCart)="refreshCart()"></app-swag-list>
 
 <hr />
@@ -6,6 +6,10 @@
 <h4>Your Cart</h4>
 <app-swag-list #cart [raceID]="raceID" [isCart]="true" (refreshCart)="refreshCart()"></app-swag-list>
 
-<div class='CheckoutButtonContainer'>
+<div class='CheckoutButtonContainer' *ngIf="checkoutDisabled">
+    <button class="buttonWithIcon" [disabled]='true' style="background-color:red;" (click)="checkout()">Checkout<mat-icon>shopping_bag</mat-icon></button>
+</div>
+
+<div class='CheckoutButtonContainer' *ngIf="!checkoutDisabled">
     <button class="buttonWithIcon" (click)="checkout()">Checkout<mat-icon>shopping_bag</mat-icon></button>
 </div>

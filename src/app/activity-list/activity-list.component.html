@@ -1,0 +1,30 @@
+<tr *ngFor="let row of activityData">
+  <td style="padding:10px;">
+    {{ row.name }}
+  </td>
+
+  <td style="padding:10px;">
+    {{ row.distance }} {{ row.distance_type }}
+  </td>
+
+  <td style="padding:10px;">
+    {{ row.moving_time }} seconds
+  </td>
+
+  <td style="padding:10px;">
+    {{ row.start_date }}
+  </td>
+
+  <td style="padding:10px;">
+    {{ row.type }}
+  </td>
+
+  <td style="padding:10px">
+    <span *ngIf="row.is_manual">Manual</span>
+    <span *ngIf="!row.is_manual">Strava</span>
+  </td>
+
+  <td>
+    <button mat-raised (click)="removeActivityByID(row.id)">Remove</button>
+  </td>
+</tr>

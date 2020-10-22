@@ -262,21 +262,12 @@ export class FeedComponent implements OnInit {
     });
   }
 
-    openModal(id: string) {
-    var data = (id == 'custom-modal-6') ? {raceID:this.ID, callbackFunction:null} : {};
-     data.callbackFunction = this.testFunction;
-
+    openModal(id: string,element) {
+    var data = (id == 'story-popup') ? {element:element, callbackFunction:null} : {};
+    console.log("ELEMENT passed", element);
     this.modalService.open(id,data);
   }
 
-  testFunction = (incomingData = null) => {
-  //  const toAlert = (incomingData != null) ? incomingData : this.testString;
-  if(incomingData != null){
-    this.newStoryPosted();
-    console.log("PARENT",incomingData);
-      }
-
-  }
 
   ToggleStoryOptions(story_id:number = null) {
     console.log('Togglestoryoptions - received story_id',story_id);
