@@ -47,6 +47,7 @@ export interface Item {
   price:number,
   state:ItemState,
   type:ItemType,
+  sizes:any[],
 }
 
 export interface Order {
