@@ -1,39 +1,51 @@
-<div *ngIf="this.isTag">
+<div *ngIf="!this.isTag && !this.userData.isTeam && !this.userData.isMe"> <!-- INDIVIDUALS WHO ARENT TAGGED WHO ARENT ME -->
+  <img src="{{this.userData.profile_url}}" width="200" height="200">
+    <div class="row text">
+      <div class="name">
+        <app-user-profile-nav [username]=userData.username [displayName]=userData.display_name [style.font-weight]="700"></app-user-profile-nav>
+      </div>
+      <div class="distance">
+        {{ this.userData.total_distance }} {{ this.userData.distance_type }}
+      </div>
+    </div>
+    <div class="row">
+        <app-user-follow class="butt" [wide]="true" [userID]="this.userData.user_id" [follows]="this.userData.follows" (followStatusChanged)="followStatusChanged($event)"></app-user-follow>
+    </div> 
+</div>
+
+<div *ngIf="this.userData.isMe"> <!-- ME, IF IM NOT ON A TEAM -->
+    <img src="{{this.userData.profile_url}}" width="200" height="200">
+    <div class="row text">
+      <div class="name">
+        <app-user-profile-nav [username]=userData.username [displayName]=userData.display_name [style.font-weight]="700"></app-user-profile-nav>
+      </div>
+      <div class="distance">
+        {{ this.userData.total_distance }} {{ this.userData.distance_type }}
+      </div>
+    </div>
+    <div class="row">
+        <button class="butt" [routerLink]="['/']">My profile</button>
+    </div>
+</div>
+
+
+<div *ngIf="this.isTag"> <!-- TAGS /ORGANIZATIONS-->
     <p>
-        {{ userData.display_name }}
-    </p>
-  
-    <p>
+      {{ userData.display_name }}
+        <br>
       {{ this.userData.total_distance }} {{ this.userData.distance_type }}
     </p>
 </div>
 
-<div *ngIf="!this.isTag && !this.userData.isTeam">
-
-  <img src="{{this.userData.profile_url}}" width="100" height="100">
-  <p>
-      <app-user-profile-nav [username]=userData.username [displayName]=userData.display_name [style.font-weight]="700"></app-user-profile-nav>
-  </p>
-
-  <p>
-    {{ this.userData.total_distance }} {{ this.userData.distance_type }}
-  </p>
-    
-  <p *ngIf="!this.userData.isMe">
-    <app-user-follow [userID]="this.userData.user_id" [follows]="this.userData.follows" (followStatusChanged)="followStatusChanged($event)"></app-user-follow>
-  </p>
-</div>
-
-<div *ngIf="!this.isTag && this.userData.isTeam">
+<div *ngIf="!this.isTag && this.userData.isTeam"> <!-- TEAMS-->
   <p>
       {{ userData.display_name }}
-  </p>
-
+    </p>
   <p *ngFor="let user of this.userData.child_user_stats">
       <app-user-profile-nav [username]=user.username [displayName]=user.display_name></app-user-profile-nav>
   </p>
 
-  <p>
+<p>
     {{ this.userData.total_distance }} {{ this.userData.distance_type }}
   </p>
     

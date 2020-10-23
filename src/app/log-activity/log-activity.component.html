@@ -7,14 +7,14 @@
     <ng-template [ngIf]="this.d != null" [ngIfElse]="LoadingLogActivity">
       <div class='Slideshow'>
         <div class="SlideshowHeader">
-          <button class="SlideshowButton" (click)="SwitchSlideshow('strava')" *ngIf="this.d.manualEntry" >Strava</button>
+          <button class="SlideshowButton" (click)="SwitchSlideshow('strava')" id="strava-btn" *ngIf="this.d.manualEntry" >Strava</button>
           <!--<button class="SlideshowButton" (click)="SwitchSlideshow('info')">Information</button>-->
-          <button class="SlideshowButton" (click)="SwitchSlideshow('manual')" *ngIf="this.d.manualEntry">Manual</button>
+          <button class="SlideshowButton" (click)="SwitchSlideshow('manual')" id="manual-btn" *ngIf="this.d.manualEntry">Manual</button>
         </div>
         <div class="SlideshowContents">
           <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'strava'}">
-           <!-- <app-activities-menu *ngIf="this.progress" [distance_unit]="progress.distance_type" [race_id]="raceID" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-activities-menu> -->
-           <app-activities-menu *ngIf="!this.d.automaticImport && stravaData.authorized" [distance_unit]="this.d.distance_unit" [race_id]="this.d.race_id" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-activities-menu>
+           <!-- <app-strava-entry *ngIf="this.progress" [distance_unit]="progress.distance_type" [race_id]="raceID" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-strava-entry> -->
+           <app-strava-entry *ngIf="!this.d.automaticImport && stravaData.authorized" [distance_unit]="this.d.distance_unit" [race_id]="this.d.race_id" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-strava-entry>
   
            <b *ngIf="this.d.automaticImport">Automatic import is turned on.</b>
   

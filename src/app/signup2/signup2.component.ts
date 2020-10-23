@@ -1,11 +1,11 @@
-import { Component, OnInit, Inject, ViewChild, Output, EventEmitter, Input} from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, Output, EventEmitter, Input, AfterViewChecked} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentType } from '../payments.service';
-import { AboutData } from '../race-about/race-about.component';
+import { AboutData } from '../race-about-page/race-about-page.component';
 import { TagType } from '../tags.service';
 import { RaceService } from '../race.service';
 import { Cart } from '../swag.service';
@@ -35,7 +35,9 @@ export class Signup2Component implements OnInit {
     private router:Router, 
     private _raceService:RaceService, 
     private modalService: ModalService
-  ) {}
+  ) { 
+    
+  }
 
   @Input() id: string;
 
@@ -69,11 +71,12 @@ export class Signup2Component implements OnInit {
       Validators.required,
     ])
   });
-
-
+  
   ngOnInit() {
+
     this.isLoggedIn = this._authService.isLoggedIn();
     this.InitForm();
+    
   }
 
   get d() { return this.modalService.getModalData(this.id); }
@@ -121,6 +124,7 @@ export class Signup2Component implements OnInit {
         let cart:Cart = callbackStruct.data;
         this.d.price = cart.price.toString();
         this.cartForm.controls['complete'].setValue(true);
+        console.log('IN CHECKOUT RETYURBN:',this.d);
       }
 
      if(this.stepper.selectedIndex==1)

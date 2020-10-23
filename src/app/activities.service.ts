@@ -30,4 +30,8 @@ export class ActivitiesService {
   getActivities(race_id:number) {
     return this.http.post(environment.apiUrl + '/api/get-activities/',{race_id:race_id}).toPromise();
   }
+
+  removeAppliedActivity(activity_id: number){
+    return this.http.post(environment.apiUrl + '/api/remove-applied-activity/', {activity_id: activity_id}).toPromise();
+  }
 }

@@ -8,3 +8,7 @@
     align-items: flex-start;
     flex-wrap: nowrap;
 }
+
+::ng-deep .mat-step-header .mat-step-icon-selected {
+    background-color: var(--tucan-green); 
+ }

@@ -1,180 +1,364 @@
-<p *ngIf="userStats==null">Nothing yet! Check back when you start logging activities.</p>
-<div class="row">
-    <div class="column2">
-        <canvas id="lineCharts"></canvas>
-    </div>
-    
-
-    <div class="column2">
-
-            <div class="tab">
-          <button *ngIf="userStats!=null && userStats.run_tot_activities > 0" style="background-color:rgba(0, 51, 204,0.2);" class="tablinks" (click)="openStats(event, 'run_stats')">Run Stats</button>
-          <button *ngIf="userStats!=null && userStats.walk_tot_activities > 0" style="background-color:rgba(153, 204, 255,0.2);" class="tablinks" (click)="openStats(event, 'walk_stats')">Walk Stats</button>
-          <button *ngIf="userStats!=null && userStats.ride_tot_activities > 0" style="background-color:rgba(204, 0, 204,0.2);" class="tablinks" (click)="openStats(event, 'ride_stats')">Ride Stats</button>
+<div class="TucanContainer">
+  <h2 *ngIf="userData.is_me; else otherUserStats">Your Stats</h2>
+  <ng-template #otherUserStats><h2>{{userData.first_name}}'s Stats</h2></ng-template>
+ 
+  <ng-template [ngIf]='userStats!= null' [ngIfElse]="LoadingUserStatsBlock">
+      <div class="UserStatsContentContainer">
+        <div class="UserStatsCanvasContainer">
+          <canvas id="lineCharts" height="120px"></canvas>
         </div>
+        <div class="UserStatsTableContainer">
+          <div class='Slideshow'>
+            <div class="SlideshowHeader">
+              <button class="SlideshowButton" (click)="SwitchSlideshow('run')" id="run-btn">Run</button>
+              <button class="SlideshowButton" (click)="SwitchSlideshow('walk')" id="walk-btn">Walk</button>
+              <button class="SlideshowButton" (click)="SwitchSlideshow('bike')" id="bike-btn">Bike</button>
+            </div>
+            <div class="SlideshowContents RaceSlideshowContents">
+              <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'run'}">
+              <table class="table table-striped textControl">
+                  <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Total</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row">Distance (mi)</th>
+                    <td>{{userStats.run_tot_dist}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Time (hrs)</th>
+                    <td>{{userStats.run_tot_hrs}}</td>
+                  </tr>
+                  <tr>
+                     <th scope="row"># Runs</th>
+                    <td>{{userStats.run_tot_activities}}</td>
+                  </tr>
+                  </tbody>
 
-        <!-- Tab content -->
+                  <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Best</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row">Distance (mi)</th>
+                    <td>{{ userStats.run_max_dist }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Time (hrs)</th>
+                    <td>{{ userStats.run_max_time }}</td>
+                  </tr>
+                  <tr>
+                     <th scope="row">Pace (min/mi)</th>
+                    <td>{{ userStats.run_max_pace}}</td>
+                  </tr>
+                  </tbody>
 
-        <div id="run_stats" class="tabcontent" style="display:block" *ngIf="userStats!=null && userStats.run_tot_activities > 0">
-        <div class="row">
-          <div class="column1">
-            <p>Total Runs</p>
-            <p  ><b>{{userStats.run_tot_activities}}</b></p>
+                  <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Average</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row">Distance (mi)</th>
+                    <td>{{ userStats.run_average_dist }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Time (hrs)</th>
+                    <td>{{ userStats.run_average_time }}</td>
+                  </tr>
+                  <tr>
+                     <th scope="row">Pace (min/mi)</th>
+                    <td>{{ userStats.run_average_pace }}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'walk'}">
+              <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Total</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row">Distance (mi)</th>
+                    <td>{{userStats.walk_tot_dist}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Time (hrs)</th>
+                    <td>{{userStats.walk_tot_hrs}}</td>
+                  </tr>
+                  <tr>
+                     <th scope="row"># walks</th>
+                    <td>{{userStats.walk_tot_activities}}</td>
+                  </tr>
+                  </tbody>
+
+                  <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Best</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row">Distance (mi)</th>
+                    <td>{{ userStats.walk_max_dist }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Time (hrs)</th>
+                    <td>{{ userStats.walk_max_time}}</td>
+                  </tr>
+                  <tr>
+                     <th scope="row">Pace (min/mi)</th>
+                    <td>{{ userStats.walk_max_pace}}</td>
+                  </tr>
+                  </tbody>
+
+                  <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Average</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row">Distance (mi)</th>
+                    <td>{{ userStats.walk_average_dist }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Time (hrs)</th>
+                    <td>{{ userStats.walk_average_time}}</td>
+                  </tr>
+                  <tr>
+                     <th scope="row">Pace (min/mi)</th>
+                    <td>{{ userStats.walk_average_pace}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+             <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'bike'}">
+              <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Total</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row">Distance (mi)</th>
+                    <td>{{userStats.ride_tot_dist}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Time (hrs)</th>
+                    <td>{{userStats.ride_tot_hrs}}</td>
+                  </tr>
+                  <tr>
+                     <th scope="row"># rides</th>
+                    <td>{{userStats.ride_tot_activities}}</td>
+                  </tr>
+                  </tbody>
+
+                  <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Best</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row">Distance (mi)</th>
+                    <td>{{ userStats.ride_max_dist }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Time (hrs)</th>
+                    <td>{{ userStats.ride_max_time }}</td>
+                  </tr>
+                  <tr>
+                     <th scope="row">Pace (min/mi)</th>
+                    <td>{{ userStats.ride_max_pace }}</td>
+                  </tr>
+                  </tbody>
+
+                  <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Average</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row">Distance (mi)</th>
+                    <td>{{ userStats.ride_average_dist }}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Time (hrs)</th>
+                    <td>{{ userStats.ride_average_time }}</td>
+                  </tr>
+                  <tr>
+                     <th scope="row">Pace (min/mi)</th>
+                    <td>{{ userStats.ride_average_pace}}</td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+            </div>
           </div>
-          <div class="column1">
-            <p>Total Distance</p>
-            <p ><b>{{userStats.run_tot_dist}}</b> mi</p>
-          </div>
-          <div class="column1">
-            <p>Total Time</p>
-            <p ><b>{{userStats.run_tot_hrs}}</b> hrs</p>
-          </div>
+        </div>
       </div>
 
+
+<!--
       <div class="row">
-          <div class="column1">
-            <p>Best Pace</p>
-            <p ><b>{{userStats.run_max_pace}}</b> min/mi</p>
-          </div>
-
-          <div class="column1">
-            <p>Longest Distance</p>
-            <p ><b>{{userStats.run_max_dist}}</b> mi</p>
-          </div>
-          
-          <div class="column1">
-            <p>Most Time</p>
-            <p ><b>{{userStats.run_max_time}}</b> hrs</p>
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="column1">
-            <p>Average Pace</p> 
-            <p ><b>{{userStats.run_average_pace}}</b> min/mi</p>
-          </div>
-
-          <div class="column1">
-            <p>Average Distance</p>
-            <p ><b>{{userStats.run_average_dist}}</b> mi</p>
-          </div>
-
-          <div class="column1">
-            <p>Average Time</p>
-            <p ><b>{{userStats.run_average_time}}</b> hrs</p>
-          </div>
-
-          </div>
-          </div>
 
 
-          <div id="walk_stats" class="tabcontent" style="display:block;" *ngIf="userStats!=null && userStats.walk_tot_activities > 0">
-        <div class="row">
-          <div class="column1">
-            <p>Total Walks</p>
-            <p  ><b>{{userStats.walk_tot_activities}}</b></p>
-          </div>
-          <div class="column1">
-            <p>Total Distance</p>
-            <p ><b>{{userStats.walk_tot_dist}}</b> mi</p>
-          </div>
-          <div class="column1">
-            <p>Total Time</p>
-            <p ><b>{{userStats.walk_tot_hrs}}</b> hrs</p>
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="column1">
-            <p>Best Pace</p>
-            <p ><b>{{userStats.walk_max_pace}}</b> min/mi</p>
-          </div>
-
-          <div class="column1">
-            <p>Longest Distance</p>
-            <p ><b>{{userStats.walk_max_dist}}</b> mi</p>
-          </div>
-          
-          <div class="column1">
-            <p>Most Time</p>
-            <p ><b>{{userStats.walk_max_time}}</b> hrs</p>
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="column1">
-            <p>Average Pace</p> 
-            <p ><b>{{userStats.walk_average_pace}}</b> min/mi</p>
-          </div>
-
-          <div class="column1">
-            <p>Average Distance</p>
-            <p ><b>{{userStats.walk_average_dist}}</b> mi</p>
-          </div>
-
-          <div class="column1">
-            <p>Average Time</p>
-            <p ><b>{{userStats.walk_average_time}}</b> hrs</p>
-          </div>
-
-          </div>
-          </div>
+            <div class='Slideshow'>
+            <div class="SlideshowHeader">
+              <button class="SlideshowButton" (click)="SwitchSlideshow('run')" id="run-btn">Run</button>
+              <button class="SlideshowButton" (click)="SwitchSlideshow('walk')" id="walk-btn">Walk</button>
+              <button class="SlideshowButton" (click)="SwitchSlideshow('bike')" id="bike-btn">Bike</button>
+            </div>
+            <div class="SlideshowContents RaceSlideshowContents">
+              <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'run'}">
 
 
 
-          <div id="ride_stats" class="tabcontent" *ngIf="userStats!=null && userStats.ride_tot_activities > 0">
+                  <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Distance (mi) (mi)</th>
+                    <th scope="col">Time (hrs) (hrs)</th>
+                    <th scope="col">Pace (min/mi) (min/mi)</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row">TOTAL</th>
+                    <td>{{ userStats.run_tot_dist }}</td>
+                    <td>{{ userStats.run_tot_hrs }}</td>
+                    <td></td>
+                  </tr>
+                  </tbody>
 
-                         <div class="row">
-          <div class="column1">
-            <p>Total Cycles</p>
-            <p ><b>{{userStats.ride_tot_activities}}</b></p>
-          </div>
-          <div class="column1">
-            <p>Total Distance</p>
-            <p ><b>{{userStats.ride_tot_dist}}</b> mi</p>
-          </div>
-          <div class="column1">
-            <p>Total Time</p>
-            <p ><b>{{userStats.ride_tot_hrs}}</b> hrs</p>
-          </div>
-      </div>
+                  <tbody>
+                  <tr>
+                    <th scope="row">AVERAGE</th>
+                    <td>{{ userStats.run_average_dist }}</td>
+                    <td>{{ userStats.run_average_Time (hrs)}}</td>
+                    <td>{{ userStats.run_average_Pace (min/mi) }}</td>
+                  </tr>
+                  </tbody>
 
-      <div class="row">
-          <div class="column1">
-            <p>Best Pace</p>
-            <p ><b>{{userStats.ride_max_pace}}</b> min/mi</p>
+                  <tbody>
+                  <tr>
+                    <th scope="row">BEST/LONGEST</th>
+                    <td>{{ userStats.run_max_dist }}</td>
+                    <td>{{ userStats.run_max_Time (hrs)}}</td>
+                    <td>{{ userStats.run_max_Pace (min/mi) }} </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+               <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'walk'}">
+                  <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Distance (mi) (mi)</th>
+                    <th scope="col">Time (hrs) (hrs)</th>
+                    <th scope="col">Pace (min/mi) (min/mi)</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row">TOTAL</th>
+                    <td>{{ userStats.walk_tot_dist }}</td>
+                    <td>{{ userStats.walk_tot_hrs }}</td>
+                    <td></td>
+                  </tr>
+                  </tbody>
+
+                  <tbody>
+                  <tr>
+                    <th scope="row">AVERAGE</th>
+                    <td>{{ userStats.walk_average_dist }}</td>
+                    <td>{{ userStats.walk_average_Time (hrs)}}</td>
+                    <td>{{ userStats.walk_average_Pace (min/mi) }}</td>
+                  </tr>
+                  </tbody>
+
+                  <tbody>
+                  <tr>
+                    <th scope="row">BEST/LONGEST</th>
+                    <td>{{ userStats.walk_max_dist }}</td>
+                    <td>{{ userStats.walk_max_Time (hrs)}}</td>
+                    <td>{{ userStats.walk_max_Pace (min/mi) }} </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'bike'}">
+                  <table class="table table-striped">
+                  <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Distance (mi) (mi)</th>
+                    <th scope="col">Time (hrs) (hrs)</th>
+                    <th scope="col">Pace (min/mi) (min/mi)</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr>
+                    <th scope="row">TOTAL</th>
+                    <td>{{ userStats.ride_tot_dist }}</td>
+                    <td>{{ userStats.ride_tot_hrs }}</td>
+                    <td></td>
+                  </tr>
+                  </tbody>
+
+                  <tbody>
+                  <tr>
+                    <th scope="row">AVERAGE</th>
+                    <td>{{ userStats.ride_average_dist }}</td>
+                    <td>{{ userStats.ride_average_Time (hrs)}}</td>
+                    <td>{{ userStats.ride_average_Pace (min/mi) }}</td>
+                  </tr>
+                  </tbody>
+
+                  <tbody>
+                  <tr>
+                    <th scope="row">BEST/LONGEST</th>
+                    <td>{{ userStats.ride_max_dist }}</td>
+                    <td>{{ userStats.ride_max_Time (hrs)}}</td>
+                    <td>{{ userStats.ride_max_Pace (min/mi) }} </td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
 
-          <div class="column1">
-            <p>Longest Distance</p>
-            <p ><b>{{userStats.ride_max_dist}}</b> mi</p>
-          </div>
-          
-          <div class="column1">
-            <p>Most Time</p>
-            <p ><b>{{userStats.ride_max_time}}</b> hrs</p>
-          </div>
-      </div>
-
-      <div class="row">
-          <div class="column1">
-            <p>Average Pace</p> 
-            <p ><b>{{userStats.ride_average_pace}}</b> min/mi</p>
-          </div>
-
-          <div class="column1">
-            <p>Average Distance</p>
-            <p ><b>{{userStats.ride_average_dist}}</b> mi</p>
-          </div>
-
-          <div class="column1">
-            <p>Average Time</p>
-            <p ><b>{{userStats.ride_average_time}}</b> hrs</p>
-          </div>
-
-          </div>
-       </div>
-
-           
-    </div>
+      </div> -->
+  </ng-template>
+  <ng-template #LoadingUserStatsBlock>
+    <p>Nothing yet! Check back when you start logging activities.</p>
+  </ng-template>
+  
 </div>

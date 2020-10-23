@@ -2,3 +2,22 @@
     background-size: cover;
     padding: 10px;
   }
+
+  .button-padding{
+  	margin:5px;	
+  }
+
+  .row {
+  display: flex;
+  width:100%;
+  flex-wrap: wrap;
+  margin:5px;
+
+}
+
+.pic-col {
+  width:20%;
+}
+.text-col {
+  width:80%;
+}

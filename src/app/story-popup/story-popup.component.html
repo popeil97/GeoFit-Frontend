@@ -1,0 +1,20 @@
+<div class="TucanContainer">
+  <div *ngIf="d !== null; else loadingMessage">
+   <img src="{{ d.element.story_image }}" style="max-width:100%;">
+   <p>
+   	<br>
+   	<img width="50px" style="border-radius:50%" src="{{ d.element.profile_url }}">
+  <b> <app-user-profile-nav [username]=d.element.username [displayName]=d.element.display_name></app-user-profile-nav></b>
+   {{ d.element.story_text }}</p>
+    <!--
+    <mat-dialog-actions align="end">
+      <button class="CloseLogin" (click)="closeDialog()">Cancel</button>
+    </mat-dialog-actions>
+    -->
+    <app-story-btn *ngIf="this._authService.isLoggedIn()" [use]="'like'" [storyID]=d.element.story_id [likes]=d.element.likes [likesCount]=d.element.likes_count></app-story-btn>
+
+    <app-comments [comments]="d.element.comments" [storyID]="d.element.story_id"></app-comments>
+<button class="CloseLogin" (click)="closeDialog()">Close</button>
+  </div>
+  <ng-template #loadingMessage><p>Loading post...</p></ng-template>
+</div>

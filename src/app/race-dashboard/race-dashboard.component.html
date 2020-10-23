@@ -1,5 +1,19 @@
 <div class="container">
   <h1>{{ this.raceName }} Dashboard</h1>
 
+  <div *ngIf="this.childRaceData.length > 1">
+    <div class="container">
+      <label>Select Route</label>
+      <select [(ngModel)]="selectedRaceID">
+        <option *ngFor="let x of this.childRaceData" [value]="x.id" [selected]="selectedRaceID == x.id">{{x.name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- List of racers in this race -->
+  <app-race-dashboard-racer-list [raceID]="selectedRaceID" [raceName]="selectedRaceName"></app-race-dashboard-racer-list>
+
+  <!-- Manage reported stories -->
   <app-race-story-manage [raceID]="raceID"></app-race-story-manage>
+
 </div>

@@ -29,14 +29,6 @@ export class ViewFollowComponent implements OnInit {
   private slides = ['followers','following'];
 
   ngOnInit() {
-    /*
-  	this._userService.getFollowersAndFollowedSeperate().then((resp:FollowersResp) => {
-      this.followers = resp.followers;
-      this.followed = resp.followed;
-      this.numFollowers = this.followers.length;
-      this.numFollowing = this.followed.length;
-    });
-    */
 
   }
   

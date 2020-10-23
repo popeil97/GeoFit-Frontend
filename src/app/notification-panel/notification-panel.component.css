@@ -1,0 +1,14 @@
+.FeedItem {
+      padding:8px;
+      box-sizing: border-box;
+
+      display:flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: stretch;
+      flex-wrap: nowrap;
+      font-size:12px;
+    }
+    .FeedItem:nth-child(2n) {
+      background-color:#EBEBEB
+    }

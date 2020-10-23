@@ -1,5 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,400;0,700;1,400&display=swap');
+/*
+@font-face {
+	font-family:Mulish;
+	src:url(./fonts/Mulish/Mulish-Regular.ttf);
+}
+@font-face {
+	font-family:Mulish-Italic;
+	src:url(./fonts/Mulish/Mulish-Italic.ttf);
+}
+@font-face {
+	font-family:Mulish-Bold;
+	src:url(./fonts/Mulish/Mulish-Bold.ttf);
+}
+*/
 
 :root {
   --partial_mobile_width: 992px;
@@ -7,16 +20,31 @@
 
   --main-background-color: #36343C;
   --primary-darkgrey: #36343C;
+  --primary-lightgrey: rgb(200,200,200);
 
   --tucan-orange:#ed6a11;
   --tucan-green:#7FCC92;
   --slate-tint:#C4C4C4;
+  --input-background-color: #EBEBEB;
+
+  --common-box-shadow: 0px 0px 5px 2px rgb(200,200,200);
+
+  --h1:64px;
+  --h2:33.75px;
+  --h3:26px;
+  --h4:24px;
+  --h5:22px;
+  --h6:20px;
+  --h7:12px;
 }
+
+/*
 * {
   -webkit-transition: all ease 0.5s;
   -moz-transition: all ease 0.5s;
-  transition: all ease 0.5s;
+  transition: all ease 0.5s; PENIS LOL
 }
+*/
 
 html, body { 
   height: 100%;
@@ -29,9 +57,7 @@ body {
 }
 
 
-h1, .h1 {  
-  font-size: 64px !important;
-}
+h1, .h1 {	font-size: 64px;	}
 h2, .h2 {
   font-size: 33.75px !important;
   color: var(--tucan-orange);
@@ -53,6 +79,10 @@ h6, .h6 {
   font-size:12px;
 }
 
+input[type=text], input[type=password], input[type=email], input[type=number], input[type=date], input[type=url], input[type=time], input[type=tel], input[type=search], textarea {
+  background-color: var(--input-background-color);
+}
+
 button:hover, .button:hover, a:hover {
   cursor:pointer;
 }
@@ -66,6 +96,7 @@ button, .button {
   border-width: 1px;
   border-style: solid;
   border-color: rgb(200,200,200);
+  outline-width: 0;
 
   background-color:inherit;
   color: var(--primary-darkgrey);
@@ -76,7 +107,22 @@ button.darkButton, .button.darkButton {
   color:white;
 }
 
-button.transparentWhiteButton, .button.darkButton {
+button.strippedWhite{
+  display:inline-block;
+  padding:1px;
+  border-width: 0px;
+  
+  background-color:white;
+  color: var(--primary-darkgrey);
+}
+
+button.orangeButton, .button.orangeButton {
+  background-color: var(--tucan-orange);
+  color:black;
+}
+
+
+button.transparentWhiteButton{
   background-color:inherit;
   border-color:white;
   color:white;
@@ -108,7 +154,21 @@ button.buttonWithIcon, .button.buttonWithIcon {
   align-items: center;
   flex-wrap: nowrap;
 }
+button.wideButton, .button.wideButton {
+  padding-left:64px;
+  padding-right:64px;
+}
 
+.color-white {
+  color:white;
+}
+.bold-text {
+  font-weight: bold;
+}
+
+.margin-right-4px {
+  margin-right:4px !important;
+}
 .margin-bottom-0px {
   margin-bottom:0px !important;
 }
@@ -193,9 +253,6 @@ body.custom-modal-open {
   .dropdown:hover {
     cursor:pointer;
   }
-  .dropdown.dropdownVisible {
-    overflow:initial;
-  }
 .dropdown .dropdownContents {
   position:absolute;
   top:100%;
@@ -210,10 +267,16 @@ body.custom-modal-open {
   align-items:stretch;
   flex-wrap: nowrap;
 }
-.dropdown.dropdownOpen, .dropdown:hover {
-  overflow:visible;
+.dropdown.dropdownOpen, .dropdown:hover, .dropdown.dropdownVisible.dropdownOpen {
+  overflow:visible !important;
 }
-.dropdown.dropdownVisible .dropdownContents, .dropdown:hover .dropdownContents, .dropdown.dropdownOpen .dropdownContents {
+.dropdown.dropdownVisible:hover {
+  overflow:hidden;
+}
+.dropdown.dropdownVisible:hover .dropdownContents {
+  height:0;
+}
+.dropdown:hover .dropdownContents, .dropdown.dropdownOpen .dropdownContents, .dropdown.dropdownVisible.dropdownOpen .dropdownContents {
   height:auto;
 }
 .dropdownItem {
@@ -271,10 +334,13 @@ body.custom-modal-open {
   background-color: var(--main-background-color);
   color:white;
 }
+img.PageHeaderSegmentImage {
+	width:160px;
+}
 h1.PageHeaderSegmentTitle {
-  margin-top:16px;
-  margin-bottom:0;
-  font-weight: bold;
+	margin-top:8px;
+	margin-bottom:0;
+	font-weight: bold;
 }
 
 .Slideshow {
@@ -291,7 +357,7 @@ h1.PageHeaderSegmentTitle {
   flex-grow:1;
   flex-basis: 32px;
 
-  margin-bottom:16px;
+  margin-bottom:12px;
 
   display:flex;
   flex-direction: row;
@@ -301,26 +367,30 @@ h1.PageHeaderSegmentTitle {
 }
 .SlideshowButton {
   margin-right:8px;
-  
+  outline-width: 0;
+  font-size:14px;
 }
 
 .SlideshowSlide {
   height:0;
   visibility: hidden;
   opacity:0;
-
   overflow:hidden;
+  display:none;
 }
 .SlideshowSlide.Slideshow-CurrentSlide {
   height:auto;
   visibility: visible;
   opacity:1;
+  display:initial;
 }
 
 .RaceLocationsContainer {
   position:relative;
+  /*
   padding-top:16px;
   padding-bottom:16px;
+  */
 
   display:flex;
   flex-direction: row;
@@ -550,3 +620,33 @@ h1.PageHeaderSegmentTitle {
 .pos3of4 { transform: rotate(-90deg) translate(14px) rotate(90deg); }
 
 
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #C4C4C4; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #36343C; 
+}
+
+
+@media only screen and (max-width: 600px) {
+	.PageHeaderSegment {
+		align-items: center;
+	}
+	h1.PageHeaderSegmentTitle {
+		font-size:24px;
+		font-weight: 550;	/* semi-bold */
+	}
+}

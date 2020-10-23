@@ -13,39 +13,44 @@
         </div>
 
          <div *ngIf="this._authService.isLoggedIn()" class='margin-bottom-16px'>
-          <div *ngIf="userData.is_me">
-            <button class='darkButton shadowButton' (click)="openFollowersDialog()">Followers: {{this.followersData.numFollowers}} | Following: {{this.followersData.numFollowing}}</button>
+          <ng-template [ngIf]="userData.is_me">
+            <button class='darkButton shadowButton FollowersButton' (click)="openFollowersDialog()">Followers: {{this.followersData.numFollowers}} | Following: {{this.followersData.numFollowing}}</button>
             <!--<app-view-follow></app-view-follow>-->
-          </div>
+          </ng-template>
         </div>
 
         <div *ngIf="userData.about_visibility||userData.location_visibility||userData.is_me" class='margin-bottom-16px'>
-          <div *ngIf="this.userData.about_visibility || userData.is_me ">
+          <ng-template [ngIf]="this.userData.about_visibility || userData.is_me">
             <ng-template [ngIf]="this.userData.description!='N/A'" [ngIfElse]="descriptionDefault">
               <p class="h7 UserProfileDescription"><span *ngIf="!this.userData.about_visibility">(hidden) </span>{{this.userData.description}}</p> 
             </ng-template>
-            <ng-template #descriptionDefault><p class='italics h7'>No description available</p></ng-template>
-          </div>
-          <div *ngIf="userData.location_visibility || userData.is_me ">
+            <ng-template #descriptionDefault>
+              <p class='italics h7 UserProfileDescription'>No description available</p>
+            </ng-template>
+          </ng-template>
+          <ng-template [ngIf]="userData.location_visibility || userData.is_me ">
             <ng-template [ngIf]="userData.location != 'N/A'" [ngIfElse]="locationDefault">
-              <p class='h7'><span *ngIf="!this.userData.location_visibility">(hidden) </span>{{ userData.location }}</p>  
+              <p class='h7 UserProfileLocation'>
+                <span *ngIf="!this.userData.location_visibility">(hidden) </span>
+                {{ userData.location }}
+              </p>  
             </ng-template>
             <ng-template #locationDefault>
-              <span class='italics h7'>No location info available</span>
+              <p class='italics h7 UserProfileLocation'>No location info available</p>
             </ng-template>
-          </div>
+          </ng-template>
         </div>
 
-        <div *ngIf="this._authService.isLoggedIn()" class='margin-bottom-16px'>
-          <div *ngIf="userData.is_me">
-            <div>
-              <h6>Strava Authentication</h6>
+        <div *ngIf="this._authService.isLoggedIn()" class='UserProfileStravaContent margin-bottom-16px'>
+          <ng-template [ngIf]="userData.is_me">
+            <h6 class='UserProfileStravaHeader'>Strava Authentication</h6>
+            <div class='UserProfileStravaContainer'>
               <app-stravauth></app-stravauth>
             </div>
-          </div>
+          </ng-template>
         </div>
         <div *ngIf="!userData.is_me" >
-          <app-user-follow [tempLight]="false" [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
+          <app-user-follow [tempLight]="true" [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
         </div>
 
         <!--
@@ -60,7 +65,7 @@
 
       <div class='UserProfileActions' *ngIf="userData != null && this._authService.isLoggedIn() && userData.is_me">
         <button class="darkButton" (click)="openModal('profileModal')" >Edit</button>
-        <a class="button darkButton" (click)="logout()">Log out</a>
+        <button class="darkButton" (click)="logout()">Log out</button>
       </div>
 
     </div>
@@ -70,26 +75,30 @@
     <div class="Slideshow">
       <div class="SlideshowHeader">
         <button class="SlideshowButton" (click)="SwitchSlideshow('home')" id="home-btn">Home</button>
-        <button class="SlideshowButton" (click)="SwitchSlideshow('stats')" id="stats-btn">Stats</button>
+     <!--  <button class="SlideshowButton" (click)="SwitchSlideshow('stats')" id="stats-btn">Stats</button> -->
         <button *ngIf="!showEdit" class="SlideshowButton" (click)="SwitchSlideshow('feed')" id="feed-btn">Feed</button>
     <!--    <button class="SlideshowButton" (click)="SwitchSlideshow('races')" id="races-btn">Races</button> -->
       </div>
       <div class="SlideshowContents">
 
-        <div id='statsContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'home'}">
-          <div *ngIf="userData != null; else RaceLoadingMessage">
-            <h2 *ngIf="userData.is_me; else otherHome">Home</h2>
+        <div id='homeContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'home'}">
+          <ng-template [ngIf]="userData != null" [ngIfElse]="HomeLoadingMessage">
 
+            <h2 *ngIf="userData.is_me; else otherHome">Home</h2>
             <ng-template #otherHome><h2>{{userData.first_name}}'s Profile</h2></ng-template>
-            <div class="RaceContainer PageSegment">
-                <div *ngIf="userData != null; else RaceLoadingMessage">
-                  <div *ngIf="userRaces==null"></div>
-                  <div *ngIf="userRaces!=null&&userRaces.length>0; else noRacesDisplay">
-                    <app-user-race></app-user-race>
-                  </div>
-                  <ng-template #noRacesDisplay><p>You currently do not have any races under your belt. To find races you may be interested in, head over to <a routerLink='/races'>Public Races</a>.</p></ng-template>
-            </div>
-            <ng-template #RaceLoadingMessage><p>Loading user data...</p></ng-template>
+
+            <div class="HomeContainer">
+              <div class='HomeColumnContainer'>
+                <div class="HomeComponentContainer">
+                  <app-user-race [userData]="userData"></app-user-race>
+                </div>
+              </div>
+              <div class='HomeColumnContainer'>
+                <div class='HomeComponentContainer'>
+                  <app-user-stats [userData]="userData" [userID]="userData.user_id"></app-user-stats>
+                </div>
+
+              </div>
             </div>
 
             <!--
@@ -102,18 +111,17 @@
               </div>
             </div>
           </div> -->
+          </ng-template>
+          <ng-template #HomeLoadingMessage><p>Retrieving user data...</p></ng-template>
         </div>
-      </div>
 
         <div id='statsContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'stats'}">
           <div *ngIf="userData != null; else StatsLoadingMessage">
-            <h2 *ngIf="userData.is_me; else otherUserStats">Your Stats</h2>
-
-            <ng-template #otherUserStats><h2>{{userData.first_name}}'s Stats</h2></ng-template>
-            <app-user-stats [userID]="userData.user_id"></app-user-stats>
+            <app-user-stats [userData]="userData" [userID]="userData.user_id"></app-user-stats>
           </div>
           <ng-template #StatsLoadingMessage><p>Retrieving user data...</p></ng-template>
         </div>
+
         <div *ngIf="!showEdit" id='feedContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'feed'}">
           <div *ngIf="userData != null; else FeedLoadingMessage">
             <h2 *ngIf="userData.is_me; else otherUserFeed">Your Feed</h2>
@@ -122,18 +130,20 @@
           </div>
           <ng-template #FeedLoadingMessage><p>Retrieving user data...</p></ng-template>
         </div>
+
         <div id='raceContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'races'}">
           <div *ngIf="userData != null; else RaceLoadingMessage">
             <h2 *ngIf="userData.is_me; else otherUserRaces">Your Races</h2>
             <ng-template #otherUserRaces><h2>{{userData.first_name}}'s Races</h2></ng-template>
             <div *ngIf="userRaces==null"></div>
             <div *ngIf="userRaces!=null&&userRaces.length>0; else noRacesDisplay">
-              <app-user-race></app-user-race>
+              <app-user-race [userData]="userData"></app-user-race>
             </div>
             <ng-template #noRacesDisplay><p>You currently do not have any races under your belt. To find races you may be interested in, head over to <a routerLink='/races'>Public Races</a>.</p></ng-template>
           </div>
           <ng-template #RaceLoadingMessage><p>Loading user data...</p></ng-template>
         </div>
+
       </div>
     </div>
   </div>

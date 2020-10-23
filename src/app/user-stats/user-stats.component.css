@@ -1,3 +1,22 @@
+.UserStatsContentContainer {
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+
+
+  .UserStatsCanvasContainer {
+    width:100%;
+  }
+/*
+  .UserStatsTableContainer {
+    width:35%;
+  }
+*/
+
+
 /* Create three equal columns that floats next to each other */
 .column {
   float: left;
@@ -6,6 +25,22 @@
   padding: 4px;
   height: 80px; /* Should be removed. Only for demonstration */
 }
+
+.textControl{
+  font-size:14px;
+  font-family:"Mulish";
+}
+
+
+th, td {
+  text-align: left;
+  padding: 2px;
+}
+/*
+.tr:nth-child(even) 
+{
+  background-color: #FFFFFF;
+}*/
 
 .material-icons {
   font-family: 'Material Icons';

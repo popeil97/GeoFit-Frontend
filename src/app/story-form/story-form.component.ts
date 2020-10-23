@@ -13,17 +13,27 @@ export class StoryFormComponent implements OnInit {
 
   @Output() storyPostedEvent = new EventEmitter();
 
+  @Output() logActivityEvent = new EventEmitter();
+
   private storyText: string;
 
   public storyImage:any;
 
-  constructor(private storyService: StoryService,
-              private _imageService: ImageService) { }
+  public acceptedEmojis = ['😁','😊','🤪','😂','🥳','😲','😉','😭',
+                           '🤟','💪','👏','❤️','🔥','🍻','🏃‍','🏃‍♀️',
+                          '🚴‍♂️','👟','🍂','🌲','☀️','❄️','🌄','🌇'];
+  emojis: Boolean;
+
+  constructor(
+    private storyService: StoryService,
+    private _imageService: ImageService
+  ) {}
 
   ngOnInit() {
+    this.emojis=false;
   }
 
-  onSelectFile(event){
+  onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       var reader = new FileReader();
 
@@ -35,10 +45,18 @@ export class StoryFormComponent implements OnInit {
     }
   }
 
+  addText(element:any) {
+    this.storyText = (<HTMLInputElement>document.getElementById("storyImageCaption")).value;
+    (<HTMLInputElement>document.getElementById("storyImageCaption")).value = this.storyText + element;
+  }
 
-  uploadStory(): void{
- //    console.log("uploading story");
-//     console.log("Story image: ", this.storyImage);
+  toggleEmojis() {
+    this.emojis = !this.emojis;
+  }
+
+  uploadStory(): void {
+    // console.log("uploading story");
+    // console.log("Story image: ", this.storyImage);
     let withLastStory = false;
 
     //Get text field input (image already uploaded via eventListener)
@@ -60,18 +78,28 @@ export class StoryFormComponent implements OnInit {
   }
 
   uploadStoryWithService(raceID, storyImage, storyText, withLastStory){
-    this.storyService.uploadStory(raceID, storyImage, storyText, withLastStory).then( data =>
-      {
-      //   console.log("Uploaded story");
-        //Emit event to refresh feed
-        this.storyPostedEvent.emit();
+    this.storyService.uploadStory(raceID, storyImage, storyText, withLastStory).then( data => {
+      //console.log("Uploaded story");
+      //Emit event to refresh feed
+      console.log("EMIT STORY POST");
+      this.storyPostedEvent.emit();
 
-        //Clear input fields
-        (<HTMLInputElement>document.getElementById("storyImage")).value = '';
-        (<HTMLInputElement>document.getElementById("storyImageCaption")).value = '';
-        this.storyText = null;
-        this.storyImage = null;
-      });
+      //Clear input fields
+      (<HTMLInputElement>document.getElementById("storyImage")).value = '';
+      (<HTMLInputElement>document.getElementById("storyImageCaption")).value = '';
+      this.storyText = null;
+      this.storyImage = null;
+    });
+  }
+
+  logActivity() {
+    console.log("hi emittingg...");
+    this.logActivityEvent.emit("emitting");
+  }
+
+  deletePic() {
+    //Clear uploaded file
+    this.storyImage = null;
   }
 
 }

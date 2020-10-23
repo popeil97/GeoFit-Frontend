@@ -1,0 +1,27 @@
+.StoryCommentInput {
+  font-size: var(--h7) !important;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.status-col{
+	width:70%;
+	padding-right:20px;
+}
+
+.post-col{
+	width:25%;
+}
+
+.PostContainer {
+    margin-top:8px;
+
+    display:flex;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+}

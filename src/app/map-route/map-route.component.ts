@@ -77,24 +77,22 @@ export class MapRouteComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     for(const propName in changes) {
       if(changes.hasOwnProperty(propName)) {
-         console.log("map-route:race-id", this.raceID);
         switch(propName) {
           case 'coordinates':
             if (this.coordinates){
-            //  console.log("coordinates: ", this.coordinates);
+             // console.log("coordinates: ", this.coordinates);
               this.applyCoordinates();
             }
 
           case 'routePins':
             if (this.routePins && this.displayUsers){
-          //    console.log("route pins: ", this.routePins);
+              console.log("route pins: ", this.routePins);
               this.createRoutePins();
             }
 
           case 'userData':
             if (this.userData && this.displayUsers){
-          //    console.log("NEW USER DATA IN MAP-ROUTE COMP:");
-          //    console.log("userData: ", this.userData);
+              console.log("User data for ID ", this.raceID, " : ", this.userData);
               this.createUserPins(false);
             }
             
@@ -107,9 +105,6 @@ export class MapRouteComponent implements OnChanges {
   public panToUserMarker(user_id, showPopUp=true){
     //Do this to pan *and* zoom
     var markerBounds = L.latLngBounds([this.markersByUserID[user_id.toString()]['latLng']]);
-  //  console.log("In pan to user marker for user ID ", user_id);
-    
-    //Gotta do an event up to map to pan to the bounds in var above
   }
 
   private applyCoordinates():void {
@@ -152,7 +147,7 @@ export class MapRouteComponent implements OnChanges {
       shadowUrl: 'leaflet/marker-shadow.png',
     })}).addTo(this.map);
 
-    this.marker_start.bindPopup(this.popupService.makePopup({name:'Start',state:'Jerusalem'}));
+   // this.marker_start.bindPopup(this.popupService.makePopup({name:'Start',state:''}));
 
     this.marker_end = L.marker(end_coord,{icon: L.icon({
       iconSize: [ 38, 36 ],
@@ -162,24 +157,35 @@ export class MapRouteComponent implements OnChanges {
       shadowUrl: 'leaflet/marker-shadow.png',
     })}).addTo(this.map);
 
-    this.marker_end.bindPopup(this.popupService.makePopup({name:'End',state:'Philadelphia'}));
+  //  this.marker_end.bindPopup(this.popupService.makePopup({name:'End',state:''}));
 
     if(this.zoom)
     {
+      console.log("ZOOM ZOOM IN MAP");
       this.map.setZoom(9);
     }
+    else
+    {
+      this.map.setZoom(2);
+    }
     
-    
-    var color = "blue";
+    var color = "#7FCC92";
 
     //Add each path to map independently
     _.forEach(temp_routes_flipped,(route) => {
       this.line = L.polyline(route,{
-        color: color,
+        color: '#578a63',
         weight: 8,
-        opacity: 0.65
+        opacity: 0.8
+      }).addTo(this.map);
+
+       L.polyline(route,{
+        color: color,
+        weight: 5,
+        opacity: 1
       }).addTo(this.map);
     });
+
 
     //We store coordinates in their original order 
     //so we can work out user progression along route later
@@ -551,6 +557,10 @@ export class MapRouteComponent implements OnChanges {
       distanceTypeOptions = {units: 'kilometers'};
     }
 
+    console.log("USER ROUTE IDX IN CREATE PIN ", user_route_idx);
+    console.log("COORDS IN CREATE PIN ", this.coordsRoutes);
+    console.log("COORDS[] IN CREATE PIN ", this.coordsRoutes[user_route_idx]);
+
     var along_user = turf.along(this.coordsRoutes[user_route_idx], user_rel_miles, distanceTypeOptions);
 
     var lng_user = along_user.geometry.coordinates[0];
@@ -692,7 +702,10 @@ interface UserData {
   isMe: boolean,
   gender: string,
   age: number,
+
+  email:string,
   description: string,
+  location:string,
 }
 
 interface OrgPinData {

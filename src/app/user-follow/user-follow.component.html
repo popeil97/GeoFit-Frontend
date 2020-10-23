@@ -1,7 +1,7 @@
-<button (click)="changeLikeStatus()" class="darkButton" *ngIf="!this.tempLight">
+<button [disabled]="disabled"  [ngClass]="{'wideButton' : wide, 'disabledButton': disabled}" (click)="changeLikeStatus()" class="darkButton" *ngIf="this.tempLight">
   <span class="ui-button-text">{{follows ? 'Unfollow' : 'Follow'}}</span>
 </button>
 
-<button (click)="changeLikeStatus()" *ngIf="this.tempLight">
+<button  [disabled]="disabled" [ngClass]="{'wideButton' : wide, 'disabledButton': disabled}" (click)="changeLikeStatus()" *ngIf="!this.tempLight">
   <span class="ui-button-text">{{follows ? 'Unfollow' : 'Follow'}}</span>
 </button>

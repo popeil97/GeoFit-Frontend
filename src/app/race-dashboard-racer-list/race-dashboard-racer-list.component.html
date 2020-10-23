@@ -1,0 +1,14 @@
+<div>
+  <h2>Racers List</h2>
+
+  <div class="table-container ex3" style="overflow:hidden;">
+
+      <div *ngIf="!this.racersList.length">
+        There are no racers in your race. Sounds like you need to spend longer than 2 weeks marketing!
+      </div>
+      
+      <!-- Row with data of user or team -->
+      <app-race-dashboard-racer-row *ngFor="let row of this.racersList" [racerData]="row" (removeUserByIDEvent)="removeUserByID($event)"></app-race-dashboard-racer-row>
+  
+    </div>
+</div>

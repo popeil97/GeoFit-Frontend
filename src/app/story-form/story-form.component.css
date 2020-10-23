@@ -1,6 +1,149 @@
+.StoryFormInputContainer {
+	position: relative;
+	width:100%;
+
+	/**
+	border-radius: 10px;
+	border:0.5px solid grey;
+	background-color:var(--input-background-color);
+	overflow:hidden; **/
+
+	display:flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+	flex-wrap: nowrap;
+}
+.StoryFormInput {
+	width:100%;
+	height: min-content;
+	overflow:auto;
+	border:none;
+	resize: none;
+	margin-bottom:8px;
+	font-size:12px;
+	padding:4px 8px 4px 8px;
+	box-sizing: border-box;
+	border-radius: 10px;
+}
+.StoryFormInput:hover {
+	outline:none;
+}
+.StoryFormInputImageWrapper {
+	position: relative;
+	text-align: center;
+	width:100px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:4px;
+	margin-bottom:8px;
+}	
+	.StoryFormInputImagePreview {
+		position: relative;
+		z-index: 1;
+		width:100%;
+	}
+	.StoryFormInputImageDeleteButton {
+		position: absolute;
+		z-index: 2;
+		left:100%;
+		top:0;
+		transform:translateX(50%);
+
+		padding:0;
+		width:20px;
+		height:20px;
+		line-height: 20px;
+
+		box-shadow: var(--common-box-shadow);
+	}
+
+.StoryFormInputExtraButtonsContainer {
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+
+.StoryFormEmojiToggleButton{
+	flex-grow:1;
+	flex-basis: 40px;
+	font-size:12px;
+}
+	.StoryFormImageButton  {
+		flex-grow:1;
+		flex-basis: 40px;
+		margin-left:8px;
+		font-size:10px;
+	}
+
+	.StoryFormPostButton  {
+		flex-grow:1;
+		flex-basis: 170px;
+		margin-left:8px;
+		font-size:14px;
+	}
+
+.StoryFormInputEmojisButtonsContainer {
+	margin-bottom:8px;
+	font-size:12px;
+}
+.StoryFormInputSubmitButtonContainer {
+	display:flex;
+	flex-direction: row-reverse;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+
 @media only screen and (max-width:1024px) {
   	.btn-mobile
 	 {
 	 	font-size:50px;left-padding:8px;right-padding:8px
 	 }
 	}
+
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #EBEBEB;
+}
+
+
+.status-col {
+  width:80%;
+}
+
+.pic-col {
+  width:20%;
+}
+textarea {
+  resize: none;
+  height:60px;
+  border:none;
+  outline-width: 0;
+  background-color: #EBEBEB;
+}
+
+.buttonContainer{
+	align-items:right;
+}
+
+.material-icons{
+  font-size:14px;
+}
+
+.StoryEmojisContainer {
+      position: absolute;
+      right:0;
+      top:100%;
+      width:max-content;
+      z-index: 2;
+
+      background-color:white;
+      padding:8px;
+      box-sizing: border-box;
+      border:0.5px solid black;
+    }

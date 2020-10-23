@@ -20,6 +20,16 @@ export class LogActivityComponent implements OnInit {
   ngOnInit() {
   	console.log("hi", this.d);
 
+    try{
+      document.getElementById('strava-btn').style.backgroundColor = "#36343c";
+      document.getElementById('strava-btn').style.color = "#FFFFFF";
+    }
+    catch(e)
+    {
+      
+    }
+    
+
     this._stravauthService.getStravaInfo().then( data => {
       this.stravaData = data as StravaData;
     })
@@ -30,6 +40,25 @@ export class LogActivityComponent implements OnInit {
     //console.log("to", to, this.acceptedScreens.indexOf(to));
     if (to == null || this.acceptedScreens.indexOf(to) == -1) return;
     this.currentScreen = to;
+
+    document.getElementById(to+'-btn').style.backgroundColor = "#36343c";
+    document.getElementById(to+'-btn').style.color = "#FFFFFF";
+
+    switch(to) { 
+     case 'strava': { 
+       document.getElementById('manual-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('manual-btn').style.color = "#000000";
+        break; 
+     } 
+     case 'manual': { 
+       document.getElementById('strava-btn').style.backgroundColor = "#FFFFFF";
+       document.getElementById('strava-btn').style.color = "#000000";
+        break; 
+     }  
+     default: { 
+        break; 
+     } 
+   }
     return;
   }
 

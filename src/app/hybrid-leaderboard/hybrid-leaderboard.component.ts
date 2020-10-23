@@ -8,20 +8,23 @@ import { LeaderboardService } from '../leaderboard.service';
 })
 export class HybridLeaderboardComponent implements OnInit,OnChanges {
 
-  @Input() raceID:number;
+  @Input() raceID:number = undefined;
 
-  public leaderboard:any[];
+  public leaderboard:any[] = [];
   private page:number = 1;
+  public showMore = false;
 
   constructor(private _leaderboardService:LeaderboardService) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     for(const propName in changes) {
         if(changes.hasOwnProperty(propName)) {
-
+          console.log('HYBRID PROPNAME:',propName);
           switch(propName) {
             case 'raceID':
+              console.log('GOT NEW RACEID FROM HYBRID LEADERBOARD',changes.raceID);
               if(changes.raceID.currentValue != undefined) {
+                
                 this.getLeaderboard();
               }
 
@@ -32,7 +35,15 @@ export class HybridLeaderboardComponent implements OnInit,OnChanges {
   }
 
   ngOnInit() {
+    console.log('INIT FROM HYBRID LEADERBOARD');
+    if(this.raceID != undefined) {
+      this.getLeaderboard();
+    }
+  }
 
+  toggleDetails()
+  {
+    this.showMore = !this.showMore;
   }
 
   public getLeaderboard() {

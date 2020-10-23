@@ -2,8 +2,9 @@
   <div class='RegisterHeader'>
     <button class="CloseLogin" (click)="closeDialog()">Cancel</button>
   </div>
-  <h2 mat-dialog-title>Race Registration</h2>
-  <div *ngIf="d !== null; else loadingMessage">
+  <h2 mat-dialog-title *ngIf="d.racePrice != 0">Race Registration</h2>
+  <h2 mat-dialog-title *ngIf="d.racePrice == 0">You are Registered!</h2>
+  <div *ngIf="d !== null && d.racePrice !=0; else loadingMessage">
     <mat-dialog-content>
       <mat-horizontal-stepper [linear]="true" #stepper>
         <mat-step [editable]="true" [stepControl]="tagForm" *ngIf="d.hasTags">

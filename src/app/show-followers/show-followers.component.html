@@ -1,3 +1,17 @@
-<img src="{{this.picURL}}"  width="30" height="30">
-<app-user-profile-nav [username]=person.username [displayName]=person.full_name></app-user-profile-nav>
-<app-user-follow [tempLight]="true" [userID]=person.user_id [follows]="userData.follows"></app-user-follow>
+<div class="row">
+
+	<div class="col-pic">
+		<img src="{{this.picURL}}"  width="30" height="30">
+	</div>
+
+	<div class="col-name">
+		<app-user-profile-nav [username]=person.username [displayName]=person.full_name></app-user-profile-nav>
+	</div>
+
+	<div class="col-button">
+		<app-user-follow [tempLight]="false" [userID]=person.user_id [follows]="userData.follows"></app-user-follow>
+	</div>
+</div>
+
+
+

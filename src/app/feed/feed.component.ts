@@ -30,6 +30,8 @@ export class FeedComponent implements OnInit {
   //ID of race or user
   @Input() ID:number;
 
+  //@Input() profile_pic:any;
+
   //Items on feed to display
   @Input() feedItems: Array<FeedObj>;
 
@@ -82,12 +84,12 @@ export class FeedComponent implements OnInit {
 //    console.log("feed service: ", this._feedService);
 
     this._feedService.ID = this.ID;
-
     //If no feedItems provided as input, reset and refresh feed
     if (!this.feedItems){
       this.resetFeed();
       this.refreshFeed();
     }
+    
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -143,19 +145,20 @@ export class FeedComponent implements OnInit {
     if (getNextPage){
       this.page_number += 1;
     }
-
-//    console.log(getNextPage);
- //   console.log("Getting page num ", this.page_number);
-
+    console.log("getting feeditems");
     this._feedService.refreshFeed(this.page_number, this.items_per_page, !this.initialized).then(payload => {
       var newFeedObjs: Array<FeedObj> = [];
       var get_created_ts = this.get_created_ts;
       var data = payload.serialized_feed;
       this.canRefresh = payload.can_refresh;
 
+      // I'm replacing the code below with a reduce function, to prevent duplicate entries from appearing
+      // Why are duplicates appearing? Please stop sending back duplicates. Why are there duplicates?? 
+      // Back end should not be producing duplicates! Why is there no check for this???
+      /*
       Object.keys(data).map(function(feedItemIndex){
         let feedItem: FeedObj = data[feedItemIndex];
-
+        feedItem.show_options = false;
         //By default don't open comment fields
         //Unless we have just posted a comment
         if (feedItem.story_id == openStoryIDComments){
@@ -167,10 +170,24 @@ export class FeedComponent implements OnInit {
 
         newFeedObjs.push(feedItem);
       });
+      */
+
+      newFeedObjs = Object.keys(data).reduce((accumulator, feedItemIndex) => {
+        let feedItem: FeedObj = data[feedItemIndex];
+        if (accumulator.findIndex(a=>{return a.story_id == feedItem.story_id}) > -1) return accumulator;
+        feedItem.show_options = false;
+        //By default don't open comment fields
+        //Unless we have just posted a comment
+        // Booleans can be stored like this. Doing an if-else just to add "true" or "false" is sub-optimal
+        feedItem.show_comments = (feedItem.story_id == openStoryIDComments);  
+        accumulator.push(feedItem);
+        return accumulator;
+      },[]);
 
       //viewComponent.feedItems = newFeedObjs.concat(viewComponent.feedItems);
       //Continue to explore ways to refresh feed. In meantime, get all feed objs every time
       viewComponent.feedItems = newFeedObjs;
+      console.log("New feeditems: ", viewComponent.feedItems);
       this.loading = false;
     });
 
@@ -245,20 +262,21 @@ export class FeedComponent implements OnInit {
     });
   }
 
-    openModal(id: string) {
-    var data = (id == 'custom-modal-6') ? {raceID:this.ID, callbackFunction:null} : {};
-     data.callbackFunction = this.testFunction;
-
+    openModal(id: string,element) {
+    var data = (id == 'story-popup') ? {element:element, callbackFunction:null} : {};
+    console.log("ELEMENT passed", element);
     this.modalService.open(id,data);
   }
 
-  testFunction = (incomingData = null) => {
-  //  const toAlert = (incomingData != null) ? incomingData : this.testString;
-  if(incomingData != null){
-    this.newStoryPosted();
-    console.log("PARENT",incomingData);
-      }
 
+  ToggleStoryOptions(story_id:number = null) {
+    console.log('Togglestoryoptions - received story_id',story_id);
+    if (!story_id) return;
+    var itemIndex = this.feedItems.findIndex(f=>{return f.story_id == story_id});
+    console.log('Togglestoryoptions - found item index',itemIndex);
+    if (itemIndex == -1) return;
+    this.feedItems[itemIndex].show_options = !this.feedItems[itemIndex].show_options;
+    return;
   }
 
   
@@ -287,7 +305,9 @@ interface FeedObj {
   is_mine:boolean;
   comments: Comment[];
   show_comments: boolean;
+  show_options: boolean;
   follows: boolean;
+  hot: boolean;
 }
 
 interface FeedPayload {

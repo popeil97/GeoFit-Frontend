@@ -13,9 +13,13 @@ export class UserFollowComponent implements OnInit {
   // TRUE if we follow them, FALSE if we do not follow them
   @Input() follows: boolean;
 
-  @Input() tempLight:boolean;
+  @Input() disabled : boolean;
+
+  @Input() tempLight:boolean ;
 
   @Output() followStatusChanged: EventEmitter<void> = new EventEmitter();
+
+  @Input() wide:boolean;
 
   constructor(
     private _userService:UsersService,

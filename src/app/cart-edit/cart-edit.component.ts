@@ -13,6 +13,7 @@ export class CartEditComponent implements OnInit,OnChanges {
   @Output() checkoutAlert: EventEmitter<any> = new EventEmitter();
   @ViewChild('cart') cartList:SwagListComponent;
   @ViewChild('items') itemList:SwagListComponent;
+  public checkoutDisabled: Boolean = false;
 
   constructor() { }
 

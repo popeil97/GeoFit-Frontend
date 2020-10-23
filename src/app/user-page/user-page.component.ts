@@ -183,22 +183,21 @@ export class UserPageComponent implements OnInit {
      //  document.getElementById('races-btn').style.color = "#000000";
        document.getElementById('feed-btn').style.backgroundColor = "#FFFFFF";
        document.getElementById('feed-btn').style.color = "#000000";
-       document.getElementById('stats-btn').style.backgroundColor = "#FFFFFF";
-       document.getElementById('stats-btn').style.color = "#000000";
+     //  document.getElementById('stats-btn').style.backgroundColor = "#FFFFFF";
+     //  document.getElementById('stats-btn').style.color = "#000000";
         break; 
      } 
      case 'stats': { 
     //   document.getElementById('races-btn').style.backgroundColor = "#FFFFFF";
      //  document.getElementById('races-btn').style.color = "#000000";
-       document.getElementById('feed-btn').style.backgroundColor = "#FFFFFF";
-       document.getElementById('feed-btn').style.color = "#000000";
+     // document.getElementById('feed-btn').style.color = "#000000";
        document.getElementById('home-btn').style.backgroundColor = "#FFFFFF";
        document.getElementById('home-btn').style.color = "#000000";
         break; 
      } 
      case 'feed': { 
-        document.getElementById('stats-btn').style.backgroundColor = "#FFFFFF";
-       document.getElementById('stats-btn').style.color = "#000000";
+    //    document.getElementById('stats-btn').style.backgroundColor = "#FFFFFF";
+    //   document.getElementById('stats-btn').style.color = "#000000";
      //  document.getElementById('races-btn').style.backgroundColor = "#FFFFFF";
       // document.getElementById('races-btn').style.color = "#000000";
        document.getElementById('home-btn').style.backgroundColor = "#FFFFFF";

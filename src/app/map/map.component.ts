@@ -86,7 +86,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }
   }
 
-
   ngAfterViewInit(): void {
     if(this.map == undefined) {
       this.initMap();
@@ -104,6 +103,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
     //console.log('getting user data')
     return this._raceService.getUserRacestats(raceID,page).then((data:any) =>{
       this.routeData[raceID].userData = data.users_data;
+      console.log("MAP USER DATA",data.users_data);
 
       this.loading = false;
     });
@@ -244,6 +244,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
   }
 
   public panToMarkerBounds(markerBounds){
+    console.log("PPAN1")
     var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
     this.map.fitBounds(markerBounds, options);
   }
@@ -338,15 +339,15 @@ export class MapComponent implements AfterViewInit,OnChanges {
     // });
 
     // tiles.addTo(this.map);
-
-    const tiles = L.tileLayer('http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+    var map_tiles =  'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+    const tiles = L.tileLayer(map_tiles, {
       maxZoom: 19,
       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     });
 
     tiles.addTo(this.map);
 
-    new L.Control.Zoom({ position: "topright" }).addTo(this.map);
+    new L.Control.Zoom({ position: "bottomright" }).addTo(this.map);
 
     //An extract of address points from the LINZ bulk extract: http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde
 //Should be this data set: http://data.linz.govt.nz/#/layer/779-nz-street-address-electoral/
@@ -395,7 +396,10 @@ interface UserData {
   isMe: boolean,
   gender: string,
   age: number,
+
+  email:string,
   description: string,
+  location:string,
 }
 
 interface OrgPinData {

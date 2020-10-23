@@ -1,0 +1,62 @@
+<h3>Settings</h3>
+<div class="container" >
+    <form [formGroup]="settingsForm">
+
+      <h6 class='InputLabel'>Strava</h6>
+      <div class="form-group toggleShift textControl" >
+        <mat-slide-toggle formControlName="isAutomaticImport">Automatic Activity Import</mat-slide-toggle>
+      </div>
+ 
+      <h6 class='InputLabel'>Gender</h6>
+      <div class="form-group toggleShift textControl">
+        <mat-slide-toggle formControlName="malePinsOn">Male Pins</mat-slide-toggle>
+        <mat-slide-toggle formControlName="femalePinsOn" style="padding-left:10px;">Female Pins</mat-slide-toggle>
+      </div>
+
+      <h6 class='InputLabel'>Age</h6>
+      <div class="form-group toggleShift textControl">
+        <mat-slide-toggle formControlName="allAgesOn" >Show All Ages</mat-slide-toggle>
+        <br>
+        <div style="display: inline-block">
+          <select class="form-control textControl" formControlName="ageRange" style="display: inline-block">
+            <option class="dropdown-placeholder" style="display: none" value="-1">Select Age</option>
+            <option *ngFor="let ageRange of ageRangeOptions" [value]="ageRange">
+              {{ ageRange }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <h6 class='InputLabel'>Following</h6>
+      <div class="form-group toggleShift textControl">
+        <mat-slide-toggle formControlName="followerPinsOnly">Following Pins</mat-slide-toggle>
+      </div>
+    
+    </form>
+
+      <button  (click)="apply()">Apply</button>
+      
+      <div>
+        <div *ngIf="successfulUpdate" class="alert alert-primary">
+        <div>
+         Successfully Applied
+        </div>
+      </div>
+   </div>
+
+  </div>
+
+
+<button class="CloseLogin" (click)="closeDialog()">Close</button>
+
+
+<!--  <h3>Heat Map</h3>
+      <div class="form-group">
+        <mat-slide-toggle formControlName="heatMapOn">Heat Map On</mat-slide-toggle>
+      </div> -->
+
+      <!--
+      <h4>Organization Pins</h4>
+      <div class="form-group toggleShift">
+        <mat-slide-toggle formControlName="showOrgPins">Organization Pins Only</mat-slide-toggle>
+      </div> -->

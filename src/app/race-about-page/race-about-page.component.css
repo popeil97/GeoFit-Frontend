@@ -1,0 +1,99 @@
+.AboutRaceImageContainer {
+	position:relative;
+	height:280px;
+	overflow:hidden;
+}
+.AboutRaceImage {
+	display:block;
+	width:100%;
+
+	margin-left:auto;
+	margin-right:auto;
+}
+.RaceHeader {
+	display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+	flex-wrap: wrap;
+	
+	margin-bottom:16px;
+}
+
+.RaceSlideshowContents {
+	border-left:2px solid rgb(200,200,200);
+	margin-left:16px;
+	padding-left:8px;
+	box-sizing: border-box;
+}
+
+.MapPreview {
+	position: relative;
+	width:100%;
+	height:auto;
+
+	display:flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-wrap: nowrap;
+}
+
+.MapContainer {
+	position: relative;
+	width:100%;
+	height:320px;
+}
+.RaceLocationsContainer, .RaceRouteInfo {
+	width:80%;
+	padding-top:8px;
+	padding-bottom:8px;
+}
+
+.RaceButtonsContainer {
+	display:flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.RaceButtonsContainer button, .RaceButtonsContainer .button {
+	margin-right:8px;
+	margin-bottom:8px;
+}
+
+.aligned-with-icon{
+    position: relative;
+    top: -5px;
+    margin-left: 5px; /* optional */
+}
+
+.RaceDirectorContainer {
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+	flex-wrap: nowrap;
+}
+.RaceDirectorPic {
+	width:20%;
+}
+.RaceDirectorInfo {
+	width:60%;
+}
+
+@media only screen and (max-width: 600px) {
+	.RaceDirectorContainer {
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: stretch;
+	}
+
+	.RaceDirectorPic {
+		width:100%;
+	}
+	.RaceDirectorInfo {
+		width:100%;
+	}
+
+}

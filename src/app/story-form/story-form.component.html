@@ -1,14 +1,54 @@
-<div>
-
-  <input type="text" id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="Type anything here..." style="width:100%;">
-
-  <input type="file" id="storyImage" name="storyImageField" accept="image/*" (change)="onSelectFile($event)">
-
-      <div class="wrapper" *ngIf="storyImage">
-        <img [src]="this.storyImage" width="100px">
-      </div>
-
-  
-  <button type="button" class="btn btn-primary btn-sm btn-mobile" style="background-color:#2C00A5; border-color:#2C00A5;" (click)="uploadStory()">Add Story</button>
-
+<div class='StoryFormInputContainer'>
+	<textarea class='StoryFormInput' #input id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="What's on your mind?" required></textarea>
+	<div class="StoryFormInputImageWrapper" *ngIf="storyImage">
+		<img [src]="this.storyImage" class='StoryFormInputImagePreview'>
+		<div class='button darkButton StoryFormInputImageDeleteButton'>
+			<span class="material-icons" (click)="deletePic()">close</span>
+		</div>
+	</div>
+	<div class='StoryFormInputExtraButtonsContainer'>
+		<button [ngClass]="{'darkButton':this.emojis,'lightButton':!this.emojis}" class='StoryFormEmojiToggleButton' (click)="toggleEmojis()">😊</button>
+		<button class='lightButton StoryFormImageButton italics' (click)="fileInput.click()">
+			<span class="material-icons">filter</span>
+		</button>
+		<button class='lightButton StoryFormPostButton' (click)="uploadStory()">POST</button>
+		<input #fileInput type="file" id="storyImage" name="storyImageField" (change)="onSelectFile($event)" style="display:none;" />
+	</div>
 </div>
+<div class='StoryFormInputEmojisButtonsContainer'>
+	<ng-template [ngIf]="this.emojis">
+		<span *ngFor="let element of this.acceptedEmojis" layout="row" layout-align="center center">
+			<button class='lightButton' (click)="addText(element)">{{element}}</button>
+		</span>
+	</ng-template>
+</div>
+<!--
+	<div class="row">
+	<div class = "status-col">
+		<textarea  id="storyImageCaption" name="storyImageCaptionField" maxlength="100" placeholder="What's on your mind?"  required style="width:100%;"></textarea>
+	</div>
+	<div class="pic-col">
+		<button type="button" (click)="fileInput.click()">
+		  <span class="material-icons">
+			filter
+		  </span>
+		  <input #fileInput type="file"   id="storyImage" name="storyImageField" (change)="onSelectFile($event)" style="display:none;" />
+		</button> 
+
+		  <div class="wrapper" *ngIf="storyImage">
+		    <img [src]="this.storyImage" width="30px">
+		  </div>
+	</div>
+</div>
+
+<div *ngIf="this.emojis">
+	<span *ngFor="let element of this.acceptedEmojis"  layout="row" layout-align="center center">
+		<button (click)="addText(element)">{{element}}</button>
+	</span>
+</div>
+
+<div class="buttonContainer">
+	<button (click)="toggleEmojis()">😊</button>
+	<button class="orangeButton" (click)="uploadStory()">POST</button>
+</div>
+-->

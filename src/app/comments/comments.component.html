@@ -1,22 +1,40 @@
-<div class="table-container" *ngIf="comments" style="overflow-y: auto;max-height:60vh;">
-  <table mat-table [dataSource]="comments" class="commentTable">
+<div class='Feed' *ngIf="comments">
+  <div *ngFor="let element of comments" class='FeedItem'>
+    <div class='FeedProfileImgCell'>
+      <div class='FeedProfileImgContainer'>
+        <img class="FeedProfileImg" src="{{ element.profile_url }}">
+      </div>
+    </div>
+    <div class='FeedProfileContentCell'>
+      <div class='FeedMessageHeader'>
+        <p class='FeedMessageName'><app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav></p>
+        <span class='h7'>{{ this.get_created_ts(element.created_ts) }}</span>
+      </div>
+      <div class='FeedMessageContent'>
+        <p class='margin-bottom-4px'>{{ element.body }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+  <table mat-table [dataSource]="comments" class="commentTable" >
     <ng-container matColumnDef="ProfilePic" style="padding: 10px;">
       <td mat-cell *matCellDef="let element">
-        <img width="50px" src="{{ element.profile_url }}">
+        <img width="30px" style="border-radius:50%;" src="{{ element.profile_url }}">
       </td>
     </ng-container>
 
     <ng-container matColumnDef="Data" style="padding: 2px;">
       <td mat-cell *matCellDef="let element">
-
-        <app-user-profile-nav [displayName]="element.display_name" [username]=element.username></app-user-profile-nav>
+        <p style="font-size:12px; font-family:'Mulish';">
+        <b><app-user-profile-nav [displayName]="element.display_name" [username]=element.username></app-user-profile-nav></b>
         {{ element.body }}
         <small>{{ this.get_created_ts(element.created_ts) }}</small>
-
+      </p>
       </td>
     </ng-container>
 
     <tr mat-row *matRowDef="let myRowData; columns: columns"></tr>
   </table>
-</div>
+-->
 <app-comments-form *ngIf="this._authService.isLoggedIn()" [storyID]="storyID" (commentPosted)="newCommentPosted()"></app-comments-form>

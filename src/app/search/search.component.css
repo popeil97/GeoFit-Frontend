@@ -1,0 +1,48 @@
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin:2px;
+  font-family:"Mulish";
+  font-size:12px;
+}
+
+.textInput{
+  font-family:"Mulish";
+  font-size:12px;
+}
+
+.followCol{
+	width:30%;
+  margin:2px;
+}
+
+.nameCol{
+	width:65%;
+  margin:2px;
+}
+.searchResult{
+	background-color:white;
+  border-bottom: 1px solid var(--slate-tint);
+	margin-bottom:1px;
+	border-radius:3px;
+}
+
+.form-control + button  {
+    position: absolute;
+    left: -32px;
+    top: 5px;
+    border: 0;
+    background-color: transparent;
+    box-shadow: none;
+}
+
+.FeedItem {
+      
+      box-sizing: border-box;
+
+      font-size:12px;
+      background-color:#FFFFFF;
+    }
+    .FeedItem:nth-child(2n) {
+      background-color:#EBEBEB
+    }
