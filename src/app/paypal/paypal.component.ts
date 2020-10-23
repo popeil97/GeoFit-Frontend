@@ -65,6 +65,12 @@ export class PaypalComponent implements AfterViewChecked {
   
 
   ngAfterViewChecked(): void {
+    // if(this.price === "0") {
+    //   let bypass = {} as any;
+    //   bypass.success = true;
+    //   bypass.type = 'PAYMENT';
+    //   this.transactionAlert.emit(bypass);
+    // }
     if (!this.addScript) {
       this.addPaypalScript().then(() => {
         paypal.Buttons(this.paypalConfig).render('#paypal-view')
