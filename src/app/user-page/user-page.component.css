@@ -57,6 +57,7 @@
             display:block;
             width:100%;
             margin-bottom:16px;
+            border-radius:1em;
         }
         .UserProfileName {
             margin-bottom:4px;
@@ -97,6 +98,7 @@
             box-shadow: var(--common-box-shadow);
             padding:16px;
             box-sizing: border-box;
+            border-radius:1em;
         }
 .RaceContainer {
     display:flex;
@@ -148,6 +150,7 @@
             min-width: 240px;
             margin-left:auto;
             margin-right:auto;
+
         }
         .UserProfileName, .UserProfileEmail, .UserProfileDescription, .UserProfileLocation, .UserProfileStravaContent {
             text-align:center;

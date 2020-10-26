@@ -175,7 +175,7 @@ a.navbar-brand {
 .NavNotifImgContainer, .NavProfileImgContainer {
   position: relative;
   display:inline-block;
-  border-radius:50%;
+  border-radius:0.5em;
   width:35px;
   height:35px;
   overflow:hidden;

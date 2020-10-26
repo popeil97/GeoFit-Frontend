@@ -38,6 +38,7 @@
 }
 	.AboutTucanMember img {
 		width:100%;
+		border-radius:1em;
 	}
 
 @media only screen and (max-width: 600px) {
