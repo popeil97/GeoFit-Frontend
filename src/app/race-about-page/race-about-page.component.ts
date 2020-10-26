@@ -10,6 +10,7 @@ import { SwagComponent } from '../swag/swag.component';
 import { TagType } from '../tags.service';
 import { ModalService } from '../modalServices';
 import { MapService } from '../map.service';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-race-about-page',
@@ -50,6 +51,11 @@ export class RaceAboutPageComponent implements OnInit {
   public num_users:any;
   userData: UserData;
 
+  logos: Logo;
+
+  trails: Array<string> = [];
+  trails_dist: Array<{distance: string}> = [];
+
   public currentScreen = 'map';
   public acceptedScreens = ['map','logistics','race_director'];
 
@@ -77,6 +83,7 @@ export class RaceAboutPageComponent implements OnInit {
     private modalService: ModalService,
     private _userProfileService:UserProfileService,
     private _mapService: MapService,
+    private _usersService:UsersService
   ) {}
 
   ngAfterViewInit(): void {
@@ -88,6 +95,9 @@ export class RaceAboutPageComponent implements OnInit {
   }
 
   ngOnInit() {
+
+   
+
     // Debugging
     var _this = this;
     // Hides some kind of form. Dunno what it is yet, but we'll figure it out
@@ -109,7 +119,21 @@ export class RaceAboutPageComponent implements OnInit {
         let raceData = data as RaceData;
         _this.followedIDs = raceData.followedIDs;
         _this.raceIDs = raceData.race_IDs;
-        console.log("Race IDs: ", _this.raceIDs);
+        console.log("Child Race IDs: ", _this.raceIDs);
+
+        console.log("RACE ID LEN",  this.raceIDs.length);
+         for (let i = 0; i < this.raceIDs.length; i++) {
+          let raceID = this.raceIDs[i];
+          console.log("RACE ID", raceID);
+
+
+          this._mapService.getMapData(raceID).then((data) => {
+            let mapData = data as RouteData;
+            this.trails.push(mapData.name);
+            console.log("ROUTE", mapData.name);        
+          });
+        };
+
       });
       
       // Get information about this particular rase
@@ -134,18 +158,18 @@ export class RaceAboutPageComponent implements OnInit {
       });
     });
 
-/**
-    this._mapService.getMapData(_this.raceID).then((data) => {
-        //console.log(data);
-        let mapData = data as RouteData;
-        console.log("MAP DATA",this.mapData);
-       
-      }); **/
+    
 
 
     document.getElementById('map-btn').style.backgroundColor = "#36343c";
     document.getElementById('map-btn').style.color = "#FFFFFF";
     console.log("race-about-page:race-id", this.raceID);
+
+ //Im a fucking idiot
+  //   this._usersService.getLogos(this.raceID).then((data)=>{
+    //  this.logos = data as Logo;
+   //   console.log("LOGOSSSSSSSSSs", this.logos);
+  //  });
   }
 
   ProcessDate = (date = null) => {
@@ -370,9 +394,13 @@ export class RaceAboutPageComponent implements OnInit {
 
 }
 
+
+
+interface Logo{
+  raceLogos:string[];
+}
 interface RouteData {
   name: string;
-  coords: any;
 }
 
 export interface AboutData {
