@@ -6,10 +6,11 @@
 <h4>Your Cart</h4>
 <app-swag-list #cart [raceID]="raceID" [isCart]="true" (refreshCart)="refreshCart()"></app-swag-list>
 
-<div class='CheckoutButtonContainer' *ngIf="checkoutDisabled">
-    <button class="buttonWithIcon" [disabled]='true' style="background-color:red;" (click)="checkout()">Checkout<mat-icon>shopping_bag</mat-icon></button>
+<div class='CheckoutButtonContainer'>
+    <button class="buttonWithIcon" (click)="checkout()">Checkout<mat-icon>shopping_bag</mat-icon></button>
 </div>
 
-<div class='CheckoutButtonContainer' *ngIf="!checkoutDisabled">
-    <button class="buttonWithIcon" (click)="checkout()">Checkout<mat-icon>shopping_bag</mat-icon></button>
+
+<div *ngIf="checkoutDisabled">
+   You must add an item to continue to payment
 </div>

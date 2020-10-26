@@ -60,10 +60,10 @@
               <!--   <app-signup [price]="race.raceSettings.price" [hasTags]="race.raceSettings.has_entry_tags"[race_id]="race.id" (signupCallback)="signupCallback($event)" (click)="trySignup()"></app-signup> -->
               
               <ng-template [ngIf]="!this._authService.isLoggedIn()" [ngIfElse]="OtherRegisterButton">
-                <button (click)="openModal('custom-modal-2',race)">Register for Race</button>
+              <!--  <button (click)="openModal('custom-modal-2',race)">Register for Race</button> -->
               </ng-template>
               <ng-template #OtherRegisterButton>
-                <button *ngIf="!race.joined" (click)="openModal('custom-modal-3',race)">Register for Race</button>
+               <!-- <button *ngIf="!race.joined" (click)="openModal('custom-modal-3',race)">Register for Race</button> -->
               </ng-template>
               <p *ngIf="race.joined" class='h7'><b>You've registered for this race.</b></p>
               <p *ngIf="!race.has_started && race.joined" class='h7'>Come back on race day ({{race.start_date.month}} {{race.start_date.day}}).</p>

@@ -49,8 +49,20 @@ export class CartEditComponent implements OnInit,OnChanges {
     checkoutCallback.success = true;
     checkoutCallback.type = 'CHECKOUT';
     checkoutCallback.data = this.cartList.getCart();
+    console.log(";CART", checkoutCallback.data );
+    if(checkoutCallback.data.orders.length>=1)
+    {
+      this.checkoutAlert.emit(checkoutCallback);
+      this.checkoutDisabled = false;
+      console.log("CHECKOUT PROCEED");
+    }
+    else
+    {
+      this.checkoutDisabled = true;
+      console.log("CHECKOUT BLOCKED");
+    }
 
-    this.checkoutAlert.emit(checkoutCallback);
+    
 
   }
 
