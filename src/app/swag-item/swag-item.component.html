@@ -16,7 +16,7 @@
       <div class='cartSizeContainer' *ngIf="item.type!=1">
         <p class='margin-bottom-0px'>Size:</p>
         <select class='cartSelectSize' [(ngModel)]="selectedSize">
-          <option *ngFor="let size of sizes" [value]="size" (click)="onSizeSelect(size)">{{size}}</option>
+          <option *ngFor="let size of item.sizes" [value]="size" (click)="onSizeSelect(size)">{{size}}</option>
         </select>
         <!--<button class='h7 buttonWithIcon' [ngClass]="{'addButtonDisabled':btnDisabled}" [disabled]="btnDisabled" (click)="addToCart()">Add to Cart <mat-icon>shopping_cart</mat-icon></button> -->
       </div>
