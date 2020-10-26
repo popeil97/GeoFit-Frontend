@@ -7,7 +7,7 @@
 				<h3 class="MapHeaderTitle">{{this.raceName}}</h3>
 				<div class='MapHeaderButtonsContainer'>
 					<button class="smallButton" style="margin-right:3px;" (click)="viewAbout()">ABOUT</button>
-					<button class="lightButton smallButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('mapSettingsModal')"><span class="material-icons">settings</span></button>
+				<!--	<button class="lightButton smallButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('mapSettingsModal')"><span class="material-icons">settings</span></button> -->
           <span (click)="toggleMenu()" style="font-size:20px;" *ngIf="isOpen" class="material-icons">close</span>
 
 
