@@ -32,6 +32,10 @@
         </div>
       </div>
       <p>{{aboutData.description}}</p>
+
+     HI  {{this.logos[0]}}
+      <img  src="{{this.logos[0]}}" />
+
       <!-- icon to indicate race type : 1-run;2-bike;3-all -->
       <!--<i *ngIf="aboutData.race_type == 3" class="material-icons">directions_run</i> <i class="material-icons" >directions_bike</i>--> 
     </ng-template>
@@ -89,14 +93,13 @@
                 <p class='RaceLocation'>{{aboutData.end_loc}}</p>
               </div>
               
-              <div class='RaceRouteInfo margin-bottom-8px'>
-                <h6 class='margin-bottom-4px'>Number of trails:</h6>
-                <ng-template [ngIf]="aboutData.num_children>1" [ngIfElse]="OneChildBlock">
-                  <p class='h7 margin-bottom-0px'>{{aboutData.num_children}}</p>
-                </ng-template>
-                <ng-template #OneChildBlock>
-                  <p class='h7 margin-bottom-0px'>1</p>
-                </ng-template>
+              <div class='RaceRouteInfo margin-bottom-8px' *ngIf="aboutData.num_children>1">
+                <h6 class='margin-bottom-4px'>Trails ({{aboutData.num_children}} total):</h6>  
+
+                <div *ngFor="let trail of this.trails">           
+                    <p class='h7 margin-bottom-0px'>{{trail}}</p>
+                </div>          
+                
               </div>
 
             </ng-template>
