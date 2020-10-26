@@ -165,10 +165,11 @@ export class RaceAboutPageComponent implements OnInit {
     document.getElementById('map-btn').style.color = "#FFFFFF";
     console.log("race-about-page:race-id", this.raceID);
 
-     this._usersService.getLogos(this.raceID).then((data)=>{
-      this.logos = data as Logo;
-      console.log("LOGOSSSSSSSSSs", this.logos);
-    });
+ //Im a fucking idiot
+  //   this._usersService.getLogos(this.raceID).then((data)=>{
+    //  this.logos = data as Logo;
+   //   console.log("LOGOSSSSSSSSSs", this.logos);
+  //  });
   }
 
   ProcessDate = (date = null) => {
