@@ -161,6 +161,8 @@ export class Register2Component implements OnInit {
                   }
                   else
                   {
+                    let registrationBody = {race_id:this.d.race_id} as any;
+                    this._raceService.joinRace(registrationBody);
                     this.router.navigate(['/welcome']);
                   }
                 }
