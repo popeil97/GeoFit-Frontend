@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { MustMatch } from './_helpers/must-match.validator';
 import { UserProfileService } from '../userprofile.service';
 import { ModalService } from '../modalServices';
+import { RaceService } from '../race.service';
 
 @Component({
   selector: 'app-register2',
@@ -47,7 +48,8 @@ export class Register2Component implements OnInit {
     private route:ActivatedRoute,
     private _authService: AuthService,
     private _userProfileService:UserProfileService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private _raceService: RaceService,
   ) { }
 
   ngOnInit() {
@@ -151,8 +153,18 @@ export class Register2Component implements OnInit {
             else {
                if(this.d.register == true)
                 {
-                  this.closeDialog() ;
-                  this.openModal('custom-modal-3');
+                  if(this.d.price > 0)
+                  {
+                    this.closeDialog() ;
+                    this.openModal('custom-modal-3');
+
+                  }
+                  else
+                  {
+                    let registrationBody = {race_id:this.d.race_id} as any;
+                    this._raceService.joinRace(registrationBody);
+                    this.router.navigate(['/welcome']);
+                  }
                 }
                 else
                 {
