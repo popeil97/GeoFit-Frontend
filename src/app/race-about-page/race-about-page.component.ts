@@ -184,18 +184,13 @@ export class RaceAboutPageComponent implements OnInit {
 
 
   openModal(id: string) {
-    if(!this._authService.isLoggedIn())
+    if(!this._authService.isLoggedIn() || this.raceSettings.price>0) //user is NOT logged in
     {
       const data = (id == 'custom-modal-2') ? {register:true, price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} :(id == 'custom-modal-3') ? {price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} : null;
       //console.log("MODAL DATA", data);
       this.modalService.open(id,data);
-
     }
-
-    else if(this.raceSettings.price > 0) {
-      // open the cart modal
-    }
-    else
+    else //user is logged in and price = 0;
     {
       //add race stat then...
       let registrationBody = {race_id:this.raceID} as any;
