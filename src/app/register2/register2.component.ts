@@ -151,8 +151,16 @@ export class Register2Component implements OnInit {
             else {
                if(this.d.register == true)
                 {
-                  this.closeDialog() ;
-                  this.openModal('custom-modal-3');
+                  if(this.d.price > 0)
+                  {
+                    this.closeDialog() ;
+                    this.openModal('custom-modal-3');
+
+                  }
+                  else
+                  {
+                    this.router.navigate(['/welcome']);
+                  }
                 }
                 else
                 {

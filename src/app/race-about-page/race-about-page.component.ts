@@ -183,20 +183,10 @@ export class RaceAboutPageComponent implements OnInit {
 
 
   openModal(id: string) {
-
-    if(this.raceSettings.price == 0) {
-      let registrationBody = {race_id:this.raceID} as any;
-      this.raceService.joinRace(registrationBody);
-      this.router.navigate(['/welcome']);
-    }
-
-    else {
       const data = (id == 'custom-modal-2') ? {register:true, price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} :(id == 'custom-modal-3') ? {price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} : null;
       //console.log("MODAL DATA", data);
       this.modalService.open(id,data);
-    }
-
-    
+   
   }
 
   closeModal(id: string) {
