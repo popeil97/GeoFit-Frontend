@@ -14,7 +14,7 @@ export class SwagItemComponent implements OnInit {
   @Output() refreshState: EventEmitter<any> = new EventEmitter();
   sizes:string[] = ['S','M','L','XL','2XL','3XL','S (youth)','M (youth)','L (youth)'];
   btnDisabled:Boolean = true;
-  selectedSize:string;
+  selectedSize:string = '';
 
   constructor(private _swagService:SwagService) { }
 
@@ -56,7 +56,7 @@ export class SwagItemComponent implements OnInit {
 
   init() {
     this.btnDisabled = true;
-    this.selectedSize = null;
+    this.selectedSize = '';
   }
 
 }

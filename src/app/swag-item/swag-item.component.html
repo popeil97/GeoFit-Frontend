@@ -13,7 +13,7 @@
           <h6 class='margin-bottom-0px'>${{item.price}}</h6>
         </div>
       </div>
-      <div class='cartSizeContainer' *ngIf="item.type!=1">
+      <div class='cartSizeContainer' *ngIf="item.type!=1 && item.sizes != null">
         <p class='margin-bottom-0px'>Size:</p>
         <select class='cartSelectSize' [(ngModel)]="selectedSize">
           <option *ngFor="let size of item.sizes" [value]="size" (click)="onSizeSelect(size)">{{size}}</option>
