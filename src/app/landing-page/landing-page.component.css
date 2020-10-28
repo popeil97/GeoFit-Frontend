@@ -1,3 +1,40 @@
+.column{
+    width: 49%;
+    color:black;
+  }
+
+  .column3{
+    width: 23%;
+    color:black;
+  }
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  height: calc(50vh - 64px);
+  background-color:white;
+  color:black;
+}
+.socialMedia{
+  max-width:24px;
+  margin:4px;
+}
+
+.row1 {
+  display: flex;
+  flex-wrap: wrap;
+  height: calc(50vh - 64px);
+  background-color:rgb(240, 240, 240);
+  color:black;
+}
+
+.row2 {
+  display: flex;
+  flex-wrap: wrap;
+  height: calc(50vh - 64px);
+  background-color:#7FCC92;
+  color:black;
+}
+
 .masthead {
 
   height: calc(100vh - 64px);
@@ -8,6 +45,7 @@
   align-items: stretch;
 }
 
+
 .split {
   position:relative;
   z-index: 2;
@@ -17,7 +55,18 @@
   padding-right:16px;
   box-sizing: border-box;
 
-  background-color: var(--primary-darkgrey);
+  background-color: white;
+}
+
+.splitImg {
+  position:relative;
+  z-index: 2;
+  width:50%;
+
+  padding-left:16px;
+  padding-right:16px;
+  box-sizing: border-box;
+  color:black;
 }
 
 .split.left {
@@ -34,7 +83,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
   
-  text-align: center;
   width:75%;
   min-width: 300px;
   padding-top:40px;
@@ -44,11 +92,32 @@
   .LandingMain p {
     margin-top:16px;
     margin-bottom:0;
-    color:white;
+    color:black;
   }
 
+  .LandingMainBlack {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  width:50%;
+  min-width: 250px;
+  padding-top:40px;
+  padding-bottom:40px;
+  box-sizing: border-box;
+}
+  .LandingMainBlack p {
+    margin-top:16px;
+    margin-bottom:0;
+    color:black;
+  }
 .LandingHeaderText, .centered p {
-  color:white;
+  color:black;
+}
+
+.LandingHeaderTextBlack, .centered p {
+  color:black;
 }
 .LandingTucanLogo {
   margin-bottom:40px;
@@ -67,6 +136,10 @@
   left:50%;
   transform:translate(-50%,-50%);
   max-width: 100%;
+}
+
+.FeatureHeading {
+  margin:16px;
 }
 .LandingSubheadingButtons {
   display:flex;
