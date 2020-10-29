@@ -4,11 +4,11 @@
    <!-- <img class='PageHeaderSegmentImage FAQsHeaderImage' src= "../../assets/svg.png" alt="FAQs" /> -->
     <h1 class="PageHeaderSegmentTitle">Frequently Asked Questions</h1>
   </div>
-   <div class='ImageSegment'>
+  <!-- <div class='ImageSegment'>
     <p style="text-align:center;">
       <img src= "../../assets/question.png" class="FAQImage" style="max-width:300px;">
     </p>
-  </div>
+  </div> -->
   <div class='PageSegment'>
     <h2 class='margin-bottom-16px'>Using Tucan Fitness</h2>
     
@@ -85,6 +85,29 @@
           <br />
           If you dispute the claim with Paypal, it deducts $20 from the fundraiser or race you are associated with, and no one wants that.
         </p>
+      </div>
+    </div>
+  </div>
+
+
+    <div class='PageSegment'>
+    <h2 class='margin-bottom-16px'>About Tucan Fitness Races</h2>
+    
+    <div class='faqAccordian'>
+      <div class='faqHeader' (click)="this.ToggleQuestion('actually_run')">
+        <p class='margin-bottom-4px'> <span class="material-icons">keyboard_arrow_right</span> <b>What is a virtual race?</b></p>
+      </div>
+      <div class='faqContent' [ngClass]="{'open':this.IsOpen('actually_run')}">
+        <p class='margin-bottom-0px'>Whether you’re running in the city, your neighborhood, or your own backyard, you’re also sharing a digital route with other participants and racers. Tucan Fitness removes borders and boundaries of race participation so that racers can participate from anywhere in the world, without all the hassle of parking, scheduling, traffic, (and port-a-potties) but with the benefit of a worldwide community working together towards common fitness and fundraising goals.</p>
+      </div>
+    </div>
+    
+    <div class='faqAccordian'>
+      <div class='faqHeader' (click)="this.ToggleQuestion('where')">
+        <p class='margin-bottom-4px'><span class="material-icons">keyboard_arrow_right</span> <b>What is a hybrid race?</b></p>
+      </div>
+      <div class='faqContent' [ngClass]="{'open':this.IsOpen('where')}">
+       <p class='margin-bottom-0px'>Race directors wanted to take virtual racing to the next level, and we listened. Introducing… a whole new kind of race, hybrid racing. You have a set time period to run real physical trails in a selected city. You choose the timing and the order in which you complete each trail in-person. You can run the distance in one day or you can take the entire race duration. Our platform brings together participants with social features, statistics, and leaderboards. Compete with friends, the clock, and yourself!</p>
       </div>
     </div>
   </div>

@@ -1,40 +1,7 @@
-.column{
-    width: 49%;
-    color:black;
-  }
-
-  .column3{
-    width: 23%;
-    color:black;
-  }
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  height: calc(50vh - 64px);
-  background-color:white;
-  color:black;
-}
 .socialMedia{
   max-width:24px;
   margin:4px;
 }
-
-.row1 {
-  display: flex;
-  flex-wrap: wrap;
-  height: calc(50vh - 64px);
-  background-color:rgb(240, 240, 240);
-  color:black;
-}
-
-.row2 {
-  display: flex;
-  flex-wrap: wrap;
-  height: calc(50vh - 64px);
-  background-color:#7FCC92;
-  color:black;
-}
-
 .masthead {
 
   height: calc(100vh - 64px);
@@ -116,8 +83,11 @@
   color:black;
 }
 
-.LandingHeaderTextBlack, .centered p {
-  color:black;
+.LandingHeaderTextWhite, .centered p {
+  color:white;
+}
+.LandingHeaderTextGreen, .centered p {
+  color:var(--tucan-green);
 }
 .LandingTucanLogo {
   margin-bottom:40px;
@@ -168,6 +138,43 @@ article, aside, figcaption, figure, footer,b header, hgroup, main, nav, section 
 }
 
 
+.AboutTucanValuesContainer {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.AboutTucanFeaturesContainer {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+.AboutTucanFeatureImg{
+  max-height: 60%;
+    max-width: 60%;
+}
+
+.AboutTucanValue {
+  width:30%;
+}
+
+
+.AboutTucanFeatures {
+  width:49%;
+}
+
+.AboutTucanFooter1{
+  width:49%;
+}
+
+.AboutTucanFooter2{
+  width:24%;
+}
 @media only screen and (max-width: 600px) {
   .masthead {
     flex-direction: column;
@@ -197,4 +204,29 @@ article, aside, figcaption, figure, footer,b header, hgroup, main, nav, section 
     top:0;
     transform:translateX(-50%);
   }
+
+
+    .AboutTucanValuesContainer {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+
+    .AboutTucanValue {
+      width:100%;
+    }
+    .AboutTucanFeatures {
+      width:100%;
+    }
+    .AboutTucanFooter1 {
+      width:0%;
+    }
+    .AboutTucanFooter2 {
+      width:100%;
+    }
+    .AboutTucanFeatureImg{
+      max-height: 25%;
+        max-width: 25%;
+    }
+
 }
