@@ -43,4 +43,6 @@ interface RacerItem{
   distance_type:string;
   child_user_stats: RacerItem[];
   activities: any[];
+  total_distance:any;
+  isTeam:any;
 }

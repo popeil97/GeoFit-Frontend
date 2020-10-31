@@ -9,3 +9,21 @@
 	max-height: 20%;
     max-width: 20%;
 }
+
+.ImgCol{
+    width: 60%;
+    margin: 1px;
+  }
+.ContentCol{
+    width: 35%;
+    margin: 1px;
+  }
+    .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.socialMedia{
+	max-width:24px;
+	margin:4px;
+}

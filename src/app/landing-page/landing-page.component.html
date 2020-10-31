@@ -1,28 +1,152 @@
 <!-- Masthead-->
+<div class='PageContainer'>
 <ng-template [ngIf]="!this._authService.isLoggedIn()" [ngIfElse]="LoggedInLanding">
     <div class="masthead" id="race">
         <div class="split left">
             <div class='TucanContainer'>
                 <div class="LandingMain">
-                    <img src= "../../assets/logos/logo-white.png" class="TucanLogo LandingTucanLogo">
-                    <h3 class='LandingHeaderText'>We bring community to virtual racing</h3>
+                    <img src= "../../assets/logos/tucan-logo-01.png" class="TucanLogo LandingTucanLogo">
+                    <h3>We bring community to virtual racing</h3>
                     <div class='LandingSubheading'>
-                        <p>Tucan fitness is a social fitness platform for race and fundraiser organizers to engage their community virtually.</p>
-                        <a class="button lightButton LandingAboutButton" routerLink='/about-tucan'>About Tucan Fitness</a>
+                        <p>Tucan fitness is a social fitness platform for race and fundraiser organizers to engage their community virtually from anywhere in the world.</p>
+                      <!--  <a class="button lightButton LandingAboutButton" routerLink='/about-tucan'>About Tucan Fitness</a> -->
                     </div>
     
                     <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
-                        <button class='darkButton shadowButton' (click)="openModal('custom-modal-1')">Log In</button>
-                        <button class='darkButton shadowButton' (click)="openModal('custom-modal-2')">Sign Up</button>
+                        <button (click)="openModal('custom-modal-1')">Log In</button>
+                        <button (click)="openModal('custom-modal-2')">Sign Up</button>
                     </div>
                 </div>
             </div>
         </div>
         <div class="split right">
-            <img class='landingImage' src='../../assets/landing/collage.jpeg' alt='Image'>
+            <img class='landingImage' src='../../assets/landing/main.PNG' alt='Image' style="max-width:450px;">
         </div>
     </div>
+
+     
+
+      <div class='PageSegment' style="background-color:rgb(240, 240, 240);" >
+            <div class='AboutTucanValuesContainer'>
+                  <div class='AboutTucanFeatures'>
+                        <h3>Get fit with your community</h3>
+                        <div class='LandingSubheading'>
+                            <p>Tucan Fitness is built around community, with the goal that you can participate and engage with others from anywhere in the world</p>
+                       </div>  
+                  </div>
+                  <div class='AboutTucanFeatures'>
+                         <img src= "../../assets/community.png" class="AboutTucanFeatureImg" style="max-width:250px;"> 
+                  </div>
+                  
+            </div>
+      </div>
+
+      <div class='PageSegment' style="background-color:white;">
+            <div class='AboutTucanValuesContainer'>
+                  <div class='AboutTucanFeatures'>
+                        <img src= "../../assets/social.png" class="AboutTucanFeatureImg" style="max-width:250px;">
+                  </div>
+                  <div class='AboutTucanFeatures'>
+                         <h3>Share your progress</h3>
+                    <div class='LandingSubheading'>
+                        <p>Tucan Fitness is a social platform that allows you to share pictures, videos, and your hard work with others</p>
+                    </div> 
+                  </div>
+                  
+            </div>
+      </div>
+
+
+      <div class='PageSegment'  style="background-color:rgb(240, 240, 240);">
+            <div class='AboutTucanValuesContainer'>
+                  <div class='AboutTucanFeatures'>
+                        <h3>Bring out your competitive side</h3>
+                        <div class='LandingSubheading'>
+                            <p>Tucan Fitness helps you achieve your personal goals, whether it's to be healthy or climb the leaderboard.</p>
+                        </div>  
+                  </div>
+                  <div class='AboutTucanFeatures'>
+                         <img src= "../../assets/fitness.png" class="AboutTucanFeatureImg" style="max-width:250px;">  
+                  </div>
+                  
+            </div>
+      </div>
+
+      <div class='PageSegment' style="background-color:white;">
+            <div class='AboutTucanValuesContainer'>
+                  <div class='AboutTucanFeatures'>
+                         <img src= "../../assets/social-good.png" class="AboutTucanFeatureImg" style="max-width:250px;"> 
+                  </div>
+                  <div class='AboutTucanFeatures'>
+                         <h3>Give back to your org</h3>
+                    <div class='LandingSubheading'>
+                        <p>Tucan Fitness allows you to raise money for a cause you care about and support your community</p>
+                    </div>
+                  </div>
+                  
+            </div>
+      </div>
+
+       <div class='PageSegment' style="background-color:rgb(240, 240, 240);">
+            <h2>Our Value</h2>
+            <div class='AboutTucanValuesContainer'>
+                  <div class='AboutTucanValue'>
+                        <h3>For Racers</h3>
+                        <p><b>Fit fitness into your own schedule.</b> Do not let your busy schedule stop you from climbing the leaderboard or raising funds for a good cause. Connect with other racers in your community and be social from a distance.</p>  
+                  </div>
+                  <div class='AboutTucanValue'>
+                        <h3>For Race Directors</h3>
+                        <p><b>Replace canceled races or create new events.</b> Engage your community virtually, all without the costs required to put on in-person events. Take your event 100% virtual or create hybrid events to take racing to the next level. </p>  
+                  </div>
+                  <div class='AboutTucanValue'>
+                        <h3 >For Fundraisers</h3>
+                        <p><b>A turn-key fundraising solution.</b> Quickly set up a race, share with your community and get people moving together, all for a good cause. Choose your own custom route and engage your sponsors to make a personalized fundraiser.</p>  
+                  </div>
+                  
+            </div>
+      </div>
+
+
+    <div class='PageSegment'>
+            <div class='AboutTucanValuesContainer'>
+                  <div class='AboutTucanFooter1'>
+                         
+                  </div>
+                  <div class='AboutTucanFooter2'>
+                         <h3 class='LandingHeaderTextBlack'>Company</h3>
+                         <div class='LandingSubheading'>
+                        <a routerLink="/about-tucan" routerLinkActive="active">About Tucan</a><br>
+                        <a routerLink="/public-races" routerLinkActive="active">Public Races</a><br>
+                        <a routerLink="/faqs" routerLinkActive="active">FAQS</a><br>
+                        <a routerLink="/contact" routerLinkActive="active">Contact</a><br>
+                        <app-terms-of-service></app-terms-of-service>
+                        <a href="https://stories..com/work"freepik>Illustration by Freepik Stories</a>
+
+                    </div>
+                  </div>
+                  <div class='AboutTucanFooter2'>
+                        <h3 class='LandingHeaderTextBlack'>Contact Us</h3>
+                         <a href="mailto:admin@tucan.fitness">admin@tucan.fitness</a>
+                        <p>
+                        <br>
+                        <br>
+                        <br>
+                        </p>
+                        <a href="https://www.facebook.com/tucanfit"><img class="socialMedia" src= "https://www.flaticon.com/svg/static/icons/svg/174/174848.svg"></a>
+                        <a href="https://www.linkedin.com/company/tucan-fitness/"><img class="socialMedia" src= "https://www.flaticon.com/svg/static/icons/svg/174/174857.svg"></a>
+                    
+                  </div>
+                  
+            </div>
+      </div>
+
+
+
+
+
+
 </ng-template>
 <ng-template #LoggedInLanding>
     <app-user-page></app-user-page>
 </ng-template>
+</div>

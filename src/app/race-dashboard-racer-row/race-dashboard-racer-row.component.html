@@ -1,3 +1,4 @@
+<!--
 <tr>
   <td style="padding:10px;">
     <img width="50px" src="{{ racerData.profile_url }}">
@@ -22,11 +23,12 @@
     </button>
   </td>
 </tr>
-
+-->
 <!-- If there are any child races (i.e. this is team) then list them similarly -->
+<!--
 <div class="container" *ngIf="racerData.child_user_stats">
   <app-race-dashboard-racer-row *ngFor="let row of racerData.child_user_stats" [racerData]="row" (removeUserByIDEvent)="removeUserByID($event)"></app-race-dashboard-racer-row>
-</div>
+</div>-->
 
 <!-- If there are any activities associated with this race stat, list here -->
 <div class="container" *ngIf="racerData.activities && showActivities">

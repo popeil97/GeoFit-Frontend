@@ -50,6 +50,11 @@ export class UsersService {
     return this.http.post(environment.apiUrl + '/api/user-race-setting-update/',{form:form}).toPromise();
   }
 
+  getLogos(race_id:number) {
+  //   console.log(race_id)
+    return this.http.post(environment.apiUrl + '/api/get-logos/',{race_id:race_id}).toPromise();
+  }
+
   //FUTURE: Block users etc
 
 }

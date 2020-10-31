@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IdahoComponent } from './idaho.component';
+import { RaceCreatePageComponent } from './race-create-page.component';
 
-describe('IdahoComponent', () => {
-  let component: IdahoComponent;
-  let fixture: ComponentFixture<IdahoComponent>;
+describe('RaceCreatePageComponent', () => {
+  let component: RaceCreatePageComponent;
+  let fixture: ComponentFixture<RaceCreatePageComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IdahoComponent ]
+      declarations: [ RaceCreatePageComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IdahoComponent);
+    fixture = TestBed.createComponent(RaceCreatePageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
