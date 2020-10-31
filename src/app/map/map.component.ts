@@ -39,6 +39,10 @@ export class MapComponent implements AfterViewInit,OnChanges {
   @Input() followedIDs:any;
   @Input() zoom:Boolean;
 
+  //Parent race ID
+  //Same as raceIDs elem if no child races
+  @Input() parentRaceID:number;
+
   //IDs of races constituent to this race
   //More than one if this is a multi-route race
   @Input() raceIDs:number[] = [];
@@ -52,6 +56,9 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
   //Leaflet map
   public map;
+
+  //LatLng markers of all race start/end coords
+  private raceMarkers = [] as any;
 
   private initialized: boolean = false;
 
@@ -78,7 +85,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
             case 'raceIDs':
               if (!_.isEqual(changes.raceIDs.currentValue, changes.raceIDs.previousValue)){
                 this.getMapData();
-                console.log("map:race-id", this.raceIDs);
               }
           }
         }
@@ -99,12 +105,11 @@ export class MapComponent implements AfterViewInit,OnChanges {
     this.initialized = true;
   }
 
+
   public getUserPinData(raceID:number,page:number) {
-    //console.log('getting user data')
     return this._raceService.getUserRacestats(raceID,page).then((data:any) =>{
       this.routeData[raceID].userData = data.users_data;
       console.log("MAP USER DATA",data.users_data);
-
       this.loading = false;
     });
   }
@@ -113,73 +118,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
   public getMapData(){
     this.loading=true;
 
-  //   this.userData = [];
-  //   let workers = [] as any;
-
-  //   this._mapService.getUserPinSize(this.raceID).then((resp) => {
-  //     console.log('USER PIN SIZE RESP:',resp);
-  //     let pages = resp['pages'];
-
-  //     for(var page = 1; page <= pages; page++) {
-  //       let worker = this.getUserPinData(page);
-  //       workers.push(worker);
-  //     }
-
-  //     console.log('WORKERS:',workers)
-
-  //     // Promise.all(workers).then((vals:any) => {
-  //     //   console.log('DONE LOADING PINS:',vals)
-  //     //   vals.forEach((val) => {
-  //     //     this.userData = this.userData.concat(val['users_data']);
-  //     //   });
-
-  //     //   console.log('ALL USERS DATA:',this.userData)
-
-  //     //   if (this.displayUsers){
-  //     //     this.createUserPins(false);
-  //     //   }
-  //     //   this.loading = false;
-  //     // })
-  //   });
-
-    
-
-  //   this._mapService.getOrgPinStats(this.raceID).then((data) => {
-  //     console.log('ORG PINSSSS DATAAAAA',data);
-  //     let orgPinData = data as OrgPinData;
-  //     this.orgData = orgPinData.org_pins;
-  //   })
-    
-  //   this._mapService.getMapData(this.raceID).then((data) => {
-  //     let mapData = data as MapData;
-
-  //     //Get and apply coordinates
-  //     this.coordinates = mapData.coords;
-  //     this.applyCoordinates();
-
-  //     //Get and apply route pins
-  //     this.routePins = mapData.route_pins;
-      
-
-  //     this.loading=true;
-
-      
-  //   });
-
-  // }
-
-  // public getUserPinData(page:number) {
-  //   console.log('getting user data')
-  //   return this._raceService.getUserRacestats(this.raceID,page).then((data) =>{
-  //     this.userData = this.userData.concat(data['users_data']);
-
-  //     if (this.displayUsers){
-  //       this.createUserPins(false);
-  //     }
-  //     this.loading = false;
-  //   });
-  // }
-
     //To prevent old data from remaining on map if MapRouteComponent child
     //is deleted, pre-emptively clear pins
     _.forEach(this.mapRouteChildren.toArray(),(child:MapRouteComponent) => {
@@ -187,11 +125,11 @@ export class MapComponent implements AfterViewInit,OnChanges {
       child.clearOrgPins();
     });
 
-    //console.log("Race IDs in map comp: ", this.raceIDs);
+    //Pan to race start/end bounds
+    this.panToRaceMarkerBounds();
 
     for (let i = 0; i < this.raceIDs.length; i++) {
       let raceID = this.raceIDs[i];
-    //  //console.log(raceID);
 
       this.routeData[raceID] = (): RouteData => ({
         name: '',
@@ -207,44 +145,38 @@ export class MapComponent implements AfterViewInit,OnChanges {
       });
       
       this._mapService.getMapData(raceID).then((data) => {
-        //console.log(data);
         let mapData = data as RouteData;
 
         this.routeData[raceID].coords = mapData.coords;
         this.routeData[raceID].route_pins = mapData.route_pins;
-          
-        // this._raceService.getUserRacestats(raceID).then((data:any) => {
-        //   this.routeData[raceID].userData = data.users_data;
-        //   //console.log("User pin data: ", this.routeData[raceID].userData)
-          
-        //   this.loading=false;
-        // });
 
-      let workers = [] as any;
+        let workers = [] as any;
 
-      this._mapService.getUserPinSize(raceID).then((resp) => {
-        //console.log('USER PIN SIZE RESP:',resp);
-        let pages = resp['pages'];
+        this._mapService.getUserPinSize(raceID).then((resp) => {
+          let pages = resp['pages'];
 
-        for(var page = 1; page <= pages; page++) {
-          let worker = this.getUserPinData(raceID,page);
-          workers.push(worker);
-        }
+          for(var page = 1; page <= pages; page++) {
+            let worker = this.getUserPinData(raceID,page);
+            workers.push(worker);
+          }
 
-        //console.log('WORKERS:',workers)
+        });
 
-      });
-
-
-
-        
       });
     };
-
   }
 
+
+  public panToRaceMarkerBounds(){
+    if (this.parentRaceID){
+      this._mapService.getRaceMarkers(this.parentRaceID).then((data) => {
+        this.map.fitBounds(data['markers'], { padding: [20, 20] });
+      })
+    }
+  }
+
+
   public panToMarkerBounds(markerBounds){
-    console.log("PPAN1")
     var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
     this.map.fitBounds(markerBounds, options);
   }
@@ -256,25 +188,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
   //   //Do this to pan *and* zoom
   //   var markerBounds = L.latLngBounds([this.markersByUserID[user_id.toString()]['latLng']]);
-  //   var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
-  //   this.map.fitBounds(markerBounds, options);
-  // }
-
-
-  // public panToUSA(){
-  //   var corner1 = L.latLng(40.4, -73.7);
-  //   var corner2 = L.latLng(39.79, -75.5);
-  //   var markerBounds = L.latLngBounds(corner1,corner2);
-  //   var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
-  //   this.map.fitBounds(markerBounds, options);
-  // }
-
-
-  // public panToIsrael(){
-  //   var corner1 = L.latLng(31.8,35.3);
-  //   var corner2 = L.latLng(31.76, 35.18);
-    
-  //   var markerBounds = L.latLngBounds(corner1,corner2);
   //   var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
   //   this.map.fitBounds(markerBounds, options);
   // }

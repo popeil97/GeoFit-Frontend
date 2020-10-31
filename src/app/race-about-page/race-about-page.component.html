@@ -75,7 +75,7 @@
       <div class="SlideshowContents RaceSlideshowContents">
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'map'}">
           <div class='MapContainer'>
-            <app-map [raceIDs]="raceIDs" [displayUsers]="false" zoom="true"></app-map>
+            <app-map [raceIDs]="raceIDs" [parentRaceID]="raceID" [displayUsers]="false" zoom="true"></app-map>
           </div>
           <div class="RaceRoutesContainer">
             <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceRoutesBlock">
