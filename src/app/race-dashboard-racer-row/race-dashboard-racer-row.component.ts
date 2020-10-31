@@ -9,6 +9,9 @@ export class RaceDashboardRacerRowComponent implements OnInit {
   @Input() racerData: RacerItem;
 
   @Output() removeUserByIDEvent: EventEmitter<number> = new EventEmitter();
+  @Output() activityDeletedEvent: EventEmitter<number> = new EventEmitter();
+
+  public showActivities: boolean = false;
 
   constructor() { }
 
@@ -17,6 +20,17 @@ export class RaceDashboardRacerRowComponent implements OnInit {
 
   public removeUserByID(user_id: number){
     this.removeUserByIDEvent.emit(user_id);
+  }
+
+  public toggleActivities(){
+    this.showActivities = !this.showActivities;
+  }
+
+  public activityDeletedHandler(id: number){
+    console.log("In racer row event handler");
+    console.log("ID: ", id);
+    this.activityDeletedEvent.emit(id);
+    console.log("Emitted from racer row");
   }
 
 }

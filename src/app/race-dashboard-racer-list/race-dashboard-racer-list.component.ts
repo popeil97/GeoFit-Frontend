@@ -61,6 +61,13 @@ export class RaceDashboardRacerListComponent implements OnInit {
     })
   }
 
+  public activityDeletedHandler(id: number){
+    //TODO: Something smart that only refreshes activity
+    //list that was affected by change
+    console.log("In racer list handler", id);
+    //this.getRaceList();
+  }
+  
 }
 
 interface RacerItem{

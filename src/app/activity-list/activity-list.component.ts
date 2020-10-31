@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ActivitiesService } from '../activities.service';
 
 @Component({
@@ -8,6 +8,8 @@ import { ActivitiesService } from '../activities.service';
 })
 export class ActivityListComponent implements OnInit {
   @Input() activityData: ActivityItem;
+
+  @Output() activityDeleted: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(
     private _activityService: ActivitiesService,
@@ -19,7 +21,14 @@ export class ActivityListComponent implements OnInit {
   //TODO: Extend functionality to delete multiple activities at once
   public removeActivityByID(activity_id:number){
     this._activityService.removeAppliedActivity(activity_id).then((data) => {
-      console.log(data);
+      if (data['success']){
+        console.log("Successfully deleted activity!");
+        this.activityDeleted.emit(activity_id);
+        console.log("Emitted activityDeleted event from activity list");
+      }
+      else {
+        console.log("Failed to delete activity.");
+      }
     });
   }
 
