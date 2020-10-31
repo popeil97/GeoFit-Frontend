@@ -12,6 +12,7 @@ export class RoutePinDialogComponent implements OnInit {
   description: string;
   image_urls: string;
   carouselOptions:any;
+  LoadingPin:Boolean;
 
   constructor(private modalService: ModalService) { }
 
