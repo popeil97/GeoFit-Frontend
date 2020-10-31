@@ -22,6 +22,10 @@ export class MapService {
     return this.http.post(environment.apiUrl + '/api/map/', {race_id : raceID}).toPromise();
   }
 
+  public getMapTrail(raceID: number) {
+    return this.http.post(environment.apiUrl + '/api/map-route/', {race_id : raceID}).toPromise();
+  }
+
   public getOrgPinStats(raceID:number) {
     return this.http.post(environment.apiUrl + '/api/get-org-pins/',{race_id:raceID}).toPromise();
   }

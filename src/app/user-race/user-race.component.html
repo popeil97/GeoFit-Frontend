@@ -1,6 +1,6 @@
 <div class="TucanContainer">
-  <h2 *ngIf="userData.is_me; else otherUserRaces">Your Races</h2>
-  <ng-template #otherUserRaces><h2>{{userData.first_name}}'s Races</h2></ng-template>
+  <h2 *ngIf="userData.is_me; else otherUserRaces">Your races</h2>
+  <ng-template #otherUserRaces><h2>{{userData.first_name}}'s races</h2></ng-template>
 
   <ng-template [ngIf]='userRaces != null' [ngIfElse]="LoadingUserRacesBlock">
     <ng-template [ngIf]="userRaces.length > 0" [ngIfElse]="NoUserRacesBlock">
@@ -35,8 +35,8 @@
           </div>
 
           <div class='UserRaceItemButtons'>
-            <button  (click)="viewRace(race)" *ngIf="race.has_started">Go to Race</button>
-            <button  (click)="viewAbout(race)" *ngIf="race.has_started">Race Details</button>
+            <button  (click)="viewRace(race)" *ngIf="race.has_started">Go to race</button>
+            <button  (click)="viewAbout(race)" *ngIf="race.has_started">Race details</button>
             <p *ngIf="!race.has_started" class='h7'>Come back on race day ({{race.start_date.month}} {{race.start_date.day}}).</p>
           </div>
 

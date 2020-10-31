@@ -1,6 +1,6 @@
 <div class="TucanContainer">
-  <h2 *ngIf="userData.is_me; else otherUserStats">Your Stats</h2>
-  <ng-template #otherUserStats><h2>{{userData.first_name}}'s Stats</h2></ng-template>
+  <h2 *ngIf="userData.is_me; else otherUserStats">Your stats</h2>
+  <ng-template #otherUserStats><h2>{{userData.first_name}}'s stats</h2></ng-template>
  
   <ng-template [ngIf]='userStats!= null' [ngIfElse]="LoadingUserStatsBlock">
       <div class="UserStatsContentContainer">

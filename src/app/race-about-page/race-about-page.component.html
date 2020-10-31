@@ -40,18 +40,18 @@
   </div>
 
   <div class='PageSegment'>
-    <h3>Interested in Participating?</h3>
+    <h3>Interested in participating?</h3>
     <ng-template [ngIf]="this.aboutData == null" [ngIfElse]="RaceActionsBlock">
       <p>Waiting for race data...</p>
     </ng-template>
     <ng-template #RaceActionsBlock>
       <div class='RaceButtonsContainer'>
-        <button (click)="this.viewRace()" *ngIf="this.hasStarted && this.hasJoined">Go to Race</button>
-        <button (click)="this.viewRace()" *ngIf="this.hasStarted && !this.hasJoined ">Preview Race</button>
-        <button (click)="this.goToRaceDashboard()" *ngIf="this.isOwner || this.isModerator">GO TO DASHBOARD</button>      
+        <button (click)="this.viewRace()" *ngIf="this.hasStarted && this.hasJoined">Go to race</button>
+        <button (click)="this.viewRace()" *ngIf="this.hasStarted && !this.hasJoined ">Preview race</button>
+        <button (click)="this.goToRaceDashboard()" *ngIf="this.isOwner || this.isModerator">Go to dashboard</button>      
   
-        <button *ngIf="!this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-2')">Register for Race</button>
-        <button *ngIf="this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-3')">Register for Race</button>
+        <button *ngIf="!this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-2')">Register for race</button>
+        <button *ngIf="this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-3')">Register for race</button>
 
         <p *ngIf="this._authService.isLoggedIn() && this.hasJoined" class='margin-bottom-8px'><b>You've registered for this race.</b></p>
         <p *ngIf=" !hasStarted && this.hasJoined" class='margin-bottom-8px italics'> Come back on race day ({{aboutData.start_date.month}}, {{aboutData.start_date.day}}).</p>
@@ -69,8 +69,8 @@
     <div class='Slideshow'>
       <div class="SlideshowHeader">
         <button class="SlideshowButton" (click)="SwitchSlideshow('map')" id="map-btn">Route Details</button>
-        <button class="SlideshowButton" (click)="SwitchSlideshow('logistics')" id="logistics-btn">Rules &amp; Requirements</button>
-        <button class="SlideshowButton" (click)="SwitchSlideshow('race_director')" id="race_director-btn">About the Race Director</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('logistics')" id="logistics-btn">Rules &amp; requirements</button>
+        <button class="SlideshowButton" (click)="SwitchSlideshow('race_director')" id="race_director-btn">About the race director</button>
       </div>
       <div class="SlideshowContents RaceSlideshowContents">
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'map'}">
@@ -126,20 +126,20 @@
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'logistics'}">
 
           <div class='margin-bottom-16px'>
-            <h6 class='margin-bottom-4px'>Race Type <button class="smallButton" (click)="this.openModal('custom-modal-4')">What does this mean?</button>:</h6>
+            <h6 class='margin-bottom-4px'>Race type <button class="smallButton" (click)="this.openModal('custom-modal-4')">What does this mean?</button>:</h6>
             <ng-template [ngIf]="this.aboutData.is_hybrid" [ngIfElse]="VirtualText">
-              <p  *ngIf="aboutData.race_type == 1" class='h7 margin-bottom-0px'>Hybrid Run</p>
-              <p  *ngIf="aboutData.race_type == 2" class='h7 margin-bottom-0px'>Hybrid Bike</p>
+              <p  *ngIf="aboutData.race_type == 1" class='h7 margin-bottom-0px'>Hybrid run</p>
+              <p  *ngIf="aboutData.race_type == 2" class='h7 margin-bottom-0px'>Hybrid bike</p>
             </ng-template>
             <ng-template #VirtualText>
-              <p *ngIf="aboutData.race_type == 1" class='h7 margin-bottom-0px'>Virtual Run</p>
-              <p *ngIf="aboutData.race_type == 2" class='h7 margin-bottom-0px'>Virtual Bike</p>
+              <p *ngIf="aboutData.race_type == 1" class='h7 margin-bottom-0px'>Virtual run</p>
+              <p *ngIf="aboutData.race_type == 2" class='h7 margin-bottom-0px'>Virtual bike</p>
             </ng-template>
             
           </div>
 
           <div class='margin-bottom-16px'>
-            <h6 class='margin-bottom-4px'>Race Requirements:</h6>
+            <h6 class='margin-bottom-4px'>Race requirements:</h6>
             <ng-template [ngIf]="this.raceSettings.isManualEntry" [ngIfElse]="ManualText">
               <p class='h7 margin-bottom-0px'>NONE however, the Strava mobile app is highly recommended for tracking fitness activities!</p>
             </ng-template>
@@ -159,7 +159,7 @@
           </div>
 
           <div class='margin-bottom-16px'>
-            <h6 class='margin-bottom-4px'>Entry Fee</h6>
+            <h6 class='margin-bottom-4px'>Entry fee</h6>
             <ng-template [ngIf]="this.raceSettings != null" [ngIfElse]="LoadingRaceSettings">
               <p class='h7 margin-bottom-0px'>${{raceSettings.price}}</p>
             </ng-template>
@@ -176,13 +176,13 @@
               </div>
               <div class="RaceDirectorInfo">
                 <div class='margin-bottom-16px'>
-                  <h6 class='margin-bottom-4px'>Race Director:</h6>
+                  <h6 class='margin-bottom-4px'>Race director:</h6>
                   <p class='h7 margin-bottom-0px'>{{this.userData.first_name}} {{this.userData.last_name}}</p>
                   <a [href]='this.userData.email_mailto' class='h7 margin-bottom-0px'>{{this.userData.email}}</a>
                 </div>
 
                 <div class='margin-bottom-16px'>
-                  <h6 class='margin-bottom-4px'>About the Director:</h6>
+                  <h6 class='margin-bottom-4px'>About the director:</h6>
                   <p class='h7 margin-bottom-0px'>{{this.userData.description}}</p>
                 </div>
               </div>

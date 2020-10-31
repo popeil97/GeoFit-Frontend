@@ -189,7 +189,6 @@ article, aside, figcaption, figure, footer,b header, hgroup, main, nav, section 
   
     height:300px;
 
-    background:linear-gradient(0deg, white, #36343C 95%, transparent);
   }
   .split.right {
     position: absolute;
@@ -202,6 +201,7 @@ article, aside, figcaption, figure, footer,b header, hgroup, main, nav, section 
   }
   .landingImage {
     top:0;
+    max-width:200px;
     transform:translateX(-50%);
   }
 

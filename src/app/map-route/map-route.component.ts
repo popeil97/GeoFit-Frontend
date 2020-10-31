@@ -8,6 +8,7 @@ import { PopUpService } from '../pop-up.service';
 import { UserFollowComponent } from '../user-follow/user-follow.component';
 import { RoutePinDialogComponent } from '../route-pin-dialog/route-pin-dialog.component';
 import { MapService } from '../map.service';
+import { ModalService } from '../modalServices';
 
 import 'leaflet';
 import 'leaflet.markercluster';
@@ -69,6 +70,7 @@ export class MapRouteComponent implements OnChanges {
     private _profileService:UserProfileService,
     private _mapService: MapService,
     private _raceService:RaceService,
+    private modalService: ModalService,
     public dialog: MatDialog) { 
       this.coordsRoutes = [];
     }
@@ -626,12 +628,20 @@ export class MapRouteComponent implements OnChanges {
     });
   }
 
+  private openModal(index: number, thisComponent: any) {
+    var data = {title:thisComponent.routePins[index].title,
+                description:thisComponent.routePins[index].description,
+                image_urls:thisComponent.routePins[index].image_urls};
+    console.log("MODAL DATAAAA", data);
+    this.modalService.open("pin",data);
+  }
+
 
   private createRoutePins(){
     this.routePinMarkers = new L.featureGroup();
 
     for (let i = 0; i < this.routePins.length; i++){
-      var img_html = "<img src=\"" + this.routePins[i].image_urls[0] + "\";\"><div class=\"rounded-pin\"></div>";
+      var img_html = "<img src=\"" + this.routePins[i].image_urls[0] + "\";\"><div class=\"rounded-pin\" style=\"background-color:var(--tucan-green);\"></div>";
       var userIcon = L.divIcon({
         className: 'route-pin',
         html: img_html,
@@ -654,7 +664,9 @@ export class MapRouteComponent implements OnChanges {
     //Handle marker onclick events (open popups)
     let thisComponent = this;
     this.routePinMarkers.on('click', function(ev) {
-      thisComponent.openRoutePinDialogueWithIndex(ev.layer.options.routePinIndex, thisComponent);
+    //  thisComponent.openRoutePinDialogueWithIndex(ev.layer.options.routePinIndex, thisComponent);
+
+      thisComponent.openModal(ev.layer.options.routePinIndex, thisComponent);
     });
     
   }

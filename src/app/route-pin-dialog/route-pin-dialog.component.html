@@ -1,15 +1,19 @@
-<h2 mat-dialog-title>{{ this.title }}</h2>
-<mat-dialog-content>
 
-  <owl-carousel [options]="carouselOptions" [carouselClasses]="['owl-theme', 'row', 'sliding']">
-    <div class="item" *ngFor="let image of image_urls;let i= index">
-      <img class="slide-image" src="{{image}}" style="object-fit:contain;max-height:400px">
-    </div>
-  </owl-carousel>
+<ng-template [ngIf]="this.d != null" [ngIfElse]="LoadingPin">
+	<h3>{{ this.d.title }}</h3>
+	<mat-dialog-content>
+	  <owl-carousel [options]="carouselOptions" [carouselClasses]="['owl-theme', 'row', 'sliding']">
+	    <div class="item" *ngFor="let image of this.d.image_urls;let i= index">
+	      <img class="slide-image" src="{{image}}" style="object-fit:contain;max-height:400px">
+	    </div>
+	  </owl-carousel>
 
-  <h4>{{ this.description }}</h4>
+	  <p>{{ this.d.description }}</p>
 
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
-</mat-dialog-actions>
+	</mat-dialog-content>
+	<mat-dialog-actions>
+	  <button (click)="closeModal('pin')">Close</button>
+	</mat-dialog-actions>
+<ng-template #LoadingPin>
+      <p>Loading Pin Data...</p>
+</ng-template>

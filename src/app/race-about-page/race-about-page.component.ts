@@ -128,10 +128,10 @@ export class RaceAboutPageComponent implements OnInit {
           console.log("RACE ID", raceID);
 
 
-          this._mapService.getMapData(raceID).then((data) => {
+          this._mapService.getMapTrail(raceID).then((data) => {
             let mapData = data as RouteData;
-            this.trails.push(mapData.name);
-            console.log("ROUTE", mapData.name);        
+           this.trails.push(mapData.name);
+           console.log("ROUTE", mapData.name);        
           });
         };
 
