@@ -33,4 +33,10 @@ export class MapService {
     return this.http.get(environment.apiUrl + url_formatted).toPromise();
   }
 
+  // getMyMarkers gets the latitude,longitude pairs of all of request user's
+  // markers in race (or child races) of id raceID
+  public getRaceMarkers(raceID:number){
+    return this.http.post(environment.apiUrl + '/api/race-markers/', {race_id: raceID}).toPromise();
+  }
+
 }
