@@ -2,6 +2,8 @@ import { Component, OnInit, Input, Output, EventEmitter,OnChanges } from '@angul
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { ModalService } from '../modalServices';
 import {ErrorStateMatcher} from '@angular/material/core';
+import {MatSnackBar} from '@angular/material/snack-bar'
+import { SnackbarComponent } from '../snackbar/snackbar.component';
 
 @Component({
   selector: 'app-manual-entry',
@@ -19,7 +21,7 @@ export class ManualEntryComponent implements OnInit {
 
   submitted = false;
 
-  constructor( private modalService: ModalService,) { 
+  constructor( private modalService: ModalService,private _snackbar:MatSnackBar,) { 
     
   }
 
@@ -73,6 +75,14 @@ export class ManualEntryComponent implements OnInit {
  //   this.manualEntryForm.get('distanceType').setValue('MI');
   }
 
+  closeModal(id: string) {
+    this.modalService.close(id);
+    console.log(this.modalService.getModalData(id));
+
+ //   this._snackbar.openFromComponent(SnackbarComponent,{duration: 5000,horizontalPosition: 'left',
+   //   verticalPosition: 'bottom',data:{message:'Your activity has been applied!'}});
+  }
+
   upload(): void {
     this.modalService.callbackModal("custom-modal-5",null);
     let formClean = this.manualEntryForm.value as any;
@@ -97,6 +107,7 @@ export class ManualEntryComponent implements OnInit {
     this.manualEntryForm.get('minutes').setValue(0);
     this.manualEntryForm.get('seconds').setValue(0);
     this.submitted = true;
+    this.closeModal('custom-modal-5');
   }
 
   parseDistanceType(entry:any) {

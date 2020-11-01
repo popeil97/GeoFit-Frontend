@@ -106,7 +106,7 @@
 			</div>
 		</div>
 		<div class='MapGreaterContainer'>
-			<app-map [raceIDs]="raceIDs" [displayUsers]="true" [followedIDs]="followedIDs" [zoom]="false"></app-map>
+			<app-map [raceIDs]="raceIDs" [parentRaceID]="raceID" [displayUsers]="true" [followedIDs]="followedIDs" [zoom]="false"></app-map>
 			<div *ngIf="this._authService.isLoggedIn() && this.userRegistered"[ngClass]="{searchContainer: isOpen, searchContainerSmall: !isOpen}">
 				<app-search [raceID]="raceID"></app-search>
 			</div>

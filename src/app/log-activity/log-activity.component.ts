@@ -95,6 +95,8 @@ export class LogActivityComponent implements OnInit {
 
   }
 
+  
+
 }
 
 interface StravaData{

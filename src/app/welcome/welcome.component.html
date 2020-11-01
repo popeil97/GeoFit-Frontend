@@ -17,14 +17,14 @@
 
   <div class='WelcomeContainer PageSegment'>
     <div class='WelcomeInfo' *ngIf="this._authService.isLoggedIn()">
-      <h2>Upload a profile pic</h2>
+      <h3>Upload a profile pic</h3>
       <p>Let other people in your race know who you are!</p>
       <app-profile-pic-form [userData]="this.userData"></app-profile-pic-form>
     </div>
     <div class='WelcomeInfo'>
       <h3>Read our FAQs</h3>
       <p>Find out more about our platform and business</p>
-      <img src= "../../assets/faq.PNG" class='FaqImg'>
+      <img src= "../../assets/misc/fwd.png" class="FAQImage" style="max-width:210px;">
       <br>
       <button routerLink='/faqs'>FAQs</button>
     </div>

@@ -8,6 +8,7 @@ import { PopUpService } from '../pop-up.service';
 import { UserFollowComponent } from '../user-follow/user-follow.component';
 import { RoutePinDialogComponent } from '../route-pin-dialog/route-pin-dialog.component';
 import { MapService } from '../map.service';
+import { ModalService } from '../modalServices';
 
 import 'leaflet';
 import 'leaflet.markercluster';
@@ -69,6 +70,7 @@ export class MapRouteComponent implements OnChanges {
     private _profileService:UserProfileService,
     private _mapService: MapService,
     private _raceService:RaceService,
+    private modalService: ModalService,
     public dialog: MatDialog) { 
       this.coordsRoutes = [];
     }
@@ -135,7 +137,7 @@ export class MapRouteComponent implements OnChanges {
     let finish = new L.LatLng(end_coord[0], end_coord[1]);
     let bounds = new L.LatLngBounds(begin, finish);
 
-    this.map.fitBounds(bounds, { padding: [15, 15] });
+    //this.map.fitBounds(bounds, { padding: [15, 15] });
 
     const lat = 29.651634;
     const lon = -82.324829;
@@ -158,16 +160,6 @@ export class MapRouteComponent implements OnChanges {
     })}).addTo(this.map);
 
   //  this.marker_end.bindPopup(this.popupService.makePopup({name:'End',state:''}));
-
-    if(this.zoom)
-    {
-      console.log("ZOOM ZOOM IN MAP");
-      this.map.setZoom(9);
-    }
-    else
-    {
-      this.map.setZoom(2);
-    }
     
     var color = "#7FCC92";
 
@@ -402,8 +394,6 @@ export class MapRouteComponent implements OnChanges {
     this.clearUserPins();
     this.clearOrgPins();
 
- //   console.log("USER DATA IN MAP ROUTE COMP: ", this.userData);
-
     //Set max number of markers in a cluster and set up clustering
     var maxMarkersInCluster = 4;
     this.markerClusters = this.createMarkerClusterGroup(maxMarkersInCluster);
@@ -440,9 +430,14 @@ export class MapRouteComponent implements OnChanges {
                                       })
 
       if (layer._leaflet_id == Object.keys(thisComponent.myMarker._layers)[0]){
-        thisComponent.markerClusters.zoomToShowLayer(layer, function() {
-          layer.openPopup();
-        });
+        //TODO: Logic in here that uses zoomToShowLayer if we are not part of a
+        //hybrid race??
+
+        // thisComponent.markerClusters.zoomToShowLayer(layer, function() {
+        //   layer.openPopup();
+        // });
+        
+        layer.openPopup();
       }
     })
 
@@ -590,7 +585,7 @@ export class MapRouteComponent implements OnChanges {
       //If this pin is current user, pan and zoom to it
       if (this.isMe(userData)){
         this.myMarker = this.markersByUserID[elementID]['locMarker'];
-        this.panToUserMarker(elementID);
+        //this.panToUserMarker(elementID);
       }
     }
 
@@ -626,12 +621,20 @@ export class MapRouteComponent implements OnChanges {
     });
   }
 
+  private openModal(index: number, thisComponent: any) {
+    var data = {title:thisComponent.routePins[index].title,
+                description:thisComponent.routePins[index].description,
+                image_urls:thisComponent.routePins[index].image_urls};
+    console.log("MODAL DATAAAA", data);
+    this.modalService.open("pin",data);
+  }
+
 
   private createRoutePins(){
     this.routePinMarkers = new L.featureGroup();
 
     for (let i = 0; i < this.routePins.length; i++){
-      var img_html = "<img src=\"" + this.routePins[i].image_urls[0] + "\";\"><div class=\"rounded-pin\"></div>";
+      var img_html = "<img src=\"" + this.routePins[i].image_urls[0] + "\";\"><div class=\"rounded-pin\" style=\"background-color:var(--tucan-green);\"></div>";
       var userIcon = L.divIcon({
         className: 'route-pin',
         html: img_html,
@@ -654,7 +657,9 @@ export class MapRouteComponent implements OnChanges {
     //Handle marker onclick events (open popups)
     let thisComponent = this;
     this.routePinMarkers.on('click', function(ev) {
-      thisComponent.openRoutePinDialogueWithIndex(ev.layer.options.routePinIndex, thisComponent);
+    //  thisComponent.openRoutePinDialogueWithIndex(ev.layer.options.routePinIndex, thisComponent);
+
+      thisComponent.openModal(ev.layer.options.routePinIndex, thisComponent);
     });
     
   }

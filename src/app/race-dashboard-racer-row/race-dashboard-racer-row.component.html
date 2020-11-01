@@ -13,7 +13,14 @@
   </td>
   
   <td style="padding:10px;" *ngIf="!racerData.isTeam">
-    <button mat-raised (click)="removeUserByID(racerData.user_id)">Remove</button>            
+    <button mat-raised (click)="removeUserByID(racerData.user_id)">Remove User</button>            
+  </td>
+
+  <td style="padding:10px;" *ngIf="!racerData.isTeam">
+    <button mat-raised (click)="toggleActivities()">
+      <span *ngIf="showActivities">Hide Activities</span>
+      <span *ngIf="!showActivities">Show Activities</span>
+    </button>
   </td>
 </tr>
 -->
@@ -24,7 +31,6 @@
 </div>-->
 
 <!-- If there are any activities associated with this race stat, list here -->
-<!--
-<div class="container" *ngIf="racerData.activities">
-  <app-activity-list [activityData]="racerData.activities"></app-activity-list>
-</div> -->
+<div class="container" *ngIf="racerData.activities && showActivities">
+  <app-activity-list [activityData]="racerData.activities" (activityDeleted)="activityDeletedEvent.emit($event)"></app-activity-list>
+</div>

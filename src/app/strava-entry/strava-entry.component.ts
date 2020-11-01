@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter,OnChanges } from '@angular/core';
 import { ActivitiesService } from '../activities.service';
+import { ModalService } from '../modalServices';
 
 
 @Component({
@@ -21,7 +22,7 @@ export class StravaEntryComponent implements OnInit {
   invalidImport:Boolean = false;
 
 
-  constructor(private _activitiesService:ActivitiesService) { }
+  constructor(private modalService: ModalService, private _activitiesService:ActivitiesService) { }
 
   ngOnInit() {
 
@@ -56,6 +57,8 @@ export class StravaEntryComponent implements OnInit {
       this.getActivities();
       this.refreshStatComponents.emit();
     });
+    console.log("shelllloooo");
+    this.closeModal('custom-modal-5');
   }
 
   addAct(act:any): void {
@@ -86,6 +89,11 @@ export class StravaEntryComponent implements OnInit {
       this.activities = resp['activities'];
       console.log("ACTIVITIES", this.activities);
     });
+  }
+
+  closeModal(id: string) {
+    this.modalService.close(id);
+    console.log(this.modalService.getModalData(id));
   }
 
 

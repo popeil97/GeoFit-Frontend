@@ -20,11 +20,12 @@
   </td>
 
   <td style="padding:10px">
+    <!----TODO: HOW BEST TO REPRESENT THIS INFO?-->
     <span *ngIf="row.is_manual">Manual</span>
     <span *ngIf="!row.is_manual">Strava</span>
   </td>
 
   <td>
-    <button mat-raised (click)="removeActivityByID(row.id)">Remove</button>
+    <button mat-raised (click)="removeActivityByID(row.id)">Delete Activity</button>
   </td>
 </tr>

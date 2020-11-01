@@ -8,7 +8,7 @@
       </div>
       
       <!-- Row with data of user or team -->
-      <app-race-dashboard-racer-row *ngFor="let row of this.racersList" [racerData]="row" (removeUserByIDEvent)="removeUserByID($event)"></app-race-dashboard-racer-row>
+      <app-race-dashboard-racer-row *ngFor="let row of this.racersList" [racerData]="row" (activityDeletedEvent)="activityDeletedHandler($event)" (removeUserByIDEvent)="removeUserByID($event)"></app-race-dashboard-racer-row>
   
     </div>
 </div>
