@@ -51,8 +51,8 @@ export class RaceAboutPageComponent implements OnInit {
   public num_users:any;
   userData: UserData;
 
-  logos: Logo;
-
+  public logos: Logo;
+  public raceLogos: Array<string> = [];
   trails: Array<string> = [];
   trails_dist: Array<{distance: string}> = [];
 
@@ -167,10 +167,12 @@ export class RaceAboutPageComponent implements OnInit {
     console.log("race-about-page:race-id", this.raceID);
 
  //Im a fucking idiot
-  //   this._usersService.getLogos(this.raceID).then((data)=>{
-    //  this.logos = data as Logo;
-   //   console.log("LOGOSSSSSSSSSs", this.logos);
-  //  });
+     this._usersService.getLogos(this.raceID).then((data)=>{
+      this.logos = data as Logo;
+      this.raceLogos = this.logos.raceLogos;
+      console.log("LOGOSSSSSSSSSs", this.logos);
+   });
+     
   }
 
   ProcessDate = (date = null) => {
@@ -184,6 +186,7 @@ export class RaceAboutPageComponent implements OnInit {
 
 
   openModal(id: string) {
+    console.log("Logo outside...",this.logos);
     if(!this._authService.isLoggedIn() || this.raceSettings.price>0) //user is NOT logged in
     {
       const data = (id == 'custom-modal-2') ? {register:true, price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} :(id == 'custom-modal-3') ? {price:this.raceSettings.price,race_id:this.raceID,hasJoined:this.hasJoined,hasStarted:this.hasStarted,hasTags: this.raceSettings.has_entry_tags} : null;
