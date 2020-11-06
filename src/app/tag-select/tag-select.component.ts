@@ -30,6 +30,8 @@ export class TagSelectComponent implements OnInit {
       ]),
     });
 
+    console.log('IN TAG SELECT');
+
     this._tagService.getTags(this.raceID,this.tagType).then((resp:any) => {
       this.tags = resp['tags'];
     //   console.log('TAGS:',this.tags);
