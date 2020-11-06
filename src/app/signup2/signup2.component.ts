@@ -45,6 +45,7 @@ export class Signup2Component implements OnInit {
   modalData: any;
   isLoggedIn:Boolean;
   needsPayment:Boolean = false;
+  tagType = TagType.ENTRY;
 
   @ViewChild('stepper') public stepper: MatStepper;
 
@@ -127,7 +128,7 @@ export class Signup2Component implements OnInit {
         console.log('IN CHECKOUT RETYURBN:',this.d);
       }
 
-     if(this.stepper.selectedIndex==1)
+     if(this.stepper.selectedIndex==this.getStepperFinishIndex())
      {
       this.closeDialog();
       this.router.navigate(['/welcome']);
@@ -139,6 +140,14 @@ export class Signup2Component implements OnInit {
      
 
     }
+  }
+
+  getStepperFinishIndex() {
+    let index = 1; // default for paid race with no tags
+    if(this.d.hasTags) {
+      index += 1;
+    }
+    return index;
   }
 
   closeDialog() {
