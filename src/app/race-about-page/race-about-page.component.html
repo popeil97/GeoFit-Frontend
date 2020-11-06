@@ -31,8 +31,8 @@
           </div>
         </div>
       </div>
-      <p>{{aboutData.description}}</p>
-
+      <!-- <p>{{aboutData.description}}</p> -->
+      <p [innerHTML]="aboutData.description"></p>
 
       <!-- icon to indicate race type : 1-run;2-bike;3-all -->
       <!--<i *ngIf="aboutData.race_type == 3" class="material-icons">directions_run</i> <i class="material-icons" >directions_bike</i>--> 
