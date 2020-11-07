@@ -16,7 +16,6 @@ export class SearchService {
   }
 
   searchForRacer(query:string,raceID:number) {
-    console.log('ATTEMPTING TO FILTER!!!',query);
-    return this.http.get(environment.apiUrl + '/api/racer-search/',{params:{query:query,race_id:raceID.toString()}}).toPromise();
+    return this.http.get(environment.apiUrl + '/race/racer-search/',{params:{query:query,race_id:raceID.toString()}}).toPromise();
   }
 }

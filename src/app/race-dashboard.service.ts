@@ -20,11 +20,11 @@ export class RaceDashboardService {
 
   getRacerList(race_id:number) {
     console.log("Getting racer list with ID ", race_id);
-    return this.http.post(environment.apiUrl + '/api/race-dashboard-racer-list/',{race_id:race_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/race-stat/dashboard/racer-list/',{race_id:race_id}).toPromise();
   }
 
   removeUserFromRaceByID(race_id: number, user_id: number){
-    return this.http.post(environment.apiUrl + '/api/race-dashboard-remove-user/',{race_id:race_id, user_id: user_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/race-stat/dashboard/remove-user/',{race_id:race_id, user_id: user_id}).toPromise();
   }
 
 }

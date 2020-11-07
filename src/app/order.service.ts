@@ -17,7 +17,7 @@ export class OrderService {
   }
 
   submitOrder(order:Order) {
-    return this.http.post(environment.apiUrl + '/api/order-submit/', {order:order}).toPromise();
+    return this.http.post(environment.apiUrl + '/orders/submit/', {order:order}).toPromise();
   }
 }
 

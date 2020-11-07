@@ -28,8 +28,8 @@ export class RaceFeedService {
   }
 
   public refreshFeed(page_num: number, items_per_page: number, init: boolean = false) {
-    //return this.http.post(environment.apiUrl + '/api/refresh-feed/', {refresh : this.refresh_ts, race_id: this.ID}).toPromise();
-    return this.http.post(environment.apiUrl + '/api/race-feed-paginate/', {page_number : page_num, items_per_page: items_per_page, init: init, race_id: this.ID}).toPromise();
+    //return this.http.post(environment.apiUrl + '/race-stat/feed/refresh/', {refresh : this.refresh_ts, race_id: this.ID}).toPromise();
+    return this.http.post(environment.apiUrl + '/race-stat/feed/paginate/', {page_number : page_num, items_per_page: items_per_page, init: init, race_id: this.ID}).toPromise();
   }
 
   public resetFeed(){

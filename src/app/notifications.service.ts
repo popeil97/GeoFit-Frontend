@@ -12,7 +12,7 @@ export class NotificationsService {
 
   createNotification(form:any) {
     try {
-      return this.http.post(environment.apiUrl + '/api/notification-create/',{form:form}).toPromise();
+      return this.http.post(environment.apiUrl + '/notifications/create/',{form:form}).toPromise();
     }
     catch(err) {
         console.log("couldn't create notification.")
@@ -23,7 +23,7 @@ export class NotificationsService {
   // will poll for notifications, this is very bad, don't keep this for too long
   getNotifications() {
     try {
-      return this.http.get(environment.apiUrl + '/api/notification-get/');
+      return this.http.get(environment.apiUrl + '/notifications/');
     }
     catch(err) {
         console.log("couldn't get notifications.")
@@ -34,7 +34,7 @@ export class NotificationsService {
 
   submitAction(not_id:number,action:NotifactionAction) {
     try {
-      return this.http.post(environment.apiUrl + '/api/notification-action/',{not_id:not_id,action:action}).toPromise();
+      return this.http.post(environment.apiUrl + '/notifications/action/',{not_id:not_id,action:action}).toPromise();
     }
     catch(err) {
         console.log("couldn't take action for notifications.")

@@ -19,20 +19,20 @@ export class MapService {
   }
 
   public getMapData(raceID: number) {
-    return this.http.post(environment.apiUrl + '/api/map/', {race_id : raceID}).toPromise();
+    return this.http.post(environment.apiUrl + '/race/map/', {race_id : raceID}).toPromise();
   }
 
   public getMapTrail(raceID: number) {
-    return this.http.post(environment.apiUrl + '/api/map-route/', {race_id : raceID}).toPromise();
+    return this.http.post(environment.apiUrl + '/race/map-route/', {race_id : raceID}).toPromise();
   }
 
   public getOrgPinStats(raceID:number) {
-    return this.http.post(environment.apiUrl + '/api/get-org-pins/',{race_id:raceID}).toPromise();
+    return this.http.post(environment.apiUrl + '/race/org-pins/',{race_id:raceID}).toPromise();
   }
 
   public getUserPinSize(raceID:number) {
     let headers = new HttpHeaders();
-    let url = '/api/get-userpin-size/?race_id=%s';
+    let url = '/race/user-pin-size/?race_id=%s';
     let url_formatted = url.replace('%s',raceID.toString());
     return this.http.get(environment.apiUrl + url_formatted).toPromise();
   }
@@ -40,7 +40,7 @@ export class MapService {
   // getMyMarkers gets the latitude,longitude pairs of all of request user's
   // markers in race (or child races) of id raceID
   public getRaceMarkers(raceID:number){
-    return this.http.post(environment.apiUrl + '/api/race-markers/', {race_id: raceID}).toPromise();
+    return this.http.post(environment.apiUrl + '/race/markers/', {race_id: raceID}).toPromise();
   }
 
 }

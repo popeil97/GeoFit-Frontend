@@ -30,12 +30,12 @@ export class AuthService {
   // Uses http.post() to register user from REST API endpoint
   public register(registerForm) {
 //    console.log(registerForm);
-    return this.http.post(environment.apiUrl + '/api/register/', registerForm, this.httpOptions);
+    return this.http.post(environment.apiUrl + '/accounts/register/', registerForm, this.httpOptions);
   }
 
   // Uses http.post() to get an auth token from djangorestframework-jwt endpoint
   public login(user) {
-    return this.http.post(environment.apiUrl + '/api/login/', JSON.stringify(user), this.httpOptions)
+    return this.http.post(environment.apiUrl + '/accounts/login/', JSON.stringify(user), this.httpOptions)
   }
 
   public isLoggedIn(): Boolean {
@@ -62,7 +62,7 @@ export class AuthService {
   public logout() {
     //Remove JWT in local storage
 
-    this.http.post(environment.apiUrl + '/api/logout/', JSON.stringify({}), this.httpOptions).subscribe(
+    this.http.post(environment.apiUrl + '/accounts/logout/', JSON.stringify({}), this.httpOptions).subscribe(
       err => {
         this.errors = err['error'];
       }
@@ -90,13 +90,11 @@ export class AuthService {
   }
 
   public requestPassword(email: string){
-    return this.http.post(environment.apiUrl + '/api/password-request/', JSON.stringify({'email': email}), this.httpOptions);
+    return this.http.post(environment.apiUrl + '/accounts/password-request/', JSON.stringify({'email': email}), this.httpOptions);
   }
 
   public changePassword(password: string, slug: string){
-  //  console.log(password);
- //   console.log(slug);
-    return this.http.post(environment.apiUrl + '/api/password-change/', JSON.stringify({'password': password, 'slug': slug}), this.httpOptions);
+    return this.http.post(environment.apiUrl + '/accounts/password-change/', JSON.stringify({'password': password, 'slug': slug}), this.httpOptions);
   }
  
 }

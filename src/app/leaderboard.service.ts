@@ -29,7 +29,7 @@ export class LeaderboardService {
       payload.tag_id = tagID;
     }
 
-    return this.http.post(environment.apiUrl + '/api/individual-leaderboard/', payload).toPromise();
+    return this.http.post(environment.apiUrl + '/race/individual-leaderboard/', payload).toPromise();
   }
 
   public getTeamLeaderboard(page:number,tagID?:number) {
@@ -40,15 +40,15 @@ export class LeaderboardService {
       payload.tag_id = tagID;
     }
 
-    return this.http.post(environment.apiUrl + '/api/team-leaderboard/', payload).toPromise();
+    return this.http.post(environment.apiUrl + '/race/team-leaderboard/', payload).toPromise();
   }
 
   public getOrganizationLeaderboard() {
-    return this.http.post(environment.apiUrl + '/api/organization-leaderboard/',{race_id:this.raceID}).toPromise();
+    return this.http.post(environment.apiUrl + '/race/org-leaderboard/',{race_id:this.raceID}).toPromise();
   }
 
   public getHybridLeaderboard(race_id:number,page:number) {
-    return this.http.post(environment.apiUrl + '/api/hybrid-leaderboard/',{race_id:race_id,page:page}).toPromise();
+    return this.http.post(environment.apiUrl + '/race/hybrid-leaderboard/',{race_id:race_id,page:page}).toPromise();
   }
 
 }

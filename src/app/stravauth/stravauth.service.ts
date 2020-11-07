@@ -22,7 +22,7 @@ export class StravauthService {
  
   public authenticate() {
     //window.location.href='https://app.strava.com/oauth/authorize?client_id=49168&redirect_uri=http://localhost:8000/strava-login/&response_type=code&approval_prompt=auto&scope=write/';
-    this.http.get(environment.apiUrl + '/api/strava-login/').subscribe(
+    this.http.get(environment.apiUrl + '/strava/auth/').subscribe(
       data => {
        //  console.log(data['url']);
        //  console.log("Going to this url....");
@@ -39,10 +39,10 @@ export class StravauthService {
   }
 
   public getStravaInfo() {
-    return this.http.post(environment.apiUrl + '/api/strava-status/', {}).toPromise();
+    return this.http.post(environment.apiUrl + '/strava/status/', {}).toPromise();
   }
 
   public deauthorize() {
-    return this.http.post(environment.apiUrl + '/api/strava-deauth/', {}).toPromise();
+    return this.http.post(environment.apiUrl + '/strava/deauth/', {}).toPromise();
   }
 }

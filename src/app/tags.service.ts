@@ -18,7 +18,7 @@ export class TagsService {
   }
 
   getTags(race_id:number,tag_type:TagType) {
-    return this.http.post(environment.apiUrl + '/api/get-tags/',{race_id:race_id,tag_type:tag_type}).toPromise();
+    return this.http.post(environment.apiUrl + '/tags/',{race_id:race_id,tag_type:tag_type}).toPromise();
   }
 
   addTag(tagBody:TagFormObj, img:any) {
@@ -30,11 +30,11 @@ export class TagsService {
       payload.img = img;
     }
 
-    return this.http.post(environment.apiUrl + '/api/add-tag/',payload).toPromise();
+    return this.http.post(environment.apiUrl + '/tags/add/',payload).toPromise();
   }
 
   removeTag(tag_id:number) {
-    return this.http.post(environment.apiUrl + '/api/delete-tag/',{id:tag_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/tags/delete/',{id:tag_id}).toPromise();
   }
 
 

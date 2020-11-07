@@ -28,7 +28,7 @@ export class UserProfileService {
   }
 
   updateProfile(formClean){
-    return this.http.post(environment.apiUrl + '/api/profile-update/', {'form': formClean}).toPromise();
+    return this.http.post(environment.apiUrl + '/profile/update/', {'form': formClean}).toPromise();
   }
 
   goToUserProfile(username:string) {
@@ -37,13 +37,12 @@ export class UserProfileService {
 
   getUserProfile(username:string){
   //   console.log("from service username", username);
-    return this.http.post(environment.apiUrl + '/api/user-profile/',{'username':username}).toPromise();
+    return this.http.post(environment.apiUrl + '/profile/info/',{'username':username}).toPromise();
   }
 
   //Functions to refresh user feed
   public refreshFeed(page_num: number, items_per_page: number) {
-    //return this.http.post(environment.apiUrl + '/api/user-feed/',{'username':this.ID}).toPromise();
-    return this.http.post(environment.apiUrl + '/api/user-feed/', {page_number : page_num, items_per_page: items_per_page, username: this.ID}).toPromise();
+    return this.http.post(environment.apiUrl + '/profile/feed/', {page_number : page_num, items_per_page: items_per_page, username: this.ID}).toPromise();
   }
 
   public resetFeed(){

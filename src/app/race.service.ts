@@ -20,43 +20,43 @@ export class RaceService {
 
 
   getRaces(user:any) {
-    return this.http.get(environment.apiUrl + '/api/races/')
+    return this.http.get(environment.apiUrl + '/race/list/')
   }
 
 
   getRace(race_id:number) {
   //   console.log(race_id)
-    return this.http.post(environment.apiUrl + '/api/race/',{race_id:race_id});
+    return this.http.post(environment.apiUrl + '/race/',{race_id:race_id});
   }
 
   joinRace(registrationBody:any) {
   //   console.log('Attempting to join race:',registrationBody);
-    return this.http.post(environment.apiUrl + '/api/join/',registrationBody).toPromise();
+    return this.http.post(environment.apiUrl + '/race/join/',registrationBody).toPromise();
   }
 
   getRaceAbout(race_id:number) {
-    return this.http.post(environment.apiUrl + '/api/about/',{race_id:race_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/race/about/',{race_id:race_id}).toPromise();
   }
 
   updateRaceAbout(aboutForm:any,race_id:number) {
-    return this.http.post(environment.apiUrl + '/api/updateAbout/',{form:aboutForm,race_id:race_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/race/about/update/',{form:aboutForm,race_id:race_id}).toPromise();
   }
 
   createRace(raceForm:any) {
   //   console.log('SERVICE FILE:',raceForm)
-    return this.http.post(environment.apiUrl + '/api/create/',{form:raceForm}).toPromise();
+    return this.http.post(environment.apiUrl + '/race/create/',{form:raceForm}).toPromise();
   }
 
   getUserRacestats(race_id:number,page:number) {
-    return this.http.post(environment.apiUrl + '/api/get-users-racestats/',{race_id:race_id,page:page}).toPromise();
+    return this.http.post(environment.apiUrl + '/race/user-racestats/',{race_id:race_id,page:page}).toPromise();
   }
 
   getTeamOrUserStat(race_id:number) {
-    return this.http.post(environment.apiUrl + '/api/get-team-or-user-stat/',{race_id:race_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/race/team-or-user-stat/',{race_id:race_id}).toPromise();
   }
 
   getReportedStories(race_id: number){
-    return this.http.post(environment.apiUrl + '/api/story-reported/',{race_id:race_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/report/repoted/',{race_id:race_id}).toPromise();
   }
 
 }

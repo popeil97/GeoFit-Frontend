@@ -15,7 +15,7 @@ export class ActivitiesService {
       race_id:race_id
     };
 
-    return this.http.post(environment.apiUrl + '/api/import/',body).toPromise();
+    return this.http.post(environment.apiUrl + '/race/import/',body).toPromise();
   } 
 
   uploadManualEntry(entry:any, race_id:number) {
@@ -24,14 +24,14 @@ export class ActivitiesService {
       manualEntry: entry
     };
 
-    return this.http.post(environment.apiUrl + '/api/manual/',body).toPromise();
+    return this.http.post(environment.apiUrl + '/race/manual/',body).toPromise();
   }
 
   getActivities(race_id:number) {
-    return this.http.post(environment.apiUrl + '/api/get-activities/',{race_id:race_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/race/eligible-activities/',{race_id:race_id}).toPromise();
   }
 
   removeAppliedActivity(activity_id: number){
-    return this.http.post(environment.apiUrl + '/api/remove-applied-activity/', {activity_id: activity_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/race-stat/applied-activity/remove/', {activity_id: activity_id}).toPromise();
   }
 }

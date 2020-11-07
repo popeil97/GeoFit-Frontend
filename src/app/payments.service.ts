@@ -15,15 +15,15 @@ export class PaymentsService {
   }
 
   confirmPayment(payment:Payment) {
-    return this.http.post(environment.apiUrl + '/api/payment-confirmed/',{payment:payment}).toPromise();
+    return this.http.post(environment.apiUrl + '/payments/confirmed/',{payment:payment}).toPromise();
   }
 
   getOrderID(price:string) {
-    return this.http.post(environment.apiUrl + '/api/create-order/',{price:price}).toPromise();
+    return this.http.post(environment.apiUrl + '/payments/order/',{price:price}).toPromise();
   }
 
   captureOrder(race_id:number,payment_id:string) {
-    return this.http.post(environment.apiUrl + '/api/capture-order/',{race_id:race_id,payment_id:payment_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/payments/capture/',{race_id:race_id,payment_id:payment_id}).toPromise();
   }
 }
 

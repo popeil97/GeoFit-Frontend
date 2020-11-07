@@ -16,6 +16,6 @@ export class ReportService {
 
   closeCase(race_id: number, story_id:number) {
     //Close all reports involving Story with ID story_id
-    return this.http.post(environment.apiUrl + '/api/story-report-close/',{race_id: race_id, story_id:story_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/report/close/',{race_id: race_id, story_id:story_id}).toPromise();
   }
 }

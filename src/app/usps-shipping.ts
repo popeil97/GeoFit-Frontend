@@ -29,15 +29,15 @@ export class USPSShippingService {
   }
 
   public getUserAddresses(){
-      return this.http.post(environment.apiUrl + '/api/user-addresses/', this.httpOptions).toPromise();
+      return this.http.post(environment.apiUrl + '/shipping-address/', this.httpOptions).toPromise();
   }
 
   public submitAddress(address){
-      return this.http.post(environment.apiUrl + '/api/shipping-conf/', address, this.httpOptions).toPromise();
+      return this.http.post(environment.apiUrl + '/shipping-validate/', address, this.httpOptions).toPromise();
   }
 
   public deleteAddress(id){
-      return this.http.post(environment.apiUrl + '/api/shipping-del/', {'id': id}, this.httpOptions).toPromise();
+      return this.http.post(environment.apiUrl + '/shipping-address/delete/', {'id': id}, this.httpOptions).toPromise();
   }
 
   getBodyFromQuery(query){
@@ -100,7 +100,7 @@ export class USPSShippingService {
     const url = 'http://production.shippingapis.com/ShippingAPI.dll?API=Verify&XML='+body;
    //  console.log(url);
 
-    return this.http.post(environment.apiUrl + '/api/shipping-val/', {'url': url},  this.httpOptions).toPromise()
+    return this.http.post(environment.apiUrl + '/shipping-address/validate/', {'url': url},  this.httpOptions).toPromise()
 
   }
 }
