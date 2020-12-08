@@ -1,25 +1,26 @@
+<!-- Table, each row is : [name, distance, time, activity date, activity type, manual/strava, (delete)] -->
 <tr *ngFor="let row of activityData">
-  <td style="padding:10px;">
+  <td class="pad10Px">
     {{ row.name }}
   </td>
 
-  <td style="padding:10px;">
+  <td class="pad10Px">
     {{ row.distance }} {{ row.distance_type }}
   </td>
 
-  <td style="padding:10px;">
+  <td class="pad10Px">
     {{ row.moving_time }} seconds
   </td>
 
-  <td style="padding:10px;">
+  <td class="pad10Px">
     {{ row.start_date }}
   </td>
 
-  <td style="padding:10px;">
+  <td class="pad10Px">
     {{ row.type }}
   </td>
 
-  <td style="padding:10px">
+  <td class="pad10Px">
     <!----TODO: HOW BEST TO REPRESENT THIS INFO?-->
     <span *ngIf="row.is_manual">Manual</span>
     <span *ngIf="!row.is_manual">Strava</span>

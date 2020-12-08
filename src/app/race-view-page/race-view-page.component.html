@@ -1,71 +1,35 @@
 <div class='TucanContainer'> 
-	<!--<app-loader [isActive]="loading"></app-loader>-->
 	<div class="MapContainer">
-
 		<div class="MapSidebar" [ngClass]="{MapSidebarWidthBig: isOpen, MapSidebarWidthSmall: !isOpen}">
 			<div class="MapHeaderContainer" *ngIf="isOpen">
 				<h3 class="MapHeaderTitle">{{this.raceName}}</h3>
 				<div class='MapHeaderButtonsContainer'>
 					<button class="smallButton" style="margin-right:3px;" (click)="viewAbout()">ABOUT</button>
-				<!--	<button class="lightButton smallButton" *ngIf="this._authService.isLoggedIn() && this.userRegistered" (click)="openModal('mapSettingsModal')"><span class="material-icons">settings</span></button> -->
-          <span (click)="toggleMenu()" style="font-size:20px;" *ngIf="isOpen" class="material-icons">close</span>
-
-
+          			<span (click)="toggleMenu()" style="font-size:20px;" *ngIf="isOpen" class="material-icons">close</span>
 				</div>
-         
 			</div>
-
-      <div class="MapHeaderContainer" *ngIf="!isOpen">
-       <button *ngIf="!isOpen" (click)="toggleMenu()"><span class="material-icons">menu</span></button>
-     </div>
-
+		    <div class="MapHeaderContainer" *ngIf="!isOpen">
+		       <button *ngIf="!isOpen" (click)="toggleMenu()"><span class="material-icons">menu</span></button>
+		    </div>
 			<button  class='LogContainer' *ngIf="this._authService.isLoggedIn() && this.userRegistered && isOpen" (click)="openModal('custom-modal-5')" >LOG ACTIVITY </button>
-
 			<div class='MapActionsContainer' *ngIf="(!this._authService.isLoggedIn() || !this.userRegistered) && isOpen">
-					<p class='color-white'>Join the race and become a participant!</p>
-					<button class="lightButton wideButton" (click)="viewAbout()">JOIN</button>
+				<p class='color-white'>Join the race and become a participant!</p>
+				<button class="lightButton wideButton" (click)="viewAbout()">JOIN</button>
 			</div>
-
-			<!-- <div *ngIf="this.childRaceData.length > 1 && isOpen">
-				<div class="container">
-				  <label>Select Route</label>
-				  <select [(ngModel)]="selectedRaceID">
-					  <option *ngFor="let x of this.childRaceData" [value]="x.id" [selected]="selectedRaceID == x.id">{{x.name}}</option>
-				  </select>
-				</div>
-			  </div> -->
-
-<!--
-			<div class='MapActionsContainer'>
-				<ng-template [ngIf]="this._authService.isLoggedIn() && this.userRegistered" [ngIfElse]="NotLoggedInBlock">
-					<button class="lightButton wideButton" (click)="openModal('custom-modal-5')" >LOG ACTIVITY</button>
-				</ng-template>
-				<ng-template #NotLoggedInBlock>
-					<p class='color-white'>Join the race and become a participant!</p>
-					<button class="lightButton wideButton" (click)="viewAbout()">JOIN</button>
-				</ng-template>
-			</div>
- -->
-			<!--
-			<div class='MapActionsContainer'  *ngIf="this._authService.isLoggedIn() && this.userRegistered && num_activities>0" matBadge="{{num_activities}}"  matBadgePosition="after" matBadgeColor="accent" (click)="openModal('custom-modal-5')" >LOG ACTIVITY</div> -->
-			
-			
-
 			<div class="Slideshow MapFeedContainer"  *ngIf="isOpen">
 				<div class="SlideshowHeader MapFeedSlideshowHeader" >
 					<button class="SlideshowButton" (click)="SwitchSlideshow('feed')" id="feed-btn">Social Feed</button>
 					<button class="SlideshowButton" (click)="SwitchSlideshow('leaderboard')" id="leaderboard-btn">Leaderboard</button>
 				</div>
 				<div class="SlideshowContents MapFeedSlideshowContents">
-						
 					<div class="SlideshowSlide MapFeedSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'feed'}">
 						<div *ngIf="this._authService.isLoggedIn()" class="MapFeedInputContainer">
-								<div class="MapFeedInputProfileContainer">
-									<img class='MapFeedInputProfile' src="{{userData.profile_url}}" alt='Your Profile Picture'>
-								</div>
-								<div class='MapFeedInputTextContainer'>
-									<app-story-form  [raceID]="raceID" (logActivityEvent)="logActivity($event)" (storyPostedEvent)="newStoryPosted($event)"></app-story-form>
-								</div>
+							<div class="MapFeedInputProfileContainer">
+								<img class='MapFeedInputProfile' src="{{userData.profile_url}}" alt='Your Profile Picture'>
+							</div>
+							<div class='MapFeedInputTextContainer'>
+								<app-story-form  [raceID]="raceID" (logActivityEvent)="logActivity($event)" (storyPostedEvent)="newStoryPosted($event)"></app-story-form>
+							</div>
 						</div>
 						<div class='MapFeedSettingsButtonContainer'>
 							<div class='MapFeedSettingsContainer'>
@@ -79,12 +43,10 @@
 						<div class='MapFeed'>
 							<app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
 						</div>
-					</div>
-						
+					</div>		
 					<div class="SlideshowSlide MapLeaderboardSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'leaderboard'}">
 						<div class='LeaderboardFeed'>
 							<app-tag-select *ngIf="hasEntryTags && !isHybrid" [raceID]="raceID" [tagType]="entryTagType" [hasAll]="true" [title]="'Filter by Org'" (emitState)="setLeaderboardTagID($event)"></app-tag-select>
-
 							<div class="routeRow" *ngIf="isHybrid && childRaceData.length > 0">
 								<div class="routeCol">
 									<app-route-select  [routes]="childRaceData" [title]="'Filter by Route'" (routeChanged)="setLeaderboardRouteFilter($event)"></app-route-select>
@@ -93,15 +55,11 @@
 									<button class="whiteButton smallButton" (click)="openModal('route-info')">?</button>
 								</div>
 							</div>
-							
-							
-
 							<app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard> 
 							<app-leaderboard *ngIf="selectedTagFilterID != 0 && raceSettings.allowTeams" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
 							<app-hybrid-leaderboard *ngIf="isHybrid" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard>
 						</div>
 					</div>
-					
 				</div>
 			</div>
 		</div>
@@ -110,7 +68,6 @@
 			<div *ngIf="this._authService.isLoggedIn() && this.userRegistered"[ngClass]="{searchContainer: isOpen, searchContainerSmall: !isOpen}">
 				<app-search [raceID]="raceID"></app-search>
 			</div>
-			
 		</div>
 	</div>
 </div>

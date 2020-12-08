@@ -19,21 +19,14 @@
       <div class="TucanFormSegmentContainer">
         <div class="TucanFormSegment">
           <h6 class='InputLabel'>First Name<sup class='h7 red-text'>*</sup></h6>
-          <!--<input class="form-control" type="text" placeholder="First Name" value="{{this.d.userData.first_name}}" formControlName="FirstName">-->
           <input class="form-control" type="text" placeholder="First Name" formControlName="FirstName">
           <div *ngIf="profileForm.get('FirstName').invalid && (profileForm.get('FirstName').dirty || profileForm.get('FirstName').touched)">
             <p *ngIf="f.FirstName.errors.required" class='h7 redText margin-bottom-0px'>First name is required.</p>
           </div>
-          <!--
-          <div *ngIf="profileForm.get('FirstName').invalid && (profileForm.get('FirstName').dirty || profileForm.get('FirstName').touched)">
-            <div *ngIf="profileForm.get('FirstName').errors.required">First Name is required.</div>
-          </div>
-          -->
         </div>
     
         <div class="TucanFormSegment">
           <h6 class='InputLabel'>Last Name<sup class='h7 red-text'>*</sup></h6>
-          <!--<input class="form-control" type="text" placeholder="Last Name" value="{{this.d.userData.last_name}}" formControlName="LastName">-->
           <input class="form-control" type="text" placeholder="Last Name" formControlName="LastName">
           <div *ngIf="profileForm.get('LastName').invalid && (profileForm.get('LastName').dirty || profileForm.get('LastName').touched)">
             <p *ngIf="profileForm.get('LastName').errors.required" class='h7 redText margin-bottom-0px'>Last Name is required.</p>
@@ -46,7 +39,6 @@
           <h6 class='InputLabel'>About</h6>
           <mat-slide-toggle formControlName="aboutToggle">Show</mat-slide-toggle>
         </div>
-        <!--<textarea class="form-control" formControlName="About" rows="3" placeholder="About" value="{{this.d.userData.description}}"  required ></textarea>-->
         <textarea class="form-control" formControlName="About" rows="3" placeholder="About" required></textarea>
      </div>
   
@@ -57,7 +49,6 @@
           <h6 class='InputLabel'>Location</h6>
           <mat-slide-toggle formControlName="locationToggle">Show</mat-slide-toggle>
         </div>
-        <!--<input class="form-control" type="text" placeholder="Location" value="{{this.d.userData.location}}"  formControlName="Location">-->
         <input class="form-control" type="text" placeholder="Location" formControlName="Location">
         <div *ngIf="profileForm.get('Location').invalid && (profileForm.get('Location').dirty || profileForm.get('Location').touched)">
           <p *ngIf="profileForm.get('Location').errors.maxlength" class='h7 redText margin-bottom-0px'>This must be no more than 30 characters.</p>
@@ -71,17 +62,6 @@
         <input class="form-control" type="text" placeholder="{{this.d.userData.email}}" readonly>
       </div>
     </div>
-  
-  <!--
-      <div class="form-group" style="text-align: left; padding: 5px;">
-        <label name="DistanceType">Distance Type</label>
-        <select class="form-control" formControlName="DistanceType">
-          <option *ngFor="let typeOption of distanceTypeOptions" [value]="typeOption">
-            {{ typeOption }}
-          </option>
-        </select>
-      </div>
-  -->
       <button  (click)="this.updateProfile()">Update</button>
     </form>
   </ng-template>

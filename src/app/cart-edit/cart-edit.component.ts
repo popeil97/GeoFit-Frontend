@@ -34,7 +34,6 @@ export class CartEditComponent implements OnInit,OnChanges {
   }
 
   refreshCart() {
-  //  console.log('GONNA CALL INIT ON CART');
     this.cartList.init();
   }
 
@@ -44,12 +43,11 @@ export class CartEditComponent implements OnInit,OnChanges {
   }
 
   checkout() {
-
     let checkoutCallback = {} as any;
     checkoutCallback.success = true;
     checkoutCallback.type = 'CHECKOUT';
     checkoutCallback.data = this.cartList.getCart();
-    console.log(";CART", checkoutCallback.data );
+    //console.log(";CART", checkoutCallback.data );
     if(checkoutCallback.data.orders.length>=1)
     {
       this.checkoutAlert.emit(checkoutCallback);

@@ -1,34 +1,20 @@
 <div class="form-group" style="text-align: left; padding: 5px;">
-  <!--    <label name="start_loc">Start Location</label>-->
-
-    <div class="col-xs-9" style="margin-bottom:6px;">
-     <input class="form-control textInput" type="text" placeholder="Search Racer" (keyup)="filter()" [(ngModel)]="query" />
+  <div class="col-xs-9" style="margin-bottom:6px;">
+    <input class="form-control textInput" type="text" placeholder="Search Racer" (keyup)="filter()" [(ngModel)]="query" />
     <button type="submit"><span class="material-icons">search</span></button>
   </div>
 
-       <div *ngFor="let option of searchResults"  class="FeedItem">
-       	<div class="row">
-       		<div class="nameCol">
-       			 <app-user-profile-nav [username]=option.username [displayName]=option.display_name></app-user-profile-nav>
-       		</div>
-       		<div class="followCol" *ngIf="!option.isMe">
-       			<app-user-follow  [userID]=option.user_id [tempLight]="false" [follows]=option.follows></app-user-follow>
-       		</div>
-          <div class="followCol" *ngIf="option.isMe">
-            <app-user-follow  [userID]=option.user_id [tempLight]="false" [follows]=option.follows [disabled]="true"></app-user-follow>
-          </div>
-       	</div>
-       	
-         
-       </div>
-   </div>
-
-
-   <!--
-   	  <mat-form-field>
-     <input matInput type="text" placeholder="Search Racer" [matAutocomplete]="racerFilterAuto" (keyup)="filter()" [(ngModel)]="query" />
-     <button mat-button matPrefix mat-icon-button>
-    <mat-icon>search</mat-icon>
-  </button>
-</mat-form-field>
--->
+  <div *ngFor="let option of searchResults"  class="FeedItem">
+   	<div class="row">
+   		<div class="nameCol">
+   			 <app-user-profile-nav [username]=option.username [displayName]=option.display_name></app-user-profile-nav>
+   		</div>
+   		<div class="followCol" *ngIf="!option.isMe">
+   			<app-user-follow  [userID]=option.user_id [tempLight]="false" [follows]=option.follows></app-user-follow>
+   		</div>
+      <div class="followCol" *ngIf="option.isMe">
+        <app-user-follow  [userID]=option.user_id [tempLight]="false" [follows]=option.follows [disabled]="true"></app-user-follow>
+      </div>
+   	</div>
+  </div>
+</div>
