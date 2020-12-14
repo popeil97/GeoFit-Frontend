@@ -71,6 +71,7 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
   public isManualEntry:Boolean = false;
   public hasEntryTags:Boolean = false;
   public isHybrid: Boolean = false;
+  public allowTeams: Boolean = false;
 
   public feedOptions:Boolean = false;
 
@@ -102,7 +103,8 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
   varcolors = ['#bb0000', '#ffffff'];
 
   public currentScreen = 'feed';
-  public acceptedScreens = ['feed','leaderboard'];
+  public currentLeaderboard = 'individual';
+  public acceptedScreens = ['feed','leaderboard','teams'];
 
   constructor(
     private raceService:RaceService,
@@ -322,6 +324,7 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
       this.hasEntryTags = this.raceSettings.has_entry_tags;
       this.isManualEntry = this.raceSettings.isManualEntry;
       this.isHybrid = this.race.is_hybrid;
+      this.allowTeams = this.raceSettings.allowTeams;
 
       // User specific-info
       this.userRaceSettings = raceData.settings;
@@ -385,13 +388,44 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
       case 'feed':
         document.getElementById('leaderboard-btn').style.backgroundColor = "#FFFFFF";
         document.getElementById('leaderboard-btn').style.color = "#000000";
+        document.getElementById('teams-btn').style.backgroundColor = "#FFFFFF";
+        document.getElementById('teams-btn').style.color = "#000000";
         break; 
       case 'leaderboard':
         document.getElementById('feed-btn').style.backgroundColor = "#FFFFFF";
         document.getElementById('feed-btn').style.color = "#000000";
+        document.getElementById('teams-btn').style.backgroundColor = "#FFFFFF";
+        document.getElementById('teams-btn').style.color = "#000000";
+        break; 
+      case 'teams':
+        document.getElementById('feed-btn').style.backgroundColor = "#FFFFFF";
+        document.getElementById('feed-btn').style.color = "#000000";
+        document.getElementById('leaderboard-btn').style.backgroundColor = "#FFFFFF";
+        document.getElementById('leaderboard-btn').style.color = "#000000";
         break; 
     }
     return;
+  }
+
+  SwitchLeaderboard = (to:string = null) => {
+    this.currentLeaderboard = to;
+    document.getElementById(to+'-leaderboard-btn').style.backgroundColor = "#36343c";
+    document.getElementById(to+'-leaderboard-btn').style.color = "#FFFFFF";
+
+    switch(to) {
+      case 'individual':
+        document.getElementById('teams-leaderboard-btn').style.backgroundColor = "#FFFFFF";
+        document.getElementById('teams-leaderboard-btn').style.color = "#000000";
+        break;
+
+      case 'teams':
+        document.getElementById('individual-leaderboard-btn').style.backgroundColor = "#FFFFFF";
+        document.getElementById('individual-leaderboard-btn').style.color = "#000000";
+        break;
+
+    }
+    
+
   }
 }
 

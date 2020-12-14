@@ -55,6 +55,7 @@
 				<div class="SlideshowHeader MapFeedSlideshowHeader" >
 					<button class="SlideshowButton" (click)="SwitchSlideshow('feed')" id="feed-btn">Social Feed</button>
 					<button class="SlideshowButton" (click)="SwitchSlideshow('leaderboard')" id="leaderboard-btn">Leaderboard</button>
+					<button class="SlideshowButton" (click)="SwitchSlideshow('teams')" id="teams-btn">Teams</button>
 				</div>
 				<div class="SlideshowContents MapFeedSlideshowContents">
 						
@@ -94,12 +95,19 @@
 								</div>
 							</div>
 							
-							
+							<div *ngIf="allowTeams" class="SlideshowHeader MapFeedSlideshowHeader">
+								<button class="SlideshowButton" (click)="SwitchLeaderboard('individual')" id="individual-leaderboard-btn">Individual</button>
+								<button class="SlideshowButton" (click)="SwitchLeaderboard('teams')" id="teams-leaderboard-btn">Teams</button>
+							</div>
 
-							<app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard> 
-							<app-leaderboard *ngIf="selectedTagFilterID != 0 && raceSettings.allowTeams" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
-							<app-hybrid-leaderboard *ngIf="isHybrid" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard>
+							<app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0 && currentLeaderboard == 'individual'" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard> 
+							<app-leaderboard *ngIf="selectedTagFilterID != 0 && raceSettings.allowTeams && currentLeaderboard == 'teams'" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
+							<app-hybrid-leaderboard *ngIf="isHybrid && currentLeaderboard == 'individual'" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard>
 						</div>
+					</div>
+
+					<div class="SlideshowSlide MapLeaderboardSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'teams'}">
+						<app-team-list [race_id]="raceID" [userStat]="userStat" (callback)="refreshAllComponents($event)"></app-team-list>
 					</div>
 					
 				</div>
