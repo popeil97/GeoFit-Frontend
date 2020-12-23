@@ -1,4 +1,50 @@
 <div style="max-height:600px;">
+
+  <div *ngIf="myPos != null && myPos != undefined">
+    <h3>My Position</h3>
+    <div class="LeaderboardItem" (click)="toggleDetails()"> 
+
+        
+      <div class="row">
+          <div class="NumCol">
+            <b>{{myPos.rank}}</b>
+          </div>
+          <div class="PicCol">
+            <img src="{{myPos.profile_url}}" width="30" height="30" class="roundImg">
+          </div>
+          <div class="NameCol">
+            <app-user-profile-nav [username]="myPos.username" [displayName]="myPos.display_name"></app-user-profile-nav>
+          </div>
+          <div class="DistanceCol">
+            <i style="right:0;">{{myPos.total_distance}} {{myPos.distance_type}}</i>
+          </div>
+    </div>
+      
+      
+      
+    <div *ngIf="showMore">
+      <div class="LeaderboardItem" *ngFor="let member of myPos.child_user_stats">
+        <div class="PicCol">
+            <img src="{{member.profile_url}}" width="30" height="30">
+          </div>
+          <div class="NameCol">
+            <app-user-profile-nav [username]="member.username" [displayName]="member.display_name"></app-user-profile-nav>
+          </div>
+          <div class="DistanceCol">
+            <i style="right:0;">{{member.total_distance}} {{member.distance_type}}</i>
+          </div>
+          <div class="FollowCol">
+            <app-user-follow [userID]=member.user_id [follows]=member.follows *ngIf="use != 'teams'"></app-user-follow>
+          </div>
+      </div>
+    </div>
+
+      
+  </div>
+
+</div>
+
+  <h3>Leaderboard</h3>
     <div class="row">
        <div class = "winner-column-lowered" *ngIf="leaderboard.length >= 2">
         <p><b>🥈</b><img class = "twoImage" src="{{leaderboard[1].profile_url}}" width="30" height="30">
