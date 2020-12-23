@@ -1,12 +1,9 @@
 <div class='PageContainer'>
   <div class="PageSegment PageHeaderSegment">
-    <!-- <img src= "../../assets/landing/tucan_main.png" class="TucanLogo" /> -->
     <h1 class="PageHeaderSegmentTitle">Public Races</h1>
     <app-loader [isActive]="loading"></app-loader>
   </div>
-  <div class="PageSegment">
-    <!-- <a type="button" class="btn btn-primary" style="float:right" routerLink='/create'>Create Race</a> -->
-    
+  <div class="PageSegment">  
     <div *ngIf="races == null"><p>Loading races...</p></div>
     <div *ngIf="races != null && races.length == 0; else DisplayRacesBlock">
       <p style="text-align:center;"><b> No races to display</b> </p>
@@ -47,23 +44,14 @@
                 </div>
                 <p class='RaceLocation'>{{race.end_loc}}</p>
               </div>
-              <!--
-              <h6>Entry Fee:</h6>
-              <p>$ {{race.raceSettings.price}}</p>
-              -->
             </div>
             <div class='TucanRaceItemButtons'>
               <button (click)="viewAbout(race)">View Race Details</button>
               <button (click)="viewRace(race)" *ngIf="race.has_started && race.joined">Go to race</button>
               <button (click)="viewRace(race)" *ngIf="race.has_started && !race.joined ">Preview race</button>
-              <!-- this is just temporary for now, have to come back in and fix the inputs -->
-              <!--   <app-signup [price]="race.raceSettings.price" [hasTags]="race.raceSettings.has_entry_tags"[race_id]="race.id" (signupCallback)="signupCallback($event)" (click)="trySignup()"></app-signup> -->
-              
               <ng-template [ngIf]="!this._authService.isLoggedIn()" [ngIfElse]="OtherRegisterButton">
-              <!--  <button (click)="openModal('custom-modal-2',race)">Register for Race</button> -->
               </ng-template>
               <ng-template #OtherRegisterButton>
-               <!-- <button *ngIf="!race.joined" (click)="openModal('custom-modal-3',race)">Register for Race</button> -->
               </ng-template>
               <p *ngIf="race.joined" class='h7'><b>You've registered for this race.</b></p>
               <p *ngIf="!race.has_started && race.joined" class='h7'>Come back on race day ({{race.start_date.month}} {{race.start_date.day}}).</p>
@@ -73,74 +61,6 @@
         </div>
       </div>
     </ng-template>
-
-<!--
-    <div class="row" >
-      <div 
-        class="col-3 col-sm-3 col-md-3 col-lg-3" 
-        *ngIf="!this._authService.isLoggedIn() || races.length>0"
-      >
-        <table 
-          mat-table
-          [dataSource]="races" multiTemplateDataRows
-          class="mat-elevation-z8"
-          *ngIf="races.length > 0"
-        >
-          <ng-container matColumnDef="name">
-            <th mat-header-cell *matHeaderCellDef> Race </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="distance">
-            <th mat-header-cell *matHeaderCellDef> Distance </th>
-            <td mat-cell *matCellDef="let element"> {{element.distance}} {{element.distance_type}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="start_loc">
-            <th mat-header-cell *matHeaderCellDef> Start Loc </th>
-            <td mat-cell *matCellDef="let element"> {{element.start_loc}} </td>
-          </ng-container>
-
-          <ng-container matColumnDef="end_loc">
-            <th mat-header-cell *matHeaderCellDef> End Loc </th>
-            <td mat-cell *matCellDef="let element"> {{element.end_loc}} </td>
-          </ng-container>
--->
-          <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-<!--
-          <ng-container matColumnDef="expandedDetail">
-            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-              <div class="example-element-detail"
-                   [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-
-                   <img src="{{element.race_image}}" style="width: 255px;" />
-                   <br>
-                <div class="container example-element-description">
-                  {{element.description}}
-                </div>
-
-                <div class="container" style="float: right;">
-
-
-                  <button type="button" class="btn btn-secondary" style="float: right;margin-right:3px; " (click)="viewAbout(element)">View</button>
-                </div>
-                
-              </div>
-              
-            </td>
-          </ng-container>
-
-          <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-          <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
-              class="example-element-row"
-              [class.example-expanded-row]="expandedElement === element"
-              (click)="expandedElement = expandedElement === element ? null : element">
-          </tr>
-          <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-        </table>
-      </div>
-    </div>
--->
   </div>
 </div>
 

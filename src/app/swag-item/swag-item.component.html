@@ -1,5 +1,4 @@
 <!-- Item type 1= entry; 2=swag 3=entry+swag-->
-
 <div class="cartItem" *ngIf="!isOrder">
   <div class='cartItemContents'>
     <img class='cartItemImage' src={{item.image}} alt={{item.name}}>
@@ -18,17 +17,14 @@
         <select class='cartSelectSize' [(ngModel)]="selectedSize">
           <option *ngFor="let size of item.sizes" [value]="size" (click)="onSizeSelect(size)">{{size}}</option>
         </select>
-        <!--<button class='h7 buttonWithIcon' [ngClass]="{'addButtonDisabled':btnDisabled}" [disabled]="btnDisabled" (click)="addToCart()">Add to Cart <mat-icon>shopping_cart</mat-icon></button> -->
       </div>
 
       <div class='cartSizeContainer' *ngIf="item.type!=1">
         <button class='h7 buttonWithIcon' (click)="addToCart()">Add to Cart <mat-icon>shopping_cart</mat-icon></button>
-        <!--<button class='h7 buttonWithIcon' [ngClass]="{'addButtonDisabled':btnDisabled}" [disabled]="btnDisabled" (click)="addToCart()">Add to Cart <mat-icon>shopping_cart</mat-icon></button> -->
       </div>
 
       <div class='cartSizeContainer' *ngIf="item.type==1">
         <button class='h7 buttonWithIcon' (click)="addEntryToCart()">Add to Cart <mat-icon>shopping_cart</mat-icon></button>
-        <!--<button class='h7 buttonWithIcon' [ngClass]="{'addButtonDisabled':btnDisabled}" [disabled]="btnDisabled" (click)="addToCart()">Add to Cart <mat-icon>shopping_cart</mat-icon></button> -->
       </div>
     </div>
   </div>

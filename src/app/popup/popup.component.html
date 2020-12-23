@@ -40,12 +40,12 @@
 <div *ngIf="!this.isTag && this.userData.isTeam"> <!-- TEAMS-->
   <p>
       {{ userData.display_name }}
-    </p>
+  </p>
   <p *ngFor="let user of this.userData.child_user_stats">
       <app-user-profile-nav [username]=user.username [displayName]=user.display_name></app-user-profile-nav>
   </p>
 
-<p>
+  <p>
     {{ this.userData.total_distance }} {{ this.userData.distance_type }}
   </p>
     
