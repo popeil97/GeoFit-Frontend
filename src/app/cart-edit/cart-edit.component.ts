@@ -31,6 +31,7 @@ export class CartEditComponent implements OnInit,OnChanges {
   }
 
   ngOnInit() {
+    console.log('CART IS ALIVE');
   }
 
   refreshCart() {
