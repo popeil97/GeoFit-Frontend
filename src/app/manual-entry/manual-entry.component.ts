@@ -86,7 +86,7 @@ export class ManualEntryComponent implements OnInit {
   upload(): void {
     this.modalService.callbackModal("custom-modal-5",null);
     let formClean = this.manualEntryForm.value as any;
-   // console.log(this.manualEntryForm);
+   console.log(this.manualEntryForm);
     let isValid: Boolean = this.manualEntryForm.valid;
 
     if(isValid) {

@@ -15,12 +15,12 @@
       </div>
       <div class="column2">
             <div class="form-group">
-                <select class="form-control" formControlName="activityType" [ngClass]="{ 'is-invalid': submitted && f.activityType.errors }">
+                <select class="form-control" formControlName="activityType" [ngClass]="{ 'is-invalid': submitted && f.activityType && f.activityType.errors }">
                     <option *ngFor="let typeOption of activityOptions" [value]="typeOption">
                     {{ typeOption }}
                     </option>
                 </select>
-                <div *ngIf="submitted && f.activityType.errors" class="invalid-feedback">
+                <div *ngIf="submitted && f.activityType && activityType.errors" class="invalid-feedback">
                     <div *ngIf="f.activityType.errors.required">Required</div>
                 </div>
             </div>

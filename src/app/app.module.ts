@@ -121,6 +121,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { StoryPopupComponent } from './story-popup/story-popup.component';
 import { RaceCreatePageComponent } from './race-create-page/race-create-page.component';
 import { TeamFormDialogComponent } from './team-form/team-form-dialog.component';
+import { CheckpointListComponent } from './checkpoint-list/checkpoint-list.component';
 
 
 @NgModule({
@@ -211,6 +212,7 @@ import { TeamFormDialogComponent } from './team-form/team-form-dialog.component'
     StoryPopupComponent,
     RaceCreatePageComponent,
     TeamFormDialogComponent,
+    CheckpointListComponent,
       ],
 
   imports: [

@@ -343,6 +343,7 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
 
   uploadManualEntry(entry) {
     this.activitiesService.uploadManualEntry(entry,this.selectedRaceID).then((resp) => {
+      console.log('GOT MANUAL ENTRY:',resp);
       this.refreshStatComponents();
     });
   }
