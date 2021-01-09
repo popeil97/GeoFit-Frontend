@@ -28,7 +28,7 @@ export class SwagListComponent implements OnInit,OnChanges {
         switch(propName) {
           case 'raceID':
             if (!_.isEqual(changes.raceID.currentValue, changes.raceID.previousValue) && changes.raceID.currentValue != undefined){
-              this.init();
+              // this.init();
             }
         }
       }
