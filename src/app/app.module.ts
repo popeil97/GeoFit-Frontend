@@ -125,6 +125,7 @@ import { RaceCreatePageComponent } from './race-create-page/race-create-page.com
 /* NEW COMPONENTS USING VIEWS/ FOLDER */
 import { HeaderNavComponent } from './views/header-nav/header-nav.component';
 import { LandingPageComponent } from './views/landing-page/landing-page.component';
+import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-creators.component';
 
 
 @NgModule({
@@ -215,6 +216,7 @@ import { LandingPageComponent } from './views/landing-page/landing-page.componen
     StoryPopupComponent,
     RaceCreatePageComponent,
     HeaderNavComponent,
+    ForRaceCreatorsComponent,
       ],
 
   imports: [

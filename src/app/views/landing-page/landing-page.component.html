@@ -3,37 +3,36 @@
   <div class="LandingPageSegment masthead" id="race">
     
     <div class="HorizontalItem">
-      <div class="LandingMain">
-        <img src= "../../../assets/logos/tucan-logo-01.png" class="TucanLogo LandingTucanLogo">
-        <h3>We bring community to virtual racing</h3>
-        <div class='LandingSubheading'>
-          <p>Tucan fitness isn't a social fitness platform for race and fundraiser organizers to engage their community virtually from anywhere in the world.</p>
-          <!--  <a class="button lightButton LandingAboutButton" routerLink='/about-tucan'>About Tucan Fitness</a> -->
-        </div>
-        <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
-          <button (click)="openModal('custom-modal-1')">Log in</button>
-          <button (click)="openModal('custom-modal-2')">Sign up</button>
-        </div>
+      <img src= "../../../assets/logos/tucan-logo-01.png" class="TucanLandingLogoImage">
+      <h3>We bring community to virtual racing</h3>
+      <div class='LandingSubheading'>
+        <p>Tucan fitness isn't a social fitness platform for race and fundraiser organizers to engage their community virtually from anywhere in the world.</p>
+        <!--  <a class="button lightButton LandingAboutButton" routerLink='/about-tucan'>About Tucan Fitness</a> -->
+      </div>
+      <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
+        <button (click)="openModal('custom-modal-1')">Log in</button>
+        <button (click)="openModal('custom-modal-2')">Sign up</button>
       </div>
     </div>
     
     <div class="HorizontalItem">
-      <img class='HorizontalItemImage' src='../../../assets/landing/main.png' alt='Image' />
+      <img class='LandingPageImage' src='../../../assets/landing/main.png' alt='Image' />
     </div>
 
   </div>
   
        
   
-  <div class='LandingPageSegment'>
+  <div class='LandingPageSegment GrayBackground Vertical'>
     <div class='VerticalItem'>
       <div class='LandingPageSegment'>
         <div class='HorizontalItem'>
-          <img src= "../../../assets/community.PNG" class="VerticalItemImage" /> 
+          <img src= "../../../assets/community.PNG" class="LandingPageImage" /> 
         </div>
         <div class='HorizontalItem'>
-          <h3>Get fit with your community</h3>
-          <p>Tucan Fitness is built around community, with the goal that you can participate and engage with others from anywhere in the world</p>
+            <h3>What is Tucan Fitness?</h3>
+            <p>Tucan Fitness brings community to virtual racing. We are a social fitness platform for organizations to engage their community virtually, promote healthy living, and raise funds for good causes.</p>
+            <p>We are built around community and our races empower people to participate from anywhere, anytime, and at any pace. Connect with your community and be social from a distance all while staying fit.</p>
         </div>
       </div>
     </div>
@@ -42,71 +41,38 @@
     </div>
   </div>
   
-  <div class='PageSegment' style="background-color:white;">
-    <div class='AboutTucanValuesContainer'>
-      <div class='AboutTucanFeatures'>
-        <img src= "../../../assets/social.PNG" class="AboutTucanFeatureImg" style="max-width:250px;">
-      </div>
-      <div class='AboutTucanFeatures'>
-        <h3>Share your progress</h3>
-        <div class='LandingSubheading'>
-          <p>Tucan Fitness is a social platform that allows you to share pictures, videos, and your hard work with others</p>
-        </div> 
-      </div>
-                    
-    </div>
-  </div>
-  
-  
-  <div class='PageSegment'  style="background-color:rgb(240, 240, 240);">
-    <div class='AboutTucanValuesContainer'>
-      <div class='AboutTucanFeatures'>
-        <h3>Bring out your competitive side</h3>
-        <div class='LandingSubheading'>
-          <p>Tucan Fitness helps you achieve your personal goals, whether it's to be healthy or climb the leaderboard.</p>
-        </div>  
-      </div>
-      <div class='AboutTucanFeatures'>
-        <img src= "../../../assets/fitness.PNG" class="AboutTucanFeatureImg" style="max-width:250px;">  
-      </div>
-                    
-    </div>
-  </div>
-  
-  <div class='PageSegment' style="background-color:white;">
-    <div class='AboutTucanValuesContainer'>
-      <div class='AboutTucanFeatures'>
-        <img src= "../../../assets/social-good.PNG" class="AboutTucanFeatureImg" style="max-width:250px;"> 
-      </div>
-      <div class='AboutTucanFeatures'>
-        <h3>Give back to your org</h3>
-        <div class='LandingSubheading'>
-          <p>Tucan Fitness allows you to raise money for a cause you care about and support your community</p>
+  <div class='LandingPageSegment Vertical TextAlignCenter'>
+    <div class='VerticalItem'>
+      <h3>What can Tucan Fitness do for you?</h3>
+      <p>(INSERT ICONS HERE)</p>
+      <div class='AboutTucanValuesContainer'>
+        <div class='AboutTucanValue'>
+          <h3>For Racers</h3>
+          <p><b>Fit fitness into your own schedule.</b> Do not let your busy schedule stop you from climbing the leaderboard or raising funds for a good cause. Connect with other racers in your community and be social from a distance.</p>  
         </div>
-      </div>
-                    
+        <div class='AboutTucanValue'>
+          <h3>For Race Directors</h3>
+          <p><b>Replace canceled races or create new events.</b> Engage your community virtually, all without the costs required to put on in-person events. Take your event 100% virtual or create hybrid events to take racing to the next level. </p>  
+        </div>
+        <div class='AboutTucanValue'>
+          <h3 >For Fundraisers</h3>
+          <p><b>A turn-key fundraising solution.</b> Quickly set up a race, share with your community and get people moving together, all for a good cause. Choose your own custom route and engage your sponsors to make a personalized fundraiser.</p>  
+        </div> 
+      </div>                
     </div>
   </div>
   
-  <div class='PageSegment' style="background-color:rgb(240, 240, 240);">
-    <h2>Our Value</h2>
-    <div class='AboutTucanValuesContainer'>
-      <div class='AboutTucanValue'>
-        <h3>For Racers</h3>
-        <p><b>Fit fitness into your own schedule.</b> Do not let your busy schedule stop you from climbing the leaderboard or raising funds for a good cause. Connect with other racers in your community and be social from a distance.</p>  
+  
+  <div class='LandingPageSegment Vertical GrayBackground'>
+    <div class='VerticalItem TextAlignCenter'>
+      <h3>Join the Tucan Community!</h3>
+      <p>(INSERT COPY HERE)</p>
+      <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
+        <button (click)="openModal('custom-modal-1')">Log in</button>
+        <button (click)="openModal('custom-modal-2')">Sign up</button>
       </div>
-      <div class='AboutTucanValue'>
-        <h3>For Race Directors</h3>
-        <p><b>Replace canceled races or create new events.</b> Engage your community virtually, all without the costs required to put on in-person events. Take your event 100% virtual or create hybrid events to take racing to the next level. </p>  
-      </div>
-      <div class='AboutTucanValue'>
-        <h3 >For Fundraisers</h3>
-        <p><b>A turn-key fundraising solution.</b> Quickly set up a race, share with your community and get people moving together, all for a good cause. Choose your own custom route and engage your sponsors to make a personalized fundraiser.</p>  
-      </div>
-                    
     </div>
   </div>
-  
   
   <div class='PageSegment'>
     <div class='AboutTucanValuesContainer'>

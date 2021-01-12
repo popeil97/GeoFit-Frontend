@@ -21,6 +21,8 @@ import { CartEditComponent } from './cart-edit/cart-edit.component';
 import { PaypalComponent } from './paypal/paypal.component';
 import { SearchComponent } from './search/search.component';
 
+import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-creators.component';
+
 const routes: Routes = [
   {path: 'race', component:RaceViewPageComponent},
   {path: 'races', component:PublicRacesPageComponent},
@@ -39,6 +41,8 @@ const routes: Routes = [
   {path: 'faqs', component:FaqPageComponent},
   {path: 'contact', component:ContactPageComponent},
   {path: 'search', component:SearchComponent},
+
+  {path: 'for-race-creators', component:ForRaceCreatorsComponent},
 ];
 
 @NgModule({
