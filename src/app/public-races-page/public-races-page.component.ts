@@ -113,6 +113,20 @@ export class PublicRacesPageComponent implements OnInit {
     }
   }
 
+  truncateHTML(text: string): string {
+
+    let charlimit = 270;
+    if(!text || text.length <= charlimit )
+    {
+        return text;
+    }
+
+
+  let without_html = text.replace(/<(?:.|\n)*?>/gm, '');
+  let shortened = without_html.substring(0, charlimit) + "...";
+  return shortened;
+}
+
   ProcessDate = (date = null) => {
     if (date == null) return {month:null,day:date}
     const dateComponents = date.split('-');

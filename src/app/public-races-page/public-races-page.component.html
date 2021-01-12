@@ -33,7 +33,8 @@
             </div>
           </div>
           
-          <p class='TucanRaceItemDescription' [innerHTML]="race.description"></p>
+          <p class='TucanRaceItemDescription' [innerHTML]="truncateHTML(race.description)"></p>
+
 
           <div class='TucanRaceItemDetails'>
             <div class='TucanRaceItemSpecificInfo'>
