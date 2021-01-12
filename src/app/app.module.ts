@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { PublicRacesPageComponent } from './public-races-page/public-races-page.component';
-import { LandingPageComponent  } from './landing-page/landing-page.component';
 import { MapComponent } from './map/map.component';
 import { RaceViewPageComponent } from './race-view-page/race-view-page.component';
 import { UserProgressComponent } from './user-progress/user-progress.component';
@@ -27,8 +26,10 @@ import { FeedComponent } from './feed/feed.component';
 import { StoryService } from './story.service';
 import { ImageService } from './image.service';
 import { LeaderboardService } from './leaderboard.service';
-import { RegisterComponent } from './register/register.component'
-import { RegisterDialogContent } from './register/register.component'
+import { RegisterComponent } from './register/register.component';
+import { RegisterDialogContent } from './register/register.component';
+
+// import { LandingPageComponent  } from './landing-page/landing-page.component';
 
 import {
   HttpRequest,
@@ -121,6 +122,10 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { StoryPopupComponent } from './story-popup/story-popup.component';
 import { RaceCreatePageComponent } from './race-create-page/race-create-page.component';
 
+/* NEW COMPONENTS USING VIEWS/ FOLDER */
+import { HeaderNavComponent } from './views/header-nav/header-nav.component';
+import { LandingPageComponent } from './views/landing-page/landing-page.component';
+
 
 @NgModule({
   declarations: [
@@ -209,6 +214,7 @@ import { RaceCreatePageComponent } from './race-create-page/race-create-page.com
     ContactFormComponent,
     StoryPopupComponent,
     RaceCreatePageComponent,
+    HeaderNavComponent,
       ],
 
   imports: [
