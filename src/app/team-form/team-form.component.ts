@@ -12,12 +12,12 @@ import { TeamEditBody } from '../race-view-page/race-view-page.component';
 })
 export class TeamFormComponent implements AfterViewInit,OnChanges {
   @Input() teamEditForm:TeamEditBody;
+  @Input() raceID:number;
   @Output() callback:EventEmitter<any> = new EventEmitter();
 
   teamForm:FormGroup;
   uploadedUrl:any;
   raceName:string;
-  raceID:number;
   followerOptions:any[];
   followersInvited:any[] = [];
   errorMsg:string;
@@ -72,10 +72,10 @@ export class TeamFormComponent implements AfterViewInit,OnChanges {
   }
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.raceName = params['params']['name'];
-      this.raceID = params['params']['id'];
-    });
+    // this.route.paramMap.subscribe(params => {
+    //   this.raceName = params['params']['name'];
+    //   this.raceID = params['params']['id'];
+    // });
 
     this._userService.getFollowersAndFollowed().then((resp:FollowersResp) => {
      //  console.log('RESP:',resp);
@@ -127,7 +127,7 @@ export class TeamFormComponent implements AfterViewInit,OnChanges {
             this.errorMsg = resp.message;
             return;
           }
-
+          console.log('GONNA CALL CALLBACK');
           this.callback.emit();
         });
       }

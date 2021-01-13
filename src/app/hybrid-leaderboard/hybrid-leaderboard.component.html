@@ -1,11 +1,9 @@
+<!-- Table, each row is : [rank, picture, name, distance, (follow)] -->
 <div style="max-height:600px;">
-     <!-- <button (click)="toggleLeaderboardOpen()">{{leaderboardOpen ? 'Hide More' : 'Show More'}}</button> -->
  <div *ngIf="leaderboard.length >= 1">
-  <div  style="overflow:auto; max-height:600px;"> <!-- *ngIf="leaderboardOpen" -->
+  <div  style="overflow:auto; max-height:600px;">
     <div *ngFor="let group of leaderboard; let i=index">
-      <div class="LeaderboardItem"  *ngIf="!group.isTeam" (click)="toggleDetails()"> <!--[ngClass]="{'LeaderboardItem' : i>2, 'LeaderboardGold':i==0,'LeaderboardSilver':i==1,'LeaderboardBronze':i==2}"-->
-
-        
+      <div class="LeaderboardItem"  *ngIf="!group.isTeam" (click)="toggleDetails()">
           <div class="row">
               <div class="NumCol">
                 <b *ngIf="i>2">{{i+1}}</b>
@@ -34,30 +32,27 @@
         </div>
           
         <div *ngIf="showMore">
-        <div *ngFor="let routeStat of group.route_stats">
-            <div class="row">
-              <div class="NameCol">
-                {{routeStat.name}}
-              </div>
-              <div class="DistanceCol">
-                {{routeStat.display_time}}
-              </div>
-          </div>  
+          <div *ngFor="let routeStat of group.route_stats">
+              <div class="row">
+                <div class="NameCol">
+                  {{routeStat.name}}
+                </div>
+                <div class="DistanceCol">
+                  {{routeStat.display_time}}
+                </div>
+             </div>  
+          </div>
+        </div>     
       </div>
-    </div>
-          
-        
-          
-      </div>
-    </div>
+    w</div>
 
-    <span class="link textControl" style="display:table; margin:0 auto;" (click)="getNextPage()">Load More...</span>
-    <p>
-      <br>
-      <br>
-      <br>
-    </p>
+      <span class="link textControl" style="display:table; margin:0 auto;" (click)="getNextPage()">Load More...</span>
+      <p>
+        <br>
+        <br>
+        <br>
+      </p>
+    </div>
   </div>
-</div>
 </div>
 

@@ -1,3 +1,41 @@
+<button mat-button color="primary" (click)="openTeamForm()">{{userStat.team_id == null ? "Create Team" : "Edit Team"}}</button>
+<button mat-button color="warning" (click)="quitTeam(usersTeam)" *ngIf="userStat.team_id != null">Quite Team</button>
+
+
+<div *ngIf="userStat.team_id != null">
+  <h3>My Team</h3>
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + usersTeam.profile_url + ')'}" style="position:relative; padding-top: 5px; float:left;"></div>
+      <div style="padding: 10px;">{{usersTeam.display_name}}</div>
+    </mat-panel-title>
+    <mat-panel-description style="padding:8px;">
+      {{usersTeam.total_distance}} {{usersTeam.distance_type}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <mat-card>
+    <mat-panel-title>
+      Description
+    </mat-panel-title>
+    <mat-panel-description style="padding:8px;">
+      {{usersTeam.description}}
+    </mat-panel-description>
+  </mat-card>
+
+  <mat-card *ngFor="let member of usersTeam.child_user_stats">
+    <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + member.profile_url + ')'}" style="position: relative; float:left;"></div>
+    <div style="padding-left: 50px;">{{member.display_name}}</div>
+    <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div>
+    <mat-chip *ngIf="member.user_id == usersTeam.user_id">Owner</mat-chip>
+  </mat-card>
+</mat-expansion-panel>
+</div>
+  <br>
+
+  <h3>All Teams</h3>
+  
 <mat-accordion>
   <mat-expansion-panel *ngFor="let team of teams">
     <mat-expansion-panel-header>

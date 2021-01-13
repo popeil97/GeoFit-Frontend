@@ -121,6 +121,7 @@ import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { StoryPopupComponent } from './story-popup/story-popup.component';
 import { RaceCreatePageComponent } from './race-create-page/race-create-page.component';
+import { TeamFormDialogComponent } from './team-form/team-form-dialog.component';
 
 /* NEW COMPONENTS USING VIEWS/ FOLDER */
 import { HeaderNavComponent } from './views/header-nav/header-nav.component';
@@ -215,6 +216,8 @@ import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-cre
     ContactFormComponent,
     StoryPopupComponent,
     RaceCreatePageComponent,
+    TeamFormDialogComponent,
+
     HeaderNavComponent,
     ForRaceCreatorsComponent,
       ],
@@ -256,6 +259,7 @@ import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-cre
                   ReportFormComponent,
                   StoryDeleteDialogComponent,
                   WhyInfoDialogContent,
+                  TeamFormDialogComponent,
                   //ViewFollowDialogContent
                   ] 
 })

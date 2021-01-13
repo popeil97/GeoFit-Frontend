@@ -61,57 +61,58 @@ export class PublicRacesPageComponent implements OnInit {
               public _authService: AuthService,private _userProfileService: UserProfileService,private modalService: ModalService,) { }
 
   ngOnInit() {
-
-    this.raceService.getRaces({}).subscribe(
-      data => {
-        /*
-        this.racesData = data.map(race=>{
-          var ma = {...race};
-          ma.start_date = this.ProcessDate(race.start_date);
-          ma.end_date = this.ProcessDate(race.end_date);
-          return ma;
-        });
-        */
-        this.racesData = data;
-       //  console.log('RACE DATA:',this.racesData);
-        this.races = _.filter(this.racesData.races,(race:any) => {
-            race.raceSettings = this.getRaceSettings(race);
-            race.start_date = this.ProcessDate(race.start_date);
-            race.end_date = this.ProcessDate(race.end_date);
-        //    console.log("RACE SET",race);
-            return race;    
-        });
-     //    console.log('RACES:',this.races)
-        this.userRaces = _.filter(this.racesData.races,(race:any) => {
-          return race.joined;
-        });
-        this.racesInvited = this.racesData.races_invited;
-        this.joinedRacesIDs = this.racesData.user_race_ids;
-      }
-    )
-
-    // this.races = this.racesData.races;
-
-    // console.log('CONTR:',this.racesData);
-
     if (localStorage.getItem('loggedInUsername')){
       this._authService.username = localStorage.getItem('loggedInUsername');
 
       this._userProfileService.getUserProfile(this._authService.username).then((data) => {
-      this.userData = data as UserData;
+        this.userData = data as UserData;
 
-       if (this.userData.location =="")
-      {
-        this.userData.location = "N/A";
-      }
+        // Get public races
+        this.raceService.getRaces(this.userData.user_id).subscribe(
+          data => {
+            this.racesData = data;
+    
+            this.races = _.filter(this.racesData.races,(race:any) => {
+                race.raceSettings = this.getRaceSettings(race);
+                race.start_date = this.ProcessDate(race.start_date);
+                race.end_date = this.ProcessDate(race.end_date);
+                return race;    
+            });
+    
+            this.userRaces = _.filter(this.racesData.races,(race:any) => {
+              return race.joined;
+            });
+            this.racesInvited = this.racesData.races_invited;
+            this.joinedRacesIDs = this.racesData.user_race_ids;
+          }
+        )
 
-      if (this.userData.description =="")
-      {
-        this.userData.description = "N/A";
-      }
-    });
+        if (this.userData.location =="")
+          {
+            this.userData.location = "N/A";
+          }
+
+        if (this.userData.description =="")
+          {
+            this.userData.description = "N/A";
+          }
+      });
     }
   }
+
+  truncateHTML(text: string): string {
+
+    let charlimit = 270;
+    if(!text || text.length <= charlimit )
+    {
+        return text;
+    }
+
+
+  let without_html = text.replace(/<(?:.|\n)*?>/gm, '');
+  let shortened = without_html.substring(0, charlimit) + "...";
+  return shortened;
+}
 
   ProcessDate = (date = null) => {
     if (date == null) return {month:null,day:date}

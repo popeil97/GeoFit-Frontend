@@ -7,7 +7,6 @@
   />
 </div>
 
-<!--<div class='PageContainer' *ngIf="this.aboutData != null; else LoadingRaceBlock">-->
 <div class="PageContainer">
   <div class='PageSegment'>
     <a class="nav-link" routerLink='/races'><span class="material-icons" inline=true>keyboard_arrow_left</span> <span class="aligned-with-icon">Return to Public Races</span></a>
@@ -31,11 +30,7 @@
           </div>
         </div>
       </div>
-      <!-- <p>{{aboutData.description}}</p> -->
       <p [innerHTML]="aboutData.description"></p>
-
-      <!-- icon to indicate race type : 1-run;2-bike;3-all -->
-      <!--<i *ngIf="aboutData.race_type == 3" class="material-icons">directions_run</i> <i class="material-icons" >directions_bike</i>--> 
     </ng-template>
   </div>
 
@@ -57,9 +52,6 @@
         <p *ngIf=" !hasStarted && this.hasJoined" class='margin-bottom-8px italics'> Come back on race day ({{aboutData.start_date.month}}, {{aboutData.start_date.day}}).</p>
         <p *ngIf=" !hasStarted && !this.hasJoined" class='margin-bottom-8px italics'>Join by race day ({{aboutData.start_date.month}}, {{aboutData.start_date.day}}).</p>
       </div>
-
-      <!-- test this by going into the "swag" module in the backend and adding swag to your race -->
-    <!-- <app-swag *ngIf="hasMerch" [isOwner]="isOwner" [race_id]="raceID"></app-swag> -->
     </ng-template>
   </div>
     
@@ -103,25 +95,6 @@
             </ng-template>
           </div>
         </div>
-
-        <!--
-        <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'info'}">
-          <ng-template [ngIf]="this.aboutData == null">
-            <p>Loading race details...</p>
-          </ng-template>
-          <h6>Race Type</h6>
-          <button (click)="this.openModal('custom-modal-4')">What does this mean?</button>
-          <p *ngIf="this.aboutData.is_hybrid; else VirtualText">Hybrid </p>
-          <ng-template #VirtualText>
-            <p>Virtual</p>
-          </ng-template>
-          <h6>Entry Fee</h6>
-          <p *ngIf="this.raceSettings != null; else LoadingRaceSettings">${{raceSettings.price}}</p>
-          <ng-template #LoadingRaceSettings>
-            <p>Loading Race Settings</p>
-          </ng-template>
-        </div>
-        -->
 
         <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'logistics'}">
 
@@ -203,7 +176,6 @@
           <p><i>Our sponsors</i></p>
       </div>
   
-
       </div>
     </div>
   </div>

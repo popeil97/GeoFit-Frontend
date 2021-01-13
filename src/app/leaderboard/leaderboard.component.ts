@@ -17,6 +17,7 @@ export class LeaderboardComponent implements OnInit,OnChanges {
 
   public columns:string[] = ['Rank','ProfilePic','Name','Distance','Follow'];
   public leaderboard: LeaderboardItem[];
+  public myPos: LeaderboardItem;
 
   private initialized: boolean = false;
   private page:number = 1;
@@ -78,17 +79,31 @@ export class LeaderboardComponent implements OnInit,OnChanges {
       this._leaderboardService.getIndividualLeaderboard(this.page,this.tagID != -1 ? this.tagID : null).then((data) => {
         leaderboardData = data as LeaderboardStruct;
         this.leaderboard = leaderboardData.leaderboard;
+
+          // set my current leaderboard position to myPos
+        this.myPos = leaderboardData.user_leaderboard_stat;
+            
+        if(this.myPos != null && this.myPos != undefined) {
+          this.myPos.rank = leaderboardData.user_rank;
+        }
         
       })
 
-      console.log("YEEE",this.leaderboard);
     }
 
     else if (this.use == 'teams' && this.tagID != 0){ // and tagID != all_id
       this._leaderboardService.getTeamLeaderboard(this.page,this.tagID != -1 ? this.tagID : null).then((data) => {
         leaderboardData = data as LeaderboardStruct;
         this.leaderboard = leaderboardData.leaderboard;
-      })
+
+        // set my current leaderboard position to myPos
+        this.myPos = leaderboardData.user_leaderboard_stat;
+            
+        if(this.myPos != null && this.myPos != undefined) {
+          this.myPos.rank = leaderboardData.user_rank;
+        }
+      });
+      
     }
 
     else {
@@ -96,9 +111,18 @@ export class LeaderboardComponent implements OnInit,OnChanges {
       this._leaderboardService.getOrganizationLeaderboard().then((resp:any) => {
         console.log('ALL LEADERBOARD:',resp);
         this.leaderboard = resp.organization_leaderboard;
+
       })
     }
 
+    // set my current leaderboard position to myPos
+    this.myPos = leaderboardData.user_leaderboard_stat;
+        
+    if(this.myPos != null && this.myPos != undefined) {
+      this.myPos.rank = leaderboardData.user_rank;
+    }
+
+    console.log("YEEE",leaderboardData);
     this.page++;
 
   }
@@ -141,4 +165,6 @@ export interface LeaderboardItem {
 
 export interface LeaderboardStruct {
   leaderboard: LeaderboardItem[];
+  user_leaderboard_stat:LeaderboardItem;
+  user_rank:Number;
 }

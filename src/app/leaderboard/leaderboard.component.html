@@ -1,11 +1,58 @@
+<!-- Table, each row is : [rank, picture, name, distance, (follow)] -->
 <div style="max-height:600px;">
+
+  <div *ngIf="myPos != null && myPos != undefined">
+    <h3>My Position</h3>
+    <div class="LeaderboardItem" (click)="toggleDetails()"> 
+
+        
+      <div class="row">
+          <div class="NumCol">
+            <b>{{myPos.rank}}</b>
+          </div>
+          <div class="PicCol">
+            <img src="{{myPos.profile_url}}" width="30" height="30" class="roundImg">
+          </div>
+          <div class="NameCol">
+            <app-user-profile-nav [username]="myPos.username" [displayName]="myPos.display_name"></app-user-profile-nav>
+          </div>
+          <div class="DistanceCol">
+            <i style="right:0;">{{myPos.total_distance}} {{myPos.distance_type}}</i>
+          </div>
+    </div>
+      
+      
+      
+    <div *ngIf="showMore">
+      <div class="LeaderboardItem" *ngFor="let member of myPos.child_user_stats">
+        <div class="PicCol">
+            <img src="{{member.profile_url}}" width="30" height="30">
+          </div>
+          <div class="NameCol">
+            <app-user-profile-nav [username]="member.username" [displayName]="member.display_name"></app-user-profile-nav>
+          </div>
+          <div class="DistanceCol">
+            <i style="right:0;">{{member.total_distance}} {{member.distance_type}}</i>
+          </div>
+          <div class="FollowCol">
+            <app-user-follow [userID]=member.user_id [follows]=member.follows *ngIf="use != 'teams'"></app-user-follow>
+          </div>
+      </div>
+    </div>
+
+      
+  </div>
+
+</div>
+
+  <h3>Leaderboard</h3>
     <div class="row">
        <div class = "winner-column-lowered" *ngIf="leaderboard.length >= 2">
         <p><b>🥈</b><img class = "twoImage" src="{{leaderboard[1].profile_url}}" width="30" height="30">
           
           <app-user-profile-nav [username]="leaderboard[1].username" [displayName]="leaderboard[1].display_name" [nameBreak]="true"></app-user-profile-nav>
            <i>{{leaderboard[1].total_distance}} {{leaderboard[1].distance_type}}</i><br>
-           <app-user-follow [userID]=leaderboard[1].user_id [follows]=leaderboard[1].follows></app-user-follow>
+           <app-user-follow [userID]=leaderboard[1].user_id [follows]=leaderboard[1].follows *ngIf="use != 'teams'"></app-user-follow>
         </p>  
       </div>
 
@@ -14,7 +61,7 @@
           
           <app-user-profile-nav [username]="leaderboard[0].username" [displayName]="leaderboard[0].display_name" [nameBreak]="true"></app-user-profile-nav>
            <i>{{leaderboard[0].total_distance}} {{leaderboard[0].distance_type}}</i><br>
-           <app-user-follow [userID]=leaderboard[0].user_id [follows]=leaderboard[0].follows></app-user-follow>
+           <app-user-follow [userID]=leaderboard[0].user_id [follows]=leaderboard[0].follows *ngIf="use != 'teams'"></app-user-follow>
         </p>
       </div>
 
@@ -23,19 +70,15 @@
           
           <app-user-profile-nav [username]="leaderboard[2].username" [displayName]="leaderboard[2].display_name"  [nameBreak]="true"></app-user-profile-nav>
           <i>{{leaderboard[2].total_distance}} {{leaderboard[2].distance_type}}</i><br>
-           <app-user-follow [userID]=leaderboard[2].user_id [follows]=leaderboard[2].follows></app-user-follow>
+           <app-user-follow [userID]=leaderboard[2].user_id [follows]=leaderboard[2].follows *ngIf="use != 'teams'"></app-user-follow>
         </p>
       </div>
   </div>
-
- <!-- <button (click)="toggleLeaderboardOpen()">{{leaderboardOpen ? 'Hide More' : 'Show More'}}</button> -->
  <div *ngIf="leaderboard.length >= 3">
-  <div  style="overflow:auto; max-height:600px;"> <!-- *ngIf="leaderboardOpen" -->
+  <div  style="overflow:auto; max-height:600px;"> 
     <div *ngFor="let group of leaderboard; let i=index">
       <div *ngIf="i>2">
-      <div class="LeaderboardItem"  *ngIf="!group.isTeam" (click)="toggleDetails()"> <!--[ngClass]="{'LeaderboardItem' : i>2, 'LeaderboardGold':i==0,'LeaderboardSilver':i==1,'LeaderboardBronze':i==2}"-->
-
-        
+      <div class="LeaderboardItem"  *ngIf="!group.isTeam" (click)="toggleDetails()">        
           <div class="row">
               <div class="NumCol">
                 <b>{{i+1}}</b>
@@ -50,7 +93,7 @@
                 <i style="right:0;">{{group.total_distance}} {{group.distance_type}}</i>
               </div>
               <div class="FollowCol">
-                <app-user-follow [userID]=group.user_id [follows]=group.follows></app-user-follow>
+                <app-user-follow [userID]=group.user_id [follows]=group.follows *ngIf="use != 'teams'"></app-user-follow>
               </div>
         </div>
           
@@ -68,7 +111,7 @@
                 <i style="right:0;">{{member.total_distance}} {{member.distance_type}}</i>
               </div>
               <div class="FollowCol">
-                <app-user-follow [userID]=member.user_id [follows]=member.follows></app-user-follow>
+                <app-user-follow [userID]=member.user_id [follows]=member.follows *ngIf="use != 'teams'"></app-user-follow>
               </div>
           </div>
         </div>
@@ -89,127 +132,3 @@
 </div>
 
 
-<!--
-  <mat-accordion >
-    <div *ngFor="let group of leaderboard; let i=index">
-      <div *ngIf="i%2==0">
-      <mat-expansion-panel [disabled]="!group.isTeam">
-        <mat-expansion-panel-header>
-          <div class="column-lb-small">
-            <div *ngIf="i<3">
-              <div *ngIf="i==0">
-                 <img src="https://image.flaticon.com/icons/svg/2997/2997149.svg" width="25" height="25">
-              </div>
-              <div *ngIf="i==1">
-                 <img src="https://image.flaticon.com/icons/svg/2996/2996977.svg" width="25" height="25">
-              </div>
-              <div *ngIf="i==2">
-                 <img src="https://image.flaticon.com/icons/svg/2997/2997180.svg" width="25" height="25">
-              </div>
-             
-            </div>
-            <div *ngIf="i>2">
-              <p><b>{{i+1}}</b></p>
-            </div>          
-          </div>
-          <div class="column-lb-small">
-            <img src="{{group.profile_url}}" width="30" height="30">
-          </div>
-          <div class="column-lb1">
-            <p *ngIf="allowFollow">
-              <app-user-profile-nav [username]="group.username" [displayName]="group.display_name"></app-user-profile-nav>
-            </p>
-            <p *ngIf="!allowFollow">
-              {{group.display_name}}
-            </p>
-          </div>
-          <div class="column-lb2">
-            <p style="display:inline;color:#2C007E;">{{group.total_distance}}</p><p style="font-size: 8px;display:inline; color:#16697a;">{{group.distance_type}}</p>
-          </div>
-          <div class="column-lb3">
-            <app-user-follow [userID]=group.user_id [follows]=group.follows *ngIf="allowFollow"></app-user-follow>
-          </div>
-       </mat-expansion-panel-header>
-       <mat-card *ngFor="let member of group.child_user_stats">
-        <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + member.profile_url + ')'}" style="position: relative; float:left;"></div>
-        <div style="padding-left: 50px;">{{member.display_name}}</div>
-        <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div>
-      </mat-card>
-      </mat-expansion-panel>
-    </div>
-    <div *ngIf="i%2==1">
-      <mat-expansion-panel [disabled]="!group.isTeam">
-        <mat-expansion-panel-header>
-          <div class="column-lb-small">
-            <div *ngIf="i<3">
-              <div *ngIf="i==0">
-                 <img src="https://image.flaticon.com/icons/svg/2997/2997149.svg" width="25" height="25">
-              </div>
-              <div *ngIf="i==1">
-                 <img src="https://image.flaticon.com/icons/svg/2996/2996977.svg" width="25" height="25">
-              </div>
-              <div *ngIf="i==2">
-                 <img src="https://image.flaticon.com/icons/svg/2997/2997180.svg" width="25" height="25">
-              </div>
-             
-            </div>
-            <div *ngIf="i>2">
-              <p><b>{{i+1}}</b></p>
-            </div>          
-          </div>
-          <div class="column-lb-small">
-            <img src="{{group.profile_url}}" width="30" height="30">
-          </div>
-          <div class="column-lb1">
-            <p *ngIf="allowFollow">
-              <app-user-profile-nav [username]="group.username" [displayName]="group.display_name"></app-user-profile-nav>
-            </p>
-            <p *ngIf="!allowFollow">
-              {{group.display_name}}
-            </p>
-          </div>
-          <div class="column-lb2">
-            <p style="display:inline;color:#2C007E;">{{group.total_distance}}</p><p style="font-size: 8px;display:inline; color:#16697a;">{{group.distance_type}}</p>
-          </div>
-          <div class="column-lb3" *ngIf="allowFollow">
-            <app-user-follow [userID]=group.user_id [follows]=group.follows></app-user-follow>
-          </div>
-       </mat-expansion-panel-header>
-       <mat-card *ngFor="let member of group.child_user_stats">
-        <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + member.profile_url + ')'}" style="position: relative; float:left;"></div>
-        <div style="padding-left: 50px;">{{member.display_name}}</div>
-        <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div>
-      </mat-card>
-      </mat-expansion-panel>
-    </div>
-    </div>
-    <span class="link" style="display:table;
-    margin:0 auto;" (click)="getNextLeaderboardPage()">Show More</span>
-  </mat-accordion>
--->
-  <!-- 
- <mat-accordion>
-    <div *ngFor="let group of leaderboard; let i=index">
-      <mat-expansion-panel [disabled]="!group.isTeam">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <div class="column-lb-small">
-            <p style="padding-top: 10px; padding-right: 5px;">{{i+1}}</p>
-          </div>
-            <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + group.profile_url + ')'}" style="position:relative; padding-top: 5px; float:left;"></div>
-            <div style="padding: 10px;">{{group.display_name}}</div>
-          </mat-panel-title>
-          <mat-panel-description style="padding:8px; float: right;">
-            {{group.total_distance}} {{group.distance_type}}
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-    
-        <mat-card *ngFor="let member of group.child_user_stats">
-          <div mat-card-avatar class="example-header-image" [ngStyle]="{'background-image': 'url(' + member.profile_url + ')'}" style="position: relative; float:left;"></div>
-          <div style="padding-left: 50px;">{{member.display_name}}</div>
-          <div style="padding-left: 50px;">{{member.total_distance}} {{member.distance_type}}</div>
-        </mat-card>
-      </mat-expansion-panel>
-    </div>
-  <mat-accordion>
-  -->

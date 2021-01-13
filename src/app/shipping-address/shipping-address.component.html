@@ -33,27 +33,19 @@
       </td>
     </ng-container>
   </table>
-
   <br>
   <div class="col-3 col-sm-3 col-md-3 col-lg-3" style="padding-bottom: 20px;">
       <mat-card class="example-card" >
         <mat-card-header>
           <mat-card-title style="float: left;">Add Shipping Address</mat-card-title>
           <a class="dropdown-hide text-black" style="padding-left: 10px;color:#2C007E;" type="button" (click)="toggleAddressForm()"><i class="material-icons">add_circle</i></a>
-          <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
         </mat-card-header>
-        
-        
         <mat-card-content>      
         </mat-card-content>
       </mat-card>
-
       <br>
-
       <div *ngIf="showAddressForm">
           <app-shipping-address-form (addressChanged)="addressChanged()"></app-shipping-address-form>
-        </div>
-    </div>
-
-    
+      </div>
+  </div>  
 </div>

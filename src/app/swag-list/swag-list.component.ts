@@ -28,7 +28,7 @@ export class SwagListComponent implements OnInit,OnChanges {
         switch(propName) {
           case 'raceID':
             if (!_.isEqual(changes.raceID.currentValue, changes.raceID.previousValue) && changes.raceID.currentValue != undefined){
-              this.init();
+              // this.init();
             }
         }
       }
@@ -40,6 +40,7 @@ export class SwagListComponent implements OnInit,OnChanges {
       this._swagService.getCart(this.raceID).then((resp) => {
     //     console.log('ORDERS:',resp['cart']);
         this.cart = resp['cart'];
+        console.log('getting cart');
       })
     }
 
