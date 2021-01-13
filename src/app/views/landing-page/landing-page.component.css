@@ -3,6 +3,14 @@
     align-items: center;
     flex-wrap: nowrap;
     justify-content: center;
+    width:100%;
+    padding-top:32px;
+    padding-bottom: 32px;
+    box-sizing: border-box;
+}
+.LandingPageSegment .LandingPageSegment {
+  padding-top:0;
+  padding-bottom:0;
 }
 .LandingPageSegment.Vertical {
   flex-direction: column;
@@ -10,234 +18,166 @@
 .LandingPageSegment.GrayBackground {
   background-color:rgb(240, 240, 240);
 }
-.HorizontalItem, .VerticalItem {
-    /* In case we find a browser that does not support `display:"flex"` */
-    position:relative;
-    z-index: 0;
-    padding:32px;
-    box-sizing: border-box;
+.LandingPageSegment.alignItemsFlexStart {
+  align-items: flex-start;
 }
-.HorizontalItem {
-    flex: 0 1 100%;
-    max-width: 400px;
-    text-align: center;
-}
-.VerticalItem {
-    flex: 1 0 360px;
-    width:100%;
-}
-.TextAlignCenter {
-  text-align: center;
-}
-.LandingPageImage {
-    max-width: 360px;
-    max-height: 360px;
-}
-.VerticalItemImage {
-    position: absolute;
-    z-index: 1;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    max-width: 100%;
+.LandingPageSegment.justifyContentSpaceEvenly {
+  justify-content: space-evenly;
 }
 
-.socialMedia{
-    max-width:24px;
-    margin:4px;
-  }
+.LandingPageSegmentItem {
+  position: relative;
+  z-index: inherit;
+  flex-grow: 0;
+  flex-shrink: 1;
+  width:100%;
+  max-width: 480px;
+  height:auto;
+  padding-left:16px;
+  padding-right:16px;
 
-.masthead {
-    /* offset header navigation */  
-    height: calc(100vh - 64px);
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap:nowrap;
 }
-  
+.LandingPageSegment.Vertical > .LandingPageSegmentItem {
+  max-width: 960px;
+}
+
+
+
+.FirstSegment {
+  height:calc(100vh - 64px);
+}
+.LandingSubheading {
+  margin-bottom:16px;
+}
+.LandingSubheadingButtons {
+  display:flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.LandingSubheadingButtons button, .LandingSubheadingButtons .button {
+  margin:8px;
+}
 .TucanLandingLogoImage {
   width:100%;
   max-width: 360px;
 }
+.LandingPageImage {
+  max-width: 360px;
+  max-height: 360px;
+}
+.WhatIsTucanListItem {
+  width: 120px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.BenefitsListItem {
+  width:30%;
+  padding-left:5%;
+  padding-right: 5%;
+  max-width: calc(120px + 10%);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.WhatIsTucanIconContainer, .BenefitsIconContainer {
+  position:relative;
+  width: 100%;
+  padding-top:100%;
+  overflow: hidden;
 
-  
-  .splitImg {
-    position:relative;
-    z-index: 2;
-    width:50%;
-  
-    padding-left:16px;
-    padding-right:16px;
-    box-sizing: border-box;
-    color:black;
-  }
+  margin-bottom: 16px;
+}
+.WhatIsTucanIcon, .BenefitsIcon {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:100%;
+  max-height: 100%;
+}
+.LandingPageProfileImageContainer {
+  position:relative;
+  width:100%;
+  padding-top:100%;
+  overflow:hidden;
+  border-radius: 50%;
 
-  
-  .LandingMain {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    width:75%;
-    min-width: 300px;
-    box-sizing: border-box;
-  }
-    .LandingMain p {
-      margin-top:16px;
-      margin-bottom:0;
-      color:black;
-    }
-  
-    .LandingMainBlack {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    width:50%;
-    min-width: 250px;
-    padding-top:40px;
-    padding-bottom:40px;
-    box-sizing: border-box;
-  }
-    .LandingMainBlack p {
-      margin-top:16px;
-      margin-bottom:0;
-      color:black;
-    }
-  .LandingHeaderText, .centered p {
-    color:black;
-  }
-  
-  .LandingHeaderTextWhite, .centered p {
-    color:white;
-  }
-  .LandingHeaderTextGreen, .centered p {
-    color:var(--tucan-green);
-  }
-  .LandingTucanLogo {
-    margin-bottom:40px;
-    width:90%;
-  }
-  .LandingSubheading {
-    margin-bottom:16px;
-  }
-  .LandingAboutButton {
-    margin-top:8px;
-  }
-  
-  .FeatureHeading {
-    margin:16px;
-  }
-  .LandingSubheadingButtons {
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+  margin-bottom:16px;
+}
+.LandingPageProfileImage {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:100%;
+  max-height: 100%;
+}
+.AboutTucanFooter1{
+  width:49%;
+}
+.AboutTucanFooter2{
+  width:24%;
+}
+.socialMedia{
+  max-width:24px;
+  margin:4px;
+}
+.LandingHeaderText, .centered p {
+  color:black;
+}
+.AboutTucanValuesContainer {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+
+@media only screen and (max-width: 600px) {
+  .LandingPageSegment {
     flex-wrap: wrap;
   }
-  .LandingSubheadingButtons button, .LandingSubheadingButtons .button {
-    margin:8px;
+  .WhatIsTucanListItem {
+    margin-bottom:16px;
   }
-
-  
-  .btn-outline {
-    border: 2px solid black;
-    background-color: white;
-    color: black;
-    padding: 10px 22px;
-    font-size: 16px;
-    cursor: pointer;
+  .TucanTeamProfile {
+    flex-direction: row;
+    justify-content: flex-start;
+    margin-bottom: 16px;
   }
-  
-  
+  .TucanTeamProfile .textAlignCenter {
+    text-align: left;
+  }
+  .TucanTeamProfile p {
+    margin-bottom:8px;
+  }
+  .LandingPageProfileImageContainer {
+    width:120px;
+    padding-top:120px;
+    border-radius: 60px;
+    max-width:30%;
+    margin-right: 16px;
+  }
+  .LandingPageProfileImage {
+    height:100%;
+    width:auto;
+    max-width: 100%;
+  }
   .AboutTucanValuesContainer {
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: nowrap;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
   }
-  
-  .AboutTucanFeaturesContainer {
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: nowrap;
+  .AboutTucanFooter1 {
+    width:0%;
   }
-  
-  .AboutTucanFeatureImg{
-    max-height: 60%;
-      max-width: 60%;
+  .AboutTucanFooter2 {
+    width:100%;
   }
-  
-  .AboutTucanValue {
-    width:30%;
-  }
-  
-  
-  .AboutTucanFeatures {
-    width:49%;
-  }
-  
-  .AboutTucanFooter1{
-    width:49%;
-  }
-  
-  .AboutTucanFooter2{
-    width:24%;
-  }
-  @media only screen and (max-width: 600px) {
-    .masthead {
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-    .split {
-      width:100%;
-    }
-    .split.left {
-      position: relative;
-      z-index: 1;
-    
-      height:300px;
-  
-    }
-    .split.right {
-      position: absolute;
-      top:0;
-      left:0;
-      right:0;
-      z-index: 0;
-  
-      height:100vh;
-    }
-    .landingImage {
-      top:0;
-      max-width:200px;
-      transform:translateX(-50%);
-    }
-  
-  
-      .AboutTucanValuesContainer {
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: stretch;
-    }
-  
-      .AboutTucanValue {
-        width:100%;
-      }
-      .AboutTucanFeatures {
-        width:100%;
-      }
-      .AboutTucanFooter1 {
-        width:0%;
-      }
-      .AboutTucanFooter2 {
-        width:100%;
-      }
-      .AboutTucanFeatureImg{
-        max-height: 25%;
-          max-width: 25%;
-      }
-  
-  }
+}

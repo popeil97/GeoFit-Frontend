@@ -166,21 +166,35 @@ button.wideButton, .button.wideButton {
   font-weight: bold;
 }
 
-.margin-right-4px {
-  margin-right:4px !important;
-}
-.margin-bottom-0px {
-  margin-bottom:0px !important;
-}
-.margin-bottom-4px {
-  margin-bottom:4px !important;
-}
-.margin-bottom-8px {
-  margin-bottom:8px !important;
-}
-.margin-bottom-16px {
-  margin-bottom: 16px !important;
-}
+.margin-0px, .margin-top-bottom-0px, .margin-top-0px    { margin-top: 0px;  }
+.margin-0px, .margin-top-bottom-0px, .margin-bottom-0px { margin-bottom:0px !important; }
+.margin-0px, .margin-left-right-0px, .margin-left-0px   { margin-left:0px;  }
+.margin-0px, .margin-left-right-0px, .margin-right-0px  { margin-right: 0px;  }
+
+.margin-4px, .margin-top-bottom-4px, .margin-top-4px    { margin-top:4px; }
+.margin-4px, .margin-top-bottom-4px, .margin-bottom-4px { margin-bottom:4px !important; }
+.margin-4px, .margin-left-right-4px, .margin-left-4px   { margin-left:4px;  }
+.margin-4px, .margin-left-right-4px, .margin-right-4px  { margin-right:4px !important;  }
+
+.margin-8px, .margin-top-bottom-8px, .margin-top-8px    { margin-top:8px; }
+.margin-8px, .margin-top-bottom-8px, .margin-bottom-8px { margin-bottom:8px !important; }
+.margin-8px, .margin-left-right-8px, .margin-left-8px   { margin-left:8px;  }
+.margin-8px, .margin-left-right-8px, .margin-right-8px  { margin-right:8px;  }
+
+.margin-16px, .margin-top-bottom-16px, .margin-top-16px    { margin-top:16px; }
+.margin-16px, .margin-top-bottom-16px, .margin-bottom-16px { margin-bottom:16px !important; }
+.margin-16px, .margin-left-right-16px, .margin-left-16px   { margin-left:16px;  }
+.margin-16px, .margin-left-right-16px, .margin-right-16px  { margin-right:16px;  }
+
+.margin-32px, .margin-top-bottom-32px, .margin-top-32px    { margin-top:32px; }
+.margin-32px, .margin-top-bottom-32px, .margin-bottom-32px { margin-bottom:32px; }
+.margin-32px, .margin-left-right-32px, .margin-left-32px   { margin-left:32px;  }
+.margin-32px, .margin-left-right-32px, .margin-right-32px  { margin-right:32px;  }
+
+
+.textAlignCenter {  text-align: center; }
+.alignItemsFlexStart {  align-items: flex-start;  }
+.justifyContentSpaceEvenly { justify-content: space-evenly; }
 
 /* ---- General Use ---- */
 .TucanContainer {
