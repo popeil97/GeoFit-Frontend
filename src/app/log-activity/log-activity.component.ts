@@ -30,9 +30,9 @@ export class LogActivityComponent implements OnInit {
     }
     
 
-    this._stravauthService.getStravaInfo().then( data => {
-      this.stravaData = data as StravaData;
-    })
+    // this._stravauthService.getStravaInfo().then( data => {
+    //   this.stravaData = data as StravaData;
+    // })
 
   }
 
