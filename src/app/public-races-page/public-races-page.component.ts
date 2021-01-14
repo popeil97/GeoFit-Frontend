@@ -66,26 +66,7 @@ export class PublicRacesPageComponent implements OnInit {
 
       this._userProfileService.getUserProfile(this._authService.username).then((data) => {
         this.userData = data as UserData;
-
-        // Get public races
-        this.raceService.getRaces(this.userData.user_id).subscribe(
-          data => {
-            this.racesData = data;
-    
-            this.races = _.filter(this.racesData.races,(race:any) => {
-                race.raceSettings = this.getRaceSettings(race);
-                race.start_date = this.ProcessDate(race.start_date);
-                race.end_date = this.ProcessDate(race.end_date);
-                return race;    
-            });
-    
-            this.userRaces = _.filter(this.racesData.races,(race:any) => {
-              return race.joined;
-            });
-            this.racesInvited = this.racesData.races_invited;
-            this.joinedRacesIDs = this.racesData.user_race_ids;
-          }
-        )
+        this.getPublicRaces(this.userData.user_id);
 
         if (this.userData.location =="")
           {
@@ -97,6 +78,9 @@ export class PublicRacesPageComponent implements OnInit {
             this.userData.description = "N/A";
           }
       });
+    }
+    else {
+      this.getPublicRaces(null);
     }
   }
 
@@ -118,6 +102,28 @@ export class PublicRacesPageComponent implements OnInit {
     if (date == null) return {month:null,day:date}
     const dateComponents = date.split('-');
     return {month:this.monthKey[dateComponents[0]],day:dateComponents[1]}
+  }
+
+  getPublicRaces(user_id:number){
+    // Get public races
+    this.raceService.getRaces(user_id).subscribe(
+      data => {
+        this.racesData = data;
+
+        this.races = _.filter(this.racesData.races,(race:any) => {
+            race.raceSettings = this.getRaceSettings(race);
+            race.start_date = this.ProcessDate(race.start_date);
+            race.end_date = this.ProcessDate(race.end_date);
+            return race;    
+        });
+
+        this.userRaces = _.filter(this.racesData.races,(race:any) => {
+          return race.joined;
+        });
+        this.racesInvited = this.racesData.races_invited;
+        this.joinedRacesIDs = this.racesData.user_race_ids;
+      }
+    )
   }
 
   getRaceSettings(race:any)
