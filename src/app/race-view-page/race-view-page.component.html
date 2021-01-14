@@ -63,13 +63,13 @@
 							</div>
 
 							<app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0 && currentLeaderboard == 'individual'" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard> 
-							<app-leaderboard *ngIf="selectedTagFilterID != 0 && raceSettings.allowTeams && currentLeaderboard == 'teams'" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
+							<app-leaderboard *ngIf="selectedTagFilterID != 0 && allowTeams && currentLeaderboard == 'teams'" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
 							<app-hybrid-leaderboard *ngIf="isHybrid && currentLeaderboard == 'individual'" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard>
 						</div>
 					</div>
 
 					<div class="SlideshowSlide MapLeaderboardSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'teams'}">
-						<app-team-list [race_id]="raceID" [userStat]="userStat" (callback)="refreshAllComponents($event)"></app-team-list>
+						<app-team-list *ngIf="allowTeams" [race_id]="raceID" [userStat]="userStat" (callback)="refreshAllComponents($event)"></app-team-list>
 					</div>
 					
 				</div>
