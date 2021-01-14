@@ -1,0 +1,12 @@
+.my-custom-icon{
+    width: 24px;
+    height: 24px;
+    margin-left: -12px;
+    margin-top: -12px;
+    border-radius: 18px;
+    border: 2px solid #3F51B5;
+    text-align: center;
+    color: #3F51B5;
+    background-color: #fff;
+    font-size: 16px;
+  }

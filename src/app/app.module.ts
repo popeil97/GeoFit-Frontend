@@ -122,6 +122,8 @@ import { StoryPopupComponent } from './story-popup/story-popup.component';
 import { RaceCreatePageComponent } from './race-create-page/race-create-page.component';
 import { TeamFormDialogComponent } from './team-form/team-form-dialog.component';
 import { CheckpointListComponent } from './checkpoint-list/checkpoint-list.component';
+import { CheckpointItemComponent } from './checkpoint-item/checkpoint-item.component';
+import { CheckpointDialogComponent } from './checkpoint-list/checkpoint-dialog.component';
 
 
 @NgModule({
@@ -213,6 +215,8 @@ import { CheckpointListComponent } from './checkpoint-list/checkpoint-list.compo
     RaceCreatePageComponent,
     TeamFormDialogComponent,
     CheckpointListComponent,
+    CheckpointItemComponent,
+    CheckpointDialogComponent,
       ],
 
   imports: [
@@ -253,6 +257,7 @@ import { CheckpointListComponent } from './checkpoint-list/checkpoint-list.compo
                   StoryDeleteDialogComponent,
                   WhyInfoDialogContent,
                   TeamFormDialogComponent,
+                  CheckpointDialogComponent,
                   //ViewFollowDialogContent
                   ] 
 })

@@ -41,6 +41,7 @@ export class MapRouteComponent implements OnChanges {
   @Input() orgData: UserData[];
   @Input() userData: UserData[];
   @Input() routePins: RoutePins[];
+  @Input() checkpoints: CheckpointMapData[];
   
   private line:any;
   private coordsRoutes:any[];
@@ -96,6 +97,12 @@ export class MapRouteComponent implements OnChanges {
             if (this.userData && this.displayUsers){
               console.log("User data for ID ", this.raceID, " : ", this.userData);
               this.createUserPins(false);
+            }
+
+          case 'checkpoints':
+            if (this.checkpoints){
+              console.log('CHECKPOINT DATA FROM NG CHANGES:',this.checkpoints);
+              this.createCheckpointMarkers();
             }
             
         }
@@ -528,6 +535,32 @@ export class MapRouteComponent implements OnChanges {
     });
   }
   
+  public createCheckpointMarkers() {
+    this.checkpoints.forEach((checkpoint:CheckpointMapData) => {
+
+
+      var distanceTypeOptions;
+      if (checkpoint.distance_type == 'MI'){
+        distanceTypeOptions = {units: 'miles'};
+      }
+      else {
+        distanceTypeOptions = {units: 'kilometers'};
+      }
+
+      var along_checkpoint = turf.along(this.coordsRoutes[0], checkpoint.marker, distanceTypeOptions);
+
+      var lng_checkpoint = along_checkpoint.geometry.coordinates[0];
+      var lat_checkpoint = along_checkpoint.geometry.coordinates[1];
+
+      L.marker([lat_checkpoint,lng_checkpoint],{
+        icon: L.divIcon({
+          className: 'my-custom-icon',
+          html: "5"
+      })
+      }).addTo(this.map);
+
+    });
+  }
 
   public createPin(userData: UserData, isTag: boolean=false){
     var img_html = "<img src=\"" + userData.profile_url + "\";\"><div class=\"pin\"></div><div class=\"pulse\"></div>";
@@ -715,4 +748,11 @@ interface UserData {
 
 interface OrgPinData {
   org_pins: UserData[];
+}
+
+export interface CheckpointMapData {
+  marker:number;
+  name:string;
+  id:number;
+  distance_type:string;
 }
