@@ -20,7 +20,7 @@
 				<div class="SlideshowHeader MapFeedSlideshowHeader" >
 					<button class="SlideshowButton" (click)="SwitchSlideshow('feed')" id="feed-btn">Social Feed</button>
 					<button class="SlideshowButton" (click)="SwitchSlideshow('leaderboard')" id="leaderboard-btn">Leaderboard</button>
-					<button class="SlideshowButton" (click)="SwitchSlideshow('teams')" id="teams-btn">Teams</button>
+					<button *ngIf="allowTeams" class="SlideshowButton" (click)="SwitchSlideshow('teams')" id="teams-btn">Teams</button>
 				</div>
 				<div class="SlideshowContents MapFeedSlideshowContents">
 					<div class="SlideshowSlide MapFeedSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'feed'}">
