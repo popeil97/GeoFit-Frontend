@@ -120,6 +120,8 @@ import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { StoryPopupComponent } from './story-popup/story-popup.component';
 import { RaceCreatePageComponent } from './race-create-page/race-create-page.component';
+import { TeamFormDialogComponent } from './team-form/team-form-dialog.component';
+import { LoginDialogComponent } from './login/login-dialog.component';
 
 
 @NgModule({
@@ -209,6 +211,8 @@ import { RaceCreatePageComponent } from './race-create-page/race-create-page.com
     ContactFormComponent,
     StoryPopupComponent,
     RaceCreatePageComponent,
+    TeamFormDialogComponent,
+    LoginDialogComponent,
       ],
 
   imports: [
@@ -248,7 +252,13 @@ import { RaceCreatePageComponent } from './race-create-page/race-create-page.com
                   ReportFormComponent,
                   StoryDeleteDialogComponent,
                   WhyInfoDialogContent,
+                  TeamFormDialogComponent,
                   //ViewFollowDialogContent
+
+                  LoginComponent,
+                  Register2Component,
+                  Signup2Component,
+                  LogActivityComponent,
                   ] 
 })
 export class AppModule { 

@@ -33,6 +33,11 @@ export class SwagItemComponent implements OnInit {
   }
 
   addToCart() {
+
+    if(this.item.sizes != null && this.selectedSize == null) {
+      return;
+    }
+
     this._swagService.addToCart(this.item.id,this.selectedSize).then((resp) => {
       this.init();
       this.refreshState.emit();

@@ -15,7 +15,6 @@
          <div *ngIf="this._authService.isLoggedIn()" class='margin-bottom-16px'>
           <ng-template [ngIf]="userData.is_me">
             <button class='darkButton shadowButton FollowersButton' (click)="openFollowersDialog()">Followers: {{this.followersData.numFollowers}} | Following: {{this.followersData.numFollowing}}</button>
-            <!--<app-view-follow></app-view-follow>-->
           </ng-template>
         </div>
 
@@ -52,14 +51,6 @@
         <div *ngIf="!userData.is_me" >
           <app-user-follow [tempLight]="true" [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
         </div>
-
-        <!--
-        <div *ngIf="userData.location_visibility||userData.is_me">
-          <h6>Location:</h6>
-          <p *ngIf="userData.location != 'N/A'; else locationDefault">{{ userData.location }}</p>  
-          <ng-template #locationDefault>No location info available</ng-template>
-        </div>
-      -->
       </div>
       <ng-template #profileLoadingMessage><p>Loading...</p></ng-template>
 
@@ -75,9 +66,7 @@
     <div class="Slideshow">
       <div class="SlideshowHeader">
         <button class="SlideshowButton" (click)="SwitchSlideshow('home')" id="home-btn">Home</button>
-     <!--  <button class="SlideshowButton" (click)="SwitchSlideshow('stats')" id="stats-btn">Stats</button> -->
         <button *ngIf="!showEdit" class="SlideshowButton" (click)="SwitchSlideshow('feed')" id="feed-btn">Feed</button>
-    <!--    <button class="SlideshowButton" (click)="SwitchSlideshow('races')" id="races-btn">Races</button> -->
       </div>
       <div class="SlideshowContents">
 
@@ -100,17 +89,6 @@
 
               </div>
             </div>
-
-            <!--
-            <div class="RaceContainer PageSegment">
-              <div class="FeedContainer">
-                <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
-              </div>
-              <div class="StatsContainer">
-                <app-user-stats [userID]="userData.user_id"></app-user-stats>
-              </div>
-            </div>
-          </div> -->
           </ng-template>
           <ng-template #HomeLoadingMessage><p>Retrieving user data...</p></ng-template>
         </div>

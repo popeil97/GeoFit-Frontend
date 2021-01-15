@@ -40,6 +40,7 @@ export class SwagListComponent implements OnInit,OnChanges {
       this._swagService.getCart(this.raceID).then((resp) => {
     //     console.log('ORDERS:',resp['cart']);
         this.cart = resp['cart'];
+        console.log('getting cart');
       })
     }
 

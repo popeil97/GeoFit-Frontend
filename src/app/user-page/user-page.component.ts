@@ -55,26 +55,11 @@ export class UserPageComponent implements OnInit {
     //   console.log(this.username);
     });
 
-    this.raceService.getRaces({}).subscribe(
-      data => {
-        this.racesData = data;
-        this.userRaces = _.filter(this.racesData.races,(race:any) => {
-          if(race.joined) {
-            return race;
-          }
-        });
-       //  console.log("USER RACES PROFILE", this.userRaces);
-      }
-    )
-
     document.getElementById('home-btn').style.backgroundColor = "#36343c";
-     document.getElementById('home-btn').style.color = "#FFFFFF";
-
+    document.getElementById('home-btn').style.color = "#FFFFFF";
   }
 
   ngOnChanges(changes: SimpleChanges) {
-   //  console.log('changes:',changes);
-
     for(const propName in changes) {
       if(changes.hasOwnProperty(propName)) {
 
@@ -86,6 +71,20 @@ export class UserPageComponent implements OnInit {
         }
       }
     }
+  }
+
+  getUserRaces() {
+    // Updates the list of races associated with the user who's profile we are viewing
+    this.raceService.getRaces(this.userData.user_id).subscribe(
+      data => {
+        this.racesData = data;
+        this.userRaces = _.filter(this.racesData.races,(race:any) => {
+          if(race.joined) {
+            return race;
+          }
+        });
+      }
+    )
   }
 
   getUserData() {
@@ -130,10 +129,6 @@ export class UserPageComponent implements OnInit {
   }
 
   viewRace(race:any) {
-  //   console.log('SELECTED RACE:',race);
-
-    // set race in race service
-
     this.router.navigate(['/race',{name:race.name,id:race.id}]);
   }
 

@@ -1,5 +1,14 @@
-import { Component, OnInit, Inject, ViewChild, Output, EventEmitter, Input } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
+import { 
+  Component, 
+  OnInit, 
+  Inject, 
+  ViewChild, 
+  Output, 
+  EventEmitter, 
+  Input, 
+  NgModule,
+} from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
@@ -10,6 +19,13 @@ import { MustMatch } from './_helpers/must-match.validator';
 import { UserProfileService } from '../userprofile.service';
 import { ModalService } from '../modalServices';
 import { RaceService } from '../race.service';
+
+import { LoginComponent } from '../login/login.component';
+import { Signup2Component } from '../signup2/signup2.component';
+
+@NgModule({
+  imports:[MatDialogRef]
+})
 
 @Component({
   selector: 'app-register2',
@@ -50,9 +66,14 @@ export class Register2Component implements OnInit {
     private _userProfileService:UserProfileService,
     private modalService: ModalService,
     private _raceService: RaceService,
+
+    private dialog : MatDialog,
+    private dialogRef : MatDialogRef<Register2Component>,
+    @Inject(MAT_DIALOG_DATA) public data : any,
   ) { }
 
   ngOnInit() {
+    
     this.route.paramMap.subscribe(params => {
     //   console.log('PARAMS:',params);
       if(params['params'] && params['params']['params']) {
@@ -63,10 +84,15 @@ export class Register2Component implements OnInit {
       }
     });
 
+    //console.log(this.data);
+
     this.ResetForms();
   }
 
-   get d() { return this.modalService.modalsData[this.id]}
+    get d() { 
+      // return this.modalService.modalsData[this.id]
+      return this.data;
+    }
 
   onKeyUpEvent(event:any) {
     const {target} = event;
@@ -92,7 +118,7 @@ export class Register2Component implements OnInit {
     this.ChangeFormSegment(1);
   }
 
-  onPersonalSubmit(event:any) {
+  onPersonalSubmit = (event:any) => {
     /*
     if (event) {
       event.preventDefault();
@@ -136,57 +162,59 @@ export class Register2Component implements OnInit {
     },);
 
     //Register and navigate to login
-    this._authService.register(this.registerForm.value).subscribe( 
-      data => {
-        let form = this.registerForm.value
-        this._authService.login({email:form.email,password:form.password}).subscribe(
-          
-          data => {
+    this._authService.register(this.registerForm.value).subscribe(register_data => {
+      //console.log("WOW WOW, WEVE REGISTERED!");
+      let form = this.registerForm.value
+      this._authService.login({email:form.email,password:form.password}).subscribe(login_data => {
+        //console.log("WOW WOW, WEVE LOGGED IN!")
+        localStorage.setItem('access_token', login_data['token']);
+        localStorage.setItem('loggedInUsername', login_data['username']);
+        this._authService.username = login_data['username'];
+        //console.log("WOW WOW, WE'VE SET OUR AUTHSERVICE USERNAME", this.redirectParams);
 
-            localStorage.setItem('access_token', data['token']);
-            localStorage.setItem('loggedInUsername', data['username']);
-            this._authService.username = data['username'];
-
-            if(this.redirectParams) {
-              this.router.navigate([this.redirectUrl,this.redirectParams]);
+        if(this.redirectParams) {
+          //console.log("GOOD BYE, I' BEing REDIRECTED");
+          this.router.navigate([this.redirectUrl,this.redirectParams]);
+        }
+        else {
+          //console.log("WE'RE NOT REDIRECTING! YAY!", this.d)
+          if(this.d != null && this.d.register == true) {
+            //console.log("I SHOUld Be OPENING SIGN UP NOW")
+            if(this.d.price > 0) {
+              //console.log('A PRICE IS SET');
+              this.closeDialog();
+              // this.openModal('custom-modal-3');
+              this.openSignUp();
             }
             else {
-               if(this.d.register == true)
-                {
-                  if(this.d.price > 0)
-                  {
-                    this.closeDialog() ;
-                    this.openModal('custom-modal-3');
-
-                  }
-                  else
-                  {
-                    let registrationBody = {race_id:this.d.race_id} as any;
-                    this._raceService.joinRace(registrationBody);
-                    this.router.navigate(['/welcome']);
-                  }
-                }
-                else
-                {
-            //       console.log("WELCOME");
-                  this.router.navigate(['/welcome']);
-                }
+              //console.log("I SHOULD BE JOINING THE RACE NOW")
+              let registrationBody = {
+                race_id:this.d.race_id
+              } as any;
+              this._raceService.joinRace(registrationBody);
+              this.router.navigate(['/welcome']);
             }
-            this.closeDialog();
-          },
-        err => {
-          this.loading = false;
-          this.errors = err['error'];
-     //      console.log(this.errors);
-        });
-        
-      },
-      err => {
-   //      console.log(err);
+          }
+          else {
+            //console.log("I AM BEING WELCOMED?")
+            this.router.navigate(['/welcome']);
+          }
+        }
+        //console.log("OH WELL, I AM GOING TO CLOSE ANYWAYS");
+        this.closeDialog();
+      }, (err) => {
+        //console.log("UH OH A PROBLEM WITH LOG IN")
         this.loading = false;
         this.errors = err['error'];
-    //     console.log(this.errors);
-      });
+        // console.log(this.errors);
+      });  
+    }, (err) => {
+      //console.log("UH OH ERROR WITH REGISTER")
+      // console.log(err);
+      this.loading = false;
+      this.errors = err['error'];
+      //     console.log(this.errors);
+    });
   }
 
   ChangeFormSegment(n:number) {
@@ -199,7 +227,7 @@ export class Register2Component implements OnInit {
   get c() { return this.credentialsForm.controls; }
   get p() { return this.personalForm.controls;  }
 
-  onSubmit() {
+  onSubmit = () => {
       this.submitted = true;
       this.acceptedTerms = true;
       // stop here if form is invalid
@@ -219,47 +247,48 @@ export class Register2Component implements OnInit {
       this.registerForm.value.email = this.registerForm.value.email.toLowerCase();
 
       //Register and navigate to login
-      this._authService.register(this.registerForm.value).subscribe( 
-        data => {
-          let form = this.registerForm.value
-          this._authService.login({email:form.email,password:form.password}).subscribe(
-            
-            data => {
+      this._authService.register(this.registerForm.value).subscribe(register_data => {
+        //console.log('SUCCESSFULlY reGistered! YAY');
+        let form = this.registerForm.value
+        this._authService.login({email:form.email,password:form.password}).subscribe(login_data => {
+          //console.log("SUCCESSFULLY LOGGEd iN AFTER ReGSITERING! YAY YAY")
+          localStorage.setItem('access_token', login_data['token']);
+          localStorage.setItem('loggedInUsername', login_data['username']);
+          this._authService.username = login_data['username'];
 
-              localStorage.setItem('access_token', data['token']);
-              localStorage.setItem('loggedInUsername', data['username']);
-              this._authService.username = data['username'];
-
-              if(this.redirectParams) {
-                this.router.navigate([this.redirectUrl,this.redirectParams]);
-              }
-              else {
-                if(this.d.register = true)
+          if(this.redirectParams) {
+            //console.log('REDIRECTING AFTER LOG IN! NO!')
+            this.router.navigate([this.redirectUrl,this.redirectParams]);
+          }
+          else {
+                if(this.d != null && this.d.register == true)
                 {
+                  //console.log("I SHOUld Now bE GOInG TO ThE ReGISTER PAGE! YAY?")
                   this.closeDialog() ;
-                  this.openModal('custom-modal-3');
+                  //this.openModal('custom-modal-3');
+                  this.openSignUp();
                 }
                 else
                 {
+                  //console.log("WHERE'S MY WELCOME???");
                   this.router.navigate(['/welcome']);
                 }
                 
-              }
-              this.closeDialog();
-            },
-          err => {
-            this.loading = false;
-            this.errors = err['error'];
-     //        console.log(this.errors);
-          });
-          
-        },
-        err => {
-          console.log(err);
+          }
+          //console.log("ReGARDLESS, I HAVE REACHED THE END AND SHould CLOSE")
+          this.closeDialog();
+        }, (err) => {
+          //console.log("UH OH, SIGN IN HAS FAILED");
           this.loading = false;
           this.errors = err['error'];
-     //      console.log(this.errors);
-        });
+          // console.log(this.errors);
+        });    
+      }, (err) => {
+        //console.log("UH OH, REGISTER HAS FAILED", err);
+        this.loading = false;
+        this.errors = err['error'];
+        // console.log(this.errors);
+      });
   }
 
   ResetForms() {
@@ -304,20 +333,48 @@ export class Register2Component implements OnInit {
 
   }
 
-  closeDialog() {
+  closeDialog = () => {
+    /*
     if (this.id == null) return;
     this.modalService.close(this.id);
     this.ResetForms();
+    */
+    //console.log('SUPPOSED TO CLOSE SIGN UP FORM');
+    this.ResetForms();
+    this.dialogRef.close();
   }
 
   SwitchToLogin = () => {
     this.closeDialog();
-    this.modalService.open('custom-modal-1');
+    //this.modalService.open('custom-modal-1');
+    let d = this.dialog.open(LoginComponent, {
+      panelClass: 'LoginContainer'
+    });
+    d.afterClosed().subscribe(result=>{
+      //console.log("SWITCH TO LOGIN FRoM REGISTER", result);
+    })
+  }
+
+  openSignUp = () => {
+    const passToSignUp = {
+      panelClass: "SignUpContainer",
+      data: {
+        price:this.d.price,
+        race_id:this.d.race_id,
+        hasJoined:this.d.hasJoined,
+        hasStarted:this.d.hasStarted,
+        hasTags: this.d.hasTags
+      }
+    }
+    let d = this.dialog.open(Signup2Component, passToSignUp);
+    d.afterClosed().subscribe(result=>{
+      //console.log("CLOSING SIGN UP",result);
+    })
   }
 
   openModal(id: string) {
     const data = (id == 'custom-modal-3') ? {price:this.d.price,race_id:this.d.race_id,hasJoined:this.d.hasJoined,hasStarted:this.d.hasStarted,hasTags: this.d.hasTags} : null;
-    console.log("REG MODAL DATA", data);
+    //console.log("REG MODAL DATA", data);
     this.modalService.open(id,data);
   }
 }
