@@ -20,7 +20,7 @@ export class ForRaceCreatorsComponent implements OnInit {
   }
 
   testFunction = (incomingData = null) => {
-    const toAlert = (incomingData != null) ? incomingData : this.testString;
+    const toAlert = (incomingData != null) ? incomingData : "TEST FUNCTION";
     console.log(toAlert);
   }
 

@@ -93,10 +93,30 @@
 .HowItWorksStep {
     max-width: 720px;
 }
+.HowItWorksRow {
+  padding-bottom: 8px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid rgb(225,225,225);
+}
+.HowItWorksRow:last-child {
+  border-bottom: none;
+}
+.HowItWorksStep:nth-child(even) .LandingPageSegmentItem:first-child {
+  align-items: flex-start;
+}
+.HowItWorksStep:nth-child(even) .LandingPageSegmentItem:last-child {
+  align-items: flex-end;
+}
+.HowItWorksStep:nth-child(odd) .LandingPageSegmentItem:first-child {
+  align-items: flex-end;
+}
+.HowItWorksStep:nth-child(odd) .LandingPageSegmentItem:last-child {
+  align-items: flex-start;
+}
 .HowItWorksIconContainer {
   position:relative;
-  width: 240px;
-  padding-top:240px;
+  width: 160px;
+  height:160px;
   overflow: hidden;
 }
 .HowItWorksIcon{
@@ -104,9 +124,35 @@
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
+  max-width:100%;
+  max-height: 100%;
+}
+
+.BenefitsListItem {
+  width:30%;
+  padding-left:5%;
+  padding-right: 5%;
+  max-width: calc(120px + 10%);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.BenefitsIconContainer {
+  position:relative;
+  width: 100%;
+  padding-top:100%;
+  overflow: hidden;
+
+  margin-bottom: 16px;
+}
+.BenefitsIcon {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
   width:100%;
   max-height: 100%;
 }
+
 .LandingPageProfileImageContainer {
   position:relative;
   width:100%;
