@@ -26,7 +26,7 @@ export class LogActivityComponent implements OnInit {
   @Input() id: string;
 
   modalData: any;
-  private currentScreen = 'strava';
+  public currentScreen = 'strava';
   private acceptedScreens = ['strava','manual'];
   public stravaData: StravaData;
 
