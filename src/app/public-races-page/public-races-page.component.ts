@@ -168,7 +168,20 @@ export class PublicRacesPageComponent implements OnInit {
 
  openModal(id: string,race:any) {
 //     console.log("MODAL RACE", race);
-    const data = (id == 'custom-modal-2') ? {register:true, price:race.raceSettings.price,race_id:race.id,hasTags: race.raceSettings.has_entry_tags} :(id == 'custom-modal-3') ? {price:race.raceSettings.price,race_id:race.id,hasTags: race.raceSettings.has_entry_tags} : null;
+    const data = (id == 'custom-modal-2') 
+      ? {
+        register:true, 
+        price:race.raceSettings.price,
+        race_id:race.id,
+        hasTags: race.raceSettings.has_entry_tags
+      } 
+      : (id == 'custom-modal-3') 
+        ? {
+            price:race.raceSettings.price,
+            race_id:race.id,
+            hasTags: race.raceSettings.has_entry_tags
+          } 
+          : null;
    //  console.log("MODAL DATA", data);
     this.modalService.open(id,data);
   }

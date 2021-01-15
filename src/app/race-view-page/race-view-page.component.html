@@ -11,7 +11,8 @@
 		    <div class="MapHeaderContainer" *ngIf="!isOpen">
 		       <button *ngIf="!isOpen" (click)="toggleMenu()"><span class="material-icons">menu</span></button>
 		    </div>
-			<button  class='LogContainer' *ngIf="this._authService.isLoggedIn() && this.userRegistered && isOpen" (click)="openModal('custom-modal-5')" >LOG ACTIVITY </button>
+			<!--<button  class='LogContainer' *ngIf="this._authService.isLoggedIn() && this.userRegistered && isOpen" (click)="openModal('custom-modal-5')" >LOG ACTIVITY </button>-->
+			<button  class='LogContainer' *ngIf="this._authService.isLoggedIn() && this.userRegistered && isOpen" (click)="openLogActivity()" >LOG ACTIVITY </button>
 			<div class='MapActionsContainer' *ngIf="(!this._authService.isLoggedIn() || !this.userRegistered) && isOpen">
 				<p class='color-white'>Join the race and become a participant!</p>
 				<button class="lightButton wideButton" (click)="viewAbout()">JOIN</button>

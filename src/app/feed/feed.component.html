@@ -5,7 +5,7 @@
     <button (click)="openModal('custom-modal-6')">Make a Post</button>
   </div> -->
 
-  <ng-template [ngIf]='feedItems.length > 0' [ngIfElse]="NothingInFeedBlock">
+  <ng-template [ngIf]='feedItems && feedItems.length > 0' [ngIfElse]="NothingInFeedBlock">
     <div class='Feed'>
       <div *ngFor="let element of feedItems" class='FeedItem' [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">
         <div class='FeedProfileImgCell'>

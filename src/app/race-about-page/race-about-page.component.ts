@@ -12,6 +12,10 @@ import { ModalService } from '../modalServices';
 import { MapService } from '../map.service';
 import { UsersService } from '../users.service';
 
+import { MatDialog } from '@angular/material';
+import { Register2Component } from '../register2/register2.component';
+import { Signup2Component } from '../signup2/signup2.component';
+
 @Component({
   selector: 'app-race-about-page',
   templateUrl: './race-about-page.component.html',
@@ -85,6 +89,9 @@ export class RaceAboutPageComponent implements OnInit {
     private _mapService: MapService,
     private _usersService:UsersService,
     private _raceService:RaceService,
+
+
+    private dialog : MatDialog,
   ) {}
 
   ngAfterViewInit(): void {
@@ -200,8 +207,63 @@ export class RaceAboutPageComponent implements OnInit {
       this._raceService.joinRace(registrationBody);
       this.router.navigate(['/welcome']);
     }
-      
-   
+  }
+
+  openRegister = () => {
+    if(!this._authService.isLoggedIn() || this.raceSettings.price>0) //user is NOT logged in
+    {
+      const data = {
+        register:true, 
+        price:this.raceSettings.price,
+        race_id:this.raceID,
+        hasJoined:this.hasJoined,
+        hasStarted:this.hasStarted,
+        hasTags: this.raceSettings.has_entry_tags
+      };
+      //console.log("MODAL DATA", data);
+      let d = this.dialog.open(Register2Component,{
+        panelClass:"RegisterContainer",
+        data: data
+      });
+      d.afterClosed().subscribe(result=>{
+        //console.log('CLOSED REGISTER FROM "race-about-page"', result);
+      })
+    }
+    else //user is logged in and price = 0;
+    {
+      //add race stat then...
+      let registrationBody = {race_id:this.raceID} as any;
+      this._raceService.joinRace(registrationBody);
+      this.router.navigate(['/welcome']);
+    }
+  }
+
+  openSignUp = () => {
+    if(!this._authService.isLoggedIn() || this.raceSettings.price>0) //user is NOT logged in
+    {
+      const data = {
+        price:this.raceSettings.price,
+        race_id:this.raceID,
+        hasJoined:this.hasJoined,
+        hasStarted:this.hasStarted,
+        hasTags: this.raceSettings.has_entry_tags
+      };
+      //console.log("MODAL DATA", data);
+      let d = this.dialog.open(Signup2Component,{
+        panelClass:"SignUpContainer",
+        data: data
+      });
+      d.afterClosed().subscribe(result=>{
+        //console.log('CLOSED SIGN UP FROM "race-about-page"', result);
+      });
+    }
+    else //user is logged in and price = 0;
+    {
+      //add race stat then...
+      let registrationBody = {race_id:this.raceID} as any;
+      this._raceService.joinRace(registrationBody);
+      this.router.navigate(['/welcome']);
+    }
   }
 
   closeModal(id: string) {
