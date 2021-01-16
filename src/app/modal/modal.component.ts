@@ -30,17 +30,6 @@ export class ModalComponent implements OnInit {
       return;
     }
 
-    // move element to bottom of page (just before </body>) so it can be displayed above everything else
-    document.body.appendChild(this.element);
-
-    // close modal on background click
-    this.element.addEventListener('click', function (e: any) {
-     // console.log(e.target.className);
-      if (e.target.className === 'custom-modal') {
-          modal.close();
-      }
-    });
-
     // add self (this modal instance) to the modal service so it's accessible from controllers
     this.modalService.add(this);
   }
@@ -53,8 +42,21 @@ export class ModalComponent implements OnInit {
 
   // open modal
   open(): void {
-      this.element.style.display = 'block';
-      document.body.classList.add('custom-modal-open');
+    let modal = this;
+
+    // move element to bottom of page (just before </body>) so it can be displayed above everything else
+    document.body.appendChild(this.element);
+
+    // close modal on background click
+    this.element.addEventListener('click', function (e: any) {
+      // console.log(e.target.className);
+      if (e.target.className === 'custom-modal') {
+        modal.close();
+      }
+    });
+
+    this.element.style.display = 'block';
+    document.body.classList.add('custom-modal-open');
   }
 
   // close modal

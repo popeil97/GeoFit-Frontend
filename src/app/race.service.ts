@@ -21,7 +21,11 @@ export class RaceService {
 
 
   getRaces(user_id:number) {
-    return this.http.get(environment.apiUrl + '/api/races/?user_id=' + encodeURIComponent(user_id.toString()))
+    var apiURL = environment.apiUrl + '/api/races/';
+    if (user_id) {
+      apiURL += '?user_id=' + encodeURIComponent(user_id.toString());
+    }
+    return this.http.get(apiURL)
   }
 
 

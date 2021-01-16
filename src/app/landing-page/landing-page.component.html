@@ -13,8 +13,10 @@
                     </div>
     
                     <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
-                        <button (click)="openModal('custom-modal-1')">Log in</button>
-                        <button (click)="openModal('custom-modal-2')">Sign up</button>
+                        <!--<button (click)="openModal('custom-modal-1')">Log in</button>-->
+                        <button (click)="openLogin()">Log in</button>
+                        <!--<button (click)="openModal('custom-modal-2')">Sign up</button>-->
+                        <button (click)="openRegister()">Sign up</button>
                     </div>
                 </div>
             </div>

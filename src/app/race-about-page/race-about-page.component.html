@@ -44,9 +44,13 @@
         <button (click)="this.viewRace()" *ngIf="this.hasStarted && this.hasJoined">Go to race</button>
         <button (click)="this.viewRace()" *ngIf="this.hasStarted && !this.hasJoined ">Preview race</button>
         <button (click)="this.goToRaceDashboard()" *ngIf="this.isOwner || this.isModerator">Go to dashboard</button>      
-  
+
+        <!--
         <button *ngIf="!this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-2')">Register for race</button>
         <button *ngIf="this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-3')">Register for race</button>
+          -->
+          <button *ngIf="!this._authService.isLoggedIn() &&!this.hasJoined" (click)="openRegister()">Register for race</button>
+          <button *ngIf="this._authService.isLoggedIn() &&!this.hasJoined" (click)="openSignUp()">Register for race</button>
 
         <p *ngIf="this._authService.isLoggedIn() && this.hasJoined" class='margin-bottom-8px'><b>You've registered for this race.</b></p>
         <p *ngIf=" !hasStarted && this.hasJoined" class='margin-bottom-8px italics'> Come back on race day ({{aboutData.start_date.month}}, {{aboutData.start_date.day}}).</p>
@@ -100,7 +104,7 @@
 
           <div class='margin-bottom-16px'>
             <h6 class='margin-bottom-4px'>Race type <button class="smallButton" (click)="this.openModal('custom-modal-4')">What does this mean?</button>:</h6>
-            <ng-template [ngIf]="this.aboutData.is_hybrid" [ngIfElse]="VirtualText">
+            <ng-template [ngIf]="this.aboutData && this.aboutData.is_hybrid" [ngIfElse]="VirtualText">
               <p  *ngIf="aboutData.race_type == 1" class='h7 margin-bottom-0px'>Hybrid run</p>
               <p  *ngIf="aboutData.race_type == 2" class='h7 margin-bottom-0px'>Hybrid bike</p>
             </ng-template>
@@ -113,7 +117,7 @@
 
           <div class='margin-bottom-16px'>
             <h6 class='margin-bottom-4px'>Race requirements:</h6>
-            <ng-template [ngIf]="this.raceSettings.isManualEntry" [ngIfElse]="ManualText">
+            <ng-template [ngIf]="this.raceSettings && this.raceSettings.isManualEntry" [ngIfElse]="ManualText">
               <p class='h7 margin-bottom-0px'>NONE however, the Strava mobile app is highly recommended for tracking fitness activities!</p>
             </ng-template>
             <ng-template #ManualText>

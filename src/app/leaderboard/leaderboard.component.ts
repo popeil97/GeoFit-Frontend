@@ -70,7 +70,7 @@ export class LeaderboardComponent implements OnInit,OnChanges {
   }
 
   getLeaderboard(){
-    var leaderboardData;
+    let leaderboardData:LeaderboardStruct = {} as LeaderboardStruct;
     console.log("GETTING LEADERBOARD", this.tagID);
 
     this.page = 1;
@@ -166,5 +166,5 @@ export interface LeaderboardItem {
 export interface LeaderboardStruct {
   leaderboard: LeaderboardItem[];
   user_leaderboard_stat:LeaderboardItem;
-  user_rank:Number;
+  user_rank:number;
 }

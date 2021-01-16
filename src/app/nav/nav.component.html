@@ -64,10 +64,12 @@
           </ng-template>
           <ng-template #NavButtonsBlock>
             <div class='NavItem'>
-              <button class='darkButton' (click)="openModal('custom-modal-1')">Log in</button>
+              <!--<button class='darkButton' (click)="openModal('custom-modal-1')">Log in</button>-->
+              <button class='darkButton' (click)="openLogin()">Log in</button>
             </div>
             <div class='NavItem'>
-              <button class='darkButton' (click)="openModal('custom-modal-2')">Sign up</button>
+              <!--<button class='darkButton' (click)="openModal('custom-modal-2')">Sign up</button>-->
+              <button class='darkButton' (click)="openRegister()">Sign up</button>
             </div>
           </ng-template>
         </div>
@@ -76,6 +78,8 @@
   </div>
 </nav>
 
+<!--
 <custom-modal class='custom-modal-container' id="custom-modal-1">
   <app-login id="custom-modal-1"></app-login>
 </custom-modal>
+-->

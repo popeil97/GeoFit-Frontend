@@ -666,6 +666,13 @@ h1.PageHeaderSegmentTitle {
 }
 
 
+
+.LoginContainer, .RegisterContainer, .SignUpContainer, .LogActivityContainer {
+  /* width:calc(600px - 48px); */
+  width:600px;
+}
+
+
 @media only screen and (max-width: 600px) {
 	.PageHeaderSegment {
 		align-items: center;

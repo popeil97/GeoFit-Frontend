@@ -3,7 +3,7 @@
   <div class='PageSegment'>
     <h3>Log Activity</h3>
 
-    <ng-template [ngIf]="this.d != null" [ngIfElse]="LoadingLogActivity">
+    <!--<ng-template [ngIf]="this.d != null" [ngIfElse]="LoadingLogActivity">-->
       <div class='Slideshow'>
         <div class="SlideshowHeader">
           <button class="SlideshowButton" (click)="SwitchSlideshow('strava')" id="strava-btn" *ngIf="this.d.manualEntry" >Strava</button>
@@ -11,24 +11,26 @@
         </div>
         <div class="SlideshowContents">
           <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'strava'}">
-           <app-strava-entry *ngIf="!this.d.automaticImport && stravaData.authorized" [distance_unit]="this.d.distance_unit" [race_id]="this.d.race_id" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)"></app-strava-entry>
+          <app-strava-entry *ngIf="!this.d.automaticImport && stravaData && stravaData.authorized" [distance_unit]="this.d.distance_unit" [race_id]="this.d.race_id" (setLoaderState)="setLoaderState($event)" (refreshStatComponents)="refreshStatComponents($event)" [closeDialog]="closeDialog"></app-strava-entry>
   
-           <b *ngIf="this.d.automaticImport">Automatic import is turned on.</b>
+          <b *ngIf="this.d.automaticImport">Automatic import is turned on.</b>
   
-            <div *ngIf="!stravaData.authorized">
+            <div *ngIf="!stravaData || !stravaData.authorized">
                 <b> You don't have your account connected to Strava </b>
                 <app-stravauth></app-stravauth>
             </div>
           </div>
           <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'manual'}" *ngIf="this.d.manualEntry">
-            <app-manual-entry [race_type]="this.d.raceType" (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>
+            <app-manual-entry [race_type]="this.d.raceType" (uploadManualEntry)="uploadManualEntry($event)" [closeDialog]="closeDialog"></app-manual-entry>
           </div>
         </div>
       </div>
+    <!--
     </ng-template>
     <ng-template #LoadingLogActivity>
       <p>Loading Logging Activity...</p>
-    </ng-template>
+    </ng-template>'
+  -->
   </div>
   <button class="CloseLogin" (click)="closeDialog()">Close</button> 
 </div>

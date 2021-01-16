@@ -47,7 +47,7 @@
 
   <h3>Leaderboard</h3>
     <div class="row">
-       <div class = "winner-column-lowered" *ngIf="leaderboard.length >= 2">
+       <div class = "winner-column-lowered" *ngIf="leaderboard && leaderboard.length >= 2">
         <p><b>🥈</b><img class = "twoImage" src="{{leaderboard[1].profile_url}}" width="30" height="30">
           
           <app-user-profile-nav [username]="leaderboard[1].username" [displayName]="leaderboard[1].display_name" [nameBreak]="true"></app-user-profile-nav>
@@ -56,7 +56,7 @@
         </p>  
       </div>
 
-      <div class = "winner-column" *ngIf="leaderboard.length >= 1">
+      <div class = "winner-column" *ngIf="leaderboard && leaderboard.length >= 1">
         <p><b>🥇</b><img class = "oneImage" src="{{leaderboard[0].profile_url}}" width="30" height="30">
           
           <app-user-profile-nav [username]="leaderboard[0].username" [displayName]="leaderboard[0].display_name" [nameBreak]="true"></app-user-profile-nav>
@@ -65,7 +65,7 @@
         </p>
       </div>
 
-      <div class = "winner-column-lowered" *ngIf="leaderboard.length >= 3">
+      <div class = "winner-column-lowered" *ngIf="leaderboard && leaderboard.length >= 3">
         <p><b>🥉</b><img class = "threeImage" src="{{leaderboard[2].profile_url}}" width="30" height="30">
           
           <app-user-profile-nav [username]="leaderboard[2].username" [displayName]="leaderboard[2].display_name"  [nameBreak]="true"></app-user-profile-nav>
@@ -74,7 +74,7 @@
         </p>
       </div>
   </div>
- <div *ngIf="leaderboard.length >= 3">
+ <div *ngIf="leaderboard && leaderboard.length >= 3">
   <div  style="overflow:auto; max-height:600px;"> 
     <div *ngFor="let group of leaderboard; let i=index">
       <div *ngIf="i>2">

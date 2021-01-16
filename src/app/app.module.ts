@@ -122,6 +122,7 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { StoryPopupComponent } from './story-popup/story-popup.component';
 import { RaceCreatePageComponent } from './race-create-page/race-create-page.component';
 import { TeamFormDialogComponent } from './team-form/team-form-dialog.component';
+import { LoginDialogComponent } from './login/login-dialog.component';
 
 /* NEW COMPONENTS USING VIEWS/ FOLDER */
 import { HeaderNavComponent } from './views/header-nav/header-nav.component';
@@ -220,6 +221,7 @@ import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-cre
 
     HeaderNavComponent,
     ForRaceCreatorsComponent,
+    LoginDialogComponent,
       ],
 
   imports: [
@@ -261,6 +263,11 @@ import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-cre
                   WhyInfoDialogContent,
                   TeamFormDialogComponent,
                   //ViewFollowDialogContent
+
+                  LoginComponent,
+                  Register2Component,
+                  Signup2Component,
+                  LogActivityComponent,
                   ] 
 })
 export class AppModule { 
