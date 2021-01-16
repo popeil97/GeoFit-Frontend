@@ -5,12 +5,12 @@
       <img src= "../../../assets/logos/tucan-logo-01.png" class="TucanLandingLogoImage">
       <h3>We bring community to virtual racing</h3>
       <div class='LandingSubheading'>
-        <p>Tucan fitness isn't a social fitness platform for race and fundraiser organizers to engage their community virtually from anywhere in the world.</p>
+        <p>Tucan fitness is a social fitness platform for racers to get fit together virtually from anywhere in the world.</p>
         <!--  <a class="button lightButton LandingAboutButton" routerLink='/about-tucan'>About Tucan Fitness</a> -->
       </div>
       <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
-        <button (click)="openModal('custom-modal-1')">Log in</button>
-        <button (click)="openModal('custom-modal-2')">Sign up</button>
+        <button (click)="openLogin()">Log in</button>
+        <button (click)="openRegister()">Sign up</button>
       </div>
     </div>
     
@@ -25,15 +25,12 @@
   <div class='LandingPageSegment GrayBackground Vertical'>
     <div class='LandingPageSegmentItem margin-bottom-32px'>
       <div class='LandingPageSegment'>
-        <div class='LandingPageSegmentItem'>
-          <img src= "../../../assets/community.PNG" class="LandingPageImage" /> 
+        <div class='LandingPageSegmentItem EmpowerImageContainer'>
+          <img class="EmpowerImage" src= "../../../assets/icons/run-green-icon.png" alt="Empower You" /> 
         </div>
         <div class='LandingPageSegmentItem'>
-          <div class='margin-top-bottom-16px'>
-            <h3>What is Tucan Fitness?</h3>
-          </div>
-          <p>Tucan Fitness brings community to virtual racing. We are a social fitness platform for organizations to engage their community virtually, promote healthy living, and raise funds for good causes.</p>
-          <p>We are built around community and our races empower people to participate from anywhere, anytime, and at any pace. Connect with your community and be social from a distance all while staying fit.</p>
+          <h3 class='margin-top-bottom-16px'>We empower you to be healthy and fit</h3>
+          <p>Tucan Fitness is built around community which allows for accountability to your health and fitness goals. Our races empower you to participate from anywhere, anytime, and at any pace.</p>
         </div>
       </div>
     </div>
@@ -146,12 +143,12 @@
   
   
   <div class='LandingPageSegment Vertical GrayBackground'>
-    <div class='LandingPageSegmentItem textAlignCenter margin-bottom-32px'>
+    <div class='LandingPageSegmentItem ClosingSegmentItem textAlignCenter margin-bottom-32px'>
       <h3>Join the Tucan Community!</h3>
-      <p>(INSERT COPY HERE)</p>
+      <p>Connect with our community and be social from anywhere all while staying fit.<br />Get started by joining a race, or, if you’re not ready - just by signing up to Tucan Fitness.</p>
       <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
-        <button (click)="openModal('custom-modal-1')">Log in</button>
-        <button (click)="openModal('custom-modal-2')">Sign up</button>
+        <button (click)="openLogin()">Log in</button>
+        <button (click)="openRegister()">Sign up</button>
       </div>
     </div>
     <div class='LandingPageSegmentItem'>
@@ -208,6 +205,7 @@
     </div>
   </div>
   
+  <!--
   <div class='PageSegment'>
     <div class='AboutTucanValuesContainer'>
       <div class='AboutTucanFooter1'></div>
@@ -236,4 +234,6 @@
       </div>                
     </div>
   </div>
+  -->
+  <app-footer></app-footer>
 </div>

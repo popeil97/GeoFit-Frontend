@@ -7,11 +7,11 @@ import { LoginComponent } from '../../login/login.component';
 import { Register2Component } from '../../register2/register2.component';
 
 @Component({
-  selector: 'app-for-race-creators',
-  templateUrl: './for-race-creators.component.html',
-  styleUrls: ['./for-race-creators.component.css']
+  selector: 'app-for-racers',
+  templateUrl: './for-racers.component.html',
+  styleUrls: ['./for-racers.component.css']
 })
-export class ForRaceCreatorsComponent implements OnInit {
+export class ForRacersComponent implements OnInit {
 
   constructor(
     public _authService: AuthService, 
@@ -64,5 +64,4 @@ export class ForRaceCreatorsComponent implements OnInit {
       //el.scrollIntoView();
     }
   }
-
 }

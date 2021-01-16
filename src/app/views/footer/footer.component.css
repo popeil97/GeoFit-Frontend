@@ -1,0 +1,47 @@
+.Footer {
+    width:100%;
+    height:auto;
+    background-color:var(--main-background-color);
+    padding:64px;
+    box-sizing: border-box;
+
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+
+    color:white;
+}
+
+.FooterColumn {
+    flex-shrink: 1;
+    flex-grow: 0;
+    flex-basis: 100%;
+
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+.FooterHeader {
+    color: var(--tucan-orange);
+}
+.FooterList {
+    list-style: none;
+    padding-left:0;
+}
+.FooterURL {
+    color:white;
+}
+.FooterURL:hover {
+    cursor:pointer;
+    opacity: 0.8;
+}
+.FooterSocialMedia {
+    width:16px;
+    height:16px;
+    margin-right: 8px;
+    margin-bottom:8px;
+}

@@ -12,16 +12,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class TermsOfServiceComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private _authService: AuthService,private route:ActivatedRoute, 
-    private router:Router) { }
+  constructor(
+    public dialog: MatDialog, 
+    private _authService: AuthService,
+    private route:ActivatedRoute, 
+    private router:Router
+  ) { }
 
   ngOnInit() {
   }
 
   openDialog() {
-
     const dialogRef = this.dialog.open(TermsOfServiceDialogContent,{disableClose: false, data:{} as MatDialogConfig});
-
   }
 
 }

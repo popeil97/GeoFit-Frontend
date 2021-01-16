@@ -128,6 +128,8 @@ import { LoginDialogComponent } from './login/login-dialog.component';
 import { HeaderNavComponent } from './views/header-nav/header-nav.component';
 import { LandingPageComponent } from './views/landing-page/landing-page.component';
 import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-creators.component';
+import { ForRacersComponent } from './views/for-racers/for-racers.component';
+import { FooterComponent } from './views/footer/footer.component';
 
 
 @NgModule({
@@ -222,6 +224,8 @@ import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-cre
     HeaderNavComponent,
     ForRaceCreatorsComponent,
     LoginDialogComponent,
+    ForRacersComponent,
+    FooterComponent,
       ],
 
   imports: [
