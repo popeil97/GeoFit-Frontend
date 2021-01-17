@@ -122,6 +122,8 @@ import { StoryPopupComponent } from './story-popup/story-popup.component';
 import { RaceCreatePageComponent } from './race-create-page/race-create-page.component';
 import { TeamFormDialogComponent } from './team-form/team-form-dialog.component';
 import { LoginDialogComponent } from './login/login-dialog.component';
+import { ProxyComponent } from './proxy/proxy.component';
+import { Proxy2Component } from './proxy2/proxy2.component';
 
 
 @NgModule({
@@ -213,6 +215,8 @@ import { LoginDialogComponent } from './login/login-dialog.component';
     RaceCreatePageComponent,
     TeamFormDialogComponent,
     LoginDialogComponent,
+    ProxyComponent,
+    Proxy2Component,
       ],
 
   imports: [

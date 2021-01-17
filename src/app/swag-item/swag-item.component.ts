@@ -34,7 +34,7 @@ export class SwagItemComponent implements OnInit {
 
   addToCart() {
 
-    if(this.item.sizes != null && this.selectedSize == null) {
+    if(this.item.sizes != null && this.selectedSize == '') {
       return;
     }
 

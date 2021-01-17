@@ -19,6 +19,8 @@ import { SwagListComponent } from './swag-list/swag-list.component';
 import { CartEditComponent } from './cart-edit/cart-edit.component';
 import { PaypalComponent } from './paypal/paypal.component';
 import { SearchComponent } from './search/search.component';
+import { ProxyComponent } from './proxy/proxy.component';
+import { Proxy2Component } from './proxy2/proxy2.component';
 
 const routes: Routes = [
   {path: 'race', component:RaceViewPageComponent},
@@ -38,6 +40,8 @@ const routes: Routes = [
   {path: 'faqs', component:FaqPageComponent},
   {path: 'contact', component:ContactPageComponent},
   {path: 'search', component:SearchComponent},
+  {path: 'eldercare', component:ProxyComponent},
+  {path: 'RunForTheDogs', component:Proxy2Component},
 ];
 
 @NgModule({
