@@ -99,11 +99,41 @@
   max-width: 360px;
   max-height: 360px;
 }
-.WhatIsTucanListItem {
-  width: 120px;
-  padding-top: 0;
-  padding-bottom: 0;
+
+
+.LandingPageIconList {
+  display:flex;
+  flex-direction:row;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap:wrap;
 }
+.IconTextItem {
+  width:100px;
+  min-height:100px;
+  padding-top:0;
+  padding-bottom:0;
+  margin-left:16px;
+  margin-right:16px;
+}
+.IconContainer {
+  position:relative;
+  width:100px;
+  height:100px;
+  margin-bottom:8px;
+}
+.Icon {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  max-width: 100%;
+  max-height: 100%;
+}
+.BenefitsSegment {
+    flex-wrap: wrap;
+}
+
 .BenefitsListItem {
   width:30%;
   padding-left:5%;
@@ -134,6 +164,7 @@
   flex-direction: row;
   align-items: flex-start;
   flex-wrap: wrap;
+  padding:0;
 }
 .TeamProfilesSegment {
   width:464px;
@@ -227,6 +258,33 @@
   .LandingPageSegment {
     flex-wrap: wrap;
   }
+  .LandingPageSegmentItem, .LandingPageSegmentItem .LandingPageSegment {
+    padding-left:0;
+    padding-right:0;
+  }
+  .FirstSegment {
+    flex-direction: column-reverse;
+  }
+  .FirstSegment > .LandingPageSegmentItem:first-child, .FirstSegment > .LandingPageSegmentItem:last-child {
+    width:100%;
+    padding-left:0;
+    padding-right:0;
+  }
+  .IconTextItem {
+    width:80px;
+    min-height:80px;
+  }
+  .IconContainer {
+    width:80px;
+    height:80px;
+  }
+
+  .BenefitsList {
+    max-width: 400px;
+  }
+
+
+
   .WhatIsTucanListItem {
     margin-bottom:16px;
   }

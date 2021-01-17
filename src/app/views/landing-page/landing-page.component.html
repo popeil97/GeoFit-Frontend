@@ -3,9 +3,9 @@
     
     <div class="LandingPageSegmentItem">
       <img src= "../../../assets/logos/tucan-logo-01.png" class="TucanLandingLogoImage">
-      <h3>We bring community to virtual racing</h3>
+      <h3 class='textAlignCenter'>We bring community to virtual racing</h3>
       <div class='LandingSubheading'>
-        <p>Tucan fitness is a social fitness platform for racers to get fit together virtually from anywhere in the world.</p>
+        <p class='textAlignCenter'>Tucan fitness is a social fitness platform for racers to get fit together virtually from anywhere in the world.</p>
         <!--  <a class="button lightButton LandingAboutButton" routerLink='/about-tucan'>About Tucan Fitness</a> -->
       </div>
       <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
@@ -29,93 +29,83 @@
           <img class="EmpowerImage" src= "../../../assets/icons/run-green-icon.png" alt="Empower You" /> 
         </div>
         <div class='LandingPageSegmentItem'>
-          <h3 class='margin-top-bottom-16px'>We empower you to be healthy and fit</h3>
+          <h3 class='margin-top-bottom-16px'>We empower you to be healthy <span class='nobr'>and fit</span></h3>
           <p>Tucan Fitness is built around community which allows for accountability to your health and fitness goals. Our races empower you to participate from anywhere, anytime, and at any pace.</p>
         </div>
       </div>
     </div>
-    <div class='LandingPageSegmentItem'>
-      <div class='LandingPageSegment alignItemsFlexStart justifyContentSpaceEvenly'>
-        <div class='LandingPageSegmentItem WhatIsTucanListItem'>
-          <div class='WhatIsTucanIconContainer'>
+    <div class='LandingPageSegmentItem LandingPageIconList'>
+        <div class='IconTextItem'>
+          <div class='IconContainer'>
             <img class='WhatIsTucanIcon' src='../../../assets/icons/community-icon.png' alt='Community Icon'>
           </div>
-          <h6 class='textAlignCenter'>Community-Oriented</h6>
+          <p class='textAlignCenter'>Community-Oriented</p>
         </div>
-        <div class='LandingPageSegmentItem WhatIsTucanListItem'>
-          <div class='WhatIsTucanIconContainer'>
-            <img class='WhatIsTucanIcon' src='../../../assets/icons/flexibility-icon.png' alt='Flexibility Icon'>
+        <div class='IconTextItem'>
+          <div class='IconContainer'>
+            <img class='Icon' src='../../../assets/icons/flexibility-icon.png' alt='Flexibility Icon'>
           </div>
-          <h6 class='textAlignCenter'>Flexible</h6>
+          <p class='textAlignCenter'>Flexible</p>
         </div>
-        <div class='LandingPageSegmentItem WhatIsTucanListItem'>
-          <div class='WhatIsTucanIconContainer'>
-            <img class='WhatIsTucanIcon' src='../../../assets/icons/fitness-icon.png' alt='Fitness Icon'>
+        <div class='IconTextItem'>
+          <div class='IconContainer'>
+            <img class='Icon' src='../../../assets/icons/fitness-icon.png' alt='Fitness Icon'>
           </div>
-          <h6 class='textAlignCenter'>Health-Promoting</h6>
+          <p class='textAlignCenter'>Health-Promoting</p>
         </div>
-        <div class='LandingPageSegmentItem WhatIsTucanListItem'>
-          <div class='WhatIsTucanIconContainer'>
-            <img class='WhatIsTucanIcon' src='../../../assets/icons/fundraising-icon.png' alt='Fundraising Icon'>
+        <div class='IconTextItem'>
+          <div class='IconContainer'>
+            <img class='Icon' src='../../../assets/icons/fundraising-icon.png' alt='Fundraising Icon'>
           </div>
-          <h6 class='textAlignCenter'>Fundraising</h6>
+          <p class='textAlignCenter'>Fundraising</p>
         </div>
-        <div class='LandingPageSegmentItem WhatIsTucanListItem'>
-          <div class='WhatIsTucanIconContainer'>
-            <img class='WhatIsTucanIcon' src='../../../assets/icons/engagement-icon.png' alt='Engagement Icon'>
+        <div class='IconTextItem'>
+          <div class='IconContainer'>
+            <img class='Icon' src='../../../assets/icons/engagement-icon.png' alt='Engagement Icon'>
           </div>
-          <h6 class='textAlignCenter'>Engaging</h6>
+          <p class='textAlignCenter'>Engaging</p>
         </div>
       </div>
-    </div>
   </div>
   
-  <div class='LandingPageSegment Vertical'>
-    <div class='LandingPageSegmentItem margin-top-bottom-32px'>
-      <h3>What can Tucan Fitness do for you?</h3>
-    </div>
-    <div class='LandingPageSegmentItem'>
-      <div class='LandingPageSegment alignItemsFlexStart justifyContentSpaceEvenly'>
-        <div class='LandingPageSegmentItem BenefitsListItem'>
-          <div class='BenefitsIconContainer'>
-            <img class='BenefitsIcon' src='../../../assets/icons/leaderboard-icon.png' alt='Leaderboard Icon'>
-          </div>
-          <h6 class='textAlignCenter'>Leaderboards</h6>
+  <div class='LandingPageSegment BenefitsSegment'>
+    <h3 class='margin-top-bottom-32px'>What can Tucan Fitness do for you?</h3>
+    <div class='LandingPageSegmentItem LandingPageIconList BenefitsList'>
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/leaderboard-icon.png' alt='Leaderboard Icon'>
         </div>
-        <div class='LandingPageSegmentItem BenefitsListItem'>
-          <div class='BenefitsIconContainer'>
-            <img class='BenefitsIcon' src='../../../assets/icons/social-feed-icon.png' alt='Social Feed Icon'>
-          </div>
-          <h6 class='textAlignCenter'>Social Feeds</h6>
-        </div>
-        <div class='LandingPageSegmentItem BenefitsListItem'>
-          <div class='BenefitsIconContainer'>
-            <img class='BenefitsIcon' src='../../../assets/icons/map-icon.png' alt='Map Icon'>
-          </div>
-          <h6 class='textAlignCenter'>Virtual Race Routes</h6>
-        </div>
+        <p class='textAlignCenter'>Leaderboards</p>
       </div>
-    </div>
-    <div class='LandingPageSegmentItem'>
-      <div class='LandingPageSegment alignItemsFlexStart justifyContentSpaceEvenly'>
-        <div class='LandingPageSegmentItem BenefitsListItem'>
-          <div class='BenefitsIconContainer'>
-            <img class='BenefitsIcon' src='../../../assets/icons/shared-icon.png' alt='Shared Experience Icon'>
-          </div>
-          <h6 class='textAlignCenter'>Shared Experiences</h6>
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/social-feed-icon.png' alt='Social Feed Icon'>
         </div>
-        <div class='LandingPageSegmentItem BenefitsListItem'>
-          <div class='BenefitsIconContainer'>
-            <img class='BenefitsIcon' src='../../../assets/icons/progress-icon.png' alt='Progress Icon'>
-          </div>
-          <h6 class='textAlignCenter'>Real-time Progress Tracking</h6>
+        <p class='textAlignCenter'>Social Feeds</p>
+      </div>
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/map-icon.png' alt='Map Icon'>
         </div>
-        <div class='LandingPageSegmentItem BenefitsListItem'>
-          <div class='BenefitsIconContainer'>
-            <img class='BenefitsIcon' src='../../../assets/icons/app-icon.png' alt='App Icon'>
-          </div>
-          <h6 class='textAlignCenter'>Fitness App Integration</h6>
+        <p class='textAlignCenter'>Virtual Race Routes</p>
+      </div>
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/shared-icon.png' alt='Shared Experience Icon'>
         </div>
+        <p class='textAlignCenter'>Shared Experiences</p>
+      </div>
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/progress-icon.png' alt='Progress Icon'>
+        </div>
+        <p class='textAlignCenter'>Real-time Progress Tracking</p>
+      </div>
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/app-icon.png' alt='App Icon'>
+        </div>
+        <p class='textAlignCenter'>Fitness App Integration</p>
       </div>
     </div>
     <!--

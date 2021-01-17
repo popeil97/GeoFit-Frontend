@@ -56,6 +56,10 @@ body {
   font-size: 16px;
 }
 
+.width-100per {
+  width:100%;
+}
+
 
 h1, .h1 {	font-size: 64px;	}
 h2, .h2 {
@@ -77,6 +81,9 @@ h6, .h6 {
 }
 .h7 {
   font-size:12px;
+}
+.nobr {
+  white-space: nowrap;
 }
 
 input[type=text], input[type=password], input[type=email], input[type=number], input[type=date], input[type=url], input[type=time], input[type=tel], input[type=search], textarea {
