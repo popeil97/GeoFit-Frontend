@@ -9,8 +9,8 @@
         <!--  <a class="button lightButton LandingAboutButton" routerLink='/about-tucan'>About Tucan Fitness</a> -->
       </div>
       <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
-        <button (click)="openLogin()">Log in</button>
-        <button (click)="openRegister()">Sign up</button>
+        <button class='LandingButton' (click)="openLogin()">Log in</button>
+        <button class='LandingButton' (click)="openRegister()">Sign up</button>
       </div>
     </div>
     
@@ -147,61 +147,71 @@
       <h3>Join the Tucan Community!</h3>
       <p>Connect with our community and be social from anywhere all while staying fit.<br />Get started by joining a race, or, if you’re not ready - just by signing up to Tucan Fitness.</p>
       <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
-        <button (click)="openLogin()">Log in</button>
-        <button (click)="openRegister()">Sign up</button>
+        <button class='LandingButton' (click)="openLogin()">Log in</button>
+        <button class='LandingButton' (click)="openRegister()">Sign up</button>
       </div>
     </div>
-    <div class='LandingPageSegmentItem'>
-      <div class="LandingPageSegment">
-        <div class="LandingPageSegmentItem TucanTeamProfile">
-          <div class='LandingPageProfileImageContainer'>
-            <img class='LandingPageProfileImage' src= "../../../assets/landing/billy.jpeg">
+    <div class='LandingPageSegmentItem LandingPageTeamProfiles'>
+        <div class='TeamProfilesSegment'>
+          <div class="LandingPageSegmentItem TucanTeamProfile">
+            <div class='LandingPageProfileImageContainer'>
+              <img class='LandingPageProfileImage' src="../../../assets/landing/billy.jpeg" />
+              <a href="https://www.linkedin.com/in/grenis/" target="_blank">
+                <div class='LandingPageProfileHoverContainer'>
+                  <img class='LandingPageProfileHoverImage' src="https://image.flaticon.com/icons/svg/1384/1384046.svg" />
+                </div>
+              </a>
+            </div>
+            <div>
+              <h5 class="roboto-purple">Billy Grenis</h5>
+              <p class="roboto-purple">CEO, marathon runner</p>
+            </div>
           </div>
-          <div>
-            <h5 class="roboto-purple">Billy Grenis</h5>
-            <p class="roboto-purple">CEO, marathon runner</p>
-            <a href="https://www.linkedin.com/in/grenis/" target="_blank">
-              <img src= "https://image.flaticon.com/icons/svg/1384/1384046.svg" width="20" height="20">
-            </a>
-          </div>
-        </div>
-        <div class="LandingPageSegmentItem TucanTeamProfile">
-          <div class='LandingPageProfileImageContainer'>
-            <img class='LandingPageProfileImage' src= "../../../assets/landing/nathan.JPG">
-          </div>
-          <div>
-            <h5 class="roboto-purple">Nathan Cinnamond</h5>
-            <p class="roboto-purple">Engineer, avid runner</p>
-            <a href="https://www.linkedin.com/in/nathancinnamond/" target="_blank">
-              <img src= "https://image.flaticon.com/icons/svg/1384/1384046.svg" width="20" height="20">
-            </a>
-          </div>
-        </div>
-        <div class="LandingPageSegmentItem TucanTeamProfile">
-          <div class='LandingPageProfileImageContainer'>
-            <img class='LandingPageProfileImage' src= "../../../assets/landing/katie.jpg">
-          </div>
-          <div>
-            <h5 class="roboto-purple">Katie Donahoe</h5>
-            <p class="roboto-purple">Engineer, daily walker</p>
-            <a href="https://www.linkedin.com/in/katie-donahoe-90a241121/" target="_blank">
-              <img src= "https://image.flaticon.com/icons/svg/1384/1384046.svg" width="20" height="20">
-            </a>
+          <div class="LandingPageSegmentItem TucanTeamProfile">
+            <div class='LandingPageProfileImageContainer'>
+              <img class='LandingPageProfileImage' src="../../../assets/landing/nathan.JPG" />
+              <a href="https://www.linkedin.com/in/nathancinnamond/" target="_blank">
+                <div class='LandingPageProfileHoverContainer'>
+                  <img class='LandingPageProfileHoverImage' src="https://image.flaticon.com/icons/svg/1384/1384046.svg" />
+              </div>
+              </a>
+            </div>
+            <div>
+              <h5 class="roboto-purple">Nathan Cinnamond</h5>
+              <p class="roboto-purple">Engineer, avid runner</p>
+            </div>
           </div>
         </div>
-        <div class="LandingPageSegmentItem TucanTeamProfile">
-          <div class='LandingPageProfileImageContainer'>
-            <img class='LandingPageProfileImage' src= "../../../assets/landing/alex.JPG">
+        <div class='TeamProfilesSegment'>
+          <div class="LandingPageSegmentItem TucanTeamProfile">
+            <div class='LandingPageProfileImageContainer'>
+              <img class='LandingPageProfileImage' src="../../../assets/landing/katie.jpg" />
+              <a href="https://www.linkedin.com/in/katie-donahoe-90a241121/" target="_blank">
+                <div class='LandingPageProfileHoverContainer'>            
+                  <img class='LandingPageProfileHoverImage' src="https://image.flaticon.com/icons/svg/1384/1384046.svg" />
+                </div>
+              </a>
+            </div>
+            <div>
+              <h5 class="roboto-purple">Katie Donahoe</h5>
+              <p class="roboto-purple">Engineer, daily walker</p>
+            </div>
           </div>
-          <div>
-            <h5 class="roboto-purple">Alex Popeil</h5>
-            <p class="roboto-purple">Engineer, likes to code</p>
-            <a href="https://www.linkedin.com/in/alexander-popeil-b4440410b/" target="_blank">
-              <img src= "https://image.flaticon.com/icons/svg/1384/1384046.svg" width="20" height="20">
-            </a>
+          <div class="LandingPageSegmentItem TucanTeamProfile">
+            <div class='LandingPageProfileImageContainer'>
+              <img class='LandingPageProfileImage' src="../../../assets/landing/alex.JPG" />
+              <a href="https://www.linkedin.com/in/alexander-popeil-b4440410b/" target="_blank">
+                <div class='LandingPageProfileHoverContainer'>
+                  <img class='LandingPageProfileHoverImage' src="https://image.flaticon.com/icons/svg/1384/1384046.svg" />
+                </div>
+              </a>
+            </div>
+            <div>
+              <h5 class="roboto-purple">Alex Popeil</h5>
+              <p class="roboto-purple">Engineer, likes to code</p>
+            </div>
           </div>
         </div>
-  </div>
     </div>
   </div>
   

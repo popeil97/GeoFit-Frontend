@@ -6,8 +6,8 @@
       <h1 class='color-white'>For Race Creators</h1>
       <h6 class='color-white'>Eager to create your first race? Let's get started!</h6>
       <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
-        <button (click)="openLogin()">Log in</button>
-        <button (click)="openRegister()">Sign up</button>
+        <button class='LandingButton' (click)="openLogin()">Log in</button>
+        <button class='LandingButton' (click)="openRegister()">Sign up</button>
       </div>
     </div>
 
@@ -211,17 +211,17 @@
     <div class='LandingPageSegmentItem BottomActionItem'>
       <h4>Ready to Get Started?</h4>
       <p>Start creating your first race by signing up into Tucan Fitness.</p>
-      <button (click)="openRegister()">Sign Up</button>
+      <button class='LandingButton' (click)="openRegister()">Sign Up</button>
     </div>
     <div class='LandingPageSegmentItem BottomActionItem'>
       <h4>Have a Question Left Unanswered?</h4>
       <p>Our FAQ's are a great start to learning more.</p>
-      <button  (click)="navigateTo('/faqs')">Open FAQs</button>
+      <button class='LandingButton' (click)="navigateTo('/faqs')">Open FAQs</button>
     </div>
     <div class='LandingPageSegmentItem BottomActionItem'>
       <h4>Want to Talk to a Rep?</h4>
       <p>Get connected with one of our core team members.</p>
-      <button (click)="navigateTo('/contact')">Contact Us</button>
+      <button class='LandingButton' (click)="navigateTo('/contact')">Contact Us</button>
     </div>
   </div>
   

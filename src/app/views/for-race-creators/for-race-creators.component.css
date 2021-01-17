@@ -50,6 +50,14 @@
 }
 
 
+
+.LandingButton {
+  background-color:white;
+}
+.LandingButton:hover, .Landingbutton:focus {
+  background-color: var(--main-background-color);
+  color:white;
+}
 .FirstSegment {
     position: relative;
     background-image: url(../../../assets/forRaceCreatorsHero.jpg);
@@ -83,7 +91,6 @@
 }
 .LandingSubheadingButtons button, .LandingSubheadingButtons .button {
   margin:8px;
-  background-color: white;
 }
 .TucanLandingLogoImage {
   width:100%;
