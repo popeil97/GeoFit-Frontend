@@ -8,10 +8,15 @@
         <p class='textAlignCenter'>Tucan fitness is a social fitness platform for racers to get fit together virtually from anywhere in the world.</p>
         <!--  <a class="button lightButton LandingAboutButton" routerLink='/about-tucan'>About Tucan Fitness</a> -->
       </div>
-      <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
+      <div *ngIf="!this._authService.isLoggedIn(); else loggedInAction" class='LandingSubheadingButtons'>
         <button class='LandingButton' (click)="openLogin()">Log in</button>
         <button class='LandingButton' (click)="openRegister()">Sign up</button>
       </div>
+      <ng-template #loggedInAction>
+        <div class='LandingSubheadingButtons'>
+          <button class='LandingButton' (click)="goToUserProfile()">Go to your profile</button>
+        </div>
+      </ng-template>
     </div>
     
     <div class="LandingPageSegmentItem">
@@ -29,8 +34,8 @@
           <img class="EmpowerImage" src= "../../../assets/icons/run-green-icon.png" alt="Empower You" /> 
         </div>
         <div class='LandingPageSegmentItem'>
-          <h3 class='margin-top-bottom-16px'>We empower you to be healthy <span class='nobr'>and fit</span></h3>
-          <p>Tucan Fitness is built around community which allows for accountability to your health and fitness goals. Our races empower you to participate from anywhere, anytime, and at any pace.</p>
+          <h3 class='margin-top-bottom-16px EmpowerHeader'>We empower you to be healthy <span class='nobr'>and fit</span></h3>
+          <p class='EmpowerText'>Tucan Fitness is built around community which allows for accountability to your health and fitness goals. Our races empower you to participate from anywhere, anytime, and at any pace.</p>
         </div>
       </div>
     </div>
@@ -69,7 +74,7 @@
   </div>
   
   <div class='LandingPageSegment BenefitsSegment'>
-    <h3 class='margin-top-bottom-32px'>What can Tucan Fitness do <span class='nobr'>for you?</span></h3>
+    <h3 class='margin-top-bottom-32px width-100per textAlignCenter'>What can Tucan Fitness do <span class='nobr'>for you?</span></h3>
     <div class='LandingPageSegmentItem LandingPageIconList BenefitsList'>
       <div class='IconTextItem'>
         <div class='IconContainer'>

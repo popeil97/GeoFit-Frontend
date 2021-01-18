@@ -40,6 +40,11 @@
 }
 .FooterURL {
     color:white;
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
 }
 .FooterURL:hover {
     cursor:pointer;
@@ -48,6 +53,27 @@
 .FooterSocialMedia {
     width:16px;
     height:16px;
-    margin-right: 8px;
-    margin-bottom:8px;
+    margin-right: 16px;
+}
+
+@media only screen and (max-width:600px) {
+    .Footer {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align:center;
+    }
+    .FooterColumn {
+        margin-left:0px;
+        margin-right:0px;
+
+        flex-direction: column;
+        align-items: center;
+    }
+    .FooterList {
+        width:100%;
+    }
+    .FooterURL {
+        justify-content: center;
+    }
 }

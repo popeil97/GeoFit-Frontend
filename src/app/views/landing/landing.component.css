@@ -75,6 +75,9 @@
   .LandingSubheading {
     margin-bottom:16px;
   }
+  .LandingSubheading p {
+      margin-bottom:0;
+  }
   .LandingSubheadingButtons {
     display:flex;
     flex-direction: row;
@@ -96,8 +99,8 @@
     width:100%;
   }
   .LandingPageImage {
-    max-width: 360px;
-    max-height: 360px;
+    max-width: 420px;
+    max-height: 420px;
   }
   
   
@@ -113,8 +116,9 @@
     min-height:100px;
     padding-top:0;
     padding-bottom:0;
-    margin-left:16px;
-    margin-right:16px;
+    margin-left:24px;
+    margin-right:24px;
+    margin-bottom:24px;
   }
   .IconContainer {
     position:relative;
@@ -257,6 +261,8 @@
   @media only screen and (max-width: 600px) {
     .LandingPageSegment {
       flex-wrap: wrap;
+      padding-left:16px;
+      padding-right:16px;
     }
     .LandingPageImage {
       max-height: initial;
@@ -266,6 +272,10 @@
     .LandingPageSegmentItem, .LandingPageSegment .LandingPageSegment {
       padding-left:0;
       padding-right:0;
+    }
+    .LandingPageSegment .LandingPageSegment {
+        padding-left:0px;
+        padding-right:0px;
     }
     .FirstSegment {
       flex-direction: column-reverse;
@@ -281,12 +291,18 @@
     .IconTextItem {
       width:80px;
       min-height:80px;
+      margin-left:16px;
+      margin-right:16px;
+        margin-bottom:16px;
     }
     .IconContainer {
       width:80px;
       height:80px;
     }
   
+    .EmpowerHeader, .EmpowerText {
+        text-align:center;
+    }
     .BenefitsList {
       max-width: 400px;
     }

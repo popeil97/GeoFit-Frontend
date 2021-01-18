@@ -8,8 +8,8 @@
       <div class="TucanNavigationBlackTransparent" (click)="ToggleNavigation()"></div>
       <div class="TucanNavigationButtons">
         <div class="TucanNavigationButtonSegment">
-          <div class='NavItem'>
-            <a class="TucanNavigationLogo" routerLink='/'><img src= "../../assets/logos/logo-white-headOnly-small.png"></a>
+          <div class='NavItem TucanNavigationLogo' (click)="NavItemClick('/')">
+            <img src= "../../assets/logos/logo-white-headOnly-small.png" alt="Tucan Fitness Logo" />
           </div>
            
           <div class="NavItem active" (click)="NavItemClick('/for-race-creators')">
@@ -34,7 +34,7 @@
           -->
         </div>
 
-        <div class="TucanNavigationButtonSegment" id='NavLoginButtons'>
+        <div class="TucanNavigationButtonSegment NavLoginButtons" id='NavLoginButtons'>
           <div class="NavItem active" (click)="NavItemClick('/races')">
             <p class="NavLink">Public Races<span class="sr-only">(current)</span></p>
           </div>
@@ -85,7 +85,7 @@
           </ng-template>
           <ng-template #NavButtonsBlock>
             <div class='NavItem'>
-              <button class='darkButton' (click)="openLogin()">Log in</button>
+              <button class='HeaderLoginButton darkButton' (click)="openLogin()">Log in</button>
             </div>
             <!--
             <div class='NavItem'>

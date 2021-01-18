@@ -206,22 +206,14 @@ a.navbar-brand {
   box-shadow: 0 4px 10px -2px black;
 }
 
-@media only screen and (max-width: 900px) {
-  /*
-  .TucanNavigationLogo img {
-    width:90px;
-  }
-  */
-}
-
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 760px) {
   .TucanNavigationLogo {
-    height:auto;
-    width:90px;
+    height: 40px;
+    width:100%;
   }
   .TucanNavigationLogo img {
-    height:auto;
-    width:100%;
+    max-width:100%;
+    max-height: 100%;
   }
   .TucanNavigationToggler {
     display:block;
@@ -255,12 +247,13 @@ a.navbar-brand {
     max-width: 60%;
     height:100%;
 
-    padding:16px;
+    padding:32px;
     box-sizing: border-box;
 
     background-color: var(--main-background-color);
 
     flex-direction: column;
+    justify-content: flex-start;
     align-items: stretch;
   }
   .TucanNavigationButtonSegment {
@@ -268,10 +261,16 @@ a.navbar-brand {
     align-items: stretch;
   }
     .TucanNavigationButtonSegment .NavItem button, .TucanNavigationButtonSegment .NavItem .button {
-      width:100%;
+      background-color:white;
+      color: var(--main-background-color);
+      font-weight:bold;
     }
   .TucanNavigationButtonSegment.safariBrowser {
     margin-bottom:79px;
+  }
+  .NavLoginButtons {
+    border-top: 1px solid white;
+    padding-top:16px;
   }
   .NavDropdownContents {
     left:0;
@@ -282,6 +281,6 @@ a.navbar-brand {
   .NavItem {
     padding-left:0;
     padding-right:0;
-    margin-bottom:8px;
+    margin-bottom:16px;
   }
 }

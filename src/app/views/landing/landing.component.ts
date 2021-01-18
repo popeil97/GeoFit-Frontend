@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 import {AuthService} from '../../auth.service';
 import {throwError} from 'rxjs';
 import $ from "jquery";
@@ -18,6 +19,7 @@ export class LandingComponent implements OnInit {
 
   constructor(
     public _authService: AuthService, 
+    public router : Router,
     public dialog : MatDialog,
   ) { }
 
@@ -26,6 +28,7 @@ export class LandingComponent implements OnInit {
     if (localStorage.getItem('access_token')){
       this._authService.token = localStorage.getItem('access_token');
     }
+    console.log(this._authService.isLoggedIn());
 
   }
 
@@ -49,6 +52,10 @@ export class LandingComponent implements OnInit {
     d.afterClosed().subscribe(result=>{
       console.log('CLOSING REGISTER FROM LANDING', result);
     })
+  }
+
+  goToUserProfile = () => {
+    this.router.navigate(['/profile']);
   }
 
 /**
