@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { SwagListComponent } from '../swag-list/swag-list.component';
 import * as _ from 'lodash';
+import { ItemType } from '../swag.service';
 
 @Component({
   selector: 'app-cart-edit',
@@ -49,7 +50,7 @@ export class CartEditComponent implements OnInit,OnChanges {
     checkoutCallback.type = 'CHECKOUT';
     checkoutCallback.data = this.cartList.getCart();
     //console.log(";CART", checkoutCallback.data );
-    if(checkoutCallback.data.orders.length>=1)
+    if(checkoutCallback.data.orders.length>=1 && this.hasRegistrationItem())
     {
       this.checkoutAlert.emit(checkoutCallback);
       this.checkoutDisabled = false;
@@ -63,6 +64,20 @@ export class CartEditComponent implements OnInit,OnChanges {
 
     
 
+  }
+
+  hasRegistrationItem() {
+    let cart = this.cartList.getCart();
+
+    for(var i = 0; i < cart.orders.length; i++) {
+      let order = cart.orders[i];
+
+      if(order.item.type == ItemType.ENTRY || order.item.type == ItemType.ENTRYANDSWAG) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
 }
