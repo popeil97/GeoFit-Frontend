@@ -304,14 +304,31 @@
   .LandingPageSegment {
     flex-wrap: wrap;
   }
-  .StickySubNavigation {
-    display:none;
+  .LandingPageSegmentItem, .LandingPageSegment .LandingPageSegment {
+      padding-left:0;
+      padding-right:0;
+    }
+  .LandingPageSegment .LandingPageSegment {
+    padding-left:0px;
+    padding-right:0px;
   }
+  .IconTextItem {
+    width:80px;
+    min-height:80px;
+    margin-left:16px;
+    margin-right:16px;
+      margin-bottom:16px;
+  }
+  .IconContainer {
+    width:80px;
+    height:80px;
+  }
+
     .FirstSegment .LandingPageSegmentItem {
         padding-left:16px;
         padding-right:16px;
-        margin-left:16px;
-        margin-right: 16px;
+        text-align: center;
+        align-items: center;
     }
     .FirstSegment .LandingPageSegmentItem:first-child {
         padding-top:16px;
@@ -320,6 +337,13 @@
     .FirstSegment .LandingPageSegmentItem:last-child {
         padding-top:16px;
         padding-bottom: 16px;
+    }
+    .HeroSignUp {
+      margin-top:8px;
+      margin-bottom:8px;
+    }
+    .StickySubNavigation {
+      display:none;
     }
   .WhatIsTucanListItem {
     margin-bottom:16px;
@@ -347,6 +371,49 @@
     width:auto;
     max-width: 100%;
   }
+
+  .HowItWorksRow {
+    padding-left:0px;
+    padding-right:0px;
+    padding-bottom: 0px;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .HowItWorksRow:nth-child(even) {
+    flex-direction: column;
+  }
+  .HowItWorksIconContainer {
+    width: 80px;
+    height:80px;
+    margin-left:0px;
+    margin-right:0px;
+    margin-bottom:16px;
+  }
+  .HowItWorksRow > .LandingPageSegmentItem {
+    padding-left:0px;
+    padding-right:0px;
+    align-items: center;
+  }
+  .BottomActionItemsList {
+    flex-direction: column;
+    align-items: stretch;
+    text-align:center;
+  }
+  .BottomActionItem {
+    width: 100%;
+    align-items: center;
+    padding-left:0px;
+    padding-right:0px;
+    margin-bottom:36px;
+  }
+
+
+
+
+
+
   .AboutTucanValuesContainer {
     flex-direction: column;
     justify-content: flex-start;

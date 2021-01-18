@@ -4,7 +4,7 @@
     <div class="LandingPageSegmentItem">
       <!--<img src= "../../../assets/logos/logo-white.png" class="TucanLandingLogoImage">-->
       <h1 class='color-white'>For Race Creators</h1>
-      <h6 class='color-white'>Eager to create your first race? Let's get started!</h6>
+      <h6 class='color-white'>Eager to create your first race? Let's <span class='nobr'>get started!</span></h6>
       <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
         <button class='LandingButton HeroSignUp' (click)="openRegister()">Sign Up</button>
         <!--<button class='LandingButton' (click)="openRegister()">Sign up</button>-->
@@ -16,7 +16,7 @@
   
   <div class='StickySubNavigation'>
     <div class='StickySubNavigationItem' (click)="scrollToElement('howWork')">
-      <span>How Does Tucan Fitness Work?</span>
+      <span>How does Tucan Fitness work?</span>
     </div>
     <div class='StickySubNavigationItem' (click)="scrollToElement('benefits')">
       <span>Benefits</span>
@@ -29,14 +29,14 @@
   
   <div class='LandingPageSegment Vertical GrayBackground' id="howWork">
     <div class='LandingPageSegmentItem margin-bottom-32px'>
-      <h1 class="textAlignCenter">How does Tucan <span class='nobr'>Fitness work?</span></h1>
+      <h1 class="textAlignCenter"><span class='nobr'>How does Tucan</span><br /><span class='nobr'>Fitness work?</span></h1>
     </div>
     <div class='LandingPageSegmentItem HowItWorksRow'>
       <div class='LandingPageSegmentItem HowItWorksIconContainer'>
         <img class='HowItWorksIcon' src='../../../assets/icons/plan-icon.png' alt="Planning Icon" />
       </div>
       <div class='LandingPageSegmentItem'>
-        <h5>STEP 1: CREATE A RACE</h5>
+        <h5>STEP 1: CREATE <span class='nobr'>A RACE</span></h5>
         <p>Log into your Tucan Fitness account and get started creating your race with our Creator Tool.</p>
       </div>
     </div>
@@ -45,7 +45,7 @@
         <img class='HowItWorksIcon' src='../../../assets/icons/route-icon.png' alt="Route Icon" />
       </div>
       <div class='LandingPageSegmentItem'>
-        <h5>Step 2: Fill out the details</h5>
+        <h5>STEP 2: FILL OUT <span class='nobr'>THE DETAILS</span></h5>
         <p>Add the important details including the race route, participants, fundraising merch, and other key aspects of your race.</p>
       </div>
     </div>
@@ -54,7 +54,7 @@
         <img class='HowItWorksIcon' src='../../../assets/icons/share-icon.png' alt="Share Icon" />
       </div>
       <div class='LandingPageSegmentItem'>
-        <h5>Step 3: Share your race</h5>
+        <h5>STEP 3: SHARE YOUR RACE</h5>
         <p>Send out invitations to your race participants and share your new race on social media.</p>
       </div>
     </div>
@@ -63,7 +63,7 @@
         <img class='HowItWorksIcon' src='../../../assets/icons/analyze-icon.png' alt="Analyze Icon" />
       </div>  
       <div class='LandingPageSegmentItem'>
-        <h5>Step 4: Track your race</h5>
+        <h5>STEP 4: TRACK YOUR RACE</h5>
         <p>Keep track of your participants, settings, status of the race, and more via your Race Dashboard on your account.</p>
       </div>
     </div>
@@ -72,13 +72,13 @@
         <img class='HowItWorksIcon' src='../../../assets/icons/finish-icon.png' alt="Finish Icon" />
       </div>
       <div class='LandingPageSegmentItem'>
-        <h5>Step 5: Finish!</h5>
+        <h5>STEP 5: FINISH!</h5>
         <p>When the race is over, collect your registration fees and send a thank you to all of your participants.</p>
       </div>
     </div>
   </div>
 
-  <div class='LandingPageSegment BenefitsSegment' id="benefits">
+  <div class='LandingPageSegment Vertical BenefitsSegment' id="benefits">
     <h3 class='margin-bottom-32px textAlignCenter'>The benefits of partnering with <span class='nobr'>Tucan Fitness:</span></h3>
     <div class='LandingPageSegmentItem LandingPageIconList'>
       <div class='IconTextItem'>
@@ -120,7 +120,7 @@
     </div>
   </div>
 
-  <div class='LandingPageSegment GrayBackground FeaturesSegment' id="features">
+  <div class='LandingPageSegment Vertical GrayBackground FeaturesSegment' id="features">
     <h3 class='margin-bottom-32px textAlignCenter'>Our features cater to <span class='nobr'>your needs</span></h3>
     <div class='LandingPageSegmentItem LandingPageIconList'>
       <div class='IconTextItem'>
@@ -200,17 +200,17 @@
   
   <div class='LandingPageSegment BottomActionItemsList'>
     <div class='LandingPageSegmentItem BottomActionItem BottomActionGetStarted'>
-      <h3>Ready to <span class='nobr'>Get Started?</span></h3>
+      <h3>Ready to <span class='nobr'>get started?</span></h3>
       <p>Start creating your first race by signing up into <span class='nobr'>Tucan Fitness.</span></p>
       <button class='LandingButton' (click)="openRegister()">Sign Up</button>
     </div>
     <div class='LandingPageSegmentItem BottomActionItem'>
-      <h3>Have a Question Left Unanswered?</h3>
+      <h3>Have a question left unanswered?</h3>
       <p>Our FAQ's are a great start to learning more.</p>
       <button class='LandingButton' (click)="navigateTo('/faqs')">Open FAQs</button>
     </div>
     <div class='LandingPageSegmentItem BottomActionItem'>
-      <h3>Want to Talk to <span class='nobr'>a Rep?</span></h3>
+      <h3>Want to talk to <span class='nobr'>a rep?</span></h3>
       <p>Get connected with one of our core team members.</p>
       <button class='LandingButton' (click)="navigateTo('/contact')">Contact Us</button>
     </div>
