@@ -258,7 +258,12 @@
   .LandingPageSegment {
     flex-wrap: wrap;
   }
-  .LandingPageSegmentItem, .LandingPageSegmentItem .LandingPageSegment {
+  .LandingPageImage {
+    max-height: initial;
+    max-width: initial;
+    width:100%;
+  };
+  .LandingPageSegmentItem, .LandingPageSegment .LandingPageSegment {
     padding-left:0;
     padding-right:0;
   }
@@ -269,6 +274,9 @@
     width:100%;
     padding-left:0;
     padding-right:0;
+  }
+  .FirstSegment > .LandingPageSegmentItem:last-child {
+    margin-bottom:24px;
   }
   .IconTextItem {
     width:80px;

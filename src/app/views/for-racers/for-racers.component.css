@@ -7,8 +7,10 @@
     flex-wrap: nowrap;
     justify-content: center;
     width:100%;
-    padding-top:64px;
-    padding-bottom: 64px;
+    padding-top:32px;
+    padding-bottom: 32px;
+    padding-left:64px;
+    padding-right:64px;
     box-sizing: border-box;
 }
 .LandingPageSegment .LandingPageSegment {
@@ -90,7 +92,17 @@
   flex-wrap: wrap;
 }
 .LandingSubheadingButtons button, .LandingSubheadingButtons .button {
-  margin:8px;
+  margin-right:16px;
+}
+.HeroSignUp {
+  width: 120px;
+}
+.HeroLogin {
+  text-decoration: underline;
+}
+.HeroLogin:hover {
+  cursor:pointer;
+  opacity:0.8;
 }
 .TucanLandingLogoImage {
   width:100%;
@@ -108,6 +120,7 @@
   background-color:var(--main-background-color); 
   color:white;
   padding:16px;
+  padding-left:126px;
   box-sizing: border-box;
   display:flex;
   align-items: flex-start;

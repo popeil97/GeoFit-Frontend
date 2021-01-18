@@ -207,9 +207,11 @@ a.navbar-brand {
 }
 
 @media only screen and (max-width: 900px) {
+  /*
   .TucanNavigationLogo img {
     width:90px;
   }
+  */
 }
 
 @media only screen and (max-width: 600px) {

@@ -6,8 +6,9 @@
       <h1 class='color-white'>For Racers</h1>
       <h6 class='color-white'>Eager to join your first race? Let’s get started!</h6>
       <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
-        <button class='LandingButton' (click)="openLogin()">Log in</button>
-        <button class='LandingButton' (click)="openRegister()">Sign up</button>
+        <button class='LandingButton HeroSignUp' (click)="openRegister()">Sign Up</button>
+        <!--<button class='LandingButton' (click)="openRegister()">Sign up</button>-->
+        <p class='color-white margin-bottom-0px italics'>Already have an account? <span (click)="openLogin()" class='HeroLogin'>Log in</span></p>
       </div>
     </div>
 
@@ -15,20 +16,20 @@
   
   <div class='StickySubNavigation'>
     <div class='StickySubNavigationItem' (click)="scrollToElement('howWork')">
-      <span>- How Does Tucan Fitness Work?</span>
+      <span>How Does Tucan Fitness Work?</span>
     </div>
     <div class='StickySubNavigationItem' (click)="scrollToElement('benefits')">
-      <span>- Benefits</span>
+      <span>Benefits</span>
     </div>
     <div class='StickySubNavigationItem' (click)="scrollToElement('features')">
-      <span>- Features</span>
+      <span>Features</span>
     </div>
   </div>
        
   
   <div class='LandingPageSegment Vertical GrayBackground' id="howWork">
     <div class='LandingPageSegmentItem margin-bottom-32px'>
-      <h1>How Does Tucan Fitness Work?</h1>
+      <h1>How Does Tucan <span class='nobr'>Fitness Work?</span></h1>
     </div>
     <div class='LandingPageSegmentItem HowItWorksRow'>
       <div class='LandingPageSegmentItem HowItWorksIconContainer'>
@@ -81,7 +82,7 @@
     <div class='LandingPageSegmentItem margin-bottom-16px'>
       <div class='LandingPageSegment BenefitsSegment'>
         <div class='LandingPageSegmentItem'>
-          <h3 class='margin-bottom-32px'>Interact and collaborate with other racers around the world</h3>
+          <h3 class='margin-bottom-32px'>Interact and collaborate with other racers around <span class='nobr'>the world</span></h3>
           <p>Participating in a virtual race allows you to:</p>
           <ul>
             <li>Compete and share your story with other racers</li>
@@ -119,7 +120,7 @@
   </div>
 
   <div class='LandingPageSegment Vertical GrayBackground' id="features">
-    <h3 class='margin-bottom-32px'>Our Features Cater to Your Needs</h3>
+    <h3 class='margin-bottom-32px'>Our features cater to <span class='nobr'>your needs</span></h3>
     <div class='LandingPageSegmentItem'>
       <div class='LandingPageSegment alignItemsFlexStart justifyContentSpaceEvenly'>
         <div class='LandingPageSegmentItem BenefitsListItem'>
