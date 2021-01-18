@@ -1,0 +1,287 @@
+/****** NavBar *****/
+.navbar {
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index: 10; 
+
+  width:100%;
+  height:80px;
+  padding:16px;
+  box-sizing: border-box;
+  /* background:rgba(256,256,256,0.7); */
+  background-color: var(--main-background-color);
+  border-bottom:1px solid white;
+
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.NavItem {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+
+  padding-right: 12px;
+  padding-left: 8px;
+}
+  .NavLink {
+    margin-top:0;
+    margin-bottom: 0;
+    font-size: 19px;
+    color:white;
+  }
+  .NavItem:hover {
+    cursor: pointer;
+  }
+    .NavItem:hover .NavLink {
+      text-decoration: underline;
+    }
+.NavProfileDropdownSelected {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.TucanNavigationLogo {
+  width:auto;
+  height:30px;
+}
+.TucanNavigationLogo img {
+  height:100%;
+}
+.TucanNavigationToggler {
+  display:none;
+}
+.TucanNavigationContents {
+  width:100%;
+}
+.TucanNavigationBlackTransparent {
+  display:none;
+}
+.TucanNavigationButtons {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.TucanNavigationButtonSegment {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+
+
+a.navbar-brand {
+    padding-top: 0px ; 
+    padding-bottom: 0px ;
+ }
+
+.navbar a {
+  border-bottom:none;
+  color:white;
+}
+
+.navbar ul li a {border-bottom:none;}
+
+.roboto-white
+{
+  font-family: "Roboto";
+  color:#effaf7;
+}
+
+.roboto-purple
+{
+  font-family: "Roboto";
+  color:#2C007E;
+}
+
+.navbar-nav {
+}
+  
+  /* Fixes dropdown menus placed on the right side */
+  .ml-auto .dropdown-menu {
+    left: auto !important;
+    right: 0px;
+  }
+
+.right {
+  position: absolute;
+  right: 0;
+}
+
+.maincode:hover .maintooltip { /* NEW */
+    display: block;
+}
+
+
+.maintooltip {
+    display: none;
+    color: #403d58;
+    margin-left: 2px; /* moves the tooltip to the right */
+    margin-top: 12px; /* moves it down */
+    position: absolute;
+    padding:4px;
+    z-index: 1000;
+    background: #fafafa;
+    border-radius: 15px;
+}
+
+.maincode {
+    margin:1px;
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 35px;  /* Preferred icon size */
+  display: inline-flex;
+  vertical-align: top;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+
+.NavProfileDropdown {
+  padding:8px;
+  color:white
+}
+.NavNotifImgContainer, .NavProfileImgContainer {
+  position: relative;
+  display:inline-block;
+  border-radius:0.5em;
+  width:35px;
+  height:35px;
+  overflow:hidden;
+}
+.NavProfileImgContainer {
+  margin-right:8px;
+}
+.NavProfileImg {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:100%;
+}
+
+.NavNotifImg {
+  position: absolute;
+  top:1%;
+  left:10%;
+  transform:translate(-50%,-50%);
+  width:100%;
+}
+
+.NavDropdownContents {
+  right:0;
+  left:initial;
+  background-color: var(--main-background-color);
+  box-shadow: 0 4px 10px -2px black;
+}
+
+@media only screen and (max-width: 900px) {
+  /*
+  .TucanNavigationLogo img {
+    width:90px;
+  }
+  */
+}
+
+@media only screen and (max-width: 600px) {
+  .TucanNavigationLogo {
+    height:auto;
+    width:90px;
+  }
+  .TucanNavigationLogo img {
+    height:auto;
+    width:100%;
+  }
+  .TucanNavigationToggler {
+    display:block;
+  }
+  .TucanNavigationContents {
+    position:fixed;
+    left:0;
+    top:0;
+    width:0;
+    height:100vh;
+    overflow:hidden;
+  }
+  .TucanNavigationContents.open {
+    width:100vw;
+  }
+  .TucanNavigationBlackTransparent {
+    position:absolute;
+    z-index: 1;
+
+    display:block;
+    width:100%;
+    height:100%;
+
+    background-color: rgba(0,0,0,0.5);
+  }
+  .TucanNavigationButtons {
+    position:relative;
+    z-index: 2;
+
+    width:auto;
+    max-width: 60%;
+    height:100%;
+
+    padding:16px;
+    box-sizing: border-box;
+
+    background-color: var(--main-background-color);
+
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .TucanNavigationButtonSegment {
+    flex-direction: column;
+    align-items: stretch;
+  }
+    .TucanNavigationButtonSegment .NavItem button, .TucanNavigationButtonSegment .NavItem .button {
+      width:100%;
+    }
+  .TucanNavigationButtonSegment.safariBrowser {
+    margin-bottom:79px;
+  }
+  .NavDropdownContents {
+    left:0;
+    right:initial;
+    top:initial;
+    bottom:100%;
+  }
+  .NavItem {
+    padding-left:0;
+    padding-right:0;
+    margin-bottom:8px;
+  }
+}

@@ -20,10 +20,14 @@ import { CartEditComponent } from './cart-edit/cart-edit.component';
 import { PaypalComponent } from './paypal/paypal.component';
 import { SearchComponent } from './search/search.component';
 
+import { LandingComponent } from './views/landing/landing.component';
+import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-creators.component';
+import { ForRacersComponent } from './views/for-racers/for-racers.component';
+
 const routes: Routes = [
   {path: 'race', component:RaceViewPageComponent},
   {path: 'races', component:PublicRacesPageComponent},
-  {path: '', component:LandingPageComponent},
+  //{path: '', component:LandingPageComponent},
   {path: 'create', component:RaceCreateComponent},
   {path: 'profile',component:UserPageComponent},
   {path: 'about',component:RaceAboutPageComponent},
@@ -38,6 +42,10 @@ const routes: Routes = [
   {path: 'faqs', component:FaqPageComponent},
   {path: 'contact', component:ContactPageComponent},
   {path: 'search', component:SearchComponent},
+
+  {path:'',component:LandingComponent},
+  {path:'for-race-creators',component:ForRaceCreatorsComponent},
+  {path:'for-racers',component:ForRacersComponent},
 ];
 
 @NgModule({
