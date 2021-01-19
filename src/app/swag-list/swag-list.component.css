@@ -2,18 +2,16 @@
   margin-bottom:32px;
 }
 .itemsInCartContainer {
-  background-color:lightgrey;
-  padding:8px;
   box-sizing: border-box;
 }
 
 .TotalDisplay {
   width:100%;
-  margin-top:8px;
+  margin-top:36px;
   
   display:flex;
-  flex-direction: row-reverse;
-  justify-content: flex-start;
+  flex-direction: flex-start;
+  justify-content: center;
   align-items: flex-start;
   flex-wrap: nowrap;
 }
