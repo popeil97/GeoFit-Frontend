@@ -30,6 +30,7 @@
 .cartItemDescription, .orderItemDescription {
     flex-grow: 1;
     flex-basis: 0;
+    margin-bottom:16px;
 
     display:flex;
     flex-direction: column;
@@ -59,6 +60,7 @@
     width:auto;
 }
 .cartSizeContainer {
+    margin-bottom:8px;
     display:flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -93,6 +95,9 @@
         justify-content: flex-start;
         align-items: center;
         text-align:center;
+    }
+    .cartItemDescription, .orderItemDescription {
+        flex-basis: initial;
     }
     .cartItemDescription {
         align-items: center;
