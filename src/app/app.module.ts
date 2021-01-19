@@ -122,7 +122,6 @@ import { StoryPopupComponent } from './story-popup/story-popup.component';
 import { RaceCreatePageComponent } from './race-create-page/race-create-page.component';
 import { TeamFormDialogComponent } from './team-form/team-form-dialog.component';
 import { LoginDialogComponent } from './login/login-dialog.component';
-<<<<<<< HEAD
 import { ProxyComponent } from './proxy/proxy.component';
 import { Proxy2Component } from './proxy2/proxy2.component';
 import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-creators.component';
@@ -130,13 +129,6 @@ import { FooterComponent } from './views/footer/footer.component';
 import { ForRacersComponent } from './views/for-racers/for-racers.component';
 import { LandingComponent } from './views/landing/landing.component';
 import { HeaderNavComponent } from './views/header-nav/header-nav.component';
-=======
-import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-creators.component';
-import { FooterComponent } from './views/footer/footer.component';
-import { ForRacersComponent } from './views/for-racers/for-racers.component';
-import { LandingComponent } from './views/landing/landing.component';
-import { HeaderNavComponent } from './views/header-nav/header-nav.component';
->>>>>>> dev-ui
 
 
 @NgModule({
