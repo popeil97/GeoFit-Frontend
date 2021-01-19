@@ -1,0 +1,224 @@
+<div class='PageContainer'>
+  <div class="LandingPageSegment FirstSegment" id="forRaceCreators">
+    
+    <div class="LandingPageSegmentItem">
+      <!--<img src= "../../../assets/logos/logo-white.png" class="TucanLandingLogoImage">-->
+      <h1 class='color-white'>For Racers</h1>
+      <h6 class='color-white'>Eager to join your first race? Let’s <span class='nobr'>get started!</span></h6>
+      <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
+        <button class='LandingButton HeroSignUp' (click)="openRegister()">Sign Up</button>
+        <!--<button class='LandingButton' (click)="openRegister()">Sign up</button>-->
+        <p class='color-white margin-bottom-0px italics'>Already have an account? <span (click)="openLogin()" class='HeroLogin'>Log in</span></p>
+      </div>
+    </div>
+
+  </div>
+  
+  <div class='StickySubNavigation'>
+    <div class='StickySubNavigationItem' (click)="scrollToElement('howWork')">
+      <span>How Does Tucan Fitness Work?</span>
+    </div>
+    <div class='StickySubNavigationItem' (click)="scrollToElement('benefits')">
+      <span>Benefits</span>
+    </div>
+    <div class='StickySubNavigationItem' (click)="scrollToElement('features')">
+      <span>Features</span>
+    </div>
+  </div>
+       
+  
+  <div class='LandingPageSegment Vertical GrayBackground' id="howWork">
+    <div class='LandingPageSegmentItem margin-bottom-32px'>
+      <h1><span class='nobr'>How Does Tucan</span><br /><span class='nobr'>Fitness Work?</span></h1>
+    </div>
+    <div class='LandingPageSegmentItem HowItWorksRow'>
+      <div class='LandingPageSegmentItem HowItWorksIconContainer'>
+        <img class='HowItWorksIcon' src='../../../assets/icons/register-icon.png' alt="Register Icon" />
+      </div>
+      <div class='LandingPageSegmentItem'>
+        <h6>Step 1: Register to a race</h6>
+        <p>View the races currently available on the “Races” page. Once you find one you like, register, and buy any merch you may be interested in.</p>
+      </div>
+    </div>
+    <div class='LandingPageSegmentItem HowItWorksRow'>
+      <div class='LandingPageSegmentItem HowItWorksIconContainer'>
+        <img class='HowItWorksIcon' src='../../../assets/icons/profile-icon.png' alt="Profile Icon" />
+      </div>
+      <div class='LandingPageSegmentItem'>
+        <h6>Step 2: Set up your profile</h6>
+        <p>Before race day, set up your profile. It’s recommended to connect to Strava to enable automatic import of activities. Change your profile pic and description so friends can find you!</p>
+      </div>
+    </div>
+    <div class='LandingPageSegmentItem HowItWorksRow'>
+      <div class='LandingPageSegmentItem HowItWorksIconContainer'>
+        <img class='HowItWorksIcon' src='../../../assets/icons/run-green-icon.png' alt="Run Icon" />
+      </div>
+      <div class='LandingPageSegmentItem'>
+        <h6>Step 3: Run/walk/cycle</h6>
+        <p>Once race day starts, you complete fitness activities, and record it using Strava or another device.</p>
+      </div>
+    </div>
+    <div class='LandingPageSegmentItem HowItWorksRow'>
+      <div class='LandingPageSegmentItem HowItWorksIconContainer'>
+        <img class='HowItWorksIcon' src='../../../assets/icons/socialize-icon.png' alt="Socialize Icon" />
+      </div>  
+      <div class='LandingPageSegmentItem'>
+        <h6>Step 4: Upload, interact, and repeat</h6>
+        <p>After completing an activity, go back to Tucan Fitness and share your progress by uploading your activity and any pictures or statuses you want to share with the community!</p>
+      </div>
+    </div>
+    <div class='LandingPageSegmentItem HowItWorksRow'>
+      <div class='LandingPageSegmentItem HowItWorksIconContainer'>
+        <img class='HowItWorksIcon' src='../../../assets/icons/finish-icon.png' alt="Finish Icon" />
+      </div>
+      <div class='LandingPageSegmentItem'>
+        <h6>Step 5: Finish!</h6>
+        <p>When the race is over, you can feel good about your accomplishments and the cause you ran for! Now it’s time to think about your next race!</p>
+      </div>
+    </div>
+  </div>
+
+  <div class='LandingPageSegment Vertical' id="benefits">
+    <h3 class='margin-bottom-32px textAlignCenter'>Interact and collaborate with other racers around <span class='nobr'>the world</span></h3>
+    <div class='LandingPageSegmentItem RaceViewImageContainer'>
+      <img class='RaceViewImage' src='../../../assets/raceView.jpg' alt='Race View Screenshot' />
+    </div>
+    <div class='LandingPageSegmentItem margin-bottom-16px'>
+      <p>Participating in a virtual race allows you to:</p>
+      <ul>
+        <li>Compete and share your story with other racers</li>
+        <li>Exercise at your own pace while providing for a good cause</li>
+        <li>Track your progress and statistics over the duration of the race</li>
+      </ul>
+    </div>
+    <div class='LandingPageSegmentItem LandingPageIconList'>
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/community-icon.png' alt='Community Icon' />
+        </div>
+        <p class='textAlignCenter'>Community-Oriented</p>
+      </div>
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/flexibility-icon.png' alt='Flexibility Icon' />
+        </div>
+        <p class='textAlignCenter'>Flexible</p>
+      </div>
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/fitness-icon.png' alt='Health Icon' />
+        </div>
+        <p class='textAlignCenter'>Health-Promoting</p>
+      </div>
+    </div>
+  </div>
+
+  <div class='LandingPageSegment Vertical GrayBackground' id="features">
+    <h3 class='margin-bottom-32px textAlignCenter'>Our features cater to <span class='nobr'>your needs</span></h3>
+    <div class='LandingPageSegmentItem LandingPageIconList'>
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/leaderboard-icon.png' alt='Leaderboard Icon' />
+        </div>
+        <p class='textAlignCenter'>Leaderboards</p>
+      </div>
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/social-feed-icon.png' alt='Social Feed Icon' />
+        </div>
+        <p class='textAlignCenter'>Social Feeds</p>
+      </div>
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/map-icon.png' alt='Map Icon' />
+        </div>
+        <p class='textAlignCenter'>Virtual Race Routes</p>
+      </div>
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/teams-icon.png' alt='Teams Icon' />
+        </div>
+        <p class='textAlignCenter'>Teams</p>
+      </div>
+      <!--
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/shared-icon.png' alt='Shared Experience Icon' />
+        </div>
+        <p class='textAlignCenter'>Shared Experiences</p>
+      </div>
+      -->
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/progress-icon.png' alt='Progress Icon' />
+        </div>
+        <p class='textAlignCenter'>Real-time Progress Tracking</p>
+      </div>
+      <!--
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/brand-icon.png' alt='Brand Icon' />
+        </div>
+        <p class='textAlignCenter'>Branding</p>
+      </div>
+      -->
+      <div class='IconTextItem'>
+        <div class='IconContainer'>
+          <img class='Icon' src='../../../assets/icons/app-icon.png' alt='App Icon' />
+        </div>
+        <p class='textAlignCenter'>Fitness App Integration</p>
+      </div>
+    </div>
+  </div>
+  
+  
+  <div class='LandingPageSegment BottomActionItemsList'>
+    <div class='LandingPageSegmentItem BottomActionItem BottomActionGetStarted'>
+      <h3>Ready to <span class='nobr'>get started?</span></h3>
+      <p>Start creating your first race by signing up into <span class='nobr'>Tucan Fitness.</span></p>
+      <button class='LandingButton' (click)="openRegister()">Sign Up</button>
+    </div>
+    <div class='LandingPageSegmentItem BottomActionItem'>
+      <h3>Have a question left unanswered?</h3>
+      <p>Our FAQ's are a great start to learning more.</p>
+      <button class='LandingButton' (click)="navigateTo('/faqs')">Open FAQs</button>
+    </div>
+    <div class='LandingPageSegmentItem BottomActionItem'>
+      <h3>Want to talk to <span class='nobr'>a rep?</span></h3>
+      <p>Get connected with one of our core team members.</p>
+      <button class='LandingButton' (click)="navigateTo('/contact')">Contact Us</button>
+    </div>
+  </div>
+  
+  <!--
+  <div class='PageSegment'>
+    <div class='AboutTucanValuesContainer'>
+      <div class='AboutTucanFooter1'></div>
+      <div class='AboutTucanFooter2'>
+        <h3 class='LandingHeaderTextBlack'>Company</h3>
+        <div class='LandingSubheading'>
+          <a routerLink="/about-tucan" routerLinkActive="active" style="color:var(--tucan-green);">About Tucan</a><br>
+          <a routerLink="/public-races" routerLinkActive="active" style="color:var(--tucan-green);">Public Races</a><br>
+          <a routerLink="/faqs" routerLinkActive="active" style="color:var(--tucan-green);">FAQS</a><br>
+          <a routerLink="/contact" routerLinkActive="active" style="color:var(--tucan-green);">Contact</a><br>
+          <app-terms-of-service></app-terms-of-service>
+          <a href="https://stories..com/work"freepik style="color:var(--tucan-green);">Illustration by Freepik</a>
+
+        </div>
+      </div>
+      <div class='AboutTucanFooter2'>
+        <h3 class='LandingHeaderTextBlack'>Contact Us</h3>
+        <a href="mailto:admin@tucan.fitness" style="color:var(--tucan-green);">admin@tucan.fitness</a>
+        <p>
+          <br>
+          <br>
+          <br>
+        </p>
+        <a href="https://www.facebook.com/tucanfit"><img class="socialMedia" src= "https://www.flaticon.com/svg/static/icons/svg/174/174848.svg"></a>
+        <a href="https://www.linkedin.com/company/tucan-fitness/"><img class="socialMedia" src= "https://www.flaticon.com/svg/static/icons/svg/174/174857.svg"></a>          
+      </div>                
+    </div>
+  </div>
+  -->
+  <app-footer></app-footer>
+</div>

@@ -22,10 +22,14 @@ import { SearchComponent } from './search/search.component';
 import { ProxyComponent } from './proxy/proxy.component';
 import { Proxy2Component } from './proxy2/proxy2.component';
 
+import { LandingComponent } from './views/landing/landing.component';
+import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-creators.component';
+import { ForRacersComponent } from './views/for-racers/for-racers.component';
+
 const routes: Routes = [
   {path: 'race', component:RaceViewPageComponent},
   {path: 'races', component:PublicRacesPageComponent},
-  {path: '', component:LandingPageComponent},
+  //{path: '', component:LandingPageComponent},
   {path: 'create', component:RaceCreateComponent},
   {path: 'profile',component:UserPageComponent},
   {path: 'about',component:RaceAboutPageComponent},
@@ -42,6 +46,9 @@ const routes: Routes = [
   {path: 'search', component:SearchComponent},
   {path: 'eldercare', component:ProxyComponent},
   {path: 'RunForTheDogs', component:Proxy2Component},
+  {path:'',component:LandingComponent},
+  {path:'for-race-creators',component:ForRaceCreatorsComponent},
+  {path:'for-racers',component:ForRacersComponent},
 ];
 
 @NgModule({
