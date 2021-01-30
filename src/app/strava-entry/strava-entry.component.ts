@@ -18,7 +18,7 @@ export class StravaEntryComponent implements OnInit {
   @Input() race_id:number;
   @Input() distance_unit:string;
   @Output() setLoaderState: EventEmitter<boolean> = new EventEmitter();
-  @Output() refreshStatComponents: EventEmitter<void> = new EventEmitter();
+  @Output() refreshStatComponents: EventEmitter<any> = new EventEmitter();
   
   columns:string[] = ['Name','Distance','Date'];
   selectedRows:number[] = [];
@@ -59,7 +59,7 @@ export class StravaEntryComponent implements OnInit {
       this.setLoaderState.emit(false);
       // this.getRaceState(); // change eventually
       this.getActivities();
-      this.refreshStatComponents.emit();
+      this.refreshStatComponents.emit({});
       
       // handle checkpoints
       this.openCheckpointDialog(res['checkpoints_passed']);
