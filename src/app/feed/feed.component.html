@@ -5,7 +5,7 @@
     <button (click)="openModal('custom-modal-6')">Make a Post</button>
   </div> -->
 
-  <ng-template [ngIf]='feedItems.length > 0' [ngIfElse]="NothingInFeedBlock">
+  <ng-template [ngIf]='feedItems && feedItems.length > 0' [ngIfElse]="NothingInFeedBlock">
     <div class='Feed'>
       <div *ngFor="let element of feedItems" class='FeedItem' [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">
         <div class='FeedProfileImgCell'>
@@ -19,7 +19,7 @@
                 <!-- NO STORY : FITNESS UPDATE -->
                 <div class='FeedMessageHeader'>
                   <p class='FeedMessageName'><app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav></p>
-                  <span class='small'>{{ this.get_created_ts(element.created_ts) }}</span>
+                  
                   <div class='FeedmessageOtherInfo'>
                     <span class='small margin-right-4px'>{{ element.hot? '🔥🔥🔥' : ' ' }}</span>
                     <span class='small'>{{ this.get_created_ts(element.created_ts) }}</span>

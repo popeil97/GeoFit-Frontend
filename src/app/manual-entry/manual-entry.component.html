@@ -20,7 +20,7 @@
                     {{ typeOption }}
                     </option>
                 </select>
-                <div *ngIf="submitted && f.activityType && activityType.errors" class="invalid-feedback">
+                <div *ngIf="submitted && f.activityType && f.activityType.errors" class="invalid-feedback">
                     <div *ngIf="f.activityType.errors.required">Required</div>
                 </div>
             </div>
@@ -33,7 +33,7 @@
         <input class="form-control" [matDatepicker]="picker" formControlName="activityDate" placeholder="Activity Date (MM/DD/YYYY) *" [ngClass]="{ 'is-invalid': submitted && f.date_of_birth.errors }">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         
-        <div *ngIf="submitted && f.activityDate.errors" class="invalid-feedback">
+        <div *ngIf="submitted && f.activityDate && f.activityDate.errors" class="invalid-feedback">
             <div *ngIf="f.activityDate.errors.required">Required (MM/DD/YYYY).</div>
         </div>
     </div>

@@ -14,6 +14,8 @@ export class ManualEntryComponent implements OnInit {
 
   manualEntryForm:FormGroup;
  // @Input() id: string;
+
+  @Input() closeDialog: () => void;
   @Input() race_type:number;
   @Output() uploadManualEntry: EventEmitter<any> = new EventEmitter();
   activityOptions:any[];
@@ -75,6 +77,7 @@ export class ManualEntryComponent implements OnInit {
  //   this.manualEntryForm.get('distanceType').setValue('MI');
   }
 
+  /*
   closeModal(id: string) {
     this.modalService.close(id);
     console.log(this.modalService.getModalData(id));
@@ -82,6 +85,7 @@ export class ManualEntryComponent implements OnInit {
  //   this._snackbar.openFromComponent(SnackbarComponent,{duration: 5000,horizontalPosition: 'left',
    //   verticalPosition: 'bottom',data:{message:'Your activity has been applied!'}});
   }
+  */
 
   upload(): void {
     this.modalService.callbackModal("custom-modal-5",null);
@@ -107,7 +111,8 @@ export class ManualEntryComponent implements OnInit {
     this.manualEntryForm.get('minutes').setValue(0);
     this.manualEntryForm.get('seconds').setValue(0);
     this.submitted = true;
-    this.closeModal('custom-modal-5');
+    //this.closeModal('custom-modal-5');
+    this.closeDialog();
   }
 
   parseDistanceType(entry:any) {

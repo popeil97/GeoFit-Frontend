@@ -14,6 +14,7 @@ export class StravaEntryComponent implements OnInit {
 
   activities:Activity[] = [];
   public actsToImport:number[] = [];
+  @Input() closeDialog: ()=>void;
   @Input() race_id:number;
   @Input() distance_unit:string;
   @Output() setLoaderState: EventEmitter<boolean> = new EventEmitter();
@@ -63,8 +64,9 @@ export class StravaEntryComponent implements OnInit {
       // handle checkpoints
       this.openCheckpointDialog(res['checkpoints_passed']);
     });
-    console.log("shelllloooo");
-    this.closeModal('custom-modal-5');
+    // console.log("shelllloooo");
+    //this.closeModal('custom-modal-5');
+    this.closeDialog();
   }
 
   addAct(act:any): void {

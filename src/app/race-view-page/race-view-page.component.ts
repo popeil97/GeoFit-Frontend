@@ -16,11 +16,15 @@ import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
 import * as confetti from 'canvas-confetti';
 import { ModalService } from '../modalServices';
 
+import { MatDialog } from '@angular/material';
+import { LogActivityComponent } from '../log-activity/log-activity.component';
+
 declare var $: any;
 import * as _ from 'lodash';
 import { TagType, Tag } from '../tags.service';
 import { RouteSelectComponent } from '../route-select/route-select.component';
 import { HybridLeaderboardComponent } from '../hybrid-leaderboard/hybrid-leaderboard.component';
+import { CheckpointDialogComponent } from '../checkpoint-list/checkpoint-dialog.component';
 
 
 
@@ -115,6 +119,8 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     private storyService: StoryService,
     public _authService: AuthService,
     private modalService: ModalService,
+
+    private dialog : MatDialog,
   ) {
     this.modalData = {};
   }
@@ -135,8 +141,11 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     this.getRaceState();
     this.getActivities();
 
-    document.getElementById('feed-btn').style.backgroundColor = "#36343c";
-    document.getElementById('feed-btn').style.color = "#FFFFFF";
+    const feedButton = document.getElementById('feed-btn');
+    if (feedButton) {
+      feedButton.style.backgroundColor = "#36343c";
+      feedButton.style.color = "#FFFFFF";
+    }
   }
 
   ngAfterViewInit(): void {
@@ -157,17 +166,52 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
   }
 
   openModal(id: string) {
-    var data = (id=='mapSettingsModal') ? {userSettings:this.userRaceSettings,callbackFunction:null}:(id == 'custom-modal-5') ? {raceType:this.raceType, distance_unit: this.progress.distance_type, race_id:this.raceID, numActivities : this.num_activities, manualEntry:this.raceSettings.isManualEntry, automaticImport: this.userRaceSettings.isAutomaticImport, callbackFunction:null} : {};
+    var data = (id=='mapSettingsModal') 
+      ? {
+        userSettings:this.userRaceSettings,
+        callbackFunction:null
+      }
+      :(id == 'custom-modal-5') 
+        ? {
+          raceType:this.raceType, 
+          distance_unit: this.progress.distance_type, 
+          race_id:this.raceID, 
+          numActivities : this.num_activities, 
+          manualEntry:this.raceSettings.isManualEntry, 
+          automaticImport: this.userRaceSettings.isAutomaticImport, 
+          callbackFunction:null
+        } 
+        : {};
     data.callbackFunction = this.uploadActivity;
 
     this.modalService.open(id,data);
+  }
+
+  openLogActivity = () => {
+    let tD = this.dialog.open(LogActivityComponent, {
+      panelClass:"LogActivityContainer",
+      data:{
+        raceType:this.raceType, 
+        distance_unit: this.progress.distance_type, 
+        race_id:this.raceID, 
+        numActivities : this.num_activities, 
+        manualEntry:this.raceSettings.isManualEntry, 
+        automaticImport: this.userRaceSettings.isAutomaticImport,
+        uploadActivity: this.uploadActivity,
+      }
+    });
+    tD.afterClosed().subscribe(result=>{
+      // console.log('CLOSING LOG ACTIVITY', result);
+      this.getRaceState();
+      this.getActivities();
+    })
   }
 
   uploadActivity = (incomingData = null) => {
     // const toAlert = (incomingData != null) ? incomingData : this.testString;
     if (incomingData == null || typeof incomingData === 'undefined') return;
     
-    console.log("PARENT INCOMING DATA",incomingData.type);
+    // console.log("PARENT INCOMING DATA",incomingData.type);
     switch(incomingData.type) {
       case('manual'):
         this.uploadManualEntry(incomingData.entry);
@@ -344,6 +388,10 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
   uploadManualEntry(entry) {
     this.activitiesService.uploadManualEntry(entry,this.selectedRaceID).then((resp) => {
       console.log('GOT MANUAL ENTRY:',resp);
+
+      // handle checkpoints
+      this.openCheckpointDialog(resp['checkpoints_passed']);
+
       this.refreshStatComponents();
     });
   }
@@ -382,21 +430,31 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     //console.log("to", to, this.acceptedScreens.indexOf(to));
     if (to == null || this.acceptedScreens.indexOf(to) == -1) return;
     this.currentScreen = to;
-    document.getElementById(to+'-btn').style.backgroundColor = "#36343c";
-    document.getElementById(to+'-btn').style.color = "#FFFFFF";
+    
+    const toButton = document.getElementById(to+'-btn'),
+        teamButton = document.getElementById('teams-btn');
+    if (!toButton) { return; }
+    
+    toButton.style.backgroundColor = "#36343c";
+    toButton.style.color = "#FFFFFF";
 
     switch(to) { 
       case 'feed':
         document.getElementById('leaderboard-btn').style.backgroundColor = "#FFFFFF";
         document.getElementById('leaderboard-btn').style.color = "#000000";
-        document.getElementById('teams-btn').style.backgroundColor = "#FFFFFF";
-        document.getElementById('teams-btn').style.color = "#000000";
+        if (teamButton) {
+          document.getElementById('teams-btn').style.backgroundColor = "#FFFFFF";
+          document.getElementById('teams-btn').style.color = "#000000";
+        }
         break; 
       case 'leaderboard':
         document.getElementById('feed-btn').style.backgroundColor = "#FFFFFF";
         document.getElementById('feed-btn').style.color = "#000000";
-        document.getElementById('teams-btn').style.backgroundColor = "#FFFFFF";
-        document.getElementById('teams-btn').style.color = "#000000";
+        if (teamButton) {
+          document.getElementById('teams-btn').style.backgroundColor = "#FFFFFF";
+          document.getElementById('teams-btn').style.color = "#000000";
+       }
+
         break; 
       case 'teams':
         document.getElementById('feed-btn').style.backgroundColor = "#FFFFFF";
@@ -427,6 +485,18 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     }
     
 
+  }
+
+  openCheckpointDialog(checkpointIDs:number[]) {
+    if(checkpointIDs == null) {
+      return;
+    }
+    let dialogPayload = {
+      data: {
+        checkpointIDs: checkpointIDs
+      }
+    }
+    let dialogRef = this.dialog.open(CheckpointDialogComponent,dialogPayload);
   }
 }
 

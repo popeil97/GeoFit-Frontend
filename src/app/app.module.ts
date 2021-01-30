@@ -124,6 +124,12 @@ import { TeamFormDialogComponent } from './team-form/team-form-dialog.component'
 import { CheckpointListComponent } from './checkpoint-list/checkpoint-list.component';
 import { CheckpointItemComponent } from './checkpoint-item/checkpoint-item.component';
 import { CheckpointDialogComponent } from './checkpoint-list/checkpoint-dialog.component';
+import { LoginDialogComponent } from './login/login-dialog.component';
+import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-creators.component';
+import { FooterComponent } from './views/footer/footer.component';
+import { ForRacersComponent } from './views/for-racers/for-racers.component';
+import { LandingComponent } from './views/landing/landing.component';
+import { HeaderNavComponent } from './views/header-nav/header-nav.component';
 
 
 @NgModule({
@@ -217,6 +223,12 @@ import { CheckpointDialogComponent } from './checkpoint-list/checkpoint-dialog.c
     CheckpointListComponent,
     CheckpointItemComponent,
     CheckpointDialogComponent,
+    LoginDialogComponent,
+    ForRaceCreatorsComponent,
+    FooterComponent,
+    ForRacersComponent,
+    LandingComponent,
+    HeaderNavComponent,
       ],
 
   imports: [
@@ -259,6 +271,11 @@ import { CheckpointDialogComponent } from './checkpoint-list/checkpoint-dialog.c
                   TeamFormDialogComponent,
                   CheckpointDialogComponent,
                   //ViewFollowDialogContent
+
+                  LoginComponent,
+                  Register2Component,
+                  Signup2Component,
+                  LogActivityComponent,
                   ] 
 })
 export class AppModule { 

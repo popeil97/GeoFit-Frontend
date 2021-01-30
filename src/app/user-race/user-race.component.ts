@@ -32,7 +32,7 @@ export class UserRaceComponent implements OnInit {
   }
 
   ngOnInit() {
-  	 this.raceService.getRaces({}).subscribe(
+  	 this.raceService.getRaces(this.userData.user_id).subscribe(
       data => {
 
         this.racesData = data;

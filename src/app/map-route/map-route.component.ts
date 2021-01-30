@@ -552,11 +552,15 @@ export class MapRouteComponent implements OnChanges {
       var lng_checkpoint = along_checkpoint.geometry.coordinates[0];
       var lat_checkpoint = along_checkpoint.geometry.coordinates[1];
 
-      L.marker([lat_checkpoint,lng_checkpoint],{
-        icon: L.divIcon({
-          className: 'my-custom-icon',
-          html: "5"
-      })
+      L.circleMarker([lat_checkpoint,lng_checkpoint],{
+        radius: 10,
+        stroke: true,
+        color: 'green',
+        opacity: 1,
+        weight: 1,
+        fill: true,
+        fillColor: "green",
+        fillOpacity: 1
       }).addTo(this.map);
 
     });
