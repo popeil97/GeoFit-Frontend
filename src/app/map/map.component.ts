@@ -8,7 +8,7 @@ import { PopUpService } from '../pop-up.service';
 import { UserFollowComponent } from '../user-follow/user-follow.component';
 import { RoutePinDialogComponent } from '../route-pin-dialog/route-pin-dialog.component';
 import { MapService } from '../map.service';
-import { MapRouteComponent } from '../map-route/map-route.component';
+import { CheckpointMapData, MapRouteComponent } from '../map-route/map-route.component';
 
 import 'leaflet';
 import 'leaflet.markercluster';
@@ -137,6 +137,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
         route_pins: [],
         userData: [],
         org_pins: [],
+        checkpoints: []
       });
 
       this._mapService.getOrgPinStats(raceID).then((data) => {
@@ -161,6 +162,11 @@ export class MapComponent implements AfterViewInit,OnChanges {
           }
 
         });
+
+        this._mapService.getCheckpointMapData(raceID).then((resp) => {
+          console.log('GOT SOME CHECKPOINT MAP DATA:',resp);
+          this.routeData[raceID].checkpoints = resp['checkpoints'];
+        })
 
       });
     };
@@ -293,6 +299,7 @@ interface RouteData {
   route_pins: RoutePins[];
   userData: UserData[];
   org_pins: UserData[];
+  checkpoints: CheckpointMapData[];
 }
 
 interface UserData {

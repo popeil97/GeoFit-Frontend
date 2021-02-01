@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter,OnChanges } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { ActivitiesService } from '../activities.service';
+import { CheckpointDialogComponent } from '../checkpoint-list/checkpoint-dialog.component';
 import { ModalService } from '../modalServices';
 
 
@@ -16,14 +18,14 @@ export class StravaEntryComponent implements OnInit {
   @Input() race_id:number;
   @Input() distance_unit:string;
   @Output() setLoaderState: EventEmitter<boolean> = new EventEmitter();
-  @Output() refreshStatComponents: EventEmitter<void> = new EventEmitter();
+  @Output() refreshStatComponents: EventEmitter<any> = new EventEmitter();
   
   columns:string[] = ['Name','Distance','Date'];
   selectedRows:number[] = [];
   invalidImport:Boolean = false;
 
 
-  constructor(private modalService: ModalService, private _activitiesService:ActivitiesService) { }
+  constructor(private modalService: ModalService, private _activitiesService:ActivitiesService,public dialog: MatDialog) { }
 
   ngOnInit() {
 
@@ -45,6 +47,7 @@ export class StravaEntryComponent implements OnInit {
 
   importSelectedActs(): void {
     // this.loading = true; // switch to toggleFunction that communicates with parent
+    
     this.invalidImport = false
     this.setLoaderState.emit(true);
     this._activitiesService.importActivities(this.actsToImport,this.race_id).then((res) => {
@@ -56,7 +59,10 @@ export class StravaEntryComponent implements OnInit {
       this.setLoaderState.emit(false);
       // this.getRaceState(); // change eventually
       this.getActivities();
-      this.refreshStatComponents.emit();
+      this.refreshStatComponents.emit({});
+      
+      // handle checkpoints
+      this.openCheckpointDialog(res['checkpoints_passed']);
     });
     // console.log("shelllloooo");
     //this.closeModal('custom-modal-5');
@@ -96,6 +102,18 @@ export class StravaEntryComponent implements OnInit {
   closeModal(id: string) {
     this.modalService.close(id);
     console.log(this.modalService.getModalData(id));
+  }
+
+  openCheckpointDialog(checkpointIDs:number[]) {
+    if(checkpointIDs == null) {
+      return;
+    }
+    let dialogPayload = {
+      data: {
+        checkpointIDs: checkpointIDs
+      }
+    }
+    let dialogRef = this.dialog.open(CheckpointDialogComponent,dialogPayload);
   }
 
 

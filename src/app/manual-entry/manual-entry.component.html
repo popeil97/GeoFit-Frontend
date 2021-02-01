@@ -15,7 +15,7 @@
       </div>
       <div class="column2">
             <div class="form-group">
-                <select class="form-control" formControlName="activityType" [ngClass]="{ 'is-invalid': submitted && f.activityType.errors }">
+                <select class="form-control" formControlName="activityType" [ngClass]="{ 'is-invalid': submitted && f.activityType && f.activityType.errors }">
                     <option *ngFor="let typeOption of activityOptions" [value]="typeOption">
                     {{ typeOption }}
                     </option>

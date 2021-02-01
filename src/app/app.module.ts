@@ -121,6 +121,9 @@ import { ContactFormComponent } from './contact-form/contact-form.component';
 import { StoryPopupComponent } from './story-popup/story-popup.component';
 import { RaceCreatePageComponent } from './race-create-page/race-create-page.component';
 import { TeamFormDialogComponent } from './team-form/team-form-dialog.component';
+import { CheckpointListComponent } from './checkpoint-list/checkpoint-list.component';
+import { CheckpointItemComponent } from './checkpoint-item/checkpoint-item.component';
+import { CheckpointDialogComponent } from './checkpoint-list/checkpoint-dialog.component';
 import { LoginDialogComponent } from './login/login-dialog.component';
 import { ProxyComponent } from './proxy/proxy.component';
 import { Proxy2Component } from './proxy2/proxy2.component';
@@ -219,6 +222,9 @@ import { HeaderNavComponent } from './views/header-nav/header-nav.component';
     StoryPopupComponent,
     RaceCreatePageComponent,
     TeamFormDialogComponent,
+    CheckpointListComponent,
+    CheckpointItemComponent,
+    CheckpointDialogComponent,
     LoginDialogComponent,
     ProxyComponent,
     Proxy2Component,
@@ -267,6 +273,7 @@ import { HeaderNavComponent } from './views/header-nav/header-nav.component';
                   StoryDeleteDialogComponent,
                   WhyInfoDialogContent,
                   TeamFormDialogComponent,
+                  CheckpointDialogComponent,
                   //ViewFollowDialogContent
 
                   LoginComponent,

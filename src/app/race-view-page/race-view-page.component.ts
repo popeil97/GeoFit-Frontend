@@ -24,6 +24,7 @@ import * as _ from 'lodash';
 import { TagType, Tag } from '../tags.service';
 import { RouteSelectComponent } from '../route-select/route-select.component';
 import { HybridLeaderboardComponent } from '../hybrid-leaderboard/hybrid-leaderboard.component';
+import { CheckpointDialogComponent } from '../checkpoint-list/checkpoint-dialog.component';
 
 
 
@@ -386,6 +387,11 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
 
   uploadManualEntry(entry) {
     this.activitiesService.uploadManualEntry(entry,this.selectedRaceID).then((resp) => {
+      console.log('GOT MANUAL ENTRY:',resp);
+
+      // handle checkpoints
+      this.openCheckpointDialog(resp['checkpoints_passed']);
+
       this.refreshStatComponents();
     });
   }
@@ -479,6 +485,18 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     }
     
 
+  }
+
+  openCheckpointDialog(checkpointIDs:number[]) {
+    if(checkpointIDs == null) {
+      return;
+    }
+    let dialogPayload = {
+      data: {
+        checkpointIDs: checkpointIDs
+      }
+    }
+    let dialogRef = this.dialog.open(CheckpointDialogComponent,dialogPayload);
   }
 }
 

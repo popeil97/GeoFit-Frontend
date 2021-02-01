@@ -3,6 +3,6 @@
     <div id="map"></div>
 
     <div *ngFor="let item of routeData | keyvalue ">           
-        <app-map-route [map]="map" [raceID]="item.key" [coordinates]="item.value.coords" [orgData]="item.value.org_pins" [userData]="item.value.userData" [routePins]="item.value.route_pins" [followedIDs]="followedIDs" [zoom]="zoom" [displayUsers]="displayUsers"></app-map-route>
+        <app-map-route [map]="map" [raceID]="item.key" [coordinates]="item.value.coords" [orgData]="item.value.org_pins" [userData]="item.value.userData" [routePins]="item.value.route_pins" [checkpoints]="item.value.checkpoints" [followedIDs]="followedIDs" [zoom]="zoom" [displayUsers]="displayUsers"></app-map-route>
     </div>
 </div>
