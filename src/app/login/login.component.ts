@@ -5,7 +5,10 @@ import {
   //ViewChild, 
   Output, 
   EventEmitter, 
-  Input 
+  Input, 
+  NgModule,
+
+  Inject
 } from '@angular/core';
 // import { MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -16,6 +19,12 @@ import { AuthService } from '../auth.service';
 import { UserProfileService } from '../userprofile.service';
 
 import { ModalService } from '../modalServices';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Register2Component } from '../register2/register2.component';
+
+@NgModule({
+  imports:[MatDialogRef]
+})
 
 @Component({
   selector: 'app-login',
@@ -40,6 +49,10 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private _authService: AuthService,
     private _userProfileService: UserProfileService,
+
+    public dialog : MatDialog,
+    @Inject(MAT_DIALOG_DATA) data: any,
+    public dialogRef : MatDialogRef<LoginComponent>,
   ) { }
 
   ngOnInit() {
@@ -95,22 +108,29 @@ export class LoginComponent implements OnInit {
   }
 
   closeDialog() {
-    if (this.id == null) return;
-    
-    this.modalService.callbackModal(this.id,'FROM CHILD');
-    
+    //if (this.id == null) return;
+    //this.modalService.callbackModal(this.id,'FROM CHILD');
+
     this.loginForm.reset();
     this.loginForm.markAsPristine();
     this.loginForm.markAsUntouched();
     this.loginForm.updateValueAndValidity();
     this.loading = false;
     this.submitted = false;
-    this.modalService.close(this.id);
+    
+    //this.modalService.close(this.id);
+    this.dialogRef.close();
   }
 
-  SwitchToSignup = () => {
+  SwitchToRegister = () => {
     this.closeDialog();
-    this.modalService.open('custom-modal-2');
+    //this.modalService.open('custom-modal-2');
+    let d = this.dialog.open(Register2Component, {
+      panelClass:"RegisterContainer",
+    });
+    d.afterClosed().subscribe(result=>{
+      //console.log("CLOSED REGISTER", result);
+    })
   }
 
 }

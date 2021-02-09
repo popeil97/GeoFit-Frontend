@@ -20,96 +20,94 @@
   background-color:#EBEBEB
 }
 
-  .FeedProfileImgCell {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 30px;
+.FeedProfileImgCell {
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: 30px;
 
-    width:30px;
-    height:30px;
-    margin-right:8px;
-  }
-    .FeedProfileImgContainer {
-      position: relative;
-      width:30px;
-      height:30px;
-      border-radius: 15px;
-      overflow:hidden;
+  width:30px;
+  height:30px;
+  margin-right:8px;
+}
+.FeedProfileImgContainer {
+  position: relative;
+  width:30px;
+  height:30px;
+  border-radius: 15px;
+  overflow:hidden;
 
-      border:0.5px solid grey;
-      box-sizing: border-box;
-    }
-      .FeedProfileImg {
-        position: absolute;
-        width:100%;
-        top:50%;
-        left:50%;
-        transform:translate(-50%,-50%);
-      }
-  .FeedProfileContentCell {
-    flex-grow: 1;
-    flex-basis: 0;
-  }
-    .FeedMessageHeader {
-      display:flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: nowrap;
-    }
-      .FeedMessageName {
-        font-weight:bold;
-        margin-bottom:0;
-      }
-    .FeedMessageContent {}
-    .FeedMessageActionsContainer {
-      display:flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: nowrap;
-    }
-      .FeedMessageActionsSocialContainer {
-        display:flex;
-        flex-direction: row;
-        justify-content: flex-start;
-        align-items: center;
-        flex-wrap: nowrap;
-      }
-    .FeedMessageOptionsDropdown {
-      position: relative;
-    }
-      .FeedMessageOptions {
-        position: absolute;
-        right:0;
-        left:unset;
-        top:100%;
+  border:0.5px solid grey;
+  box-sizing: border-box;
+}
+.FeedProfileImg {
+  position: absolute;
+  width:100%;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+.FeedProfileContentCell {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+.FeedMessageHeader {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.FeedMessageName {
+  font-weight:bold;
+  margin-bottom:0;
+}
+.FeedMessageContent {}
+.FeedMessageActionsContainer {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.FeedMessageActionsSocialContainer {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.FeedMessageOptionsDropdown {
+  position: relative;
+}
+.FeedMessageOptions {
+  position: absolute;
+  right:0;
+  left:unset;
+  top:100%;
 
-        width:max-content;
-      }
-        .FeedMessageOptionsContent {
-          position: relative;
-          width:100%;
-          height:100%;
-          padding:8px;
-          box-sizing: border-box;
+  width:max-content;
+}
 
-          background-color:white;
-          border-radius: 10px;
-          border:0.5px solid var(--primary-lightgrey);
-        }
-          .FeedMessageOption {
-            margin-bottom:0px;
-            border-bottom:0.5px solid var(--primary-lightgrey);
-          }
-          .FeedMessageOption:last-child {
-            border-bottom:none;
-          }
+.FeedMessageOptionsContent {
+  position: relative;
+  width:100%;
+  height:100%;
+  padding:8px;
+  box-sizing: border-box;
 
+  background-color:white;
+  border-radius: 10px;
+  border:0.5px solid var(--primary-lightgrey);
+}
 
+.FeedMessageOption {
+  margin-bottom:0px;
+  border-bottom:0.5px solid var(--primary-lightgrey);
+}
 
-
-
+.FeedMessageOption:last-child {
+  border-bottom:none;
+}
 
 .mat-row {
   height: auto;

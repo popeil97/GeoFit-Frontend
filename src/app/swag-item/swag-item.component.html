@@ -1,34 +1,24 @@
 <!-- Item type 1= entry; 2=swag 3=entry+swag-->
-
 <div class="cartItem" *ngIf="!isOrder">
   <div class='cartItemContents'>
-    <img class='cartItemImage' src={{item.image}} alt={{item.name}}>
+    <div class='cartItemImageContainer'>
+      <img class='cartItemImage' src={{item.image}} alt={{item.name}} />
+    </div>
     <div class='cartItemDescription'>
-      <div class='cartNameContainer'>
-        <h6 class='margin-bottom-0px'>{{item.name}}</h6>
-      </div>
-      <div class='cartDescriptionPriceContainer'>
-        <p class='margin-bottom-4px' >{{item.description}}</p>
-        <div class='cardPriceContainer'>
-          <h6 class='margin-bottom-0px'>${{item.price}}</h6>
-        </div>
-      </div>
+      <h6 class='margin-bottom-0px'>{{item.name}}</h6>
+      <p class='margin-bottom-8px'>{{item.description}}</p>
+      <p class='margin-bottom-8px bold-text'>${{item.price}}</p>
       <div class='cartSizeContainer' *ngIf="item.type!=1">
         <p class='margin-bottom-0px'>Size:</p>
         <select class='cartSelectSize' [(ngModel)]="selectedSize">
           <option *ngFor="let size of item.sizes" [value]="size" (click)="onSizeSelect(size)">{{size}}</option>
         </select>
-        <!--<button class='h7 buttonWithIcon' [ngClass]="{'addButtonDisabled':btnDisabled}" [disabled]="btnDisabled" (click)="addToCart()">Add to Cart <mat-icon>shopping_cart</mat-icon></button> -->
       </div>
-
       <div class='cartSizeContainer' *ngIf="item.type!=1">
         <button class='h7 buttonWithIcon' (click)="addToCart()">Add to Cart <mat-icon>shopping_cart</mat-icon></button>
-        <!--<button class='h7 buttonWithIcon' [ngClass]="{'addButtonDisabled':btnDisabled}" [disabled]="btnDisabled" (click)="addToCart()">Add to Cart <mat-icon>shopping_cart</mat-icon></button> -->
       </div>
-
       <div class='cartSizeContainer' *ngIf="item.type==1">
         <button class='h7 buttonWithIcon' (click)="addEntryToCart()">Add to Cart <mat-icon>shopping_cart</mat-icon></button>
-        <!--<button class='h7 buttonWithIcon' [ngClass]="{'addButtonDisabled':btnDisabled}" [disabled]="btnDisabled" (click)="addToCart()">Add to Cart <mat-icon>shopping_cart</mat-icon></button> -->
       </div>
     </div>
   </div>
@@ -37,14 +27,14 @@
 
 <div class="orderItem" *ngIf="isOrder">
   <div class='orderItemContents'>
-    <img class='orderItemImage' src={{order.item.image}} alt={{order.item.name}}>
+    <div class='orderItemImageContainer'>
+      <img class='orderItemImage' src={{order.item.image}} alt={{order.item.name}} />
+    </div>
     <div class='orderItemDescription'>
       <h6 class='margin-bottom-0px' *ngIf="order.item.type!=1">{{order.item.name}} - {{order.details}}</h6>
       <h6 class='margin-bottom-0px' *ngIf="order.item.type==1">{{order.item.name}}</h6>
-      <p class='margin-bottom-0px'>${{order.item.price}}</p>
-    </div>
-    <div class='removeButtonContainer'>      
-      <button class='h7 lightButton buttonWithIcon' (click)="removeFromCart()">Remove<mat-icon>shopping_cart</mat-icon></button> 
+      <p class='margin-bottom-8px'>${{order.item.price}}</p>
+      <button class='h7 lightButton buttonWithIcon' (click)="removeFromCart()">Remove<mat-icon>shopping_cart</mat-icon></button>
     </div>
   </div>
 </div>

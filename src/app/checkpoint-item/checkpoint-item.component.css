@@ -1,0 +1,19 @@
+.checkpointContents {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: stretch;
+    flex-wrap: nowrap;
+}
+.checkpointImage {
+    flex-shrink: 0;
+    flex-basis: 80px;
+    width:80px;
+    margin-right:16px;
+}
+.checkpointDescription {
+    flex-grow:1;
+    flex-basis: auto;
+    margin-left:16px;
+    margin-right:16px;
+}

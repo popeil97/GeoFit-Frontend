@@ -61,27 +61,62 @@ export class PublicRacesPageComponent implements OnInit {
               public _authService: AuthService,private _userProfileService: UserProfileService,private modalService: ModalService,) { }
 
   ngOnInit() {
+    if (localStorage.getItem('loggedInUsername')){
+      this._authService.username = localStorage.getItem('loggedInUsername');
 
-    this.raceService.getRaces({}).subscribe(
+      this._userProfileService.getUserProfile(this._authService.username).then((data) => {
+        this.userData = data as UserData;
+        this.getPublicRaces(this.userData.user_id);
+
+        if (this.userData.location =="")
+          {
+            this.userData.location = "N/A";
+          }
+
+        if (this.userData.description =="")
+          {
+            this.userData.description = "N/A";
+          }
+      });
+    }
+    else {
+      this.getPublicRaces(null);
+    }
+  }
+
+  truncateHTML(text: string): string {
+
+    let charlimit = 270;
+    if(!text || text.length <= charlimit )
+    {
+        return text;
+    }
+
+
+  let without_html = text.replace(/<(?:.|\n)*?>/gm, '');
+  let shortened = without_html.substring(0, charlimit) + "...";
+  return shortened;
+}
+
+  ProcessDate = (date = null) => {
+    if (date == null) return {month:null,day:date}
+    const dateComponents = date.split('-');
+    return {month:this.monthKey[dateComponents[0]],day:dateComponents[1]}
+  }
+
+  getPublicRaces(user_id:number){
+    // Get public races
+    this.raceService.getRaces(user_id).subscribe(
       data => {
-        /*
-        this.racesData = data.map(race=>{
-          var ma = {...race};
-          ma.start_date = this.ProcessDate(race.start_date);
-          ma.end_date = this.ProcessDate(race.end_date);
-          return ma;
-        });
-        */
         this.racesData = data;
-       //  console.log('RACE DATA:',this.racesData);
+
         this.races = _.filter(this.racesData.races,(race:any) => {
             race.raceSettings = this.getRaceSettings(race);
             race.start_date = this.ProcessDate(race.start_date);
             race.end_date = this.ProcessDate(race.end_date);
-        //    console.log("RACE SET",race);
             return race;    
         });
-     //    console.log('RACES:',this.races)
+
         this.userRaces = _.filter(this.racesData.races,(race:any) => {
           return race.joined;
         });
@@ -89,34 +124,6 @@ export class PublicRacesPageComponent implements OnInit {
         this.joinedRacesIDs = this.racesData.user_race_ids;
       }
     )
-
-    // this.races = this.racesData.races;
-
-    // console.log('CONTR:',this.racesData);
-
-    if (localStorage.getItem('loggedInUsername')){
-      this._authService.username = localStorage.getItem('loggedInUsername');
-
-      this._userProfileService.getUserProfile(this._authService.username).then((data) => {
-      this.userData = data as UserData;
-
-       if (this.userData.location =="")
-      {
-        this.userData.location = "N/A";
-      }
-
-      if (this.userData.description =="")
-      {
-        this.userData.description = "N/A";
-      }
-    });
-    }
-  }
-
-  ProcessDate = (date = null) => {
-    if (date == null) return {month:null,day:date}
-    const dateComponents = date.split('-');
-    return {month:this.monthKey[dateComponents[0]],day:dateComponents[1]}
   }
 
   getRaceSettings(race:any)
@@ -161,7 +168,20 @@ export class PublicRacesPageComponent implements OnInit {
 
  openModal(id: string,race:any) {
 //     console.log("MODAL RACE", race);
-    const data = (id == 'custom-modal-2') ? {register:true, price:race.raceSettings.price,race_id:race.id,hasTags: race.raceSettings.has_entry_tags} :(id == 'custom-modal-3') ? {price:race.raceSettings.price,race_id:race.id,hasTags: race.raceSettings.has_entry_tags} : null;
+    const data = (id == 'custom-modal-2') 
+      ? {
+        register:true, 
+        price:race.raceSettings.price,
+        race_id:race.id,
+        hasTags: race.raceSettings.has_entry_tags
+      } 
+      : (id == 'custom-modal-3') 
+        ? {
+            price:race.raceSettings.price,
+            race_id:race.id,
+            hasTags: race.raceSettings.has_entry_tags
+          } 
+          : null;
    //  console.log("MODAL DATA", data);
     this.modalService.open(id,data);
   }

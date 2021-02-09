@@ -1,0 +1,350 @@
+.PageContainer {
+    margin-bottom: 0;
+  }
+  .LandingPageSegment {
+      display:flex;
+      align-items: center;
+      flex-wrap: nowrap;
+      justify-content: center;
+      width:100%;
+      padding-top:32px;
+      padding-bottom: 32px;
+      padding-left:64px;
+      padding-right: 64px;
+      box-sizing: border-box;
+  }
+  .LandingPageSegment .LandingPageSegment {
+    padding-top:0;
+    padding-bottom:0;
+  }
+  .LandingPageSegment.Vertical {
+    flex-direction: column;
+  }
+  .LandingPageSegment.GrayBackground {
+    background-color:rgb(240, 240, 240);
+  }
+  .LandingPageSegment.alignItemsFlexStart {
+    align-items: flex-start;
+  }
+  .LandingPageSegment.justifyContentSpaceEvenly {
+    justify-content: space-evenly;
+  }
+  
+  .LandingPageSegmentItem {
+    position: relative;
+    z-index: inherit;
+    flex-grow: 0;
+    flex-shrink: 1;
+    width:100%;
+    max-width: 480px;
+    height:auto;
+    padding-left:16px;
+    padding-right:16px;
+  
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap:nowrap;
+  }
+  .LandingPageSegment.Vertical > .LandingPageSegmentItem {
+    max-width: 960px;
+  }
+  
+  
+  .LandingButton {
+    background-color:white;
+  }
+  .LandingButton:hover, .Landingbutton:focus {
+    background-color: var(--main-background-color);
+    color:white;
+  }
+  .FirstSegment {
+    padding-left:24px;
+    padding-right: 24px;
+    padding-top:64px;
+    padding-bottom: 64px;
+  }
+  .FirstSegment > .LandingPageSegmentItem:first-child {
+    width:40%;
+    max-width: 360px;
+  }
+  .FirstSegment > .LandingPageSegmentItem:last-child {
+    width:60%;
+  }
+  .LandingSubheading {
+    margin-bottom:16px;
+  }
+  .LandingSubheading p {
+      margin-bottom:0;
+  }
+  .LandingSubheadingButtons {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .LandingSubheadingButtons button, .LandingSubheadingButtons .button {
+    margin:8px;
+  }
+  .TucanLandingLogoImage {
+    width:100%;
+    max-width: 360px;
+  }
+  .EmpowerImageContainer {
+    width:240px;
+  }
+  .EmpowerImage {
+    width:100%;
+  }
+  .LandingPageImage {
+    max-width: 420px;
+    max-height: 420px;
+  }
+  
+  
+  .LandingPageIconList {
+    display:flex;
+    flex-direction:row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap:wrap;
+  }
+  .IconTextItem {
+    width:100px;
+    min-height:100px;
+    padding-top:0;
+    padding-bottom:0;
+    margin-left:24px;
+    margin-right:24px;
+    margin-bottom:24px;
+  }
+  .IconContainer {
+    position:relative;
+    width:100px;
+    height:100px;
+    margin-bottom:8px;
+  }
+  .Icon {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .BenefitsSegment {
+      flex-wrap: wrap;
+  }
+  
+  .BenefitsListItem {
+    width:30%;
+    padding-left:5%;
+    padding-right: 5%;
+    max-width: calc(120px + 10%);
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .WhatIsTucanIconContainer, .BenefitsIconContainer {
+    position:relative;
+    width: 100%;
+    padding-top:100%;
+    overflow: hidden;
+  
+    margin-bottom: 16px;
+  }
+  .WhatIsTucanIcon, .BenefitsIcon {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:100%;
+    max-height: 100%;
+  }
+  
+  
+  .LandingPageTeamProfiles {
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    padding:0;
+  }
+  .TeamProfilesSegment {
+    width:464px;
+    padding-left:0;
+    padding-right:0;
+  
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+  .TucanTeamProfile {
+    width:232px;
+  }
+  .LandingPageProfileImageContainer {
+    position:relative;
+    width:180px;
+    height:180px;
+    overflow:hidden;
+    border-radius: 50%;
+  
+    margin-bottom:16px;
+  }
+  .LandingPageProfileImage {
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:100%;
+    max-height: 100%;
+  }
+  .LandingPageProfileHoverContainer {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:45px;
+    background-color: rgb(0,0,0);
+    line-height: 0;
+  
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+  
+    transition: height 0.5s;
+  }
+  .LandingPageProfileHoverImage {
+    background-color: white;
+    line-height:0;
+    border-radius: 4px;
+    width:20px;
+    height:20px;
+    transition: width 0.5s, height 0.5s;
+  }
+  .LandingPageProfileImageContainer:hover .LandingPageProfileHoverContainer {
+    height:100%;
+  }
+  .LandingPageProfileImageContainer:hover .LandingPageProfileHoverImage {
+    width:30px;
+    height:30px;
+  }
+  
+  .AboutTucanFooter1{
+    width:49%;
+  }
+  .AboutTucanFooter2{
+    width:24%;
+  }
+  .socialMedia{
+    max-width:24px;
+    margin:4px;
+  }
+  .LandingHeaderText, .centered p {
+    color:black;
+  }
+  .AboutTucanValuesContainer {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+  }
+  
+  .ClosingSegmentItem {
+    max-width: 960px;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .LandingPageSegment {
+      flex-wrap: wrap;
+      padding-left:16px;
+      padding-right:16px;
+    }
+    .LandingPageImage {
+      max-height: initial;
+      max-width: initial;
+      width:100%;
+    };
+    .LandingPageSegmentItem, .LandingPageSegment .LandingPageSegment {
+      padding-left:0;
+      padding-right:0;
+    }
+    .LandingPageSegment .LandingPageSegment {
+        padding-left:0px;
+        padding-right:0px;
+    }
+    .FirstSegment {
+      flex-direction: column-reverse;
+    }
+    .FirstSegment > .LandingPageSegmentItem:first-child, .FirstSegment > .LandingPageSegmentItem:last-child {
+      width:100%;
+      padding-left:0;
+      padding-right:0;
+    }
+    .FirstSegment > .LandingPageSegmentItem:last-child {
+      margin-bottom:24px;
+    }
+    .IconTextItem {
+      width:80px;
+      min-height:80px;
+      margin-left:16px;
+      margin-right:16px;
+        margin-bottom:16px;
+    }
+    .IconContainer {
+      width:80px;
+      height:80px;
+    }
+  
+    .EmpowerHeader, .EmpowerText {
+        text-align:center;
+    }
+    .BenefitsList {
+      max-width: 400px;
+    }
+  
+  
+  
+    .WhatIsTucanListItem {
+      margin-bottom:16px;
+    }
+    .TucanTeamProfile {
+      flex-direction: row;
+      justify-content: flex-start;
+      margin-bottom: 16px;
+      width:100%;
+    }
+    .TucanTeamProfile .textAlignCenter {
+      text-align: left;
+    }
+    .TucanTeamProfile p {
+      margin-bottom:8px;
+    }
+    .LandingPageProfileImageContainer {
+      width:120px;
+      height:120px;
+      border-radius: 50%;
+      margin-right: 16px;
+      flex-shrink: 0;
+    }
+    .LandingPageProfileImage {
+      height:100%;
+      width:auto;
+      max-width: 100%;
+    }
+    .AboutTucanValuesContainer {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: stretch;
+    }
+    .AboutTucanFooter1 {
+      width:0%;
+    }
+    .AboutTucanFooter2 {
+      width:100%;
+    }
+  }

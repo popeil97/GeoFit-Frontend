@@ -21,8 +21,7 @@
           <app-story-btn *ngIf="this._authService.isLoggedIn()" [use]="'like'" [storyID]=storyItem.story_id [likes]=storyItem.likes [likesCount]=storyItem.likes_count></app-story-btn>
           <app-story-btn *ngIf="storyItem.is_mine" [use]="'delete'" [storyID]=storyItem.story_id></app-story-btn>
           <br>
-
-          <!--<div style="overflow-y: auto;max-height:75vh;">-->
+          
           <div>
             <app-comments [comments]="storyItem.comments" [storyID]="storyItem.story_id"></app-comments>
           </div>

@@ -79,6 +79,14 @@ h6, .h6 {
   font-size:12px;
 }
 
+.textAlignCenter {
+  text-align: center;
+}
+
+.nobr {
+  white-space: nowrap;
+}
+
 input[type=text], input[type=password], input[type=email], input[type=number], input[type=date], input[type=url], input[type=time], input[type=tel], input[type=search], textarea {
   background-color: var(--input-background-color);
 }
@@ -166,21 +174,80 @@ button.wideButton, .button.wideButton {
   font-weight: bold;
 }
 
-.margin-right-4px {
-  margin-right:4px !important;
-}
-.margin-bottom-0px {
-  margin-bottom:0px !important;
-}
-.margin-bottom-4px {
-  margin-bottom:4px !important;
-}
-.margin-bottom-8px {
-  margin-bottom:8px !important;
-}
-.margin-bottom-16px {
-  margin-bottom: 16px !important;
-}
+.margin-0px, .margin-top-bottom-0px, .margin-top-0px      { margin-top:0px; }
+.margin-0px, .margin-top-bottom-0px, .margin-bottom-0px   { margin-bottom: 0px !important; }
+.margin-0px, .margin-left-right-0px, .margin-left-0px     { margin-left: 0px; }
+.margin-0px, .margin-left-right-0px, .margin-right-0px    { margin-right:0px; }
+
+.margin-4px, .margin-left-right-4px, .margin-left-4px     { margin-left:4px;  }
+.margin-4px, .margin-left-right-4px, .margin-right-4px    { margin-right:4px !important;  }
+.margin-4px, .margin-top-bottom-4px, .margin-top-4px      { margin-top:4px; }
+.margin-4px, .margin-top-bottom-4px, .margin-bottom-4px   { margin-bottom:4px !important; }
+
+.margin-8px, .margin-left-right-8px, .margin-left-8px     { margin-left:8px; }
+.margin-8px, .margin-left-right-8px, .margin-right-8px    { margin-right:8px; }
+.margin-8px, .margin-top-bottom-8px, .margin-top-8px      { margin-top:8px; }
+.margin-8px, .margin-top-bottom-8px, .margin-bottom-8px   { margin-bottom:8px !important; }
+
+.margin-16px, .margin-left-right-16px, .margin-left-16px     { margin-left:16px; }
+.margin-16px, .margin-left-right-16px, .margin-right-16px    { margin-right:16px; }
+.margin-16px, .margin-top-bottom-16px, .margin-top-16px      { margin-top:16px; }
+.margin-16px, .margin-top-bottom-16px, .margin-bottom-16px   { margin-bottom:16px !important; }
+
+.margin-24px, .margin-left-right-24px, .margin-left-24px     { margin-left:24px; }
+.margin-24px, .margin-left-right-24px, .margin-right-24px    { margin-right:24px; }
+.margin-24px, .margin-top-bottom-24px, .margin-top-24px      { margin-top:24px; }
+.margin-24px, .margin-top-bottom-24px, .margin-bottom-24px   { margin-bottom:24px; }
+
+.margin-32px, .margin-left-right-32px, .margin-left-32px     { margin-left:32px; }
+.margin-32px, .margin-left-right-32px, .margin-right-32px    { margin-right:32px; }
+.margin-32px, .margin-top-bottom-32px, .margin-top-32px      { margin-top:32px; }
+.margin-32px, .margin-top-bottom-32px, .margin-bottom-32px   { margin-bottom:32px; }
+
+.margin-64px, .margin-left-right-64px, .margin-left-64px     { margin-left:64px; }
+.margin-64px, .margin-left-right-64px, .margin-right-64px    { margin-right:64px; }
+.margin-64px, .margin-top-bottom-64px, .margin-top-64px      { margin-top:64px; }
+.margin-64px, .margin-top-bottom-64px, .margin-bottom-64px   { margin-bottom:64px; }
+
+.padding-0px, .padding-top-bottom-0px, .padding-top-0px      { padding-top:0px; }
+.padding-0px, .padding-top-bottom-0px, .padding-bottom-0px   { padding-bottom: 0px; }
+.padding-0px, .padding-left-right-0px, .padding-left-0px     { padding-left: 0px; }
+.padding-0px, .padding-left-right-0px, .padding-right-0px    { padding-right:0px; }
+
+.padding-4px, .padding-left-right-4px, .padding-left-4px     { padding-left:4px;  }
+.padding-4px, .padding-left-right-4px, .padding-right-4px    { padding-right:4px;  }
+.padding-4px, .padding-top-bottom-4px, .padding-top-4px      { padding-top:4px; }
+.padding-4px, .padding-top-bottom-4px, .padding-bottom-4px   { padding-bottom:4px; }
+
+.padding-8px, .padding-left-right-8px, .padding-left-8px     { padding-left:8px; }
+.padding-8px, .padding-left-right-8px, .padding-right-8px    { padding-right:8px; }
+.padding-8px, .padding-top-bottom-8px, .padding-top-8px      { padding-top:8px; }
+.padding-8px, .padding-top-bottom-8px, .padding-bottom-8px   { padding-bottom:8px; }
+
+.padding-16px, .padding-left-right-16px, .padding-left-16px  { padding-left:16px; }
+.padding-16px, .padding-left-right-16px, .padding-right-16px { padding-right:16px; }
+.padding-16px, .padding-top-bottom-16px, .padding-top-16px   { padding-top:16px; }
+.padding-16px, .padding-top-bottom-16px, .padding-bottom-16px{ padding-bottom:16px; }
+
+.padding-24px, .padding-left-right-24px, .padding-left-24px  { padding-left:24px; }
+.padding-24px, .padding-left-right-24px, .padding-right-24px { padding-right:24px; }
+.padding-24px, .padding-top-bottom-24px, .padding-top-24px   { padding-top:24px; }
+.padding-24px, .padding-top-bottom-24px, .padding-bottom-24px{ padding-bottom:24px; }
+
+.padding-32px, .padding-left-right-32px, .padding-left-32px  { padding-left:32px; }
+.padding-32px, .padding-left-right-32px, .padding-right-32px { padding-right:32px; }
+.padding-32px, .padding-top-bottom-32px, .padding-top-32px   { padding-top:32px; }
+.padding-32px, .padding-top-bottom-32px, .padding-bottom-32px{ padding-bottom:32px; }
+
+.padding-64px, .padding-left-right-64px, .padding-left-64px  { padding-left:64px; }
+.padding-64px, .padding-left-right-64px, .padding-right-64px { padding-right:64px; }
+.padding-64px, .padding-top-bottom-64px, .padding-top-64px   { padding-top:64px; }
+.padding-64px, .padding-top-bottom-64px, .padding-bottom-64px{ padding-bottom:64px; }
+
+.width-0px    { width:0%;   }
+.width-50per  { width:50%;  }
+.width-100per { width:100%; }
+
 
 /* ---- General Use ---- */
 .TucanContainer {
@@ -649,6 +716,13 @@ h1.PageHeaderSegmentTitle {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #36343C; 
+}
+
+
+
+.LoginContainer, .RegisterContainer, .SignUpContainer, .LogActivityContainer {
+  /* width:calc(600px - 48px); */
+  width:600px;
 }
 
 

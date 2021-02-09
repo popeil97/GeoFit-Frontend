@@ -5,6 +5,10 @@ import $ from "jquery";
 
 import { ModalService } from '../modalServices';
 
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import { LoginComponent } from '../login/login.component';
+import { Register2Component } from '../register2/register2.component';
+
 @Component({
   selector: 'app-landing-page',
   templateUrl: './landing-page.component.html',
@@ -20,7 +24,7 @@ export class LandingPageComponent implements OnInit {
 
   private testString = "From Parent";
 
-  constructor(public _authService: AuthService, private modalService: ModalService) { }
+  constructor(public _authService: AuthService, private modalService: ModalService, private dialog : MatDialog) { }
 
   ngOnInit() {
     this.user = {
@@ -109,6 +113,23 @@ export class LandingPageComponent implements OnInit {
     var data = (id == 'custom-modal-3') ? {race_id:'HELLO',callbackFunction:null} : {};
     data.callbackFunction = this.testFunction;
     this.modalService.open(id,data);
+  }
+
+  openLogin() {
+    let d = this.dialog.open(LoginComponent, {
+      panelClass: 'LoginContainer'
+    });
+    d.afterClosed().subscribe(result=>{
+      //console.log("CLOSED LOGIN", result);
+    })
+  }
+  openRegister() {
+    let d = this.dialog.open(Register2Component, {
+      panelClass: 'RegisterContainer'
+    });
+    d.afterClosed().subscribe(result=>{
+      //console.log('CLOSED SIGN UP', result);
+    })
   }
 
   testFunction = (incomingData = null) => {

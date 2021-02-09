@@ -8,6 +8,10 @@ import { NotificationPanelComponent } from '../notification-panel/notification-p
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { ModalService } from '../modalServices';
+import { MatDialog } from '@angular/material';
+
+import { LoginComponent } from '../login/login.component';
+import { Register2Component } from '../register2/register2.component';
 
 declare var $: any
 
@@ -31,6 +35,8 @@ export class NavComponent implements OnInit {
     private _bottomSheet: MatBottomSheet,
     private router:Router,
     private modalService: ModalService,
+
+    private dialog : MatDialog
   ) {}
 
   public notifications:any[] = [];
@@ -198,6 +204,23 @@ export class NavComponent implements OnInit {
     const data = (id == 'custom-modal-1') ? {register:false}:(id == 'custom-modal-2') ? {register:false} : null;
     this.modalService.open(id, data);
     this.NavItemClick();
+  }
+
+  openLogin() {
+    let d = this.dialog.open(LoginComponent, {
+      panelClass: 'LoginContainer'
+    });
+    d.afterClosed().subscribe(result=>{
+      //console.log('CLOSED LOGIN FROM NAV', result);
+    })
+  }
+  openRegister() {
+    let d = this.dialog.open(Register2Component,{
+      panelClass:"RegisterContainer"
+    });
+    d.afterClosed().subscribe(result=>{
+      //console.log('CLOSED REGISTER',result);
+    });
   }
 
 }

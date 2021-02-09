@@ -17,11 +17,6 @@ export class CommentsFormComponent implements OnInit {
 
   commentForm: FormGroup;
 
-  public acceptedEmojis = ['😁','🤩','🤪','😂','🥳','😲','😉','😭',
-                           '🤟','💪','👏','❤️','🔥','🍻','🏃‍','🏃‍♀️',
-                          '🚴‍♂️','👟','🍂','🌲','☀️','❄️','🌄','🌇'];
-  emojis: Boolean;
-
   constructor(private _storyService: StoryService) {
     this.commentForm = new FormGroup({
       body: new FormControl('',[
@@ -40,10 +35,7 @@ export class CommentsFormComponent implements OnInit {
     console.log("STRY",this.storyText);
     (<HTMLInputElement>document.getElementById("storyCommentCaption"+this.storyID)).value = this.storyText + element;
   }
-  toggleEmojis()
-  {
-    this.emojis = !this.emojis;
-  }
+
 
   submitCommentForm(){
     let formClean = this.commentForm.value as CommentForm;

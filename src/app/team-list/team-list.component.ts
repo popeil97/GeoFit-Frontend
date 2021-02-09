@@ -3,6 +3,10 @@ import { NotificationType, NotificationsService } from '../notifications.service
 import { TeamService } from '../team.service';
 import {MatSnackBar} from '@angular/material/snack-bar'
 import { SnackbarComponent } from '../snackbar/snackbar.component';
+import { MatDialog } from '@angular/material';
+import { TeamFormDialogComponent } from '../team-form/team-form-dialog.component';
+import { TeamForm } from '../team-form/team-form.component';
+import { TeamEditBody } from '../race-view-page/race-view-page.component';
 
 @Component({
   selector: 'app-team-list',
@@ -11,6 +15,7 @@ import { SnackbarComponent } from '../snackbar/snackbar.component';
 })
 export class TeamListComponent implements OnInit {
   teams:any[] = [];
+  usersTeam:any;
   @Input() race_id:number;
   @Input() userStat:any;
   @Output() callback:EventEmitter<any> = new EventEmitter();
@@ -18,7 +23,8 @@ export class TeamListComponent implements OnInit {
 
   constructor(private _notificationService:NotificationsService,
               private _teamService:TeamService,
-              private _snackbar:MatSnackBar) { }
+              private _snackbar:MatSnackBar,
+              public dialog: MatDialog) { }
 
   ngOnInit() {
     this.getTeams();
@@ -27,14 +33,18 @@ export class TeamListComponent implements OnInit {
   getTeams(): void {
     this._teamService.getTeamsList(this.race_id).then((resp) => {
       this.teams = resp['team_stats'];
-     //  console.log('TEAMS COMPONENT:',this.teams);
+      console.log('TEAMS COMPONENT:',this.teams);
+      this.usersTeam = this.teams.find((team:any) => {
+        return team.team_id == this.userStat.team_id;
+      });
+
+      console.log('MY TEAM:',this.usersTeam);
     });
   }
 
   joinRequest(team:any): void {
 
  //    console.log('TEAM:',team);
-
     let form = {
       type:NotificationType.TEAM_JOIN,
       context_id:team.team_id,
@@ -57,6 +67,29 @@ export class TeamListComponent implements OnInit {
 
   editTeam(team:any) {
     this.edit.emit(team.team_id);
+  }
+
+  openTeamForm() {
+    let dialogPayload = {
+      data: {
+        editConfig:{
+          team_id: this.userStat.team_id,
+          isEdit: true ? this.userStat.team_id : false
+        } as TeamEditBody,
+        raceID: this.race_id
+      }
+    }
+    let dialogRef = this.dialog.open(TeamFormDialogComponent,dialogPayload);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+
+      if(result != undefined && result == true) {
+        // refresh team list component
+        this.callback.emit();
+        this.getTeams();
+      }
+    });
   }
 
 }

@@ -1,107 +1,92 @@
 <div class="container" style="overflow:hidden;">
   <form [formGroup]="manualEntryForm">
+    <div class="row">
+      <div class="column0">
+          <div class="form-group" style="padding-left:15px;">
+            <input class="form-control" type="text" placeholder="Distance" formControlName="distance"/>
+            <br>
+            <div *ngIf="manualEntryForm.get('distance').invalid && (manualEntryForm.get('distance').dirty || manualEntryForm.get('distance').touched)"
+          class="alert alert-danger">
+            <div *ngIf="manualEntryForm.get('distance').errors.required">
+               Required
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column2">
+            <div class="form-group">
+                <select class="form-control" formControlName="activityType" [ngClass]="{ 'is-invalid': submitted && f.activityType && f.activityType.errors }">
+                    <option *ngFor="let typeOption of activityOptions" [value]="typeOption">
+                    {{ typeOption }}
+                    </option>
+                </select>
+                <div *ngIf="submitted && f.activityType && f.activityType.errors" class="invalid-feedback">
+                    <div *ngIf="f.activityType.errors.required">Required</div>
+                </div>
+            </div>
+      </div>
+    </div>
+
+
+    <div class="form-group">
+       <mat-datepicker #picker></mat-datepicker>
+        <input class="form-control" [matDatepicker]="picker" formControlName="activityDate" placeholder="Activity Date (MM/DD/YYYY) *" [ngClass]="{ 'is-invalid': submitted && f.date_of_birth.errors }">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        
+        <div *ngIf="submitted && f.activityDate && f.activityDate.errors" class="invalid-feedback">
+            <div *ngIf="f.activityDate.errors.required">Required (MM/DD/YYYY).</div>
+        </div>
+    </div>
 
 
     <div class="row">
-
-  <div class="column0">
+      <div class="column">
         <div class="form-group" style="padding-left:15px;">
-      <input class="form-control" type="text" placeholder="Distance" formControlName="distance"/>
-      <br>
-      <div *ngIf="manualEntryForm.get('distance').invalid && (manualEntryForm.get('distance').dirty || manualEntryForm.get('distance').touched)"
-    class="alert alert-danger">
-    
-    <div *ngIf="manualEntryForm.get('distance').errors.required">
-       Required
-    </div>
-    </div>
-    </div>
+          <mat-label name="hours">Hours</mat-label>
+          <input matInput type="number" class="form-control" formControlName="hours">
+          <br>
+            <div *ngIf="manualEntryForm.get('hours').invalid && (manualEntryForm.get('hours').dirty || manualEntryForm.get('hours').touched)"
+          class="alert alert-danger">
+              <div *ngIf="manualEntryForm.get('hours').errors.required">
+                 Required
+              </div>
+          </div>
+        </div>
+      </div>
 
-  </div>
-  
-
-  <div class="column2">
+      <div class="column">
         <div class="form-group">
-            <select class="form-control" formControlName="activityType" [ngClass]="{ 'is-invalid': submitted && f.activityType.errors }">
-                <option *ngFor="let typeOption of activityOptions" [value]="typeOption">
-                {{ typeOption }}
-                </option>
-            </select>
-            <div *ngIf="submitted && f.activityType.errors" class="invalid-feedback">
-                <div *ngIf="f.activityType.errors.required">Required</div>
-            </div>
+          <mat-label name="minutes">Minutes</mat-label>
+          <input matInput type="number" class="form-control" formControlName="minutes">
+          <br>
+          <div *ngIf="manualEntryForm.get('minutes').invalid && (manualEntryForm.get('minutes').dirty || manualEntryForm.get('minutes').touched)"
+        class="alert alert-danger">
+        
+        <div *ngIf="manualEntryForm.get('minutes').errors.required">
+           Required
         </div>
-  </div>
-  </div>
+        </div>
+        </div>
+      </div>
 
-
-    <div class="form-group">
-           <mat-datepicker #picker></mat-datepicker>
-            <input class="form-control" [matDatepicker]="picker" formControlName="activityDate" placeholder="Activity Date (MM/DD/YYYY) *" [ngClass]="{ 'is-invalid': submitted && f.date_of_birth.errors }">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            
-            <div *ngIf="submitted && f.activityDate.errors" class="invalid-feedback">
-                <div *ngIf="f.activityDate.errors.required">Required (MM/DD/YYYY).</div>
+      <div class="column">
+        <div class="form-group">
+          <mat-label name="seconds">Seconds</mat-label>
+          <input matInput type="number" class="form-control" formControlName="seconds">
+          <br>
+            <div *ngIf="manualEntryForm.get('seconds').invalid && (manualEntryForm.get('seconds').dirty || manualEntryForm.get('seconds').touched)"
+          class="alert alert-danger">
+            <div *ngIf="manualEntryForm.get('seconds').errors.required">
+              Required
             </div>
+          </div>
         </div>
 
-
-
-<div class="row">
-
-  <div class="column">
-
-    <div class="form-group" style="padding-left:15px;">
-      <mat-label name="hours">Hours</mat-label>
-      <input matInput type="number" class="form-control" formControlName="hours">
-      <br>
-      <div *ngIf="manualEntryForm.get('hours').invalid && (manualEntryForm.get('hours').dirty || manualEntryForm.get('hours').touched)"
-    class="alert alert-danger">
-    
-    <div *ngIf="manualEntryForm.get('hours').errors.required">
-       Required
+      </div>
     </div>
-    </div>
-    </div>
-
-  </div>
-  <div class="column">
-
-    <div class="form-group">
-      <mat-label name="minutes">Minutes</mat-label>
-      <input matInput type="number" class="form-control" formControlName="minutes">
-      <br>
-      <div *ngIf="manualEntryForm.get('minutes').invalid && (manualEntryForm.get('minutes').dirty || manualEntryForm.get('minutes').touched)"
-    class="alert alert-danger">
-    
-    <div *ngIf="manualEntryForm.get('minutes').errors.required">
-       Required
-    </div>
-    </div>
-    </div>
-
-  </div>
-  <div class="column">
-
-    <div class="form-group">
-      <mat-label name="seconds">Seconds</mat-label>
-      <input matInput type="number" class="form-control" formControlName="seconds">
-      <br>
-      <div *ngIf="manualEntryForm.get('seconds').invalid && (manualEntryForm.get('seconds').dirty || manualEntryForm.get('seconds').touched)"
-    class="alert alert-danger">
-    
-    <div *ngIf="manualEntryForm.get('seconds').errors.required">
-      Required
-    </div>
-    </div>
-    </div>
-
-  </div>
-</div>
-    
-
+  
     <div style="position: relative; text-align:center;">
-    <button (click)="upload()">Add Activity</button>
+      <button (click)="upload()">Add Activity</button>
     </div>
   </form>
 </div>

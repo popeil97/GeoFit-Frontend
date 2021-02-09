@@ -1,0 +1,11 @@
+<h2 mat-dialog-title>
+    You Passed a Checkpoint(s)!
+  </h2>
+  <mat-dialog-content>
+    <div *ngFor="let id of checkpointIDs">
+        <app-checkpoint-item [checkpointID]="id"></app-checkpoint-item>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </mat-dialog-actions>

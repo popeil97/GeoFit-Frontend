@@ -35,8 +35,11 @@ export class UserStatsComponent implements OnInit {
       console.error(err);
     })
 
-    document.getElementById('run-btn').style.backgroundColor = "#36343c";
-    document.getElementById('run-btn').style.color = "#FFFFFF";
+    const runButton = document.getElementById('run-btn');
+    if (runButton) {
+      runButton.style.backgroundColor = "#36343c";
+      runButton.style.color = "#FFFFFF";
+    }
   }
 
   private showChart(mydates,run_dists,walk_dists,bike_dists,other_dists) {

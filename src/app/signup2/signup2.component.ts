@@ -1,4 +1,14 @@
-import { Component, OnInit, Inject, ViewChild, Output, EventEmitter, Input, AfterViewChecked} from '@angular/core';
+import { 
+  Component, 
+  OnInit, 
+  Inject, 
+  ViewChild, 
+  Output, 
+  EventEmitter, 
+  Input, 
+  AfterViewChecked,
+  NgModule,
+} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
@@ -21,6 +31,10 @@ interface SignupDialogData {
   hasTags:Boolean,
 }
 
+@NgModule({
+  imports:[MatDialogRef]
+})
+
 @Component({
   selector: 'app-signup2',
   templateUrl: './signup2.component.html',
@@ -34,7 +48,11 @@ export class Signup2Component implements OnInit {
     private route:ActivatedRoute, 
     private router:Router, 
     private _raceService:RaceService, 
-    private modalService: ModalService
+    private modalService: ModalService,
+
+
+    private dialogRef : MatDialogRef<Signup2Component>,
+    @Inject(MAT_DIALOG_DATA) public data : any,
   ) { 
     
   }
@@ -80,7 +98,10 @@ export class Signup2Component implements OnInit {
     
   }
 
-  get d() { return this.modalService.getModalData(this.id); }
+  get d() { 
+    // return this.modalService.getModalData(this.id); 
+    return this.data;
+  }
 
   InitForm = () => {
     if (this.d == null) return;
@@ -151,8 +172,11 @@ export class Signup2Component implements OnInit {
   }
 
   closeDialog() {
+    /*
     if (this.id == null) return;
     this.modalService.close(this.id);
+    */
+    this.dialogRef.close();
   }
 
 }
