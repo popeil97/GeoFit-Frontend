@@ -177,10 +177,8 @@ export class RaceCreateComponent implements OnInit {
 
       let file = event.target.files[0];
 
-      console.log('FILE:',file);
-
       reader.onload = (event) => { // called once readAsDataURL is completed
-        this.uploadeUrl = file;
+        this.uploadeUrl = reader.result;
       }
     }
   }

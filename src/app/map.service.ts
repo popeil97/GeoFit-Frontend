@@ -44,7 +44,7 @@ export class MapService {
   }
 
   public getCheckpointMapData(race_id:number) {
-    return this.http.post(environment.apiUrl + '/api/map-checkpoints/',{race_id:race_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/checkpoints/map-checkpoints/',{race_id:race_id}).toPromise();
   }
 
 }
