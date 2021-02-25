@@ -10,7 +10,12 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 export class UserRaceComponent implements OnInit {
   @Input() userData: UserData;
-  constructor(private raceService: RaceService,private router:Router,) { }
+  @Input() showCreateButton: any;
+
+  constructor(
+    private raceService: RaceService,
+    private router:Router,
+  ) { }
 
   public races:any[] = null;
   public userRaces:any[] = null;
@@ -45,7 +50,7 @@ export class UserRaceComponent implements OnInit {
         });
          
        this.userRaces = _.filter(this.racesData.races,(race:any) => {
-          console.log(race,race.joined);
+          //console.log(race,race.joined);
           if(race.joined) {
             return race;
           }
@@ -60,7 +65,11 @@ export class UserRaceComponent implements OnInit {
   ProcessDate = (date = null) => {
     if (date == null) return {month:null,day:date}
     const dateComponents = date.split('-');
-    return {month:this.monthKey[dateComponents[0]],day:dateComponents[1]}
+    return {
+      raw:date,
+      month:this.monthKey[dateComponents[0]],
+      day:dateComponents[1]
+    }
   }
 
   viewRace(race:any) {
@@ -73,6 +82,10 @@ export class UserRaceComponent implements OnInit {
 
   viewAbout(race:any) {
     this.router.navigate(['/about',{name:race.name,id:race.id}]);
+  }
+
+  navigateTo(url:string = null) {
+    if (url != null) this.router.navigate([url]);
   }
 
 }

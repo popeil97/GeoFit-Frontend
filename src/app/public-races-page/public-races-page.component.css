@@ -1,44 +1,179 @@
+.PageContainer {
+  margin-bottom:0px;
+}
+.LandingPageSegment {
+  display:flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: center;
+  width:100%;
+  padding-top:32px;
+  padding-bottom: 32px;
+  padding-left:64px;
+  padding-right:64px;
+  box-sizing: border-box;
+}
+.LandingPageSegment .LandingPageSegment {
+  padding-top:0;
+  padding-bottom:0;
+}
+.LandingPageSegment.Vertical {
+  flex-direction: column;
+}
+.LandingPageSegment.GrayBackground {
+  background-color:rgb(240, 240, 240);
+}
+.LandingPageSegment.alignItemsFlexStart {
+  align-items: flex-start;
+}
+.LandingPageSegment.justifyContentSpaceEvenly {
+  justify-content: space-evenly;
+}
+.LandingPageSegmentItem {
+  position: relative;
+  z-index: inherit;
+  flex-grow: 0;
+  flex-shrink: 1;
+  width:100%;
+  max-width: 480px;
+  height:auto;
+  padding-left:16px;
+  padding-right:16px;
+
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex-wrap:nowrap;
+}
+.LandingPageSegment.Vertical > .LandingPageSegmentItem {
+  max-width: 960px;
+}
+
+.FirstSegment {
+  position: relative;
+  background-image: url(../../assets/forRacersHero.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size:cover;
+
+  align-items: stretch;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
+  min-height: 240px;
+  padding-bottom: 0px;
+  padding-left:0px;
+  padding-right:0px;
+
+  border-bottom: 1px solid white;
+}
+  .FirstSegment .LandingPageSegmentItem {
+      background: linear-gradient(transparent, 40%, rgba(50,50,50,0.75));
+      padding:24px;
+      align-items: flex-start;
+      max-width: 100%;
+  }
+
+  .LandingSubheadingButtons {
+      display:flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+  }
+      .LandingSubheadingButtons button, .LandingSubheadingButtons .button {
+          margin-right:16px;
+      }
+  .LandingButton {
+      background-color:white;
+  }
+      .LandingButton:hover, .Landingbutton:focus {
+          background-color: var(--main-background-color);
+          color:white;
+      }
+  .HeroSignUp {
+      width: 120px;
+  }
+  .HeroLogin {
+      text-decoration: underline;
+  }
+      .HeroLogin:hover {
+          cursor:pointer;
+          opacity:0.8;
+      }
+  
+
+
+
 .TucanRaceItem {
   display:block;
-  /*
-  padding:16px;
-  box-sizing: border-box;
-  */
+  position:relative;
+  width:100%;
+  max-width:800px;
+  overflow:hidden;
+
   margin-bottom:8px;
   border-radius:1em;
   box-shadow: 0px 0px 5px 2px rgb(200,200,200);
 }
-
-.TucanRaceItemContents {
-  position: relative;
-  width:100%;
-  height:auto;
-  padding:32px;
-  box-sizing: border-box;
-}
-  .TucanRaceItemHeader {
-    display:flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-
-    margin-bottom:16px;
+  .TucanRaceItemImageContainer {
+    width:100%;
+    height:100px;
+    overflow:hidden;
   }
-  .TucanRaceItemDescription {
-    margin-bottom:16px;
-  }
-  .TucanRaceItemDetails {
+    .TucanRaceItemImage {
+        width:100%;
+        height:100%;
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center top;
+    }
+  .TucanRaceItemContents {
+    position: relative;
     width:100%;
     height:auto;
-    margin-bottom:16px;
-
-    display:flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: stretch;
-    flex-wrap: nowrap;
+    padding:32px;
   }
+    .TucanRaceItemHeader {
+      display:flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+      margin-bottom:16px;
+    }
+      .TucanRaceItemHeader .CalendarDaysContainer {
+        flex-shrink: 0;
+        flex-basis: 240px;
+        padding-left:16px;
+      }
+    .TucanRaceItemDetails {
+      display:flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+    }
+      .TucanRaceItemDescription {
+        flex-shrink: 1;
+        flex-basis: 100%;
+        padding-right:16px;
+        border-right:1px solid rgb(200,200,200);
+      }
+
+    /*
+    .TucanRaceItemDetails {
+      width:100%;
+      height:auto;
+      margin-bottom:16px;
+
+      display:flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: stretch;
+      flex-wrap: nowrap;
+    }
+
     .TucanRaceItemSpecificInfo {
       flex-grow:1;
 
@@ -77,22 +212,15 @@
             margin:0 !important;
             opacity:0.5;
           }
-    .TucanRaceItemButtons {
-      flex-shrink:0;
-      flex-grow: 0;
-      /*
-      flex-basis: 200px;
-      margin-left:32px;
-      margin-right: 32px;
-      */
+    */
 
-      display:flex;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: stretch;
-      flex-wrap: nowrap;
+    .TucanRaceItemButtons {
+      flex-shrink: 0;
+      flex-basis: 240px;
+      padding-left:16px;
     }
     .TucanRaceItemButtons button, .TucanRaceItemButtons .button {
+      width:100%;
       margin-bottom:8px;
     }
 
@@ -104,26 +232,6 @@
 
       margin-right:8px;
       box-sizing: border-box;
-    }
-
-.TucanRaceItemImageContainer {
-  position: relative;
-  width:100%;
-  height:80px;
-  overflow:hidden;
-  border-top-right-radius: 1em;
-  border-top-left-radius: 1em;
-}
-    .TucanRaceItemImage {
-      position:absolute;
-      top:0;
-      left:0;
-      width:100%;
-      /*
-      width:160px;
-      margin-left:16px;
-      float:right;
-      */
     }
 
     .TucanRaceItemImageSmall {
@@ -265,6 +373,7 @@ background-color: #2C00A5;
   }
 
 
+/*
 @media only screen and (max-width: 992px) {
   .TucanRaceItemDescription {
     flex-direction: column;
@@ -285,4 +394,37 @@ background-color: #2C00A5;
     
     width:100%;
   }
+}
+*/
+
+@media only screen and (max-width: 750px) {
+  .TucanRaceItemHeader {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+    .TucanRaceItemHeader .CalendarDaysContainer {
+      padding-left:0px;
+      margin-top:8px;
+      flex-basis: auto;
+    }
+  .TucanRaceItemViewAboutButton {
+    width:100%;
+  }
+  .TucanRaceItemDetails {
+    flex-direction: column;
+    align-items: stretch;
+  }
+    .TucanRaceItemDescription {
+      flex-basis: auto;
+      padding-right:0px;
+      padding-bottom:16px;
+      border-right:0px;
+      border-bottom:1px solid rgb(200,200,200);
+    }
+    .TucanRaceItemButtons {
+      flex-basis: auto;
+      padding-left:0px;
+      padding-top:16px;
+    }
 }

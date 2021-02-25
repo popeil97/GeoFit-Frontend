@@ -1,6 +1,13 @@
 <div class="TucanContainer">
-  <h2 *ngIf="userData.is_me; else otherUserRaces">Your races</h2>
-  <ng-template #otherUserRaces><h2>{{userData.first_name}}'s races</h2></ng-template>
+  <div class="UserRaceHeaderRow">
+    <div class="UserRaceHeader">
+      <h2 *ngIf="userData.is_me; else otherUserRaces">Your races</h2>
+      <ng-template #otherUserRaces><h2>{{userData.first_name}}'s races</h2></ng-template>
+    </div>
+    <div *ngIf="showCreateButton" class="UserRaceHeaderCreateContainer">
+      <button (click)="navigateTo('/create')">Create New Race</button>
+    </div>
+  </div>
 
   <ng-template [ngIf]='userRaces != null' [ngIfElse]="LoadingUserRacesBlock">
     <ng-template [ngIf]="userRaces.length > 0" [ngIfElse]="NoUserRacesBlock">
@@ -45,7 +52,12 @@
     </ng-template>
     <ng-template #NoUserRacesBlock>
       <ng-template [ngIf]="userData.is_me" [ngIfElse]="OtherUserNoRaces">
-        <p>You currently do not have any races under your belt. To find races you may be interested in, head over to <a routerLink='/races'>Public Races</a>.</p>
+        <p>You currently do not have any races under your belt.</p>
+        <p>Here are some things you can do:</p>
+        <ul>
+          <li>Head over to <a routerLink='/races'>Public Races</a> to sign up for a race.</li>
+          <li><a routerLink='/'>Create your own race</a> and manage it from the comforts of your own home.</li>
+        </ul>
       </ng-template>
       <ng-template #OtherUserNoRaces>
         <p>{{userData.first_name}} is not signed up to any races for now.</p>

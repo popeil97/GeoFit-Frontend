@@ -170,6 +170,9 @@ button.wideButton, .button.wideButton {
 .color-white {
   color:white;
 }
+.color-red {
+  color: red;
+}
 .bold-text {
   font-weight: bold;
 }

@@ -130,6 +130,7 @@ import { FooterComponent } from './views/footer/footer.component';
 import { ForRacersComponent } from './views/for-racers/for-racers.component';
 import { LandingComponent } from './views/landing/landing.component';
 import { HeaderNavComponent } from './views/header-nav/header-nav.component';
+import { PublicRacesComponent } from './views/public-races/public-races.component';
 
 
 @NgModule({
@@ -229,6 +230,7 @@ import { HeaderNavComponent } from './views/header-nav/header-nav.component';
     ForRacersComponent,
     LandingComponent,
     HeaderNavComponent,
+    PublicRacesComponent,
       ],
 
   imports: [
