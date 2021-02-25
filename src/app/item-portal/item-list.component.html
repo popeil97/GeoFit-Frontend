@@ -1,0 +1,51 @@
+    <div *ngFor="let item of items" class="TucanRaceItem">
+      <div class='TucanRaceItemImageContainer'>
+        <img class="TucanRaceItemImage" *ngIf="item.image != null" src="{{item.image}}" />
+      </div>
+      <div class='TucanRaceItemContents'>
+        
+        <div class='TucanRaceItemHeader'>
+          <h2>{{item.name}}</h2>
+          <div class='CalendarDaysContainer'>
+            <div class='CalendarDay'>
+              <!-- <div class='CalendarDayM'><p class='h7'>{{race.start_date.month}}</p></div>
+              <div class='CalendarDayD'><p>{{race.start_date.day}}</p></div> -->
+            </div>
+            <div class='CalendarDaysLine'>
+              <p class='h7'>to</p>
+            </div>
+            <div class='CalendarDay'>
+              <!-- <div class='CalendarDayM'><p class='h7'>{{race.end_date.month}}</p></div>
+              <div class='CalendarDayD'><p>{{race.end_date.day}}</p></div> -->
+            </div>
+          </div>
+        </div>
+        
+        <p class='TucanRaceItemDescription'>{{item.description}}</p>
+
+
+        <div class='TucanRaceItemDetails'>
+          <div class='TucanRaceItemSpecificInfo'>
+            <div class='RaceLocationsContainer'>
+              <p class='RaceLocation'>{{item.price}}</p>
+              <div class='RaceDistanceLine'>
+                <!-- <p class='h7'>{{race.distance}} {{race.distance_type}}</p> -->
+              </div>
+              <!-- <p class='RaceLocation'>{{race.end_loc}}</p> -->
+            </div>
+          </div>
+          <div class='TucanRaceItemButtons'>
+            <!-- <button (click)="viewAbout(race)">View Race Details</button>
+            <button (click)="viewRace(race)" *ngIf="race.has_started && race.joined">Go to race</button>
+            <button (click)="viewRace(race)" *ngIf="race.has_started && !race.joined ">Preview race</button>
+            <ng-template [ngIf]="!this._authService.isLoggedIn()" [ngIfElse]="OtherRegisterButton">
+            </ng-template>
+            <ng-template #OtherRegisterButton>
+            </ng-template> -->
+            <!-- <p *ngIf="race.joined" class='h7'><b>You've registered for this race.</b></p>
+            <p *ngIf="!race.has_started && race.joined" class='h7'>Come back on race day ({{race.start_date.month}} {{race.start_date.day}}).</p>
+            <p *ngIf="!race.has_started && !race.joined" class='h7'>Join by race day ({{race.start_date.month}} {{race.start_date.day}}).</p> -->
+          </div>
+        </div>
+      </div>
+    </div>

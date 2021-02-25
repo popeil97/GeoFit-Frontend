@@ -1,0 +1,61 @@
+<div class="TucanContainer">
+
+  <form class="ItemForm" [formGroup]="itemForm">
+      
+      <div class="TucanFormSegment">
+          <h6 class='InputLabel'>Name</h6>
+          <input type="text" id="itemName" formControlName="name" class="form-control" placeholder="Name" [ngClass]="{ 'is-invalid': submitted && itemForm.get('name').errors }" />
+          <div *ngIf="submitted && itemForm.get('name').errors" class="invalid-feedback">
+              <div *ngIf="itemForm.get('name').errors.required">Item Name is required</div>
+          </div>
+      </div>
+              
+      <div class="TucanFormSegment">
+          <h6 class='InputLabel'>Description</h6>
+          <input type="textarea" id="itemDescription" formControlName="description" class="form-control" placeholder="Description" [ngClass]="{ 'is-invalid': submitted && itemForm.get('description').errors }"/>
+          <div *ngIf="submitted && itemForm.get('description').errors" class="invalid-feedback">
+            <div *ngIf="itemForm.get('description').errors.required">Description is Required</div>
+        </div>
+      </div>
+
+      <div class="TucanFormSegment">
+        <h6 class='InputLabel'>Price</h6>
+        <input type="number" id="itemPrice" formControlName="price" class="form-control" min=0 [ngClass]="{ 'is-invalid': submitted && itemForm.get('price').errors }" />
+        <div *ngIf="submitted && itemForm.get('price').errors" class="invalid-feedback">
+            <div *ngIf="itemForm.get('price').errors.required">Price is Required</div>
+        </div>
+    </div>
+
+    <div class="TucanFormSegment">
+        <h6 class='InputLabel'>Sizes</h6>
+        <input type="text" id="itemSizes" formControlName="sizes" class="form-control" placeholder="S,M,L" />
+    </div>
+
+    <div class="TucanFormSegment">
+        <h6 class='InputLabel'>Item Type</h6>
+        <mat-form-field appearance="fill">
+            <mat-select formControlName="item_type" [ngClass]="{ 'is-invalid': submitted && itemForm.get('item_type').errors }">
+              <mat-option *ngFor="let itemType of itemTypes" [value]="itemType" (click)="changeItemType(itemType)">
+                {{ itemType.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div *ngIf="submitted && itemForm.get('item_type').errors" class="invalid-feedback">
+            <div *ngIf="itemForm.get('item_type').errors.required">Item Type is Required</div>
+        </div>
+    </div>
+
+    <div class="TucanFormSegment">
+        <h6 class='InputLabel'>Item Image</h6>
+        <input type="file" formControlName="image" (change)="onSelectFile($event)"/>
+      </div>
+
+      <div class="TucanFormSegment">
+          <button [disabled]="loading" (click)="submitForm()">Submit</button>
+          <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+          <button class="CloseLogin" (click)="closeDialog()">Cancel</button>
+      </div>
+    </form>
+
+</div>

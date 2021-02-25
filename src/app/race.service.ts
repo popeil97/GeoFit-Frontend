@@ -63,4 +63,12 @@ export class RaceService {
     return this.http.post(environment.apiUrl + '/report/repoted/',{race_id:race_id}).toPromise();
   }
 
+  getRaceSettings(race_id:number) {
+    return this.http.post(environment.apiUrl + '/race-settings/get/',{race_id:race_id}).toPromise();
+  }
+
+  updateOrCreateRaceSettings(race_id:number,settingsForm:any) {
+    return this.http.post(environment.apiUrl + '/race-settings/update-or-create/',{race_id:race_id,rules:settingsForm}).toPromise();
+  }
+
 }

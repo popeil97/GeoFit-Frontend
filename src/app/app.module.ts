@@ -130,6 +130,10 @@ import { FooterComponent } from './views/footer/footer.component';
 import { ForRacersComponent } from './views/for-racers/for-racers.component';
 import { LandingComponent } from './views/landing/landing.component';
 import { HeaderNavComponent } from './views/header-nav/header-nav.component';
+import { ItemPortalComponent } from './item-portal/item-portal.component';
+import { ItemListComponent } from './item-portal/item-list.component';
+import { ItemFormComponent } from './item-portal/item-form.component';
+import { ItemFormDialogComponent } from './item-portal/item-form-dialog.component';
 
 
 @NgModule({
@@ -229,6 +233,10 @@ import { HeaderNavComponent } from './views/header-nav/header-nav.component';
     ForRacersComponent,
     LandingComponent,
     HeaderNavComponent,
+    ItemPortalComponent,
+    ItemListComponent,
+    ItemFormComponent,
+    ItemFormDialogComponent,
       ],
 
   imports: [
@@ -276,6 +284,7 @@ import { HeaderNavComponent } from './views/header-nav/header-nav.component';
                   Register2Component,
                   Signup2Component,
                   LogActivityComponent,
+                  ItemFormDialogComponent,
                   ] 
 })
 export class AppModule { 

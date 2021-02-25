@@ -23,6 +23,7 @@ import { SearchComponent } from './search/search.component';
 import { LandingComponent } from './views/landing/landing.component';
 import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-creators.component';
 import { ForRacersComponent } from './views/for-racers/for-racers.component';
+import { ItemPortalComponent } from './item-portal/item-portal.component';
 
 const routes: Routes = [
   {path: 'race', component:RaceViewPageComponent},
@@ -35,7 +36,6 @@ const routes: Routes = [
   {path: 'shipping', component:ShippingAddressComponent },
   {path: 'password-request', component:PasswordRequestComponent},
   {path: 'password-change', component:PasswordChangeComponent},
-  {path: 'test',component:PaypalComponent},
   {path: 'dashboard', component:RaceDashboardComponent },
   {path: 'welcome', component:WelcomeComponent},
   {path: 'about-tucan', component:AboutTucanPageComponent},
@@ -46,6 +46,7 @@ const routes: Routes = [
   {path:'',component:LandingComponent},
   {path:'for-race-creators',component:ForRaceCreatorsComponent},
   {path:'for-racers',component:ForRacersComponent},
+  {path:'test',component:ItemPortalComponent},
 ];
 
 @NgModule({
