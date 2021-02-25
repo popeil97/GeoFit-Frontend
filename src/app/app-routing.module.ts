@@ -24,11 +24,10 @@ import { LandingComponent } from './views/landing/landing.component';
 import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-creators.component';
 import { ForRacersComponent } from './views/for-racers/for-racers.component';
 import { ItemPortalComponent } from './item-portal/item-portal.component';
+import { PublicRacesComponent } from './views/public-races/public-races.component';
 
 const routes: Routes = [
   {path: 'race', component:RaceViewPageComponent},
-  {path: 'races', component:PublicRacesPageComponent},
-  //{path: '', component:LandingPageComponent},
   {path: 'create', component:RaceCreateComponent},
   {path: 'profile',component:UserPageComponent},
   {path: 'about',component:RaceAboutPageComponent},
@@ -47,6 +46,8 @@ const routes: Routes = [
   {path:'for-race-creators',component:ForRaceCreatorsComponent},
   {path:'for-racers',component:ForRacersComponent},
   {path:'test',component:ItemPortalComponent},
+  {path: 'races', component:PublicRacesPageComponent},
+  //{path: 'races-dev', component:PublicRacesComponent},
 ];
 
 @NgModule({

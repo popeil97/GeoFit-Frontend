@@ -134,6 +134,7 @@ import { ItemPortalComponent } from './item-portal/item-portal.component';
 import { ItemListComponent } from './item-portal/item-list.component';
 import { ItemFormComponent } from './item-portal/item-form.component';
 import { ItemFormDialogComponent } from './item-portal/item-form-dialog.component';
+import { PublicRacesComponent } from './views/public-races/public-races.component';
 
 
 @NgModule({
@@ -237,6 +238,7 @@ import { ItemFormDialogComponent } from './item-portal/item-form-dialog.componen
     ItemListComponent,
     ItemFormComponent,
     ItemFormDialogComponent,
+    PublicRacesComponent,
       ],
 
   imports: [
