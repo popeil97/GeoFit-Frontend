@@ -20,6 +20,7 @@ export class RaceCreateComponent implements OnInit {
 
   @ViewChild(MapComponent) map:MapComponent;
 
+  // --- Initializing form groups ---
   raceForm:FormGroup;
   raceRouteForm:FormGroup;
   raceMerchandiseForm:FormGroup;
@@ -75,12 +76,8 @@ export class RaceCreateComponent implements OnInit {
       endDate: new FormControl('',[
         Validators.required,
       ]),
-      startLoc: new FormControl('',[
-        Validators.required,
-      ]),
-      endLoc: new FormControl('', [
-        Validators.required,
-      ]),
+      startLoc: new FormControl(''),
+      endLoc: new FormControl(''),
       public: new FormControl(false,[
         Validators.required,
       ]),
@@ -125,12 +122,8 @@ export class RaceCreateComponent implements OnInit {
 
 
     this.options = [
-      {
-        name: 'Ocala, FL'
-      },
-      {
-        name: 'Gainesville, FL'
-      }
+      {name: 'Ocala, FL'},
+      {name: 'Gainesville, FL'}
     ];
 
   }
@@ -180,17 +173,6 @@ export class RaceCreateComponent implements OnInit {
     })
   }
 
-  selectOption(option:any, key:string) {
-    console.log('TEST:',option);
-    if(key == 'startLoc') {
-      this.selectedStartLoc = option;
-    }
-
-    else {
-      this.selectedEndLoc = option;
-    }
-  }
-
   selectRaceType(option:any) {
     this.raceType = option.type;
   }
@@ -232,31 +214,138 @@ export class RaceCreateComponent implements OnInit {
     */
   }
 
-  preview() {
-    
-    if(this.selectedStartLoc != null && this.selectedEndLoc != null) {
-      this.loading=true;
-      let start_coord:MapBoxCoord = this.selectedStartLoc.center;
-      let end_coord:MapBoxCoord = this.selectedEndLoc.center;
+  findClosestLocations(key:string) {
+    if (
+      !key || 
+      key.trim().length == 0 || 
+      (key != "startLoc" && key != "endLoc")
+    ) return;
 
-      start_coord.lon = this.selectedStartLoc.center[0];
-      start_coord.lat = this.selectedStartLoc.center[1];
-
-      end_coord.lon = this.selectedEndLoc.center[0];
-      end_coord.lat = this.selectedEndLoc.center[1];
-
-      console.log(start_coord);
-      console.log(end_coord);
-
-      this._coordinateService.getCoordinates(start_coord,end_coord).then((resp:GraphHopperResp) => {
-        console.log('RESP:',resp);
-        //this.map.clearMap();
-        this.coords = resp.coords;
-        this.isPreviewMode = true;
-        this.previewDistance = resp.distance.toString() + resp.dist_unit
-        this.loading=false;
-      })
+    var loc = this.raceForm.get(key);
+    if (loc.value.trim().length == 0) {
+      loc.setErrors({missing:true});
+      return;
     }
+    
+    loc.setErrors(null);
+    this._coordinateService.getLocation(loc.value.trim()).then((resp:MapBoxPlaceResp) => {
+      if(key == 'startLoc') {
+        this.selectedStartLoc = null;
+        this.startOptions = resp.features;
+      }
+      else if (key == 'endLoc') {
+        this.selectedEndLoc = null;
+        this.endOptions = resp.features;
+      }
+    });
+  }
+  selectLocationOption(option:any, key:string) {
+    switch(key) {
+      case "startLoc":
+        this.selectedStartLoc = option;
+        this.startOptions = null;
+        this.raceForm.get('startLoc').setValue(option.place_name);
+        break;
+      case "endLoc":
+        this.selectedEndLoc = option;
+        this.endOptions = null;
+        this.raceForm.get('endLoc').setValue(option.place_name);
+        break;
+    }
+  }
+  clearLocationOptions(key:string) {
+    switch(key) {
+      case "startLoc":
+        this.startOptions = null;
+        break;
+      case "endLoc":
+        this.endOptions = null;
+        break;
+    }
+  } 
+  preview() {
+    var startLoc = this.raceForm.get('startLoc'),
+        endLoc = this.raceForm.get('endLoc');
+    var hasErrors = false;
+
+    if (startLoc.value.trim().length == 0) {
+      hasErrors = true;
+      startLoc.setErrors({missing:true});
+    } 
+    else if (this.selectedStartLoc == null) {
+      hasErrors = true;
+      startLoc.setErrors({unselected:true});
+    }
+    else {
+      startLoc.setErrors(null);
+    }
+    if (endLoc.value.trim().length == 0) {
+      hasErrors = true;
+      endLoc.setErrors({missing:true});
+    } 
+    else if (this.selectedEndLoc == null) {
+      hasErrors = true;
+      endLoc.setErrors({unselected:true});
+    }
+    else {
+      endLoc.setErrors(null);
+    }
+    if (hasErrors) return;
+
+    // We should have start and end location options already saved
+    this.loading=true;
+    let start_coord:MapBoxCoord = this.selectedStartLoc.center;
+    let end_coord:MapBoxCoord = this.selectedEndLoc.center;
+
+    start_coord.lon = this.selectedStartLoc.center[0];
+    start_coord.lat = this.selectedStartLoc.center[1];
+
+    end_coord.lon = this.selectedEndLoc.center[0];
+    end_coord.lat = this.selectedEndLoc.center[1];
+
+    console.log(start_coord);
+    console.log(end_coord);
+
+    this._coordinateService.getCoordinates(start_coord,end_coord).then((resp:GraphHopperResp) => {
+      console.log('RESP:',resp);
+      //this.map.clearMap();
+      this.coords = resp.coords;
+      this.isPreviewMode = true;
+      this.previewDistance = resp.distance.toString() + resp.dist_unit
+      this.loading=false;
+    });
+    
+    /*
+    // testing location services
+    var startLocPromise = this._coordinateService.getLocation(startLoc.value.trim()),
+        endLocPromise = this._coordinateService.getLocation(endLoc.value.trim());
+    Promise.all([startLocPromise, endLocPromise]).then(locations => {
+      console.log('LOCATIONS',locations);
+      var startResponse = locations[0] as MapBoxPlaceResp,
+          endResponse = locations[1] as MapBoxPlaceResp;
+      var startFeatures:MapBoxPlace[] = startResponse.features,
+          endFeatures:MapBoxPlace[] = endResponse.features;
+      
+    }).catch(locationErrors=>{
+      console.log('ERROR GETTING LOCATION:',locationErrors);
+      // Never had something like this happen, but I suppose it can happen...
+    });
+    */
+
+    /*
+    this._coordinateService.getLocation(query).then((resp:MapBoxPlaceResp) => {
+      console.log('LOCATION RESP:',resp);
+      if(key == 'startLoc') {
+        this.selectedStartLoc = null;
+        this.startOptions = resp.features;
+      }
+
+      else {
+        this.selectedEndLoc = null;
+        this.endOptions = resp.features;
+      }
+    })
+    */
   }
 
   onSelectFile(event) {

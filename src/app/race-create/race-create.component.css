@@ -66,11 +66,14 @@
       margin-bottom:0px;
       justify-content: space-between;
     }
+    .formGroup.formGroupAlignedTop {
+      align-items: flex-start;
+    }
       .formInputContainer {
         flex-shrink: 1;
         flex-basis: 100%;
-        margin-left:8px;
-        margin-right:8px;
+        margin-left:16px;
+        margin-right:16px;
       }
       .formInputContainer:first-child {
         margin-left:0px;
@@ -81,6 +84,9 @@
       .formInputContainer.autoWidth {
         width:auto;
         flex-basis: auto;
+      }
+      .formInputContainer.formInputContainerSelfAlignedCenter {
+        align-self: center;
       }
         .formTextInput {
           width:100%;
@@ -148,16 +154,75 @@
     background-color: rgba(0,0,0,0.8);
   }
 
+.locationOptions {
+  width:100%;
+  height:0px;
+  position:relative;
+}
+  .locationOptionsInnerContainer {
+    position:absolute;
+    left:0;
+    top:-8px;
+    width:100%;
+    height:auto;
+    background-color: white;
+    padding:8px;
+    border-left: 2px solid rgb(200,200,200);
+    border-right: 2px solid rgb(200,200,200);
+    border-bottom: 2px solid rgb(200,200,200);
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+  }
+  .locationOptionsHeader {
+    height:100%;
+    padding-top:4px;
+    padding-bottom:4px;
+  }
+  .locationOptionsHeaderContainer {
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+  .locationOptionsClose:hover {
+    cursor:pointer;
+    text-decoration: underline;
+  }
+  .locationOption {
+    width:100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow:hidden;
+    font-size: var(--h7);
+  }
+  .locationOption:hover {
+    cursor:pointer;
+    padding-left:16px;
+  }
 .submitButtonGroup {
   justify-content: center;
   margin-bottom:0px;
 }
-.submitButton {
+.formButton {
   background-color: white;
 }
-.submitButton:hover {
+.formButton:hover {
   background-color: var(--main-background-color);
   color:white;
+}
+
+.MapRoutePreview {
+  position:relative;
+  width:100%;
+  max-width: 800px;
+  padding-bottom:100%;
+}
+
+.uploadFileIcon {
+  width:36px;
+  height:36px;
+  margin-bottom:8px;
 }
 
 

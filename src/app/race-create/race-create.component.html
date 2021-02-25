@@ -98,7 +98,10 @@
               (change)="onSelectBannerFile($event)"
             />
             <div id="bannerPreview" class="bannerPreview" (click)="this.onSelectBannerTrigger();" [style.backgroundImage]="'url(' + this.bannerURL + ')'">
-              <div class="bannerPreviewOverlay" [ngClass]="{'noOverlay':this.bannerURL != null}"><p class="margin-0px color-white">Select an image file.</p></div>
+              <div class="bannerPreviewOverlay" [ngClass]="{'noOverlay':this.bannerURL != null}">
+                <img class="uploadFileIcon" src="../../assets/icons/upload-icon-white.svg" alt="Upload File Icon" />
+                <p class="margin-0px color-white">Select an image file.</p>
+              </div>
               <div class="bannerLoadingOverlay" *ngIf="this.bannerLoading"><p class="margin-0px color-white">Loading...</p></div>
             </div>
           </div>
@@ -106,10 +109,10 @@
       </div>
 
       <div class="formPanel">
-        <h6>Race Settings<span class="color-red">*</span></h6>
+        <h6>Race Settings</h6>
         <div class='formGroup'>
           <div class='formInputContainer'>
-            <label for="raceType">Race Type:</label>
+            <label for="raceType">Race Type: <span class="color-red">*</span></label>
             <select id="raceType" class='formSelectInput' formControlName="raceType">
               <option *ngFor="let option of raceTypeOptions" [value]="option.name" (click)="selectRaceType(option)">{{option.name}}</option>
             </select>
@@ -158,17 +161,96 @@
       </div>
 
       <div class='formPanel'>
+        <h6>Race Map &amp; Route</h6>
+        <p class="italics">To generate a route for your race, you will need either:</p>
+        <ul class="italics">
+          <li>a pair of starting and ending locations (we can generate a route for you), or</li>
+          <li>a JSON / GPX file that contains a pre-built race.</li>
+        </ul>
+        <p class="italics">Note: if a JSON / GPX route is uploaded, it will override any generated route made using the start and end locations.</p>
+        <div class='formGroup'>
+          <div class='formInputContainer'>
+            <label for="startLoc">Starting Location</label>
+            <input 
+              id="startLoc" 
+              class='formTextInput'
+              [ngClass]="{'errorTextInput':this.raceForm.controls.startLoc.errors != null}"
+              type='text'
+              formControlName="startLoc" 
+              (keyup)="this.findClosestLocations('startLoc');"
+              autocomplete="off"
+            >
+            <div *ngIf="this.startOptions!=null" class='locationOptions'>
+              <div class='locationOptionsInnerContainer'>
+                <div class="locationOptionsHeaderContainer">
+                  <p class="italics margin-0px locationOptionsHeader">Please select one of the options below:</p>
+                  <p class="italics h7 margin-left-8px locationOptionsClose" (click)="this.clearLocationOptions('startLoc');">Close Dropdown</p>
+                </div>
+                <option *ngFor="let option of this.startOptions" class='locationOption' [value]="option.place_name" (click)="selectLocationOption(option,'startLoc')">
+                  {{ option.place_name }}
+                </option>
+              </div>
+            </div>
+            <p class="margin-0px italics h7" *ngIf="this.selectedStartLoc==null; else selectedStart"><span class="bold-text">Chosen location:</span> (not selected)</p>
+            <ng-template #selectedStart>
+              <p class="margin-0px italics h7"><span class="bold-text">Chosen location:</span> {{this.selectedStartLoc.place_name}}</p>
+            </ng-template>
+            <div class='formErrorMessage redText' *ngIf="this.raceForm.get('startLoc').invalid">
+              <p *ngIf="this.raceForm.get('startLoc').hasError('missing')" class="margin-0px">A race starting location is required.</p>
+              <p *ngIf="this.raceForm.get('startLoc').hasError('unselected')" class="margin-0px">A race starting location must be selected.</p>
+            </div>
+            <p class="margin-top-bottom-8px">to</p>
+            <label for="endLoc">Ending Location</label>
+            <input 
+              id="endLoc" 
+              class='formTextInput'
+              [ngClass]="{'errorTextInput':this.raceForm.controls.endLoc.errors != null}"
+              type='text' 
+              formControlName="endLoc" 
+              (keyup)="this.findClosestLocations('endLoc');"
+              autocomplete="off"
+            />
+            <div *ngIf="this.endOptions!=null" class='locationOptions'>
+              <div class='locationOptionsInnerContainer'>
+                <div class="locationOptionsHeaderContainer">
+                  <p class="italics margin-0px locationOptionsHeader">Please select one of the options below:</p>
+                  <p class="italics h7 margin-left-8px locationOptionsClose" (click)="this.clearLocationOptions('endLoc');">Close Dropdown</p>
+                </div>
+                <option *ngFor="let option of this.endOptions" class='locationOption' [value]="option.place_name" (click)="selectLocationOption(option,'endLoc')">
+                  {{ option.place_name }}
+                </option>
+              </div>
+            </div>
+            <p class="margin-0px italics h7" *ngIf="this.selectedEndLoc==null; else selectedEnd"><span class="bold-text">Chosen location:</span> (not selected)</p>
+            <ng-template #selectedEnd>
+              <p class="margin-0px italics h7"><span class="bold-text">Chosen location:</span> {{this.selectedEndLoc.place_name}}</p>
+            </ng-template>
+            <div class='formErrorMessage redText' *ngIf="this.raceForm.get('endLoc').invalid">
+              <p *ngIf="this.raceForm.get('endLoc').hasError('missing')" class="margin-0px">A race end location is required.</p>
+              <p *ngIf="this.raceForm.get('endLoc').hasError('unselected')" class="margin-0px">A race end location must be selected.</p>
+            </div>
+            <button class="formButton margin-top-8px" (click)="this.preview();">Auto-Generate Route</button>
+          </div>
+        </div>
+        <p class='margin-top-bottom-16px'>- OR -</p>
         <div class='formGroup'>
           <div class='formInputContainer'>
             <label name="route_file">Route File(optional)</label>
             <input type="file" formControlName="routeFile" (change)="onSelectFile($event)"/>
           </div>
         </div>
+        <hr />
+        <div class="formGroup">
+          <label>Race Map Preview:</label>
+          <div class="MapRoutePreview">
+            <!--<app-map [coordinates]="coords" [displayUsers]="false"></app-map>-->
+          </div>
+        </div>
       </div>
 
       <div class="formPanel">
         <div class='formGroup submitButtonGroup'>
-          <button class="submitButton" (click)="submitRaceForm()">Create New Race</button>
+          <button class="formButton" (click)="submitRaceForm()">Create New Race</button>
         </div>
       </div>
 
