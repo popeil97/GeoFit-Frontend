@@ -1,10 +1,12 @@
-import {Injectable} from '@angular/core';
+import {Injectable, EventEmitter, Output} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from './../environments/environment';
+import { Observable, Observer, Subject, } from 'rxjs';
 
- 
 @Injectable()
 export class AuthService {
+
+  public getLoginStatus = new Subject<Boolean>();
  
   // http options used for making API calls
   private httpOptions: any;
@@ -35,14 +37,13 @@ export class AuthService {
 
   // Uses http.post() to get an auth token from djangorestframework-jwt endpoint
   public login(user) {
-    return this.http.post(environment.apiUrl + '/accounts/login/', JSON.stringify(user), this.httpOptions)
+    return this.http.post(environment.apiUrl + '/accounts/login/', JSON.stringify(user), this.httpOptions);
   }
 
   public isLoggedIn(): Boolean {
     if(localStorage.getItem('loggedInUsername') && localStorage.getItem('access_token')) {
       return true;
     }
-
     return false;
   }
  
@@ -75,6 +76,8 @@ export class AuthService {
     this.token = null;
     this.token_expires = null;
     this.username = null;
+
+    this.emitLoginStausChange();
   }
  
   private updateData(token) {
@@ -95,6 +98,10 @@ export class AuthService {
 
   public changePassword(password: string, slug: string){
     return this.http.post(environment.apiUrl + '/accounts/password-change/', JSON.stringify({'password': password, 'slug': slug}), this.httpOptions);
+  }
+
+  emitLoginStausChange() {
+    this.getLoginStatus.next(this.isLoggedIn());
   }
  
 }
