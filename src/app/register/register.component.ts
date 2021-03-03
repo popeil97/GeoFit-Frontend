@@ -127,6 +127,7 @@ export class RegisterDialogContent {
                 localStorage.setItem('access_token', data['token']);
                 localStorage.setItem('loggedInUsername', data['username']);
                 this._authService.username = data['username'];
+                this._authService.emitLoginStausChange();
 
                 if(this.redirectParams) {
                   this.router.navigate([this.redirectUrl,this.redirectParams]);

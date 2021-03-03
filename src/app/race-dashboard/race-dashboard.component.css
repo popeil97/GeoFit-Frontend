@@ -1,0 +1,94 @@
+.PageContainer {
+    margin-bottom:0px;
+}
+.DashboardInitialization {
+    position:relative;
+    background-color: rgb(230,230,230);
+    width:100%;
+    height: calc(100vh - 80px);
+    min-height: calc(100vh - 80px);
+
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.mustLogInContainer {
+    position:relative;
+    background-color: rgb(230,230,230);
+    width:100%;
+    min-height: 100%;
+
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.mustLogInNotice {
+    position:relative;
+    max-width: 480px;
+  }
+    .mustLogInButtons {
+      display:flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+      .mustLogInButtons button {
+        margin:8px;
+        background-color: white;
+      }
+
+
+
+.DashboardContainer {
+    position:relative;
+    background-color: rgb(255,255,255);
+    height: calc(100vh - 80px);
+    min-height: calc(100vh - 80px);
+
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+}
+.DashboardNavigation, .DashboardContents {
+    position:relative;
+    padding:32px;
+}
+.DashboardNavigation {
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 320px;
+    height:100%;
+    background-color: rgb(230,230,230);
+}
+.DashboardContents {
+    flex-shrink: 1;
+    flex-basis: 100%;
+    height:100%;
+    background-color: red;
+}
+
+.RaceName {
+    /* These are technically the same, but use both */
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  /* This is the dangerous one in WebKit, as it breaks things wherever */
+  word-break: break-all;
+  /* Instead use this non-standard one: */
+  word-break: break-word;
+
+  /* Adds a hyphen where the word breaks, if supported (No Blink) */
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}

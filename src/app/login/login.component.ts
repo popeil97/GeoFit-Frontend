@@ -87,6 +87,7 @@ export class LoginComponent implements OnInit {
         this.loggedInAsUsernameEvent.emit(data['username']);
 
         if (data['success']){
+          this._authService.emitLoginStausChange();
           this.continueAsMe(data['username']);
           this.closeDialog();
         }
