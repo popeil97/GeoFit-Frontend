@@ -135,6 +135,7 @@ import { ItemListComponent } from './item-portal/item-list.component';
 import { ItemFormComponent } from './item-portal/item-form.component';
 import { ItemFormDialogComponent } from './item-portal/item-form-dialog.component';
 import { PublicRacesComponent } from './views/public-races/public-races.component';
+import { ItemDeleteDialogComponent } from './item-portal/item-delete-dialog.component';
 
 
 @NgModule({
@@ -239,6 +240,7 @@ import { PublicRacesComponent } from './views/public-races/public-races.componen
     ItemFormComponent,
     ItemFormDialogComponent,
     PublicRacesComponent,
+    ItemDeleteDialogComponent,
       ],
 
   imports: [
@@ -287,6 +289,7 @@ import { PublicRacesComponent } from './views/public-races/public-races.componen
                   Signup2Component,
                   LogActivityComponent,
                   ItemFormDialogComponent,
+                  ItemDeleteDialogComponent,
                   ] 
 })
 export class AppModule { 

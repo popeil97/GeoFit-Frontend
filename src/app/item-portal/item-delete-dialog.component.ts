@@ -2,22 +2,20 @@ import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-item-form-dialog',
-  templateUrl: './item-form-dialog.component.html',
-  styleUrls: ['./item-form-dialog.component.css']
+  selector: 'app-item-delete-dialog',
+  templateUrl: './item-delete-dialog.component.html',
+  styleUrls: ['./item-delete-dialog.component.css']
 })
 
-export class ItemFormDialogComponent implements OnInit {
+export class ItemDeleteDialogComponent implements OnInit {
 
     itemID:number;
-    raceID:number;
-    isEdit:boolean;
+    itemName:string;
 
-    constructor(public dialogRef: MatDialogRef<ItemFormDialogComponent>,
+    constructor(public dialogRef: MatDialogRef<ItemDeleteDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
           this.itemID = data.itemID;
-          this.raceID = data.raceID;
-          this.isEdit = data.isEdit;
+          this.itemName = data.itemName;
          }
 
     ngOnInit() {

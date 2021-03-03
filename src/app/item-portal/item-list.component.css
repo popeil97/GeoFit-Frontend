@@ -1,0 +1,37 @@
+.itemPanel {
+    background-color: rgb(255,255,255);
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+    width:20%;
+    max-width: 800px;
+    padding:32px;
+    border-radius: 8px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:32px;
+    float: left;
+  };
+
+.itemPanel label {
+    width:100%;
+    font-weight: bold;
+};
+
+.itemPanel h6 {
+    font-weight:bold;
+};
+
+.row {
+    width: 100%;
+    margin: 0 auto;
+    display: grid;
+    grid-auto-flow: column;
+  };
+
+  /* .icon-btn {
+
+  }; */
+
+  .icon-btn:hover {
+    cursor: pointer;
+  }
+

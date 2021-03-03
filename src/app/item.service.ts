@@ -29,11 +29,11 @@ export class ItemService {
     return this.http.post(environment.apiUrl + '/orders/item/create/',{race_id:raceID,item_form:itemForm}).toPromise();
   }
 
-  public editTeam(raceID:number,itemForm:any) {
-    return this.http.post(environment.apiUrl + '/orders/items/edit/',{race_id:raceID,item_form:itemForm}).toPromise();
+  public editItem(itemID:number,itemForm:any) {
+    return this.http.post(environment.apiUrl + '/orders/item/edit/',{item_id:itemID,item_form:itemForm}).toPromise();
   }
 
-  public deleteTeam(itemID:number) {
+  public deleteItem(itemID:number) {
     return this.http.post(environment.apiUrl + '/orders/item/delete/',{item_id:itemID}).toPromise();
   }
 }

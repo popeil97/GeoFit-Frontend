@@ -1,7 +1,23 @@
 <div class="TucanContainer">
 
-  <button class="addItemBtn" (click)="openItemForm()">+ Add Item</button>
+  <div style="padding-bottom: 10%;">
+    <button class="addItemBtn" (click)="openItemForm()">+ Add Item</button>
+  </div>
+  
+  <h3>Entry</h3>
+  <div class="jumbotron">
+    <app-item-list [raceID]="raceID" [itemType]="1" (refresh)="refreshItemLists()"></app-item-list>
+  </div>
+  
 
-  <app-item-list [raceID]="raceID" [itemType]="1"></app-item-list>
+  <h3>Entry + Merchandise</h3>
+  <div class="jumbotron">
+    <app-item-list [raceID]="raceID" [itemType]="3" (refresh)="refreshItemLists()"></app-item-list>
+  </div>
+
+  <h3>Merchandise</h3>
+  <div class="jumbotron">
+    <app-item-list [raceID]="raceID" [itemType]="2" (refresh)="refreshItemLists()"></app-item-list>
+  </div>
 
 </div>

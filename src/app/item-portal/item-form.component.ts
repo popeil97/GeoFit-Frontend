@@ -12,11 +12,14 @@ export class ItemFormComponent implements OnInit,OnChanges {
   
   @Input() raceID:number = 24;
   @Input() itemID:number;
+  @Input() isEdit: boolean = false;
   @Output() callback:EventEmitter<any> = new EventEmitter();
+
   itemForm:FormGroup;
   submitted:Boolean;
   loading:Boolean;
   uploadedUrl:any;
+  item:Item;
 
   itemTypes = [
       {name:"Entry",value:ItemType.ENTRY},
@@ -61,24 +64,28 @@ export class ItemFormComponent implements OnInit,OnChanges {
       // then fill form
 
       this._itemService.getItemByID(this.itemID).then((resp) => {
-          let item = resp['item'] as Item;
+        console.log("ITEM FROM GET ITEM BY ID:",resp);
+          this.item = resp['item'] as Item;
 
           // fill form
 
           let sizes = '';
-          for(var i = 0; i < item.sizes.length; i++) {
-              sizes += item.sizes[i];
+          if(this.item.sizes != null) {
+            for(var i = 0; i < this.item.sizes.length; i++) {
+              sizes += this.item.sizes[i];
 
-              if(i != item.sizes.length-1) {
+              if(i != this.item.sizes.length-1) {
                   sizes += ',';
               }
+            }
           }
+          
 
           this.itemForm = this.formBuilder.group({
-            name: [item.name,Validators.required],
-            description: [item.description,Validators.required],
-            price:[item.price,Validators.required],
-            item_type:[item.type,Validators.required],
+            name: [this.item.name,Validators.required],
+            description: [this.item.description,Validators.required],
+            price:[this.item.price,Validators.required],
+            item_type:[this.item.type,Validators.required],
             sizes: [sizes,Validators.nullValidator],
             image: new FormControl(''),
         });
@@ -86,15 +93,17 @@ export class ItemFormComponent implements OnInit,OnChanges {
         // get item type index
         let itemTypeIndex = 0;
         for(var i = 0; i < this.itemTypes.length; i++) {
-            if(this.itemTypes[i].value == item.type) {
+            if(this.itemTypes[i].value == this.item.type) {
                 itemTypeIndex = i;
                 break;
             }
         }
 
         // set item type dropdown
-        let itemSelect = document.getElementById('itemTypeSelect') as any;
-        itemSelect.selectedIndex = itemTypeIndex;
+        // let itemSelect = document.getElementById('itemTypeSelect') as any;
+        // itemSelect.selectedIndex = itemTypeIndex;
+
+        this.itemForm.controls.item_type.setValue(this.itemTypes[itemTypeIndex]);
 
       })
 
@@ -143,7 +152,18 @@ export class ItemFormComponent implements OnInit,OnChanges {
       console.log("CLEARN FORM: ",cleanForm);
 
       // submit item form
-      this._itemService.createItem(this.raceID,cleanForm).then((resp) => {
+
+      if(this.isEdit) {
+          this._itemService.editItem(this.item.id,cleanForm).then((resp) => {
+            if(resp['success']) {
+              console.log('successfully created item!');
+              this.callback.emit(); // tell dialog to close
+            }
+          });
+      }
+
+      else {
+        this._itemService.createItem(this.raceID,cleanForm).then((resp) => {
           console.log('CREATE ITEM RESP:',resp);
         if(resp['success']) {
             console.log('successfully created item!');
@@ -152,6 +172,8 @@ export class ItemFormComponent implements OnInit,OnChanges {
         this.loading = false;
         
       });
+      }
+      
 
       this.submitted = false;
   }

@@ -1,7 +1,9 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { ItemService } from '../item.service';
-import { RaceService } from '../race.service';
 import { Item, ItemType } from '../swag.service';
+import { ItemDeleteDialogComponent } from './item-delete-dialog.component';
+import { ItemFormDialogComponent } from './item-form-dialog.component';
 
 @Component({
   selector: 'app-item-list',
@@ -12,35 +14,65 @@ export class ItemListComponent implements OnInit {
   
   @Input() raceID:number;
   @Input() itemType:ItemType;
+  @Output() refresh:EventEmitter<any> = new EventEmitter(); 
 
   public items:Item[];
 
-  constructor(private _itemService:ItemService,private _raceService:RaceService) { }
+  constructor(private _itemService:ItemService, public dialog: MatDialog) { }
 
   ngOnInit() {
+    this.getItemList();
+  }
+
+  getItemList() {
     this._itemService.getItemsByType(this.raceID,this.itemType).then((resp) => {
         this.items = resp['items'];
         console.log("ITEMS: ",this.items);
     });
+  }
 
-    this._raceService.getRaceSettings(this.raceID).then((resp) => {
+  deleteItem(item:Item) {
+    let dialogPayload = {
+        data: {
+          itemID: item.id,
+          itemName: item.name 
+        }
+      }
+      let dialogRef = this.dialog.open(ItemDeleteDialogComponent,dialogPayload);
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
+  
+        if(result != undefined && result == true) {
+          this._itemService.deleteItem(item.id).then((resp) => {
+              console.log("RESP FROM ITEM DELETE: ", resp);
+              if(resp['success']) {
+                  // callback to refresh all child lists
+                  this.refresh.emit();
 
-        
+              }
+          })
+        }
+      });
+  }
 
-        console.log("RESP FROM RACE SETTINGS: ", resp);
-    });
-
-    let form = {
-        isManual:false,
-        allowTeams:true,
-        maxTeamSize:3,
-        price: 0.01,
-        hasEntryTags: false
-    };
-
-    this._raceService.updateOrCreateRaceSettings(this.raceID,form).then((resp) => {
-        console.log("RACE SETTINGS UPDATE: ",resp);
-    });
+  editItem(itemID:number) {
+    let dialogPayload = {
+        height: '700px',
+        width: '600px',
+        data: {
+          itemID: itemID,
+          raceID: this.raceID,
+          isEdit:true
+        }
+      }
+      let dialogRef = this.dialog.open(ItemFormDialogComponent,dialogPayload);
+  
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(result);
+  
+        this.refresh.emit();
+      });
   }
 
 }
