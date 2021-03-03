@@ -28,14 +28,12 @@ import { PublicRacesComponent } from './views/public-races/public-races.componen
 
 const routes: Routes = [
   {path: 'race', component:RaceViewPageComponent},
-  {path: 'create', component:RaceCreateComponent},
   {path: 'profile',component:UserPageComponent},
   {path: 'about',component:RaceAboutPageComponent},
   {path: 'teams',component:TeamFormComponent},
   {path: 'shipping', component:ShippingAddressComponent },
   {path: 'password-request', component:PasswordRequestComponent},
   {path: 'password-change', component:PasswordChangeComponent},
-  {path: 'dashboard', component:RaceDashboardComponent },
   {path: 'welcome', component:WelcomeComponent},
   {path: 'about-tucan', component:AboutTucanPageComponent},
   {path: 'faqs', component:FaqPageComponent},
@@ -48,6 +46,9 @@ const routes: Routes = [
   {path:'test',component:ItemPortalComponent},
   {path: 'races', component:PublicRacesPageComponent},
   //{path: 'races-dev', component:PublicRacesComponent},
+
+  {path: 'create', component:RaceCreateComponent},
+  {path: 'dashboard', component:RaceDashboardComponent},
 ];
 
 @NgModule({

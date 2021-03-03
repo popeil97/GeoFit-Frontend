@@ -21,6 +21,30 @@ export class RaceCreateComponent implements OnInit {
   @ViewChild(MapComponent) map:MapComponent;
 
   // --- Initializing form groups ---
+  raceBasicsForm:FormGroup;
+    raceType:RaceTypes;
+    raceTypeOptions = [
+      {
+        name:'Run/Walk',
+        type:RaceTypes.RUN_WALK
+      },{
+        name:'Ride',
+        type:RaceTypes.RIDE
+      },{
+        name:'Any',
+        type:RaceTypes.ANY
+      }
+    ];
+    private bannerInput;
+    private bannerURLTypes: Array<string> = ['png','jpg','jpeg'];
+    public bannerURL: any;
+    public bannerLoading: boolean = false;
+    public hasSubmitted: boolean = false;
+    public createSuccess: boolean = false;
+    public createResponse: any = null;
+
+
+
   raceForm:FormGroup;
   raceRouteForm:FormGroup;
   raceMerchandiseForm:FormGroup;
@@ -37,24 +61,6 @@ export class RaceCreateComponent implements OnInit {
   selectedStartLoc:MapBoxPlace;
   selectedEndLoc:MapBoxPlace;
 
-  raceType:RaceTypes;
-  raceTypeOptions = [
-    {
-      name:'Run/Walk',
-      type:RaceTypes.RUN_WALK
-    },{
-      name:'Ride',
-      type:RaceTypes.RIDE
-    },{
-      name:'Any',
-      type:RaceTypes.ANY
-    }
-  ];
-
-  private bannerInput;
-  public bannerURL: any;
-  public bannerLoading: boolean = false;
-
   constructor(
     private _coordinateService:CoordinatesService,
     private _raceService:RaceService,
@@ -62,6 +68,9 @@ export class RaceCreateComponent implements OnInit {
     private router:Router,
     private dialog:MatDialog,
   ) { 
+
+    this.initializeRaceBasicsForm();
+
     this.raceForm = new FormGroup({
       name: new FormControl('',[
         Validators.required,
@@ -128,7 +137,14 @@ export class RaceCreateComponent implements OnInit {
 
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.coords = null;
+    /*
+    this.raceBasicsForm.get('bannerFile').valueChanges.subscribe((val)=>{
+      this.onSelectBannerFileChange(val);
+    });
+    */
+  }
 
   ngAfterViewInit() {
     this.bannerInput = document.getElementById("bannerPreviewInput");
@@ -143,7 +159,6 @@ export class RaceCreateComponent implements OnInit {
       console.log("CLOSE LOGIN FROM to_race_creators", result);
     })
   }
-
   openRegister = () => {
     let d = this.dialog.open(Register2Component, {
       panelClass:"RegisterContainer",
@@ -153,24 +168,42 @@ export class RaceCreateComponent implements OnInit {
       console.log("CLOSE REGISTER FROM to_race_creators", result);
     })
   }
+  navigateTo(url:string = null) {
+    if (url != null) this.router.navigate([url]);
+  }
+  navigateToDashboard() {
+    if (this.createResponse == null) return;
+    this.router.navigate(['/dashboard',{name:this.createResponse.name,id:this.createResponse.race_id}]);
+  }
 
-  locationFilter(key:string) {
-    let query:string = this.raceForm.value[key];
-    console.log('QUERY:',query);
-
-    this._coordinateService.getLocation(query).then((resp:MapBoxPlaceResp) => {
-      console.log('LOCATION RESP:',resp);
-
-      if(key == 'startLoc') {
-        this.selectedStartLoc = null;
-        this.startOptions = resp.features;
-      }
-
-      else {
-        this.selectedEndLoc = null;
-        this.endOptions = resp.features;
-      }
-    })
+  initializeRaceBasicsForm() {
+    // The form control needed to operate the race basics form
+    this.raceBasicsForm = new FormGroup({
+      name: new FormControl('',[
+        Validators.required,
+        cannotBeEmptyString(),
+        Validators.maxLength(30),
+      ]),
+      description: new FormControl('',[
+        Validators.required,
+        cannotBeEmptyString(),
+        Validators.maxLength(2000),
+      ]),
+      startDate: new FormControl('',[
+        Validators.required,
+        cannotBeEmptyString(),
+      ]),
+      endDate: new FormControl('',[
+        Validators.required,
+        cannotBeEmptyString(),
+      ]),
+      bannerFile: new FormControl(null,[
+        requiredFileType(false, this.bannerURLTypes),
+      ]),
+      raceType: new FormControl('',[
+        Validators.required,
+      ]),
+    });
   }
 
   selectRaceType(option:any) {
@@ -178,15 +211,89 @@ export class RaceCreateComponent implements OnInit {
   }
 
 
-  clearForm() {
-    this.selectedEndLoc = null;
-    this.selectedStartLoc = null;
-    this.raceForm.reset();
+  // --- All Banner-Related Functions ---
+  onSelectBannerTrigger() {
+    this.bannerInput.click();
   }
+  onSelectBannerFileChange(e:any) {
+    var bannerInput = this.raceBasicsForm.get('bannerFile');
+    if (
+      bannerInput.invalid
+      ||
+      e.target.files == null
+      ||
+      (e.target.files && e.target.files.length == 0)
+    ) {
+      this.bannerURL = null;
+      this.bannerLoading = false;
+      return;
+    }
+    
+    // if (e.target.files && e.target.files[0]) {
+    this.bannerLoading = true;
+    let file = e.target.files[0];
+    var reader = new FileReader();
+    reader.onload = (event) => {
+      this.bannerURL = reader.result;
+      this.bannerLoading = false;
+    }
+    reader.readAsDataURL(file);
+    // }
+  }
+  // --- End Banner-Related Functions ---
 
-  submitRaceForm() {
-    let formClean = this.raceForm.value as RaceForm;
-    console.log(this.raceForm.valid);
+  onRaceBasicsFormSubmit() {
+    this.hasSubmitted = true;
+    if (this.raceBasicsForm.valid) {
+      console.log('form is valid!');
+      let formClean = this.raceBasicsForm.value as RaceBasicsForm;
+      formClean.raceType = this.raceType;
+      if (this.bannerURL) formClean.raceImage = this.bannerURL;
+      formClean.startLoc = "Boston, Massachusetts, USA";
+      formClean.start_lon = -71.05708;
+      formClean.start_lat = 42.36115;
+      formClean.endLoc = "New York, New York, USA";
+      formClean.end_lon = 127.02461;
+      formClean.end_lat = 37.53260;
+      formClean.public = false;
+      console.log('FORM DATA TO SEND: ', formClean)
+      this._raceService.createRace(formClean).then((resp:FromResp) => {
+        console.log('CREATE RESP:',resp);
+        
+        this.createSuccess = true;
+        this.createResponse = resp;
+
+        this.hasSubmitted = false;
+        this.bannerURL = null;
+        this.raceBasicsForm.reset();
+        this.raceBasicsForm.markAsPristine();
+        this.raceBasicsForm.markAsUntouched();
+        this.initializeRaceBasicsForm();
+        /*
+        this.raceBasicsForm.reset({
+          name:{value:''},
+          description:{value:''},
+          startDate:{value:''},
+          endDate:{value:''},
+          startLoc:{value:''},
+          bannerFile:{value:null},
+          raceType:{value:''},
+        });
+        //this.bannerURL = null;
+        Object.keys(this.raceBasicsForm.controls).forEach(key => {
+          this.raceBasicsForm.get(key).setErrors(null);
+        });
+        */
+        //this.router.navigate(['/about',{name:resp.name,id:resp.race_id}]);
+      });
+    } else {
+      // validate all form fields
+      Object.keys(this.raceBasicsForm.controls).forEach(field => {
+        const control = this.raceBasicsForm.get(field);
+        control.markAsTouched({ onlySelf: true });
+      });
+    }
+
 
     /*
     let isValid: Boolean = this.raceForm.valid;
@@ -213,6 +320,42 @@ export class RaceCreateComponent implements OnInit {
     }
     */
   }
+
+
+
+
+
+
+
+
+
+
+  locationFilter(key:string) {
+    let query:string = this.raceForm.value[key];
+    console.log('QUERY:',query);
+
+    this._coordinateService.getLocation(query).then((resp:MapBoxPlaceResp) => {
+      console.log('LOCATION RESP:',resp);
+
+      if(key == 'startLoc') {
+        this.selectedStartLoc = null;
+        this.startOptions = resp.features;
+      }
+
+      else {
+        this.selectedEndLoc = null;
+        this.endOptions = resp.features;
+      }
+    })
+  }
+
+
+  clearForm() {
+    this.selectedEndLoc = null;
+    this.selectedStartLoc = null;
+    this.raceForm.reset();
+  }
+
 
   findClosestLocations(key:string) {
     if (
@@ -359,24 +502,6 @@ export class RaceCreateComponent implements OnInit {
     }
   }
 
-  // --- All Banner-Related Functions ---
-  onSelectBannerTrigger() {
-    this.bannerInput.click();
-  }
-  onSelectBannerFile(e) {
-    if (e.target.files && e.target.files[0]) {
-      this.bannerLoading = true;
-      let file = e.target.files[0];
-      var reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = (event) => {
-        this.bannerURL = reader.result;
-        this.bannerLoading = false;
-      }
-    }
-  }
-  // --- End Banner-Related Functions ---
-
 }
 
 interface MapBoxPlaceResp {
@@ -397,6 +522,22 @@ interface GraphHopperResp {
 }
 
 // --- All Race Form Interfaces ---
+interface RaceBasicsForm {
+  name: string,         // The race's name. Required, maxLength = 30
+  description: string,  // The race's description. Required, maxLength = 2,000   UNKNOWN IF IMPLEMENTED IN BACKEND
+  startDate:string,     // The race's starting date. Required
+  endDate:string,       // The race's ending date. Required
+  raceImage:any,        // The race's image file. NOT required
+  raceType:RaceTypes,   // The race's type. Required
+  public:Boolean,       // Is the race public/viewable? Initially always FALSE
+
+  startLoc:string,      // Shouldn't be here...
+  endLoc:string,        // Shouldn't be here...
+  start_lon:number,     // Shouldn't be here...
+  start_lat:number,     // Shouldn't be here...
+  end_lon:number,       // Shouldn't be here...
+  end_lat:number,       // Shouldn't be here...
+}
 interface RaceForm {
   name:string,        // The race's name. Required, maxLength==30
   start_lon:number,   // The race's starting longitude
@@ -453,4 +594,46 @@ enum RaceTypes {
 interface FromResp {
   race_id:number;
   name:string;
+}
+
+
+export function cannotBeEmptyString() {
+  return function (control: FormControl) {
+    const val = control.value;
+    const valid = (typeof val === "string" && val.trim().length > 0);
+    if (!valid) {
+      return {
+        required:true
+      }
+    }
+    return null;
+  }
+}
+export function requiredFileType( required:boolean, types: Array<string> ) {
+  return function (control: FormControl) {
+
+    const file = control.value;
+    
+    if ( file ) {
+      const extension = file.split('.')[1].toLowerCase();
+      console.log(extension);
+      if ( types.indexOf(extension) > -1 ) {
+        console.log('extension allowed');
+        return null;
+      }
+      console.log('extension not allowed');
+      return {
+        requiredFileType: true
+      }
+    }
+
+    if (required) {
+      console.log('file is still required anyways');
+      return {
+        requiredFileType: true
+      };
+    }
+
+    return null;
+  };
 }
