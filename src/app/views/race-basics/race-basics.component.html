@@ -1,0 +1,152 @@
+<div class='PageContainer CreateRacePageContainer'>
+
+  <div class='formGroup formGroupHeader'>
+    <h2>Update Basic Details</h2>
+    <div>
+      <button class="formButton resetButton" (click)="this.resetForm()">Reset Changes</button>
+    </div>
+  </div>
+
+  <ng-template [ngIf]="this.raceID == null || this.raceData == null" [ngIfElse]="FormView">
+    <p>MISSING RACE INFORMATION</p>
+  </ng-template>
+  <ng-template #FormView>
+
+    <ng-template [ngIf]="this.loading" [ngIfElse]="LoadedForm">
+      <p>Loading Race Basics form...</p>
+    </ng-template>
+
+    <ng-template #LoadedForm>
+      <p class="italics margin-bottom-16px">Inputs marked with <span class="color-red">*</span> are required.</p>
+    <form [formGroup]="this.raceBasicsForm" (ngSubmit)="this.onRaceBasicsFormSubmit()" class="CreateForm" name="RaceBasicsForm">
+        <div class='formGroupHeader'>
+          <h6>Race Name<span class="color-red">*</span></h6>
+          <p class="margin-bottom-0px margin-left-16px italics">{{30 - this.raceBasicsForm.get('name').value.length}}</p>
+        </div>
+        <div class="formGroup">
+          <div class='formInputContainer'>
+            <input 
+              id="raceName" 
+              class="formTextInput" 
+              [ngClass]="{'errorTextInput':(this.raceBasicsForm.get('name').dirty || this.raceBasicsForm.get('name').touched) && this.raceBasicsForm.controls.name.errors!=null}" 
+              type="text" 
+              placeholder="Race Name" 
+              maxlength="30" 
+              formControlName="name" 
+              [readonly]="this.hasSubmitted"
+            />
+            <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('name').invalid && (this.raceBasicsForm.get('name').dirty || this.raceBasicsForm.get('name').touched)">
+              <p *ngIf="this.raceBasicsForm.get('name').hasError('required')" class="margin-0px">Your race needs a name.</p>
+              <p *ngIf="this.raceBasicsForm.get('name').hasError('maxlength')" class="margin-0px">Your race's name cannot exceed 30 characters.</p>
+            </div>
+          </div>
+        </div>
+        <div class='formGroupHeader'>
+          <h6>Race Description<span class="color-red">*</span></h6>
+          <p class="margin-bottom-0px margin-left-16px italics">{{2000 - this.raceBasicsForm.get('description').value.length}}</p>
+        </div>
+        <div class='formGroup'>
+          <div class='formInputContainer'>
+            <textarea 
+              id="raceDescription" 
+              class='formTextInput' 
+              [ngClass]="{'errorTextInput':(this.raceBasicsForm.get('description').dirty || this.raceBasicsForm.get('description').touched) && this.raceBasicsForm.controls.description.errors!=null}"
+              placeholder="Race Description" 
+              formControlName="description"
+              rows="4"
+              maxlength="2000"
+              [readonly]="this.hasSubmitted"
+            ></textarea>
+            <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('description').invalid && (this.raceBasicsForm.get('description').dirty || this.raceBasicsForm.get('description').touched)">
+              <p *ngIf="this.raceBasicsForm.get('description').hasError('required')" class="margin-0px">Your race needs a description.</p>
+            </div>
+          </div>
+        </div>
+        <h6>Race Dates<span class="color-red">*</span></h6>
+        <div class='formGroup'>
+          <div class='formInputContainer autoWidth'>
+            <input 
+              class='formTextInput' 
+              [ngClass]="{'errorTextInput':(this.raceBasicsForm.get('startDate').dirty || this.raceBasicsForm.get('startDate').touched) && this.raceBasicsForm.controls.startDate.errors!=null}" 
+              type="date" 
+              placeholder="Start Date" 
+              formControlName="startDate" 
+              max="{{this.raceBasicsForm.get('endDate').value}}"
+              [readonly]="this.hasSubmitted"
+            />
+          </div>
+          <p class='margin-0px'>to</p>
+          <div class='formInputContainer autoWidth'>
+            <input 
+              class='formTextInput' 
+              [ngClass]="{'errorTextInput':(this.raceBasicsForm.get('endDate').dirty || this.raceBasicsForm.get('endDate').touched) && this.raceBasicsForm.controls.endDate.errors!=null}" 
+              type="date" 
+              placeholder="End Date" 
+              formControlName="endDate" 
+              min="{{this.raceBasicsForm.get('startDate').value}}"
+              [readonly]="this.hasSubmitted"
+            />
+          </div>
+          <div class='formErrorMessage redText' *ngIf="(this.raceBasicsForm.get('startDate').invalid && (this.raceBasicsForm.get('startDate').dirty || this.raceBasicsForm.get('startDate').touched))||(this.raceBasicsForm.get('endDate').invalid && (this.raceBasicsForm.get('endDate').dirty || this.raceBasicsForm.get('endDate').touched))">
+            <p *ngIf="this.raceBasicsForm.get('startDate').hasError('required') && this.raceBasicsForm.get('endDate').valid" class="margin-0px">Your race needs a start date.</p>
+            <p *ngIf="this.raceBasicsForm.get('endDate').hasError('required') && this.raceBasicsForm.get('startDate').valid" class="margin-0px">Your race needs an end date.</p>
+            <p *ngIf="this.raceBasicsForm.get('startDate').hasError('required') && this.raceBasicsForm.get('endDate').hasError('required')" class="margin-0px">Your race needs both start and end dates.</p>
+          </div>
+        </div>
+        <h6>Banner</h6>
+        <p class="italics">The banner will accomodate the topmost section of your selected image when viewed on the "Public Races" page. It is recommended to use banner images that are horizontal and wide. Large files can potentially lag the browser when creating your race.</p>
+        <div class='formGroup'>
+          <div class='formInputContainer'>
+            <input 
+              id="bannerPreviewInput"
+              type="file" 
+              class='bannerPreviewInput'
+              formControlName="bannerFile" 
+              accept=".png,.jpg,.jpeg"
+              (change)="this.onSelectBannerFileChange($event)"
+              [readonly]="this.hasSubmitted"
+            />
+            <div id="bannerPreview" class="bannerPreview" (click)="this.onSelectBannerTrigger();" [style.backgroundImage]="'url(' + this.bannerURL + ')'">
+              <div class="bannerPreviewOverlay" [ngClass]="{'noOverlay':this.bannerURL != null}">
+                <img class="uploadFileIcon" src="../../../assets/icons/upload-icon-white.svg" alt="Upload File Icon" />
+                <p class="margin-0px color-white">Select an image file.</p>
+              </div>
+              <div class="bannerLoadingOverlay" *ngIf="this.bannerLoading"><p class="margin-0px color-white">Loading...</p></div>
+            </div>
+            <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('bannerFile').invalid && (this.raceBasicsForm.get('bannerFile').dirty || this.raceBasicsForm.get('bannerFile').touched)">
+              <p class="margin-0px">Your banner image is neither a PNG or JPG file. Please upoad a PNG or JPG file if you wish to use a banner image.</p>
+            </div>
+          </div>
+        </div>
+        <h6>Race Type: <span class="color-red">*</span></h6>
+        <p class="italics">The race type determines what kind of activity you are allowing racers to perform for the race. For some races, you may allow only walking/running, others you may allow only biking, and some you may allow either.</p>
+        <div class='formGroup'>
+          <div class='formInputContainer'>
+            <select 
+              id="raceType" 
+              class='formSelectInput' 
+              formControlName="raceType" 
+            >
+              <option *ngFor="let option of raceTypeOptions" [value]="option.name" (click)="selectRaceType(option)">{{option.name}}</option>
+            </select>
+            <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('raceType').invalid && (this.raceBasicsForm.get('raceType').dirty || this.raceBasicsForm.get('raceType').touched)">
+              <p class="margin-0px">Please select an appropriate race type for your race.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class='formGroup submitButtonGroup'>
+          <input 
+            type="submit" 
+            class="button formButton createRaceSubmitButton" 
+            value="Update Race Details" 
+            [readonly]="this.hasSubmitted" 
+          />
+          <p class="italics redText margin-top-16px" *ngIf="!this.raceBasicsForm.valid && this.hasSubmitted">Errors have been found above. Check each of your inputs for errors.</p>
+        </div>
+
+      </form>
+    </ng-template>
+  </ng-template>
+
+</div>

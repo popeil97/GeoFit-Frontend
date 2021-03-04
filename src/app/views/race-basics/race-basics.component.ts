@@ -1,16 +1,218 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl,FormGroup, Validators } from '@angular/forms';
-import { CoordinatesService } from '../coordinates.service';
-import { MapComponent } from '../map/map.component';
-import { RaceService } from '../race.service';
-import { AuthService } from '../auth.service';
+import { Component, OnInit, Input } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { RaceService } from '../../race.service';
 import { Router } from '@angular/router';
-import { from } from 'rxjs';
 
-import { MatDialog } from '@angular/material';
-import { LoginComponent } from '../login/login.component';
-import { Register2Component } from '../register2/register2.component';
+@Component({
+  selector: 'app-race-basics',
+  templateUrl: './race-basics.component.html',
+  styleUrls: ['./race-basics.component.css']
+})
+export class RaceBasicsComponent implements OnInit {
 
+  // We theoretically can pull the raceID from the raceData data, but we should be safe here and try to pass it via Angular Input instead
+  @Input() raceID:number;
+  @Input() raceData:any;
+
+  // --- Initializing form groups ---
+  raceBasicsForm:FormGroup;
+    raceType:RaceTypes;
+    raceTypeOptions = [
+      {
+        name:'Run/Walk',
+        type:RaceTypes.RUN_WALK
+      },{
+        name:'Ride',
+        type:RaceTypes.RIDE
+      },{
+        name:'Any',
+        type:RaceTypes.ANY
+      }
+    ];
+    private bannerInput;
+    private bannerURLTypes: Array<string> = ['png','jpg','jpeg'];
+    public bannerURL: any;
+    public bannerLoading: boolean = false;
+    public hasSubmitted: boolean = false;
+    public createSuccess: boolean = false;
+    public createResponse: any = null;
+
+    public loading:boolean = true;
+
+  constructor(
+    private _raceService:RaceService,
+  ) {}
+
+  ngOnInit() {
+    console.log(this.raceID, this.raceData);
+    this.initializeRaceBasicsForm();
+  }
+  ngAfterViewInit() {
+    this.bannerInput = document.getElementById("bannerPreviewInput");
+  }
+
+  initializeRaceBasicsForm() {
+    
+    this.loading = true;
+
+    if (this.raceID == null || this.raceData == null) {
+      this.loading = false;
+      return;
+    }
+
+    this.raceType = this.raceData.race_type;
+    this.bannerURL = this.raceData.race_image;
+    // TODO: get banner URL from race data and save it in this.bannerURL
+
+    // The form control needed to operate the race basics form
+    this.raceBasicsForm = new FormGroup({
+      name: new FormControl(this.raceData.name,[
+        Validators.required,
+        cannotBeEmptyString(),
+        Validators.maxLength(30),
+      ]),
+      description: new FormControl(this.raceData.description,[
+        Validators.required,
+        cannotBeEmptyString(),
+        Validators.maxLength(2000),
+      ]),
+      startDate: new FormControl(this.raceData.start_date,[
+        Validators.required,
+        cannotBeEmptyString(),
+      ]),
+      endDate: new FormControl(this.raceData.end_date,[
+        Validators.required,
+        cannotBeEmptyString(),
+      ]),
+      bannerFile: new FormControl(this.raceData.race_image,[
+        requiredFileType(false, this.bannerURLTypes),
+      ]),
+      raceType: new FormControl(this.raceTypeDictionary(RaceTypes[this.raceData.race_type]),[
+        Validators.required,
+      ]),
+    });
+
+    this.loading = false;
+  }
+  resetForm() {
+    this.initializeRaceBasicsForm();
+  }
+
+
+  selectRaceType(option:any) {
+    this.raceType = option.type;
+  }
+  raceTypeDictionary(name:string) {
+    var val = null;
+    switch(name) {
+      case 'RUN_WALK':
+        val = 'Run/Walk';
+        break;
+      case 'RIDE':
+        val = "Ride"
+        break;
+      case 'ANY':
+        val = "Any"
+        break;
+    }
+    return val;
+  }
+
+  // --- All Banner-Related Functions ---
+  onSelectBannerTrigger() {
+    this.bannerInput.click();
+  }
+  onSelectBannerFileChange(e:any) {
+    var bannerInput = this.raceBasicsForm.get('bannerFile');
+    console.log(bannerInput.value, bannerInput.errors);
+    if (
+      bannerInput.invalid
+      ||
+      e.target.files == null
+      ||
+      (e.target.files && e.target.files.length == 0)
+    ) {
+      console.log("SOMETHING IS WRONG:",bannerInput.invalid, e.target.files==null,(e.target.files&&e.target.files.length==0));
+      this.bannerURL = null;
+      this.bannerLoading = false;
+      return;
+    }
+
+    // if (e.target.files && e.target.files[0]) {
+    this.bannerLoading = true;
+    let file = e.target.files[0];
+    var reader = new FileReader();
+    reader.onload = (event) => {
+      this.bannerURL = reader.result;
+      console.log(this.bannerURL);
+      this.bannerLoading = false;
+    }
+    reader.readAsDataURL(file);
+    // }
+  }
+  // --- End Banner-Related Functions ---
+
+}
+
+enum RaceTypes {
+  RUN_WALK=1,
+  RIDE=2,
+  ANY=3,
+}
+
+export function cannotBeEmptyString() {
+  return function (control: FormControl) {
+    const val = control.value;
+    const valid = (typeof val === "string" && val.trim().length > 0);
+    if (!valid) {
+      return {
+        required:true
+      }
+    }
+    return null;
+  }
+}
+export function requiredFileType( required:boolean, types: Array<string> ) {
+  return function (control: FormControl) {
+
+    const file = control.value;
+    
+    if ( file ) {
+      const filename_components = file.split('.');
+      const extension = filename_components[filename_components.length - 1].toLowerCase();
+      console.log(extension);
+      if ( types.indexOf(extension) > -1 ) {
+        console.log('extension allowed');
+        return null;
+      }
+      console.log('extension not allowed');
+      return {
+        requiredFileType: true
+      }
+    }
+
+    if (required) {
+      console.log('file is still required anyways');
+      return {
+        requiredFileType: true
+      };
+    }
+
+    return null;
+  };
+}
+
+
+
+
+
+
+
+
+
+
+
+/*
 @Component({
   selector: 'app-race-create',
   templateUrl: './race-create.component.html',
@@ -139,11 +341,6 @@ export class RaceCreateComponent implements OnInit {
 
   ngOnInit() {
     this.coords = null;
-    /*
-    this.raceBasicsForm.get('bannerFile').valueChanges.subscribe((val)=>{
-      this.onSelectBannerFileChange(val);
-    });
-    */
   }
 
   ngAfterViewInit() {
@@ -173,7 +370,7 @@ export class RaceCreateComponent implements OnInit {
   }
   navigateToDashboard() {
     if (this.createResponse == null) return;
-    this.router.navigate(['/dashboard',{name:this.createResponse.name,id:this.createResponse.race_id}]);
+    this.router.navigate(['/dashboard',{id:this.createResponse.race_id}]);
   }
 
   initializeRaceBasicsForm() {
@@ -269,21 +466,6 @@ export class RaceCreateComponent implements OnInit {
         this.raceBasicsForm.markAsPristine();
         this.raceBasicsForm.markAsUntouched();
         this.initializeRaceBasicsForm();
-        /*
-        this.raceBasicsForm.reset({
-          name:{value:''},
-          description:{value:''},
-          startDate:{value:''},
-          endDate:{value:''},
-          startLoc:{value:''},
-          bannerFile:{value:null},
-          raceType:{value:''},
-        });
-        //this.bannerURL = null;
-        Object.keys(this.raceBasicsForm.controls).forEach(key => {
-          this.raceBasicsForm.get(key).setErrors(null);
-        });
-        */
         //this.router.navigate(['/about',{name:resp.name,id:resp.race_id}]);
       });
     } else {
@@ -318,7 +500,6 @@ export class RaceCreateComponent implements OnInit {
 
       this.raceForm.reset();
     }
-    */
   }
 
 
@@ -456,39 +637,7 @@ export class RaceCreateComponent implements OnInit {
       this.isPreviewMode = true;
       this.previewDistance = resp.distance.toString() + resp.dist_unit
       this.loading=false;
-    });
-    
-    /*
-    // testing location services
-    var startLocPromise = this._coordinateService.getLocation(startLoc.value.trim()),
-        endLocPromise = this._coordinateService.getLocation(endLoc.value.trim());
-    Promise.all([startLocPromise, endLocPromise]).then(locations => {
-      console.log('LOCATIONS',locations);
-      var startResponse = locations[0] as MapBoxPlaceResp,
-          endResponse = locations[1] as MapBoxPlaceResp;
-      var startFeatures:MapBoxPlace[] = startResponse.features,
-          endFeatures:MapBoxPlace[] = endResponse.features;
-      
-    }).catch(locationErrors=>{
-      console.log('ERROR GETTING LOCATION:',locationErrors);
-      // Never had something like this happen, but I suppose it can happen...
-    });
-    */
-
-    /*
-    this._coordinateService.getLocation(query).then((resp:MapBoxPlaceResp) => {
-      console.log('LOCATION RESP:',resp);
-      if(key == 'startLoc') {
-        this.selectedStartLoc = null;
-        this.startOptions = resp.features;
-      }
-
-      else {
-        this.selectedEndLoc = null;
-        this.endOptions = resp.features;
-      }
-    })
-    */
+    }); 
   }
 
   onSelectFile(event) {
@@ -523,13 +672,13 @@ interface GraphHopperResp {
 
 // --- All Race Form Interfaces ---
 interface RaceBasicsForm {
+
   name: string,         // The race's name. Required, maxLength = 30
   description: string,  // The race's description. Required, maxLength = 2,000   UNKNOWN IF IMPLEMENTED IN BACKEND
   startDate:string,     // The race's starting date. Required
   endDate:string,       // The race's ending date. Required
   raceImage:any,        // The race's image file. NOT required
   raceType:RaceTypes,   // The race's type. Required
-  public:Boolean,       // Is the race public/viewable? Initially always FALSE
 
   startLoc:string,      // Shouldn't be here...
   endLoc:string,        // Shouldn't be here...
@@ -552,13 +701,12 @@ interface RaceForm {
   public:Boolean,     // Is the race public/viewable?
   routeFile:any,      // The route file. JSON or GP-something
   raceType:RaceTypes, // The race's type. Required
-  /*
+
   description:string,   // The race's description.
   teams:Boolean,
   teamSize:number,
   manual:Boolean,
   registrationFee:number,
-  */
 }
 interface RaceRouteForm {
   raceId:string,
@@ -585,55 +733,10 @@ interface RaceMerchandiseForm {
   }
 // --- End Race Form Interfaces ---
 
-enum RaceTypes {
-  RUN_WALK=1,
-  RIDE=2,
-  ANY=3,
-}
+
 
 interface FromResp {
   race_id:number;
   name:string;
 }
-
-
-export function cannotBeEmptyString() {
-  return function (control: FormControl) {
-    const val = control.value;
-    const valid = (typeof val === "string" && val.trim().length > 0);
-    if (!valid) {
-      return {
-        required:true
-      }
-    }
-    return null;
-  }
-}
-export function requiredFileType( required:boolean, types: Array<string> ) {
-  return function (control: FormControl) {
-
-    const file = control.value;
-    
-    if ( file ) {
-      const extension = file.split('.')[1].toLowerCase();
-      console.log(extension);
-      if ( types.indexOf(extension) > -1 ) {
-        console.log('extension allowed');
-        return null;
-      }
-      console.log('extension not allowed');
-      return {
-        requiredFileType: true
-      }
-    }
-
-    if (required) {
-      console.log('file is still required anyways');
-      return {
-        requiredFileType: true
-      };
-    }
-
-    return null;
-  };
-}
+*/

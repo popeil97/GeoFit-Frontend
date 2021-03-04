@@ -1,12 +1,12 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { RaceService } from '../race.service';
-import { RaceSettings } from '../race-about-page/race-about-page.component';
-import { AuthService } from '../auth.service';
+import { RaceService } from '../../race.service';
+import { RaceSettings } from '../../race-about-page/race-about-page.component';
+import { AuthService } from '../../auth.service';
 
 import { MatDialog } from '@angular/material';
-import { LoginComponent } from '../login/login.component';
-import { Register2Component } from '../register2/register2.component';
+import { LoginComponent } from '../../login/login.component';
+import { Register2Component } from '../../register2/register2.component';
 
 @Component({
   selector: 'app-race-dashboard',
@@ -18,12 +18,10 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
   public loading:Boolean = true;
   public raceID: number = null;
   public raceData: any = null;
-
+  public page: string;
 
 
   public isOwnerOrMod:Boolean = false;
-
-  public page: string;
 
   public raceName: string;
 
@@ -56,18 +54,16 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
     this.route.paramMap.subscribe(params => {
       // Get the race ID from the URL
       this.raceID = params['params']['id'];
+      this.page = (params['params']['page']) ? params['params']['page'] : "admin";
       if (this.raceID) {
         // there was a race ID in the URL
         if (this._authService.isLoggedIn()) {
-          // We are logged in
-          this.getRaceData();
+          this.getRaceData();     // We are logged in
         } else {
-          // We aren't logged in
-          this.loading = false;
+          this.loading = false;   // We aren't logged in
         }
       } else {
-        // There was no race ID in the url
-        this.loading = false;
+        this.loading = false;     // There was no race ID in the url
       }
     });
     /*
@@ -99,6 +95,10 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
             if (this.raceID){
               this.getRaceData();
             }
+            break;
+          case 'page':
+            console.log('Page Change');
+            break;
         }
       }
     }
@@ -122,8 +122,8 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
       console.log("CLOSE REGISTER FROM to_race_creators", result);
     })
   }
-  navigateTo(url:string = null) {
-    if (url != null) this.router.navigate([url]);
+  navigateTo(url:string = null, params:any = null) {
+    if (url != null) this.router.navigate([url,params]);
   }
 
   handleLoginChange = (loggedIn:Boolean) => {
@@ -150,6 +150,72 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
   private getRaceData(){
     this.loading = true;
 
+    Promise.all([this.raceService.getRacePromise(this.raceID), this.raceService.getRaceAbout(this.raceID)]).then(res=>{
+      let d0 = res[0] as RaceData,
+          d1 = res[1] as RaceAboutData;
+      if (!d0.is_mod_or_owner) {
+        this.loading = false;
+        this.raceData = null;
+        this.isOwnerOrMod = false;
+        return;
+      }
+
+      this.raceData = {
+        id:d0.race.id,
+        is_mod_or_owner:d0.is_mod_or_owner,
+        is_owner:d1.isOwner,
+        is_moderator:d1.isModerator,
+        owner: {
+          id:d1.about_info.owner.id,
+          username:d1.about_info.owner.username,
+          email:d1.about_info.owner.email,
+          first_name:d1.about_info.owner.first_name,
+          last_name:d1.about_info.owner.last_name,
+        },
+        basics:{
+          name:d0.race.name,
+          description:d0.race.description,
+          start_date:d0.race.start_date,
+          end_date:d0.race.end_date,
+          race_image:d1.about_info.race_image,
+          race_type:d0.race.race_type,
+        },
+        settings:{
+          is_manual_entry:d0.race_settings.isManualEntry,
+          allow_teams:d0.race_settings.allowTeams,
+          max_team_size:d0.race_settings.max_team_size,
+        },
+        map:{
+          distance:d0.race.distance,
+          distance_type:d0.race.distance_type,
+          distance_units:d0.distance_units,
+          start_loc: d0.race.start_loc,
+          end_loc: d0.race.end_loc,
+          start_lon: d0.race.start_lon,
+          start_lat: d0.race.start_lat,
+          end_lon: d0.race.end_lon,
+          end_lat: d0.race.end_lat,
+          valid_route_file: d0.race.valid_route_file,
+          race_IDs:d0.race_IDs,
+          child_races:d0.child_race_dict,
+          num_children:d1.about_info.num_children,
+        },
+        finances:{
+          payment_required:d0.race_settings.paymentRequired,
+          price:d0.race_settings.price,
+          has_swag:d0.race_settings.has_swag,
+          has_entry_tags:d0.race_settings.has_entry_tags,
+        },
+        public:d0.race.public,
+        has_started:d1.hasStarted,
+      }
+    }).catch(errors=>{
+      console.log(errors);
+    }).finally(()=>{
+      this.loading = false;
+    })
+
+    /*
     this.raceService.getRace(this.raceID).subscribe((data) => {
 
       let d = data as RaceData;
@@ -172,9 +238,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
       this.childRaceData.unshift({id:this.raceID,name:'All'});
       
       // Race-specific info
-      /*
-      CAN USE THIS INFO WHEN IT IS NECESSARY IN DASHBOARD
-      */
+      // CAN USE THIS INFO WHEN IT IS NECESSARY IN DASHBOARD
       // this.race = raceData.race;
       // this.raceSettings = raceData.race_settings;
       // this.raceType = raceData.race.race_type;
@@ -190,7 +254,17 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
       }
 
     });
+    */
     
+  }
+  public navigateToAdmin() {
+    this.navigateTo('dashboard',{id:this.raceID})
+  }
+  public navigateToRaceBasics() {
+    this.navigateTo('dashboard',{id:this.raceID,page:'basics'});
+  }
+  public navigateToSettings() {
+    this.navigateTo('dashboard',{id:this.raceID,page:'settings'});
   }
 
 }
@@ -212,4 +286,14 @@ interface RaceData {
   IDs_to_name: any;
   race_IDs: number[];
   child_race_dict: ChildRaceData[];
+  distance_units:number;
+  owner:any;
+}
+interface RaceAboutData {
+  about_info:any;
+  hasJoined:boolean;
+  hasStarted:boolean;
+  isModerator:boolean;
+  isOwner:boolean;
+  race_settings:any;
 }

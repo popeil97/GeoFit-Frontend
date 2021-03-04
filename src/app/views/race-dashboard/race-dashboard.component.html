@@ -49,9 +49,20 @@
       </ng-template>
       <ng-template #MainView>
         <div class="DashboardNavigation">
-          <h1 class="RaceName">{{this.raceData.race.name}}</h1>
+          <h1 class="RaceName">{{this.raceData.basics.name}}</h1>
+          <ul>
+            <li><button (click)="this.navigateToAdmin();"><span>Admin</span></button></li>
+            <li><button (click)="this.navigateToRaceBasics();"><span>Race Basics</span></button></li>
+            <li><button (click)="this.navigateToSettings();"><span>Settings</span></button></li>
+          </ul>
         </div>
-        <div class="DashboardContents"></div>
+        <div class="DashboardContents" [ngSwitch]="this.page">
+          <p *ngSwitchCase="'admin'">Admin</p>
+          <div *ngSwitchCase="'basics'">
+            <app-race-basics [raceID]="this.raceID" [raceData]="this.raceData.basics"></app-race-basics>
+          </div>
+          <p *ngSwitchCase="'settings'">Settings</p>
+        </div>
         <!--
         <h1>{{ this.raceName }} Dashboard</h1>
       

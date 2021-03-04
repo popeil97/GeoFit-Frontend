@@ -1,0 +1,195 @@
+.CreateForm {
+    width:100%;
+  }
+    .CreateForm h6 {
+      font-weight:bold;
+    }
+    .formPanel {
+      background-color: rgb(255,255,255);
+      box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+      width:100%;
+      max-width: 800px;
+      padding:32px;
+      border-radius: 8px;
+      margin-left:auto;
+      margin-right:auto;
+      margin-bottom:32px;
+    }
+      .formPanel label {
+        width:100%;
+        font-weight: bold;
+      }
+      .formGroup, .formGroupHeader {
+        width:100%;
+        margin-bottom:32px;
+  
+        display:flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+      }
+      .formGroup.formGroupWithLeftBorder {
+        border-left:2px solid rgb(200,200,200);
+        padding-left:16px;
+      }
+      .formGroupHeader {
+        margin-bottom:0px;
+        justify-content: space-between;
+      }
+      .formGroup.formGroupAlignedTop {
+        align-items: flex-start;
+      }
+        .formInputContainer {
+          flex-shrink: 1;
+          flex-basis: 100%;
+          margin-left:16px;
+          margin-right:16px;
+        }
+        .formInputContainer:first-child {
+          margin-left:0px;
+        }
+        .formInputContainer:last-child {
+          margin-right:0px;
+        }
+        .formInputContainer.autoWidth {
+          width:auto;
+          flex-basis: auto;
+        }
+        .formInputContainer.formInputContainerSelfAlignedCenter {
+          align-self: center;
+        }
+          .formTextInput {
+            width:100%;
+            padding:4px 8px 4px 8px;
+            border:2px solid rgb(200,200,200);
+            background-color: white;
+            border-radius: 8px;
+          }
+          .formTextInput:focus {
+            outline: none;
+          }
+          .formInputContainer.autoWidth .formTextInput, .formTextInput.autoWidth {
+            width:auto;
+          }
+          .formTextInput.errorTextInput {
+            border-color: red;
+          }
+  
+  .bannerPreviewInput {
+    display:none;
+  }
+  .bannerPreview {
+    width:100%;
+    max-width: 800px;
+    height:100px;
+    position: relative;
+  
+    background-color: rgb(200,200,200);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+  }
+    .bannerPreviewOverlay {
+      opacity: 0.5;
+      background-color: rgb(0,0,0,0.5);
+      position: absolute;
+      width:100%;
+      height:100%;
+      transition: opacity 0.5s linear;
+  
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+    .bannerPreviewOverlay.noOverlay {
+      opacity:0;
+    }
+    .bannerPreview:hover {
+      cursor:pointer;
+    }
+    .bannerPreview:hover .bannerPreviewOverlay {
+      opacity: 1;
+    }
+    .bannerLoadingOverlay {
+      position:absolute;
+      width:auto;
+      max-width: 100%;
+      height:auto;
+      padding:4px;
+      border-radius: 8px;
+      left:8px;
+      top:8px;
+      background-color: rgba(0,0,0,0.8);
+    }
+  
+  .congratulationsContainer {
+    width:100%;
+    margin-bottom:32px;
+  
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+    .congratulationsIcon {
+      width:120px;
+      height:120px;
+      margin-right:32px;
+    }
+    .congratulationsName {
+      display:flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: nowrap;
+    }
+      .draftNotice {
+        flex-shrink: 0;
+        flex-basis: auto;
+  
+        border:2px solid red;
+        color:red;
+        border-radius: 8px;
+        margin-left:8px;
+        padding:4px;
+      }
+    .proceedButton {
+      font-size: var(--h6);
+      margin-bottom:16px;
+    }
+  .submitButtonGroup {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:0px;
+  }
+  .formButton {
+    background-color: white;
+  }
+  .formButton:hover {
+    background-color: var(--main-background-color);
+    color:white;
+  }
+  .formButton.resetButton {
+      background-color: red;
+      color:white;
+  }
+  .createRaceSubmitButton.disabled {
+    opacity:0.5;
+  }
+  .createRaceSubmitButton.disabled:hover {
+    cursor:initial;
+    background-color: initial;
+    color:initial;
+  }
+  
+  .uploadFileIcon {
+    width:36px;
+    height:36px;
+    margin-bottom:8px;
+  }
+  

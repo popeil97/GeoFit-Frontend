@@ -3,14 +3,12 @@ import { Routes, RouterModule } from '@angular/router';
 import { PublicRacesPageComponent } from './public-races-page/public-races-page.component';
 import { RaceViewPageComponent } from './race-view-page/race-view-page.component';
 import { LandingPageComponent  } from './landing-page/landing-page.component';
-import { RaceCreateComponent } from './race-create/race-create.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { RaceAboutPageComponent } from './race-about-page/race-about-page.component';
 import { TeamFormComponent } from './team-form/team-form.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { PasswordRequestComponent } from './password-request/password-request.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
-import { RaceDashboardComponent } from './race-dashboard/race-dashboard.component';
 import {WelcomeComponent} from './welcome/welcome.component'
 import {AboutTucanPageComponent} from './about-tucan-page/about-tucan-page.component'
 import {FaqPageComponent} from './faq-page/faq-page.component'
@@ -25,6 +23,9 @@ import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-cre
 import { ForRacersComponent } from './views/for-racers/for-racers.component';
 import { ItemPortalComponent } from './item-portal/item-portal.component';
 import { PublicRacesComponent } from './views/public-races/public-races.component';
+
+import { RaceCreateComponent } from './views/race-create/race-create.component';
+import { RaceDashboardComponent } from './views/race-dashboard/race-dashboard.component';
 
 const routes: Routes = [
   {path: 'race', component:RaceViewPageComponent},

@@ -32,6 +32,9 @@ export class RaceService {
   //   console.log(race_id)
     return this.http.post(environment.apiUrl + '/race/',{race_id:race_id});
   }
+  getRacePromise(race_id:number) {
+    return this.http.post(environment.apiUrl + '/race/',{race_id:race_id}).toPromise();
+  }
 
   joinRace(registrationBody:any) {
   //   console.log('Attempting to join race:',registrationBody);
