@@ -240,6 +240,16 @@ export class RaceCreateComponent implements OnInit {
     reader.readAsDataURL(file);
     // }
   }
+  cancelBannerImage(e:any) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    this.bannerURL = null;
+    this.bannerLoading = false;
+    this.raceBasicsForm.get('bannerFile').reset();
+  }
   // --- End Banner-Related Functions ---
 
   onRaceBasicsFormSubmit() {

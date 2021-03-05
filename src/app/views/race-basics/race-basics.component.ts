@@ -38,6 +38,7 @@ export class RaceBasicsComponent implements OnInit {
     public createResponse: any = null;
 
     public loading:boolean = true;
+    public changedValues = [];
 
   constructor(
     private _raceService:RaceService,
@@ -60,8 +61,8 @@ export class RaceBasicsComponent implements OnInit {
       return;
     }
 
-    this.raceType = this.raceData.race_type;
-    this.bannerURL = this.raceData.race_image;
+    this.raceType = this.raceData.raceType;
+    this.bannerURL = this.raceData.bannerFile;
     // TODO: get banner URL from race data and save it in this.bannerURL
 
     // The form control needed to operate the race basics form
@@ -76,18 +77,18 @@ export class RaceBasicsComponent implements OnInit {
         cannotBeEmptyString(),
         Validators.maxLength(2000),
       ]),
-      startDate: new FormControl(this.raceData.start_date,[
+      startDate: new FormControl(this.raceData.startDate,[
         Validators.required,
         cannotBeEmptyString(),
       ]),
-      endDate: new FormControl(this.raceData.end_date,[
+      endDate: new FormControl(this.raceData.endDate,[
         Validators.required,
         cannotBeEmptyString(),
       ]),
-      bannerFile: new FormControl(this.raceData.race_image,[
+      bannerFile: new FormControl(this.raceData.bannerFile,[
         requiredFileType(false, this.bannerURLTypes),
       ]),
-      raceType: new FormControl(this.raceTypeDictionary(RaceTypes[this.raceData.race_type]),[
+      raceType: new FormControl(this.raceTypeDictionary(RaceTypes[this.raceData.raceType]),[
         Validators.required,
       ]),
     });
@@ -96,11 +97,13 @@ export class RaceBasicsComponent implements OnInit {
   }
   resetForm() {
     this.initializeRaceBasicsForm();
+    this.changedValues = [];
   }
 
 
   selectRaceType(option:any) {
     this.raceType = option.type;
+    this.valueChange('raceType');
   }
   raceTypeDictionary(name:string) {
     var val = null;
@@ -138,7 +141,6 @@ export class RaceBasicsComponent implements OnInit {
       return;
     }
 
-    // if (e.target.files && e.target.files[0]) {
     this.bannerLoading = true;
     let file = e.target.files[0];
     var reader = new FileReader();
@@ -146,11 +148,109 @@ export class RaceBasicsComponent implements OnInit {
       this.bannerURL = reader.result;
       console.log(this.bannerURL);
       this.bannerLoading = false;
+      this.valueChange('bannerFile');
     }
     reader.readAsDataURL(file);
-    // }
+  }
+  cancelBannerImage(e:any) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    this.bannerURL = this.raceData.bannerFile;
+    this.bannerLoading = false;
+    this.raceBasicsForm.get('bannerFile').reset();
+
+    let index = this.changedValues.indexOf('bannerFile');
+    if (index > -1) this.changedValues.splice(index, 1);
   }
   // --- End Banner-Related Functions ---
+
+  valueChange(key:string) {
+    let changed = false;
+    switch(key) {
+      case 'bannerFile':
+        if (this.raceBasicsForm.get('bannerFile').value != this.bannerURL) {
+          if (this.changedValues.indexOf('bannerFile') == -1) this.changedValues.push(key);
+          changed = true;
+        }
+        else {
+          let index = this.changedValues.indexOf('bannerFile');
+          if (index > -1) this.changedValues.splice(index, 1);
+        }
+        break;
+      case 'raceType':
+        if (this.raceType != this.raceData.raceType) {
+          if (this.changedValues.indexOf('raceType') == -1) this.changedValues.push(key);
+          changed = true;
+        }
+        else {
+          let index = this.changedValues.indexOf('raceType');
+          if (index > -1) this.changedValues.splice(index, 1);
+        }
+        break;
+      default:
+        if (this.raceBasicsForm.get(key).value != this.raceData[key]) {
+          if (this.changedValues.indexOf(key) == -1) this.changedValues.push(key);
+          changed = true;
+        }
+        else {
+          let index = this.changedValues.indexOf(key);
+          if (index > -1) this.changedValues.splice(index, 1);
+        }
+    }
+  }
+
+  onRaceBasicsFormSubmit() {
+    this.hasSubmitted = true;
+    if (this.raceBasicsForm.valid) {
+      console.log('form is valid!');
+      let formClean = {};
+      if (this.changedValues.length == 0) {
+        // No changes have been made... why should we push a change?
+        return;
+      }
+      this.changedValues.forEach(key=>{
+      });
+
+      // We need to check all 
+
+
+      /*
+      let formClean = this.raceBasicsForm.value as RaceBasicsForm;
+      formClean.raceType = this.raceType;
+      if (this.bannerURL) formClean.raceImage = this.bannerURL;
+      formClean.startLoc = "Boston, Massachusetts, USA";
+      formClean.start_lon = -71.05708;
+      formClean.start_lat = 42.36115;
+      formClean.endLoc = "New York, New York, USA";
+      formClean.end_lon = 127.02461;
+      formClean.end_lat = 37.53260;
+      formClean.public = false;
+      console.log('FORM DATA TO SEND: ', formClean)
+      this._raceService.createRace(formClean).then((resp:FromResp) => {
+        console.log('CREATE RESP:',resp);
+        
+        this.createSuccess = true;
+        this.createResponse = resp;
+
+        this.hasSubmitted = false;
+        this.bannerURL = null;
+        this.raceBasicsForm.reset();
+        this.raceBasicsForm.markAsPristine();
+        this.raceBasicsForm.markAsUntouched();
+        this.initializeRaceBasicsForm();
+        //this.router.navigate(['/about',{name:resp.name,id:resp.race_id}]);
+      });
+      */
+    } else {
+      // validate all form fields
+      Object.keys(this.raceBasicsForm.controls).forEach(field => {
+        const control = this.raceBasicsForm.get(field);
+        control.markAsTouched({ onlySelf: true });
+      });
+    }
+  }
 
 }
 

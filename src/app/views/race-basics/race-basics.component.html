@@ -18,7 +18,7 @@
 
     <ng-template #LoadedForm>
       <p class="italics margin-bottom-16px">Inputs marked with <span class="color-red">*</span> are required.</p>
-    <form [formGroup]="this.raceBasicsForm" (ngSubmit)="this.onRaceBasicsFormSubmit()" class="CreateForm" name="RaceBasicsForm">
+      <form [formGroup]="this.raceBasicsForm" (ngSubmit)="this.onRaceBasicsFormSubmit()" class="CreateForm" name="RaceBasicsForm">
         <div class='formGroupHeader'>
           <h6>Race Name<span class="color-red">*</span></h6>
           <p class="margin-bottom-0px margin-left-16px italics">{{30 - this.raceBasicsForm.get('name').value.length}}</p>
@@ -34,6 +34,7 @@
               maxlength="30" 
               formControlName="name" 
               [readonly]="this.hasSubmitted"
+              (change)="this.valueChange('name')"
             />
             <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('name').invalid && (this.raceBasicsForm.get('name').dirty || this.raceBasicsForm.get('name').touched)">
               <p *ngIf="this.raceBasicsForm.get('name').hasError('required')" class="margin-0px">Your race needs a name.</p>
@@ -56,6 +57,7 @@
               rows="4"
               maxlength="2000"
               [readonly]="this.hasSubmitted"
+              (change)="this.valueChange('description')"
             ></textarea>
             <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('description').invalid && (this.raceBasicsForm.get('description').dirty || this.raceBasicsForm.get('description').touched)">
               <p *ngIf="this.raceBasicsForm.get('description').hasError('required')" class="margin-0px">Your race needs a description.</p>
@@ -73,6 +75,7 @@
               formControlName="startDate" 
               max="{{this.raceBasicsForm.get('endDate').value}}"
               [readonly]="this.hasSubmitted"
+              (change)="this.valueChange('startDate')"
             />
           </div>
           <p class='margin-0px'>to</p>
@@ -85,6 +88,7 @@
               formControlName="endDate" 
               min="{{this.raceBasicsForm.get('startDate').value}}"
               [readonly]="this.hasSubmitted"
+              (change)="this.valueChange('endDate')"
             />
           </div>
           <div class='formErrorMessage redText' *ngIf="(this.raceBasicsForm.get('startDate').invalid && (this.raceBasicsForm.get('startDate').dirty || this.raceBasicsForm.get('startDate').touched))||(this.raceBasicsForm.get('endDate').invalid && (this.raceBasicsForm.get('endDate').dirty || this.raceBasicsForm.get('endDate').touched))">
@@ -112,6 +116,7 @@
                 <p class="margin-0px color-white">Select an image file.</p>
               </div>
               <div class="bannerLoadingOverlay" *ngIf="this.bannerLoading"><p class="margin-0px color-white">Loading...</p></div>
+              <button class='bannerCancelButton' (click)="this.cancelBannerImage($event)" *ngIf="!this.bannerLoading && this.bannerURL!=this.raceData.bannerFile">Cancel Image Update</button>
             </div>
             <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('bannerFile').invalid && (this.raceBasicsForm.get('bannerFile').dirty || this.raceBasicsForm.get('bannerFile').touched)">
               <p class="margin-0px">Your banner image is neither a PNG or JPG file. Please upoad a PNG or JPG file if you wish to use a banner image.</p>

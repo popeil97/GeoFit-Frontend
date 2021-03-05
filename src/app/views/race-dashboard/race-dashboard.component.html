@@ -61,7 +61,9 @@
           <div *ngSwitchCase="'basics'">
             <app-race-basics [raceID]="this.raceID" [raceData]="this.raceData.basics"></app-race-basics>
           </div>
-          <p *ngSwitchCase="'settings'">Settings</p>
+          <div *ngSwitchCase="'settings'">
+            <app-race-settings [raceID]="this.raceID" [raceData]="this.raceData.settings" [getRaceDataCallback]="this.getRaceData"></app-race-settings>
+          </div>
         </div>
         <!--
         <h1>{{ this.raceName }} Dashboard</h1>

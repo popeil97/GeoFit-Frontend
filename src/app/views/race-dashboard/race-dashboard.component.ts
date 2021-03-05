@@ -147,7 +147,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
   reloadData() {
     this.getRaceData();
   }
-  private getRaceData(){
+  private getRaceData = () => {
     this.loading = true;
 
     Promise.all([this.raceService.getRacePromise(this.raceID), this.raceService.getRaceAbout(this.raceID)]).then(res=>{
@@ -175,15 +175,15 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
         basics:{
           name:d0.race.name,
           description:d0.race.description,
-          start_date:d0.race.start_date,
-          end_date:d0.race.end_date,
-          race_image:d1.about_info.race_image,
-          race_type:d0.race.race_type,
+          startDate:d0.race.start_date,
+          endDate:d0.race.end_date,
+          bannerFile:d1.about_info.race_image,
+          raceType:d0.race.race_type,
         },
         settings:{
-          is_manual_entry:d0.race_settings.isManualEntry,
           allow_teams:d0.race_settings.allowTeams,
           max_team_size:d0.race_settings.max_team_size,
+          is_manual_entry:d0.race_settings.isManualEntry,
         },
         map:{
           distance:d0.race.distance,
