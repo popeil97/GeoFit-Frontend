@@ -22,6 +22,7 @@ export class FooterComponent implements OnInit {
   navigateTo = (url:string = null) => {
     if (url == null) return;
     this.router.navigate([url]);
+    window.scrollTo(0, 0);
   }
 
   openTOS = () => {
