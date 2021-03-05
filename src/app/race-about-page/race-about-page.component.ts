@@ -362,6 +362,13 @@ export class RaceAboutPageComponent implements OnInit {
     this.router.navigate(['/race',{name:this.raceName,id:this.raceID}]);
   }
 
+  viewAboutTucan() {
+    // set race in race service
+
+    this.router.navigate(['/for-racers']);
+    window.scrollTo(0, 0);
+  }
+
   
   showModal(id:string): void {
     //console.log(id);
