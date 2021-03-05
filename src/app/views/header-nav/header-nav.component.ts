@@ -125,6 +125,7 @@ export class HeaderNavComponent implements OnInit {
   NavItemClick(url:string = null) {
     if (this.navigationOpen) this.ToggleNavigation();
     if (url != null) this.router.navigate([url]);
+    window.scrollTo(0, 0);
   }
   NavDropdownItemClick = (url:any = null) => {
     this.ToggleProfileDropdown();
