@@ -15,7 +15,11 @@ import { Register2Component } from '../../register2/register2.component';
 })
 export class RaceDashboardComponent implements OnInit, OnChanges {
 
-  public loading:Boolean = true;
+  // public loading:Boolean = true;
+  public loadingSegments = {
+    navigation:true,
+    content:true,
+  }
   public raceID: number = null;
   public raceData: any = null;
   public page: string;
@@ -48,7 +52,11 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
 
     // We add a subscription to the login event
     this._authService.getLoginStatus.subscribe(this.handleLoginChange);
-    this.loading = true;
+    
+    // this.loading = true;
+    this.loadingSegments.navigation = true;
+    this.loadingSegments.content = true;
+
     this.raceData = null;
 
     this.route.paramMap.subscribe(params => {
@@ -58,12 +66,17 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
       if (this.raceID) {
         // there was a race ID in the URL
         if (this._authService.isLoggedIn()) {
+          this.loadingSegments.navigation = false;
           this.getRaceData();     // We are logged in
         } else {
-          this.loading = false;   // We aren't logged in
+          // this.loading = false;   // We aren't logged in
+          this.loadingSegments.navigation = false;
+          this.loadingSegments.content = false;
         }
       } else {
-        this.loading = false;     // There was no race ID in the url
+        // this.loading = false;     // There was no race ID in the url
+        this.loadingSegments.navigation = false;
+        this.loadingSegments.content = false;
       }
     });
     /*
@@ -131,16 +144,18 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
       // we've logged in
       if (this.raceID) {
         // race ID was provided, gotta grab data
-        this.loading = true;
+        // this.loading = true;
         this.getRaceData();
       } else {
         // No Race ID was provided
-        this.loading = false;
+        // this.loading = false;
+        this.loadingSegments.content = false;
         this.raceData = null;
       }
     } else {
       // We've logged out
-      this.loading = false;
+      // this.loading = false;
+      this.loadingSegments.content = false;
       this.raceData = null;
     }
   }
@@ -148,13 +163,15 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
     this.getRaceData();
   }
   private getRaceData = () => {
-    this.loading = true;
+    // this.loading = true;
+    this.loadingSegments.content = true;
 
     Promise.all([this.raceService.getRacePromise(this.raceID), this.raceService.getRaceAbout(this.raceID)]).then(res=>{
       let d0 = res[0] as RaceData,
           d1 = res[1] as RaceAboutData;
       if (!d0.is_mod_or_owner) {
-        this.loading = false;
+        // this.loading = false;
+        this.loadingSegments.content = false;
         this.raceData = null;
         this.isOwnerOrMod = false;
         return;
@@ -212,7 +229,8 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
     }).catch(errors=>{
       console.log(errors);
     }).finally(()=>{
-      this.loading = false;
+      // this.loading = false;
+      this.loadingSegments.content = false;
     })
 
     /*
