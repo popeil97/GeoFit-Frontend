@@ -424,6 +424,7 @@ export class RaceAboutPageComponent implements OnInit {
 
   update(): void {
     let formClean = this.AboutForm.value as any;
+
     //console.log(this.AboutForm);
     let isValid: Boolean = this.AboutForm.valid;
 
@@ -438,6 +439,24 @@ export class RaceAboutPageComponent implements OnInit {
     
 
     if(isValid) {
+      /* 
+        formClean = {
+          name:string,
+          description:string,
+          raceImage:image,
+          rules:{
+            race_id:number,
+            price:number
+            isManual:boolean,
+            allowTeams:boolean,
+            maxTeamSize:number,
+            paymentRequired:boolean
+            price:number,
+            hasSwag:boolean,
+            hasEntryTags:boolean,
+          }
+        }
+      */
       this.raceService.updateRaceAbout(formClean,this.raceID).then((resp) => {
         this.aboutData = resp['about_info'] as AboutData;
         this.raceSettings = resp['race_settings'] as RaceSettings;

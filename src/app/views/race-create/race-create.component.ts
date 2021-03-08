@@ -255,18 +255,13 @@ export class RaceCreateComponent implements OnInit {
   onRaceBasicsFormSubmit() {
     this.hasSubmitted = true;
     if (this.raceBasicsForm.valid) {
-      console.log('form is valid!');
+
       let formClean = this.raceBasicsForm.value as RaceBasicsForm;
       formClean.raceType = this.raceType;
       if (this.bannerURL) formClean.raceImage = this.bannerURL;
-      formClean.startLoc = "Boston, Massachusetts, USA";
-      formClean.start_lon = -71.05708;
-      formClean.start_lat = 42.36115;
-      formClean.endLoc = "New York, New York, USA";
-      formClean.end_lon = 127.02461;
-      formClean.end_lat = 37.53260;
-      formClean.public = false;
-      console.log('FORM DATA TO SEND: ', formClean)
+      formClean.public = false; 
+      //console.log('FORM DATA TO SEND: ', formClean)
+      
       this._raceService.createRace(formClean).then((resp:FromResp) => {
         console.log('CREATE RESP:',resp);
         
@@ -279,22 +274,6 @@ export class RaceCreateComponent implements OnInit {
         this.raceBasicsForm.markAsPristine();
         this.raceBasicsForm.markAsUntouched();
         this.initializeRaceBasicsForm();
-        /*
-        this.raceBasicsForm.reset({
-          name:{value:''},
-          description:{value:''},
-          startDate:{value:''},
-          endDate:{value:''},
-          startLoc:{value:''},
-          bannerFile:{value:null},
-          raceType:{value:''},
-        });
-        //this.bannerURL = null;
-        Object.keys(this.raceBasicsForm.controls).forEach(key => {
-          this.raceBasicsForm.get(key).setErrors(null);
-        });
-        */
-        //this.router.navigate(['/about',{name:resp.name,id:resp.race_id}]);
       });
     } else {
       // validate all form fields

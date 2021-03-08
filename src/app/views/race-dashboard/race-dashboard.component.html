@@ -59,6 +59,7 @@
             <li><button (click)="this.navigateToAdmin();"><span>Admin</span></button></li>
             <li><button (click)="this.navigateToRaceBasics();"><span>Race Basics</span></button></li>
             <li><button (click)="this.navigateToSettings();"><span>Settings</span></button></li>
+            <li><button (click)="this.navigateToMap();"><span>Map &amp; Route</span></button></li>
           </ul>
         </div>
         <ng-template [ngIf]="this.loadingSegments.content" [ngIfElse]="RaceDashboardContents">
@@ -74,6 +75,9 @@
             </div>
             <div *ngSwitchCase="'settings'">
               <app-race-settings [raceID]="this.raceID" [raceData]="this.raceData.settings" [getRaceDataCallback]="this.getRaceData"></app-race-settings>
+            </div>
+            <div *ngSwitchCase="'map'">
+              <app-race-mapupload [raceID]="this.raceID" [raceData]="this.raceData.map" [getRaceDataCallback]="this.getRaceData"></app-race-mapupload>
             </div>
           </div>
         </ng-template>

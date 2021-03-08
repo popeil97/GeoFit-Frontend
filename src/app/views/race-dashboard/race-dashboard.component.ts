@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { RaceService } from '../../race.service';
 import { RaceSettings } from '../../race-about-page/race-about-page.component';
 import { AuthService } from '../../auth.service';
+import { MapService } from '../../map.service';
 
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from '../../login/login.component';
@@ -24,7 +25,6 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
   public raceData: any = null;
   public page: string;
 
-
   public isOwnerOrMod:Boolean = false;
 
   public raceName: string;
@@ -42,8 +42,8 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
   constructor(
     private route: ActivatedRoute,
     private raceService: RaceService,
-
     private _authService:AuthService,
+    private _mapService:MapService,
     private router:Router,
     private dialog:MatDialog,
   ) { }
@@ -166,9 +166,14 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
     // this.loading = true;
     this.loadingSegments.content = true;
 
-    Promise.all([this.raceService.getRacePromise(this.raceID), this.raceService.getRaceAbout(this.raceID)]).then(res=>{
+    Promise.all([
+      this.raceService.getRacePromise(this.raceID), 
+      this.raceService.getRaceAbout(this.raceID),
+      //this._mapService.getMapData(this.raceID)
+    ]).then(res=>{
       let d0 = res[0] as RaceData,
           d1 = res[1] as RaceAboutData;
+          //d2 = res[2] as RouteData;
       if (!d0.is_mod_or_owner) {
         // this.loading = false;
         this.loadingSegments.content = false;
@@ -203,6 +208,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
           is_manual_entry:d0.race_settings.isManualEntry,
         },
         map:{
+          name:d0.race.name,
           distance:d0.race.distance,
           distance_type:d0.race.distance_type,
           distance_units:d0.distance_units,
@@ -284,6 +290,9 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
   public navigateToSettings() {
     this.navigateTo('dashboard',{id:this.raceID,page:'settings'});
   }
+  public navigateToMap() {
+    this.navigateTo('dashboard',{id:this.raceID,page:'map'});
+  }
 
 }
 
@@ -314,4 +323,28 @@ interface RaceAboutData {
   isModerator:boolean;
   isOwner:boolean;
   race_settings:any;
+}
+interface RouteData {
+  name: string;
+  coords: any;
+  //route_pins: RoutePins[];
+  //userData: UserData[];
+  //org_pins: UserData[];
+  //checkpoints: CheckpointMapData[];
+}
+interface PinSettings {
+  followerPinsOnly: boolean;
+  malePinsOn: boolean;
+  femalePinsOn: boolean;
+  allAgesOn: boolean;
+  minAge: number;
+  maxAge: number;
+  showOrgPins: boolean;
+}
+interface RoutePins {
+  title: string;
+  desciption: string;
+  lon: number;
+  lat: number;
+  image_urls: string[];
 }

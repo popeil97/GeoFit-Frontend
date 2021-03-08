@@ -138,6 +138,7 @@ import { RaceCreateComponent } from './views/race-create/race-create.component';
 import { RaceDashboardComponent } from './views/race-dashboard/race-dashboard.component';
 import { RaceSettingsComponent } from './views/race-settings/race-settings.component';
 import { RaceBasicsComponent } from './views/race-basics/race-basics.component';
+import { RaceMapuploadComponent } from './views/race-mapupload/race-mapupload.component';
 
 
 @NgModule({
@@ -244,6 +245,7 @@ import { RaceBasicsComponent } from './views/race-basics/race-basics.component';
     PublicRacesComponent,
     RaceSettingsComponent,
     RaceBasicsComponent,
+    RaceMapuploadComponent,
       ],
 
   imports: [
