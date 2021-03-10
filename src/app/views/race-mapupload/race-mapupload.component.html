@@ -175,11 +175,14 @@
         <hr />
 
         <h6>Race Map Preview:</h6>
-        <p class="italics">A preview of the race will appear when a route file is uploaded and saved.</p>
-        <ng-template [ngIf]="this.raceData.valid_route_file">
+        <p>A preview of the race will appear when a route file is uploaded and saved.</p>
+        <ng-template [ngIf]="this.raceData.valid_route_file" [ngIfElse]="InvalidRoute">
           <div class="MapRoutePreview" >
             <app-map [raceIDs]="[this.raceID]" [parentRaceID]="this.raceID" [displayUsers]="false" [zoom]="false"></app-map>
           </div>
+        </ng-template>
+        <ng-template #InvalidRoute>
+          <p class='italics redText'>Either a route file has not been uploaded yet or the uploaded route file is invalid. Please upload a route file to preview the race map.</p>
         </ng-template>
       </form>
     </ng-template>
