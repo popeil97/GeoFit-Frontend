@@ -66,9 +66,10 @@
           <input 
             type="submit" 
             class="button formButton formSubmitButton" 
-            [ngClass]="{'disabled':this.changedValues.length==0}"
+            [ngClass]="{'disabled':(this.changedValues.length==0 || this.changedValues.length==0 || !this.isFormValid(this.form))}"
             value="Update Race Details" 
-            [readonly]="this.checkingValidityOfSubmission"
+            [disabled]="this.changedValues.length==0 || this.checkingValidityOfSubmission || !this.isFormValid(this.form)"
+            [readonly]="this.changedValues.length==0 || this.checkingValidityOfSubmission || !this.isFormValid(this.form)"
           />
           <div class="margin-top-16px" *ngIf="this.hasSubmitted">
             <p class="italics margin-0px" *ngIf="this.validForm && this.updatingSettings">Updating Race Settings...</p>

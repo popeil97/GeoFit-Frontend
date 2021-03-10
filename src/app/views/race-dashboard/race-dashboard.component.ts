@@ -162,7 +162,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
   reloadData() {
     this.getRaceData();
   }
-  private getRaceData = () => {
+  private getRaceData = (callback:any = null) => {
     // this.loading = true;
     this.loadingSegments.content = true;
 
@@ -237,6 +237,8 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
     }).finally(()=>{
       // this.loading = false;
       this.loadingSegments.content = false;
+      console.log(this.raceData);
+      if (callback) callback();
     })
 
     /*

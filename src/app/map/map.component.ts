@@ -147,6 +147,7 @@ export class MapComponent implements AfterViewInit,OnChanges {
       
       this._mapService.getMapData(raceID).then((data) => {
         let mapData = data as RouteData;
+        console.log(mapData);
 
         this.routeData[raceID].coords = mapData.coords;
         this.routeData[raceID].route_pins = mapData.route_pins;

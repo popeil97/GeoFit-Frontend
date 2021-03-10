@@ -74,4 +74,8 @@ export class RaceService {
     return this.http.post(environment.apiUrl + '/race-settings/update-or-create/',{race_id:race_id,rules:settingsForm}).toPromise();
   }
 
+  public updateMapRoute(race_form:any) {
+    return this.http.post(environment.apiUrl + '/race/map-route-form/',{form:race_form}).toPromise();
+  }
+
 }

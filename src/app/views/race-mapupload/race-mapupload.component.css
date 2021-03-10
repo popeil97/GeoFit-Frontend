@@ -161,7 +161,7 @@
     }
     .locationOption:hover {
       cursor:pointer;
-      padding-left:16px;
+      background-color: rgb(230,230,230);
     }
   .submitButtonGroup {
     flex-direction: column;
@@ -192,5 +192,12 @@
 .disabledGroup {
     opacity:0.5;
 }
+.coordinateInput {
+  width:100px !important;
+}
 
-  
+.MapRoutePreview {
+  position:relative;
+  width: 400px;
+  height:400px;
+}
