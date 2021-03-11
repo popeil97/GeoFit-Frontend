@@ -71,6 +71,10 @@ export class RaceMapuploadComponent implements OnInit,AfterViewInit {
     this.validForm = true;
 
     this.mapFileLoading = false;
+    this.mapFile = {
+      data:null,
+      filename:"",
+    }
 
     this.generatingRoute = false;
     this.generateError = null;
@@ -157,6 +161,9 @@ export class RaceMapuploadComponent implements OnInit,AfterViewInit {
     return Object.keys(f.controls).reduce((accumulator,inputKey)=>{
       return (accumulator && f.get(inputKey).errors == null);
     },true);
+  }
+  resetForm() {
+    this.initializeForm();
   }
   onFormSubmit() {
     this.checkingValidityOfSubmission = true;
