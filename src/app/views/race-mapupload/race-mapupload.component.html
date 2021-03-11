@@ -25,42 +25,64 @@
         <p class="italics">If you do not have a JSON or GPX file with you, we can generate one for you.</p>
         
         <h6>Race Starting Location: <span class="color-red">*</span></h6>
-        <div class='formGroup'>
+        <div class='formGroup formGroupAlignedTop'>
           <div class='formInputContainer'>
+            <label for="startLoc" class='margin-bottom-4px'>Location Name:</label>
             <input 
               id="startLoc" 
               class='formTextInput'
               [ngClass]="{'errorTextInput':this.form.controls.startLoc.errors != null}"
               type='text'
               formControlName="startLoc" 
-              (keyup)="this.findClosestLocations('startLoc');"
               autocomplete="off"
+              (keyup)="this.findClosestLocations('startLoc');"
             >
-            <div *ngIf="this.locations.startLoc.options!=null" class='locationOptions'>
+            <div *ngIf="this.locationOptions.startLoc!=null" class='locationOptions'>
               <div class='locationOptionsInnerContainer'>
                 <div class="locationOptionsHeaderContainer">
                   <p class="italics margin-0px locationOptionsHeader">Please select one of the options below:</p>
                   <p class="italics h7 margin-left-8px locationOptionsClose" (click)="this.clearLocationOptions('startLoc');">Close Dropdown</p>
                 </div>
-                <option *ngFor="let option of this.locations.startLoc.options" class='locationOption' [value]="option.place_name" (click)="this.selectLocationOption(option,'startLoc')">
+                <option *ngFor="let option of this.locationOptions.startLoc" class='locationOption' [value]="option.place_name" (click)="this.selectLocationOption(option,'startLoc')">
                   {{ option.place_name }}
                 </option>
               </div>
             </div>
-            <p class="margin-0px italics h7" *ngIf="this.locations.startLoc.selectedLoc==null; else selectedStart"><span class="bold-text">Chosen location:</span> (not selected)</p>
-            <ng-template #selectedStart>
-              <p class="margin-0px italics h7"><span class="bold-text">Chosen location:</span> {{this.locations.startLoc.selectedLoc.place_name}}</p>
-            </ng-template>
-            <div class='formErrorMessage redText' *ngIf="this.form.get('startLoc').invalid">
-              <p *ngIf="this.form.get('startLoc').hasError('missing')" class="margin-0px">A race starting location is required.</p>
-              <p *ngIf="this.form.get('startLoc').hasError('unselected')" class="margin-0px">A race starting location must be selected.</p>
+            <div class='formErrorMessage redText' *ngIf="(this.form.get('startLoc').invalid || this.form.get('startLat').invalid || this.form.get('startLon').invalid)">
+              <p *ngIf="this.form.get('startLoc').errors!=null" class="margin-0px">A race starting location is required.</p>
+              <p *ngIf="(this.form.get('startLat').errors!=null || this.form.get('startLon').errors!=null)" class="margin-0px">Invalid starting coordinates.</p>
             </div>
+          </div>
+          <div class='formInputContainer autoWidth'>
+            <label for="startLat" class='margin-bottom-4px'>Latitude:</label>
+            <input
+              id="startLat" 
+              class='formTextInput coordinateInput'
+              [ngClass]="{'errorTextInput':this.form.controls.startLat.errors != null}"
+              type='number'
+              formControlName="startLat"
+              (keyup)="this.valueChange('startLat')"
+              (change)="this.valueChange('startLat')"
+            />
+          </div>
+          <div class='formInputContainer autoWidth'>
+            <label for="startLon" class='margin-bottom-4px'>Longitude:</label>
+            <input
+              id="startLon" 
+              class='formTextInput coordinateInput'
+              [ngClass]="{'errorTextInput':this.form.controls.startLon.errors != null}"
+              type='number'
+              formControlName="startLon" 
+              (keyup)="this.valueChange('startLon')"
+              (change)="this.valueChange('startLon')"
+            />
           </div>
         </div>
         
         <h6>Race Ending Location: <span class="color-red">*</span></h6>
-        <div class='formGroup'>
+        <div class='formGroup formGroupAlignedTop'>
           <div class='formInputContainer'>
+            <label for="endLoc" class='margin-bottom-4px'>Location Name:</label>
             <input 
               id="endLoc" 
               class='formTextInput'
@@ -70,32 +92,56 @@
               (keyup)="this.findClosestLocations('endLoc');"
               autocomplete="off"
             />
-            <div *ngIf="this.locations.endLoc.options!=null" class='locationOptions'>
+            <div *ngIf="this.locationOptions.endLoc!=null" class='locationOptions'>
               <div class='locationOptionsInnerContainer'>
                 <div class="locationOptionsHeaderContainer">
                   <p class="italics margin-0px locationOptionsHeader">Please select one of the options below:</p>
                   <p class="italics h7 margin-left-8px locationOptionsClose" (click)="this.clearLocationOptions('endLoc');">Close Dropdown</p>
                 </div>
-                <option *ngFor="let option of this.locations.endLoc.options" class='locationOption' [value]="option.place_name" (click)="selectLocationOption(option,'endLoc')">
+                <option *ngFor="let option of this.locationOptions.endLoc" class='locationOption' [value]="option.place_name" (click)="selectLocationOption(option,'endLoc')">
                   {{ option.place_name }}
                 </option>
               </div>
             </div>
-            <p class="margin-0px italics h7" *ngIf="this.locations.endLoc.selectedLoc==null; else selectedEnd"><span class="bold-text">Chosen location:</span> (not selected)</p>
-            <ng-template #selectedEnd>
-              <p class="margin-0px italics h7"><span class="bold-text">Chosen location:</span> {{this.locations.endLoc.selectedLoc.place_name}}</p>
-            </ng-template>
-            <div class='formErrorMessage redText' *ngIf="this.form.get('endLoc').invalid">
-              <p *ngIf="this.form.get('endLoc').hasError('missing')" class="margin-0px">A race end location is required.</p>
-              <p *ngIf="this.form.get('endLoc').hasError('unselected')" class="margin-0px">A race end location must be selected.</p>
+            <div class='formErrorMessage redText' *ngIf="(this.form.get('endLoc').invalid || this.form.get('endLat').invalid || this.form.get('endLon').invalid)">
+              <p *ngIf="this.form.get('endLoc').errors != null" class="margin-0px">A race end location is required.</p>
+              <p *ngIf="(this.form.get('endLat').errors!=null || this.form.get('endLon').errors!=null)" class="margin-0px">Invalid ending coordinates.</p>
             </div>
+          </div>
+          <div class='formInputContainer autoWidth'>
+            <label for="endLat" class='margin-bottom-4px'>Latitude:</label>
+            <input
+              id="endLat" 
+              class='formTextInput coordinateInput'
+              [ngClass]="{'errorTextInput':this.form.controls.endLat.errors != null}"
+              type='number'
+              formControlName="endLat" 
+              (keyup)="this.valueChange('endLat')"
+              (change)="this.valueChange('endtLat')"
+            />
+          </div>
+          <div class='formInputContainer autoWidth'>
+            <label for="endLon" class='margin-bottom-4px'>Longitude:</label>
+            <input
+              id="endLon" 
+              class='formTextInput coordinateInput'
+              [ngClass]="{'errorTextInput':this.form.controls.endLon.errors != null}"
+              type='number'
+              formControlName="endLon" 
+              (keyup)="this.valueChange('endLon')"
+              (change)="this.valueChange('endLon')"
+            />
           </div>
         </div>
 
         <div class='formGroup formGroupWithLeftBorder formGroupAlignedTop formGroupColumn'>
-          <p>Need to generate a route file? Click below to generate and download a JSON route file.</p>
-          <p class="italics">Note: For a route file to successfully generate, you need to have a starting and ending location <strong>chosen</strong>, not simply typed out.</p>
-          <button class="formButton margin-top-8px" (click)="this.generateRouteFile();">Generate JSON route file</button>
+          <p class="margin-0px">Need to generate a route file? Click below to generate and download a route file.</p>
+          <p class="italics margin-bottom-8px">Note: For a route file to successfully generate, you must provide the coordinates for your starting and ending locations.</p>
+          <div>
+            <button class="formButton margin-top-8px" (click)="this.generateRouteFile($event);">Generate route file</button>
+            <span class="margin-left-8px italics" *ngIf="this.generatingRoute">Generating route file...</span>
+          </div>
+          <p class='italics redText margin-bottom-0px' *ngIf="this.generateError!=null">{{this.generateError}}</p>
         </div>
 
         <h6>Map File Upload <span class="color-red">*</span></h6>
@@ -105,17 +151,39 @@
             <input 
               type="file" 
               formControlName="mapFile" 
-              (change)="onSelectMapFileChange($event)"
               accept=".json,.gpx"
+              (change)="onSelectMapFileChange($event)"
             />
           </div>
         </div>
+
+        <div class='formGroup submitButtonGroup'>
+          <input 
+            type="submit" 
+            class="button formButton formSubmitButton" 
+            [ngClass]="{'disabled':(this.changedValues.length==0 || !this.isFormValid(this.form))}"
+            value="Update Map Details" 
+            [disabled]="this.changedValues.length==0 || this.checkingValidityOfSubmission || !this.isFormValid(this.form)"
+            [readonly]="this.changedValues.length==0 || this.checkingValidityOfSubmission || !this.isFormValid(this.form)"
+          />
+          <div class="margin-top-16px" *ngIf="this.hasSubmitted">
+            <p class="italics margin-0px" *ngIf="this.validForm && this.updatingSettings">Updating Map Details...</p>
+            <p class="italics redText margin-0px" *ngIf="!this.validForm">Errors have been found above. Check each of your inputs for errors.</p>
+          </div>
+        </div>
+
         <hr />
 
         <h6>Race Map Preview:</h6>
-        <div class="MapRoutePreview" *ngIf="this.coords!=null">
-          <!-- <app-map [useLoader]="false" [coordinates]="this.coords" [displayUsers]="false"></app-map> -->
-        </div>
+        <p>A preview of the race will appear when a route file is uploaded and saved.</p>
+        <ng-template [ngIf]="this.raceData.valid_route_file" [ngIfElse]="InvalidRoute">
+          <div class="MapRoutePreview" >
+            <app-map [raceIDs]="[this.raceID]" [parentRaceID]="this.raceID" [displayUsers]="false" [zoom]="false"></app-map>
+          </div>
+        </ng-template>
+        <ng-template #InvalidRoute>
+          <p class='italics redText'>Either a route file has not been uploaded yet or the uploaded route file is invalid. Please upload a route file to preview the race map.</p>
+        </ng-template>
       </form>
     </ng-template>
   </ng-template>

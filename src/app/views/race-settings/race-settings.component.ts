@@ -12,7 +12,7 @@ export class RaceSettingsComponent implements OnInit {
 
   @Input() raceID:number;
   @Input() raceData:any = null;
-  @Input() getRaceDataCallback: () => void;
+  @Input() getRaceDataCallback: (callback:any) => void;
 
   public form:FormGroup;
   public loading:Boolean = true;
@@ -80,12 +80,17 @@ export class RaceSettingsComponent implements OnInit {
         if (index > -1) this.changedValues.splice(index, 1);
       }
     }
-
-    console.log('VALUE CHANGES:',this.changedValues,key,changed);
   }
   resetForm() {
     this.initializeForm();
     this.changedValues = [];
+  }
+  isFormValid(f:FormGroup):Boolean { 
+    if (!f.disabled) return f.valid;
+    return Object.keys(f.controls).reduce((accumulator,inputKey)=>{
+      return (accumulator && f.get(inputKey).errors == null);
+    },true);
+    //return f.disabled ? f.errors == null : f.valid;
   }
   onFormSubmit() {
 
@@ -131,11 +136,12 @@ export class RaceSettingsComponent implements OnInit {
       });
 
       this.updatingSettings = true;
-      this._raceService.updateOrCreateRaceSettings(this.raceID,formClean).then(()=>{
+      this._raceService.updateOrCreateRaceSettings(this.raceID,formClean).then((resp)=>{
         this.updateSuccess = true;
-        alert("Your Race Settings have been successfully updated");
-        this.getRaceDataCallback();
-        this.initializeForm();
+        this.getRaceDataCallback(()=>{
+          alert("Your Race Settings have been successfully updated");
+          this.initializeForm();
+        });
       }).catch(error=>{
         alert(error);
       }).finally(()=>{

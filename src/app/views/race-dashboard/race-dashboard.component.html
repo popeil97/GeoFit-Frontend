@@ -71,7 +71,7 @@
           <div class="DashboardContents" [ngSwitch]="this.page">
             <p *ngSwitchCase="'admin'">Admin</p>
             <div *ngSwitchCase="'basics'">
-              <app-race-basics [raceID]="this.raceID" [raceData]="this.raceData.basics"></app-race-basics>
+              <app-race-basics [raceID]="this.raceID" [raceData]="this.raceData.basics" [getRaceDataCallback]="this.getRaceData"></app-race-basics>
             </div>
             <div *ngSwitchCase="'settings'">
               <app-race-settings [raceID]="this.raceID" [raceData]="this.raceData.settings" [getRaceDataCallback]="this.getRaceData"></app-race-settings>

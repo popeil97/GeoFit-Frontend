@@ -13,6 +13,7 @@ export class RaceBasicsComponent implements OnInit {
   // We theoretically can pull the raceID from the raceData data, but we should be safe here and try to pass it via Angular Input instead
   @Input() raceID:number;
   @Input() raceData:any;
+  @Input() getRaceDataCallback: (callback:any) => void;
 
   // --- Initializing form groups ---
   raceBasicsForm:FormGroup;
@@ -34,6 +35,7 @@ export class RaceBasicsComponent implements OnInit {
     public bannerURL: any;
     public bannerLoading: boolean = false;
     public hasSubmitted: boolean = false;
+    public validatingSubmission:boolean = false;
     public createSuccess: boolean = false;
     public createResponse: any = null;
 
@@ -55,6 +57,7 @@ export class RaceBasicsComponent implements OnInit {
   initializeRaceBasicsForm() {
     
     this.loading = true;
+    this.validatingSubmission = false;
 
     if (this.raceID == null || this.raceData == null) {
       this.loading = false;
@@ -95,7 +98,7 @@ export class RaceBasicsComponent implements OnInit {
 
     this.loading = false;
   }
-  resetForm() {
+  resetForm = () => {
     this.initializeRaceBasicsForm();
     this.changedValues = [];
   }
@@ -103,7 +106,7 @@ export class RaceBasicsComponent implements OnInit {
 
   selectRaceType(option:any) {
     this.raceType = option.type;
-    this.valueChange('raceType');
+    this.valueChange('raceType')
   }
   raceTypeDictionary(name:string) {
     var val = null;
@@ -164,6 +167,23 @@ export class RaceBasicsComponent implements OnInit {
     let index = this.changedValues.indexOf('bannerFile');
     if (index > -1) this.changedValues.splice(index, 1);
   }
+  removeBannerImage(e:any) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    this.bannerURL = null;
+    this.bannerLoading = false;
+    this.raceBasicsForm.get('bannerFile').setValue(null);
+
+    let index = this.changedValues.indexOf('bannerFile');
+    if (this.bannerURL != this.raceData.bannerFile) {
+      if (index == -1) this.changedValues.push('bannerFile');
+    }
+    else {
+      if (index > -1) this.changedValues.splice(index, 1);
+    }
+  }
   // --- End Banner-Related Functions ---
 
   valueChange(key:string) {
@@ -200,18 +220,57 @@ export class RaceBasicsComponent implements OnInit {
         }
     }
   }
-
+  isFormValid(f:FormGroup):Boolean { 
+    if (!f.disabled) return f.valid;
+    return Object.keys(f.controls).reduce((accumulator,inputKey)=>{
+      return (accumulator && f.get(inputKey).errors == null);
+    },true);
+  }
   onRaceBasicsFormSubmit() {
+    
+    if (this.validatingSubmission) {
+      console.log("We've already submitted...");
+      return;
+    }
+
     this.hasSubmitted = true;
-    if (this.raceBasicsForm.valid) {
+    this.validatingSubmission = true;
+    this.raceBasicsForm.disable();
+
+    const isValid = this.isFormValid(this.raceBasicsForm);
+
+    if (isValid && this.changedValues.length > 0) {
       console.log('form is valid!');
       let formClean = {};
-      if (this.changedValues.length == 0) {
-        // No changes have been made... why should we push a change?
-        return;
-      }
       this.changedValues.forEach(key=>{
+        switch(key) {
+          case 'bannerFile':
+            formClean['raceImage'] = this.bannerURL;
+            break;
+          case 'raceType':
+            formClean['raceType'] = this.raceType;
+            break;
+          default:
+            formClean[key]=this.raceBasicsForm.get(key).value;
+        }
       });
+
+      this._raceService.updateRaceAbout(formClean, this.raceID).then((resp:updateResp)=>{
+        console.log(resp);
+        if (resp.success) {
+          this.getRaceDataCallback(()=>{
+            this.resetForm();
+            alert("Your race information has been successfully updated");
+          });
+        } 
+        else throw(new Error('Unsuccessful Update'));
+      }).catch(error=>{
+        console.error(error);
+        alert("Your race was unable to be updated. Please try again later");
+      }).finally(()=>{
+        this.raceBasicsForm.enable();
+        this.validatingSubmission = false;
+      })
 
       // We need to check all 
 
@@ -245,15 +304,20 @@ export class RaceBasicsComponent implements OnInit {
       */
     } else {
       // validate all form fields
+      this.raceBasicsForm.enable();
       Object.keys(this.raceBasicsForm.controls).forEach(field => {
         const control = this.raceBasicsForm.get(field);
         control.markAsTouched({ onlySelf: true });
       });
+      this.validatingSubmission = false;
     }
   }
 
 }
 
+interface updateResp {
+  success:Boolean
+}
 enum RaceTypes {
   RUN_WALK=1,
   RIDE=2,
@@ -280,7 +344,6 @@ export function requiredFileType( required:boolean, types: Array<string> ) {
     if ( file ) {
       const filename_components = file.split('.');
       const extension = filename_components[filename_components.length - 1].toLowerCase();
-      console.log(extension);
       if ( types.indexOf(extension) > -1 ) {
         console.log('extension allowed');
         return null;
