@@ -35,6 +35,11 @@ export class RaceCreateComponent implements OnInit {
         type:RaceTypes.ANY
       }
     ];
+    private raceTypeOptionDictionary = {
+      'Run/Walk':RaceTypes.RUN_WALK,
+      'Ride':RaceTypes.RIDE,
+      'Any':RaceTypes.ANY
+    }
     private bannerInput;
     private bannerURLTypes: Array<string> = ['png','jpg','jpeg'];
     public bannerURL: any;
@@ -209,6 +214,9 @@ export class RaceCreateComponent implements OnInit {
   selectRaceType(option:any) {
     this.raceType = option.type;
   }
+  selectRaceTypeEvent(option_name:string) {
+    this.raceType = this.raceTypeOptionDictionary[option_name];
+  }
 
 
   // --- All Banner-Related Functions ---
@@ -260,7 +268,7 @@ export class RaceCreateComponent implements OnInit {
       formClean.raceType = this.raceType;
       if (this.bannerURL) formClean.raceImage = this.bannerURL;
       formClean.public = false; 
-      //console.log('FORM DATA TO SEND: ', formClean)
+      console.log('FORM DATA TO SEND: ', formClean)
       
       this._raceService.createRace(formClean).then((resp:FromResp) => {
         console.log('CREATE RESP:',resp);
