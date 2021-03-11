@@ -129,8 +129,9 @@
               id="raceType" 
               class='formSelectInput' 
               formControlName="raceType"
+              (change)="this.selectRaceTypeEvent($event.target.value)"
             >
-              <option *ngFor="let option of raceTypeOptions" [value]="option.name" (click)="selectRaceType(option)">{{option.name}}</option>
+              <option *ngFor="let option of raceTypeOptions" [value]="option.name">{{option.name}}</option>
             </select>
             <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('raceType').invalid && (this.raceBasicsForm.get('raceType').dirty || this.raceBasicsForm.get('raceType').touched)">
               <p class="margin-0px">Please select an appropriate race type for your race.</p>

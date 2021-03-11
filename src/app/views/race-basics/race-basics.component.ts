@@ -30,6 +30,11 @@ export class RaceBasicsComponent implements OnInit {
         type:RaceTypes.ANY
       }
     ];
+    private raceTypeOptionDictionary = {
+      'Run/Walk':RaceTypes.RUN_WALK,
+      'Ride':RaceTypes.RIDE,
+      'Any':RaceTypes.ANY
+    }
     private bannerInput;
     private bannerURLTypes: Array<string> = ['png','jpg','jpeg'];
     public bannerURL: any;
@@ -107,6 +112,10 @@ export class RaceBasicsComponent implements OnInit {
   selectRaceType(option:any) {
     this.raceType = option.type;
     this.valueChange('raceType')
+  }
+  selectRaceTypeEvent(option_name:string) {
+    this.raceType = this.raceTypeOptionDictionary[option_name];
+    this.valueChange('raceType');
   }
   raceTypeDictionary(name:string) {
     var val = null;
