@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 
 import { CoordinatesService } from '../../coordinates.service';
@@ -9,7 +9,7 @@ import { RaceService} from '../../race.service';
   templateUrl: './race-mapupload.component.html',
   styleUrls: ['./race-mapupload.component.css']
 })
-export class RaceMapuploadComponent implements OnInit {
+export class RaceMapuploadComponent implements OnInit,AfterViewInit {
 
   @Input() raceID:number = null;
   @Input() raceData:any = null;
@@ -38,8 +38,13 @@ export class RaceMapuploadComponent implements OnInit {
   public generatingRoute = false;
   public generateError:string = null;
 
-  public mapFileURL:any = null;
+  public mapFileInput:any;
+  public mapFile = {
+    data:null,
+    filename:"",
+  }
   public mapFileLoading:Boolean = false;
+  public coords:any = null;
 
   public distanceType:string = "Miles";
 
@@ -54,6 +59,10 @@ export class RaceMapuploadComponent implements OnInit {
     this.initializeForm();
   }
 
+  ngAfterViewInit() {
+    this.mapFileInput = document.getElementById('MapFileUpload');
+  }
+
   // --- RACE FORM FUNCTIONS ---
   initializeForm() {
     this.loading = true;
@@ -61,13 +70,12 @@ export class RaceMapuploadComponent implements OnInit {
     this.checkingValidityOfSubmission = false;
     this.validForm = true;
 
-    this.mapFileURL = null;
     this.mapFileLoading = false;
 
     this.generatingRoute = false;
     this.generateError = null;
 
-    console.log(this.raceData);
+    //console.log(this.raceData);
 
 
     this.form = new FormGroup({  
@@ -99,10 +107,10 @@ export class RaceMapuploadComponent implements OnInit {
         isNumber(),
         cannotBeEmptyString(),
       ]),
-      mapFile:new FormControl(null,[
-        Validators.required,
-      ]),
-    });
+      mapFile:new FormControl(null),
+    },
+      notSameStartEndLocations,
+    );
     this.loading = false;
   }
   valueChange(key:string) {
@@ -110,12 +118,12 @@ export class RaceMapuploadComponent implements OnInit {
     const removeFromChanged = (k:string) => {
       const index = this.changedValues.indexOf(k);
       if (index > -1) this.changedValues.splice(index,1);
-      //console.log(this.changedValues, this.form.controls, this.changedValues.length==0, !this.isFormValid(this.form));
+      //console.log(this.changedValues);
     }
     const addToChanged = (k:string) => {
       const index = this.changedValues.indexOf(k);
       if (index == -1) this.changedValues.push(k);
-      //console.log(this.changedValues, this.form.controls, this.changedValues.length==0, !this.isFormValid(this.form));
+      //console.log(this.changedValues);
     }
 
     const originalKey = this.originalKeyDict[key];
@@ -124,7 +132,10 @@ export class RaceMapuploadComponent implements OnInit {
       return;
     }
     else if (originalKey == "routeFile") {
+      // Either the map file was generated (aka this.mapFile or form.get(mapFile).value)
+      // We normally will just add the change to the set of changedValues anyways
       addToChanged(key);
+      return;
     }
 
     var input = this.form.get(key);
@@ -133,6 +144,13 @@ export class RaceMapuploadComponent implements OnInit {
       return;
     }
     addToChanged(key);
+  }
+  hasErrors(key:string, errorKeys:Array<string>):Boolean {
+    const input = this.form.get(key);
+    if (!input) return false;
+    return errorKeys.reduce((accumulator,index)=>{
+      return accumulator || input.hasError(index);
+    },false);
   }
   isFormValid(f:FormGroup):Boolean { 
     if (!f.disabled) return f.valid;
@@ -144,21 +162,21 @@ export class RaceMapuploadComponent implements OnInit {
     this.checkingValidityOfSubmission = true;
     this.hasSubmitted = true;
     this.validForm = this.isFormValid(this.form);
-    console.log(this.changedValues, this.validForm);
+    //console.log(this.changedValues, this.validForm);
 
     if (this.validForm && this.changedValues.length > 0) {
       let formClean = this.changedValues.reduce((accumulator,key)=>{
         const originalKey = this.originalKeyDict[key];
         if (originalKey) {
           if (originalKey == "routeFile") {
-            accumulator[originalKey] = this.mapFileURL;
+            accumulator[originalKey] = this.mapFile.data;
           } else {
             accumulator[originalKey] = this.form.get(key).value;
           }
         }
         return accumulator;
       },{});
-      console.log(formClean);
+      //console.log(formClean);
       if (Object.keys(formClean).length == 0) {
         this.checkingValidityOfSubmission = false;
         return;
@@ -184,10 +202,12 @@ export class RaceMapuploadComponent implements OnInit {
   // --- END RACE FORM FUNCTIONS ---
 
   // --- MAP ROUTE AND LOCATION FUNCTIONS ---
-  onSelectMapFileChange(e) {
-
-    e.preventDefault();
-    e.stopPropagation();
+  triggerMapFileUpload() {
+    this.mapFileInput.click();
+  }
+  onSelectMapFileChange(e:any) {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
 
     var mapFileInput = this.form.get('mapFile');
     if (
@@ -198,7 +218,10 @@ export class RaceMapuploadComponent implements OnInit {
       (e.target.files && e.target.files.length == 0)
     ) {
       console.log("SOMETHING IS WRONG:",mapFileInput.invalid, e.target.files==null,(e.target.files&&e.target.files.length==0));
-      this.mapFileURL = null;
+      this.mapFile = {
+        data:null,
+        filename:""
+      };
       this.mapFileLoading = false;
       this.valueChange('mapFile');
       return;
@@ -207,8 +230,11 @@ export class RaceMapuploadComponent implements OnInit {
     this.mapFileLoading = true;
     let file = e.target.files[0];
     var reader = new FileReader();
-    reader.onload = (event) => {
-      this.mapFileURL = reader.result;
+    reader.onload = () => {
+      this.mapFile = {
+        data:reader.result,
+        filename: (file.name) ? file.name : "Unknown file name"
+      };
       this.mapFileLoading = false;
       this.valueChange('mapFile');
     }
@@ -276,9 +302,6 @@ export class RaceMapuploadComponent implements OnInit {
     this.generateError = null;
     this.generatingRoute = true;
 
-    //var startLoc = this.form.get('startLoc'),
-    //    endLoc = this.form.get('endLoc');
-
     if (
       startLoc.errors != null ||
       endLoc.errors != null ||
@@ -291,16 +314,6 @@ export class RaceMapuploadComponent implements OnInit {
       this.generatingRoute = false;
       return;
     }
-   
-    /*
-    let start_coord:MapBoxCoord = this.locations.startLoc.selectedLoc.center;
-    let end_coord:MapBoxCoord = this.locations.endLoc.selectedLoc.center;
-
-    start_coord.lon = this.locations.startLoc.selectedLoc.center[0];
-    start_coord.lat = this.locations.startLoc.selectedLoc.center[1];
-    end_coord.lon = this.locations.endLoc.selectedLoc.center[0];
-    end_coord.lat = this.locations.endLoc.selectedLoc.center[1];
-    */
 
     const start_coord:MapBoxCoord = {
       lon:startLon.value,
@@ -323,15 +336,28 @@ export class RaceMapuploadComponent implements OnInit {
         default:
           distanceUnits = "miles";
       }
-      this.downloadRouteFile(resp.coords, resp.distance, distanceUnits, extension);
-      //this.map.clearMap();
-      /*
       this.coords = resp.coords;
-      this.isPreviewMode = true;
-      this.previewDistance = resp.distance.toString() + resp.dist_unit
-      */
-      this.generateError = null;
+      // const distance = resp.distance;
+      const content = (extension == 'gpx') 
+        ? this.createGPXXmlString(this.coords['route1'].coords) 
+        : this.createJSONString(this.coords, false);
+      //const url = 'data:text/json;charset=utf-8,' + content;
+      const date = Date.now();
+      const filename = this.raceData.name.trim().replace(/[^a-z0-9]/gi, '_').toLowerCase() + '-' + date + '.' + extension;
+      var reader = new FileReader();
+      reader.onload = () => {
+        this.mapFile = {
+          data:reader.result,
+          filename:filename,
+        };
+        console.log("CALLING MAP FILE CHANGE FROM generateRouteFile");
+        this.valueChange('mapFile');
+        this.generateError = null;
+      }
+      reader.readAsDataURL(new Blob([content], {type:"application/json"}));
+      
     }).catch(error=>{
+      console.error(error);
       this.generateError = `Error: Unable to generate route file: ${error.message}`;
     }).finally(()=>{
       this.generatingRoute = false;
@@ -351,7 +377,7 @@ export class RaceMapuploadComponent implements OnInit {
     result += '</trk></gpx>';
     return result;
   }
-  createJSONString(routes:any):string {
+  createJSONString(routes:any, encode:Boolean = true):string {
     if (
       routes == null ||
       Object.keys(routes).length == 0
@@ -367,19 +393,25 @@ export class RaceMapuploadComponent implements OnInit {
       return accumulator;
     },{});
     if (Object.keys(res).length==0) return null;
-    return encodeURIComponent(JSON.stringify(res,null,2));
+    if (encode) return encodeURIComponent(JSON.stringify(res,null,2));
+    return JSON.stringify(res,null,2);
   }
-  downloadRouteFile (coords:any, distance: number, distUnit:string, fileExtension:string = "json") {
-    const content = (fileExtension == 'gpx') ? this.createGPXXmlString(coords['route1'].coords) :  this.createJSONString(coords);
-    const url = 'data:text/json;charset=utf-8,' + content;
+  downloadRouteFile () {
+    const value = this.mapFile;
+    if (value == null || value.data == null) {
+      return;
+    }
     const link = document.createElement('a');
-    const filename = this.raceData.name.trim().replace(/[^a-z0-9]/gi, '_').toLowerCase();
+    link.download = value.filename;;
     //link.download = `${distance}-${distUnit}.${fileExtension}`;
-    link.download = `${filename}.${fileExtension}`;
-    link.href = url;
+    link.href = value.data;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+
+    //let tempEvent = {target:{files:[]}}
+    //tempEvent.target.files.push(url);
+    //this.onSelectMapFileChange(tempEvent,filename);
   };
   // --- END MAP ROUTE AND LOCATION FUNCTIONS ---
 
@@ -416,9 +448,7 @@ function cannotBeEmptyString(mustBeString:Boolean = false) {
   return function (control: FormControl) {
     const val = control.value;
     if (!val) {
-      return {
-        required:true
-      }
+      return null
     }
     const valid = (
       (!mustBeString && val.toString().trim().length > 0) ||
@@ -426,7 +456,7 @@ function cannotBeEmptyString(mustBeString:Boolean = false) {
     );
     if (!valid) {
       return {
-        required:true
+        isEmpty:true
       }
     }
     return null;
@@ -445,4 +475,20 @@ function isNumber() {
       notNumber: true
     }
   }
+}
+
+function notSameStartEndLocations(form:FormGroup) {
+  const startLat = form.get('startLat'),
+        startLon = form.get('startLon'),
+        endLat = form.get('endLat'),
+        endLon = form.get('endLon');
+
+  const latError = parseFloat(startLat.value) == parseFloat(endLat.value);
+  const lonError = parseFloat(startLon.value) == parseFloat(endLon.value);
+
+  if (latError) endLat.setErrors({sameAsStart:true});
+  if (lonError) endLon.setErrors({sameAsStart:true});
+
+  return null;
+
 }

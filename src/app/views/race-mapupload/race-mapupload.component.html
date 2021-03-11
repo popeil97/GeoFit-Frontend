@@ -104,8 +104,9 @@
               </div>
             </div>
             <div class='formErrorMessage redText' *ngIf="(this.form.get('endLoc').invalid || this.form.get('endLat').invalid || this.form.get('endLon').invalid)">
-              <p *ngIf="this.form.get('endLoc').errors != null" class="margin-0px">A race end location is required.</p>
-              <p *ngIf="(this.form.get('endLat').errors!=null || this.form.get('endLon').errors!=null)" class="margin-0px">Invalid ending coordinates.</p>
+              <p *ngIf="this.form.get('endLoc').hasError('required')" class="margin-0px">A race end location is required.</p>
+              <p *ngIf="this.form.get('endLat').hasError('sameAsStart') || this.form.get('endLon').hasError('sameAsStart')" class='margin-0px'>Your starting and ending coordinates cannot be the same.</p>
+              <p *ngIf="this.hasErrors('endLat',['required','isEmpty','notNumber']) || this.hasErrors('endLon',['required','isEmpty','notNumber'])" class="margin-0px">Invalid ending coordinates.</p>
             </div>
           </div>
           <div class='formInputContainer autoWidth'>
@@ -117,7 +118,7 @@
               type='number'
               formControlName="endLat" 
               (keyup)="this.valueChange('endLat')"
-              (change)="this.valueChange('endtLat')"
+              (change)="this.valueChange('endLat')"
             />
           </div>
           <div class='formInputContainer autoWidth'>
@@ -134,9 +135,13 @@
           </div>
         </div>
 
+        <h6>Map File Upload</h6>
+        <p><strong>NOTE:</strong> Your map route is separate from your starting and ending locations. Changing your map route will not update your starting and ending locations, and vice versa. For example, you can change your starting and/or ending locations without uploading a <span class='nobr'>new route.</span></p>
+        <p>However, we highly recommend that you update your route data whenever you alter your starting and/or ending <span class='nobr'>location information.</span></p>
         <div class='formGroup formGroupWithLeftBorder formGroupAlignedTop formGroupColumn'>
-          <p class="margin-0px">Need to generate a route file? Click below to generate and download a route file.</p>
-          <p class="italics margin-bottom-8px">Note: For a route file to successfully generate, you must provide the coordinates for your starting and ending locations.</p>
+          <h6 class="margin-0px">Need to generate a route file? Click below to generate a <span class='nobr'>route file.</span></h6>
+          <p class='margin-0px'>The newly-generated route file will be automatically attached to this form, free to download and ready <span class='nobr'>to submit.</span></p>
+          <p class="italics margin-bottom-8px">Note: For a route file to successfully generate, you must provide the coordinates for your starting and <span class='nobr'>ending locations.</span></p>
           <div>
             <button class="formButton margin-top-8px" (click)="this.generateRouteFile($event);">Generate route file</button>
             <span class="margin-left-8px italics" *ngIf="this.generatingRoute">Generating route file...</span>
@@ -144,16 +149,43 @@
           <p class='italics redText margin-bottom-0px' *ngIf="this.generateError!=null">{{this.generateError}}</p>
         </div>
 
-        <h6>Map File Upload <span class="color-red">*</span></h6>
         <div class='formGroup formGroupAlignedTop formGroupColumn'>
-          <p>Only ".json" or ".gpx" files are allowed</p>
           <div class='formInputContainer'>
             <input 
+              id="MapFileUpload"
               type="file" 
-              formControlName="mapFile" 
+              class="mapFileUpload"
+              formControlName="mapFile"
               accept=".json,.gpx"
               (change)="onSelectMapFileChange($event)"
             />
+            <div class='mapUploadActions'>
+              <ng-template [ngIf]="this.mapFile.data == null" [ngIfElse]="MapFileUploaded">
+                <div class="mapFileUploadButton" (click)="this.triggerMapFileUpload()">
+                  <img class="mapFileIcon" src="../../../assets/icons/upload-icon-white.svg">
+                  <div class="mapFileActions">
+                    <p class="margin-bottom-0px italics">Click to upload a file (".json" or ".gpx")</p>
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template #MapFileUploaded>
+                <div class="mapFileUploadedButton" (click)="this.downloadRouteFile()">
+                  <img class="mapFileIcon" src="../../../assets/icons/map-file.svg">
+                  <div class="mapFileActions">
+                    <p class="margin-bottom-4px">{{this.mapFile.filename}}</p>
+                    <p class="margin-bottom-0px italics">Click to download file</p>
+                  </div>
+                </div>
+                <div class='mapFileUploadedOtherActions'>
+                  <div class="mapFileSmallUploadButton" (click)="this.triggerMapFileUpload()">
+                    <img class="mapFileIcon" src="../../../assets/icons/upload-icon-white.svg">
+                    <div class="mapFileActions">
+                      <p class="margin-bottom-0px italics">Upload a different file</p>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </div>
           </div>
         </div>
 
@@ -176,14 +208,26 @@
 
         <h6>Race Map Preview:</h6>
         <p>A preview of the race will appear when a route file is uploaded and saved.</p>
-        <ng-template [ngIf]="this.raceData.valid_route_file" [ngIfElse]="InvalidRoute">
+
+        <!--
+        <ng-template [ngIf]="this.coords!=null" [ngIfElse]="CoordsIsNull">
           <div class="MapRoutePreview" >
-            <app-map [raceIDs]="[this.raceID]" [parentRaceID]="this.raceID" [displayUsers]="false" [zoom]="false"></app-map>
+            <app-map [coordinates]="this.coords" [displayUsers]="false" [zoom]="false"></app-map>
           </div>
         </ng-template>
-        <ng-template #InvalidRoute>
-          <p class='italics redText'>Either a route file has not been uploaded yet or the uploaded route file is invalid. Please upload a route file to preview the race map.</p>
+        <ng-template #CoordsIsNull>
+        -->
+          <ng-template [ngIf]="this.raceData.valid_route_file" [ngIfElse]="InvalidRoute">
+            <div class="MapRoutePreview" >
+              <app-map [raceIDs]="[this.raceID]" [parentRaceID]="this.raceID" [displayUsers]="false" [zoom]="false"></app-map>
+            </div>
+          </ng-template>
+          <ng-template #InvalidRoute>
+            <p class='italics redText'>Either a route file has not been uploaded yet or the uploaded route file is invalid. Please upload a route file to preview the race map.</p>
+          </ng-template>
+        <!--  
         </ng-template>
+        -->
       </form>
     </ng-template>
   </ng-template>
