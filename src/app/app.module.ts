@@ -16,7 +16,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { PopUpService } from './pop-up.service';
 import { RaceService } from './race.service';
-import { RaceCreateComponent } from './race-create/race-create.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService} from './auth.service';
@@ -81,7 +80,6 @@ import { TagFormComponent } from './tag-form/tag-form.component';
 import { TagSelectComponent } from './tag-select/tag-select.component';
 import { ReportFormComponent } from './report-form/report-form.component';
 import { StoryDeleteDialogComponent } from './story-delete-dialog/story-delete-dialog.component';
-import { RaceDashboardComponent } from './race-dashboard/race-dashboard.component';
 import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.component';
 
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -136,6 +134,12 @@ import { ItemFormComponent } from './item-portal/item-form.component';
 import { ItemFormDialogComponent } from './item-portal/item-form-dialog.component';
 import { PublicRacesComponent } from './views/public-races/public-races.component';
 import { ItemDeleteDialogComponent } from './item-portal/item-delete-dialog.component';
+
+import { RaceCreateComponent } from './views/race-create/race-create.component';
+import { RaceDashboardComponent } from './views/race-dashboard/race-dashboard.component';
+import { RaceSettingsComponent } from './views/race-settings/race-settings.component';
+import { RaceBasicsComponent } from './views/race-basics/race-basics.component';
+import { RaceMapuploadComponent } from './views/race-mapupload/race-mapupload.component';
 
 
 @NgModule({
@@ -241,6 +245,9 @@ import { ItemDeleteDialogComponent } from './item-portal/item-delete-dialog.comp
     ItemFormDialogComponent,
     PublicRacesComponent,
     ItemDeleteDialogComponent,
+    RaceSettingsComponent,
+    RaceBasicsComponent,
+    RaceMapuploadComponent,
       ],
 
   imports: [

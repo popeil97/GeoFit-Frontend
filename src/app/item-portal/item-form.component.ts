@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit, Output, SimpleChanges,EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm, FormControl } from '@angular/forms';
 import { ItemService } from '../item.service';
+import { RaceService } from '../race.service';
 import { Item, ItemType } from '../swag.service';
 
 @Component({
@@ -27,7 +28,7 @@ export class ItemFormComponent implements OnInit,OnChanges {
       {name: "Merchandise", value:ItemType.SWAG}
   ];
 
-  constructor(private _itemService:ItemService, private formBuilder: FormBuilder) { }
+  constructor(private _itemService:ItemService, private formBuilder: FormBuilder, private _raceService:RaceService) { }
 
     ngOnChanges(changes: SimpleChanges): void {
         for(const propName in changes) {
@@ -171,6 +172,20 @@ export class ItemFormComponent implements OnInit,OnChanges {
         }
         this.loading = false;
         
+      });
+
+      let fakeForm = {
+        'name':'TestyBOIII',
+        'description': 'ANIME TIBBIES',
+        'startDate':'01/20/2020',
+        'endDate':'02/20/2020',
+        'startLoc':'REEEE',
+        'endLoc':'RE-ROO',
+        'raceImage':this.uploadedUrl
+      };
+
+      this._raceService.updateRaceAbout(fakeForm,this.raceID).then((resp) => {
+        console.log('RESP FROM RACE ABOUT UPDATE: ', resp);
       });
       }
       

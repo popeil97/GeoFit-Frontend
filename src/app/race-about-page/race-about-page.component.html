@@ -41,6 +41,11 @@
     </ng-template>
     <ng-template #RaceActionsBlock>
       <div class='RaceButtonsContainer'>
+        <button class="gradient-button" *ngIf="!this._authService.isLoggedIn() &&!this.hasJoined" (click)="openRegister()">Register for race</button>
+        <button class="gradient-button" *ngIf="this._authService.isLoggedIn() &&!this.hasJoined" (click)="openSignUp()">Register for race</button>
+
+        <button (click)="this.viewAboutTucan()">Learn More</button>
+
         <button (click)="this.viewRace()" *ngIf="this.hasStarted && this.hasJoined">Go to race</button>
         <button (click)="this.viewRace()" *ngIf="this.hasStarted && !this.hasJoined ">Preview race</button>
         <button (click)="this.goToRaceDashboard()" *ngIf="this.isOwner || this.isModerator">Go to dashboard</button>      
@@ -49,8 +54,7 @@
         <button *ngIf="!this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-2')">Register for race</button>
         <button *ngIf="this._authService.isLoggedIn() &&!this.hasJoined" (click)="openModal('custom-modal-3')">Register for race</button>
           -->
-          <button *ngIf="!this._authService.isLoggedIn() &&!this.hasJoined" (click)="openRegister()">Register for race</button>
-          <button *ngIf="this._authService.isLoggedIn() &&!this.hasJoined" (click)="openSignUp()">Register for race</button>
+          
 
         <p *ngIf="this._authService.isLoggedIn() && this.hasJoined" class='margin-bottom-8px'><b>You've registered for this race.</b></p>
         <p *ngIf=" !hasStarted && this.hasJoined" class='margin-bottom-8px italics'> Come back on race day ({{aboutData.start_date.month}}, {{aboutData.start_date.day}}).</p>

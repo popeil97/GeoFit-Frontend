@@ -1,15 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
-import { CoordinatesService } from '../coordinates.service';
-import { MapComponent } from '../map/map.component';
-import { RaceService } from '../race.service';
-import { AuthService } from '../auth.service';
+import { CoordinatesService } from '../../coordinates.service';
+import { MapComponent } from '../../map/map.component';
+import { RaceService } from '../../race.service';
+import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 import { from } from 'rxjs';
 
 import { MatDialog } from '@angular/material';
-import { LoginComponent } from '../login/login.component';
-import { Register2Component } from '../register2/register2.component';
+import { LoginComponent } from '../../login/login.component';
+import { Register2Component } from '../../register2/register2.component';
 
 @Component({
   selector: 'app-race-create',
@@ -173,7 +173,7 @@ export class RaceCreateComponent implements OnInit {
   }
   navigateToDashboard() {
     if (this.createResponse == null) return;
-    this.router.navigate(['/dashboard',{name:this.createResponse.name,id:this.createResponse.race_id}]);
+    this.router.navigate(['/dashboard',{id:this.createResponse.race_id}]);
   }
 
   initializeRaceBasicsForm() {
@@ -240,23 +240,28 @@ export class RaceCreateComponent implements OnInit {
     reader.readAsDataURL(file);
     // }
   }
+  cancelBannerImage(e:any) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+
+    this.bannerURL = null;
+    this.bannerLoading = false;
+    this.raceBasicsForm.get('bannerFile').reset();
+  }
   // --- End Banner-Related Functions ---
 
   onRaceBasicsFormSubmit() {
     this.hasSubmitted = true;
     if (this.raceBasicsForm.valid) {
-      console.log('form is valid!');
+
       let formClean = this.raceBasicsForm.value as RaceBasicsForm;
       formClean.raceType = this.raceType;
       if (this.bannerURL) formClean.raceImage = this.bannerURL;
-      formClean.startLoc = "Boston, Massachusetts, USA";
-      formClean.start_lon = -71.05708;
-      formClean.start_lat = 42.36115;
-      formClean.endLoc = "New York, New York, USA";
-      formClean.end_lon = 127.02461;
-      formClean.end_lat = 37.53260;
-      formClean.public = false;
-      console.log('FORM DATA TO SEND: ', formClean)
+      formClean.public = false; 
+      //console.log('FORM DATA TO SEND: ', formClean)
+      
       this._raceService.createRace(formClean).then((resp:FromResp) => {
         console.log('CREATE RESP:',resp);
         
@@ -269,22 +274,6 @@ export class RaceCreateComponent implements OnInit {
         this.raceBasicsForm.markAsPristine();
         this.raceBasicsForm.markAsUntouched();
         this.initializeRaceBasicsForm();
-        /*
-        this.raceBasicsForm.reset({
-          name:{value:''},
-          description:{value:''},
-          startDate:{value:''},
-          endDate:{value:''},
-          startLoc:{value:''},
-          bannerFile:{value:null},
-          raceType:{value:''},
-        });
-        //this.bannerURL = null;
-        Object.keys(this.raceBasicsForm.controls).forEach(key => {
-          this.raceBasicsForm.get(key).setErrors(null);
-        });
-        */
-        //this.router.navigate(['/about',{name:resp.name,id:resp.race_id}]);
       });
     } else {
       // validate all form fields
@@ -615,7 +604,8 @@ export function requiredFileType( required:boolean, types: Array<string> ) {
     const file = control.value;
     
     if ( file ) {
-      const extension = file.split('.')[1].toLowerCase();
+      const filename_components = file.split('.');
+      const extension = filename_components[filename_components.length - 1].toLowerCase();
       console.log(extension);
       if ( types.indexOf(extension) > -1 ) {
         console.log('extension allowed');

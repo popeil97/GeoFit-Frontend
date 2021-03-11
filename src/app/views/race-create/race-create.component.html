@@ -15,7 +15,7 @@
 
     <ng-template [ngIf]="this.createSuccess" [ngIfElse]="CreateForm">
       <div class="congratulationsContainer">
-        <img src="../../assets/icons/rocket-icon.svg" class='congratulationsIcon' />
+        <img src="../../../assets/icons/rocket-icon.svg" class='congratulationsIcon' />
         <div class='congratulationsContent'>
           <h2>Congratulations!</h2>
           <p>You just created a race called:</p>
@@ -130,16 +130,17 @@
                 type="file" 
                 class='bannerPreviewInput'
                 formControlName="bannerFile" 
-                accept="image/*"
+                accept=".png,.jpg,.jpeg"
                 (change)="this.onSelectBannerFileChange($event)"
                 [readonly]="this.hasSubmitted"
               />
               <div id="bannerPreview" class="bannerPreview" (click)="this.onSelectBannerTrigger();" [style.backgroundImage]="'url(' + this.bannerURL + ')'">
                 <div class="bannerPreviewOverlay" [ngClass]="{'noOverlay':this.bannerURL != null}">
-                  <img class="uploadFileIcon" src="../../assets/icons/upload-icon-white.svg" alt="Upload File Icon" />
+                  <img class="uploadFileIcon" src="../../../assets/icons/upload-icon-white.svg" alt="Upload File Icon" />
                   <p class="margin-0px color-white">Select an image file.</p>
                 </div>
                 <div class="bannerLoadingOverlay" *ngIf="this.bannerLoading"><p class="margin-0px color-white">Loading...</p></div>
+                <button class='bannerCancelButton' (click)="this.cancelBannerImage($event)" *ngIf="!this.bannerLoading && this.bannerURL!=null">Cancel Image Upload</button>
               </div>
               <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('bannerFile').invalid && (this.raceBasicsForm.get('bannerFile').dirty || this.raceBasicsForm.get('bannerFile').touched)">
                 <p class="margin-0px">Your banner image is neither a PNG or JPG file. Please upoad a PNG or JPG file if you wish to use a banner image.</p>
