@@ -199,7 +199,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
           description:d0.race.description,
           startDate:d0.race.start_date,
           endDate:d0.race.end_date,
-          bannerFile:d1.about_info.race_image,
+          bannerFile:(d1.about_info.race_image != null && d1.about_info.race_image.indexOf('default-race-img.png')>-1) ? null : d1.about_info.race_image,
           raceType:d0.race.race_type,
         },
         settings:{

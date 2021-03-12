@@ -52,7 +52,7 @@ export class RaceBasicsComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.raceID, this.raceData);
+    //console.log(this.raceID, this.raceData);
     this.initializeRaceBasicsForm();
   }
   ngAfterViewInit() {
@@ -139,7 +139,7 @@ export class RaceBasicsComponent implements OnInit {
   }
   onSelectBannerFileChange(e:any) {
     var bannerInput = this.raceBasicsForm.get('bannerFile');
-    console.log(bannerInput.value, bannerInput.errors);
+    //console.log(bannerInput.value, bannerInput.errors);
     if (
       bannerInput.invalid
       ||
@@ -158,7 +158,7 @@ export class RaceBasicsComponent implements OnInit {
     var reader = new FileReader();
     reader.onload = (event) => {
       this.bannerURL = reader.result;
-      console.log(this.bannerURL);
+      //console.log(this.bannerURL);
       this.bannerLoading = false;
       this.valueChange('bannerFile');
     }
@@ -264,8 +264,10 @@ export class RaceBasicsComponent implements OnInit {
         }
       });
 
+      //console.log(formClean);
+
       this._raceService.updateRaceAbout(formClean, this.raceID).then((resp:updateResp)=>{
-        console.log(resp);
+        //console.log(resp);
         if (resp.success) {
           this.getRaceDataCallback(()=>{
             this.resetForm();
@@ -354,17 +356,17 @@ export function requiredFileType( required:boolean, types: Array<string> ) {
       const filename_components = file.split('.');
       const extension = filename_components[filename_components.length - 1].toLowerCase();
       if ( types.indexOf(extension) > -1 ) {
-        console.log('extension allowed');
+        //console.log('extension allowed');
         return null;
       }
-      console.log('extension not allowed');
+      //console.log('extension not allowed');
       return {
         requiredFileType: true
       }
     }
 
     if (required) {
-      console.log('file is still required anyways');
+      //console.log('file is still required anyways');
       return {
         requiredFileType: true
       };
