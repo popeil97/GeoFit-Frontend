@@ -589,10 +589,6 @@ export class MapRouteComponent implements OnChanges {
       distanceTypeOptions = {units: 'kilometers'};
     }
 
-    console.log("USER ROUTE IDX IN CREATE PIN ", user_route_idx);
-    console.log("COORDS IN CREATE PIN ", this.coordsRoutes);
-    console.log("COORDS[] IN CREATE PIN ", this.coordsRoutes[user_route_idx]);
-
     var along_user = turf.along(this.coordsRoutes[user_route_idx], user_rel_miles, distanceTypeOptions);
 
     var lng_user = along_user.geometry.coordinates[0];

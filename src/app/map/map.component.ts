@@ -33,7 +33,6 @@ import { Route } from '@angular/router';
 export class MapComponent implements AfterViewInit,OnChanges {
   @ViewChildren(MapRouteComponent) mapRouteChildren: QueryList<MapRouteComponent>;
 
-  @Input() coordinates;
   @Input() draw:Boolean;
   @Input() displayUsers:Boolean;
   @Input() followedIDs:any;
@@ -47,12 +46,12 @@ export class MapComponent implements AfterViewInit,OnChanges {
   //More than one if this is a multi-route race
   @Input() raceIDs:number[] = [];
 
+  //Route data to use in route components
+  @Input() routeData = null;
+
   private orgData: UserData[];
   private userData: UserData[];
   private routePins: RoutePins[];
-
-  //Route data to use in route components
-  public routeData = {};
 
   //Leaflet map
   public map;
@@ -86,6 +85,10 @@ export class MapComponent implements AfterViewInit,OnChanges {
               if (!_.isEqual(changes.raceIDs.currentValue, changes.raceIDs.previousValue)){
                 this.getMapData();
               }
+            case 'routeData':
+              if (!this.routeData){
+                this.getMapData();
+              }
           }
         }
       }
@@ -97,8 +100,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
       this.initMap();
     }
 
-    //This ensures we can still use homepage coords if provided via Input
-    if (!this.coordinates){
+    // If RouteData dict not provided, we create it given race_id input
+    if (!this.routeData){
       this.getMapData();
     }
 
@@ -127,6 +130,11 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     //Pan to race start/end bounds
     this.panToRaceMarkerBounds();
+
+    // Set up routeData dict
+    if (!this.routeData){
+      this.routeData = {};
+    }
 
     for (let i = 0; i < this.raceIDs.length; i++) {
       let raceID = this.raceIDs[i];
@@ -182,32 +190,27 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }
   }
 
-
   public panToMarkerBounds(markerBounds){
     var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
     this.map.fitBounds(markerBounds, options);
   }
 
-
-  // public panToUserMarker(user_id, showPopUp=true){
-  //   //Do this to simply pan to user pin
-  //   //this.map.panTo(this.markersByUserID[user_id.toString()]['latLng']);
-
-  //   //Do this to pan *and* zoom
-  //   var markerBounds = L.latLngBounds([this.markersByUserID[user_id.toString()]['latLng']]);
-  //   var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
-  //   this.map.fitBounds(markerBounds, options);
-  // }
-
-
-  // public clearMap(): void {
-  //   if(this.marker_start && this.marker_end && this.line) {
-  //     this.map.removeLayer(this.marker_start);
-  //     this.map.removeLayer(this.marker_end);
-  //     this.map.removeLayer(this.line);
-  //   }
-  // }
-
+  // Bit of a cheat by peeking into the _layers attribute, but this is the easiest
+  // way to completely clear the map
+  public clearMap(){
+    if (this.map){
+      for(var i in this.map._layers) {
+        if(this.map._layers[i]._path != undefined) {
+            try {
+                this.map.removeLayer(this.map._layers[i]);
+            }
+            catch(e) {
+                console.log("problem with " + e + this.map._layers[i]);
+            }
+        }
+      }
+    }
+  }
 
   public showPinsFromSettings(settings: PinSettings){
     //for each map-route child, call their showPinsFromSettings func
@@ -294,7 +297,7 @@ interface RoutePins {
   image_urls: string[];
 }
 
-interface RouteData {
+export interface RouteData {
   name: string;
   coords: any;
   route_pins: RoutePins[];

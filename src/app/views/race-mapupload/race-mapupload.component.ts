@@ -1,8 +1,10 @@
-import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, ViewChild } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 
 import { CoordinatesService } from '../../coordinates.service';
 import { RaceService} from '../../race.service';
+
+import { MapComponent, RouteData } from '../../map/map.component';
 
 @Component({
   selector: 'app-race-mapupload',
@@ -10,6 +12,7 @@ import { RaceService} from '../../race.service';
   styleUrls: ['./race-mapupload.component.css']
 })
 export class RaceMapuploadComponent implements OnInit,AfterViewInit {
+  @ViewChild(MapComponent) previewMap:MapComponent;
 
   @Input() raceID:number = null;
   @Input() raceData:any = null;
@@ -46,6 +49,11 @@ export class RaceMapuploadComponent implements OnInit,AfterViewInit {
   public mapFileLoading:Boolean = false;
   public coords:any = null;
 
+  // routeData stores key-value pairs where keys are race IDs and values
+  // implement RouteData interface. We only set this to preview the uploaded
+  // coordinates before the user saves them to the race
+  public routeData = null;
+
   public distanceType:string = "Miles";
 
   public previewLoading:Boolean = false;
@@ -61,6 +69,31 @@ export class RaceMapuploadComponent implements OnInit,AfterViewInit {
 
   ngAfterViewInit() {
     this.mapFileInput = document.getElementById('MapFileUpload');
+  }
+
+  // resetRouteDataFromCoords resets the preview map to show the existing route
+  resetRouteDataFromCoords(){
+    this.resetForm();
+    this.previewMap.clearMap();
+    this.routeData = null;
+  }
+
+  // setRouteDataFromCoords sets the preview map to show the uploaded route. This
+  // route has not been saved yet
+  setRouteDataFromCoords(coords:any[]) {
+    this.routeData = {};
+    this.routeData[this.raceID] = (): RouteData => ({
+      name: '',
+      coords: [],
+      route_pins: [],
+      userData: [],
+      org_pins: [],
+      checkpoints: []
+    });
+
+    console.log("Uploaded data: ", coords);
+    this.previewMap.clearMap();
+    this.routeData[this.raceID].coords = coords;
   }
 
   // --- RACE FORM FUNCTIONS ---
@@ -343,7 +376,11 @@ export class RaceMapuploadComponent implements OnInit,AfterViewInit {
         default:
           distanceUnits = "miles";
       }
+
+      // Save coords and set on RouteData var to preview on map
       this.coords = resp.coords;
+      this.setRouteDataFromCoords(this.coords);
+
       // const distance = resp.distance;
       const content = (extension == 'gpx') 
         ? this.createGPXXmlString(this.coords['route1'].coords) 

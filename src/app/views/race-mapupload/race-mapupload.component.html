@@ -217,11 +217,19 @@
         </ng-template>
         <ng-template #CoordsIsNull>
         -->
-          <ng-template [ngIf]="this.raceData.valid_route_file" [ngIfElse]="InvalidRoute">
-            <div class="MapRoutePreview" >
-              <app-map [raceIDs]="[this.raceID]" [parentRaceID]="this.raceID" [displayUsers]="false" [zoom]="false"></app-map>
+          <ng-template [ngIf]="this.routeData || this.raceData.valid_route_file" [ngIfElse]="InvalidRoute">
+            <div class="MapRoutePreview">
+              <app-map [routeData]="this.routeData" [raceIDs]="[this.raceID]" [parentRaceID]="this.raceID" [displayUsers]="false" [zoom]="false"></app-map>
             </div>
+
+            <div *ngIf="this.routeData">
+              <button class="SlideshowButton" (click)="this.resetRouteDataFromCoords()">
+                Reset
+              </button>
+            </div>
+            
           </ng-template>
+
           <ng-template #InvalidRoute>
             <p class='italics redText'>Either a route file has not been uploaded yet or the uploaded route file is invalid. Please upload a route file to preview the race map.</p>
           </ng-template>
