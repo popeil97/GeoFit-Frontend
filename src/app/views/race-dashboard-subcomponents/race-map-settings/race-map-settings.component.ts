@@ -1,17 +1,17 @@
 import { Component, OnInit, AfterViewInit, Input, ViewChild } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 
-import { CoordinatesService } from '../../coordinates.service';
-import { RaceService} from '../../race.service';
+import { CoordinatesService } from '../../../coordinates.service';
+import { RaceService} from '../../../race.service';
 
-import { MapComponent, RouteData } from '../../map/map.component';
+import { MapComponent, RouteData } from '../../../map/map.component';
 
 @Component({
-  selector: 'app-race-mapupload',
-  templateUrl: './race-mapupload.component.html',
-  styleUrls: ['./race-mapupload.component.css']
+  selector: 'app-race-map-settings',
+  templateUrl: './race-map-settings.component.html',
+  styleUrls: ['./race-map-settings.component.css']
 })
-export class RaceMapuploadComponent implements OnInit,AfterViewInit {
+export class RaceMapSettingsComponent implements OnInit,AfterViewInit {
   @ViewChild(MapComponent) previewMap:MapComponent;
 
   @Input() raceID:number = null;
@@ -69,6 +69,7 @@ export class RaceMapuploadComponent implements OnInit,AfterViewInit {
 
   ngAfterViewInit() {
     this.mapFileInput = document.getElementById('MapFileUpload');
+    console.log(this.routeData);
   }
 
   // resetRouteDataFromCoords resets the preview map to show the existing route
@@ -76,6 +77,7 @@ export class RaceMapuploadComponent implements OnInit,AfterViewInit {
     this.resetForm();
     this.previewMap.clearMap();
     this.routeData = null;
+    console.log(this.routeData);
   }
 
   // setRouteDataFromCoords sets the preview map to show the uploaded route. This
@@ -94,6 +96,7 @@ export class RaceMapuploadComponent implements OnInit,AfterViewInit {
     console.log("Uploaded data: ", coords);
     this.previewMap.clearMap();
     this.routeData[this.raceID].coords = coords;
+    console.log(this.routeData);
   }
 
   // --- RACE FORM FUNCTIONS ---

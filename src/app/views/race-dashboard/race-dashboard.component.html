@@ -77,7 +77,7 @@
               <app-race-settings [raceID]="this.raceID" [raceData]="this.raceData.settings" [getRaceDataCallback]="this.getRaceData"></app-race-settings>
             </div>
             <div *ngSwitchCase="'map'">
-              <app-race-mapupload [raceID]="this.raceID" [raceData]="this.raceData.map" [getRaceDataCallback]="this.getRaceData"></app-race-mapupload>
+              <app-race-map-settings [raceID]="this.raceID" [raceData]="this.raceData.map" [getRaceDataCallback]="this.getRaceData"></app-race-map-settings>
             </div>
           </div>
         </ng-template>

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RaceMapuploadComponent } from './race-mapupload.component';
+import { RaceMapSettingsComponent } from './race-map-settings.component';
 
 describe('RaceMapuploadComponent', () => {
-  let component: RaceMapuploadComponent;
-  let fixture: ComponentFixture<RaceMapuploadComponent>;
+  let component: RaceMapSettingsComponent;
+  let fixture: ComponentFixture<RaceMapSettingsComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RaceMapuploadComponent ]
+      declarations: [ RaceMapSettingsComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(RaceMapuploadComponent);
+    fixture = TestBed.createComponent(RaceMapSettingsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

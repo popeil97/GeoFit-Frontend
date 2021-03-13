@@ -138,7 +138,8 @@ import { RaceCreateComponent } from './views/race-create/race-create.component';
 import { RaceDashboardComponent } from './views/race-dashboard/race-dashboard.component';
 import { RaceSettingsComponent } from './views/race-settings/race-settings.component';
 import { RaceBasicsComponent } from './views/race-basics/race-basics.component';
-import { RaceMapuploadComponent } from './views/race-mapupload/race-mapupload.component';
+import { RaceMapSettingsComponent } from './views/race-dashboard-subcomponents/race-map-settings/race-map-settings.component';
+import { RaceMerchandiseSettingsComponent } from './views/race-dashboard-subcomponents/race-merchandise-settings/race-merchandise-settings.component';
 
 
 @NgModule({
@@ -245,7 +246,8 @@ import { RaceMapuploadComponent } from './views/race-mapupload/race-mapupload.co
     PublicRacesComponent,
     RaceSettingsComponent,
     RaceBasicsComponent,
-    RaceMapuploadComponent,
+    RaceMapSettingsComponent,
+    RaceMerchandiseSettingsComponent,
       ],
 
   imports: [

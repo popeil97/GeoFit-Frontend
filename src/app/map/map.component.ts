@@ -33,6 +33,7 @@ import { Route } from '@angular/router';
 export class MapComponent implements AfterViewInit,OnChanges {
   @ViewChildren(MapRouteComponent) mapRouteChildren: QueryList<MapRouteComponent>;
 
+  @Input() useLoader:Boolean = true;
   @Input() draw:Boolean;
   @Input() displayUsers:Boolean;
   @Input() followedIDs:any;
