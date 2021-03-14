@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 
-import { RaceService } from '../../race.service';
+import { RaceService } from '../../../race.service';
 
 @Component({
   selector: 'app-race-settings',

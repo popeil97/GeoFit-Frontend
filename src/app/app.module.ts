@@ -136,8 +136,8 @@ import { PublicRacesComponent } from './views/public-races/public-races.componen
 
 import { RaceCreateComponent } from './views/race-create/race-create.component';
 import { RaceDashboardComponent } from './views/race-dashboard/race-dashboard.component';
-import { RaceSettingsComponent } from './views/race-settings/race-settings.component';
-import { RaceBasicsComponent } from './views/race-basics/race-basics.component';
+import { RaceSettingsComponent } from './views/race-dashboard-subcomponents/race-settings/race-settings.component';
+import { RaceBasicsComponent } from './views/race-dashboard-subcomponents/race-basics/race-basics.component';
 import { RaceMapSettingsComponent } from './views/race-dashboard-subcomponents/race-map-settings/race-map-settings.component';
 import { RaceMerchandiseSettingsComponent } from './views/race-dashboard-subcomponents/race-merchandise-settings/race-merchandise-settings.component';
 

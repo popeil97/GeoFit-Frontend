@@ -24,6 +24,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
   public raceID: number = null;
   public raceData: any = null;
   public page: string;
+  public openedNavItem:string = null;
 
   public isOwnerOrMod:Boolean = false;
 
@@ -240,48 +241,6 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
       console.log(this.raceData);
       if (callback) callback();
     })
-
-    /*
-    this.raceService.getRace(this.raceID).subscribe((data) => {
-
-      let d = data as RaceData;
-      
-      // Catch if we're not a mod or owner
-      if (!d.is_mod_or_owner) {
-        this.loading = false;
-        this.raceData = null;
-        this.isOwnerOrMod = false;
-        return;
-      }
-      console.log("Race data: ", d);
-
-      this.raceData = d;
-      this.isOwnerOrMod = this.raceData.is_mod_or_owner;
-
-      // Child race data
-      this.raceIDs = this.raceData.race_IDs;
-      this.childRaceData = this.raceData.child_race_dict;
-      this.childRaceData.unshift({id:this.raceID,name:'All'});
-      
-      // Race-specific info
-      // CAN USE THIS INFO WHEN IT IS NECESSARY IN DASHBOARD
-      // this.race = raceData.race;
-      // this.raceSettings = raceData.race_settings;
-      // this.raceType = raceData.race.race_type;
-      // this.hasEntryTags = this.raceSettings.has_entry_tags;
-      // this.isManualEntry = this.raceSettings.isManualEntry;
-      // this.isHybrid = this.race.is_hybrid;
-
-      this.loading = false;
-
-      //Default to first race ID if not set
-      if (this.selectedRaceID == undefined){
-        this.selectedRaceID = this.raceIDs[0];
-      }
-
-    });
-    */
-    
   }
   public navigateToAdmin() {
     this.navigateTo('dashboard',{id:this.raceID})
@@ -294,6 +253,13 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
   }
   public navigateToMap() {
     this.navigateTo('dashboard',{id:this.raceID,page:'map'});
+  }
+
+  openNavItemContents(e:Event, to:string) {
+    e.preventDefault();
+    e.stopPropagation();
+    var t = (this.openedNavItem == to) ? null : to
+    this.openedNavItem = t;
   }
 
 }
