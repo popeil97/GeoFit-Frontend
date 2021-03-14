@@ -254,6 +254,9 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
   public navigateToMap() {
     this.navigateTo('dashboard',{id:this.raceID,page:'map'});
   }
+  public navigateToMerchandise() {
+    this.navigateTo('dashboard',{id:this.raceID,page:'merchandise'});
+  }
 
   openNavItemContents(e:Event, to:string) {
     e.preventDefault();

@@ -139,6 +139,24 @@
                 </li>
               </ul>
             </li>
+            <li class="DashboardNavigationItem" [ngClass]="{'opened':this.openedNavItem=='merchandise','selected':this.page=='merchandise'}"  (click)="this.navigateToMerchandise();">
+              <h6 class="margin-bottom-0px position-relative">
+                Merchandise &amp; Fees
+                <!--<div class="DashboardNavigationItemDropdownIndicator" (click)="this.openNavItemContents($event, 'merchandise')"></div>-->
+              </h6>
+              <!--
+              <ul class="DashboardNavigationSubItem" *ngIf="this.raceData != null">
+                <li class="DashboardNavigationSubItemRow">
+                  Start Location
+                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.map.start_loc != null && this.raceData.map.start_loc.length > 0)}"></div>
+                </li>
+                <li class="DashboardNavigationSubItemRow">
+                  Start Coordinates (Lat &amp; Lon)
+                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.map.start_lat != null && this.raceData.map.start_lon > null)}"></div>
+                </li>
+              </ul>
+              -->
+            </li>
           </ul>
         </div>
         <ng-template [ngIf]="this.loadingSegments.content" [ngIfElse]="RaceDashboardContents">
@@ -157,6 +175,10 @@
             </div>
             <div *ngSwitchCase="'map'">
               <app-race-map-settings [raceID]="this.raceID" [raceData]="this.raceData.map" [getRaceDataCallback]="this.getRaceData"></app-race-map-settings>
+            </div>
+            <div *ngSwitchCase="'merchandise'">
+              <h6>Merchandise &amp; Fees</h6>
+              <!--<app-race-map-settings [raceID]="this.raceID" [raceData]="this.raceData.map" [getRaceDataCallback]="this.getRaceData"></app-race-map-settings>-->
             </div>
           </div>
         </ng-template>
