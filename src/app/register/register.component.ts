@@ -117,38 +117,29 @@ export class RegisterDialogContent {
         this.registerForm.value.email = this.registerForm.value.email.toLowerCase();
 
         //Register and navigate to login
-        this._authService.register(this.registerForm.value).subscribe( 
-          data => {
-            let form = this.registerForm.value
-            this._authService.login({email:form.email,password:form.password}).subscribe(
-              
-              data => {
-
-                localStorage.setItem('access_token', data['token']);
-                localStorage.setItem('loggedInUsername', data['username']);
-                this._authService.username = data['username'];
-                this._authService.emitLoginStausChange();
-
-                if(this.redirectParams) {
-                  this.router.navigate([this.redirectUrl,this.redirectParams]);
-                }
-                else {
-                  this.router.navigate(['/welcome']);
-                }
-                this.closeDialog();
-              },
-            err => {
+        this._authService.register(this.registerForm.value).then(data => {
+          let form = this.registerForm.value
+          this._authService.login({email:form.email,password:form.password}).then(data => {
+              localStorage.setItem('access_token', data['token']);
+              localStorage.setItem('loggedInUsername', data['username']);
+              this._authService.username = data['username'];
+              this._authService.emitLoginStausChange();
+             if(this.redirectParams) {
+                this.router.navigate([this.redirectUrl,this.redirectParams]);
+              }
+              else {
+                this.router.navigate(['/welcome']);
+              }
+              this.closeDialog();
+            }).catch(err => {
               this.loading = false;
               this.errors = err['error'];
       //         console.log(this.errors);
             });
-            
-          },
-          err => {
+          }).catch(err => {
             console.log(err);
             this.loading = false;
             this.errors = err['error'];
-      //       console.log(this.errors);
           });
 
     }

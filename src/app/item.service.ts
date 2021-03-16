@@ -17,6 +17,10 @@ export class ItemService {
     };
   }
 
+  public getRaceItems(raceID:number) {
+    return this.http.post(environment.apiUrl + '/orders/merch-items/',{race_id:raceID}).toPromise();
+  }
+
   public getItemByID(itemID:number) {
     return this.http.post(environment.apiUrl + '/orders/item/get-by-id/',{item_id:itemID}).toPromise();
   }
@@ -27,6 +31,10 @@ export class ItemService {
 
   public createItem(raceID:number,itemForm:any) {
     return this.http.post(environment.apiUrl + '/orders/item/create/',{race_id:raceID,item_form:itemForm}).toPromise();
+  }
+
+  public editItem(itemID:number,itemForm:any) {
+    return this.http.post(environment.apiUrl + '/orders/item/edit/',{item_id:itemID, item_form:itemForm}).toPromise();
   }
 
   public editTeam(raceID:number,itemForm:any) {

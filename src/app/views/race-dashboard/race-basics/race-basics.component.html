@@ -37,6 +37,7 @@
             />
             <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('name').invalid && (this.raceBasicsForm.get('name').dirty || this.raceBasicsForm.get('name').touched)">
               <p *ngIf="this.raceBasicsForm.get('name').hasError('required')" class="margin-0px">Your race needs a name.</p>
+              <p *ngIf="this.raceBasicsForm.get('name').hasError('isEmpty')" class="margin-0px">Empty spaces are not valid for a race name.</p>
               <p *ngIf="this.raceBasicsForm.get('name').hasError('maxlength')" class="margin-0px">Your race's name cannot exceed 30 characters.</p>
             </div>
           </div>
@@ -59,6 +60,7 @@
             ></textarea>
             <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('description').invalid && (this.raceBasicsForm.get('description').dirty || this.raceBasicsForm.get('description').touched)">
               <p *ngIf="this.raceBasicsForm.get('description').hasError('required')" class="margin-0px">Your race needs a description.</p>
+              <p *ngIf="this.raceBasicsForm.get('description').hasError('isEmpty')" class="margin-0px">Empty spaces are not valid for a race description.</p>
             </div>
           </div>
         </div>
@@ -90,9 +92,9 @@
             />
           </div>
           <div class='formErrorMessage redText' *ngIf="(this.raceBasicsForm.get('startDate').invalid && (this.raceBasicsForm.get('startDate').dirty || this.raceBasicsForm.get('startDate').touched))||(this.raceBasicsForm.get('endDate').invalid && (this.raceBasicsForm.get('endDate').dirty || this.raceBasicsForm.get('endDate').touched))">
-            <p *ngIf="this.raceBasicsForm.get('startDate').hasError('required') && this.raceBasicsForm.get('endDate').valid" class="margin-0px">Your race needs a start date.</p>
-            <p *ngIf="this.raceBasicsForm.get('endDate').hasError('required') && this.raceBasicsForm.get('startDate').valid" class="margin-0px">Your race needs an end date.</p>
-            <p *ngIf="this.raceBasicsForm.get('startDate').hasError('required') && this.raceBasicsForm.get('endDate').hasError('required')" class="margin-0px">Your race needs both start and end dates.</p>
+            <p *ngIf="(this.raceBasicsForm.get('startDate').hasError('required') || this.raceBasicsForm.get('startDate').hasError('isEmpty')) && this.raceBasicsForm.get('endDate').valid" class="margin-0px">Your race needs a start date.</p>
+            <p *ngIf="(this.raceBasicsForm.get('endDate').hasError('required') || this.raceBasicsForm.get('endDate').hasError('isEmpty')) && this.raceBasicsForm.get('startDate').valid" class="margin-0px">Your race needs an end date.</p>
+            <p *ngIf="(this.raceBasicsForm.get('startDate').hasError('required') || this.raceBasicsForm.get('startDate').hasError('isEmpty')) && (this.raceBasicsForm.get('endDate').hasError('required') || this.raceBasicsForm.get('endDate').hasError('isEmpty'))" class="margin-0px">Your race needs both start and end dates.</p>
           </div>
         </div>
         <h6>Banner</h6>

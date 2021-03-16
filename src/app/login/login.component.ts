@@ -7,8 +7,8 @@ import {
   EventEmitter, 
   Input, 
   NgModule,
-
-  Inject
+  Inject,
+  OnDestroy,
 } from '@angular/core';
 // import { MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -31,10 +31,10 @@ import { Register2Component } from '../register2/register2.component';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   @Input() id: string;
-  loginForm: FormGroup;
+  loginForm: FormGroup = null;
   loading = false;
   submitted = false;
   errors: any = [];
@@ -61,6 +61,10 @@ export class LoginComponent implements OnInit {
       password: ['', Validators.required]
     });
   }
+  ngOnDestroy() {
+    this.loginForm = null;
+    this.errors = null;
+  }
 
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
@@ -77,27 +81,23 @@ export class LoginComponent implements OnInit {
 
     var email = this.f.email.value.toLowerCase();
 
-    this._authService.login({'email': email, 'password': this.f.password.value}).subscribe(
-      data => {
-        localStorage.setItem('access_token', data['token']);
-        localStorage.setItem('loggedInUsername', data['username']);
-        this._authService.username = data['username'];
+    this._authService.login({'email': email, 'password': this.f.password.value}).then(data => {
+      localStorage.setItem('access_token', data['token']);
+      localStorage.setItem('loggedInUsername', data['username']);
+      this._authService.username = data['username'];
 
-        //Emit
-        this.loggedInAsUsernameEvent.emit(data['username']);
-
-        if (data['success']){
-          this._authService.emitLoginStausChange();
-          this.continueAsMe(data['username']);
-          this.closeDialog();
-        }
-      },
-      err => {
-        this.loading = false;
-//        console.log(err);
-        this.errors = err['error'];
+      //Emit
+      this.loggedInAsUsernameEvent.emit(data['username']);
+      
+      if (data['success']){
+        this._authService.emitLoginStausChange();
+        this.continueAsMe(data['username']);
+        this.closeDialog();
       }
-    );
+    }).catch(err => {
+      this.loading = false;
+      this.errors = err['error'];
+    });
   }
 
   toggleRegister(action?:string) {

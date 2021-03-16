@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RaceService } from '../../../race.service';
 import { Router } from '@angular/router';
 
+import { cannotBeEmptyString, requiredFileType } from '../race-dashboard.component';
+
 @Component({
   selector: 'app-race-basics',
   templateUrl: './race-basics.component.html',
@@ -264,8 +266,6 @@ export class RaceBasicsComponent implements OnInit {
         }
       });
 
-      //console.log(formClean);
-
       this._raceService.updateRaceAbout(formClean, this.raceID).then((resp:updateResp)=>{
         //console.log(resp);
         if (resp.success) {
@@ -281,38 +281,7 @@ export class RaceBasicsComponent implements OnInit {
       }).finally(()=>{
         this.raceBasicsForm.enable();
         this.validatingSubmission = false;
-      })
-
-      // We need to check all 
-
-
-      /*
-      let formClean = this.raceBasicsForm.value as RaceBasicsForm;
-      formClean.raceType = this.raceType;
-      if (this.bannerURL) formClean.raceImage = this.bannerURL;
-      formClean.startLoc = "Boston, Massachusetts, USA";
-      formClean.start_lon = -71.05708;
-      formClean.start_lat = 42.36115;
-      formClean.endLoc = "New York, New York, USA";
-      formClean.end_lon = 127.02461;
-      formClean.end_lat = 37.53260;
-      formClean.public = false;
-      console.log('FORM DATA TO SEND: ', formClean)
-      this._raceService.createRace(formClean).then((resp:FromResp) => {
-        console.log('CREATE RESP:',resp);
-        
-        this.createSuccess = true;
-        this.createResponse = resp;
-
-        this.hasSubmitted = false;
-        this.bannerURL = null;
-        this.raceBasicsForm.reset();
-        this.raceBasicsForm.markAsPristine();
-        this.raceBasicsForm.markAsUntouched();
-        this.initializeRaceBasicsForm();
-        //this.router.navigate(['/about',{name:resp.name,id:resp.race_id}]);
       });
-      */
     } else {
       // validate all form fields
       this.raceBasicsForm.enable();
@@ -334,48 +303,6 @@ enum RaceTypes {
   RIDE=2,
   ANY=3,
 }
-
-export function cannotBeEmptyString() {
-  return function (control: FormControl) {
-    const val = control.value;
-    const valid = (typeof val === "string" && val.trim().length > 0);
-    if (!valid) {
-      return {
-        required:true
-      }
-    }
-    return null;
-  }
-}
-export function requiredFileType( required:boolean, types: Array<string> ) {
-  return function (control: FormControl) {
-
-    const file = control.value;
-    
-    if ( file ) {
-      const filename_components = file.split('.');
-      const extension = filename_components[filename_components.length - 1].toLowerCase();
-      if ( types.indexOf(extension) > -1 ) {
-        //console.log('extension allowed');
-        return null;
-      }
-      //console.log('extension not allowed');
-      return {
-        requiredFileType: true
-      }
-    }
-
-    if (required) {
-      //console.log('file is still required anyways');
-      return {
-        requiredFileType: true
-      };
-    }
-
-    return null;
-  };
-}
-
 
 
 

@@ -136,10 +136,11 @@ import { PublicRacesComponent } from './views/public-races/public-races.componen
 
 import { RaceCreateComponent } from './views/race-create/race-create.component';
 import { RaceDashboardComponent } from './views/race-dashboard/race-dashboard.component';
-import { RaceSettingsComponent } from './views/race-dashboard-subcomponents/race-settings/race-settings.component';
-import { RaceBasicsComponent } from './views/race-dashboard-subcomponents/race-basics/race-basics.component';
-import { RaceMapSettingsComponent } from './views/race-dashboard-subcomponents/race-map-settings/race-map-settings.component';
-import { RaceMerchandiseSettingsComponent } from './views/race-dashboard-subcomponents/race-merchandise-settings/race-merchandise-settings.component';
+import { RaceSettingsComponent } from './views/race-dashboard/race-settings/race-settings.component';
+import { RaceBasicsComponent } from './views/race-dashboard/race-basics/race-basics.component';
+import { RaceMapSettingsComponent } from './views/race-dashboard/race-map-settings/race-map-settings.component';
+import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-merchandise-settings/race-merchandise-settings.component';
+import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/race-merchandise-settings/race-merchandise-settings-item/race-merchandise-settings-item.component';
 
 
 @NgModule({
@@ -248,6 +249,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard-subcomp
     RaceBasicsComponent,
     RaceMapSettingsComponent,
     RaceMerchandiseSettingsComponent,
+    RaceMerchandiseSettingsItemComponent,
       ],
 
   imports: [
@@ -296,6 +298,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard-subcomp
                   Signup2Component,
                   LogActivityComponent,
                   ItemFormDialogComponent,
+                  RaceMerchandiseSettingsItemComponent,
                   ] 
 })
 export class AppModule { 

@@ -32,12 +32,12 @@ export class AuthService {
   // Uses http.post() to register user from REST API endpoint
   public register(registerForm) {
 //    console.log(registerForm);
-    return this.http.post(environment.apiUrl + '/accounts/register/', registerForm, this.httpOptions);
+    return this.http.post(environment.apiUrl + '/accounts/register/', registerForm, this.httpOptions).toPromise();
   }
 
   // Uses http.post() to get an auth token from djangorestframework-jwt endpoint
   public login(user) {
-    return this.http.post(environment.apiUrl + '/accounts/login/', JSON.stringify(user), this.httpOptions);
+    return this.http.post(environment.apiUrl + '/accounts/login/', JSON.stringify(user), this.httpOptions).toPromise();
   }
 
   public isLoggedIn(): Boolean {

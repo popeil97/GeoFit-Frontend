@@ -162,59 +162,62 @@ export class Register2Component implements OnInit {
     },);
 
     //Register and navigate to login
-    this._authService.register(this.registerForm.value).subscribe(register_data => {
-      //console.log("WOW WOW, WEVE REGISTERED!");
-      let form = this.registerForm.value
-      this._authService.login({email:form.email,password:form.password}).subscribe(login_data => {
-        //console.log("WOW WOW, WEVE LOGGED IN!")
-        localStorage.setItem('access_token', login_data['token']);
-        localStorage.setItem('loggedInUsername', login_data['username']);
-        this._authService.username = login_data['username'];
-        //console.log("WOW WOW, WE'VE SET OUR AUTHSERVICE USERNAME", this.redirectParams);
+    this._authService.register(this.registerForm.value)
+      .then(register_data => {
+        //console.log("WOW WOW, WEVE REGISTERED!");
+        let form = this.registerForm.value
+        this._authService.login({email:form.email,password:form.password})
+          .then(login_data => {
+            //console.log("WOW WOW, WEVE LOGGED IN!")
+            localStorage.setItem('access_token', login_data['token']);
+            localStorage.setItem('loggedInUsername', login_data['username']);
+            this._authService.username = login_data['username'];
+            //console.log("WOW WOW, WE'VE SET OUR AUTHSERVICE USERNAME", this.redirectParams);
 
-        if(this.redirectParams) {
-          //console.log("GOOD BYE, I' BEing REDIRECTED");
-          this.router.navigate([this.redirectUrl,this.redirectParams]);
-        }
-        else {
-          //console.log("WE'RE NOT REDIRECTING! YAY!", this.d)
-          if(this.d != null && this.d.register == true) {
-            //console.log("I SHOUld Be OPENING SIGN UP NOW")
-            if(this.d.price > 0) {
-              //console.log('A PRICE IS SET');
-              this.closeDialog();
-              // this.openModal('custom-modal-3');
-              this.openSignUp();
+            if(this.redirectParams) {
+              //console.log("GOOD BYE, I' BEing REDIRECTED");
+              this.router.navigate([this.redirectUrl,this.redirectParams]);
             }
             else {
-              //console.log("I SHOULD BE JOINING THE RACE NOW")
-              let registrationBody = {
-                race_id:this.d.race_id
-              } as any;
-              this._raceService.joinRace(registrationBody);
-              this.router.navigate(['/welcome']);
+              //console.log("WE'RE NOT REDIRECTING! YAY!", this.d)
+              if(this.d != null && this.d.register == true) {
+                //console.log("I SHOUld Be OPENING SIGN UP NOW")
+                if(this.d.price > 0) {
+                  //console.log('A PRICE IS SET');
+                  this.closeDialog();
+                  // this.openModal('custom-modal-3');
+                  this.openSignUp();
+                }
+                else {
+                  //console.log("I SHOULD BE JOINING THE RACE NOW")
+                  let registrationBody = {
+                    race_id:this.d.race_id
+                  } as any;
+                  this._raceService.joinRace(registrationBody);
+                  this.router.navigate(['/welcome']);
+                }
+              }
+              else {
+                //console.log("I AM BEING WELCOMED?")
+                this.router.navigate(['/welcome']);
+              }
             }
-          }
-          else {
-            //console.log("I AM BEING WELCOMED?")
-            this.router.navigate(['/welcome']);
-          }
-        }
-        //console.log("OH WELL, I AM GOING TO CLOSE ANYWAYS");
-        this.closeDialog();
-      }, (err) => {
-        //console.log("UH OH A PROBLEM WITH LOG IN")
+            //console.log("OH WELL, I AM GOING TO CLOSE ANYWAYS");
+            this.closeDialog();
+          })
+          .catch(err => {
+            //console.log("UH OH A PROBLEM WITH LOG IN")
+            this.loading = false;
+            this.errors = err['error'];
+            // console.log(this.errors);
+          });  
+      }).catch(err => {
+        //console.log("UH OH ERROR WITH REGISTER")
+        // console.log(err);
         this.loading = false;
         this.errors = err['error'];
-        // console.log(this.errors);
-      });  
-    }, (err) => {
-      //console.log("UH OH ERROR WITH REGISTER")
-      // console.log(err);
-      this.loading = false;
-      this.errors = err['error'];
-      //     console.log(this.errors);
-    });
+        //     console.log(this.errors);
+      });
   }
 
   ChangeFormSegment(n:number) {
@@ -247,48 +250,46 @@ export class Register2Component implements OnInit {
       this.registerForm.value.email = this.registerForm.value.email.toLowerCase();
 
       //Register and navigate to login
-      this._authService.register(this.registerForm.value).subscribe(register_data => {
-        //console.log('SUCCESSFULlY reGistered! YAY');
-        let form = this.registerForm.value
-        this._authService.login({email:form.email,password:form.password}).subscribe(login_data => {
-          //console.log("SUCCESSFULLY LOGGEd iN AFTER ReGSITERING! YAY YAY")
-          localStorage.setItem('access_token', login_data['token']);
-          localStorage.setItem('loggedInUsername', login_data['username']);
-          this._authService.username = login_data['username'];
+      this._authService.register(this.registerForm.value)
+        .then(register_data => {
+          //console.log('SUCCESSFULlY reGistered! YAY');
+          let form = this.registerForm.value
+          this._authService.login({email:form.email,password:form.password})
+            .then(login_data => {
+              //console.log("SUCCESSFULLY LOGGEd iN AFTER ReGSITERING! YAY YAY")
+              localStorage.setItem('access_token', login_data['token']);
+              localStorage.setItem('loggedInUsername', login_data['username']);
+              this._authService.username = login_data['username'];
 
-          if(this.redirectParams) {
-            //console.log('REDIRECTING AFTER LOG IN! NO!')
-            this.router.navigate([this.redirectUrl,this.redirectParams]);
-          }
-          else {
-                if(this.d != null && this.d.register == true)
-                {
+              if(this.redirectParams) {
+                //console.log('REDIRECTING AFTER LOG IN! NO!')
+                this.router.navigate([this.redirectUrl,this.redirectParams]);
+              } else {
+                if(this.d != null && this.d.register == true) {
                   //console.log("I SHOUld Now bE GOInG TO ThE ReGISTER PAGE! YAY?")
                   this.closeDialog() ;
                   //this.openModal('custom-modal-3');
                   this.openSignUp();
-                }
-                else
-                {
+                } 
+                else {
                   //console.log("WHERE'S MY WELCOME???");
                   this.router.navigate(['/welcome']);
                 }
-                
-          }
-          //console.log("ReGARDLESS, I HAVE REACHED THE END AND SHould CLOSE")
-          this.closeDialog();
-        }, (err) => {
-          //console.log("UH OH, SIGN IN HAS FAILED");
-          this.loading = false;
-          this.errors = err['error'];
-          // console.log(this.errors);
-        });    
-      }, (err) => {
-        //console.log("UH OH, REGISTER HAS FAILED", err);
-        this.loading = false;
-        this.errors = err['error'];
-        // console.log(this.errors);
-      });
+              }
+              //console.log("ReGARDLESS, I HAVE REACHED THE END AND SHould CLOSE")
+              this.closeDialog();
+            }).catch(err => {
+              //console.log("UH OH, SIGN IN HAS FAILED");
+              this.loading = false;
+              this.errors = err['error'];
+              // console.log(this.errors);
+            });    
+          }).catch(err => {
+            //console.log("UH OH, REGISTER HAS FAILED", err);
+            this.loading = false;
+            this.errors = err['error'];
+            // console.log(this.errors);
+          });
   }
 
   ResetForms() {

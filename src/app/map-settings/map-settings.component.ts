@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../users.service';
 import { RaceViewPageComponent } from '../race-view-page/race-view-page.component';
@@ -10,7 +10,7 @@ import { ModalService } from '../modalServices';
   templateUrl: './map-settings.component.html',
   styleUrls: ['./map-settings.component.css']
 })
-export class MapSettingsComponent implements OnInit,OnChanges {
+export class MapSettingsComponent implements OnInit,OnChanges,OnDestroy {
 
   @Input() id: string;
   modalData: any;
@@ -18,6 +18,8 @@ export class MapSettingsComponent implements OnInit,OnChanges {
   successfulUpdate:Boolean = false;
 
   ageRangeOptions: any[];
+
+  private onChangesSubscriptions:any[] = [];
 
    constructor(private _usersService:UsersService,private modalService: ModalService) { //, private _raceview:RaceViewPageComponent
 
@@ -67,7 +69,7 @@ export class MapSettingsComponent implements OnInit,OnChanges {
 
     console.log("ON CHANGES");
 
-    this.settingsForm.get('allAgesOn').valueChanges
+    let allAgesOnSubscription = this.settingsForm.get('allAgesOn').valueChanges
       .subscribe(value => {
           if (value == true) {
             this.settingsForm.get('ageRange').disable();
@@ -77,7 +79,7 @@ export class MapSettingsComponent implements OnInit,OnChanges {
           }
       });
 
-    this.settingsForm.get('showOrgPins').valueChanges
+    let showOrgPinsSubscription = this.settingsForm.get('showOrgPins').valueChanges
       .subscribe(value => {
         if (value == true) {
           this.settingsForm.get('ageRange').disable();
@@ -93,11 +95,21 @@ export class MapSettingsComponent implements OnInit,OnChanges {
           this.settingsForm.get('malePinsOn').enable();
           this.settingsForm.get('followerPinsOnly').enable();
         }
-      })
+      });
     
+      this.onChangesSubscriptions.push(allAgesOnSubscription, showOrgPinsSubscription);
   }
   ngOnInit(): void {
     this.initForm();
+  }
+
+  ngOnDestroy() {
+    if (this.onChangesSubscriptions.length > 0) {
+      this.onChangesSubscriptions.forEach(subscription=>{
+        subscription.unsubscribe();
+      });
+    }
+    this.onChangesSubscriptions = [];
   }
 
   get d() { return this.modalService.modalsData[this.id]}

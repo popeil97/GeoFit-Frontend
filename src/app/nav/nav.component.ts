@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { NotificationsService } from '../notifications.service';
 import {Observable} from 'rxjs/Rx';
@@ -22,11 +22,14 @@ declare var $: any
 })
 
 
-export class NavComponent implements OnInit {
+export class NavComponent implements OnInit, OnDestroy {
   userData: UserData;
   picURL:any;
   navigationOpen : boolean = false;
   profileOpen : boolean = false;
+
+  private openedBottomSheetRefSubscription:any = null;
+  private notificationSubscription:any = null;
 
   constructor(
     private _notificationService:NotificationsService,
@@ -65,7 +68,7 @@ export class NavComponent implements OnInit {
 
 
     // THIS SHOULDN'T BE THE WAY, BUT LET'S GO WITH IT FOR NOW
-    Observable.interval(1*1000) // make much larger in production
+    this.notificationSubscription = Observable.interval(1*1000) // make much larger in production
       .switchMap(() => {
         if (!this._authService.isLoggedIn()) return [];
         return this._notificationService.getNotifications();
@@ -109,7 +112,11 @@ export class NavComponent implements OnInit {
     }
     this.path=window.location.pathname;
     */
+  }
 
+  ngOnDestroy() {
+    if (this.notificationSubscription) this.notificationSubscription.unsubscribe();
+    if (this.openedBottomSheetRefSubscription) this.openedBottomSheetRefSubscription.unsubscribe();
   }
 
   ToggleNavigation() {
@@ -173,7 +180,7 @@ export class NavComponent implements OnInit {
     //console.log('openming')
     this._bottomSheet.open(NotificationPanelComponent,{data:{notifications:this.notifications}});
 
-    this._bottomSheet._openedBottomSheetRef.afterDismissed().subscribe((data) => {
+    this.openedBottomSheetRefSubscription = this._bottomSheet._openedBottomSheetRef.afterDismissed().subscribe((data) => {
       //console.log('sheet closed');
       this.getNotifications();
     })

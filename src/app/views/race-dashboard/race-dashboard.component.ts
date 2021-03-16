@@ -1,9 +1,12 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+
 import { RaceService } from '../../race.service';
-import { RaceSettings } from '../../race-about-page/race-about-page.component';
-import { AuthService } from '../../auth.service';
 import { MapService } from '../../map.service';
+import { ItemService } from '../../item.service';
+import { AuthService } from '../../auth.service';
+import { RaceSettings } from '../../race-about-page/race-about-page.component';
 
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from '../../login/login.component';
@@ -45,6 +48,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
     private raceService: RaceService,
     private _authService:AuthService,
     private _mapService:MapService,
+    private _itmeService:ItemService,
     private router:Router,
     private dialog:MatDialog,
   ) { }
@@ -170,10 +174,13 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
     Promise.all([
       this.raceService.getRacePromise(this.raceID), 
       this.raceService.getRaceAbout(this.raceID),
+      this._itmeService.getRaceItems(this.raceID),
       //this._mapService.getMapData(this.raceID)
     ]).then(res=>{
       let d0 = res[0] as RaceData,
-          d1 = res[1] as RaceAboutData;
+          d1 = res[1] as RaceAboutData,
+          d2 = res[2] as RaceItemData;
+      console.log(d2);
           //d2 = res[2] as RouteData;
       if (!d0.is_mod_or_owner) {
         // this.loading = false;
@@ -229,6 +236,10 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
           price:d0.race_settings.price,
           has_swag:d0.race_settings.has_swag,
           has_entry_tags:d0.race_settings.has_entry_tags,
+        },
+        merchandise:{
+          merchandise:d2.items.filter((item:any)=>{return item.type==2}),
+          entries:d2.items.filter((item:any)=>{return item.type==1}),
         },
         public:d0.race.public,
         has_started:d1.hasStarted,
@@ -295,6 +306,10 @@ interface RaceAboutData {
   isOwner:boolean;
   race_settings:any;
 }
+interface RaceItemData {
+  items:any,
+}
+
 interface RouteData {
   name: string;
   coords: any;
@@ -318,4 +333,102 @@ interface RoutePins {
   lon: number;
   lat: number;
   image_urls: string[];
+}
+
+function cannotBeEmptyString(mustBeString:Boolean = false) {
+  return function (control: FormControl) {
+    const val = control.value;
+    if (!val) {
+      return null
+    }
+    const valid = (
+      (!mustBeString && val.toString().trim().length > 0) ||
+      (mustBeString && typeof val === "string" && val.trim().length > 0)
+    );
+    if (!valid) {
+      return {
+        isEmpty:true
+      }
+    }
+    return null;
+  }
+}
+
+
+function isNumber() {
+  return function (control:FormControl) {
+    const val = control.value;
+    if (
+      !isNaN(val) && 
+      parseFloat(val) == val && 
+      !isNaN(parseFloat(val))
+    ) return null;
+    return {
+      notNumber: true
+    }
+  }
+}
+
+function numberGreaterThanOrEqualTo( min:number ) {
+  return function (control: FormControl) {
+    const val = control.value;
+
+    if (typeof val === 'undefined' || val == null) 
+      return {
+        missing:true,
+      }
+    if (typeof val !== 'number') 
+      return {
+        notNumber:true,
+      }
+    if (val < min) 
+      return {
+        notGreaterThan:true
+      }
+    return null;
+  };
+}
+
+function requiredFileType( required:boolean, types: Array<string> = ['jpg','jpeg','png'] ) {
+  return function (control: FormControl) {
+
+    const file = control.value;
+    
+    if ( file ) {
+      const filename_components = file.split('.');
+      const extension = filename_components[filename_components.length - 1].toLowerCase();
+      if ( types.indexOf(extension) > -1 ) {
+        //console.log('extension allowed');
+        return null;
+      }
+      //console.log('extension not allowed');
+      return {
+        requiredFileType: true
+      }
+    }
+
+    if (required) {
+      //console.log('file is still required anyways');
+      return {
+        requiredFileType: true
+      };
+    }
+
+    return null;
+  };
+}
+
+function isFormValid(f:FormGroup):Boolean { 
+  if (!f.disabled) return f.valid;
+  return Object.keys(f.controls).reduce((accumulator,inputKey)=>{
+    return (accumulator && f.get(inputKey).errors == null);
+  },true);
+}
+
+export {
+  cannotBeEmptyString,
+  isNumber,
+  numberGreaterThanOrEqualTo,
+  requiredFileType,
+  isFormValid,
 }

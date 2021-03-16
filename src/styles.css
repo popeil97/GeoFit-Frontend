@@ -86,6 +86,9 @@ h6, .h6 {
 .nobr {
   white-space: nowrap;
 }
+.hidden {
+  display:none;
+}
 
 input[type=text], input[type=password], input[type=email], input[type=number], input[type=date], input[type=url], input[type=time], input[type=tel], input[type=search], textarea {
   background-color: var(--input-background-color);
@@ -727,7 +730,7 @@ h1.PageHeaderSegmentTitle {
 
 
 
-.LoginContainer, .RegisterContainer, .SignUpContainer, .LogActivityContainer {
+.LoginContainer, .RegisterContainer, .SignUpContainer, .LogActivityContainer, .MerchandiseItemFormContainer {
   /* width:calc(600px - 48px); */
   width:600px;
 }

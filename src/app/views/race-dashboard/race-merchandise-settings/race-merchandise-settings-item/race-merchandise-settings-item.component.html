@@ -1,0 +1,129 @@
+
+<div class="TucanContainer">
+  
+  <ng-template [ngIf]="this.initializing" [ngIfElse]="ItemForm">
+    <p>Loading item information...</p>
+  </ng-template>
+  
+  <ng-template #ItemForm>
+    <form class="MerchandiseItemForm" [formGroup]="this.form" (ngSubmit)="this.onFormSubmit($event)">
+      <div class='formGroup formGroupHeader'>
+        <h2>Race Item Details</h2>
+        <button class="formButton resetButton" (click)="this.resetForm($event)">Reset Changes</button>
+      </div>
+        <h6>Item Name: <span class="color-red">*</span></h6>
+        <div class="formGroup">
+          <div class="formInputContainer">
+            <input 
+              class="formTextInput"
+              [ngClass]="{'errorTextInput':this.form.get('name').errors != null}"
+              type="text" 
+              formControlName="name"
+              placeholder="ex. T-Shirt"
+            />
+            <div class='formErrorMessage redText' *ngIf="this.form.get('name').invalid">
+              <p *ngIf="this.form.get('name').hasError('required')" class="margin-0px">An item name is required.</p>
+              <p *ngIf="this.form.get('name').hasError('isEmpty')" class='margin-0px'>An item name that isn't just spaces is required.</p>
+            </div>
+          </div>
+        </div>
+        <h6>Description: <span class="color-red">*</span></h6>
+        <div class="formGroup">
+          <div class="formInputContainer">
+            <textarea
+              class='formTextInput'
+              [ngClass]="{'errorTextInput':this.form.get('description').errors != null}"
+              formControlName="description"
+              placeholder="ex. A T-Shirt for participating in our race."
+              rows="3"
+            ></textarea>
+            <div class='formErrorMessage redText' *ngIf="this.form.get('description').invalid">
+              <p *ngIf="this.form.get('description').hasError('required')" class="margin-0px">An item description is required.</p>
+              <p *ngIf="this.form.get('description').hasError('isEmpty')" class='margin-0px'>An item description that isn't just spaces is required.</p>
+            </div>
+          </div>
+        </div>
+        <h6 class="margin-bottom-0px">Price ($ USD): <span class="color-red">*</span></h6>
+        <p class="margin-bottom-4px italics">Prices are always rounded to the closest cent.</p>
+        <div class="formGroup">
+          <div class="formInputContainer">
+            <input 
+              class="formTextInput"
+              [ngClass]="{'errorTextInput':this.form.get('price').errors != null}"
+              type="number"
+              formControlName="price"
+              placeholder="ex. 0.00"
+              min="0"
+              (change)="this.roundToCent()"
+            />
+            <div class='formErrorMessage redText' *ngIf="this.form.get('price').invalid">
+              <p *ngIf="this.form.get('price').hasError('required') || this.form.get('price').hasError('missing')" class="margin-0px">An item price is required.</p>
+              <p *ngIf="this.form.get('price').hasError('min')" class='margin-0px'>An item must have a minimum price of $0.00.</p>
+            </div>
+          </div>
+        </div>
+        <h6>Image:</h6>
+        <div class="formGroup">
+          <input 
+            id="merchandiseItemImageInput"
+            class="hidden"
+            type="file"
+            accept=".png,.jpg,.jpeg"
+            formControlName="image"
+            (change)="this.onSelectMerchandiseImageChange($event)"
+          />
+          <div class="formInputContainer">
+            <p class="margin-bottom-0px italics">An image showing your item is not necessary but highly recommended for merchandise items. Accepted file formats are <strong>jpg's or png's</strong></p>
+          </div>
+          <div class="formInputContainer">
+            <div class="MerchandiseItemImage" [style.background-image]="'url(' + this.merchandiseImageURL + ')'">
+              <div class="MerchandiseItemImageOverlay" [ngClass]="{'visible':this.merchandiseImageURL==null}" (click)="this.selectMerchandiseFile()">
+                <img class="MerchandiseItemImageOverlayIcon" src="../../../../../assets/icons/upload-icon-white.svg" alt="Upload Merchandise Image Icon" />
+                <p class="margin-bottom-0px">Upload a new item image</p>
+              </div>
+              <p class="MerchandiseImageLoadingOverlay" *ngIf="this.merchandiseImageLoading">Loading...</p>
+              <p class="MerchandiseImageCancelOverlay" *ngIf="this.merchandiseImageURL != this.initialData.image" (click)="this.removeMerchandiseImage($event)">Cancel</p>
+            </div>
+          </div>
+        </div>
+        <h6>Sizes</h6>
+        <p>Separate by commas</p>
+        <div class="formGroup">
+          <div class="formInputContainer">
+            <input 
+              class="formTextInput"
+              type="text" 
+              formControlName="sizes"
+              placeholder="ex. Small, Medium, Large"
+            />
+          </div>
+        </div>
+        <div class="formGroup">
+          <div class='formInputContainer'></div>
+            <label class="margin-bottom-0px" for="itemState">Active?</label>
+            <select 
+              id="itemState" 
+              class='formSelectInput'
+              formControlName="state"
+            >
+              <option *ngFor="let option of this.itemStateList" [value]="option.value">{{option.name}}</option>
+            </select>
+          <div class='formInputContainer'></div>
+        </div>
+
+        <div class='formGroup submitButtonGroup'>
+          <input 
+            class="button formButton formSubmitButton"
+            type="submit"
+            [value]="this.data.itemIndex==null ? 'Create Item' : 'Update Item'"
+            [disabled]="this.checkingValidityOfSubmission || !this._isFormValid()"
+            [readonly]="this.checkingValidityOfSubmission || !this._isFormValid()"
+          />
+          <div class="margin-top-16px" *ngIf="this.hasSubmitted">
+            <p class="italics margin-0px" *ngIf="this.validForm && this.updatingItem">Updating Race Settings...</p>
+            <p class="italics redText margin-0px" *ngIf="!this.validForm">Errors have been found above. Check each of your inputs for errors.</p>
+          </div>
+        </div>
+    </form>
+  </ng-template>
+</div>
