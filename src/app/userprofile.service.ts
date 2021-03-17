@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { environment } from './../environments/environment';
-
+import { Observable, Observer, Subject, } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,7 @@ export class UserProfileService {
     };
   }
 
-  updateProfile(formClean){
+  updateProfile(formClean:any){
     return this.http.post(environment.apiUrl + '/profile/update/', {'form': formClean}).toPromise();
   }
 
@@ -35,8 +35,7 @@ export class UserProfileService {
     this.router.navigate(['/profile',{username:username}]);
   }
 
-  getUserProfile(username:string){
-  //   console.log("from service username", username);
+  requestUserProfile(username:string){
     return this.http.post(environment.apiUrl + '/profile/info/',{'username':username}).toPromise();
   }
 
@@ -51,9 +50,31 @@ export class UserProfileService {
 
 }
 
+/*
 interface UserData {
   feed:any;
   email:any;
   first_name:any;
   last_name:any;
+}
+*/
+
+interface UserData {
+  user_id:number;
+  profile_url:string;
+  email:string;
+  description: string;
+  location:string;
+  first_name:string;
+  last_name:string;
+  follows:boolean;
+  distance_type: string;
+  is_me: boolean;
+  location_visibility:boolean;
+  about_visibility:boolean;
+  email_visibility:boolean;
+}
+
+export {
+  UserData,
 }

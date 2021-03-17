@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../../auth.service';
 import { NotificationsService } from '../../notifications.service';
 import {Observable} from 'rxjs/Rx';
-import { UserProfileService } from '../../userprofile.service';
+import { UserProfileService, UserData } from '../../userprofile.service';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { NotificationPanelComponent } from '../../notification-panel/notification-panel.component';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -21,9 +21,11 @@ declare var $: any
 })
 
 
-export class HeaderNavComponent implements OnInit {
-  userData: UserData;
-  picURL:any;
+export class HeaderNavComponent implements OnInit,OnDestroy {
+
+  private userDataSubscription:any = null;
+  public userData: UserData = null;
+
   navigationOpen : boolean = false;
   profileOpen : boolean = false;
 
@@ -60,6 +62,7 @@ export class HeaderNavComponent implements OnInit {
       document.getElementById('NavLoginButtons').classList.add('safariBrowser');
     }
 
+    this.userDataSubscription = this._authService.userDataChange.subscribe(this.handleUserDataChange);
 
     // THIS SHOULDN'T BE THE WAY, BUT LET'S GO WITH IT FOR NOW
     Observable.interval(1*1000) // make much larger in production
@@ -76,37 +79,24 @@ export class HeaderNavComponent implements OnInit {
     if (localStorage.getItem('access_token')){
         this._authService.token = localStorage.getItem('access_token');
     }
-  
-    if (localStorage.getItem('loggedInUsername')){
-        this._authService.username = localStorage.getItem('loggedInUsername');
-        this.getUserPic();
-    }
-    this.path=window.location.pathname;
     
     /*
-    try{this.getNotifications();}
-    catch{console.log("Couldnt get notifs");}
-  
-    /*
-    Observable.interval(60000) // make much larger in production
-      .switchMap(() => this._notificationService.getNotifications())
-      .subscribe((resp:NotificationResp) => {
-        //console.log(resp);
-        this.notifications = resp.notifications;
-        //console.log(this.notifications);
-      });
-
-    if (localStorage.getItem('access_token')){
-      this._authService.token = localStorage.getItem('access_token');
-    }
-
     if (localStorage.getItem('loggedInUsername')){
-      this._authService.username = localStorage.getItem('loggedInUsername');
-      this.getUserPic();
+        this._authService.username = localStorage.getItem('loggedInUsername');
+        this.getUserData();
     }
-    this.path=window.location.pathname;
     */
+    this.path=window.location.pathname;
+  }
 
+  ngOnDestroy() {
+    if (this.userDataSubscription) this.userDataSubscription.unsubscribe();
+    this.userData = null;
+  }
+
+  handleUserDataChange = (data:UserData) => {
+    console.log('CHANGE IN USER DATA: ', data);
+    this.userData = data;
   }
 
   ToggleNavigation() {
@@ -144,11 +134,11 @@ export class HeaderNavComponent implements OnInit {
 
   }
 
-   getUserPic(){
+   getUserData = () => {
     //Call a to-be-created service which gets user data, feed, statistics etc
-    this._userProfileService.getUserProfile(this._authService.username).then((data) => {
-      this.userData = data as UserData;
-      this.picURL = this.userData.profile_url;
+    this._userProfileService.requestUserProfile(this._authService.username).then((data:UserData) => {
+      this.userData = data;
+      console.log(this.userData);
     });
   }
 
@@ -236,18 +226,5 @@ export class HeaderNavComponent implements OnInit {
 
 interface NotificationResp {
   notifications:any[];
-}
-
-interface UserData {
-  user_id:number;
-  profile_url:string;
-  email:string;
-  description: string;
-  location:string;
-  first_name:string;
-  last_name:string;
-  follows:boolean;
-  distance_type: string;
-  is_me: boolean;
 }
 

@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, Output, EventEmitter, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { UserProfileService } from '../userprofile.service';
 import { ImageService } from '../image.service';
@@ -10,15 +10,22 @@ import { AuthService } from '../auth.service';
   templateUrl: './profile-pic-form.component.html',
   styleUrls: ['./profile-pic-form.component.css']
 })
-export class ProfilePicFormComponent implements OnInit, OnChanges {
+export class ProfilePicFormComponent implements OnInit,AfterViewInit,OnDestroy {
   
+  public initializing:Boolean = true;
+
   @Input() userData: UserData;
   @Output() formUpdated: EventEmitter<void> = new EventEmitter();
 
-  profileForm: FormGroup;
-  profilePicURL: any;
-  distanceTypeOptions: any[];
-  public profileUpdated:boolean;
+  public defaultURL:any = null;
+  public profileInput:any = null;
+  public profileForm: FormGroup = null;
+  public profilePicURL:any = null;
+  public profilePicUploading:Boolean = false;
+  public validForm:Boolean = true;
+
+  public checkingValidityOfSubmission:Boolean = false;
+  public updatingItem:Boolean = false;
 
   constructor(
     private _userProfileService: UserProfileService, 
@@ -26,32 +33,15 @@ export class ProfilePicFormComponent implements OnInit, OnChanges {
     private _imageService: ImageService,
     private _authService: AuthService,
   ) {
-    this.distanceTypeOptions = ['Mi', 'KM'];
-    this.profilePicURL = null;
-
-    this.profileForm = new FormGroup({
-      ProfilePic: new FormControl(''),
-    });
+    this.initializeForm();
   }
 
-  ngOnInit() {
-
-    console.log('Welcome:',this._authService);
-
-    //this.route.paramMap.subscribe(params => {
-    //  this.username = params['params']['username'];
-    //  this.getUserData();
-    //  console.log(this.username);
-    //});
-
-    this.populateForm();
-    this.profileUpdated = false;
-  }
+  ngOnInit() {}
 
   /*
   getUserData(){
     //Call a to-be-created service which gets user data, feed, statistics etc
-    this._userProfileService.getUserProfile(this.username).then((data) => {
+    this._userProfileService.requestUserProfile(this.username).then((data) => {
       this.userData = data as UserData;
       console.log("New user data: ", this.userData);
 
@@ -66,25 +56,103 @@ export class ProfilePicFormComponent implements OnInit, OnChanges {
   }
   */
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngAfterViewInit() {
+    this.profileInput = document.getElementById("ProfilePicInput");
+  }
 
-    for(const propName in changes) {
-      if(changes.hasOwnProperty(propName)) {
+  ngOnDestroy() {
+    this.profileInput = null;
+    this.profileForm = null;
+    this.profilePicURL = null;
+  }
 
-        switch(propName) {
-          case 'userData':
-            if(changes.userData.currentValue != undefined) {
-              this.populateForm();
-            }
-        }
-      }
+  initializeForm() {
+    this.defaultURL = (this.userData != null) ? this.userData.profile_url : null;
+    this.profilePicURL = this.defaultURL;
+    this.profileForm = new FormGroup({
+      ProfilePic: new FormControl(this.defaultURL),
+    });
+    this.initializing = false;
+  }
+  onFormSubmit = (e:any) => {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+
+    this.checkingValidityOfSubmission = true;
+    this.validForm = this.isFormValid(this.profileForm);
+    if (!this.validForm || this.profilePicURL == null) {
+      console.log("INVALID FORM");
+      this.checkingValidityOfSubmission = false;
+      return;
     }
+    var formClean = {
+      "ProfilePic": this._imageService.squareCropImage(this.profilePicURL)
+    }
+    // Finally make the push
+    this.updatingItem = true;
+    this._userProfileService.updateProfile(formClean).then((data) => {
+      //this.modalService.callbackModal(this.id,"profile-done");
+      this.updatingItem = false;
+      if (data["success"]) {
+        this.checkingValidityOfSubmission = false;
+        this.defaultURL = this.profilePicURL;
+        this.formUpdated.emit();
+      } else {
+        alert("An error occurred while updating your profile info!");
+        this.checkingValidityOfSubmission = false;
+      }
+    }).catch(error=>{
+      console.error(error);
+      alert("An error occurred while updating your profile info!");
+      this.checkingValidityOfSubmission = false;
+      this.updatingItem = false;
+    }) 
+  }
+  isFormValid = (f:FormGroup) => {
+    if (!f.disabled) return f.valid;
+    return Object.keys(f.controls).reduce((accumulator,inputKey)=>{
+      return (accumulator && f.get(inputKey).errors == null);
+    },true);
+  }
+  onClickProfilePicUpload = (e:any) => {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+    this.profileInput.click();
+  }
+  onSelectProfilePicFile(e:any) {
+    e.preventDefault();
+    e.stopPropagation();
+    const input = this.profileForm.get('ProfilePic');
+    if (
+      input.errors != null ||
+      e.target.files == null ||
+      e.target.files.length == 0
+    ) {
+      this.profilePicUploading = false;
+      input.setErrors({invalid:true});
+      return;
+    }
+    this.profilePicUploading = true;
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = () => { // called once readAsDataURL is completed
+      this.profilePicURL = reader.result;
+      this.profilePicUploading = false;
+    }
+    reader.readAsDataURL(file); // read file as data url
+  }
+  cancelProfilePicUpload = (e:any) => {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+    //Clear field form
+    this.profileForm.get('ProfilePic').reset();
+    //Clear uploaded file
+    this.profilePicURL = null;
+    this.profilePicUploading = false;
+    this.updatingItem = false;
   }
 
-  populateForm(): void {
-   //  console.log("User data: ", this.userData);
-  }
-
+  /*
   updateProfile(): void{
     let formClean: ProfilePic;
 
@@ -132,15 +200,14 @@ export class ProfilePicFormComponent implements OnInit, OnChanges {
     //This allows base64 uploaded pics to be displayed
     return this.sanitizer.bypassSecurityTrustResourceUrl(this.profilePicURL);
   }
-
-  deleteProfilePic() {
+  deleteProfilePic = () => {
     //Clear field form
     this.profileForm.get('ProfilePic').reset();
 
     //Clear uploaded file
     this.profilePicURL = null;
   }
-
+  */
 }
 
 export interface ProfilePic {

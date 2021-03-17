@@ -22,7 +22,7 @@
         <p>Please navigate to the previous page, or log in to see your own account.</p>
         <div *ngIf="!this.viewingElse && this._authService.isLoggedIn()" class="ForceUserProfileReloadBlock">
           <p class="margin-0px">If you are logged in but are seeing this message, please reload the page</p>
-          <button (click)="this.reloadPage()">Reload Page</button>
+          <button (click)="this.initializePage()">Reload Page</button>
         </div>
       </div>
     </ng-template>
@@ -79,7 +79,7 @@
           <ng-template #profileLoadingMessage><p>Loading...</p></ng-template>
     
           <div *ngIf="userData != null && this._authService.isLoggedIn() && userData.is_me" class='UserProfileActions'>
-            <button class="darkButton" (click)="openModal('profileModal')" >Edit</button>
+            <button class="darkButton" (click)="this.openProfileForm()" >Edit</button>
             <button class="darkButton" (click)="logout()">Log out</button>
           </div>
     

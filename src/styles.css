@@ -730,7 +730,12 @@ h1.PageHeaderSegmentTitle {
 
 
 
-.LoginContainer, .RegisterContainer, .SignUpContainer, .LogActivityContainer, .MerchandiseItemFormContainer {
+.LoginContainer,
+.RegisterContainer,
+.SignUpContainer,
+.LogActivityContainer,
+.MerchandiseItemFormContainer,
+.ProfileFormContainer {
   /* width:calc(600px - 48px); */
   width:600px;
 }

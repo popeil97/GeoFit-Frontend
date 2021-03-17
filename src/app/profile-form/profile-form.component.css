@@ -1,57 +1,194 @@
-.EditProfileForm {
-  margin-top:32px;
-  margin-bottom:32px;
+.EditProfileForm{
+  width:100%;
+  max-height: calc(100vh - 128px);
+  overflow-y:auto;
 }
-.SegmentHeaderWithSlider {
-  display:flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: nowrap;
-}
+  .EditProfileForm h6 {
+    font-weight:bold;
+  }
+  .formPanel {
+    background-color: rgb(255,255,255);
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+    width:100%;
+    max-width: 800px;
+    padding:32px;
+    border-radius: 8px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-bottom:32px;
+  }
+    .formPanel label {
+      width:100%;
+      font-weight: bold;
+    }
+    .formGroup, .formGroupHeader {
+      width:100%;
+      margin-bottom:32px;
 
-.LocationExtraInfoContainer {
-  display:flex;
-  flex-direction: row-reverse;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: nowrap;
+      display:flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+    .formGroup.formGroupWithLeftBorder {
+      border-left:2px solid rgb(200,200,200);
+      padding-left:16px;
+    }
+    .formGroupHeader {
+      margin-bottom:32px;
+      justify-content: space-between;
+    }
+    .formGroup.formGroupAlignedTop {
+      align-items: flex-start;
+    }
+    .formGroup.formGroupColumn {
+        flex-direction: column;
+    }
+      .formInputContainer {
+        flex-shrink: 1;
+        flex-basis: 100%;
+        margin-left:16px;
+        margin-right:16px;
+      }
+      .formInputContainer:first-child {
+        margin-left:0px;
+      }
+      .formInputContainer:last-child {
+        margin-right:0px;
+      }
+      .formInputContainer:only-child, .formInputContainer:only-of-type {
+        margin-left:0px;
+        margin-right:0px;
+      }
+      .formInputContainer.autoWidth {
+        width:auto;
+        flex-basis: auto;
+      }
+      .formInputContainer.formInputContainerSelfAlignedCenter {
+        align-self: center;
+      }
+        .formTextInput {
+          width:100%;
+          padding:4px 8px 4px 8px;
+          border:2px solid rgb(200,200,200);
+          background-color: white;
+          border-radius: 8px;
+        }
+        .formTextInput:focus {
+          outline: none;
+        }
+        .formInputContainer.autoWidth .formTextInput, .formTextInput.autoWidth {
+          width:auto;
+        }
+        .formTextInput.errorTextInput {
+          border-color: red;
+        }
+.submitButtonGroup {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom:0px;
 }
-.LocationCurrentLength {
+.formButton {
+  background-color: white;
+}
+.formButton:hover {
+  background-color: var(--main-background-color);
+  color:white;
+}
+.formButton.resetButton {
+  background-color: red;
+  color:white;
   flex-shrink: 0;
-  flex-basis: auto;
+  margin-left:32px;
+  }
+.formSubmitButton.disabled {
+  opacity:0.5;
+}
+.formSubmitButton.disabled:hover {
+  cursor:initial;
+  background-color: initial;
+  color:initial;
 }
 
-.material-icons {
-  font-family: 'Material Icons';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;  /* Preferred icon size */
-  display: inline-flex;
-  vertical-align: top;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
-  font-feature-settings: 'liga';
+.disabledGroup {
+  opacity:0.5;
 }
 
-/deep/ .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
-    background-color: #a7f2ba;
+.profilePictureContainer {
+  position:relative;
+  width:256px;
+  height:256px;
+  overflow:hidden;
+  border:1px solid rgb(200,200,200);
 }
+  .profilePicture {
+    position:relative;
+    z-index: 1;
+    width:100%;
+    height:100%;
 
-/deep/ .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
-    background-color: var(--tucan-green);
-}
+    background-position: center;
+    background-size:cover;
+    background-repeat: no-repeat;
+  }
+  .profilePictureUploadOverlay {
+    position:absolute;
+    z-index: 2;
+    top:0px;
+    left:0px;
+    width:100%;
+    height:100%;
+    opacity:0;
+    transition:opacity 0.25s ease-in-out;
+    background-color:rgba(0,0,0,0.5);
+    color:white;
+
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+    .profilePictureUploadIcon {
+      width:24px;
+      height:24px;
+      margin-bottom:8px;
+    }
+  .profilePictureContainer:hover {
+    cursor:pointer;
+  }
+  .profilePictureContainer:hover .profilePictureUploadOverlay {
+    opacity:1;
+  }
+  .profilePictureLoadingOverlay {
+    position:absolute;
+    z-index: 2;
+    top:8px;
+    left:8px;
+    width:auto;
+    max-width: 100%;
+    height:auto;
+    max-height:100%;
+    padding:4px;
+    border-radius: 8px;
+    background-color:rgb(200,200,200);
+    color:white;
+    margin:0px;
+  }
+  .profilePictureCancelOverlay {
+    position:absolute;
+    z-index: 2;
+    top:8px;
+    right:8px;
+    width:auto;
+    max-width: 100%;
+    height:auto;
+    max-height:100%;
+    padding:4px;
+    border-radius: 8px;
+    background-color:red;
+    color:white;
+    margin:0px;
+  }

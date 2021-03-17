@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { NotificationsService } from '../notifications.service';
 import {Observable} from 'rxjs/Rx';
-import { UserProfileService } from '../userprofile.service';
+import { UserProfileService, UserData } from '../userprofile.service';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { NotificationPanelComponent } from '../notification-panel/notification-panel.component';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
@@ -23,11 +23,13 @@ declare var $: any
 
 
 export class NavComponent implements OnInit, OnDestroy {
+  
   userData: UserData;
   picURL:any;
   navigationOpen : boolean = false;
   profileOpen : boolean = false;
 
+  private loggedInStatusSubscription:any = null;
   private openedBottomSheetRefSubscription:any = null;
   private notificationSubscription:any = null;
 
@@ -51,6 +53,8 @@ export class NavComponent implements OnInit, OnDestroy {
     $(document).on('click', '.dropdown-menu', function (e) {
       e.stopPropagation();
     });
+
+    this.loggedInStatusSubscription = this._authService.getLoginStatus.subscribe(this.handleLoginChange);
 
     var ua = window.navigator.userAgent;
     var iOS = !!ua.match(/iP(ad|od|hone)/i);
@@ -115,8 +119,20 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    if (this.loggedInStatusSubscription) this.loggedInStatusSubscription.unsubscribe();
     if (this.notificationSubscription) this.notificationSubscription.unsubscribe();
     if (this.openedBottomSheetRefSubscription) this.openedBottomSheetRefSubscription.unsubscribe();
+
+    this.picURL = null;
+  }
+
+  handleLoginChange(loggedIn:Boolean) {
+    if (loggedIn) {
+      this.getUserPic();
+    } 
+    else {
+      this.picURL = null;
+    }
   }
 
   ToggleNavigation() {
@@ -155,7 +171,8 @@ export class NavComponent implements OnInit, OnDestroy {
 
    getUserPic(){
     //Call a to-be-created service which gets user data, feed, statistics etc
-    this._userProfileService.getUserProfile(this._authService.username).then((data) => {
+    this._userProfileService.requestUserProfile(this._authService.username).then((data) => {
+      console.log("RETRIEVED USER DATA",data);
       this.userData = data as UserData;
       this.picURL = this.userData.profile_url;
     });
@@ -236,18 +253,5 @@ export class NavComponent implements OnInit, OnDestroy {
 
 interface NotificationResp {
   notifications:any[];
-}
-
-interface UserData {
-  user_id:number;
-  profile_url:string;
-  email:string;
-  description: string;
-  location:string;
-  first_name:string;
-  last_name:string;
-  follows:boolean;
-  distance_type: string;
-  is_me: boolean;
 }
 

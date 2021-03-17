@@ -93,7 +93,7 @@ export class Signup2Component implements OnInit {
   
   ngOnInit() {
 
-    this.isLoggedIn = this._authService.isLoggedIn();
+    this.isLoggedIn = this._authService.isLoggedIn() != null;
     this.InitForm();
     
   }

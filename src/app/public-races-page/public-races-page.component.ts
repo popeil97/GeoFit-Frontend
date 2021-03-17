@@ -75,7 +75,7 @@ export class PublicRacesPageComponent implements OnInit {
     if (localStorage.getItem('loggedInUsername')){
       this._authService.username = localStorage.getItem('loggedInUsername');
 
-      this._userProfileService.getUserProfile(this._authService.username).then((data) => {
+      this._userProfileService.requestUserProfile(this._authService.username).then((data) => {
         this.userData = data as UserData;
         this.getPublicRaces(this.userData.user_id);
 

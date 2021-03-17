@@ -133,7 +133,7 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     });
 
     if(this._authService.isLoggedIn()) {
-      this._userProfileService.getUserProfile(this._authService.username).then((data) => {
+      this._userProfileService.requestUserProfile(this._authService.username).then((data) => {
         this.userData = data as UserData;
       });
     }

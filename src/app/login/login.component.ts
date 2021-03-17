@@ -16,7 +16,7 @@ import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
 // import { first } from 'rxjs/operators';
-import { UserProfileService } from '../userprofile.service';
+import { UserProfileService, UserData, } from '../userprofile.service';
 
 import { ModalService } from '../modalServices';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -82,17 +82,29 @@ export class LoginComponent implements OnInit, OnDestroy {
     var email = this.f.email.value.toLowerCase();
 
     this._authService.login({'email': email, 'password': this.f.password.value}).then(data => {
-      localStorage.setItem('access_token', data['token']);
-      localStorage.setItem('loggedInUsername', data['username']);
-      this._authService.username = data['username'];
-
-      //Emit
-      this.loggedInAsUsernameEvent.emit(data['username']);
-      
       if (data['success']){
-        this._authService.emitLoginStausChange();
-        this.continueAsMe(data['username']);
-        this.closeDialog();
+        // store local storage variables
+        localStorage.setItem('access_token', data['token']);
+        localStorage.setItem('loggedInUsername', data['username']);
+        this._authService.username = data['username'];
+
+        //Emit to Output
+        this.loggedInAsUsernameEvent.emit(data['username']);
+
+        // Update user data
+        this._userProfileService.requestUserProfile(this._authService.username).then(ud=>{
+          // Emit to  authService subscribers
+          this._authService.emitLoginStausChange();
+          this._authService.updateUserData(ud as UserData);
+
+          // Continue
+          this.continueAsMe(data['username']);
+          this.closeDialog();
+        }).catch(uerr=>{
+          console.error(uerr);
+          this.loading = false;
+          this.errors = uerr['error'];
+        });
       }
     }).catch(err => {
       this.loading = false;

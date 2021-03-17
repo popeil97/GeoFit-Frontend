@@ -1,11 +1,15 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit, SimpleChanges, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
-import { UserProfileService } from '../userprofile.service';
+import { UserProfileService, UserData } from '../userprofile.service';
 import { AuthService } from '../auth.service';
 import { RaceService } from '../race.service';
 import { UsersService } from '../users.service';
 import { ModalService } from '../modalServices';
+
+import { MatDialog } from '@angular/material';
+import { ProfileFormComponent } from "../profile-form/profile-form.component";
+
 import * as _ from 'lodash';
 
 declare var $: any;
@@ -15,10 +19,11 @@ declare var $: any;
   templateUrl: './user-page.component.html',
   styleUrls: ['./user-page.component.css']
 })
-export class UserPageComponent implements OnInit {
+export class UserPageComponent implements OnInit,OnDestroy {
 
   username;
   userData: UserData;
+  private userDataSubscription:any = null;
   
   public loading: boolean = true;
   public showEdit: boolean = false;
@@ -43,36 +48,15 @@ export class UserPageComponent implements OnInit {
     public _authService: AuthService,
     private raceService: RaceService,
     private modalService: ModalService,
+
+    private dialog : MatDialog,
   ) {}
 
   public currentScreen = 'home';
   public acceptedScreens = ['home','stats','feed','races'];
 
   ngOnInit() {
-
-    // Initial states:
-    //  - loading is set to TRUE
-    //  - showEdit is set to FALSE
-    //  - viewingElse is set to FALSE
-
-    // For now, we have to adjust the page contents depending on if we're accessing someone else's user page or our own.
-    // We store that info inside of the local "username" variable.
-    this.route.paramMap.subscribe(params => {
-      // We first need to check if we're looking at someone else's profile
-      if (params['params']['username'] != null) {
-        this.username = params['params']['username'];
-        this.viewingElse = true;
-      } 
-      else if (this._authService.isLoggedIn()) {
-        this.username = this._authService.username;
-        this.viewingElse = false;
-      } 
-      else {
-        this.username = null;
-        this.viewingElse = false;
-      }
-      this.getUserData();
-    });
+    this.initializePage();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -89,6 +73,19 @@ export class UserPageComponent implements OnInit {
     }
   }
 
+  ngOnDestroy() {
+    if (this.userDataSubscription) this.userDataSubscription.unsubscribe();
+    this.userData = null;
+    this.followersData = null;
+  }
+
+  handleUserDataChange = (data:UserData) => {
+    this.userData = data;
+    if (this.userData != null) {
+      this.processUserData();
+    }
+  }
+
   getLoadingStatus() {
     return this.loading;
   }
@@ -102,22 +99,44 @@ export class UserPageComponent implements OnInit {
     return valid;
   }
 
-  reloadPage() {
+  initializePage = ():void => {
+    // Initial states:
+    //  - loading is set to TRUE
+    //  - showEdit is set to FALSE
+    //  - viewingElse is set to FALSE
+
+    // For now, we have to adjust the page contents depending on if we're accessing someone else's user page or our own.
+    // We store that info inside of the local "username" variable.
     this.route.paramMap.subscribe(params => {
-      // We first need to check if we're looking at someone else's profile
       if (params['params']['username'] != null) {
+        // We first need to check if we're looking at someone else's profile
+        console.log('USERNAME IN URL');
         this.username = params['params']['username'];
         this.viewingElse = true;
+
+        // If we are, then we need to get their user data
+        this.getUserData();
       } 
       else if (this._authService.isLoggedIn()) {
+        // If we can't find a username in the URL, we're probably looking at ourselves, right?
+        console.log("WE'RE LOOKING AT OURSELVES");
         this.username = this._authService.username;
         this.viewingElse = false;
+
+        // If so, then we already are storing our user data inside of _authService.
+        // We just need to reference that and listen for any changes
+        this.userData = this._authService.userData;
+        this.userDataSubscription = this._authService.userDataChange.subscribe(this.handleUserDataChange);
       } 
+      // Truly, there is no cause. We're not logged in...
       else {
+        console.log("... We don't have any username")
         this.username = null;
         this.viewingElse = false;
+
+        this.userData = null;
+        this.loading = false;
       }
-      this.getUserData();
     });
   }
 
@@ -135,7 +154,7 @@ export class UserPageComponent implements OnInit {
     )
   }
 
-  getUserData() {
+  getUserData = (callback:any = null):void => {
 
     //Call a to-be-created service which gets user data, feed, statistics etc
     if (this.username == null) {
@@ -143,24 +162,30 @@ export class UserPageComponent implements OnInit {
       this.userData = null;
       return;
     }
+
     this.loading = true;
     this.userData = null;
-    this._userProfileService.getUserProfile(this.username).then((data) => {
+
+    this._userProfileService.requestUserProfile(this.username).then((data) => {
       this.userData = data as UserData;
       console.log("New user data profPage: ", this.userData);
-      
-      if (this.userData.location == "") this.userData.location = "N/A";
-      if (this.userData.description == "") this.userData.description = "N/A";
-
-      this._userService.getFollowersAndFollowedSeperate().then((resp:FollowersResp) => {
-        this.followersData.followers = resp.followers;
-        this.followersData.followed = resp.followed;
-        this.followersData.numFollowers = this.followersData.followers.length;
-        this.followersData.numFollowing = this.followersData.followed.length;
-      });
-
-      this.loading = false;
+      this.processUserData(callback);
     });
+  }
+
+  processUserData = (callback:any = null):void => {
+    if (this.userData.location == "") this.userData.location = "N/A";
+    if (this.userData.description == "") this.userData.description = "N/A";
+
+    this._userService.getFollowersAndFollowedSeperate().then((resp:FollowersResp) => {
+      this.followersData.followers = resp.followers;
+      this.followersData.followed = resp.followed;
+      this.followersData.numFollowers = this.followersData.followers.length;
+      this.followersData.numFollowing = this.followersData.followed.length;
+    });
+
+    this.loading = false;
+    if (callback) callback();
   }
 
   openFollowersDialog = () => {
@@ -196,26 +221,35 @@ export class UserPageComponent implements OnInit {
     //this.toggleEditView();
   }
 
+  openProfileForm = ():void => {
+    this.dialog.open(ProfileFormComponent,{
+      panelClass:"ProfileFormContainer",
+      data:this.userData,
+    }).afterClosed().subscribe(isChanged=>{
+      if (isChanged) this.getUserData(()=>{
+        this._authService.updateUserData(this.userData);
+      });
+    })
+  }
+
+  /*
   openModal(id: string) {
-   
     var data = (id == 'profileModal') ? {userData:this.userData, callbackFunction:null} : {};
     console.log("DATA SENT TO CHILD", data);
     data.callbackFunction = this.updateProfile;
     this.modalService.open(id,data);
   }
-
   updateProfile = (incomingData = null) => {
     if(incomingData != null){
       this.profileUpdated(null);
       this.closeModal('profileModal');
-    }
-    
+    } 
   }
-
   closeModal(id: string) {
       this.modalService.close(id);
       console.log(this.modalService.getModalData(id));
   }
+  */
 
   SwitchSlideshow = (to:string = null) => {
     if (to == null || this.acceptedScreens.indexOf(to) == -1) return;
@@ -262,21 +296,6 @@ export class UserPageComponent implements OnInit {
 
 }
 
-interface UserData {
-  user_id:number;
-  profile_url:string;
-  email:string;
-  description: string;
-  location:string;
-  first_name:string;
-  last_name:string;
-  follows:boolean;
-  distance_type: string;
-  is_me: boolean;
-  location_visibility:boolean;
-  about_visibility:boolean;
-  email_visibility:boolean;
-}
 
 interface FollowersResp {
   followed: any[];

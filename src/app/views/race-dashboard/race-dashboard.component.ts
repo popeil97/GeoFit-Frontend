@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
@@ -6,6 +6,7 @@ import { RaceService } from '../../race.service';
 import { MapService } from '../../map.service';
 import { ItemService } from '../../item.service';
 import { AuthService } from '../../auth.service';
+import { UserProfileService, UserData} from '../../userprofile.service';
 import { RaceSettings } from '../../race-about-page/race-about-page.component';
 
 import { MatDialog } from '@angular/material';
@@ -17,9 +18,10 @@ import { Register2Component } from '../../register2/register2.component';
   templateUrl: './race-dashboard.component.html',
   styleUrls: ['./race-dashboard.component.css']
 })
-export class RaceDashboardComponent implements OnInit, OnChanges {
+export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
 
   // public loading:Boolean = true;
+  private loggedInSubscription:any = null;
   public loadingSegments = {
     navigation:true,
     content:true,
@@ -56,7 +58,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
   ngOnInit() {
 
     // We add a subscription to the login event
-    this._authService.getLoginStatus.subscribe(this.handleLoginChange);
+    this.loggedInSubscription = this._authService.getLoginStatus.subscribe(this.handleLoginChange);
     
     // this.loading = true;
     this.loadingSegments.navigation = true;
@@ -120,6 +122,10 @@ export class RaceDashboardComponent implements OnInit, OnChanges {
         }
       }
     }
+  }
+
+  ngOnDestroy() {
+    if (this.loggedInSubscription) this.loggedInSubscription.unsubscribe();
   }
 
   openLogin = () => {

@@ -22,7 +22,7 @@ export class ShowFollowersComponent implements OnInit {
 
   getUserData(){
     //Call a to-be-created service which gets user data, feed, statistics etc
-    this._userProfileService.getUserProfile(this.person.username).then((data) => {
+    this._userProfileService.requestUserProfile(this.person.username).then((data) => {
       this.userData = data as UserData;
       this.picURL = this.userData.profile_url;
       this.follows = this.userData.follows;

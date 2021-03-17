@@ -299,6 +299,7 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
                   LogActivityComponent,
                   ItemFormDialogComponent,
                   RaceMerchandiseSettingsItemComponent,
+                  ProfileFormComponent,
                   ] 
 })
 export class AppModule { 

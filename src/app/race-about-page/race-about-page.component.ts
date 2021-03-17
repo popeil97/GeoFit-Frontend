@@ -349,7 +349,7 @@ export class RaceAboutPageComponent implements OnInit {
   getOwnerData(){
     //Call a to-be-created service which gets user data, feed, statistics etc
     //console.log('race-about-page - getUserData()',this.aboutData.owner);
-    this._userProfileService.getUserProfile(this.aboutData.owner.username).then((data) => {
+    this._userProfileService.requestUserProfile(this.aboutData.owner.username).then((data) => {
       this.userData = data as UserData;
       this.userData.email_mailto = `mailto:${this.userData.email}`;
       //console.log("New user data race about pg: ", this.userData);

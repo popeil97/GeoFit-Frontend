@@ -1,15 +1,19 @@
 import {Injectable, EventEmitter, Output} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { environment } from './../environments/environment';
+import { UserProfileService, UserData } from "./userprofile.service";
 import { Observable, Observer, Subject, } from 'rxjs';
 
 @Injectable()
 export class AuthService {
 
-  public getLoginStatus = new Subject<Boolean>();
- 
   // http options used for making API calls
   private httpOptions: any;
+
+  public getLoginStatus:Subject<Boolean> = new Subject<Boolean>();
+
+  public userData:UserData = null;
+  public userDataChange:Subject<UserData> = new Subject<UserData>();
  
   // the actual JWT token
   public token: string;
@@ -23,10 +27,24 @@ export class AuthService {
   // error messages received from the login attempt
   public errors: any = [];
  
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private _userProfileService:UserProfileService,
+  ) {
     this.httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
     };
+    this.userDataChange.subscribe(val=>{
+      this.userData = val;
+    })
+    if (this.isLoggedIn()) {
+      this.username = localStorage.getItem('loggedInUsername');
+      this._userProfileService.requestUserProfile(this.username).then(d=>{
+        this.userDataChange.next(d as UserData);
+      }).catch(error=>{
+        console.error(error);
+      })
+    }
   }
  
   // Uses http.post() to register user from REST API endpoint
@@ -40,7 +58,7 @@ export class AuthService {
     return this.http.post(environment.apiUrl + '/accounts/login/', JSON.stringify(user), this.httpOptions).toPromise();
   }
 
-  public isLoggedIn(): Boolean {
+  public isLoggedIn():Boolean {
     if(localStorage.getItem('loggedInUsername') && localStorage.getItem('access_token')) {
       return true;
     }
@@ -78,6 +96,7 @@ export class AuthService {
     this.username = null;
 
     this.emitLoginStausChange();
+    this.updateUserData(null);
   }
  
   private updateData(token) {
@@ -102,6 +121,10 @@ export class AuthService {
 
   emitLoginStausChange() {
     this.getLoginStatus.next(this.isLoggedIn());
+  }
+
+  updateUserData(d:UserData) {
+    this.userDataChange.next(d);
   }
  
 }
