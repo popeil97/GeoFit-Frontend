@@ -85,7 +85,7 @@ h6, .h6 {
   text-align: center;
 }
 
-.nobr {
+.nobr, .no-br {
   white-space: nowrap;
 }
 .hidden {
@@ -184,6 +184,15 @@ button.wideButton, .button.wideButton {
 
 .position-relative {
   position:relative;
+}
+.position-absolute {
+  position:absolute;
+}
+.position-absolute-middle {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
 }
 
 .margin-0px, .margin-top-bottom-0px, .margin-top-0px      { margin-top:0px; }

@@ -49,7 +49,6 @@ export class UserPageComponent implements OnInit,OnDestroy {
     private _userService:UsersService,
     public _authService: AuthService,
     private raceService: RaceService,
-    private modalService: ModalService,
 
     private dialog : MatDialog,
   ) {}
@@ -199,10 +198,7 @@ export class UserPageComponent implements OnInit,OnDestroy {
     this.dialog.open(ViewFollowComponent,{
       panelClass:"ViewFollowersContainer",
       data:data,
-    }).afterClosed().subscribe(result=>{
-      console.log(result);
-    })
-    //this.modalService.open('followersModal',data);
+    });
   }
 
   logout() {
@@ -211,7 +207,6 @@ export class UserPageComponent implements OnInit,OnDestroy {
   }
   toggleEditView(): void{
     this.showEdit = !this.showEdit;
-   //  console.log("EDIT .", this.showEdit);
   }
 
   viewRace(race:any) {
@@ -240,25 +235,6 @@ export class UserPageComponent implements OnInit,OnDestroy {
       });
     })
   }
-
-  /*
-  openModal(id: string) {
-    var data = (id == 'profileModal') ? {userData:this.userData, callbackFunction:null} : {};
-    console.log("DATA SENT TO CHILD", data);
-    data.callbackFunction = this.updateProfile;
-    this.modalService.open(id,data);
-  }
-  updateProfile = (incomingData = null) => {
-    if(incomingData != null){
-      this.profileUpdated(null);
-      this.closeModal('profileModal');
-    } 
-  }
-  closeModal(id: string) {
-      this.modalService.close(id);
-      console.log(this.modalService.getModalData(id));
-  }
-  */
 
   SwitchSlideshow = (to:string = null) => {
     if (to == null || this.acceptedScreens.indexOf(to) == -1) return;

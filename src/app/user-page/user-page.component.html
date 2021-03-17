@@ -4,7 +4,7 @@
   
   <!-- Loading state if waiting for initialization -->
   <ng-template [ngIf]="this.getLoadingStatus()" [ngIfElse]="LoadingComplete">
-    <h1>Loading...</h1>
+    <h1 class="position-absolute-middle margin-0px">Loading...</h1>
   </ng-template>
 
   <ng-template #LoadingComplete>
