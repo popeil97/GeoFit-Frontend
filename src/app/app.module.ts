@@ -300,6 +300,7 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
                   ItemFormDialogComponent,
                   RaceMerchandiseSettingsItemComponent,
                   ProfileFormComponent,
+                  ViewFollowComponent,
                   ] 
 })
 export class AppModule { 

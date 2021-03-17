@@ -5,7 +5,6 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UserProfileService } from '../userprofile.service';
 import { ImageService } from '../image.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ModalService } from '../modalServices';
 
 @NgModule({
   imports:[MatDialogRef]

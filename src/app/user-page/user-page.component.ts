@@ -10,6 +10,8 @@ import { ModalService } from '../modalServices';
 import { MatDialog } from '@angular/material';
 import { ProfileFormComponent } from "../profile-form/profile-form.component";
 
+import { ViewFollowComponent } from '../view-follow/view-follow.component';
+
 import * as _ from 'lodash';
 
 declare var $: any;
@@ -194,7 +196,13 @@ export class UserPageComponent implements OnInit,OnDestroy {
       username:this.username,
       followersData: this.followersData,
     }
-    this.modalService.open('followersModal',data);
+    this.dialog.open(ViewFollowComponent,{
+      panelClass:"ViewFollowersContainer",
+      data:data,
+    }).afterClosed().subscribe(result=>{
+      console.log(result);
+    })
+    //this.modalService.open('followersModal',data);
   }
 
   logout() {

@@ -1,19 +1,17 @@
 <div class='TucanContainer'>
-    <div class='margin-bottom-16px'>
-        <button (click)="closeDialog()">Close</button>
-    </div>
+    <button class="margin-bottom-16px" (click)="this.closeDialog()">Close</button>
     
-    <ng-template [ngIf]="d != null" [ngIfElse]="LoadingFollowers">
+    <ng-template [ngIf]="this.data != null" [ngIfElse]="LoadingFollowers">
         <div class='Slideshow'>
             <div class="SlideshowHeader">
-                <button class="SlideshowButton" (click)="SwitchSlideshow('followers')" id="followers-btn">Followers: {{d.followersData.numFollowers}}</button>
-                <button class="SlideshowButton" (click)="SwitchSlideshow('following')" id="following-btn">Following: {{d.followersData.numFollowing}}</button>
+                <button class="SlideshowButton" (click)="SwitchSlideshow('followers')" id="followers-btn">Followers: {{this.data.followersData.numFollowers}}</button>
+                <button class="SlideshowButton" (click)="SwitchSlideshow('following')" id="following-btn">Following: {{this.data.followersData.numFollowing}}</button>
             </div>
             <div class="SlideshowContents">
                 <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'followers'}">
                     <h3>Followers</h3>
-                    <ng-template [ngIf]='d.followersData.numFollowers > 0' [ngIfElse]='NoFollowersBlock'>
-                        <div *ngFor="let person of d.followersData.followers">
+                    <ng-template [ngIf]='this.numFollowers > 0' [ngIfElse]='NoFollowersBlock'>
+                        <div *ngFor="let person of this.followers">
                             <app-show-followers [person]="person"></app-show-followers>
                         </div>
                     </ng-template>
@@ -23,8 +21,8 @@
                 </div>
                 <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'following'}">
                     <h3>Following</h3>
-                    <ng-template [ngIf]='d.followersData.numFollowing > 0' [ngIfElse]='NoFollowingBlock'>
-                        <div *ngFor="let person of d.followersData.followed">
+                    <ng-template [ngIf]='this.numFollowing > 0' [ngIfElse]='NoFollowingBlock'>
+                        <div *ngFor="let person of this.followed">
                             <app-show-followers [person]="person"></app-show-followers>
                         </div>
                     </ng-template>
