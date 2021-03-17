@@ -23,7 +23,7 @@
           <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
               <div *ngIf="f.password.errors.required">Password is required</div>
           </div>
-          <a routerLink="/password-request">Forgot password?</a>
+          <p class="a" (click)="this.navigateTo('/password-request');">Forgot password?</p>
       </div>
 
       <div class="TucanFormSegment">

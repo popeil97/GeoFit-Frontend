@@ -80,6 +80,14 @@ h6, .h6 {
 .h7 {
   font-size:12px;
 }
+a, .a {
+  color:blue;
+  margin:0px;
+}
+a:hover, .a:hover {
+  cursor:pointer;
+  text-decoration: underline;
+}
 
 .textAlignCenter {
   text-align: center;
@@ -177,6 +185,9 @@ button.wideButton, .button.wideButton {
 }
 .color-red {
   color: red;
+}
+.color-blue {
+  color:blue;
 }
 .bold-text {
   font-weight: bold;

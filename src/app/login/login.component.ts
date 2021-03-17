@@ -66,6 +66,11 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.errors = null;
   }
 
+  navigateTo(url:string = null) {
+    if (url != null) this.router.navigate([url]);
+    this.dialogRef.close();
+  }
+
   // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 
@@ -121,29 +126,20 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   closeDialog() {
-    //if (this.id == null) return;
-    //this.modalService.callbackModal(this.id,'FROM CHILD');
-
     this.loginForm.reset();
     this.loginForm.markAsPristine();
     this.loginForm.markAsUntouched();
     this.loginForm.updateValueAndValidity();
     this.loading = false;
     this.submitted = false;
-    
-    //this.modalService.close(this.id);
     this.dialogRef.close();
   }
 
   SwitchToRegister = () => {
     this.closeDialog();
-    //this.modalService.open('custom-modal-2');
     let d = this.dialog.open(Register2Component, {
       panelClass:"RegisterContainer",
     });
-    d.afterClosed().subscribe(result=>{
-      //console.log("CLOSED REGISTER", result);
-    })
   }
 
 }

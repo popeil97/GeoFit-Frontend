@@ -1,7 +1,5 @@
 <div class="TucanContainer">
-  <div class="margin-bottom-32px">
-    <button (click)="this.closeDialog()">Cancel</button>
-  </div>
+  <button (click)="this.closeDialog()">Cancel</button>
 
   <ng-template [ngIf]="this.initializing || this.profileForm == null" [ngIfElse]="FormBlock">
     <p class='italics'>Loading User Data...</p>
