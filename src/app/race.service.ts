@@ -19,10 +19,10 @@ export class RaceService {
   }
 
 
-  getRaces(user_id:number) {
-    var apiURL = environment.apiUrl + '/race/list/';
+  getRaces(user_id:number, onlyPublic:Boolean = true) {
+    var apiURL = environment.apiUrl + '/race/list/?only_public=' + encodeURIComponent(onlyPublic.toString());
     if (user_id) {
-      apiURL += '?user_id=' + encodeURIComponent(user_id.toString());
+      apiURL += '&user_id=' + encodeURIComponent(user_id.toString());
     }
     return this.http.get(apiURL)
   }
