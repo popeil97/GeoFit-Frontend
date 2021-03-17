@@ -1,11 +1,11 @@
 <div class='PageContainer'>
 
   <ng-template [ngIf]="!this._authService.isLoggedIn()" [ngIfElse]="LoggedInContent">
-    <p>You are not logged in!</p>
+    <p class="position_absolute_middle margin-bottom-0px">You are not logged in!</p>
   </ng-template>
   <ng-template #LoggedInContent>
     <ng-template [ngIf]="this.userData == null" [ngIfElse]="WelcomeContent">
-      <p>Loading...</p>
+      <p class="position_absolute_middle margin-bottom-0px">Loading...</p>
     </ng-template>
   
     <ng-template #WelcomeContent>

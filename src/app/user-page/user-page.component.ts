@@ -127,6 +127,7 @@ export class UserPageComponent implements OnInit,OnDestroy {
         // We just need to reference that and listen for any changes
         this.userData = this._authService.userData;
         this.userDataSubscription = this._authService.userDataChange.subscribe(this.handleUserDataChange);
+        this.processUserData();
       } 
       // Truly, there is no cause. We're not logged in...
       else {
