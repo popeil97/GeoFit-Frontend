@@ -227,7 +227,7 @@ export class UserPageComponent implements OnInit,OnDestroy {
 
   openProfileForm = ():void => {
     this.dialog.open(ProfileFormComponent,{
-      panelClass:"ProfileFormContainer",
+      panelClass:"DialogDefaultContainer",
       data:this.userData,
     }).afterClosed().subscribe(isChanged=>{
       if (isChanged) this.getUserData(()=>{

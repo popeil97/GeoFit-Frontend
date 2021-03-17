@@ -29,9 +29,9 @@
     <ng-template #UserProfileLoaded>
       <div class="UserProfileUserInfoContainer">
         <div class="TucanContainer UserProfileUserInfoInnerContainer">
-          <div *ngIf="userData != null; else profileLoadingMessage">
+          <div *ngIf="this.userData != null; else profileLoadingMessage">
             <div class="UserProfileIdentityContainer">
-              <img class="UserProfileImage img-responsive" src="{{userData.profile_url}}" alt=""> 
+              <img class="UserProfileImage img-responsive" src="{{this.userData.profile_url}}" alt=""> 
               <h3 class="UserProfileName">{{userData.first_name}} {{userData.last_name}}</h3>
               <ng-template [ngIf]="userData.email_visibility || userData.is_me">
                 <p class="h7 UserProfileEmail"><span *ngIf="!userData.email_visibility">(hidden) </span>{{ userData.email }}</p>
@@ -39,7 +39,7 @@
             </div>
     
             <div *ngIf="this._authService.isLoggedIn() && this.userData.is_me" class='margin-bottom-16px'>
-                <button class='darkButton shadowButton FollowersButton' (click)="openFollowersDialog()">Followers: {{this.followersData.numFollowers}} | Following: {{this.followersData.numFollowing}}</button>
+                <button class='darkButton shadowButton FollowersButton' (click)="this.openFollowersDialog()">Followers: {{this.followersData.numFollowers}} | Following: {{this.followersData.numFollowing}}</button>
             </div>
     
             <div *ngIf="userData.about_visibility||userData.location_visibility||userData.is_me" class='margin-bottom-16px'>
@@ -64,24 +64,26 @@
               </ng-template>
             </div>
     
-            <div *ngIf="this._authService.isLoggedIn()" class='UserProfileStravaContent margin-bottom-16px'>
-              <ng-template [ngIf]="userData.is_me">
-                <h6 class='UserProfileStravaHeader'>Strava Authentication</h6>
-                <div class='UserProfileStravaContainer'>
-                  <app-stravauth></app-stravauth>
+            <ng-template [ngIf]="this._authService.isLoggedIn()">
+              <ng-template [ngIf]="this.userData.user_id == this._authService.userData.user_id" [ngIfElse]="NotMeActions">
+                <div class='UserProfileStravaContent margin-bottom-16px'>
+                  <h6 class='UserProfileStravaHeader'>Strava Authentication</h6>
+                  <div class='UserProfileStravaContainer'>
+                    <app-stravauth></app-stravauth>
+                  </div>
+                </div>
+                <div class='UserProfileActions'>
+                  <button class="darkButton" (click)="this.openProfileForm()" >Edit</button>
+                  <button class="darkButton" (click)="logout()">Log out</button>
                 </div>
               </ng-template>
-            </div>
-            <div *ngIf="!userData.is_me" >
-              <app-user-follow [tempLight]="true" [userID]="userData.user_id" [follows]="userData.follows"></app-user-follow>
-            </div>
+              <ng-template #NotMeActions>
+                <app-user-follow [tempLight]="true" [userID]="this.userData.user_id" [follows]="this.userData.follows"></app-user-follow>
+              </ng-template>
+            </ng-template>
           </div>
           <ng-template #profileLoadingMessage><p>Loading...</p></ng-template>
     
-          <div *ngIf="userData != null && this._authService.isLoggedIn() && userData.is_me" class='UserProfileActions'>
-            <button class="darkButton" (click)="this.openProfileForm()" >Edit</button>
-            <button class="darkButton" (click)="logout()">Log out</button>
-          </div>
     
         </div>
       </div>

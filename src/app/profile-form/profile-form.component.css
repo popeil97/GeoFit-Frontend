@@ -1,7 +1,6 @@
 .EditProfileForm{
   width:100%;
-  max-height: calc(100vh - 128px);
-  overflow-y:auto;
+  padding:32px;
 }
   .EditProfileForm h6 {
     font-weight:bold;

@@ -740,7 +740,7 @@ h1.PageHeaderSegmentTitle {
 }
 
 
-
+.DialogDefaultContainer,
 .LoginContainer,
 .RegisterContainer,
 .SignUpContainer,
@@ -749,6 +749,9 @@ h1.PageHeaderSegmentTitle {
 .ProfileFormContainer,
 .ViewFollowersContainer {
   width:600px;
+  height:auto;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
 }
 
 
