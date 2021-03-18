@@ -9,7 +9,10 @@ import { MapComponent, RouteData } from '../../../map/map.component';
 @Component({
   selector: 'app-race-map-settings',
   templateUrl: './race-map-settings.component.html',
-  styleUrls: ['./race-map-settings.component.css']
+  styleUrls: [
+    './race-map-settings.component.css',
+    '../../../../styles/forms.css'
+  ]
 })
 export class RaceMapSettingsComponent implements OnInit,AfterViewInit {
   @ViewChild(MapComponent) previewMap:MapComponent;

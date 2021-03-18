@@ -12,7 +12,7 @@ import { Register2Component } from '../../register2/register2.component';
 @Component({
   selector: 'app-race-create',
   templateUrl: './race-create.component.html',
-  styleUrls: ['./race-create.component.css']
+  styleUrls: ['./race-create.component.css','../../../styles/forms.css']
 })
 export class RaceCreateComponent implements OnInit {
 

@@ -1,4 +1,5 @@
-<div class='PageContainer CreateRacePageContainer'>
+<div class='PageContainer'>
+  
   <div class='formGroup formGroupHeader'>
     <h2>Update Race Map</h2>
     <div>
@@ -15,7 +16,7 @@
     </ng-template>
 
     <ng-template #LoadedForm>
-      <form [formGroup]="this.form" class="MapForm" name="MapForm" (ngSubmit)="this.onFormSubmit()">
+      <form [formGroup]="this.form" class="form" name="MapForm" (ngSubmit)="this.onFormSubmit()">
         
         <p>Tucan Races require the following information:</p>
         <ul>
@@ -162,7 +163,7 @@
             <div class='mapUploadActions'>
               <ng-template [ngIf]="this.mapFile.data == null" [ngIfElse]="MapFileUploaded">
                 <div class="mapFileUploadButton" (click)="this.triggerMapFileUpload()">
-                  <img class="mapFileIcon" src="../../../assets/icons/upload-icon-white.svg">
+                  <div class="uploadFileIcon"></div>
                   <div class="mapFileActions">
                     <p class="margin-bottom-0px italics">Click to upload a file (".json" or ".gpx")</p>
                   </div>
@@ -178,7 +179,7 @@
                 </div>
                 <div class='mapFileUploadedOtherActions'>
                   <div class="mapFileSmallUploadButton" (click)="this.triggerMapFileUpload()">
-                    <img class="mapFileIcon" src="../../../assets/icons/upload-icon-white.svg">
+                    <div class="uploadFileIcon"></div>
                     <div class="mapFileActions">
                       <p class="margin-bottom-0px italics">Upload a different file</p>
                     </div>

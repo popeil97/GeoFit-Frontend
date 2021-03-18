@@ -8,7 +8,10 @@ import { cannotBeEmptyString, requiredFileType } from '../race-dashboard.compone
 @Component({
   selector: 'app-race-basics',
   templateUrl: './race-basics.component.html',
-  styleUrls: ['./race-basics.component.css']
+  styleUrls: [
+    './race-basics.component.css',
+    '../../../../styles/forms.css'
+  ]
 })
 export class RaceBasicsComponent implements OnInit {
 

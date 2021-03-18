@@ -14,7 +14,10 @@ import { MerchandiseItem, MerchandiseTypes, MerchandiseType, ItemStates, ItemTyp
 @Component({
   selector: 'app-race-merchandise-settings-item',
   templateUrl: './race-merchandise-settings-item.component.html',
-  styleUrls: ['./race-merchandise-settings-item.component.css']
+  styleUrls: [
+    './race-merchandise-settings-item.component.css',
+    '../../../../../styles/forms.css'
+  ]
 })
 export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
 
@@ -30,6 +33,12 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
   public checkingValidityOfSubmission:boolean = false;
   public validForm:Boolean = true;
   public updatingItem:boolean = false;
+  public placeholders:any = {
+    name:"ex. T-Shirt",
+    description:"ex. A T-Shirt for participating in our race.",
+    price:"ex. 5.00",
+    sizes:"ex. Small, Medium, Large"
+  }
 
   private formClean:any = null;
 
@@ -67,6 +76,7 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
   }
   ngAfterViewInit() {
     this.merchandiseImageInput = document.getElementById("merchandiseItemImageInput");
+    window.scrollTo(0,0);
   }
   ngOnDestroy() {
     this.form = null;
@@ -107,6 +117,15 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
     this.checkingValidityOfSubmission = false;
     this.updatingItem = false;
     this.validForm = true;
+
+    if (this.initialData.type == 1) {
+      this.placeholders = {
+        name:"ex. Registration Fee",
+        description:"ex. To help support efforts to maintain the race, a nominal fee is required to participate.",
+        price:"ex. 5.00",
+        sizes:"(No sizes needed)"
+      }
+    }
   }
   resetForm(e:any) {
     if (e.preventDefault) e.preventDefault();

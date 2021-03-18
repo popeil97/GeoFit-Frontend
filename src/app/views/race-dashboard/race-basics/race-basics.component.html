@@ -1,4 +1,4 @@
-<div class='PageContainer CreateRacePageContainer'>
+<div class='PageContainer'>
 
   <div class='formGroup formGroupHeader'>
     <h2>Update Basic Details</h2>
@@ -18,7 +18,7 @@
 
     <ng-template #LoadedForm>
       <p class="italics margin-bottom-16px">Inputs marked with <span class="color-red">*</span> are required.</p>
-      <form [formGroup]="this.raceBasicsForm" (ngSubmit)="this.onRaceBasicsFormSubmit()" class="CreateForm" name="RaceBasicsForm">
+      <form [formGroup]="this.raceBasicsForm" (ngSubmit)="this.onRaceBasicsFormSubmit()" class="form" name="RaceBasicsForm">
         <div class='formGroupHeader'>
           <h6>Race Name<span class="color-red">*</span></h6>
           <p class="margin-bottom-0px margin-left-16px italics">{{30 - this.raceBasicsForm.get('name').value.length}}</p>
@@ -111,12 +111,12 @@
             />
             <div id="bannerPreview" class="bannerPreview" (click)="this.onSelectBannerTrigger();" [style.backgroundImage]="'url(' + this.bannerURL + ')'">
               <div class="bannerPreviewOverlay" [ngClass]="{'noOverlay':this.bannerURL != null}">
-                <img class="uploadFileIcon" src="../../../assets/icons/upload-icon-white.svg" alt="Upload File Icon" />
+                <div class="uploadFileIcon"></div>
                 <p class="margin-0px color-white">Select an image file.</p>
               </div>
               <div class="bannerLoadingOverlay" *ngIf="this.bannerLoading"><p class="margin-0px color-white">Loading...</p></div>
-              <button class='bannerCancelButton' (click)="this.cancelBannerImage($event)" *ngIf="!this.bannerLoading && this.bannerURL!=null && this.bannerURL!=this.raceData.bannerFile">Cancel Image Update</button>
-              <button class='bannerCancelButton' (click)="this.removeBannerImage($event)" *ngIf="!this.bannerLoading && this.bannerURL==this.raceData.bannerFile && this.bannerURL!=null">Delete Race Banner Image</button>
+              <button class='formButton resetButton bannerCancelButton' (click)="this.cancelBannerImage($event)" *ngIf="!this.bannerLoading && this.bannerURL!=null && this.bannerURL!=this.raceData.bannerFile">Cancel Image Update</button>
+              <button class='formButton resetButton bannerCancelButton' (click)="this.removeBannerImage($event)" *ngIf="!this.bannerLoading && this.bannerURL==this.raceData.bannerFile && this.bannerURL!=null">Delete Race Banner Image</button>
             </div>
             <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('bannerFile').invalid && (this.raceBasicsForm.get('bannerFile').dirty || this.raceBasicsForm.get('bannerFile').touched)">
               <p class="margin-0px">Your banner image is neither a PNG or JPG file. Please upoad a PNG or JPG file if you wish to use a banner image.</p>
@@ -144,7 +144,7 @@
         <div class='formGroup submitButtonGroup'>
           <input 
             type="submit" 
-            class="button formButton createRaceSubmitButton" 
+            class="button formButton" 
             [ngClass]="{'disabled':(this.changedValues.length==0 || this.validatingSubmission || !this.isFormValid(this.raceBasicsForm))}"
             value="Update Race Details"
             [disabled]="this.changedValues.length==0 || this.validatingSubmission || !this.isFormValid(this.raceBasicsForm)" 

@@ -1,4 +1,4 @@
-<div class='PageContainer CreateRacePageContainer'>
+<div class='PageContainer'>
 
   <div class='formGroup formGroupHeader'>
     <h2>Update Race Settings</h2>
@@ -17,7 +17,7 @@
     </ng-template>
 
     <ng-template #LoadedForm>
-      <form [formGroup]="this.form" class="SettingsForm" name="SettingsForm" (ngSubmit)="this.onFormSubmit()">
+      <form [formGroup]="this.form" class="form" name="SettingsForm" (ngSubmit)="this.onFormSubmit()">
 
         <h6>Allow Teams:</h6>
         <p class="italics">If racers are allowed to form teams in your race, you must designated a maximum limit of racers per team.</p>

@@ -1,12 +1,9 @@
 .PageContainer {
-  margin-bottom:0px;
-}
-
-.CreateRacePageContainer {
   position:relative;
   padding:32px 64px 32px 64px;
   background-color: rgb(230,230,230);
   min-height: calc(100vh - 80px);
+  margin-bottom: 0px;
 
   display:flex;
   flex-direction: column;
@@ -30,84 +27,6 @@
     .mustLogInButtons button {
       margin:8px;
     }
-
-.CreateForm {
-  width:100%;
-}
-  .CreateForm h6 {
-    font-weight:bold;
-  }
-  .formPanel {
-    background-color: rgb(255,255,255);
-    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
-    width:100%;
-    max-width: 800px;
-    padding:32px;
-    border-radius: 8px;
-    margin-left:auto;
-    margin-right:auto;
-    margin-bottom:32px;
-  }
-    .formPanel label {
-      width:100%;
-      font-weight: bold;
-    }
-    .formGroup, .formGroupHeader {
-      width:100%;
-      margin-bottom:32px;
-
-      display:flex;
-      flex-direction: row;
-      justify-content: flex-start;
-      align-items: center;
-      flex-wrap: nowrap;
-    }
-    .formGroup.formGroupWithLeftBorder {
-      border-left:2px solid rgb(200,200,200);
-      padding-left:16px;
-    }
-    .formGroupHeader {
-      margin-bottom:0px;
-      justify-content: space-between;
-    }
-    .formGroup.formGroupAlignedTop {
-      align-items: flex-start;
-    }
-      .formInputContainer {
-        flex-shrink: 1;
-        flex-basis: 100%;
-        margin-left:16px;
-        margin-right:16px;
-      }
-      .formInputContainer:first-child {
-        margin-left:0px;
-      }
-      .formInputContainer:last-child {
-        margin-right:0px;
-      }
-      .formInputContainer.autoWidth {
-        width:auto;
-        flex-basis: auto;
-      }
-      .formInputContainer.formInputContainerSelfAlignedCenter {
-        align-self: center;
-      }
-        .formTextInput {
-          width:100%;
-          padding:4px 8px 4px 8px;
-          border:2px solid rgb(200,200,200);
-          background-color: white;
-          border-radius: 8px;
-        }
-        .formTextInput:focus {
-          outline: none;
-        }
-        .formInputContainer.autoWidth .formTextInput, .formTextInput.autoWidth {
-          width:auto;
-        }
-        .formTextInput.errorTextInput {
-          border-color: red;
-        }
 
 .bannerPreviewInput {
   display:none;
@@ -162,15 +81,13 @@
   .bannerCancelButton {
     position:absolute;
     z-index: 4;
+    right:8px;
+    top:8px;
+    
     width:auto;
     max-width: 100%;
     height:auto;
     padding:4px;
-    border-radius: 8px;
-    right:8px;
-    top:8px;
-    background-color: red;
-    color:white;
   }
 
 .congratulationsContainer {
@@ -256,27 +173,6 @@
     cursor:pointer;
     padding-left:16px;
   }
-.submitButtonGroup {
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-bottom:0px;
-}
-.formButton {
-  background-color: white;
-}
-.formButton:hover {
-  background-color: var(--main-background-color);
-  color:white;
-}
-.createRaceSubmitButton.disabled {
-  opacity:0.5;
-}
-.createRaceSubmitButton.disabled:hover {
-  cursor:initial;
-  background-color: initial;
-  color:initial;
-}
 
 .MapRoutePreview {
   position:relative;
@@ -284,29 +180,6 @@
   max-width: 800px;
   padding-bottom:100%;
 }
-
-.uploadFileIcon {
-  width:36px;
-  height:36px;
-  margin-bottom:8px;
-}
-
-
-strong { font-weight: 500; }
-
-a { color: #f35b3f; border-bottom: 1px dashed #f35b3f; text-decoration: none; transition: all .3s; }
-a:hover, a:focus { color: #f35b3f; border: 0; text-decoration: none; }
-
-h1, h2 { margin-top: 10px; font-size: 38px; font-weight: 100; color: #555; line-height: 50px; }
-h3 { font-size: 22px; font-weight: 300; color: #555; line-height: 30px; }
-h4 { font-size: 18px; font-weight: 300; color: #555; line-height: 26px; }
-
-img { max-width: 100%; }
-
-.medium-paragraph { font-size: 18px; line-height: 34px; }
-
-::-moz-selection { background: #f35b3f; color: #fff; text-shadow: none; }
-::selection { background: #f35b3f; color: #fff; text-shadow: none; }
 
 /****** Leaflet Icons *****/
 .location-pin img {
@@ -884,19 +757,6 @@ a.btn-customized-4.btn-customized-light.btn.btn-primary:not(:disabled):not(.disa
 
 /***** Footer *****/
 
-.footer-container {
-   position: absolute;
-   left: 0;
-   margin-top: 200px;
-   bottom: 0;
-	 opacity: 0.8;
-   z-index: 500;
-   width: 100%;
-   background-color: white;
-   color: white;
-   text-align: center;
-}
-
 mat-sidenav-container {
     position: fixed;
     top: 6.5%;
@@ -909,9 +769,6 @@ mat-sidenav-container {
 mat-sidenav-content {
     height: 100%;
     width: 100%;
-}
-
-mat-sidenav, mat-sidenav-content {
 }
 
 mat-sidenav {

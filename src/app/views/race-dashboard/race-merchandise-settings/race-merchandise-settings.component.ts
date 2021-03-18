@@ -1,15 +1,15 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
-
 import { MatDialog } from '@angular/material';
-import { RaceMerchandiseSettingsItemComponent } from './race-merchandise-settings-item/race-merchandise-settings-item.component';
 
-import { numberGreaterThanOrEqualTo, isNumber, cannotBeEmptyString, requiredFileType } from '../race-dashboard.component';
+import { RaceMerchandiseSettingsItemComponent } from './race-merchandise-settings-item/race-merchandise-settings-item.component';
 
 @Component({
   selector: 'app-race-merchandise-settings',
   templateUrl: './race-merchandise-settings.component.html',
-  styleUrls: ['./race-merchandise-settings.component.css']
+  styleUrls: [
+    './race-merchandise-settings.component.css',
+    '../../../../styles/forms.css'
+  ]
 })
 export class RaceMerchandiseSettingsComponent implements OnInit,OnDestroy {
 
@@ -61,7 +61,6 @@ export class RaceMerchandiseSettingsComponent implements OnInit,OnDestroy {
   }
 
   constructor(
-    private fb: FormBuilder,
     private dialog : MatDialog,
   ) { }
 
@@ -101,27 +100,6 @@ export class RaceMerchandiseSettingsComponent implements OnInit,OnDestroy {
           this.initializeData();
         })
       }
-      /*
-      if (result != null) {
-        const newValues = {
-          name:result.name,
-          description:result.description,
-          price:result.price,
-          type:result.type,
-          linkedItems:result.linkedItems
-        }
-        switch(result.type) {
-          case "SWAG":
-            // This is merchandise
-            this.form.get(['merchandise',result.itemIndex]).setValue(newValues);
-            break;
-          case "ENTRY":
-            // This is entry fee
-            this.form.get(['entries',result.itemIndex]).setValue(newValues);
-            // [result.itemIndex] = this.initializeItem(result);
-            break;
-        }
-      }*/
     });
   }
 

@@ -1,4 +1,4 @@
-<div class='PageContainer CreateRacePageContainer'>
+<div class='PageContainer'>
 
   <ng-template [ngIf]="this._authService.isLoggedIn()" [ngIfElse]="MustLogIn">
 
@@ -31,7 +31,7 @@
 
       <p class="italics margin-bottom-16px">Inputs marked with <span class="color-red">*</span> are required.</p>
 
-      <form [formGroup]="this.raceBasicsForm" (ngSubmit)="this.onRaceBasicsFormSubmit()" class="CreateForm" name="RaceBasicsForm">
+      <form [formGroup]="this.raceBasicsForm" (ngSubmit)="this.onRaceBasicsFormSubmit()" class="form" name="RaceBasicsForm">
       
         <div class="formPanel">
           <div class='formGroupHeader'>
@@ -127,11 +127,11 @@
               />
               <div id="bannerPreview" class="bannerPreview" (click)="this.onSelectBannerTrigger();" [style.backgroundImage]="'url(' + this.bannerURL + ')'">
                 <div class="bannerPreviewOverlay" [ngClass]="{'noOverlay':this.bannerURL != null}">
-                  <img class="uploadFileIcon" src="../../../assets/icons/upload-icon-white.svg" alt="Upload File Icon" />
+                  <div class="uploadFileIcon"></div>
                   <p class="margin-0px color-white">Select an image file.</p>
                 </div>
                 <div class="bannerLoadingOverlay" *ngIf="this.bannerLoading"><p class="margin-0px color-white">Loading...</p></div>
-                <button class='bannerCancelButton' (click)="this.cancelBannerImage($event)" *ngIf="!this.bannerLoading && this.bannerURL!=null">Cancel Image Upload</button>
+                <button class='formButton resetButton bannerCancelButton' (click)="this.cancelBannerImage($event)" *ngIf="!this.bannerLoading && this.bannerURL!=null">Cancel Image Upload</button>
               </div>
               <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('bannerFile').invalid && (this.raceBasicsForm.get('bannerFile').dirty || this.raceBasicsForm.get('bannerFile').touched)">
                 <p class="margin-0px">Your banner image is neither a PNG or JPG file. Please upoad a PNG or JPG file if you wish to use a banner image.</p>
@@ -160,7 +160,7 @@
           <div class='formGroup submitButtonGroup'>
             <input 
               type="submit" 
-              class="button formButton createRaceSubmitButton" 
+              class="button formButton" 
               value="Create New Race" 
               [readonly]="this.hasSubmitted" 
             />
