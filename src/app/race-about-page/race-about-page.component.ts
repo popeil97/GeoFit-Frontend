@@ -210,8 +210,8 @@ export class RaceAboutPageComponent implements OnInit {
   }
 
   openRegister = () => {
-    if(!this._authService.isLoggedIn() || this.raceSettings.price>0) //user is NOT logged in
-    {
+    if(!this._authService.isLoggedIn()) {
+      //user is NOT logged in
       const data = {
         register:true, 
         price:this.raceSettings.price,
@@ -226,10 +226,11 @@ export class RaceAboutPageComponent implements OnInit {
         data: data
       });
       d.afterClosed().subscribe(result=>{
-        //console.log('CLOSED REGISTER FROM "race-about-page"', result);
+        console.log("Closing Register from Race About");
+        if (typeof result !== "undefined") console.log(result);
       })
     }
-    else //user is logged in and price = 0;
+    else if (this.raceSettings.price == 0) //user is logged in and price = 0;
     {
       //add race stat then...
       let registrationBody = {race_id:this.raceID} as any;

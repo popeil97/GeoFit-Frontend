@@ -33,7 +33,8 @@ import { Register2Component } from '../register2/register2.component';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
-  @Input() id: string;
+  @Output() openRegister = new EventEmitter();
+
   loginForm: FormGroup = null;
   loading = false;
   submitted = false;
@@ -136,10 +137,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   SwitchToRegister = () => {
+    this.openRegister.emit();
+    this.closeDialog();
+    /*
     this.closeDialog();
     let d = this.dialog.open(Register2Component, {
       panelClass:"RegisterContainer",
     });
+    */
   }
 
 }

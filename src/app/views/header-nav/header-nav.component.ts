@@ -200,22 +200,30 @@ export class HeaderNavComponent implements OnInit,OnDestroy {
   }
   */
  openLogin = () => {
-   let d = this.dialog.open(LoginComponent,{
+   const d = this.dialog.open(LoginComponent,{
      panelClass:"LoginContainer",
-     data:{register:false},
    });
+   const sub = d.componentInstance.openRegister.subscribe(()=>{
+    this.openRegister();
+   })
    d.afterClosed().subscribe(result=>{
-     console.log('CLOSING LOGIN FROM NAVIGATION', result);
+     console.log('Close Login from Header nav');
+     if (typeof result !== "undefined") console.log(result);
+     sub.unsubscribe();
    });
    this.NavItemClick();
  }
  openRegister = () => {
-    let d = this.dialog.open(Register2Component,{
-      panelClass:"RegisterContainer",
-      data:{register:false},
+    const d = this.dialog.open(Register2Component, {
+      panelClass: 'RegisterContainer',
+    });
+    const sub = d.componentInstance.openLogin.subscribe(() => {
+      this.openLogin();
     });
     d.afterClosed().subscribe(result=>{
-      console.log('CLOSING REGISTER FROM NAVIGATION', result);
+      console.log("Closing Register from Header Nav");
+      if (typeof result !== "undefined") console.log(result);
+      sub.unsubscribe();
     });
     this.NavItemClick();
  }

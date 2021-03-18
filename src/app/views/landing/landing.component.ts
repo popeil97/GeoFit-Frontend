@@ -37,21 +37,31 @@ export class LandingComponent implements OnInit {
   }
 
   openLogin = () => {
-    let d = this.dialog.open(LoginComponent, {
+    const d = this.dialog.open(LoginComponent, {
       panelClass:"LoginContainer",
     });
+    const sub = d.componentInstance.openRegister.subscribe(()=>{
+      this.openRegister();
+    })
     d.afterClosed().subscribe(result=>{
-      console.log("CLOSING LOGIN FROM LANDING", result);
+      console.log("Closing login from Landing");
+      if (typeof result !== "undefined") console.log(result);
+      sub.unsubscribe();
     });
   }
 
   openRegister = () => {
-    let d = this.dialog.open(Register2Component,{
-      panelClass:"RegisterContainer",
+    const d = this.dialog.open(Register2Component, {
+      panelClass: 'RegisterContainer',
+    });
+    const sub = d.componentInstance.openLogin.subscribe(() => {
+      this.openLogin();
     });
     d.afterClosed().subscribe(result=>{
-      console.log('CLOSING REGISTER FROM LANDING', result);
-    })
+      console.log("Closing Register from Landing Page")
+      if (typeof result !== "undefined") console.log(result);
+      sub.unsubscribe();
+    });
   }
 
   goToUserProfile = () => {

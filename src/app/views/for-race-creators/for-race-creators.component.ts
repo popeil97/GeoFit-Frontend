@@ -31,23 +31,32 @@ export class ForRaceCreatorsComponent implements OnInit {
   }
 
   openLogin = () => {
-    let d = this.dialog.open(LoginComponent,{
+    const d = this.dialog.open(LoginComponent,{
       panelClass:"LoginContainer",
-      data:{register:false}
     });
-    d.afterClosed().subscribe(result=>{
-      console.log("CLOSE LOGIN FROM to_race_creators", result);
+    const sub = d.componentInstance.openRegister.subscribe(()=>{
+      this.openRegister();
     })
+    d.afterClosed().subscribe(result=>{
+      console.log("Closing Login from For Race Creators")
+      if (typeof result !== "undefined") console.log(result);
+      sub.unsubscribe();
+    });
   }
 
   openRegister = () => {
-    let d = this.dialog.open(Register2Component, {
-      panelClass:"RegisterContainer",
+    const d = this.dialog.open(Register2Component, {
+      panelClass: 'RegisterContainer',
       data:{register:false},
     });
+    const sub = d.componentInstance.openLogin.subscribe(() => {
+      this.openLogin();
+    });
     d.afterClosed().subscribe(result=>{
-      console.log("CLOSE REGISTER FROM to_race_creators", result);
-    })
+      console.log("Closing Register from For Race Creators");
+      if (typeof result !== "undefined") console.log(result);
+      sub.unsubscribe();
+    });
   }
 
   navigateTo(url:string = null) {
