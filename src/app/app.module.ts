@@ -301,6 +301,7 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
                   RaceMerchandiseSettingsItemComponent,
                   ProfileFormComponent,
                   ViewFollowComponent,
+                  RaceTypeComponent,
                   ] 
 })
 export class AppModule { 

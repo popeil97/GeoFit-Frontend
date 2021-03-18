@@ -13,6 +13,7 @@ import { ProfileFormComponent } from "../profile-form/profile-form.component";
 import { ViewFollowComponent } from '../view-follow/view-follow.component';
 
 import * as _ from 'lodash';
+import { timeStamp } from 'console';
 
 declare var $: any;
 
@@ -35,6 +36,8 @@ export class UserPageComponent implements OnInit,OnDestroy {
   public racesData:any;
 
   public followersData: any = {
+    loading:true,
+    valid:false,
     followers:[],
     followed: [],
     follow_bool:[],
@@ -83,7 +86,9 @@ export class UserPageComponent implements OnInit,OnDestroy {
   handleUserDataChange = (data:UserData) => {
     this.userData = data;
     if (this.userData != null) {
-      this.processUserData();
+      this.processUserData(()=>{
+        this.getUserRaces();
+      });
     }
   }
 
@@ -116,7 +121,9 @@ export class UserPageComponent implements OnInit,OnDestroy {
         this.viewingElse = true;
 
         // If we are, then we need to get their user data
-        this.getUserData();
+        this.getUserData(()=>{
+          this.getUserRaces();
+        });
       } 
       else if (this._authService.isLoggedIn()) {
         // If we can't find a username in the URL, we're probably looking at ourselves, right?
@@ -128,7 +135,9 @@ export class UserPageComponent implements OnInit,OnDestroy {
         // We just need to reference that and listen for any changes
         this.userData = this._authService.userData;
         this.userDataSubscription = this._authService.userDataChange.subscribe(this.handleUserDataChange);
-        this.processUserData();
+        if (this.userData != null) this.processUserData(()=>{
+          this.getUserRaces();
+        });
       } 
       // Truly, there is no cause. We're not logged in...
       else {
@@ -146,6 +155,7 @@ export class UserPageComponent implements OnInit,OnDestroy {
     // Updates the list of races associated with the user who's profile we are viewing
     this.raceService.getRaces(this.userData.user_id).subscribe(
       data => {
+        console.log('RACES:',data)
         this.racesData = data;
         this.userRaces = _.filter(this.racesData.races,(race:any) => {
           if(race.joined) {
@@ -179,12 +189,19 @@ export class UserPageComponent implements OnInit,OnDestroy {
     if (this.userData.location == "") this.userData.location = "N/A";
     if (this.userData.description == "") this.userData.description = "N/A";
 
-    this._userService.getFollowersAndFollowedSeperate().then((resp:FollowersResp) => {
-      this.followersData.followers = resp.followers;
-      this.followersData.followed = resp.followed;
-      this.followersData.numFollowers = this.followersData.followers.length;
-      this.followersData.numFollowing = this.followersData.followed.length;
-    });
+    if (this._authService.isLoggedIn()) {
+      this._userService.getFollowersAndFollowedSeperate().then((resp:FollowersResp) => {
+        this.followersData.followers = resp.followers;
+        this.followersData.followed = resp.followed;
+        this.followersData.numFollowers = this.followersData.followers.length;
+        this.followersData.numFollowing = this.followersData.followed.length;
+        this.followersData.loading = false;
+        this.followersData.valid = true;
+      });
+    } else {
+      this.followersData.loading = false;
+      this.followersData.valid = false;
+    }
 
     this.loading = false;
     if (callback) callback();

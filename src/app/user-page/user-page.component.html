@@ -38,7 +38,7 @@
               </ng-template>
             </div>
     
-            <div *ngIf="this._authService.isLoggedIn() && this.userData.is_me" class='margin-bottom-16px'>
+            <div *ngIf="this._authService.isLoggedIn() && this.userData.is_me && !this.followersData.loading && this.followersData.valid" class='margin-bottom-16px'>
                 <button class='darkButton shadowButton FollowersButton' (click)="this.openFollowersDialog()">Followers: {{this.followersData.numFollowers}} | Following: {{this.followersData.numFollowing}}</button>
             </div>
     
@@ -65,7 +65,7 @@
             </div>
     
             <ng-template [ngIf]="this._authService.isLoggedIn()">
-              <ng-template [ngIf]="this.userData.user_id == this._authService.userData.user_id" [ngIfElse]="NotMeActions">
+              <ng-template [ngIf]="this._authService.userData != null && this.userData.user_id == this._authService.userData.user_id" [ngIfElse]="NotMeActions">
                 <div class='UserProfileStravaContent margin-bottom-16px'>
                   <h6 class='UserProfileStravaHeader'>Strava Authentication</h6>
                   <div class='UserProfileStravaContainer'>

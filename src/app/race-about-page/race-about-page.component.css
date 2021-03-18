@@ -1,4 +1,11 @@
- .row {
+.TucanContainer {
+	position:relative;
+	height:calc(100vh - 80px);
+	width:100%;
+	overflow-y:auto;
+}
+
+.row {
   display: flex;
   flex-wrap: wrap;
 }
@@ -32,16 +39,23 @@
 
 .AboutRaceImageContainer {
 	position:relative;
-	/* height:280px; */
-	overflow:hidden;
-}
-.AboutRaceImage {
-	display:block;
+	height:100px;
 	width:100%;
-
-	margin-left:auto;
-	margin-right:auto;
+	overflow:hidden;
+	background-color: rgb(200,200,200);
+	transition:height 0.25s ease-in-out;
 }
+	.AboutRaceImage {
+		width:100%;
+		height:100%;
+
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+	.AboutRaceImageContainer:hover {
+		height:280px;
+	}
 .RaceHeader {
 	display:flex;
     flex-direction: row;
@@ -107,9 +121,25 @@
 	align-items: flex-start;
 	flex-wrap: nowrap;
 }
-.RaceDirectorPic {
-	width:20%;
+.RaceDirectorPicContainer {
+	flex-shrink: 0;
+	flex-basis: 256px;
+	width:256px;
+	height:256px;
+	position:relative;
+	margin-bottom:16px;
+	border: 1px solid rgb(200,200,200);
 }
+	.RaceDirectorPic {
+		width:100%;
+		height:100%;
+
+		background-position:center;
+		background-repeat: no-repeat;
+		background-size:contain;
+	}
+
+
 .RaceDirectorInfo {
 	width:60%;
 }
@@ -120,10 +150,12 @@
 		justify-content: flex-start;
 		align-items: stretch;
 	}
-
-	.RaceDirectorPic {
-		width:100%;
+	.RaceDirectorPicContainer {
+		align-self: center;
+		margin-left:auto;
+		margin-right:auto;
 	}
+
 	.RaceDirectorInfo {
 		width:100%;
 	}

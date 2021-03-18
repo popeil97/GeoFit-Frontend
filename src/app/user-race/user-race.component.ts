@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit,OnChanges, SimpleChanges, Input, OnDestroy } from '@angular/core';
 import { RaceService } from '../race.service';
 import { AuthService } from '../auth.service';
 import { UserData } from '../userprofile.service'; 
@@ -10,9 +10,12 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
   templateUrl: './user-race.component.html',
   styleUrls: ['./user-race.component.css']
 })
-export class UserRaceComponent implements OnInit {
+export class UserRaceComponent implements OnInit,OnChanges,OnDestroy {
+
   @Input() userData: UserData;
   @Input() showCreateButton: any;
+
+  private authUserDataSubscription:any = null;
 
   public races:any[] = null;
   public userRaces:any[] = null;
@@ -37,14 +40,41 @@ export class UserRaceComponent implements OnInit {
     private raceService:RaceService,
     private authService:AuthService,
     private router:Router,
-  ) { }
+  ) {
+    this.authUserDataSubscription = this.authService.userDataChange.subscribe(this.handleAuthUserDataChange);
+  }
 
   ngOnInit() {
-  	 this.raceService.getRaces(this.userData.user_id, (this.userData.user_id != this.authService.userData.user_id)).subscribe(
-      data => {
+    if (this.userData != null) this.getRaces();
+  }
 
+  ngOnChanges(changes:SimpleChanges) {
+    for (const propName in changes) {
+      switch(propName) {
+        case "userData":
+          this.getRaces();
+          break;
+      }
+    }
+  }
+
+  ngOnDestroy() {
+    this.authUserDataSubscription.unsubscribe();
+    this.races = null;
+    this.userRaces = null;
+  }
+
+  handleAuthUserDataChange = (data:UserData) => {
+    this.getRaces();
+  }
+
+  getRaces = () => {
+    if (this.userData == null) return;
+    const onlyPublic = (this.authService.userData != null) 
+      ? (this.userData.user_id != this.authService.userData.user_id)
+      : true;
+    this.raceService.getRaces(this.userData.user_id,onlyPublic).subscribe(data => {
         this.racesData = data;
-        console.log('USER RACE DATA:',this.racesData);
         this.races = _.filter(this.racesData.races,(race:any) => {
             race.start_date = this.ProcessDate(race.start_date);
             race.end_date = this.ProcessDate(race.end_date);
@@ -58,11 +88,9 @@ export class UserRaceComponent implements OnInit {
             return race;
           }
         });
-        console.log('USER RACES:',this.userRaces);
         
       }
     )
-
   }
 
   ProcessDate = (date = null) => {

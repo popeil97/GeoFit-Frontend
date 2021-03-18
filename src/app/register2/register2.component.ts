@@ -34,6 +34,7 @@ import { Signup2Component } from '../signup2/signup2.component';
 export class Register2Component implements OnInit {
 
   @Output() openLogin = new EventEmitter();
+  @Output() openSignUp = new EventEmitter();
 
   registerForm: FormGroup;
   credentialsForm: FormGroup;
@@ -170,6 +171,7 @@ export class Register2Component implements OnInit {
             this._authService.username = login_data['username'];
             //console.log("WOW WOW, WE'VE SET OUR AUTHSERVICE USERNAME", this.redirectParams);
             this.userProfileService.requestUserProfile(this._authService.username).then((user_data)=>{
+              this._authService.emitLoginStausChange();
               this._authService.updateUserData(user_data as UserData);
             }).catch(getUserProfileError=>{
               console.error(getUserProfileError);
@@ -183,10 +185,7 @@ export class Register2Component implements OnInit {
                 if(this.d != null && this.d.register == true) {
                   //console.log("I SHOUld Be OPENING SIGN UP NOW")
                   if(this.d.price > 0) {
-                    //console.log('A PRICE IS SET');
-                    this.closeDialog();
-                    // this.openModal('custom-modal-3');
-                    this.openSignUp();
+                    this.SwitchToSignUp();
                   }
                   else {
                     //console.log("I SHOULD BE JOINING THE RACE NOW")
@@ -261,6 +260,7 @@ export class Register2Component implements OnInit {
               localStorage.setItem('loggedInUsername', login_data['username']);
               this._authService.username = login_data['username'];
               this.userProfileService.requestUserProfile(this._authService.username).then((user_data)=>{
+                this._authService.emitLoginStausChange();
                 this._authService.updateUserData(user_data as UserData);
               }).catch(getUserProfileError=>{
                 console.error(getUserProfileError);
@@ -270,10 +270,7 @@ export class Register2Component implements OnInit {
                   this.router.navigate([this.redirectUrl,this.redirectParams]);
                 } else {
                   if(this.d != null && this.d.register == true) {
-                    //console.log("I SHOUld Now bE GOInG TO ThE ReGISTER PAGE! YAY?")
-                    this.closeDialog() ;
-                    //this.openModal('custom-modal-3');
-                    this.openSignUp();
+                    this.SwitchToSignUp();
                   } 
                   else {
                     //console.log("WHERE'S MY WELCOME???");
@@ -353,33 +350,10 @@ export class Register2Component implements OnInit {
   SwitchToLogin = () => {
     this.openLogin.emit();
     this.closeDialog();
-    /*
-    this.closeDialog();
-    //this.modalService.open('custom-modal-1');
-    let d = this.dialog.open(LoginComponent, {
-      panelClass: 'LoginContainer'
-    });
-    d.afterClosed().subscribe(result=>{
-      //console.log("SWITCH TO LOGIN FRoM REGISTER", result);
-    })
-    */
   }
-
-  openSignUp = () => {
-    const passToSignUp = {
-      panelClass: "SignUpContainer",
-      data: {
-        price:this.d.price,
-        race_id:this.d.race_id,
-        hasJoined:this.d.hasJoined,
-        hasStarted:this.d.hasStarted,
-        hasTags: this.d.hasTags
-      }
-    }
-    let d = this.dialog.open(Signup2Component, passToSignUp);
-    d.afterClosed().subscribe(result=>{
-      //console.log("CLOSING SIGN UP",result);
-    })
+  SwitchToSignUp = () => {
+    this.closeDialog();
+    this.openSignUp.emit();
   }
 
   openModal(id: string) {

@@ -1,26 +1,21 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ModalService } from '../modalServices';
+import { Component, NgModule } from '@angular/core'
+import { MatDialogRef } from '@angular/material';
+
+@NgModule({
+  imports:[MatDialogRef]
+})
 
 @Component({
   selector: 'app-race-type',
   templateUrl: './race-type.component.html',
   styleUrls: ['./race-type.component.css']
 })
-export class RaceTypeComponent implements OnInit {
-
-  @Input() id: string;
-  modalData: any;
-
-  constructor(private modalService: ModalService) { }
-
-  ngOnInit() {
-  }
-
-   get d() { return this.modalService.modalsData[this.id]}
+export class RaceTypeComponent {
+  constructor(
+    public dialogRef : MatDialogRef<RaceTypeComponent>,
+  ) {}
 
   closeDialog() {
-    if (this.id == null) return;
-    this.modalService.close(this.id);
+    this.dialogRef.close();
   }
-
 }

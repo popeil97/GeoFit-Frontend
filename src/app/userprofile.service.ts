@@ -50,15 +50,6 @@ export class UserProfileService {
 
 }
 
-/*
-interface UserData {
-  feed:any;
-  email:any;
-  first_name:any;
-  last_name:any;
-}
-*/
-
 interface UserData {
   user_id:number;
   profile_url:string;
@@ -73,6 +64,7 @@ interface UserData {
   location_visibility:boolean;
   about_visibility:boolean;
   email_visibility:boolean;
+  email_mailto:string;
 }
 
 export {
