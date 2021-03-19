@@ -3,14 +3,12 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { RaceService } from '../../race.service';
-import { MapService } from '../../map.service';
 import { ItemService } from '../../item.service';
 import { AuthService } from '../../auth.service';
-import { UserProfileService, UserData} from '../../userprofile.service';
-import { RaceSettings } from '../../race-about-page/race-about-page.component';
+import { RaceSettings } from '../race-about/race-about.component';
 
 import { MatDialog } from '@angular/material';
-import { LoginComponent } from '../../login/login.component';
+import { LoginComponent } from '../login/login.component';
 import { Register2Component } from '../../register2/register2.component';
 
 @Component({
@@ -48,9 +46,8 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private raceService: RaceService,
-    private _authService:AuthService,
-    private _mapService:MapService,
-    private _itmeService:ItemService,
+    private authService:AuthService,
+    private itemService:ItemService,
     private router:Router,
     private dialog:MatDialog,
   ) { }
@@ -58,7 +55,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit() {
 
     // We add a subscription to the login event
-    this.loggedInSubscription = this._authService.getLoginStatus.subscribe(this.handleLoginChange);
+    this.loggedInSubscription = this.authService.getLoginStatus.subscribe(this.handleLoginChange);
     
     // this.loading = true;
     this.loadingSegments.navigation = true;
@@ -72,7 +69,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
       this.page = (params['params']['page']) ? params['params']['page'] : "admin";
       if (this.raceID) {
         // there was a race ID in the URL
-        if (this._authService.isLoggedIn()) {
+        if (this.authService.isLoggedIn()) {
           this.loadingSegments.navigation = false;
           this.getRaceData();     // We are logged in
         } else {
@@ -94,7 +91,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
       this.page = (params['params']['page']) ? params['params']['page'] : 'admin';
 
       //this.loadingSegments.navigation = false;
-      if (this._authService.isLoggedIn()) {
+      if (this.authService.isLoggedIn()) {
         // We ARE logged in, so we gotta pull race data
         this.getRaceData();
       } else {
@@ -188,7 +185,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
     Promise.all([
       this.raceService.getRacePromise(this.raceID), 
       this.raceService.getRaceAbout(this.raceID),
-      this._itmeService.getRaceItems(this.raceID),
+      this.itemService.getRaceItems(this.raceID),
       //this._mapService.getMapData(this.raceID)
     ]).then(res=>{
       let d0 = res[0] as RaceData,

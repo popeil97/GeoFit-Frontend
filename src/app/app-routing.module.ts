@@ -1,10 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PublicRacesPageComponent } from './public-races-page/public-races-page.component';
+import { PublicRacesComponent } from './views/public-races/public-races.component';
 import { RaceViewPageComponent } from './race-view-page/race-view-page.component';
-import { LandingPageComponent  } from './landing-page/landing-page.component';
 import { UserPageComponent } from './user-page/user-page.component';
-import { RaceAboutPageComponent } from './race-about-page/race-about-page.component';
+import { RaceAboutComponent } from './views/race-about/race-about.component';
 import { TeamFormComponent } from './team-form/team-form.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { PasswordRequestComponent } from './password-request/password-request.component';
@@ -22,7 +21,6 @@ import { LandingComponent } from './views/landing/landing.component';
 import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-creators.component';
 import { ForRacersComponent } from './views/for-racers/for-racers.component';
 import { ItemPortalComponent } from './item-portal/item-portal.component';
-import { PublicRacesComponent } from './views/public-races/public-races.component';
 
 import { RaceCreateComponent } from './views/race-create/race-create.component';
 import { RaceDashboardComponent } from './views/race-dashboard/race-dashboard.component';
@@ -30,7 +28,7 @@ import { RaceDashboardComponent } from './views/race-dashboard/race-dashboard.co
 const routes: Routes = [
   {path: 'race', component:RaceViewPageComponent},
   {path: 'profile',component:UserPageComponent},
-  {path: 'about',component:RaceAboutPageComponent},
+  {path: 'about',component:RaceAboutComponent},
   {path: 'teams',component:TeamFormComponent},
   {path: 'shipping', component:ShippingAddressComponent },
   {path: 'password-request', component:PasswordRequestComponent},
@@ -45,7 +43,7 @@ const routes: Routes = [
   {path:'for-race-creators',component:ForRaceCreatorsComponent},
   {path:'for-racers',component:ForRacersComponent},
   {path:'test',component:ItemPortalComponent},
-  {path: 'races', component:PublicRacesPageComponent},
+  {path: 'races', component:PublicRacesComponent},
   //{path: 'races-dev', component:PublicRacesComponent},
 
   {path: 'create', component:RaceCreateComponent},

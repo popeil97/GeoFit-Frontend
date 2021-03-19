@@ -1,12 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
-import { MapComponent } from '../../map/map.component';
 import { RaceService } from '../../race.service';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material';
-import { LoginComponent } from '../../login/login.component';
+import { LoginComponent } from '../login/login.component';
 import { Register2Component } from '../../register2/register2.component';
 
 @Component({
@@ -14,70 +13,58 @@ import { Register2Component } from '../../register2/register2.component';
   templateUrl: './race-create.component.html',
   styleUrls: ['./race-create.component.css','../../../styles/forms.css']
 })
-export class RaceCreateComponent implements OnInit {
+export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
 
   // --- Initializing form groups ---
   raceBasicsForm:FormGroup;
-    raceType:RaceTypes;
-    raceTypeOptions = [
-      {
-        name:'Run/Walk',
-        type:RaceTypes.RUN_WALK
-      },{
-        name:'Ride',
-        type:RaceTypes.RIDE
-      },{
-        name:'Any',
-        type:RaceTypes.ANY
-      }
-    ];
-    private raceTypeOptionDictionary = {
-      'Run/Walk':RaceTypes.RUN_WALK,
-      'Ride':RaceTypes.RIDE,
-      'Any':RaceTypes.ANY
+  raceType:RaceTypes;
+  raceTypeOptions = [
+    {
+      name:'Run/Walk',
+      type:RaceTypes.RUN_WALK
+    },{
+      name:'Ride',
+      type:RaceTypes.RIDE
+    },{
+      name:'Any',
+      type:RaceTypes.ANY
     }
-    private bannerInput;
-    private bannerURLTypes: Array<string> = ['png','jpg','jpeg'];
-    public bannerURL: any;
-    public bannerLoading: boolean = false;
-    public hasSubmitted: boolean = false;
-    public verifyingFormSubmission:boolean = false;
-    public createSuccess: boolean = false;
-    public createResponse: any = null;
-
-  raceMerchandiseForm:FormGroup;
+  ];
+  private raceTypeOptionDictionary = {
+    'Run/Walk':RaceTypes.RUN_WALK,
+    'Ride':RaceTypes.RIDE,
+    'Any':RaceTypes.ANY
+  }
+  private bannerInput:any = null;
+  private bannerURLTypes: Array<string> = ['png','jpg','jpeg'];
+  public bannerURL: any;
+  public bannerLoading: boolean = false;
+  public hasSubmitted: boolean = false;
+  public verifyingFormSubmission:boolean = false;
+  public createSuccess: boolean = false;
+  public createResponse: any = null;
 
   loading:Boolean = false;
 
   constructor(
     private _raceService:RaceService,
-    private _authService:AuthService,
     private router:Router,
     private dialog:MatDialog,
   ) { 
     this.initializeRaceBasicsForm();
-    this.raceMerchandiseForm = new FormGroup({
-      raceId: new FormControl('',[
-        Validators.required,
-      ]),
-      productName: new FormControl('', [
-        Validators.required,
-      ]),
-      productDescription: new FormControl(''),
-      productImage: new FormControl(''),
-      productType: new FormControl(''),
-      productState: new FormControl(''),
-      productDetail: new FormControl(''),
-      productPhysical: new FormControl(true),
-      productShippingLimitations: new FormControl(''),
-    })
-
   }
 
   ngOnInit() {}
 
   ngAfterViewInit() {
     this.bannerInput = document.getElementById("bannerPreviewInput");
+  }
+
+  ngOnDestroy() {
+    this.bannerInput = null;
+    this.bannerURL = null;
+    this.raceBasicsForm = null;
+    this.createResponse = null;
   }
 
   openLogin = () => {
@@ -258,23 +245,7 @@ interface RaceBasicsForm {
   end_lon:number,       // Shouldn't be here...
   end_lat:number,       // Shouldn't be here...
 }
-interface RaceMerchandiseForm {
-  raceId:string,
-  productName:string,
-  productDescription:string,
-  productImage:any,
-  productType:string,
-  productState:string,
-  productDetail:RaceMerchandiseDetails,
-  productPhysical:Boolean,
-  productShippingLimitations:string,
-}
-  interface RaceMerchandiseDetails {
-    size:string,
-    color:string,
-    material:string,
-    price:number,
-  }
+
 // --- End Race Form Interfaces ---
 
 enum RaceTypes {

@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
 import {AuthService} from '../../auth.service';
-import {throwError} from 'rxjs';
-import $ from "jquery";
 
-import { LoginComponent } from '../../login/login.component';
+import { LoginComponent } from '../login/login.component';
 import { Register2Component } from '../../register2/register2.component';
 
 @Component({
@@ -18,7 +16,7 @@ export class LandingComponent implements OnInit {
   private testString = "From Parent";
 
   constructor(
-    public _authService: AuthService, 
+    public authService: AuthService, 
     public router : Router,
     public dialog : MatDialog,
   ) { }
@@ -26,14 +24,14 @@ export class LandingComponent implements OnInit {
   ngOnInit() {
     //If we already store a JWT locally, set it in memory
     if (localStorage.getItem('access_token')){
-      this._authService.token = localStorage.getItem('access_token');
+      this.authService.token = localStorage.getItem('access_token');
     }
-    console.log(this._authService.isLoggedIn());
+    console.log(this.authService.isLoggedIn());
 
   }
 
   logout() {
-    this._authService.logout();
+    this.authService.logout();
   }
 
   openLogin = () => {

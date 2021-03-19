@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import {AuthService} from '../../auth.service';
 
 import { MatDialog } from '@angular/material';
-import { LoginComponent } from '../../login/login.component';
+import { LoginComponent } from '../login/login.component';
 import { Register2Component } from '../../register2/register2.component';
 
 @Component({

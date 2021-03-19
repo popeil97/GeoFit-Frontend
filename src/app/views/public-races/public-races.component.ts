@@ -1,33 +1,50 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import {AuthService} from '../../auth.service';
+import { Component, OnInit,ViewChild } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { RaceService } from '../../race.service';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import * as _ from 'lodash';
 
 import { MatDialog } from '@angular/material';
-import { LoginComponent } from '../../login/login.component';
+import { LoginComponent } from '../login/login.component';
 import { Register2Component } from '../../register2/register2.component';
 
-import { RaceService } from '../../race.service';
+import { AuthService } from '../../auth.service';
 import { UserProfileService } from '../../userprofile.service';
+import { ModalService } from '../../modalServices';
 
-import * as _ from 'lodash';
+
 
 @Component({
   selector: 'app-public-races',
   templateUrl: './public-races.component.html',
-  styleUrls: ['./public-races.component.css']
+  styleUrls: ['./public-races.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
+
 export class PublicRacesComponent implements OnInit {
-
-  public racesData:any;
-  public races:any[] = null;
-  raceSettings:RaceSettings = {} as RaceSettings;
-
+    
   userData: UserData;
+  public races:any[] = null;
   public userRaces:any[];
   public racesInvited:any[];
+  public racesData:any;
+  public isUserRaces:Boolean = true;
+  public isInvitedRaces:Boolean;
+  public isPublicRaces:Boolean;
   public joinedRacesIDs:number[];
+  raceSettings:RaceSettings = {} as RaceSettings;
 
   public loading:Boolean = false;
+
+  dataSource = this.races;
+  private columnsToDisplay:string[] = ['name','distance', 'start_loc', 'end_loc'];
+  expandedElement: any | null;
 
   private monthKey = {
     '1':'Jan.',
@@ -45,37 +62,37 @@ export class PublicRacesComponent implements OnInit {
   }
 
   constructor(
-    public _authService: AuthService,
-    public router : Router,
+    private raceService: RaceService, 
+    private router:Router,
     public dialog : MatDialog,
 
-    private raceService: RaceService, 
+    public _authService: AuthService,
     private _userProfileService: UserProfileService,
+    private modalService: ModalService,
   ) { }
 
   ngOnInit() {
-    //If we already store a JWT locally, set it in memory
-    if (localStorage.getItem('access_token')){
-      this._authService.token = localStorage.getItem('access_token');
+    if (localStorage.getItem('loggedInUsername')){
       this._authService.username = localStorage.getItem('loggedInUsername');
+
       this._userProfileService.requestUserProfile(this._authService.username).then((data) => {
         this.userData = data as UserData;
         this.getPublicRaces(this.userData.user_id);
-        if (this.userData.location =="") {
-          this.userData.location = "N/A";
-        }
 
-        if (this.userData.description =="") {
-          this.userData.description = "N/A";
-        }
+        if (this.userData.location =="")
+          {
+            this.userData.location = "N/A";
+          }
+
+        if (this.userData.description =="")
+          {
+            this.userData.description = "N/A";
+          }
       });
-
     }
-    this.getPublicRaces(null);
-  }
-
-  logout() {
-    this._authService.logout();
+    else {
+      this.getPublicRaces(null);
+    }
   }
 
   openLogin = () => {
@@ -84,9 +101,9 @@ export class PublicRacesComponent implements OnInit {
     });
     const sub = d.componentInstance.openRegister.subscribe(()=>{
       this.openRegister();
-    });
+    })
     d.afterClosed().subscribe(result=>{
-      console.log("Closing Login from Public Races")
+      console.log("Closing Login from Public Races");
       if (typeof result !== "undefined") console.log(result);
       sub.unsubscribe();
     })
@@ -94,7 +111,7 @@ export class PublicRacesComponent implements OnInit {
 
   openRegister = () => {
     const d = this.dialog.open(Register2Component, {
-      panelClass:"RegisterContainer",
+      panelClass: 'RegisterContainer'
     });
     const sub = d.componentInstance.openLogin.subscribe(() => {
       this.openLogin();
@@ -103,22 +120,31 @@ export class PublicRacesComponent implements OnInit {
       console.log("Closing Register from Public Races");
       if (typeof result !== "undefined") console.log(result);
       sub.unsubscribe();
-    })
+    });
   }
 
   navigateTo(url:string = null) {
     if (url != null) this.router.navigate([url]);
   }
-  scrollToElement = (id : string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      var headerOffset = 64;
-      var elementPosition = el.offsetTop;
-      var offsetPosition = elementPosition - headerOffset;
-      document.documentElement.scrollTop = offsetPosition;
-      document.body.scrollTop = offsetPosition; // For Safari
-      //el.scrollIntoView();
+
+  truncateHTML(text: string): string {
+
+    let charlimit = 270;
+    if(!text || text.length <= charlimit )
+    {
+        return text;
     }
+
+
+  let without_html = text.replace(/<(?:.|\n)*?>/gm, '');
+  let shortened = without_html.substring(0, charlimit) + "...";
+  return shortened;
+}
+
+  ProcessDate = (date = null) => {
+    if (date == null) return {month:null,day:date}
+    const dateComponents = date.split('-');
+    return {month:this.monthKey[dateComponents[0]],day:dateComponents[1]}
   }
 
   getPublicRaces(user_id:number){
@@ -129,8 +155,8 @@ export class PublicRacesComponent implements OnInit {
 
         this.races = _.filter(this.racesData.races,(race:any) => {
             race.raceSettings = this.getRaceSettings(race);
-            race.start_date = this.processDate(race.start_date);
-            race.end_date = this.processDate(race.end_date);
+            race.start_date = this.ProcessDate(race.start_date);
+            race.end_date = this.ProcessDate(race.end_date);
             return race;    
         });
 
@@ -139,8 +165,6 @@ export class PublicRacesComponent implements OnInit {
         });
         this.racesInvited = this.racesData.races_invited;
         this.joinedRacesIDs = this.racesData.user_race_ids;
-
-        console.log("RACES:",this.races,"USER RACES:", this.userRaces);
       }
     )
   }
@@ -154,23 +178,6 @@ export class PublicRacesComponent implements OnInit {
     //   console.log("RACE SETTINGS", this.raceSettings);
       return this.raceSettings;
     });
-  }
-
-  processDate = (date = null) => {
-    if (date == null) return {month:null,day:date}
-    const dateComponents = date.split('-');
-    return {month:this.monthKey[dateComponents[0]],day:dateComponents[1]}
-  }
-
-  sanitizeHTML(text: string): string {
-    let charlimit = 270;
-    if (!text || text.length == 0) return text;
-
-    let without_html = text.replace(/<(?:.|\n)*?>/gm, '');
-    let shortened = (without_html.length > charlimit) 
-      ? without_html.substring(0, charlimit) + "..."
-      : without_html;
-    return shortened;
   }
 
   trySignup(): void {
@@ -201,6 +208,51 @@ export class PublicRacesComponent implements OnInit {
   viewAbout(race:any) {
     this.router.navigate(['/about',{name:race.name,id:race.id}]);
   }
+
+ openModal(id: string,race:any) {
+//     console.log("MODAL RACE", race);
+    const data = (id == 'custom-modal-2') 
+      ? {
+        register:true, 
+        price:race.raceSettings.price,
+        race_id:race.id,
+        hasTags: race.raceSettings.has_entry_tags
+      } 
+      : (id == 'custom-modal-3') 
+        ? {
+            price:race.raceSettings.price,
+            race_id:race.id,
+            hasTags: race.raceSettings.has_entry_tags
+          } 
+          : null;
+   //  console.log("MODAL DATA", data);
+    this.modalService.open(id,data);
+  }
+  closeModal(id: string) {
+      this.modalService.close(id);
+  }
+
+  toggle_pill(pill_type:string) {
+    if(pill_type == 'user') {
+      this.isUserRaces = true;
+      this.isPublicRaces = false;
+      this.isInvitedRaces = false;
+    }
+
+    else if(pill_type == 'invited') {
+      this.isUserRaces = false;
+      this.isPublicRaces = false;
+      this.isInvitedRaces = true;
+    }
+
+    else {
+      this.isUserRaces = false;
+      this.isPublicRaces = true;
+      this.isInvitedRaces = false;
+    }
+
+  }
+  
 
 }
 

@@ -2,11 +2,14 @@
   <div class="LandingPageSegment FirstSegment">
     <div class="LandingPageSegmentItem">
       <h1 class='color-white'>Public Races</h1>
-      <h6 class='color-white'>Participate in a public race, or create your own by <span class='nobr'>signing up</span> <span class='nobr'>to Tucan Fitness</span></h6>
-      <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
+      <h6 class='color-white'>Participate in a public race, or create your own by signing up <span class='nobr'>to Tucan Fitness</span></h6>
+      <div *ngIf="!this._authService.isLoggedIn(); else CreateRaceContainer" class='LandingSubheadingButtons'>
         <button class='LandingButton HeroSignUp' (click)="openRegister()">Sign Up</button>
         <p class='color-white margin-bottom-0px italics'>Already have an account? <span (click)="openLogin()" class='HeroLogin'>Log in</span></p>
       </div>
+      <ng-template #CreateRaceContainer>
+        <button class='LandingButton' (click)="navigateTo('/create')">Create a new race</button>
+      </ng-template>
     </div>
   </div>
   <div class='LandingPageSegment Vertical'>
@@ -20,11 +23,12 @@
       <div *ngFor="let race of races" class="TucanRaceItem">
         <div class='TucanRaceItemImageContainer'>
           <div class='TucanRaceItemImage' [style.backgroundImage]="'url(' + race.race_image + ')'"></div>
+          <!--<img class="TucanRaceItemImage" *ngIf="race.race_image != null" src="{{race.race_image}}" />-->
         </div>
-        <div class='TucanRaceItemContentsContainer'>
+        <div class='TucanRaceItemContents'>
           
-          <div class='TucanRaceItemHeaderContainer'>
-            <h2 class='TucanRaceItemHeader'>{{race.name}}</h2>
+          <div class='TucanRaceItemHeader'>
+            <h2>{{race.name}}</h2>
             <div class='CalendarDaysContainer'>
               <div class='CalendarDay'>
                 <div class='CalendarDayM'><p class='h7'>{{race.start_date.month}}</p></div>
@@ -39,9 +43,21 @@
               </div>
             </div>
           </div>
-          
-          <p class='TucanRaceItemDescription' [innerHTML]="sanitizeHTML(race.description)"></p>
-          <button class='TucanViewRaceDetailsButton' (click)="viewAbout(race)">View Race Details</button>
+
+          <div class='TucanRaceItemDetails'>
+            <div class='TucanRaceItemDescription'>
+              <p [innerHTML]="truncateHTML(race.description)"></p>
+              <button class='TucanRaceItemViewAboutButton' (click)="viewAbout(race)">View Race Details</button>
+            </div>
+            <div class='TucanRaceItemButtons'>
+              <button (click)="viewRace(race)" *ngIf="race.has_started && race.joined">Go to race</button>
+              <button (click)="viewRace(race)" *ngIf="race.has_started && !race.joined ">Preview race</button>
+              <p *ngIf="race.joined" class='h7'><b>You've registered for this race.</b></p>
+              <p *ngIf="!race.has_started && race.joined" class='h7'>Come back on race day ({{race.start_date.month}} {{race.start_date.day}}).</p>
+              <p *ngIf="!race.has_started && !race.joined" class='h7'>Join by race day ({{race.start_date.month}} {{race.start_date.day}}).</p>
+            </div>
+          </div>
+        
 
           <!--
           <div class='TucanRaceItemSpecificInfo'>
@@ -54,20 +70,9 @@
             </div>
           </div>
           -->
-
-          <hr />
-
-          <div class='TucanRaceItemButtons'>
-            <button (click)="viewRace(race)" *ngIf="race.has_started && race.joined">Go to race</button>
-            <button (click)="viewRace(race)" *ngIf="race.has_started && !race.joined ">Preview race</button>
-            <p *ngIf="race.joined" class='h7'><b>You've registered for this race.</b></p>
-            <p *ngIf="!race.has_started && race.joined" class='h7'>Come back on race day ({{race.start_date.month}} {{race.start_date.day}}).</p>
-            <p *ngIf="!race.has_started && !race.joined" class='h7'>Join by race day ({{race.start_date.month}} {{race.start_date.day}}).</p>
-          </div>
-
         </div>
       </div>
     </ng-template>
-
   </div>
 </div>
+

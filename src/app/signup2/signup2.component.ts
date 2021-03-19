@@ -3,19 +3,16 @@ import {
   OnInit, 
   Inject, 
   ViewChild, 
-  Output, 
-  EventEmitter, 
   Input, 
-  AfterViewChecked,
   NgModule,
 } from '@angular/core';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PaymentType } from '../payments.service';
-import { AboutData } from '../race-about-page/race-about-page.component';
+import { AboutData } from '../views/race-about/race-about.component';
 import { TagType } from '../tags.service';
 import { RaceService } from '../race.service';
 import { Cart } from '../swag.service';

@@ -8,7 +8,7 @@ import { ActivitiesService } from '../activities.service';
 import { MapComponent } from '../map/map.component';
 import { FeedComponent } from '../feed/feed.component';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
-import { RaceSettings } from '../race-about-page/race-about-page.component';
+import { RaceSettings } from '../views/race-about/race-about.component';
 import { TeamFormComponent } from '../team-form/team-form.component';
 import { AuthService } from '../auth.service';
 import { UserProfileService } from '../userprofile.service';

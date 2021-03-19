@@ -5,9 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavComponent } from './nav/nav.component';
-import { PublicRacesPageComponent } from './public-races-page/public-races-page.component';
-import { LandingPageComponent  } from './landing-page/landing-page.component';
+import { PublicRacesComponent } from './views/public-races/public-races.component';
 import { MapComponent } from './map/map.component';
 import { RaceViewPageComponent } from './race-view-page/race-view-page.component';
 import { UserProgressComponent } from './user-progress/user-progress.component';
@@ -19,7 +17,7 @@ import { RaceService } from './race.service';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { FormsModule } from '@angular/forms';
 import { AuthService} from './auth.service';
-import {TokenInterceptorService} from './landing-page/tokeninterceptorservice';
+import {TokenInterceptorService} from './tokeninterceptorservice';
 import { StravauthService } from './stravauth/stravauth.service';
 import { RaceFeedService } from './feed/race-feed.service';
 import { FeedComponent } from './feed/feed.component';
@@ -35,13 +33,13 @@ import {
   HttpEvent,
   HttpInterceptor
 } from '@angular/common/http';
+
 import { StravauthComponent } from './stravauth/stravauth.component';
-import { fromEventPattern } from 'rxjs';
 import { LoaderComponent } from './loader/loader.component';
 import { StravaEntryComponent } from './strava-entry/strava-entry.component';
 import { ManualEntryComponent } from './manual-entry/manual-entry.component';
 import { UserPageComponent } from './user-page/user-page.component';
-import { RaceAboutPageComponent } from './race-about-page/race-about-page.component';
+import { RaceAboutComponent } from './views/race-about/race-about.component';
 import { UserFollowComponent } from './user-follow/user-follow.component';
 import { StoryBtnComponent } from './story-btn/story-btn.component';
 import { TeamFormComponent } from './team-form/team-form.component';
@@ -99,7 +97,7 @@ import {
 } from './view-follow/view-follow.component';
 import { ShowFollowersComponent } from './show-followers/show-followers.component';
 import { ModalComponent } from './modal/modal.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './views/login/login.component';
 import { Register2Component } from './register2/register2.component';
 
 import { RouteSelectComponent } from './route-select/route-select.component';
@@ -122,7 +120,6 @@ import { TeamFormDialogComponent } from './team-form/team-form-dialog.component'
 import { CheckpointListComponent } from './checkpoint-list/checkpoint-list.component';
 import { CheckpointItemComponent } from './checkpoint-item/checkpoint-item.component';
 import { CheckpointDialogComponent } from './checkpoint-list/checkpoint-dialog.component';
-import { LoginDialogComponent } from './login/login-dialog.component';
 import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-creators.component';
 import { FooterComponent } from './views/footer/footer.component';
 import { ForRacersComponent } from './views/for-racers/for-racers.component';
@@ -132,8 +129,6 @@ import { ItemPortalComponent } from './item-portal/item-portal.component';
 import { ItemListComponent } from './item-portal/item-list.component';
 import { ItemFormComponent } from './item-portal/item-form.component';
 import { ItemFormDialogComponent } from './item-portal/item-form-dialog.component';
-import { PublicRacesComponent } from './views/public-races/public-races.component';
-
 import { RaceCreateComponent } from './views/race-create/race-create.component';
 import { RaceDashboardComponent } from './views/race-dashboard/race-dashboard.component';
 import { RaceSettingsComponent } from './views/race-dashboard/race-settings/race-settings.component';
@@ -146,9 +141,7 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
 @NgModule({
   declarations: [
     AppComponent,
-    NavComponent,
-    PublicRacesPageComponent,
-    LandingPageComponent,
+    PublicRacesComponent,
     MapComponent,
     RaceViewPageComponent,
     UserProgressComponent,
@@ -161,7 +154,7 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
     FeedComponent,
     ManualEntryComponent,
     UserPageComponent,
-    RaceAboutPageComponent,
+    RaceAboutComponent,
     UserFollowComponent,
     StoryBtnComponent,
     TeamFormComponent,
@@ -207,7 +200,6 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
     CartEditComponent,
     MapRouteComponent,
     ViewFollowComponent,
-    //ViewFollowDialogContent,
     ShowFollowersComponent,
     ModalComponent,
     LoginComponent,
@@ -234,7 +226,6 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
     CheckpointListComponent,
     CheckpointItemComponent,
     CheckpointDialogComponent,
-    LoginDialogComponent,
     ForRaceCreatorsComponent,
     FooterComponent,
     ForRacersComponent,
@@ -244,13 +235,12 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
     ItemListComponent,
     ItemFormComponent,
     ItemFormDialogComponent,
-    PublicRacesComponent,
     RaceSettingsComponent,
     RaceBasicsComponent,
     RaceMapSettingsComponent,
     RaceMerchandiseSettingsComponent,
     RaceMerchandiseSettingsItemComponent,
-      ],
+  ],
 
   imports: [
     BrowserModule,
@@ -277,32 +267,32 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
     LeaderboardService,
     MapService,
   ],
-  bootstrap: [AppComponent],
+  bootstrap: [
+    AppComponent
+  ],
   entryComponents:[
-                  PopupComponent,
-                  SwagDialogContent,
-                  TermsOfServiceDialogContent,
-                  RoutePinDialogComponent,
-                  NotificationPanelComponent,
-                  SnackbarComponent, 
-                  StoryDialogComponent,
-                  ReportFormComponent,
-                  StoryDeleteDialogComponent,
-                  WhyInfoDialogContent,
-                  TeamFormDialogComponent,
-                  CheckpointDialogComponent,
-                  //ViewFollowDialogContent
-
-                  LoginComponent,
-                  Register2Component,
-                  Signup2Component,
-                  LogActivityComponent,
-                  ItemFormDialogComponent,
-                  RaceMerchandiseSettingsItemComponent,
-                  ProfileFormComponent,
-                  ViewFollowComponent,
-                  RaceTypeComponent,
-                  ] 
+    PopupComponent,
+    SwagDialogContent,
+    TermsOfServiceDialogContent,
+    RoutePinDialogComponent,
+    NotificationPanelComponent,
+    SnackbarComponent, 
+    StoryDialogComponent,
+    ReportFormComponent,
+    StoryDeleteDialogComponent,
+    WhyInfoDialogContent,
+    TeamFormDialogComponent,
+    CheckpointDialogComponent,
+    LoginComponent,
+    Register2Component,
+    Signup2Component,
+    LogActivityComponent,
+    ItemFormDialogComponent,
+    RaceMerchandiseSettingsItemComponent,
+    ProfileFormComponent,
+    ViewFollowComponent,
+    RaceTypeComponent,
+  ] 
 })
 export class AppModule { 
   constructor(private injector: Injector) {

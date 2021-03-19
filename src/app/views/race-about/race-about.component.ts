@@ -1,27 +1,27 @@
 import { Component, OnInit,ViewChild,OnDestroy} from '@angular/core';
-import { RaceService } from '../race.service';
+import { RaceService } from '../../race.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { AuthService } from '../auth.service';
-import { UserProfileService, UserData } from '../userprofile.service';
+import { AuthService } from '../../auth.service';
+import { UserProfileService, UserData } from '../../userprofile.service';
 declare var $: any
-import { MapComponent } from '../map/map.component';
-import { SwagComponent } from '../swag/swag.component';
-import { MapService } from '../map.service';
-import { UsersService } from '../users.service';
+import { MapComponent } from '../../map/map.component';
+import { SwagComponent } from '../../swag/swag.component';
+import { MapService } from '../../map.service';
+import { UsersService } from '../../users.service';
 
 import { MatDialog } from '@angular/material';
-import { Register2Component } from '../register2/register2.component';
-import { Signup2Component } from '../signup2/signup2.component';
+import { Register2Component } from '../../register2/register2.component';
+import { Signup2Component } from '../../signup2/signup2.component';
 import { LoginComponent } from '../login/login.component';
-import { RaceTypeComponent } from '../race-type/race-type.component';
+import { RaceTypeComponent } from '../../race-type/race-type.component';
 
 @Component({
-  selector: 'app-race-about-page',
-  templateUrl: './race-about-page.component.html',
-  styleUrls: ['./race-about-page.component.css']
+  selector: 'app-race-about',
+  templateUrl: './race-about.component.html',
+  styleUrls: ['./race-about.component.css']
 })
 
-export class RaceAboutPageComponent implements OnInit,OnDestroy {
+export class RaceAboutComponent implements OnInit,OnDestroy {
   
   @ViewChild(MapComponent) mapChild: MapComponent;
   @ViewChild(SwagComponent) swagChild: SwagComponent;
