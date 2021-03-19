@@ -178,7 +178,7 @@
       </div>
     </div>
   
-    <p>By signing up, you agree to our <app-terms-of-service></app-terms-of-service>.</p>
+    <p>By signing up, you agree to our <button (click)="this.openTOS()">Terms of Service</button></p>
   
     <div class="container">
       <span *ngFor="let error of errors">{{ error }}<br /></span>

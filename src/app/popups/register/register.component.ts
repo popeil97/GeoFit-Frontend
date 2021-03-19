@@ -12,15 +12,22 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angula
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+
 import { 
   AuthService,
   RaceService,
   UserProfileService,
   TucanValidators,
 } from '../../services';
+
 import {
   UserData
 } from '../../models';
+
+import {
+  TermsOfServiceComponent
+} from '../terms-of-service/terms-of-service.component';
+
 import * as moment from 'moment';
 import { ModalService } from '../../modalServices';
 
@@ -336,6 +343,12 @@ export class RegisterComponent implements OnInit {
     this.personalLoading = false;
     this.personalSubmitted = false;
 
+  }
+
+  openTOS = () => {
+    this.dialog.open(TermsOfServiceComponent,{
+      panelClass:"DialogDefaultContainer"
+    })
   }
 
   closeDialog = () => {

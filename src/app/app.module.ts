@@ -64,7 +64,6 @@ import { PopupComponent } from './popup/popup.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { ShippingAddressFormComponent } from './shipping-address-form/shipping-address-form.component';
 
-import { TermsOfServiceComponent, TermsOfServiceDialogContent } from './terms-of-service/terms-of-service.component';
 import { PasswordRequestComponent } from './password-request/password-request.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { StravaInstructionsComponent } from './strava-instructions/strava-instructions.component';
@@ -103,6 +102,7 @@ import {
   ViewFollowComponent,
   RaceMerchandiseSettingsItemComponent,
   RouteInfoComponent,
+  TermsOfServiceComponent,
 } from './popups';
 
 import { RouteSelectComponent } from './route-select/route-select.component';
@@ -173,7 +173,6 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     ShippingAddressComponent,
     ShippingAddressFormComponent,
     TermsOfServiceComponent,
-    TermsOfServiceDialogContent,
     PasswordRequestComponent,
     PasswordChangeComponent,
     StravaInstructionsComponent,
@@ -268,7 +267,6 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
   entryComponents:[
     PopupComponent,
     SwagDialogContent,
-    TermsOfServiceDialogContent,
     RoutePinDialogComponent,
     NotificationPanelComponent,
     SnackbarComponent, 
@@ -288,6 +286,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     ViewFollowComponent,
     RaceTypeComponent,
     RouteInfoComponent,
+    TermsOfServiceComponent,
   ] 
 })
 export class AppModule { 

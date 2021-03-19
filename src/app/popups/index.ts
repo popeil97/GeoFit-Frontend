@@ -6,6 +6,7 @@ import { ProfileFormComponent } from './profile-form/profile-form.component';
 import { ViewFollowComponent } from './view-follow/view-follow.component';
 import { RaceMerchandiseSettingsItemComponent } from './race-merchandise-settings-item/race-merchandise-settings-item.component';
 import { RouteInfoComponent } from './route-info/route-info.component';
+import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 
 export {
     LoginComponent,
@@ -16,4 +17,5 @@ export {
     ViewFollowComponent,
     RaceMerchandiseSettingsItemComponent,
     RouteInfoComponent,
+    TermsOfServiceComponent,
 }
