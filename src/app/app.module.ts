@@ -100,7 +100,7 @@ import { RegisterComponent } from './views/register/register.component';
 
 import { RouteSelectComponent } from './route-select/route-select.component';
 import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderboard.component';
-import { Signup2Component } from './signup2/signup2.component';
+import { SignupComponent } from './views/signup/signup.component';
 import { RaceTypeComponent } from './race-type/race-type.component';
 import { UserRaceComponent } from './user-race/user-race.component';
 import { LogActivityComponent } from './log-activity/log-activity.component';
@@ -204,7 +204,7 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
     RegisterComponent,
     RouteSelectComponent,
     HybridLeaderboardComponent,
-    Signup2Component,
+    SignupComponent,
     RaceTypeComponent,
     UserRaceComponent,
     LogActivityComponent,
@@ -281,7 +281,7 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
     CheckpointDialogComponent,
     LoginComponent,
     RegisterComponent,
-    Signup2Component,
+    SignupComponent,
     LogActivityComponent,
     ItemFormDialogComponent,
     RaceMerchandiseSettingsItemComponent,

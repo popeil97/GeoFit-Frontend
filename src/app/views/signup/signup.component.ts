@@ -9,35 +9,25 @@ import {
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../auth.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { PaymentType } from '../payments.service';
-import { AboutData } from '../views/race-about/race-about.component';
-import { TagType } from '../tags.service';
-import { RaceService } from '../race.service';
-import { Cart } from '../swag.service';
-import { ModalService } from '../modalServices';
-
-interface SignupDialogData {
-
-  price:string,
-  isLoggedIn:Boolean,
-  race_id:number,
-  aboutData:AboutData,
-  hasStarted:Boolean,
-  hasTags:Boolean,
-}
+import { PaymentType } from '../../payments.service';
+import { AboutData } from '../race-about/race-about.component';
+import { TagType } from '../../tags.service';
+import { RaceService } from '../../race.service';
+import { Cart } from '../../swag.service';
+import { ModalService } from '../../modalServices';
 
 @NgModule({
   imports:[MatDialogRef]
 })
 
 @Component({
-  selector: 'app-signup2',
-  templateUrl: './signup2.component.html',
-  styleUrls: ['./signup2.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class Signup2Component implements OnInit {
+export class SignupComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog, 
@@ -48,7 +38,7 @@ export class Signup2Component implements OnInit {
     private modalService: ModalService,
 
 
-    private dialogRef : MatDialogRef<Signup2Component>,
+    private dialogRef : MatDialogRef<SignupComponent>,
     @Inject(MAT_DIALOG_DATA) public data : any,
   ) { 
     
@@ -176,4 +166,14 @@ export class Signup2Component implements OnInit {
     this.dialogRef.close();
   }
 
+}
+
+interface SignupDialogData {
+
+  price:string,
+  isLoggedIn:Boolean,
+  race_id:number,
+  aboutData:AboutData,
+  hasStarted:Boolean,
+  hasTags:Boolean,
 }

@@ -11,7 +11,7 @@ import { UsersService } from '../../users.service';
 
 import { MatDialog } from '@angular/material';
 import { RegisterComponent } from '../register/register.component';
-import { Signup2Component } from '../../signup2/signup2.component';
+import { SignupComponent } from '../signup/signup.component';
 import { LoginComponent } from '../login/login.component';
 import { RaceTypeComponent } from '../../race-type/race-type.component';
 
@@ -131,9 +131,7 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
         const getRaceData = responses[0],
               getRaceAboutData = responses[1],
               getLogosData = responses[2];
-          
-        console.log("Race Data:", getRaceData, "About Data:", getRaceAboutData, "Logo Data:", getLogosData);
-        
+                
         // Set the race's ID number
         this.raceData.raceID = getRaceData.race.id;
 
@@ -218,6 +216,7 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
         }
 
         this.raceData.loading = false;
+        console.log("RACE DATA:",this.raceData);
       }).catch((errors:any)=>{
         console.error(errors);
       });
@@ -368,11 +367,30 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
       let registrationBody = {race_id:this.raceData.raceID} as any;
       this._raceService.joinRace(registrationBody);
       this.router.navigate(['/welcome']);
+    } else {
+      // We're now opening the official sign-up form
+      const data = {
+        price:this.raceData.raceSettings.price,
+        race_id:this.raceData.raceID,
+        hasJoined:this.raceData.userDetails.hasJoined,
+        hasStarted:this.raceData.userDetails.hasStarted,
+        hasTags: this.raceData.raceSettings.has_entry_tags,
+      };
+      const d = this.dialog.open(SignupComponent,{
+        panelClass:"SignUpContainer",
+        data: data
+      });
+      d.afterClosed().subscribe(result=>{
+        console.log("Closing Sign Up from Race About");
+        if (typeof result !== "undefined") console.log(result);
+      });
     }
   }
 
   openSignUp = () => {
-    if (this.raceData.loading) return;
+    if (this.raceData.loading) {
+      return;
+    }
     if(!this._authService.isLoggedIn()) {
       //user is NOT logged in
       const data = {
@@ -382,13 +400,21 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
         hasStarted:this.raceData.userDetails.hasStarted,
         hasTags: this.raceData.raceSettings.has_entry_tags,
       };
-      const d = this.dialog.open(Signup2Component,{
-        panelClass:"SignUpContainer",
+      const d = this.dialog.open(RegisterComponent,{
+        panelClass:"RegisterContainer",
         data: data
       });
+      const loginSub = d.componentInstance.openLogin.subscribe(()=>{
+        this.openLogin();
+      });
+      const signUpSub = d.componentInstance.openSignUp.subscribe(()=>{
+        this.openSignUp();
+      })
       d.afterClosed().subscribe(result=>{
         console.log("Closing Sign Up from Race About");
         if (typeof result !== "undefined") console.log(result);
+        loginSub.unsubscribe();
+        signUpSub.unsubscribe();
       });
     }
     else if (this.raceData.raceSettings.price == 0) {
@@ -397,6 +423,24 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
       let registrationBody = {race_id:this.raceData.raceID} as any;
       this._raceService.joinRace(registrationBody);
       this.router.navigate(['/welcome']);
+    }
+    else {
+      // We're now opening the official sign-up form
+      const data = {
+        price:this.raceData.raceSettings.price,
+        race_id:this.raceData.raceID,
+        hasJoined:this.raceData.userDetails.hasJoined,
+        hasStarted:this.raceData.userDetails.hasStarted,
+        hasTags: this.raceData.raceSettings.has_entry_tags,
+      };
+      const d = this.dialog.open(SignupComponent,{
+        panelClass:"SignUpContainer",
+        data: data
+      });
+      d.afterClosed().subscribe(result=>{
+        console.log("Closing Sign Up from Race About");
+        if (typeof result !== "undefined") console.log(result);
+      });
     }
   }
 
