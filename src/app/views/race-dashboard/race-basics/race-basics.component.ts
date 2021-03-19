@@ -53,7 +53,7 @@ export class RaceBasicsComponent implements OnInit {
     public changedValues = [];
 
   constructor(
-    private _raceService:RaceService,
+    private raceService:RaceService,
   ) {}
 
   ngOnInit() {
@@ -269,7 +269,7 @@ export class RaceBasicsComponent implements OnInit {
         }
       });
 
-      this._raceService.updateRaceAbout(formClean, this.raceID).then((resp:updateResp)=>{
+      this.raceService.updateRaceAbout(formClean, this.raceID).then((resp:updateResp)=>{
         //console.log(resp);
         if (resp.success) {
           this.getRaceDataCallback(()=>{

@@ -1,6 +1,6 @@
 <div class="PageContainer DashboardContainer ">
 
-  <ng-template [ngIf]="this._authService.isLoggedIn()" [ngIfElse]="MustLogIn">
+  <ng-template [ngIf]="this.authService.isLoggedIn()" [ngIfElse]="MustLogIn">
     <!-- we produce a loading screen if either 1) both our navigation and content is loading, or 2) we're collecting race data -->
     <ng-template [ngIf]="this.loadingSegments.navigation && this.loadingSegments.content" [ngIfElse]="DataLayer">
       <div class="DashboardInitialization">

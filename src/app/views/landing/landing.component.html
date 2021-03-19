@@ -7,7 +7,7 @@
       <div class='LandingSubheading'>
         <p class='textAlignCenter'>Tucan fitness is a social fitness platform for racers to get fit together virtually from anywhere in <span class="nobr">the world.</span></p>
       </div>
-      <div *ngIf="!this._authService.isLoggedIn(); else loggedInAction" class='LandingSubheadingButtons'>
+      <div *ngIf="!this.authService.isLoggedIn(); else loggedInAction" class='LandingSubheadingButtons'>
         <button class='LandingButton' (click)="openLogin()">Log in</button>
         <button class='LandingButton' (click)="openRegister()">Sign up</button>
       </div>
@@ -141,7 +141,7 @@
       <h3>Join the <span class='nobr'>Tucan Community!</span></h3>
       <p class="margin-bottom-0px">Connect with our community and be social from anywhere all while <span class="nobr">staying fit.</span></p>
       <p>Get started by joining a race, or, if you’re not ready - just by signing up to <span class="nobr">Tucan Fitness.</span></p>
-      <div *ngIf="!this._authService.isLoggedIn()" class='LandingSubheadingButtons'>
+      <div *ngIf="!this.authService.isLoggedIn()" class='LandingSubheadingButtons'>
         <button class='LandingButton' (click)="openLogin()">Log in</button>
         <button class='LandingButton' (click)="openRegister()">Sign up</button>
       </div>

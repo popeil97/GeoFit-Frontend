@@ -15,6 +15,9 @@ import { Register2Component } from '../../register2/register2.component';
 })
 export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
 
+  // --- Initializing subscribers
+  private loginSubscription:any = null;
+
   // --- Initializing form groups ---
   raceBasicsForm:FormGroup;
   raceType:RaceTypes;
@@ -47,14 +50,17 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
   loading:Boolean = false;
 
   constructor(
-    private _raceService:RaceService,
+    private authService:AuthService,
+    private raceService:RaceService,
     private router:Router,
     private dialog:MatDialog,
-  ) { 
-    this.initializeRaceBasicsForm();
+  ) {
+    this.loginSubscription = this.authService.getLoginStatus.subscribe(this.handleLoginChange);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.initializeRaceBasicsForm();
+  }
 
   ngAfterViewInit() {
     this.bannerInput = document.getElementById("bannerPreviewInput");
@@ -65,6 +71,15 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
     this.bannerURL = null;
     this.raceBasicsForm = null;
     this.createResponse = null;
+    this.loginSubscription.unsubscribe();
+    this.loginSubscription = null;
+  }
+
+  handleLoginChange = (loggedIn:Boolean) => {
+    if (loggedIn) {
+      this.initializeRaceBasicsForm();
+      this.bannerInput = document.getElementById("bannerPreviewInput");
+    }
   }
 
   openLogin = () => {
@@ -144,6 +159,7 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
     this.bannerInput.click();
   }
   onSelectBannerFileChange(e:any) {
+    console.log("CALLING FILECHANGE");
     var bannerInput = this.raceBasicsForm.get('bannerFile');
     if (
       bannerInput.invalid
@@ -192,7 +208,7 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
       formClean.public = false; 
       console.log('FORM DATA TO SEND: ', formClean)
       
-      this._raceService.createRace(formClean).then((resp:FromResp) => {
+      this.raceService.createRace(formClean).then((resp:FromResp) => {
         console.log('CREATE RESP:',resp);
         
         this.createSuccess = true;
