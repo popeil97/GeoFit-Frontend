@@ -1,21 +1,23 @@
 import { Component, OnInit, SimpleChanges, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+
 import { 
   AuthService,
   RaceService,
   UserProfileService,
   UsersService,
-} from '../services';
+} from '../../services';
+
 import {
   UserData,
-} from '../models'
-import { ModalService } from '../modalServices';
+} from '../../models'
 
-import { MatDialog } from '@angular/material';
-import { ProfileFormComponent } from "../profile-form/profile-form.component";
-
-import { ViewFollowComponent } from '../view-follow/view-follow.component';
+import {
+  ProfileFormComponent,
+  ViewFollowComponent,
+} from '../../popups';
 
 import * as _ from 'lodash';
 import { timeStamp } from 'console';
@@ -23,11 +25,11 @@ import { timeStamp } from 'console';
 declare var $: any;
 
 @Component({
-  selector: 'app-user-page',
-  templateUrl: './user-page.component.html',
-  styleUrls: ['./user-page.component.css']
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
-export class UserPageComponent implements OnInit,OnDestroy {
+export class ProfileComponent implements OnInit,OnDestroy {
 
   username;
   userData: UserData;

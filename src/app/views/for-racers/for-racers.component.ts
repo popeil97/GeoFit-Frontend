@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {AuthService} from '../../services';
-
 import { MatDialog } from '@angular/material';
-import { LoginComponent } from '../login/login.component';
-import { RegisterComponent } from '../register/register.component';
+
+import { 
+  AuthService,
+} from '../../services';
+
+import { 
+  LoginComponent,
+  RegisterComponent,
+} from '../../popups';
 
 @Component({
   selector: 'app-for-racers',

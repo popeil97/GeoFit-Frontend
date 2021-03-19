@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
 
 import { 
   AuthService,
@@ -8,14 +9,18 @@ import {
   TucanValidators,
 } from '../../services';
 
-import { MatDialog } from '@angular/material';
-import { LoginComponent } from '../login/login.component';
-import { RegisterComponent } from '../register/register.component';
+import { 
+  LoginComponent,
+  RegisterComponent,
+} from '../../popups';
 
 @Component({
   selector: 'app-race-create',
   templateUrl: './race-create.component.html',
-  styleUrls: ['./race-create.component.css','../../../styles/forms.css']
+  styleUrls: [
+    './race-create.component.css',
+    '../../../styles/forms.css'
+  ]
 })
 export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
 

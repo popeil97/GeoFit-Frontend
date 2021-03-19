@@ -20,8 +20,8 @@ import {
   Cart,
   PaymentType,
 } from '../../models';
-import { AboutData } from '../race-about/race-about.component';
-import { ModalService } from '../../modalServices';
+
+import { AboutData } from '../../views/race-about/race-about.component';
 
 @NgModule({
   imports:[MatDialogRef]
@@ -40,17 +40,10 @@ export class SignupComponent implements OnInit {
     private route:ActivatedRoute, 
     private router:Router, 
     private _raceService:RaceService, 
-    private modalService: ModalService,
-
 
     private dialogRef : MatDialogRef<SignupComponent>,
     @Inject(MAT_DIALOG_DATA) public data : any,
-  ) { 
-    
-  }
-
-  @Input() id: string;
-
+  ) {}
 
   modalData: any;
   isLoggedIn:Boolean;
@@ -84,14 +77,11 @@ export class SignupComponent implements OnInit {
   });
   
   ngOnInit() {
-
     this.isLoggedIn = this._authService.isLoggedIn() != null;
     this.InitForm();
-    
   }
 
   get d() { 
-    // return this.modalService.getModalData(this.id); 
     return this.data;
   }
 
@@ -141,13 +131,11 @@ export class SignupComponent implements OnInit {
         console.log('IN CHECKOUT RETYURBN:',this.d);
       }
 
-     if(this.stepper.selectedIndex==this.getStepperFinishIndex())
-     {
+     if(this.stepper.selectedIndex==this.getStepperFinishIndex()) {
       this.closeDialog();
       this.router.navigate(['/welcome']);
      }
-     else
-     {
+     else {
       this.stepper.next();
      }
      
@@ -164,17 +152,12 @@ export class SignupComponent implements OnInit {
   }
 
   closeDialog() {
-    /*
-    if (this.id == null) return;
-    this.modalService.close(this.id);
-    */
     this.dialogRef.close();
   }
 
 }
 
 interface SignupDialogData {
-
   price:string,
   isLoggedIn:Boolean,
   race_id:number,

@@ -1,16 +1,19 @@
 import { Component, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { MatDialog } from '@angular/material';
+
+import { RaceSettings } from '../race-about/race-about.component';
 
 import { 
   AuthService,
   RaceService,
   ItemService,
 } from '../../services';
-import { RaceSettings } from '../race-about/race-about.component';
 
-import { MatDialog } from '@angular/material';
-import { LoginComponent } from '../login/login.component';
-import { RegisterComponent } from '../register/register.component';
+import { 
+  LoginComponent,
+  RegisterComponent,
+} from '../../popups';
 
 @Component({
   selector: 'app-race-dashboard',

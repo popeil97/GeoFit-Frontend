@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
-import { RaceMerchandiseSettingsItemComponent } from './race-merchandise-settings-item/race-merchandise-settings-item.component';
+import { 
+  RaceMerchandiseSettingsItemComponent 
+} from '../../../popups';
 
 @Component({
   selector: 'app-race-merchandise-settings',
@@ -145,20 +147,9 @@ const MerchandiseTypes = {
     dbValue:"ENTRYANDSWAG"
   },
 };
-enum ItemStates {
-  ACTIVE=1,
-  INACTIVE=2,
-}
-enum ItemTypes {
-  ENTRY=1,
-  SWAG=2,
-  ENTRYANDSWAG=3,
-}
 
 export {
   MerchandiseTypes,
   MerchandiseType,
   MerchandiseItem,
-  ItemStates,
-  ItemTypes,
 }

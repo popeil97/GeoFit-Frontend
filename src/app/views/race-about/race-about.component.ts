@@ -1,5 +1,7 @@
 import { Component, OnInit,ViewChild,OnDestroy} from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { MatDialog } from '@angular/material';
+
 import { 
   AuthService,
   RaceService,
@@ -7,18 +9,22 @@ import {
   MapService,
   UsersService,
 } from '../../services';
+
 import {
   UserData,
 } from '../../models';
-declare var $: any
+
+import { 
+  LoginComponent,
+  RegisterComponent,
+  SignupComponent,
+  RaceTypeComponent,
+} from '../../popups';
+
 import { MapComponent } from '../../map/map.component';
 import { SwagComponent } from '../../swag/swag.component';
 
-import { MatDialog } from '@angular/material';
-import { RegisterComponent } from '../register/register.component';
-import { SignupComponent } from '../signup/signup.component';
-import { LoginComponent } from '../login/login.component';
-import { RaceTypeComponent } from '../../race-type/race-type.component';
+declare var $: any
 
 @Component({
   selector: 'app-race-about',

@@ -35,7 +35,7 @@ enum ItemType {
     SWAG=2,
     ENTRYANDSWAG=3
 }
-  
+
 export {
     Item,
     Order,

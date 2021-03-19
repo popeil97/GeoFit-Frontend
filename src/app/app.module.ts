@@ -41,7 +41,7 @@ import { StravauthComponent } from './stravauth/stravauth.component';
 import { LoaderComponent } from './loader/loader.component';
 import { StravaEntryComponent } from './strava-entry/strava-entry.component';
 import { ManualEntryComponent } from './manual-entry/manual-entry.component';
-import { UserPageComponent } from './user-page/user-page.component';
+import { ProfileComponent } from './views/profile/profile.component';
 import { RaceAboutComponent } from './views/race-about/race-about.component';
 import { UserFollowComponent } from './user-follow/user-follow.component';
 import { StoryBtnComponent } from './story-btn/story-btn.component';
@@ -53,7 +53,6 @@ import { StoryModalComponent } from './story-modal/story-modal.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentsFormComponent } from './comments-form/comments-form.component';
 import { StoryFormComponent } from './story-form/story-form.component';
-import { ProfileFormComponent } from './profile-form/profile-form.component';
 
 import { PaypalComponent } from './paypal/paypal.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
@@ -93,25 +92,26 @@ import { SwagItemComponent } from './swag-item/swag-item.component';
 import { CartEditComponent } from './cart-edit/cart-edit.component';
 import { MapRouteComponent } from './map-route/map-route.component';
 
-import { 
-  ViewFollowComponent, 
-  ///ViewFollowDialogContent 
-} from './view-follow/view-follow.component';
 import { ShowFollowersComponent } from './show-followers/show-followers.component';
 import { ModalComponent } from './modal/modal.component';
-import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
+import { 
+  LoginComponent,
+  RegisterComponent,
+  SignupComponent, 
+  RaceTypeComponent,
+  ProfileFormComponent,
+  ViewFollowComponent,
+  RaceMerchandiseSettingsItemComponent,
+  RouteInfoComponent,
+} from './popups';
 
 import { RouteSelectComponent } from './route-select/route-select.component';
 import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderboard.component';
-import { SignupComponent } from './views/signup/signup.component';
-import { RaceTypeComponent } from './race-type/race-type.component';
 import { UserRaceComponent } from './user-race/user-race.component';
 import { LogActivityComponent } from './log-activity/log-activity.component';
 import { StoryFormStandaloneComponent } from './story-form-standalone/story-form-standalone.component';
 import { MapSettingsComponent } from './map-settings/map-settings.component';
 import { SearchComponent } from './search/search.component';
-import { RouteInfoComponent } from './route-info/route-info.component';
 import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/race-dashboard-racer-list.component';
 import { RaceDashboardRacerRowComponent } from './race-dashboard-racer-row/race-dashboard-racer-row.component';
 import { ActivityListComponent } from './activity-list/activity-list.component';
@@ -137,7 +137,6 @@ import { RaceSettingsComponent } from './views/race-dashboard/race-settings/race
 import { RaceBasicsComponent } from './views/race-dashboard/race-basics/race-basics.component';
 import { RaceMapSettingsComponent } from './views/race-dashboard/race-map-settings/race-map-settings.component';
 import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-merchandise-settings/race-merchandise-settings.component';
-import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/race-merchandise-settings/race-merchandise-settings-item/race-merchandise-settings-item.component';
 
 
 @NgModule({
@@ -155,7 +154,7 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
     StravaEntryComponent,
     FeedComponent,
     ManualEntryComponent,
-    UserPageComponent,
+    ProfileComponent,
     RaceAboutComponent,
     UserFollowComponent,
     StoryBtnComponent,
@@ -292,6 +291,7 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
     ProfileFormComponent,
     ViewFollowComponent,
     RaceTypeComponent,
+    RouteInfoComponent,
   ] 
 })
 export class AppModule { 

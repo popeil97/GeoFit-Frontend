@@ -1,12 +1,15 @@
 import { Component, OnInit, ViewChild, ViewChildren, QueryList, AfterViewChecked, AfterViewInit } from '@angular/core';
 import * as bootstrap from "bootstrap";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { MatDialog } from '@angular/material';
+
 import { Progress } from '../user-progress/user-progress.component';
 import { MapComponent } from '../map/map.component';
 import { FeedComponent } from '../feed/feed.component';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
 import { RaceSettings } from '../views/race-about/race-about.component';
 import { TeamFormComponent } from '../team-form/team-form.component';
+
 import { 
   AuthService,
   RaceService,
@@ -14,16 +17,20 @@ import {
   ActivitiesService,
   StoryService,
 } from '../services';
+
 import {
   UserData,
   Tag,
   TagType,
 } from '../models'
+
+import {
+  RouteInfoComponent
+} from '../popups';
+
 import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
 import * as confetti from 'canvas-confetti';
-import { ModalService } from '../modalServices';
 
-import { MatDialog } from '@angular/material';
 import { LogActivityComponent } from '../log-activity/log-activity.component';
 
 declare var $: any;
@@ -31,7 +38,6 @@ import * as _ from 'lodash';
 import { RouteSelectComponent } from '../route-select/route-select.component';
 import { HybridLeaderboardComponent } from '../hybrid-leaderboard/hybrid-leaderboard.component';
 import { CheckpointDialogComponent } from '../checkpoint-list/checkpoint-dialog.component';
-
 
 
 @Component({
@@ -124,7 +130,6 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     private router:Router,
     private storyService: StoryService,
     public _authService: AuthService,
-    private modalService: ModalService,
 
     private dialog : MatDialog,
   ) {
@@ -171,26 +176,10 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     this.searchOn = !this.searchOn;
   }
 
-  openModal(id: string) {
-    var data = (id=='mapSettingsModal') 
-      ? {
-        userSettings:this.userRaceSettings,
-        callbackFunction:null
-      }
-      :(id == 'custom-modal-5') 
-        ? {
-          raceType:this.raceType, 
-          distance_unit: this.progress.distance_type, 
-          race_id:this.raceID, 
-          numActivities : this.num_activities, 
-          manualEntry:this.raceSettings.isManualEntry, 
-          automaticImport: this.userRaceSettings.isAutomaticImport, 
-          callbackFunction:null
-        } 
-        : {};
-    data.callbackFunction = this.uploadActivity;
-
-    this.modalService.open(id,data);
+  openRouteInfo = () => {
+    this.dialog.open(RouteInfoComponent,{
+      panelClass:"DialogDefaultContainer"
+    });
   }
 
   openLogActivity = () => {
@@ -238,11 +227,6 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
 
   public toggleOptions(){
     this.feedOptions = !this.feedOptions;
-  }
-
-  closeModal(id: string) {
-    this.modalService.close(id);
-    console.log(this.modalService.getModalData(id));
   }
 
   viewAbout() {

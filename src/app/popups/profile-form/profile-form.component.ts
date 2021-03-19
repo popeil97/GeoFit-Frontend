@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnInit, AfterViewInit, Output, EventEmitter, Input, SimpleChanges, OnDestroy, Inject, NgModule } from '@angular/core';
+import { Component, OnInit, AfterViewInit, OnDestroy, Inject, NgModule } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -7,7 +7,7 @@ import {
   UserProfileService,
   ImageService,
   TucanValidators,
-} from '../services';
+} from '../../services';
 
 @NgModule({
   imports:[MatDialogRef]
@@ -38,8 +38,6 @@ export class ProfileFormComponent implements OnInit,AfterViewInit,OnDestroy  {
     private _userProfileService: UserProfileService, 
     //private sanitizer:DomSanitizer,
     private _imageService: ImageService,
-    //private modalService: ModalService,
-
     public dialog : MatDialog,
     @Inject(MAT_DIALOG_DATA) public data:any,
     public dialogRef : MatDialogRef<ProfileFormComponent>,

@@ -5,9 +5,11 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { 
   ItemService,
   TucanValidators, 
-} from '../../../../services';
+} from '../../services';
 
-import { ItemStates } from '../race-merchandise-settings.component';
+import { 
+  ItemState
+} from '../../models';
 
 @NgModule({
   imports:[MatDialogRef]
@@ -18,7 +20,7 @@ import { ItemStates } from '../race-merchandise-settings.component';
   templateUrl: './race-merchandise-settings-item.component.html',
   styleUrls: [
     './race-merchandise-settings-item.component.css',
-    '../../../../../styles/forms.css'
+    '../../../styles/forms.css'
   ]
 })
 export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
@@ -52,11 +54,11 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
     @Inject(MAT_DIALOG_DATA) public data:any,
     public dialogRef : MatDialogRef<RaceMerchandiseSettingsItemComponent>,
   ) {
-    this.itemStateList = Object.keys(ItemStates).reduce((accumulator,state_key)=>{
+    this.itemStateList = Object.keys(ItemState).reduce((accumulator,state_key)=>{
       if (isNaN(parseInt(state_key))) {
         accumulator.push({
           name:state_key,
-          value:ItemStates[state_key]
+          value:ItemState[state_key]
         });
       }
       return accumulator;

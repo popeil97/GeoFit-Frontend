@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
-import {AuthService} from '../../services';
 
-import { LoginComponent } from '../login/login.component';
-import { RegisterComponent } from '../register/register.component';
+import { 
+  AuthService,
+} from '../../services';
+
+import { 
+  LoginComponent,
+  RegisterComponent,
+} from '../../popups';
 
 @Component({
   selector: 'app-landing',
@@ -12,8 +17,6 @@ import { RegisterComponent } from '../register/register.component';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
-
-  private testString = "From Parent";
 
   constructor(
     public authService: AuthService, 

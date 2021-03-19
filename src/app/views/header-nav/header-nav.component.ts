@@ -1,4 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import {Observable} from 'rxjs/Rx';
+
+import { NotificationPanelComponent } from '../../notification-panel/notification-panel.component';
+
 import { 
   AuthService,
   UserProfileService, 
@@ -7,15 +14,11 @@ import {
 import {
   UserData,
 } from '../../models';
-import {Observable} from 'rxjs/Rx';
-import { MatBottomSheet } from '@angular/material/bottom-sheet';
-import { NotificationPanelComponent } from '../../notification-panel/notification-panel.component';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import { MatDialog } from '@angular/material';
-
-import { LoginComponent } from '../login/login.component';
-import { RegisterComponent } from '../register/register.component';
+import { 
+  LoginComponent,
+  RegisterComponent,
+} from '../../popups';
 
 declare var $: any
 

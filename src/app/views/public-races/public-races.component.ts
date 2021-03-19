@@ -1,20 +1,24 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { MatDialog } from '@angular/material';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import * as _ from 'lodash';
-
-import { MatDialog } from '@angular/material';
-import { LoginComponent } from '../login/login.component';
-import { RegisterComponent } from '../register/register.component';
 
 import { 
   AuthService,
   RaceService,
   UserProfileService,
 } from '../../services';
+
 import {
   UserData,
 } from '../../models';
+
+import { 
+  LoginComponent,
+  RegisterComponent,
+} from '../../popups';
+
 import { ModalService } from '../../modalServices';
 
 

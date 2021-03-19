@@ -4,11 +4,12 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { 
   UserProfileService,
   UsersService,
-} from '../services';
+} from '../../services';
 
 @NgModule({
   imports:[MatDialogRef]
 })
+
 @Component({
   selector: 'app-view-follow',
   templateUrl: './view-follow.component.html',
