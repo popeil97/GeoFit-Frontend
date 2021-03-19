@@ -1,10 +1,10 @@
 import { Component, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
-import { ItemService } from '../../item.service';
 import { 
   AuthService,
   RaceService,
+  ItemService,
 } from '../../services';
 import { RaceSettings } from '../race-about/race-about.component';
 

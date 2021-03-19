@@ -1,5 +1,11 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { SwagService, Item, Order } from '../swag.service';
+import { 
+  SwagService,
+} from '../services';
+import {
+  Item,
+  Order,
+} from '../models';
 
 @Component({
   selector: 'app-swag-item',
@@ -16,7 +22,9 @@ export class SwagItemComponent implements OnInit {
   btnDisabled:Boolean = true;
   selectedSize:string;
 
-  constructor(private _swagService:SwagService) { }
+  constructor(
+    private _swagService:SwagService
+  ) { }
 
   ngOnInit() {
       console.log("ITEM", this.item);

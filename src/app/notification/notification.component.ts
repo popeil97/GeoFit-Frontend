@@ -1,11 +1,16 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NotificationType, NotificationsService } from '../notifications.service';
-import { TeamService } from '../team.service';
+import { MatDialog } from '@angular/material';
 import {MatSnackBar} from '@angular/material/snack-bar'
 import { SnackbarComponent } from '../snackbar/snackbar.component';
 import { StoryDialogComponent } from '../story-dialog/story-dialog.component';
-import { MatDialog } from '@angular/material';
-import { StoryService } from '../story.service';
+import { 
+  TeamService,
+  NotificationsService,
+  StoryService,
+} from '../services';
+import {
+  NotificationType,
+} from '../models';
 
 @Component({
   selector: 'app-notification',

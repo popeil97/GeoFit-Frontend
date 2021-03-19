@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { 
   AuthService,
   UserProfileService, 
+  NotificationsService,
 } from '../../services';
 import {
   UserData,
 } from '../../models';
-import { NotificationsService } from '../../notifications.service';
 import {Observable} from 'rxjs/Rx';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { NotificationPanelComponent } from '../../notification-panel/notification-panel.component';

@@ -1,5 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter, SimpleChanges, OnChanges } from '@angular/core';
-import { SwagService, Item, Order, Cart } from '../swag.service';
+import { 
+  SwagService,
+} from '../services';
+import {
+  Item, 
+  Order, 
+  Cart,
+} from '../models';
 import * as _ from 'lodash';
 
 @Component({
@@ -16,7 +23,9 @@ export class SwagListComponent implements OnInit,OnChanges {
   public items:any = null;
   public cart:any = null;
 
-  constructor(private _swagService:SwagService) { }
+  constructor(
+    private _swagService:SwagService
+  ) { }
 
   ngOnInit() {
     this.init();

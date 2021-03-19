@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, AfterViewInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
-import { UsersService } from '../users.service';
+import { 
+  UsersService 
+} from '../services';
 import { RaceViewPageComponent } from '../race-view-page/race-view-page.component';
 import { ModalService } from '../modalServices';
 
@@ -21,7 +23,11 @@ export class MapSettingsComponent implements OnInit,OnChanges,OnDestroy {
 
   private onChangesSubscriptions:any[] = [];
 
-   constructor(private _usersService:UsersService,private modalService: ModalService) { //, private _raceview:RaceViewPageComponent
+  constructor(
+    private _usersService:UsersService,
+    private modalService: ModalService
+  ) {
+    //, private _raceview:RaceViewPageComponent
 
     this.settingsForm = new FormGroup({
       isAutomaticImport: new FormControl('',[
@@ -47,7 +53,6 @@ export class MapSettingsComponent implements OnInit,OnChanges,OnDestroy {
         Validators.required,
       ]),
     });
-
     this.ageRangeOptions = ['0-19', '20-34', '35-49', '50-64', '65-79', '80-'];
   }
 

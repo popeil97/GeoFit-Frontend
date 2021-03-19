@@ -5,6 +5,7 @@ import {
   RaceService,
   UserProfileService,
   MapService,
+  UsersService,
 } from '../../services';
 import {
   UserData,
@@ -12,7 +13,6 @@ import {
 declare var $: any
 import { MapComponent } from '../../map/map.component';
 import { SwagComponent } from '../../swag/swag.component';
-import { UsersService } from '../../users.service';
 
 import { MatDialog } from '@angular/material';
 import { RegisterComponent } from '../register/register.component';

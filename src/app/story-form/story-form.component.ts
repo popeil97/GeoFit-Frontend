@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { StoryService } from '../story.service';
 import { 
-  ImageService
+  ImageService,
+  StoryService,
 } from '../services';
 
 

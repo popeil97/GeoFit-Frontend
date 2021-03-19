@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { TeamForm } from './team-form/team-form.component';
-import { environment } from './../environments/environment';
+import { TeamForm } from '../../team-form/team-form.component';
+import { environment } from './../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

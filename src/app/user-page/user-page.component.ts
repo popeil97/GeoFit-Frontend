@@ -5,11 +5,11 @@ import {
   AuthService,
   RaceService,
   UserProfileService,
+  UsersService,
 } from '../services';
 import {
   UserData,
 } from '../models'
-import { UsersService } from '../users.service';
 import { ModalService } from '../modalServices';
 
 import { MatDialog } from '@angular/material';

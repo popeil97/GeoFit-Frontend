@@ -1,7 +1,12 @@
 import { Component, Input, OnChanges, OnInit, Output, SimpleChanges,EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm, FormControl } from '@angular/forms';
-import { ItemService } from '../item.service';
-import { Item, ItemType } from '../swag.service';
+import { 
+  ItemService 
+} from '../services';
+import { 
+  Item, 
+  ItemType
+} from '../models';
 
 @Component({
   selector: 'app-item-form',

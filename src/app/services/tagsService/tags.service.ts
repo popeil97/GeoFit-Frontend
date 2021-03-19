@@ -1,8 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from './../environments/environment';
+import { environment } from './../../../environments/environment';
 import { env } from 'process';
-import { TagFormObj } from './tag-form/tag-form.component';
+import { TagFormObj } from '../../tag-form/tag-form.component';
+import {
+  Tag, TagType
+} from '../../models';
 
 @Injectable({
   providedIn: 'root'
@@ -38,15 +41,4 @@ export class TagsService {
   }
 
 
-}
-
-export interface Tag {
-  name:string,
-  type:number,
-  id:number,
-}
-
-export enum TagType {
-  ENTRY=1,
-  OWNER=2,
 }

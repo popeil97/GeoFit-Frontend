@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { MapBoxCoord } from './views/race-create/race-create.component';
-import { environment } from './../environments/environment';
-
-
+import { MapBoxCoord } from '../../views/race-create/race-create.component';
+import { environment } from './../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { SwagListComponent } from '../swag-list/swag-list.component';
 import * as _ from 'lodash';
-import { ItemType } from '../swag.service';
+import { 
+  ItemType 
+} from '../models';
 
 @Component({
   selector: 'app-cart-edit',

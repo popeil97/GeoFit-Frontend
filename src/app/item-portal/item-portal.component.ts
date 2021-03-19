@@ -1,7 +1,9 @@
 import { Component, Input, OnInit, } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ItemService } from '../item.service';
-import { RaceService } from '../services';
+import { 
+  RaceService,
+  ItemService,
+} from '../services';
 import { ItemFormDialogComponent } from './item-form-dialog.component';
 
 @Component({

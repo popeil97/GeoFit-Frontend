@@ -12,7 +12,6 @@ import { UserProgressComponent } from './user-progress/user-progress.component';
 import { RaceMenuComponent } from './race-menu/race-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import { PopUpService } from './pop-up.service';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { FormsModule } from '@angular/forms';
 import { 
@@ -21,13 +20,15 @@ import {
   UserProfileService, 
   MapService,
   ImageService,
+  ItemService,
+  StoryService,
+  PopUpService,
+  LeaderboardService,
+  TokenInterceptorService,
 } from './services/';
-import {TokenInterceptorService} from './tokeninterceptorservice';
 import { StravauthService } from './stravauth/stravauth.service';
 import { RaceFeedService } from './feed/race-feed.service';
 import { FeedComponent } from './feed/feed.component';
-import { StoryService } from './story.service';
-import { LeaderboardService } from './leaderboard.service';
 
 import {
   HttpRequest,

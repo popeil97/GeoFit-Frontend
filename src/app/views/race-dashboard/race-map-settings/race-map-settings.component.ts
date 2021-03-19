@@ -1,9 +1,9 @@
 import { Component, OnInit, AfterViewInit, Input, ViewChild } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 
-import { CoordinatesService } from '../../../coordinates.service';
 import { 
   RaceService,
+  CoordinatesService,
   TucanValidators,
 } from '../../../services';
 

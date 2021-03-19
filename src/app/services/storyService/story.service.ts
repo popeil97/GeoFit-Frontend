@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { text } from '@angular/core/src/render3';
-import { environment } from './../environments/environment';
-
+import { environment } from './../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class StoryService {
 
   // http options used for making API calls

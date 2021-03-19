@@ -15,10 +15,12 @@ import {
   AuthService,
   RaceService,
 } from '../../services';
-import { PaymentType } from '../../payments.service';
+import {
+  TagType,
+  Cart,
+  PaymentType,
+} from '../../models';
 import { AboutData } from '../race-about/race-about.component';
-import { TagType } from '../../tags.service';
-import { Cart } from '../../swag.service';
 import { ModalService } from '../../modalServices';
 
 @NgModule({

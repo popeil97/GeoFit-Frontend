@@ -1,7 +1,12 @@
-import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
-import { ItemService } from '../item.service';
-import { RaceService } from '../services';
-import { Item, ItemType } from '../swag.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { 
+  RaceService,
+  ItemService,
+} from '../services';
+import { 
+  Item, 
+  ItemType 
+} from '../models';
 
 @Component({
   selector: 'app-item-list',

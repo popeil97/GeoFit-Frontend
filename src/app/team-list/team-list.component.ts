@@ -1,12 +1,18 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { NotificationType, NotificationsService } from '../notifications.service';
-import { TeamService } from '../team.service';
 import {MatSnackBar} from '@angular/material/snack-bar'
 import { SnackbarComponent } from '../snackbar/snackbar.component';
 import { MatDialog } from '@angular/material';
 import { TeamFormDialogComponent } from '../team-form/team-form-dialog.component';
 import { TeamForm } from '../team-form/team-form.component';
 import { TeamEditBody } from '../race-view-page/race-view-page.component';
+
+import { 
+  TeamService,
+  NotificationsService,
+} from '../services';
+import {
+  NotificationType,
+} from '../models';
 
 @Component({
   selector: 'app-team-list',
@@ -21,10 +27,12 @@ export class TeamListComponent implements OnInit {
   @Output() callback:EventEmitter<any> = new EventEmitter();
   @Output() edit:EventEmitter<any> = new EventEmitter();
 
-  constructor(private _notificationService:NotificationsService,
-              private _teamService:TeamService,
-              private _snackbar:MatSnackBar,
-              public dialog: MatDialog) { }
+  constructor(
+    private _notificationService:NotificationsService,
+    private _teamService:TeamService,
+    private _snackbar:MatSnackBar,
+    public dialog: MatDialog
+  ) { }
 
   ngOnInit() {
     this.getTeams();

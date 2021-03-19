@@ -21,7 +21,8 @@ export class PasswordChangeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private route:ActivatedRoute,
-    private _authService: AuthService,) { 
+    private _authService: AuthService,
+  ) { 
       this.changeForm = this.formBuilder.group({
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required]

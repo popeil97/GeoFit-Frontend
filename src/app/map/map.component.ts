@@ -4,16 +4,17 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular
 import { 
   UserProfileService,
   MapService,
+  PopUpService,
 } from '../services';
 import {
-  UserData
+  UserData,
+  CheckpointMapData,
 } from '../models';
 //import * as L from 'leaflet';
 //import * as markercluster from 'leaflet.markercluster';
-import { PopUpService } from '../pop-up.service';
 import { UserFollowComponent } from '../user-follow/user-follow.component';
 import { RoutePinDialogComponent } from '../route-pin-dialog/route-pin-dialog.component';
-import { CheckpointMapData, MapRouteComponent } from '../map-route/map-route.component';
+import { MapRouteComponent } from '../map-route/map-route.component';
 
 import 'leaflet';
 import 'leaflet.markercluster';
@@ -73,11 +74,13 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
   loading:boolean = false;
 
-  constructor(private popupService:PopUpService, 
-              private _profileService:UserProfileService,
-              private _mapService: MapService,
-              private _raceService:RaceService,
-              public dialog: MatDialog) {
+  constructor(
+    private popupService:PopUpService, 
+    private _profileService:UserProfileService,
+    private _mapService: MapService,
+    private _raceService:RaceService,
+    public dialog: MatDialog
+  ) {
     Window["mapComponent"] = this;
   }
 

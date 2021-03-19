@@ -4,11 +4,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { 
   ItemService,
-} from '../../../../item.service';
-
-import { 
   TucanValidators, 
 } from '../../../../services';
+
 import { ItemStates } from '../race-merchandise-settings.component';
 
 @NgModule({

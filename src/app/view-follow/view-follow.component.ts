@@ -3,8 +3,8 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { 
   UserProfileService,
+  UsersService,
 } from '../services';
-import { UsersService } from '../users.service';
 
 @NgModule({
   imports:[MatDialogRef]

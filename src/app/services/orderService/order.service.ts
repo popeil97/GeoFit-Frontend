@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from './../environments/environment';
+import { environment } from './../../../environments/environment';
 import { openStdin } from 'process';
+import {
+  Order
+} from '../../models';
 
 @Injectable({
   providedIn: 'root'
@@ -19,11 +22,4 @@ export class OrderService {
   submitOrder(order:Order) {
     return this.http.post(environment.apiUrl + '/orders/submit/', {order:order}).toPromise();
   }
-}
-
-export interface Order {
-  payment_id:number;
-  details:string;
-  race_id:number;
-  shipping_id:number;
 }

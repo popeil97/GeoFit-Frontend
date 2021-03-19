@@ -1,7 +1,9 @@
   
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
-import { StoryService } from '../story.service';
+import { 
+  StoryService 
+} from '../services';
 
 @Component({
   selector: 'app-story-dialog',

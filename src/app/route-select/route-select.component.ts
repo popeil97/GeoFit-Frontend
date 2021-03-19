@@ -1,5 +1,7 @@
 import { Component, OnInit, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
-import { LeaderboardService } from '../leaderboard.service';
+import { 
+  LeaderboardService 
+} from '../services';
 import { ChildRaceData } from '../race-view-page/race-view-page.component';
 
 @Component({

@@ -1,7 +1,9 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, FormControl, FormArray } from '@angular/forms';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
-import { StoryService } from '../story.service';
+import { 
+  StoryService 
+} from '../services';
 
 @Component({
   selector: 'app-report-form',

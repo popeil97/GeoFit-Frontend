@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild, ViewChildren, QueryList, AfterViewChecked, AfterViewInit } from '@angular/core';
 import * as bootstrap from "bootstrap";
-import { StoryService } from '../story.service'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Progress } from '../user-progress/user-progress.component';
-import { ActivitiesService } from '../activities.service';
 import { MapComponent } from '../map/map.component';
 import { FeedComponent } from '../feed/feed.component';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
@@ -13,9 +11,13 @@ import {
   AuthService,
   RaceService,
   UserProfileService,
+  ActivitiesService,
+  StoryService,
 } from '../services';
 import {
   UserData,
+  Tag,
+  TagType,
 } from '../models'
 import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
 import * as confetti from 'canvas-confetti';
@@ -26,7 +28,6 @@ import { LogActivityComponent } from '../log-activity/log-activity.component';
 
 declare var $: any;
 import * as _ from 'lodash';
-import { TagType, Tag } from '../tags.service';
 import { RouteSelectComponent } from '../route-select/route-select.component';
 import { HybridLeaderboardComponent } from '../hybrid-leaderboard/hybrid-leaderboard.component';
 import { CheckpointDialogComponent } from '../checkpoint-list/checkpoint-dialog.component';

@@ -1,5 +1,11 @@
 import { Component, AfterViewChecked, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
-import { PaymentsService, Payment, PaymentType } from '../payments.service';
+import { 
+  PaymentsService,
+} from '../services';
+import {
+  Payment, 
+  PaymentType,
+} from '../models';
 declare let paypal: any;
 
 @Component({
@@ -17,8 +23,9 @@ export class PaypalComponent implements AfterViewChecked {
   paypalConfig:any;
   paymentError:Boolean;
 
-  constructor(public _paymentsService:PaymentsService) {
-
+  constructor(
+    public _paymentsService:PaymentsService
+  ) {
     this.paypalConfig = {
       env:'production',
       createOrder: (data,actions) => {

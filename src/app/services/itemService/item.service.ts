@@ -1,8 +1,10 @@
 import {HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { environment } from './../environments/environment';
+import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
-import { ItemType } from './swag.service';
+import { 
+  ItemType 
+} from '../../models';
 
 @Injectable({
   providedIn: 'root'

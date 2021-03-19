@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { NotifactionAction } from './notification/notification.component';
-import { environment } from './../environments/environment';
+import { NotifactionAction } from '../../notification/notification.component';
+import { environment } from './../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -42,14 +42,4 @@ export class NotificationsService {
 
     
   }
-}
-
-export enum NotificationType {
-  GENERAL=1,
-  TEAM_JOIN=2,
-  TEAM_JOIN_SUCCESS=3,
-  FOLLOW_REQUEST=4,
-  AUTO_IMPORT_ALERT=5,
-  LIKE=6,
-  COMMENT=7,
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, ViewContainerRef, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
-import { UsersService } from '../users.service'
+import { 
+  UsersService 
+} from '../services'
 
 @Component({
   selector: 'app-user-follow',

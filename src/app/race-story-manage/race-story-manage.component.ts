@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { RaceService } from '../services';
+import { 
+  RaceService,
+  ReportService,
+} from '../services';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { StoryDeleteDialogComponent } from '../story-delete-dialog/story-delete-dialog.component';
-import { ReportService } from '../report.service';
 
 @Component({
   selector: 'app-race-story-manage',

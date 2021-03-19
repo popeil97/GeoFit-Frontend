@@ -4,13 +4,14 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular
 import { 
   UserProfileService,
   MapService,
+  PopUpService,
 } from '../services';
 import {
-  UserData
+  UserData,
+  CheckpointMapData,
 } from '../models';
 //import * as L from 'leaflet';
 //import * as markercluster from 'leaflet.markercluster';
-import { PopUpService } from '../pop-up.service';
 import { UserFollowComponent } from '../user-follow/user-follow.component';
 import { RoutePinDialogComponent } from '../route-pin-dialog/route-pin-dialog.component';
 import { ModalService } from '../modalServices';
@@ -77,9 +78,10 @@ export class MapRouteComponent implements OnChanges {
     private _mapService: MapService,
     private _raceService:RaceService,
     private modalService: ModalService,
-    public dialog: MatDialog) { 
-      this.coordsRoutes = [];
-    }
+    public dialog: MatDialog
+  ) { 
+    this.coordsRoutes = [];
+  }
 
 
   ngOnChanges(changes: SimpleChanges) {
@@ -733,11 +735,4 @@ interface MapData {
 
 interface OrgPinData {
   org_pins: UserData[];
-}
-
-export interface CheckpointMapData {
-  marker:number;
-  name:string;
-  id:number;
-  distance_type:string;
 }

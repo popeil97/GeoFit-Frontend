@@ -1,5 +1,10 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
-import { RaceDashboardService } from '../race-dashboard.service';
+import { 
+  RaceDashboardService,
+} from '../services';
+import {
+  ActivityItem,
+} from '../models';
 
 @Component({
   selector: 'app-race-dashboard-racer-list',
@@ -78,14 +83,4 @@ interface RacerItem{
   distance_type:string;
   child_user_stats: RacerItem[];
   activities: ActivityItem[];
-}
-
-interface ActivityItem {
-  id:number;
-  name:string;
-  distance:string;
-  moving_time:number;
-  start_date:string;
-  type:string;
-  is_manual:boolean;
 }

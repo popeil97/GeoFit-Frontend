@@ -1,5 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CheckpointService } from '../checkpoint.service';
+import { 
+  CheckpointService,
+} from '../services';
+import {
+  Checkpoint,
+} from '../models';
 
 @Component({
   selector: 'app-checkpoint-item',
@@ -11,7 +16,9 @@ export class CheckpointItemComponent implements OnInit {
   @Input() checkpointID:number;
   checkpoint: Checkpoint = {content:{}} as Checkpoint;
 
-  constructor(private _checkpointService:CheckpointService) { }
+  constructor(
+    private _checkpointService:CheckpointService
+  ) {}
 
   ngOnInit() {
     this.init();
@@ -30,16 +37,4 @@ export class CheckpointItemComponent implements OnInit {
     });
   }
 
-}
-
-export interface CheckpointContent {
-  image:any;
-  description: string;
-}
-
-export interface Checkpoint {
-  marker: number;
-  name: string;
-  id: number;
-  content: CheckpointContent;
 }
