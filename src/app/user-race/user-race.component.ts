@@ -1,7 +1,11 @@
 import { Component, OnInit,OnChanges, SimpleChanges, Input, OnDestroy } from '@angular/core';
-import { RaceService } from '../race.service';
-import { AuthService } from '../auth.service';
-import { UserData } from '../userprofile.service'; 
+import { 
+  AuthService,
+  RaceService,
+} from '../services';
+import {
+  UserData,
+} from '../models';
 import * as _ from 'lodash';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 

@@ -1,9 +1,15 @@
 import { Component, OnInit, Output, EventEmitter, Input, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { UserProfileService } from '../userprofile.service';
-import { ImageService } from '../image.service';
 import { DomSanitizer } from '@angular/platform-browser';
-import { AuthService } from '../auth.service';
+import { 
+  AuthService,
+  UserProfileService,
+  ImageService,
+  TucanValidators,
+} from '../services';
+import {
+  UserData,
+} from '../models';
 
 @Component({
   selector: 'app-profile-pic-form',
@@ -22,7 +28,6 @@ export class ProfilePicFormComponent implements OnInit,AfterViewInit,OnDestroy {
   public profileForm: FormGroup = null;
   public profilePicURL:any = null;
   public profilePicUploading:Boolean = false;
-  public validForm:Boolean = true;
 
   public checkingValidityOfSubmission:Boolean = false;
   public updatingItem:Boolean = false;
@@ -74,12 +79,15 @@ export class ProfilePicFormComponent implements OnInit,AfterViewInit,OnDestroy {
     });
     this.initializing = false;
   }
+  validForm = () => {
+    return TucanValidators.isFormValid(this.profileForm);
+  }
   onFormSubmit = (e:any) => {
     if (e.preventDefault) e.preventDefault();
     if (e.stopPropagation) e.stopPropagation();
 
     this.checkingValidityOfSubmission = true;
-    this.validForm = this.isFormValid(this.profileForm);
+    const valid = this.validForm();
     if (!this.validForm || this.profilePicURL == null) {
       console.log("INVALID FORM");
       this.checkingValidityOfSubmission = false;
@@ -107,12 +115,6 @@ export class ProfilePicFormComponent implements OnInit,AfterViewInit,OnDestroy {
       this.checkingValidityOfSubmission = false;
       this.updatingItem = false;
     }) 
-  }
-  isFormValid = (f:FormGroup) => {
-    if (!f.disabled) return f.valid;
-    return Object.keys(f.controls).reduce((accumulator,inputKey)=>{
-      return (accumulator && f.get(inputKey).errors == null);
-    },true);
   }
   onClickProfilePicUpload = (e:any) => {
     if (e.preventDefault) e.preventDefault();
@@ -217,17 +219,5 @@ export interface ProfilePic {
   About: string;
   Location: string;
   DistanceType: string;
-}
-
-interface UserData {
-  user_id:number;
-  profile_url:string;
-  email:string;
-  description: string;
-  location:string;
-  first_name:string;
-  last_name:string;
-  follows:boolean;
-  distance_type: string;
 }
 

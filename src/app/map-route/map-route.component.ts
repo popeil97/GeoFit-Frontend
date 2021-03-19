@@ -1,13 +1,18 @@
 import { AfterViewInit, Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef, ComponentFactory, ComponentFactoryResolver, RendererFactory2, ViewContainerRef, ApplicationRef } from '@angular/core';
 import { NgElement, WithProperties } from '@angular/elements';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
-import { UserProfileService } from '../userprofile.service';
+import { 
+  UserProfileService,
+  MapService,
+} from '../services';
+import {
+  UserData
+} from '../models';
 //import * as L from 'leaflet';
 //import * as markercluster from 'leaflet.markercluster';
 import { PopUpService } from '../pop-up.service';
 import { UserFollowComponent } from '../user-follow/user-follow.component';
 import { RoutePinDialogComponent } from '../route-pin-dialog/route-pin-dialog.component';
-import { MapService } from '../map.service';
 import { ModalService } from '../modalServices';
 
 import 'leaflet';
@@ -22,7 +27,7 @@ import * as turf from '@turf/turf';
 import { ListKeyManager } from '@angular/cdk/a11y';
 import { AppComponent } from '../app.component';
 import { PopupComponent } from '../popup/popup.component';
-import { RaceService } from '../race.service';
+import { RaceService } from '../services';
 
 @Component({
   selector: 'app-map-route',
@@ -724,26 +729,6 @@ interface RoutePins {
 interface MapData {
   coords: any;
   route_pins: RoutePins[];
-}
-
-interface UserData {
-  user_id: number,
-  total_distance: number,
-  distance_type: string,
-  rel_distance: number,
-  route_idx: number,
-  display_name: string,
-  profile_url: string,
-  follows: boolean,
-  child_user_stats: any[],
-  isTeam: boolean,
-  isMe: boolean,
-  gender: string,
-  age: number,
-
-  email:string,
-  description: string,
-  location:string,
 }
 
 interface OrgPinData {

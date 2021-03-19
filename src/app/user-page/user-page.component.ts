@@ -1,9 +1,14 @@
 import { Component, OnInit, SimpleChanges, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
-import { UserProfileService, UserData } from '../userprofile.service';
-import { AuthService } from '../auth.service';
-import { RaceService } from '../race.service';
+import { 
+  AuthService,
+  RaceService,
+  UserProfileService,
+} from '../services';
+import {
+  UserData,
+} from '../models'
 import { UsersService } from '../users.service';
 import { ModalService } from '../modalServices';
 

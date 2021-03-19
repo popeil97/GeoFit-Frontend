@@ -1,6 +1,4 @@
-import {Component, OnInit, ViewContainerRef} from '@angular/core';
-import {AuthService} from './auth.service';
-import {throwError} from 'rxjs';
+import {Component, ViewContainerRef} from '@angular/core';
 
 import { ModalService } from './modalServices';
  

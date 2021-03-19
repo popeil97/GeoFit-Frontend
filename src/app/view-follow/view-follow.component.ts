@@ -1,7 +1,9 @@
 import { NgModule, Component, OnInit, Inject, ViewChild, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { UserProfileService } from '../userprofile.service';
+import { 
+  UserProfileService,
+} from '../services';
 import { UsersService } from '../users.service';
 
 @NgModule({

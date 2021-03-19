@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RaceService } from '../../../race.service';
+import { 
+  RaceService,
+  TucanValidators,
+} from '../../../services';
 import { Router } from '@angular/router';
-
-import { cannotBeEmptyString, requiredFileType, isFormValid } from '../../../services';
 
 @Component({
   selector: 'app-race-basics',
@@ -82,24 +83,24 @@ export class RaceBasicsComponent implements OnInit {
     this.raceBasicsForm = new FormGroup({
       name: new FormControl(this.raceData.name,[
         Validators.required,
-        cannotBeEmptyString(),
+        TucanValidators.cannotBeEmptyString(),
         Validators.maxLength(30),
       ]),
       description: new FormControl(this.raceData.description,[
         Validators.required,
-        cannotBeEmptyString(),
+        TucanValidators.cannotBeEmptyString(),
         Validators.maxLength(2000),
       ]),
       startDate: new FormControl(this.raceData.startDate,[
         Validators.required,
-        cannotBeEmptyString(),
+        TucanValidators.cannotBeEmptyString(),
       ]),
       endDate: new FormControl(this.raceData.endDate,[
         Validators.required,
-        cannotBeEmptyString(),
+        TucanValidators.cannotBeEmptyString(),
       ]),
       bannerFile: new FormControl(this.raceData.bannerFile,[
-        requiredFileType(false, this.bannerURLTypes),
+        TucanValidators.requiredFileType(false, this.bannerURLTypes),
       ]),
       raceType: new FormControl(this.raceTypeDictionary(RaceTypes[this.raceData.raceType]),[
         Validators.required,
@@ -109,7 +110,7 @@ export class RaceBasicsComponent implements OnInit {
     this.loading = false;
   }
   validForm = () => {
-    return isFormValid(this.raceBasicsForm);
+    return TucanValidators.isFormValid(this.raceBasicsForm);
   }
   resetForm = () => {
     this.initializeRaceBasicsForm();

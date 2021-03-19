@@ -1,6 +1,5 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { RaceService } from '../../race.service';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import * as _ from 'lodash';
 
@@ -8,8 +7,14 @@ import { MatDialog } from '@angular/material';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 
-import { AuthService } from '../../auth.service';
-import { UserProfileService } from '../../userprofile.service';
+import { 
+  AuthService,
+  RaceService,
+  UserProfileService,
+} from '../../services';
+import {
+  UserData,
+} from '../../models';
 import { ModalService } from '../../modalServices';
 
 
@@ -254,19 +259,6 @@ export class PublicRacesComponent implements OnInit {
   }
   
 
-}
-
-interface UserData {
-  user_id:number;
-  profile_url:string;
-  email:string;
-  description: string;
-  location:string;
-  first_name:string;
-  last_name:string;
-  follows:boolean;
-  distance_type: string;
-  is_me: boolean;
 }
 
 export interface RaceSettings {

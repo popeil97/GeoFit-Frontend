@@ -2,7 +2,7 @@ import { Component, OnInit, Inject, ViewChild, Output, EventEmitter, Input } fro
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({

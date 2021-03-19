@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, ViewChildren, QueryList, AfterViewChecked, AfterViewInit } from '@angular/core';
 import * as bootstrap from "bootstrap";
-import { RaceService } from '../race.service';
 import { StoryService } from '../story.service'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { Progress } from '../user-progress/user-progress.component';
@@ -10,8 +9,14 @@ import { FeedComponent } from '../feed/feed.component';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
 import { RaceSettings } from '../views/race-about/race-about.component';
 import { TeamFormComponent } from '../team-form/team-form.component';
-import { AuthService } from '../auth.service';
-import { UserProfileService } from '../userprofile.service';
+import { 
+  AuthService,
+  RaceService,
+  UserProfileService,
+} from '../services';
+import {
+  UserData,
+} from '../models'
 import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
 import * as confetti from 'canvas-confetti';
 import { ModalService } from '../modalServices';
@@ -548,20 +553,6 @@ interface PinSettings {
   minAge: number;
   maxAge: number;
   showOrgPins: boolean;
-}
-
-
-interface UserData {
-  user_id:number;
-  profile_url:string;
-  email:string;
-  description: string;
-  location:string;
-  first_name:string;
-  last_name:string;
-  follows:boolean;
-  distance_type: string;
-  is_me: boolean;
 }
 
 

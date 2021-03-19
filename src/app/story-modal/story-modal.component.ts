@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { StoryService } from '../story.service';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services';
 
 declare var $: any;
 

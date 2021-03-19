@@ -13,16 +13,20 @@ import { RaceMenuComponent } from './race-menu/race-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { PopUpService } from './pop-up.service';
-import { RaceService } from './race.service';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
 import { FormsModule } from '@angular/forms';
-import { AuthService} from './auth.service';
+import { 
+  AuthService, 
+  RaceService,
+  UserProfileService, 
+  MapService,
+  ImageService,
+} from './services/';
 import {TokenInterceptorService} from './tokeninterceptorservice';
 import { StravauthService } from './stravauth/stravauth.service';
 import { RaceFeedService } from './feed/race-feed.service';
 import { FeedComponent } from './feed/feed.component';
 import { StoryService } from './story.service';
-import { ImageService } from './image.service';
 import { LeaderboardService } from './leaderboard.service';
 
 import {
@@ -71,7 +75,6 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { NotificationPanelComponent } from './notification-panel/notification-panel.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 import { StoryDialogComponent } from './story-dialog/story-dialog.component';
-import { MapService } from './map.service';
 import { TagFormComponent } from './tag-form/tag-form.component';
 import { TagSelectComponent } from './tag-select/tag-select.component';
 import { ReportFormComponent } from './report-form/report-form.component';

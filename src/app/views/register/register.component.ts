@@ -12,12 +12,17 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angula
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { AuthService } from '../../auth.service';
+import { 
+  AuthService,
+  RaceService,
+  UserProfileService,
+  TucanValidators,
+} from '../../services';
+import {
+  UserData
+} from '../../models';
 import * as moment from 'moment';
-import { MustMatch } from '../../services/form-validators';
-import { UserProfileService, UserData } from '../../userprofile.service';
 import { ModalService } from '../../modalServices';
-import { RaceService } from '../../race.service';
 
 @NgModule({
   imports:[MatDialogRef]
@@ -152,7 +157,7 @@ export class RegisterComponent implements OnInit {
       password: [this.credentialsForm.value.password, [Validators.required, Validators.minLength(6)]],
       confirmPassword: [this.credentialsForm.value.confirmPassword, Validators.required]
     }, {
-        validator: MustMatch('password', 'confirmPassword')
+        validator: TucanValidators.MustMatch('password', 'confirmPassword')
     },);
 
     //Register and navigate to login
@@ -305,7 +310,7 @@ export class RegisterComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required]
     }, {
-        validator: MustMatch('password', 'confirmPassword')
+        validator: TucanValidators.MustMatch('password', 'confirmPassword')
     },);
     this.submitted = false;
     this.loading = false;
@@ -315,7 +320,7 @@ export class RegisterComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
     }, {
-      validator: MustMatch('password','confirmPassword')
+      validator: TucanValidators.MustMatch('password','confirmPassword')
     });
     this.credentialsLoading = false;
     this.credentialsSubmitted = false;

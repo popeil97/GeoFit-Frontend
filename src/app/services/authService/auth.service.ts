@@ -1,7 +1,10 @@
 import {Injectable, EventEmitter, Output} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { environment } from './../environments/environment';
-import { UserProfileService, UserData } from "./userprofile.service";
+import { environment } from './../../../environments/environment';
+import { UserProfileService } from "../userProfileService/userprofile.service";
+import {
+  UserData
+} from '../../models';
 import { Observable, Observer, Subject, } from 'rxjs';
 
 @Injectable()

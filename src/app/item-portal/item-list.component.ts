@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ItemService } from '../item.service';
-import { RaceService } from '../race.service';
+import { RaceService } from '../services';
 import { Item, ItemType } from '../swag.service';
 
 @Component({
@@ -15,7 +15,10 @@ export class ItemListComponent implements OnInit {
 
   public items:Item[];
 
-  constructor(private _itemService:ItemService,private _raceService:RaceService) { }
+  constructor(
+    private _itemService:ItemService,
+    private _raceService:RaceService
+  ) {}
 
   ngOnInit() {
     this._itemService.getItemsByType(this.raceID,this.itemType).then((resp) => {

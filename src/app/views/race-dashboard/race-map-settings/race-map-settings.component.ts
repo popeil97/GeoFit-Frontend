@@ -2,8 +2,10 @@ import { Component, OnInit, AfterViewInit, Input, ViewChild } from '@angular/cor
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 
 import { CoordinatesService } from '../../../coordinates.service';
-import { RaceService} from '../../../race.service';
-import { cannotBeEmptyString, isNumber, notSameStartEndLocations, isFormValid } from '../../../services'
+import { 
+  RaceService,
+  TucanValidators,
+} from '../../../services';
 
 import { MapComponent, RouteData } from '../../../map/map.component';
 
@@ -125,35 +127,35 @@ export class RaceMapSettingsComponent implements OnInit,AfterViewInit {
     this.form = new FormGroup({  
       startLoc:new FormControl(this.raceData.start_loc,[
         Validators.required,
-        cannotBeEmptyString(),
+        TucanValidators.cannotBeEmptyString(),
       ]),
       startLat:new FormControl(this.raceData.start_lat,[
         Validators.required,
-        isNumber(),
-        cannotBeEmptyString(),
+        TucanValidators.isNumber(),
+        TucanValidators.cannotBeEmptyString(),
       ]),
       startLon:new FormControl(this.raceData.start_lon,[
         Validators.required,
-        isNumber(),
-        cannotBeEmptyString(),
+        TucanValidators.isNumber(),
+        TucanValidators.cannotBeEmptyString(),
       ]),
       endLoc:new FormControl(this.raceData.end_loc,[
         Validators.required,
-        cannotBeEmptyString(),
+        TucanValidators.cannotBeEmptyString(),
       ]),
       endLat:new FormControl(this.raceData.end_lat,[
         Validators.required,
-        isNumber(),
-        cannotBeEmptyString(),
+        TucanValidators.isNumber(),
+        TucanValidators.cannotBeEmptyString(),
       ]),
       endLon:new FormControl(this.raceData.end_lon,[
         Validators.required,
-        isNumber(),
-        cannotBeEmptyString(),
+        TucanValidators.isNumber(),
+        TucanValidators.cannotBeEmptyString(),
       ]),
       mapFile:new FormControl(null),
     },
-      notSameStartEndLocations,
+      TucanValidators.notSameStartEndLocations,
     );
     this.loading = false;
   }
@@ -197,7 +199,7 @@ export class RaceMapSettingsComponent implements OnInit,AfterViewInit {
     },false);
   }
   formValid = () => {
-    return isFormValid(this.form);
+    return TucanValidators.isFormValid(this.form);
   }
   resetForm() {
     this.initializeForm();

@@ -2,9 +2,11 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
 import { StoryModalComponent } from '../story-modal/story-modal.component';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { RaceFeedService } from './race-feed.service';
-import { UserProfileService } from '../userprofile.service';
 import { StoryFormComponent } from '../story-form/story-form.component';
-import { AuthService } from '../auth.service';
+import { 
+  AuthService,
+  UserProfileService,
+} from '../services';
 import { MatTableDataSource } from '@angular/material/table';
 import { StoryDialogComponent } from '../story-dialog/story-dialog.component';
 import { ReportFormComponent } from '../report-form/report-form.component';

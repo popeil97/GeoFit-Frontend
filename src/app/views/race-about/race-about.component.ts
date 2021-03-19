@@ -1,12 +1,17 @@
 import { Component, OnInit,ViewChild,OnDestroy} from '@angular/core';
-import { RaceService } from '../../race.service';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { AuthService } from '../../auth.service';
-import { UserProfileService, UserData } from '../../userprofile.service';
+import { 
+  AuthService,
+  RaceService,
+  UserProfileService,
+  MapService,
+} from '../../services';
+import {
+  UserData,
+} from '../../models';
 declare var $: any
 import { MapComponent } from '../../map/map.component';
 import { SwagComponent } from '../../swag/swag.component';
-import { MapService } from '../../map.service';
 import { UsersService } from '../../users.service';
 
 import { MatDialog } from '@angular/material';

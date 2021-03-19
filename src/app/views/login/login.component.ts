@@ -12,8 +12,13 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { AuthService } from '../../auth.service';
-import { UserProfileService, UserData, } from '../../userprofile.service';
+import { 
+  AuthService,
+  UserProfileService, 
+} from '../../services';
+import {
+  UserData,
+} from '../../models';
 
 @NgModule({
   imports:[MatDialogRef]

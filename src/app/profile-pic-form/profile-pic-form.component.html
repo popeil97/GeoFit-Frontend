@@ -33,15 +33,15 @@
         <div class='formGroup formGroupColumn formGroupAlignedTop submitButtonGroup' *ngIf="this.profilePicURL != this.defaultURL">
           <input 
             class="button formButton formSubmitButton"
-            [ngClass]="{'disabled':(this.checkingValidityOfSubmission || !this.validForm)}"
+            [ngClass]="{'disabled':(this.checkingValidityOfSubmission || !this.validForm())}"
             type="submit"
             value="Upload Profile Picture"
-            [disabled]="this.checkingValidityOfSubmission || !this.validForm"
-            [readonly]="this.checkingValidityOfSubmission || !this.validForm"
+            [disabled]="this.checkingValidityOfSubmission || !this.validForm()"
+            [readonly]="this.checkingValidityOfSubmission || !this.validForm()"
           />
           <div class="margin-top-16px" *ngIf="this.hasSubmitted">
-            <p class="italics margin-0px" *ngIf="this.validForm && this.updatingItem">Updating Profile Picture...</p>
-            <p class="italics redText margin-0px" *ngIf="!this.validForm">Errors have been found above. Check each of your inputs for errors.</p>
+            <p class="italics margin-0px" *ngIf="this.validForm() && this.updatingItem">Updating Profile Picture...</p>
+            <p class="italics redText margin-0px" *ngIf="!this.validForm()">Errors have been found above. Check each of your inputs for errors.</p>
           </div>
         </div>
         <!--

@@ -1,7 +1,7 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ItemService } from '../item.service';
-import { RaceService } from '../race.service';
+import { RaceService } from '../services';
 import { ItemFormDialogComponent } from './item-form-dialog.component';
 
 @Component({
@@ -9,19 +9,15 @@ import { ItemFormDialogComponent } from './item-form-dialog.component';
   templateUrl: './item-portal.component.html',
   styleUrls: ['./item-portal.component.css']
 })
-export class ItemPortalComponent implements OnInit,OnChanges {
+export class ItemPortalComponent implements OnInit {
   
   @Input() raceID:number = 24;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(
+    public dialog: MatDialog
+  ) { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    
-  }
-
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   openItemForm() {
     // launch item form dialog component

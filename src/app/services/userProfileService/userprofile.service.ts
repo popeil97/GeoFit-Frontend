@@ -1,7 +1,7 @@
 import { Injectable} from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { environment } from './../environments/environment';
+import { environment } from './../../../environments/environment';
 import { Observable, Observer, Subject, } from 'rxjs';
 
 @Injectable({
@@ -48,25 +48,4 @@ export class UserProfileService {
     this.refresh_ts = null;
   }
 
-}
-
-interface UserData {
-  user_id:number;
-  profile_url:string;
-  email:string;
-  description: string;
-  location:string;
-  first_name:string;
-  last_name:string;
-  follows:boolean;
-  distance_type: string;
-  is_me: boolean;
-  location_visibility:boolean;
-  about_visibility:boolean;
-  email_visibility:boolean;
-  email_mailto:string;
-}
-
-export {
-  UserData,
 }

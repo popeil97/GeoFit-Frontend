@@ -1,10 +1,12 @@
 import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
-import { RaceService } from '../../race.service';
-import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 
-import { cannotBeEmptyString, requiredFileType, isFormValid, } from '../../services/';
+import { 
+  AuthService,
+  RaceService,
+  TucanValidators,
+} from '../../services';
 
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from '../login/login.component';
@@ -123,24 +125,24 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
     this.raceBasicsForm = new FormGroup({
       name: new FormControl('',[
         Validators.required,
-        cannotBeEmptyString(),
+        TucanValidators.cannotBeEmptyString(),
         Validators.maxLength(30),
       ]),
       description: new FormControl('',[
         Validators.required,
-        cannotBeEmptyString(),
+        TucanValidators.cannotBeEmptyString(),
         Validators.maxLength(2000),
       ]),
       startDate: new FormControl('',[
         Validators.required,
-        cannotBeEmptyString(),
+        TucanValidators.cannotBeEmptyString(),
       ]),
       endDate: new FormControl('',[
         Validators.required,
-        cannotBeEmptyString(),
+        TucanValidators.cannotBeEmptyString(),
       ]),
       bannerFile: new FormControl(null,[
-        requiredFileType(false, this.bannerURLTypes),
+        TucanValidators.requiredFileType(false, this.bannerURLTypes),
       ]),
       raceType: new FormControl('',[
         Validators.required,
@@ -148,7 +150,7 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
     });
   }
   validForm = () => {
-    return isFormValid(this.raceBasicsForm);
+    return TucanValidators.isFormValid(this.raceBasicsForm);
   }
 
   selectRaceType(option:any) {

@@ -1,6 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { UserProfileService, UserData } from '../userprofile.service';
+import { 
+  AuthService,
+  UserProfileService, 
+} from '../services';
+import {
+  UserData,
+} from '../models';
 
 @Component({
   selector: 'app-welcome',

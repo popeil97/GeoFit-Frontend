@@ -1,5 +1,10 @@
 import { Component, OnInit ,Input} from '@angular/core';
-import { UserProfileService } from '../userprofile.service';
+import { 
+  UserProfileService 
+} from '../services';
+import {
+  UserData
+} from '../models';
 
 @Component({
   selector: 'app-show-followers',
@@ -13,7 +18,9 @@ export class ShowFollowersComponent implements OnInit {
   picURL:any;
   follows:any
 
-  constructor(private _userProfileService:UserProfileService,) { }
+  constructor(
+    private _userProfileService:UserProfileService,
+  ) {}
 
   ngOnInit() {
   	this.getUserData();
@@ -30,19 +37,4 @@ export class ShowFollowersComponent implements OnInit {
     });
   }
 
-}
-
-
-
-interface UserData {
-  user_id:number;
-  profile_url:string;
-  email:string;
-  description: string;
-  location:string;
-  first_name:string;
-  last_name:string;
-  follows:boolean;
-  distance_type: string;
-  is_me: boolean;
 }

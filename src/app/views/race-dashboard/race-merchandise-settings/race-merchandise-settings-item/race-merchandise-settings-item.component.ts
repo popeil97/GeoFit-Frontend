@@ -2,9 +2,13 @@ import { Component, OnInit, Inject, NgModule, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
-import { ItemService } from '../../../../item.service';
+import { 
+  ItemService,
+} from '../../../../item.service';
 
-import { isNumber, cannotBeEmptyString, isFormValid, requiredFileType } from '../../../../services';
+import { 
+  TucanValidators, 
+} from '../../../../services';
 import { ItemStates } from '../race-merchandise-settings.component';
 
 @NgModule({
@@ -92,15 +96,15 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
     this.form = this.fb.group({
       name:[this.initialData.name,Validators.compose([
         Validators.required,
-        cannotBeEmptyString(),
+        TucanValidators.cannotBeEmptyString(),
       ])],
       description:[this.initialData.description,Validators.compose([
         Validators.required,
-        cannotBeEmptyString(),
+        TucanValidators.cannotBeEmptyString(),
       ])],
       price:[this.initialData.price,Validators.compose([
         Validators.required,
-        isNumber(),
+        TucanValidators.isNumber(),
         Validators.min(0),
       ])],
       type:[this.initialData.type,Validators.compose([
@@ -110,7 +114,7 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
         Validators.required,
       ])],
       image:[this.initialData.image_file,Validators.compose([
-        requiredFileType(false, ['jpg','jpeg','png'])
+        TucanValidators.requiredFileType(false, ['jpg','jpeg','png'])
       ])],
       sizes:[this.initialData.sizes],
     });
@@ -134,7 +138,7 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
     this.initializeForm();
   }
   _isFormValid = () => {
-    return isFormValid(this.form);
+    return TucanValidators.isFormValid(this.form);
   }
   onFormSubmit(e:Event) {
     e.preventDefault();

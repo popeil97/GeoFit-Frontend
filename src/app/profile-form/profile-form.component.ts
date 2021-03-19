@@ -1,10 +1,13 @@
 import { Component, OnChanges, OnInit, AfterViewInit, Output, EventEmitter, Input, SimpleChanges, OnDestroy, Inject, NgModule } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
-import { UserProfileService } from '../userprofile.service';
-import { ImageService } from '../image.service';
 import { DomSanitizer } from '@angular/platform-browser';
+
+import { 
+  UserProfileService,
+  ImageService,
+  TucanValidators,
+} from '../services';
 
 @NgModule({
   imports:[MatDialogRef]
@@ -16,15 +19,12 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./profile-form.component.css']
 })
 export class ProfileFormComponent implements OnInit,AfterViewInit,OnDestroy  {
- // @Input() userData: UserData;
- @Input() id: string;
 
  // @Output() formUpdated: EventEmitter<void> = new EventEmitter();
 
   public initializing:Boolean = true;
   public profileForm:FormGroup = null;
   public checkingValidityOfSubmission:Boolean = false;
-  public validForm:Boolean = true;
 
   public profilePicURL:any = null;
   public profilePicInput:any = null;
@@ -84,7 +84,6 @@ export class ProfileFormComponent implements OnInit,AfterViewInit,OnDestroy  {
 
     this.distanceTypeOptions = ['Mi', 'KM'];
     this.checkingValidityOfSubmission = false;
-    this.validForm = true;
 
     this.profileForm = new FormGroup({
       FirstName: new FormControl(this.data.first_name,[
@@ -115,6 +114,9 @@ export class ProfileFormComponent implements OnInit,AfterViewInit,OnDestroy  {
 
     this.initializing = false;
   }
+  validForm = () => {
+    return TucanValidators.isFormValid(this.profileForm);
+  }
   resetForm = (e:any):void => {
     if (e.preventDefault) e.preventDefault();
     if (e.stopPropagation) e.stopPropagation();
@@ -136,8 +138,8 @@ export class ProfileFormComponent implements OnInit,AfterViewInit,OnDestroy  {
       "ProfilePic":"profile_url"
     }
     this.checkingValidityOfSubmission = true;
-    this.validForm = this.isFormValid(this.profileForm);
-    if (!this.validForm) {
+    const valid = this.validForm();
+    if (!valid) {
       console.log("INVALID FORM");
       this.checkingValidityOfSubmission = false;
       return;
@@ -158,7 +160,6 @@ export class ProfileFormComponent implements OnInit,AfterViewInit,OnDestroy  {
     }
     // Finally make the push
     this._userProfileService.updateProfile(formClean).then((data) => {
-      //this.modalService.callbackModal(this.id,"profile-done");
       if (data["success"]) {
         this.checkingValidityOfSubmission = false;
         this.dialogRef.close(true)
@@ -171,12 +172,6 @@ export class ProfileFormComponent implements OnInit,AfterViewInit,OnDestroy  {
       alert("An error occurred while updating your profile info!");
       this.checkingValidityOfSubmission = false;
     }) 
-  }
-  isFormValid = (f:FormGroup) => {
-    if (!f.disabled) return f.valid;
-    return Object.keys(f.controls).reduce((accumulator,inputKey)=>{
-      return (accumulator && f.get(inputKey).errors == null);
-    },true);
   }
   /* LEGACY CODE
   updateProfile() {

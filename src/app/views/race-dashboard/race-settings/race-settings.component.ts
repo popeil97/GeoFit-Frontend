@@ -1,8 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 
-import { RaceService } from '../../../race.service';
-import { isNumber, isFormValid } from '../../../services'
+import { 
+  RaceService,
+
+  TucanValidators,
+} from '../../../services'
 
 @Component({
   selector: 'app-race-settings',
@@ -46,7 +49,7 @@ export class RaceSettingsComponent implements OnInit {
           disabled:!this.raceData.allow_teams
         },
         [
-          isNumber(),
+          TucanValidators.isNumber(),
           Validators.min(1)
         ]
       ),
@@ -85,7 +88,7 @@ export class RaceSettingsComponent implements OnInit {
     }
   }
   formValid = () => {
-    return isFormValid(this.form);
+    return TucanValidators.isFormValid(this.form);
   }
   resetForm() {
     this.initializeForm();

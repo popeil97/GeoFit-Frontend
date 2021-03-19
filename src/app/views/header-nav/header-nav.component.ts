@@ -1,8 +1,13 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AuthService } from '../../auth.service';
+import { 
+  AuthService,
+  UserProfileService, 
+} from '../../services';
+import {
+  UserData,
+} from '../../models';
 import { NotificationsService } from '../../notifications.service';
 import {Observable} from 'rxjs/Rx';
-import { UserProfileService, UserData } from '../../userprofile.service';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { NotificationPanelComponent } from '../../notification-panel/notification-panel.component';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';

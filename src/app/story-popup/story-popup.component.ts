@@ -1,6 +1,6 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { ModalService } from '../modalServices';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services';
 import { StoryService } from '../story.service';
 
 @Component({
