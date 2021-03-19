@@ -1,10 +1,4 @@
 <div class="FeedContainer">
-
-  <!---If we are in race view AND we are authenticated, display form to post new stories-->
-  <!-- <div *ngIf="use=='race' && this._authService.isLoggedIn() && this.progress">
-    <button (click)="openModal('custom-modal-6')">Make a Post</button>
-  </div> -->
-
   <ng-template [ngIf]='feedItems && feedItems.length > 0' [ngIfElse]="NothingInFeedBlock">
     <div class='Feed'>
       <div *ngFor="let element of feedItems" class='FeedItem' [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">

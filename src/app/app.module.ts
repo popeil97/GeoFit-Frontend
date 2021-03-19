@@ -109,8 +109,6 @@ import { RouteSelectComponent } from './route-select/route-select.component';
 import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderboard.component';
 import { UserRaceComponent } from './user-race/user-race.component';
 import { LogActivityComponent } from './log-activity/log-activity.component';
-import { StoryFormStandaloneComponent } from './story-form-standalone/story-form-standalone.component';
-import { MapSettingsComponent } from './map-settings/map-settings.component';
 import { SearchComponent } from './search/search.component';
 import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/race-dashboard-racer-list.component';
 import { RaceDashboardRacerRowComponent } from './race-dashboard-racer-row/race-dashboard-racer-row.component';
@@ -211,8 +209,6 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     RaceTypeComponent,
     UserRaceComponent,
     LogActivityComponent,
-    StoryFormStandaloneComponent,
-    MapSettingsComponent,
     SearchComponent,
     RouteInfoComponent,
     RaceDashboardRacerListComponent,
