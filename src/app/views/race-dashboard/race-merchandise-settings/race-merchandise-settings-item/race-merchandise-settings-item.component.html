@@ -117,6 +117,7 @@
         <div class='formGroup submitButtonGroup'>
           <input 
             class="button formButton formSubmitButton"
+            [ngClass]="{'disabled':(this.checkingValidityOfSubmission || !this._isFormValid())}"
             type="submit"
             [value]="this.data.itemIndex==null ? 'Create Item' : 'Update Item'"
             [disabled]="this.checkingValidityOfSubmission || !this._isFormValid()"

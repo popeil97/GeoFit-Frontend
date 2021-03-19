@@ -1,11 +1,11 @@
-import { Component, OnInit, Inject, Input, Output, EventEmitter, NgModule, AfterViewInit, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, Inject, NgModule, OnDestroy } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { ItemService } from '../../../../item.service';
 
-import { numberGreaterThanOrEqualTo, isNumber, cannotBeEmptyString, isFormValid, requiredFileType } from '../../race-dashboard.component';
-import { MerchandiseItem, MerchandiseTypes, MerchandiseType, ItemStates, ItemTypes } from '../race-merchandise-settings.component';
+import { isNumber, cannotBeEmptyString, isFormValid, requiredFileType } from '../../../../services';
+import { ItemStates } from '../race-merchandise-settings.component';
 
 @NgModule({
   imports:[MatDialogRef]
@@ -100,6 +100,7 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
       ])],
       price:[this.initialData.price,Validators.compose([
         Validators.required,
+        isNumber(),
         Validators.min(0),
       ])],
       type:[this.initialData.type,Validators.compose([
@@ -132,7 +133,7 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
     if (e.stopPropagation) e.stopPropagation();
     this.initializeForm();
   }
-  _isFormValid() {
+  _isFormValid = () => {
     return isFormValid(this.form);
   }
   onFormSubmit(e:Event) {
@@ -140,7 +141,7 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
     e.stopPropagation();
 
     this.checkingValidityOfSubmission = true;
-    this.validForm = isFormValid(this.form);
+    this.validForm = this._isFormValid();
 
     const keyToOriginalKey = (k:string) => {
       var original = null;

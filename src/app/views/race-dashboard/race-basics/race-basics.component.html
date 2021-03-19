@@ -145,13 +145,13 @@
           <input 
             type="submit" 
             class="button formButton" 
-            [ngClass]="{'disabled':(this.changedValues.length==0 || this.validatingSubmission || !this.isFormValid(this.raceBasicsForm))}"
+            [ngClass]="{'disabled':(this.changedValues.length==0 || this.validatingSubmission || !this.validForm())}"
             value="Update Race Details"
-            [disabled]="this.changedValues.length==0 || this.validatingSubmission || !this.isFormValid(this.raceBasicsForm)" 
-            [readonly]="this.changedValues.length==0 || this.validatingSubmission || !this.isFormValid(this.raceBasicsForm)" 
+            [disabled]="this.changedValues.length==0 || this.validatingSubmission || !this.validForm()" 
+            [readonly]="this.changedValues.length==0 || this.validatingSubmission || !this.validForm()" 
           />
-          <p class="italics margin-top-16px" *ngIf="this.checkingValidityOfSubmission">Updating race details...</p>
-          <p class="italics redText margin-top-16px" *ngIf="!this.isFormValid(this.raceBasicsForm) && !this.checkingValidityOfSubmission">Errors have been found above. Check each of your inputs for errors.</p>
+          <p class="italics margin-top-16px" *ngIf="this.validatingSubmission">Updating race details...</p>
+          <p class="italics redText margin-top-16px" *ngIf="!this.validForm() && !this.validatingSubmission">Errors have been found above. Check each of your inputs for errors.</p>
         </div>
 
       </form>

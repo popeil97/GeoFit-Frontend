@@ -52,6 +52,7 @@
               />
               <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('name').invalid && (this.raceBasicsForm.get('name').dirty || this.raceBasicsForm.get('name').touched)">
                 <p *ngIf="this.raceBasicsForm.get('name').hasError('required')" class="margin-0px">Your race needs a name.</p>
+                <p *ngIf="this.raceBasicsForm.get('name').hasError('isEmpty')" class="margin-0px">Empty spaces are not valid for a race name.</p>
                 <p *ngIf="this.raceBasicsForm.get('name').hasError('maxlength')" class="margin-0px">Your race's name cannot exceed 30 characters.</p>
               </div>
             </div>
@@ -74,6 +75,7 @@
               ></textarea>
               <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('description').invalid && (this.raceBasicsForm.get('description').dirty || this.raceBasicsForm.get('description').touched)">
                 <p *ngIf="this.raceBasicsForm.get('description').hasError('required')" class="margin-0px">Your race needs a description.</p>
+                <p *ngIf="this.raceBasicsForm.get('description').hasError('isEmpty')" class="margin-0px">Empty spaces are not valid for a race description.</p>
               </div>
             </div>
           </div>
@@ -161,10 +163,13 @@
             <input 
               type="submit" 
               class="button formButton" 
+              [ngClass]="{'disabled':(this.verifyingFormSubmission || !this.validForm())}"
               value="Create New Race" 
-              [readonly]="this.hasSubmitted" 
+              [disabled]="this.verifyingFormSubmission || !this.validForm()" 
+              [readonly]="this.verifyingFormSubmission || !this.validForm()" 
             />
-            <p class="italics redText margin-top-16px" *ngIf="!this.raceBasicsForm.valid && this.hasSubmitted">Errors have been found above. Check each of your inputs for errors.</p>
+            <p class="italics margin-top-16px" *ngIf="this.verifyingFormSubmission">Updating race details...</p>
+            <p class="italics redText margin-top-16px" *ngIf="this.hasSubmitted && !this.validForm() && !this.verifyingFormSubmission">Errors have been found above. Check each of your inputs for errors.</p>
           </div>
         </div>
 

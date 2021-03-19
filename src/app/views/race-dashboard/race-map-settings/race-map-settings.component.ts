@@ -3,6 +3,7 @@ import { FormControl,FormGroup, Validators } from '@angular/forms';
 
 import { CoordinatesService } from '../../../coordinates.service';
 import { RaceService} from '../../../race.service';
+import { cannotBeEmptyString, isNumber, notSameStartEndLocations, isFormValid } from '../../../services'
 
 import { MapComponent, RouteData } from '../../../map/map.component';
 
@@ -195,11 +196,8 @@ export class RaceMapSettingsComponent implements OnInit,AfterViewInit {
       return accumulator || input.hasError(index);
     },false);
   }
-  isFormValid(f:FormGroup):Boolean { 
-    if (!f.disabled) return f.valid;
-    return Object.keys(f.controls).reduce((accumulator,inputKey)=>{
-      return (accumulator && f.get(inputKey).errors == null);
-    },true);
+  formValid = () => {
+    return isFormValid(this.form);
   }
   resetForm() {
     this.initializeForm();
@@ -207,7 +205,7 @@ export class RaceMapSettingsComponent implements OnInit,AfterViewInit {
   onFormSubmit() {
     this.checkingValidityOfSubmission = true;
     this.hasSubmitted = true;
-    this.validForm = this.isFormValid(this.form);
+    this.validForm = this.formValid();
     //console.log(this.changedValues, this.validForm);
 
     if (this.validForm && this.changedValues.length > 0) {
@@ -492,53 +490,4 @@ interface GraphHopperResp {
   coords:any[];
   distance:number;
   dist_unit:string;
-}
-
-function cannotBeEmptyString(mustBeString:Boolean = false) {
-  return function (control: FormControl) {
-    const val = control.value;
-    if (!val) {
-      return null
-    }
-    const valid = (
-      (!mustBeString && val.toString().trim().length > 0) ||
-      (mustBeString && typeof val === "string" && val.trim().length > 0)
-    );
-    if (!valid) {
-      return {
-        isEmpty:true
-      }
-    }
-    return null;
-  }
-}
-
-function isNumber() {
-  return function (control:FormControl) {
-    const val = control.value;
-    if (
-      !isNaN(val) && 
-      parseFloat(val) == val && 
-      !isNaN(parseFloat(val))
-    ) return null;
-    return {
-      notNumber: true
-    }
-  }
-}
-
-function notSameStartEndLocations(form:FormGroup) {
-  const startLat = form.get('startLat'),
-        startLon = form.get('startLon'),
-        endLat = form.get('endLat'),
-        endLon = form.get('endLon');
-
-  const latError = parseFloat(startLat.value) == parseFloat(endLat.value);
-  const lonError = parseFloat(startLon.value) == parseFloat(endLon.value);
-
-  if (latError) endLat.setErrors({sameAsStart:true});
-  if (lonError) endLon.setErrors({sameAsStart:true});
-
-  return null;
-
 }

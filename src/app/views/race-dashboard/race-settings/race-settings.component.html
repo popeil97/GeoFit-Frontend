@@ -46,7 +46,7 @@
             <div class='formErrorMessage redText' *ngIf="this.form.get('max_team_size').invalid && (this.form.get('max_team_size').dirty || this.form.get('max_team_size').touched)">
               <p *ngIf="this.form.get('max_team_size').hasError('missing')" class="margin-0px">Teams must have a maximum size limit.</p>
               <p *ngIf="this.form.get('max_team_size').hasError('notNumber')" class="margin-0px">Please provide an integer to indicate the maximum number of racers per team.</p>
-              <p *ngIf="this.form.get('max_team_size').hasError('notGreaterThan')" class="margin-0px">A value less than 1 is not allowed.</p>
+              <p *ngIf="this.form.get('max_team_size').hasError('min')" class="margin-0px">A value less than 1 is not allowed.</p>
             </div>
           </div>
         </div>
@@ -66,10 +66,10 @@
           <input 
             type="submit" 
             class="button formButton formSubmitButton" 
-            [ngClass]="{'disabled':(this.changedValues.length==0 || this.changedValues.length==0 || !this.isFormValid(this.form))}"
+            [ngClass]="{'disabled':(this.changedValues.length==0 || this.changedValues.length==0 || !this.formValid())}"
             value="Update Race Details" 
-            [disabled]="this.changedValues.length==0 || this.checkingValidityOfSubmission || !this.isFormValid(this.form)"
-            [readonly]="this.changedValues.length==0 || this.checkingValidityOfSubmission || !this.isFormValid(this.form)"
+            [disabled]="this.changedValues.length==0 || this.checkingValidityOfSubmission || !this.formValid()"
+            [readonly]="this.changedValues.length==0 || this.checkingValidityOfSubmission || !this.formValid()"
           />
           <div class="margin-top-16px" *ngIf="this.hasSubmitted">
             <p class="italics margin-0px" *ngIf="this.validForm && this.updatingSettings">Updating Race Settings...</p>

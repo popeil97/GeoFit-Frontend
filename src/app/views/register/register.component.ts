@@ -14,7 +14,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthService } from '../../auth.service';
 import * as moment from 'moment';
-import { MustMatch } from '../../services/must-match.validator';
+import { MustMatch } from '../../services/form-validators';
 import { UserProfileService, UserData } from '../../userprofile.service';
 import { ModalService } from '../../modalServices';
 import { RaceService } from '../../race.service';

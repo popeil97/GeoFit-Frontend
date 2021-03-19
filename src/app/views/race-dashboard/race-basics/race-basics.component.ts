@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RaceService } from '../../../race.service';
 import { Router } from '@angular/router';
 
-import { cannotBeEmptyString, requiredFileType } from '../race-dashboard.component';
+import { cannotBeEmptyString, requiredFileType, isFormValid } from '../../../services';
 
 @Component({
   selector: 'app-race-basics',
@@ -107,6 +107,9 @@ export class RaceBasicsComponent implements OnInit {
     });
 
     this.loading = false;
+  }
+  validForm = () => {
+    return isFormValid(this.raceBasicsForm);
   }
   resetForm = () => {
     this.initializeRaceBasicsForm();
@@ -234,12 +237,7 @@ export class RaceBasicsComponent implements OnInit {
         }
     }
   }
-  isFormValid(f:FormGroup):Boolean { 
-    if (!f.disabled) return f.valid;
-    return Object.keys(f.controls).reduce((accumulator,inputKey)=>{
-      return (accumulator && f.get(inputKey).errors == null);
-    },true);
-  }
+
   onRaceBasicsFormSubmit() {
     
     if (this.validatingSubmission) {
@@ -251,7 +249,7 @@ export class RaceBasicsComponent implements OnInit {
     this.validatingSubmission = true;
     this.raceBasicsForm.disable();
 
-    const isValid = this.isFormValid(this.raceBasicsForm);
+    const isValid = this.validForm();
 
     if (isValid && this.changedValues.length > 0) {
       console.log('form is valid!');

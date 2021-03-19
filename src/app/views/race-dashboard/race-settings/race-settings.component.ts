@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 
 import { RaceService } from '../../../race.service';
+import { isNumber, isFormValid } from '../../../services'
 
 @Component({
   selector: 'app-race-settings',
@@ -28,8 +29,7 @@ export class RaceSettingsComponent implements OnInit {
 
   constructor(
     private _raceService:RaceService,
-  ) { 
-  }
+  ) {}
 
   ngOnInit() {
     this.initializeForm();
@@ -47,7 +47,7 @@ export class RaceSettingsComponent implements OnInit {
         },
         [
           isNumber(),
-          numberGreaterThan(0),
+          Validators.min(1)
         ]
       ),
       is_manual_entry:new FormControl(this.raceData.is_manual_entry),
@@ -84,22 +84,14 @@ export class RaceSettingsComponent implements OnInit {
       }
     }
   }
+  formValid = () => {
+    return isFormValid(this.form);
+  }
   resetForm() {
     this.initializeForm();
     this.changedValues = [];
   }
-  isFormValid(f:FormGroup):Boolean { 
-    if (!f.disabled) return f.valid;
-    return Object.keys(f.controls).reduce((accumulator,inputKey)=>{
-      return (accumulator && f.get(inputKey).errors == null);
-    },true);
-    //return f.disabled ? f.errors == null : f.valid;
-  }
   onFormSubmit() {
-
-    const isFormValid = (f:FormGroup) => { 
-      return f.disabled ? f.errors == null : f.valid;
-    }
     const getCorrespondingKey = (k:string) => {
       let c = null;
       switch(k) {
@@ -122,7 +114,7 @@ export class RaceSettingsComponent implements OnInit {
     this.hasSubmitted = true;
     this.updatingSettings = false;
     this.updateSuccess = false;
-    this.validForm = isFormValid(this.form);
+    this.validForm = this.formValid();
 
     this.form.get('allow_teams').disable();
     this.form.get('max_team_size').disable();
@@ -163,37 +155,4 @@ export class RaceSettingsComponent implements OnInit {
       this.form.get('is_manual_entry').enable();
     }
   }
-}
-
-export function isNumber() {
-  return function (control:FormControl) {
-    const val = control.value;
-    if (
-      !isNaN(val) && 
-      parseInt(val) == val && 
-      !isNaN(parseInt(val, 10))
-    ) return null;
-    return {
-      notNumber: true
-    }
-  }
-}
-export function numberGreaterThan( greaterThan:number ) {
-  return function (control: FormControl) {
-    const val = control.value;
-
-    if (typeof val === 'undefined' || val == null) 
-      return {
-        missing:true,
-      }
-    if (typeof val !== 'number') 
-      return {
-        notNumber:true,
-      }
-    if (val <= greaterThan) 
-      return {
-        notGreaterThan:true
-      }
-    return null;
-  };
 }

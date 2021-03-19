@@ -4,6 +4,8 @@ import { RaceService } from '../../race.service';
 import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 
+import { cannotBeEmptyString, requiredFileType, isFormValid, } from '../../services/';
+
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
@@ -145,6 +147,9 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
       ]),
     });
   }
+  validForm = () => {
+    return isFormValid(this.raceBasicsForm);
+  }
 
   selectRaceType(option:any) {
     this.raceType = option.type;
@@ -200,7 +205,7 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
     this.hasSubmitted = true;
     this.verifyingFormSubmission = true;
 
-    if (this.raceBasicsForm.valid) {
+    if (this.validForm()) {
 
       let formClean = this.raceBasicsForm.value as RaceBasicsForm;
       formClean.raceType = this.raceType;
@@ -273,47 +278,4 @@ enum RaceTypes {
 interface FromResp {
   race_id:number;
   name:string;
-}
-
-
-export function cannotBeEmptyString() {
-  return function (control: FormControl) {
-    const val = control.value;
-    const valid = (typeof val === "string" && val.trim().length > 0);
-    if (!valid) {
-      return {
-        required:true
-      }
-    }
-    return null;
-  }
-}
-export function requiredFileType( required:boolean, types: Array<string> ) {
-  return function (control: FormControl) {
-
-    const file = control.value;
-    
-    if ( file ) {
-      const filename_components = file.split('.');
-      const extension = filename_components[filename_components.length - 1].toLowerCase();
-      console.log(extension);
-      if ( types.indexOf(extension) > -1 ) {
-        console.log('extension allowed');
-        return null;
-      }
-      console.log('extension not allowed');
-      return {
-        requiredFileType: true
-      }
-    }
-
-    if (required) {
-      console.log('file is still required anyways');
-      return {
-        requiredFileType: true
-      };
-    }
-
-    return null;
-  };
 }
