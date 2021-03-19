@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from '../login/login.component';
-import { Register2Component } from '../../register2/register2.component';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-race-create',
@@ -96,7 +96,7 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
     })
   }
   openRegister = () => {
-    const d = this.dialog.open(Register2Component, {
+    const d = this.dialog.open(RegisterComponent, {
       panelClass:"RegisterContainer",
     });
     const sub = d.componentInstance.openLogin.subscribe(() => {

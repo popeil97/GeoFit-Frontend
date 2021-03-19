@@ -10,7 +10,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatDialog } from '@angular/material';
 
 import { LoginComponent } from '../login/login.component';
-import { Register2Component } from '../../register2/register2.component';
+import { RegisterComponent } from '../register/register.component';
 
 declare var $: any
 
@@ -214,7 +214,7 @@ export class HeaderNavComponent implements OnInit,OnDestroy {
    this.NavItemClick();
  }
  openRegister = () => {
-    const d = this.dialog.open(Register2Component, {
+    const d = this.dialog.open(RegisterComponent, {
       panelClass: 'RegisterContainer',
     });
     const sub = d.componentInstance.openLogin.subscribe(() => {

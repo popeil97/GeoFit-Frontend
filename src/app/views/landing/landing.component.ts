@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import {AuthService} from '../../auth.service';
 
 import { LoginComponent } from '../login/login.component';
-import { Register2Component } from '../../register2/register2.component';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-landing',
@@ -49,7 +49,7 @@ export class LandingComponent implements OnInit {
   }
 
   openRegister = () => {
-    const d = this.dialog.open(Register2Component, {
+    const d = this.dialog.open(RegisterComponent, {
       panelClass: 'RegisterContainer',
     });
     const sub = d.componentInstance.openLogin.subscribe(() => {

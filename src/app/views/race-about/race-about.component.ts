@@ -10,7 +10,7 @@ import { MapService } from '../../map.service';
 import { UsersService } from '../../users.service';
 
 import { MatDialog } from '@angular/material';
-import { Register2Component } from '../../register2/register2.component';
+import { RegisterComponent } from '../register/register.component';
 import { Signup2Component } from '../../signup2/signup2.component';
 import { LoginComponent } from '../login/login.component';
 import { RaceTypeComponent } from '../../race-type/race-type.component';
@@ -345,7 +345,7 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
         hasStarted:this.raceData.userDetails.hasStarted,
         hasTags: this.raceData.raceSettings.has_entry_tags,
       };
-      const d = this.dialog.open(Register2Component,{
+      const d = this.dialog.open(RegisterComponent,{
         panelClass:"RegisterContainer",
         data: data
       });

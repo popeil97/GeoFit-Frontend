@@ -4,7 +4,7 @@ import {AuthService} from '../../auth.service';
 
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from '../login/login.component';
-import { Register2Component } from '../../register2/register2.component';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-for-racers',
@@ -45,7 +45,7 @@ export class ForRacersComponent implements OnInit {
   }
 
   openRegister = () => {
-    const d = this.dialog.open(Register2Component, {
+    const d = this.dialog.open(RegisterComponent, {
       panelClass: 'RegisterContainer',
       data:{register:false},
     });

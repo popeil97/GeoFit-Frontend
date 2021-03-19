@@ -24,8 +24,6 @@ import { FeedComponent } from './feed/feed.component';
 import { StoryService } from './story.service';
 import { ImageService } from './image.service';
 import { LeaderboardService } from './leaderboard.service';
-import { RegisterComponent } from './register/register.component'
-import { RegisterDialogContent } from './register/register.component'
 
 import {
   HttpRequest,
@@ -98,7 +96,7 @@ import {
 import { ShowFollowersComponent } from './show-followers/show-followers.component';
 import { ModalComponent } from './modal/modal.component';
 import { LoginComponent } from './views/login/login.component';
-import { Register2Component } from './register2/register2.component';
+import { RegisterComponent } from './views/register/register.component';
 
 import { RouteSelectComponent } from './route-select/route-select.component';
 import { HybridLeaderboardComponent } from './hybrid-leaderboard/hybrid-leaderboard.component';
@@ -203,7 +201,7 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
     ShowFollowersComponent,
     ModalComponent,
     LoginComponent,
-    Register2Component,
+    RegisterComponent,
     RouteSelectComponent,
     HybridLeaderboardComponent,
     Signup2Component,
@@ -217,8 +215,6 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
     RaceDashboardRacerListComponent,
     RaceDashboardRacerRowComponent,
     ActivityListComponent,
-    RegisterComponent,
-    RegisterDialogContent,
     ContactFormComponent,
     StoryPopupComponent,
     RaceCreatePageComponent,
@@ -284,7 +280,7 @@ import { RaceMerchandiseSettingsItemComponent } from './views/race-dashboard/rac
     TeamFormDialogComponent,
     CheckpointDialogComponent,
     LoginComponent,
-    Register2Component,
+    RegisterComponent,
     Signup2Component,
     LogActivityComponent,
     ItemFormDialogComponent,

@@ -9,7 +9,7 @@ import { RaceSettings } from '../race-about/race-about.component';
 
 import { MatDialog } from '@angular/material';
 import { LoginComponent } from '../login/login.component';
-import { Register2Component } from '../../register2/register2.component';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-race-dashboard',
@@ -139,7 +139,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
     })
   }
   openRegister = () => {
-    const d = this.dialog.open(Register2Component, {
+    const d = this.dialog.open(RegisterComponent, {
       panelClass:"RegisterContainer",
     });
     const sub = d.componentInstance.openLogin.subscribe(() => {

@@ -12,13 +12,12 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angula
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-import { AuthService } from '../auth.service';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { AuthService } from '../../auth.service';
 import * as moment from 'moment';
-import { MustMatch } from '../services/must-match.validator';
-import { UserProfileService, UserData } from '../userprofile.service';
-import { ModalService } from '../modalServices';
-import { RaceService } from '../race.service';
+import { MustMatch } from '../../services/must-match.validator';
+import { UserProfileService, UserData } from '../../userprofile.service';
+import { ModalService } from '../../modalServices';
+import { RaceService } from '../../race.service';
 
 @NgModule({
   imports:[MatDialogRef]
