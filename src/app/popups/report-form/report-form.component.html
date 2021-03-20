@@ -1,0 +1,40 @@
+<ng-template [ngIf]="!this.reportSuccess" [ngIfElse]="ReportSuccessful">
+  <button class='formButton margin-bottom-24px' (click)="this.closeDialog()">Close</button>
+  
+  <form class='form' [formGroup]="reportForm" (submit)="submit(reportForm.value)">
+    
+    <h2>Make a Report</h2>
+    <p>You can report the post by checking the box next to the most applicable offence and clicking Report. The person who is being reported will not get a notification from you.</p>
+
+    <div class='formGroup formGroupColumn formGroupAlignedTop'>
+        <div class='formInputContainer margin-bottom-0px' *ngFor="let offence of offences.controls; let i=index">
+          <input 
+            id="{{'report_index_'+i}}"
+            type="checkbox"
+            class="formCheckboxInput"
+            [formControl]="offence"
+          />
+          <label for="{{'report_index_'+i}}">{{offencesList[i].type}}</label>
+        </div>
+        <div class='inputErrorContainer' *ngIf="!reportForm.valid">
+          <p>Please select one checkbox only.</p>
+        </div>
+    </div>
+    <div class='formGroup submitFormGroup forGroupAlignedTop'>
+      <input 
+        type="submit"
+        class="button formButton formSubmitButton"
+        [disabled]="!reportForm.valid"
+        [readonly]="!reportForm.valid"
+        value="Report"
+      />
+    </div>
+  </form>
+
+</ng-template>
+
+<ng-template #ReportSuccessful>
+  <h2>Report Received</h2>
+  <p>Your report has been received successfully. Thanks for helping to keep our community safe!</p>
+  <button (click)="this.closeDialog()">Close</button>
+</ng-template>

@@ -1,14 +1,18 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidatorFn, FormControl, FormArray } from '@angular/forms';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { 
   StoryService 
-} from '../services';
+} from '../../services';
 
 @Component({
   selector: 'app-report-form',
   templateUrl: './report-form.component.html',
-  styleUrls: ['./report-form.component.css']
+  styleUrls: [
+    './report-form.component.css',
+    '../../../styles/forms.css'
+  ]
 })
 export class ReportFormComponent implements OnInit {
   private reportForm: FormGroup;
@@ -79,6 +83,10 @@ export class ReportFormComponent implements OnInit {
     this._storyService.reportStory(this.storyID, selectedID).then(() => {
       this.reportSuccess = true;
     })
+  }
+
+  closeDialog = () => {
+    this.dialogRef.close();
   }
 
 }

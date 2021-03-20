@@ -1,10 +1,14 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+
 import { 
   RaceService,
   ReportService,
 } from '../services';
+import {
+  StoryDeleteFormComponent
+} from '../popups';
+
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
-import { StoryDeleteDialogComponent } from '../story-delete-dialog/story-delete-dialog.component';
 
 @Component({
   selector: 'app-race-story-manage',
@@ -76,7 +80,8 @@ export class RaceStoryManageComponent implements OnChanges {
   }
 
   public openDeleteStoryDialog(storyID: number){
-    let dialogRef = this.dialog.open(StoryDeleteDialogComponent, {
+    let dialogRef = this.dialog.open(StoryDeleteFormComponent, {
+      panelClass:"DialogDefaultContainer",
       data: { 
         'storyID': storyID,
       },

@@ -58,7 +58,6 @@ import { PaypalComponent } from './paypal/paypal.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
 import { SwagComponent, SwagDialogContent } from './swag/swag.component';
 
-
 import { createCustomElement } from '@angular/elements';
 import { PopupComponent } from './popup/popup.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
@@ -76,8 +75,6 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
 import { StoryDialogComponent } from './story-dialog/story-dialog.component';
 import { TagFormComponent } from './tag-form/tag-form.component';
 import { TagSelectComponent } from './tag-select/tag-select.component';
-import { ReportFormComponent } from './report-form/report-form.component';
-import { StoryDeleteDialogComponent } from './story-delete-dialog/story-delete-dialog.component';
 import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.component';
 
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -103,6 +100,8 @@ import {
   RouteInfoComponent,
   TermsOfServiceComponent,
   WhyBirthdayComponent,
+  ReportFormComponent,
+  StoryDeleteFormComponent,
 } from './popups';
 
 import { RouteSelectComponent } from './route-select/route-select.component';
@@ -183,7 +182,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     TagFormComponent,
     TagSelectComponent,
     ReportFormComponent,
-    StoryDeleteDialogComponent,
+    StoryDeleteFormComponent,
     RaceDashboardComponent,
     RaceStoryManageComponent,
     WelcomeComponent,
@@ -269,7 +268,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     SnackbarComponent, 
     StoryDialogComponent,
     ReportFormComponent,
-    StoryDeleteDialogComponent,
+    StoryDeleteFormComponent,
     TeamFormDialogComponent,
     CheckpointDialogComponent,
     LoginComponent,

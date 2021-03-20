@@ -8,6 +8,8 @@ import { RaceMerchandiseSettingsItemComponent } from './race-merchandise-setting
 import { RouteInfoComponent } from './route-info/route-info.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
 import { WhyBirthdayComponent } from './why-birthday/why-birthday.component';
+import { ReportFormComponent } from './report-form/report-form.component';
+import { StoryDeleteFormComponent } from './story-delete-form/story-delete-form.component';
 
 export {
     LoginComponent,
@@ -20,4 +22,6 @@ export {
     RouteInfoComponent,
     TermsOfServiceComponent,
     WhyBirthdayComponent,
+    ReportFormComponent,
+    StoryDeleteFormComponent,
 }

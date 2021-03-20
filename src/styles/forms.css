@@ -39,6 +39,9 @@
     .formGroup.formGroupColumn {
         flex-direction: column;
     }
+    .formGroup.justifiedCenter {
+        justify-content: center;
+    }
     .formGroup.formGroupWithLeftBorder {
         border-left:2px solid rgb(200,200,200);
         padding-left:16px;
@@ -72,6 +75,10 @@
     .formInputContainer.formInputContainerSelfAlignedCenter {
         align-self: center;
     }
+    .formGroup.formGroupColumn .formInputContainer {
+        margin-left:0px;
+        margin-right:0px;
+    }
 
 .formTextInput {
     width:100%;
@@ -104,6 +111,10 @@
         border-color: red;
     }
 
+.formCheckboxInput {
+    margin-right:8px;
+}
+
 .inputErrorContainer {
     color: red;
     margin-top:4px;
@@ -117,7 +128,7 @@
     background-color: white;
     transition:background-color 0.25s ease-in-out;
 }
-    .formButton.resetButton {
+    .formButton.resetButton, .formButton.cancelButton {
         background-color:red;
         color:white;
     }

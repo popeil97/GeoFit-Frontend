@@ -1,16 +1,20 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
+import { MatTableDataSource } from '@angular/material/table';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { RaceFeedService } from './race-feed.service';
 import { StoryFormComponent } from '../story-form/story-form.component';
+
 import { 
   AuthService,
   UserProfileService,
 } from '../services';
-import { MatTableDataSource } from '@angular/material/table';
+import {
+  ReportFormComponent,
+  StoryDeleteFormComponent,
+} from '../popups';
+
 import { StoryDialogComponent } from '../story-dialog/story-dialog.component';
-import { ReportFormComponent } from '../report-form/report-form.component';
-import { StoryDeleteDialogComponent } from '../story-delete-dialog/story-delete-dialog.component';
 import { ModalService } from '../modalServices';
 
 declare var $: any
@@ -245,6 +249,7 @@ export class FeedComponent implements OnInit {
 
   public openReportDialog(storyID: number){
     let dialogRef = this.dialog.open(ReportFormComponent, {
+      panelClass:"DialogDefaultContainer",
       data: { 
         'storyID': storyID,
       },
@@ -252,7 +257,8 @@ export class FeedComponent implements OnInit {
   }
 
   public openDeleteStoryDialog(storyID: number){
-    let dialogRef = this.dialog.open(StoryDeleteDialogComponent, {
+    let dialogRef = this.dialog.open(StoryDeleteFormComponent, {
+      panelClass:"DialogDefaultContainer",
       data: { 
         'storyID': storyID,
       },
