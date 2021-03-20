@@ -67,7 +67,7 @@ import { ShippingAddressFormComponent } from './shipping-address-form/shipping-a
 import { PasswordRequestComponent } from './password-request/password-request.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import { StravaInstructionsComponent } from './strava-instructions/strava-instructions.component';
-import { ProfilePicFormComponent } from './profile-pic-form/profile-pic-form.component';
+import { ProfilePicFormComponent } from './welcome/profile-pic-form/profile-pic-form.component';
 import { RoutePinDialogComponent } from './route-pin-dialog/route-pin-dialog.component';
 
 import { OwlModule } from 'ngx-owl-carousel';
@@ -115,7 +115,6 @@ import { RaceDashboardRacerRowComponent } from './race-dashboard-racer-row/race-
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
 import { StoryPopupComponent } from './story-popup/story-popup.component';
-import { RaceCreatePageComponent } from './race-create-page/race-create-page.component';
 import { TeamFormDialogComponent } from './team-form/team-form-dialog.component';
 import { CheckpointListComponent } from './checkpoint-list/checkpoint-list.component';
 import { CheckpointItemComponent } from './checkpoint-item/checkpoint-item.component';
@@ -214,7 +213,6 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     ActivityListComponent,
     ContactFormComponent,
     StoryPopupComponent,
-    RaceCreatePageComponent,
     TeamFormDialogComponent,
     CheckpointListComponent,
     CheckpointItemComponent,

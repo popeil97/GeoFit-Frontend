@@ -6,10 +6,10 @@ import {
   UserProfileService,
   ImageService,
   TucanValidators,
-} from '../services';
+} from '../../services';
 import {
   UserData,
-} from '../models';
+} from '../../models';
 
 @Component({
   selector: 'app-profile-pic-form',
