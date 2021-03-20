@@ -9,6 +9,7 @@ import {
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 import { 
   AuthService,
@@ -28,9 +29,6 @@ import {
 import {
   TermsOfServiceComponent
 } from '../terms-of-service/terms-of-service.component';
-
-import * as moment from 'moment';
-import { ModalService } from '../../modalServices';
 
 @NgModule({
   imports:[MatDialogRef]
@@ -77,7 +75,6 @@ export class RegisterComponent implements OnInit {
     private route:ActivatedRoute,
     private _authService: AuthService,
     private userProfileService:UserProfileService,
-    private modalService: ModalService,
     private _raceService: RaceService,
 
     private dialog : MatDialog,
@@ -374,12 +371,6 @@ export class RegisterComponent implements OnInit {
   }
 
   closeDialog = () => {
-    /*
-    if (this.id == null) return;
-    this.modalService.close(this.id);
-    this.ResetForms();
-    */
-    //console.log('SUPPOSED TO CLOSE SIGN UP FORM');
     this.ResetForms();
     this.dialogRef.close();
   }
@@ -391,11 +382,5 @@ export class RegisterComponent implements OnInit {
   SwitchToSignUp = () => {
     this.closeDialog();
     this.openSignUp.emit();
-  }
-
-  openModal(id: string) {
-    const data = (id == 'custom-modal-3') ? {price:this.d.price,race_id:this.d.race_id,hasJoined:this.d.hasJoined,hasStarted:this.d.hasStarted,hasTags: this.d.hasTags} : null;
-    //console.log("REG MODAL DATA", data);
-    this.modalService.open(id,data);
   }
 }
