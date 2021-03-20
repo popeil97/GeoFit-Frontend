@@ -2,16 +2,13 @@ import {
   Component, 
   OnInit, 
   Inject, 
-  ViewChild, 
   Output, 
   EventEmitter, 
-  Input, 
   NgModule,
 } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatDialogConfig} from '@angular/material/dialog';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
 
 import { 
   AuthService,
@@ -38,7 +35,10 @@ import { ModalService } from '../../modalServices';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: [
+    './register.component.css',
+    '../../../styles/forms.css',
+  ]
 })
 export class RegisterComponent implements OnInit {
 
@@ -79,7 +79,7 @@ export class RegisterComponent implements OnInit {
     private dialog : MatDialog,
     private dialogRef : MatDialogRef<RegisterComponent>,
     @Inject(MAT_DIALOG_DATA) public data : any,
-  ) { }
+  ) {}
 
   ngOnInit() {
     
@@ -323,9 +323,17 @@ export class RegisterComponent implements OnInit {
     this.loading = false;
 
     this.credentialsForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]], //Validators.pattern("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$")
-      password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required],
+      email: ['',Validators.compose([
+        Validators.required, 
+        Validators.email,
+      ])], 
+      password:['',Validators.compose([
+        Validators.required, 
+        Validators.minLength(6),
+      ])],
+      confirmPassword:['',Validators.compose([
+        Validators.required,
+      ])],
     }, {
       validator: TucanValidators.MustMatch('password','confirmPassword')
     });
@@ -345,7 +353,9 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  openTOS = () => {
+  openTOS = (e:any) => {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
     this.dialog.open(TermsOfServiceComponent,{
       panelClass:"DialogDefaultContainer"
     })

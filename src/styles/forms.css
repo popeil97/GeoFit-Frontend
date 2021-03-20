@@ -24,7 +24,7 @@
 
 .formGroup, .formGroupHeader {
     width:100%;
-    margin-bottom:32px;
+    margin-bottom:24px;
 
     display:flex;
     flex-direction: row;
@@ -88,6 +88,29 @@
     }
     .formTextInput.errorTextInput {
         border-color: red;
+    }
+
+.formSelectInput {
+    width:100%;
+    padding:4px 8px 4px 8px;
+    border: 2px solid rgb(200,200,200);
+    background-color:white;
+    border-radius: 8px;
+}
+    .formInputContainer.autoWidth .formSelectInput, .formSelectInput.autoWidth {
+        width:auto;
+    }
+    .formSelectInput.errorSelectInput {
+        border-color: red;
+    }
+
+.inputErrorContainer {
+    color: red;
+    margin-top:4px;
+    font-size: var(--h7);
+}
+    .inputErrorContainer > * {
+        margin-bottom:0px;
     }
 
 .formButton {
