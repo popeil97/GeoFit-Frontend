@@ -1,22 +1,24 @@
 <ng-template [ngIf]="!this.reportSuccess" [ngIfElse]="ReportSuccessful">
   <button class='formButton margin-bottom-24px' (click)="this.closeDialog()">Close</button>
   
-  <form class='form' [formGroup]="reportForm" (submit)="submit(reportForm.value)">
+  <form class='form' [formGroup]="reportForm" (submit)="this.onSubmit($event)">
     
     <h2>Make a Report</h2>
     <p>You can report the post by checking the box next to the most applicable offence and clicking Report. The person who is being reported will not get a notification from you.</p>
 
     <div class='formGroup formGroupColumn formGroupAlignedTop'>
-        <div class='formInputContainer margin-bottom-0px' *ngFor="let offence of offences.controls; let i=index">
+        <div class='formInputContainer margin-bottom-0px' *ngFor="let offence of this.offencesList">
           <input 
-            id="{{'report_index_'+i}}"
-            type="checkbox"
+            id="{{'report_index_'+offence.id}}"
+            type="radio"
+            name="offence"
             class="formCheckboxInput"
-            [formControl]="offence"
+            value="{{offence.id}}"
+            formControlName="offence"
           />
-          <label for="{{'report_index_'+i}}">{{offencesList[i].type}}</label>
+          <label for="{{'report_index_'+offence.id}}">{{offence.type}}</label>
         </div>
-        <div class='inputErrorContainer' *ngIf="!reportForm.valid">
+        <div class='inputErrorContainer' *ngIf="this.submitted && !this._isFormValid()">
           <p>Please select one checkbox only.</p>
         </div>
     </div>
@@ -24,10 +26,12 @@
       <input 
         type="submit"
         class="button formButton formSubmitButton"
-        [disabled]="!reportForm.valid"
-        [readonly]="!reportForm.valid"
+        [ngClass]="{'disabled':(this.checkingValidity || !this._isFormValid())}"
+        [disabled]="this.checkingValidity || !this._isFormValid()"
+        [readonly]="this.checkingvalidity || !this._isFormValid()"
         value="Report"
       />
+      <p class="redText h7 margin-bottom-0px margin-top-4px" *ngIf="this.submitted && this.reportError != null">{{this.reportError.error}}</p>
     </div>
   </form>
 
