@@ -1,4 +1,4 @@
-import { NgModule, Component, OnInit, Inject, ViewChild, Output, EventEmitter, Input, OnDestroy } from '@angular/core';
+import { NgModule, Component, Inject, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { 
@@ -15,7 +15,7 @@ import {
   templateUrl: './view-follow.component.html',
   styleUrls: ['./view-follow.component.css']
 })
-export class ViewFollowComponent implements OnInit,OnDestroy {
+export class ViewFollowComponent implements OnDestroy {
 
   public followers:any[] = [];
   public followed: any[];
@@ -40,7 +40,6 @@ export class ViewFollowComponent implements OnInit,OnDestroy {
     this.numFollowing = this.data.followersData.numFollowing;
   }
 
-  ngOnInit() {}
   ngOnDestroy() {
     this.followers = [];
     this.numFollowers = 0;

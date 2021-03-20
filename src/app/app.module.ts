@@ -80,7 +80,7 @@ import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.
 import { WelcomeComponent } from './welcome/welcome.component';
 import { AboutTucanPageComponent } from './about-tucan-page/about-tucan-page.component';
 import { FaqPageComponent } from './faq-page/faq-page.component';
-import { ContactPageComponent } from './contact-page/contact-page.component';
+import { ContactPageComponent } from './views/contact-page/contact-page.component';
 
 import { SwagListComponent } from './swag-list/swag-list.component';
 import { SwagItemComponent } from './swag-item/swag-item.component';

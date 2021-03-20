@@ -1,4 +1,5 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 import { 
   RaceService,
@@ -7,8 +8,9 @@ import {
 import {
   StoryDeleteFormComponent
 } from '../popups';
-
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
+import {
+  Story
+} from '../models';
 
 @Component({
   selector: 'app-race-story-manage',
@@ -100,16 +102,4 @@ export class RaceStoryManageComponent implements OnChanges {
     });
   }
 
-}
-
-interface Story {
-  user_id: number;
-  username: string;
-  display_name: string;
-  profile_url: string;
-  story_id: number;
-  story_text: string;
-  story_image: string;
-  created_ts: number;
-  report_count: number;
 }

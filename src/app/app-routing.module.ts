@@ -8,6 +8,7 @@ import { FaqPageComponent} from './faq-page/faq-page.component'
 import { PublicRacesComponent } from './views/public-races/public-races.component';
 import { RaceAboutComponent } from './views/race-about/race-about.component';
 import { AboutTucanPageComponent} from './about-tucan-page/about-tucan-page.component'
+import {ContactPageComponent} from './views/contact-page/contact-page.component'
 
 import { RaceViewPageComponent } from './race-view-page/race-view-page.component';
 import { ProfileComponent } from './views/profile/profile.component';
@@ -16,7 +17,6 @@ import { ShippingAddressComponent } from './shipping-address/shipping-address.co
 import { PasswordRequestComponent } from './password-request/password-request.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import {WelcomeComponent} from './welcome/welcome.component'
-import {ContactPageComponent} from './contact-page/contact-page.component'
 import { SwagListComponent } from './swag-list/swag-list.component';
 import { CartEditComponent } from './cart-edit/cart-edit.component';
 import { PaypalComponent } from './paypal/paypal.component';
@@ -35,6 +35,7 @@ const routes: Routes = [
   {path:'races', component:PublicRacesComponent},
   {path:'about',component:RaceAboutComponent},
   {path:'about-tucan', component:AboutTucanPageComponent},
+  {path:'contact', component:ContactPageComponent},
 
   {path:'race', component:RaceViewPageComponent},
   {path:'profile',component:ProfileComponent},
@@ -43,7 +44,6 @@ const routes: Routes = [
   {path:'password-request', component:PasswordRequestComponent},
   {path:'password-change', component:PasswordChangeComponent},
   {path:'welcome', component:WelcomeComponent},
-  {path:'contact', component:ContactPageComponent},
   {path:'search', component:SearchComponent},
 
   {path:'create', component:RaceCreateComponent},
