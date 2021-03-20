@@ -105,6 +105,10 @@ export class RaceMapSettingsComponent implements OnInit,AfterViewInit {
     console.log(this.routeData);
   }
 
+  fitPreviewMapBounds(bounds: L.LatLngBounds){
+    this.previewMap.panToMarkerBounds(bounds);
+  }
+
   // --- RACE FORM FUNCTIONS ---
   initializeForm() {
     this.loading = true;
@@ -203,6 +207,10 @@ export class RaceMapSettingsComponent implements OnInit,AfterViewInit {
   }
   resetForm() {
     this.initializeForm();
+
+    //TODO: It's probably a little inefficient to get all map data when
+    //we're just needing the coords
+    this.previewMap.getMapData();
   }
   onFormSubmit() {
     this.checkingValidityOfSubmission = true;

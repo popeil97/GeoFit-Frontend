@@ -210,7 +210,7 @@
         <h6>Race Map Preview:</h6>
 
         <div class="MapRoutePreview">
-          <app-map [useLoader]="false" [routeData]="this.routeData" [raceIDs]="[this.raceID]" [parentRaceID]="this.raceID" [displayUsers]="false" [zoom]="false"></app-map>
+          <app-map [useLoader]="false" [routeData]="this.routeData" [raceIDs]="[this.raceID]" [parentRaceID]="this.raceID" [displayUsers]="false" [zoom]="false" (onLatLngBoundsChange)="fitPreviewMapBounds($event)"></app-map>
           <div class="MapRoutePreviewUnavailable" *ngIf="!this.raceData.valid_route_file && (this.routeData == null || (this.routeData | json) == '{}')">
             <p class="margin-0px">A preview of the race will appear when a route file is uploaded and saved.</p>
           </div>

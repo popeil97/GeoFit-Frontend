@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef, ComponentFactory, ComponentFactoryResolver, RendererFactory2, ViewContainerRef, ApplicationRef } from '@angular/core';
+import { AfterViewInit, Component, Input, Output, OnInit, OnChanges, EventEmitter, SimpleChanges, ChangeDetectorRef, ComponentFactory, ComponentFactoryResolver, RendererFactory2, ViewContainerRef, ApplicationRef } from '@angular/core';
 import { NgElement, WithProperties } from '@angular/elements';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { 
@@ -48,8 +48,12 @@ export class MapRouteComponent implements OnChanges {
   @Input() userData: UserData[];
   @Input() routePins: RoutePins[];
   @Input() checkpoints: CheckpointMapData[];
+
+  // onLatLngBoundsChange fires after new coordinates have been applied and the bounds
+  // of route have changed
+  @Output() onLatLngBoundsChange: EventEmitter<L.LatLngBounds> = new EventEmitter();
   
-  private line:any;
+  private lines:any[];
   private coordsRoutes:any[];
   private myUserDataIdx: number;
 
@@ -177,19 +181,22 @@ export class MapRouteComponent implements OnChanges {
     
     var color = "#7FCC92";
 
-    //Add each path to map independently
+    //Add each path to map independently and store reference to polylines
+    this.lines = [];
     _.forEach(temp_routes_flipped,(route) => {
-      this.line = L.polyline(route,{
-        color: '#578a63',
-        weight: 8,
-        opacity: 0.8
-      }).addTo(this.map);
+      // this.line = L.polyline(route,{
+      //   color: '#578a63',
+      //   weight: 8,
+      //   opacity: 0.8
+      // }).addTo(this.map);
 
-       L.polyline(route,{
+       var line = L.polyline(route,{
         color: color,
         weight: 5,
         opacity: 1
       }).addTo(this.map);
+      this.lines.push(line);
+      this.onLatLngBoundsChange.emit(line.getBounds());
     });
 
 
@@ -246,13 +253,8 @@ export class MapRouteComponent implements OnChanges {
       }
       if (settings.femalePinsOn){
         femaleIDs = this.getIDsByGender('Female');
-      }
-
-   //   console.log("female IDs: ", femaleIDs);
-      
+      }      
       unionIDs = maleIDs.concat(femaleIDs);
-   //   console.log("Union IDs: ", unionIDs);
-
     }
 
     //Limit to only users we follow
@@ -275,9 +277,6 @@ export class MapRouteComponent implements OnChanges {
         unionIDs = ageIDs;
       }
     }
-
- //  console.log("Union IDs: ", unionIDs);
-
     this.showPinsByID(unionIDs, false);
   }
 
@@ -293,7 +292,6 @@ export class MapRouteComponent implements OnChanges {
         IDs.push(this.userData[i].user_id);
       }
     }
-
     return IDs;
   }
 
@@ -305,7 +303,6 @@ export class MapRouteComponent implements OnChanges {
         IDs.push(this.userData[i].user_id);
       }
     }
-
     return IDs;
   }
 
@@ -634,6 +631,15 @@ export class MapRouteComponent implements OnChanges {
     return user_leaflet_id;
   }
 
+  // clearMap clears map markers accessible only by the MapRoute component object
+  // e.g. start/end markers
+  public clearMap(){
+    if (this.map){
+      this.map.removeLayer(this.marker_start);
+      this.map.removeLayer(this.marker_end);
+    }
+  }
+
 
   private isMe(userData: any){
     if (userData.isMe){
@@ -704,7 +710,13 @@ export class MapRouteComponent implements OnChanges {
     
   }
 
-
+  // fitBoundsByRouteIndex fits the map window to the subroute at given index
+  public fitBoundsByRouteIndex(index: number){
+    console.log("In fitBoundsByRouteIndex")
+    console.log("Lines: ", this.lines);
+    console.log("Bounds on lines :", this.lines[index].getBounds())
+    this.map.fitBounds(this.lines[index].getBounds());
+  }
 
 
 

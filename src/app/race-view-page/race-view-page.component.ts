@@ -393,20 +393,9 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     });
   }
 
-
-   panToUserMarker(user_id){
-  //   //Call map pan function
-  //   this.mapChild.panToUserMarker(user_id);
-   }
-
   clearUserPins(){
     this.mapChild.clearUserPins();
   }
-
-  // showPinsByID(IDs){
-  //   //Pass null to show all pins
-  //   this.mapChild.showPinsByID(IDs, false);
-  // }
 
   showAllPins(){
     this.mapChild.showAllPins();

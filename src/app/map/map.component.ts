@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, OnInit, OnChanges, SimpleChanges, ViewChildren, QueryList, ChangeDetectorRef, ComponentFactory, ComponentFactoryResolver, RendererFactory2, ViewContainerRef, ApplicationRef } from '@angular/core';
+import { AfterViewInit, Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, ViewChildren, QueryList, ChangeDetectorRef, ComponentFactory, ComponentFactoryResolver, RendererFactory2, ViewContainerRef, ApplicationRef } from '@angular/core';
 import { NgElement, WithProperties } from '@angular/elements';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { 
@@ -55,6 +55,11 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
   //Route data to use in route components
   @Input() routeData = null;
+
+  // onLatLngBoundsChange emits when a child map-route boundaries have changed
+  // Note that the emitted LatLngBound does not represent the bounds for all child map routes,
+  // just the route from which this event originates
+  @Output() onLatLngBoundsChange: EventEmitter<L.LatLngBounds> = new EventEmitter();
 
   private orgData: UserData[];
   private userData: UserData[];
@@ -182,7 +187,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
         });
 
         this._mapService.getCheckpointMapData(raceID).then((resp) => {
-          console.log('GOT SOME CHECKPOINT MAP DATA:',resp);
           this.routeData[raceID].checkpoints = resp['checkpoints'];
         })
 
@@ -207,6 +211,11 @@ export class MapComponent implements AfterViewInit,OnChanges {
   // Bit of a cheat by peeking into the _layers attribute, but this is the easiest
   // way to completely clear the map
   public clearMap(){
+    // Firstly we call each map route child's clearMap func
+    _.forEach(this.mapRouteChildren.toArray(),(child:MapRouteComponent) => {
+      child.clearMap();
+    });
+    // Then we clear up any remaining layers
     if (this.map){
       for(var i in this.map._layers) {
         if(this.map._layers[i]._path != undefined) {
@@ -259,6 +268,10 @@ export class MapComponent implements AfterViewInit,OnChanges {
         child.updateMyUserStatAndCreatePins();
       }
     });
+  }
+
+  public onLatLngBoundsUpdate(bounds: L.LatLngBounds){
+    this.onLatLngBoundsChange.emit(bounds);
   }
 
 
