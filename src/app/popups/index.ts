@@ -7,6 +7,7 @@ import { ViewFollowComponent } from './view-follow/view-follow.component';
 import { RaceMerchandiseSettingsItemComponent } from './race-merchandise-settings-item/race-merchandise-settings-item.component';
 import { RouteInfoComponent } from './route-info/route-info.component';
 import { TermsOfServiceComponent } from './terms-of-service/terms-of-service.component';
+import { WhyBirthdayComponent } from './why-birthday/why-birthday.component';
 
 export {
     LoginComponent,
@@ -18,4 +19,5 @@ export {
     RaceMerchandiseSettingsItemComponent,
     RouteInfoComponent,
     TermsOfServiceComponent,
+    WhyBirthdayComponent,
 }

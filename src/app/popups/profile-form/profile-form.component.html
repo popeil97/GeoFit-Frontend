@@ -1,16 +1,17 @@
 <div class="TucanContainer">
-  <button (click)="this.closeDialog()">Cancel</button>
+  <div class='formGroup formGroupHeader'>
+    <button (click)="this.closeDialog()">Cancel</button>
+    <button class="formButton resetButton" *ngIf="!this.initializing && this.profileForm != null" (click)="this.resetForm($event)">Reset</button>
+  </div>
 
   <ng-template [ngIf]="this.initializing || this.profileForm == null" [ngIfElse]="FormBlock">
     <p class='italics'>Loading User Data...</p>
   </ng-template>
 
   <ng-template #FormBlock>
-    <form class='EditProfileForm' [formGroup]="this.profileForm" (ngSubmit)="this.onFormSubmit($event)" novalidate>
-      <div class='formGroup formGroupHeader'>
-        <h2>Edit Profile Info</h2>
-        <button class="formButton resetButton" (click)="this.resetForm($event)">Reset</button>
-      </div>
+    <form class='form margin-top-24px' [formGroup]="this.profileForm" (ngSubmit)="this.onFormSubmit($event)" novalidate>
+      
+      <h2>Edit Profile Info</h2>
 
       <div class="formGroup formGroupColumn">
         <div class='formInputContainer'>

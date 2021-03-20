@@ -144,3 +144,24 @@
 .formButton.disabled, .disabledGroup {
     opacity:0.5;
 }
+
+@media only screen and (max-width:600px) {
+    .formGroup {
+        flex-direction:column;
+        align-items: stretch;
+    }
+    .formGroup.formGroupHeader {
+        flex-direction:row;
+    }
+    .formGroup.formGroupAlignedTop {
+        align-items: stretch;
+    }
+    .formGroup.formGroupAlignedTop .formInputContainer {
+        margin-bottom:24px;
+        margin-left:0px;
+        margin-right:0px;
+    }
+    .formGroup.formGroupAlignedTop .formInputContainer:only-child, .formGroup.formGroupAlignedTop .formInputContainer:last-child {
+        margin-bottom:0px;
+    }
+}

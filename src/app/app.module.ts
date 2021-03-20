@@ -84,7 +84,6 @@ import { WelcomeComponent } from './welcome/welcome.component';
 import { AboutTucanPageComponent } from './about-tucan-page/about-tucan-page.component';
 import { FaqPageComponent } from './faq-page/faq-page.component';
 import { ContactPageComponent } from './contact-page/contact-page.component';
-import { WhyInfoComponent,WhyInfoDialogContent} from './why-info/why-info.component';
 
 import { SwagListComponent } from './swag-list/swag-list.component';
 import { SwagItemComponent } from './swag-item/swag-item.component';
@@ -103,6 +102,7 @@ import {
   RaceMerchandiseSettingsItemComponent,
   RouteInfoComponent,
   TermsOfServiceComponent,
+  WhyBirthdayComponent,
 } from './popups';
 
 import { RouteSelectComponent } from './route-select/route-select.component';
@@ -191,8 +191,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     AboutTucanPageComponent,
     FaqPageComponent,
     ContactPageComponent,
-    WhyInfoComponent,
-    WhyInfoDialogContent,
+    WhyBirthdayComponent,
     SwagListComponent,
     SwagItemComponent,
     CartEditComponent,
@@ -273,7 +272,6 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     StoryDialogComponent,
     ReportFormComponent,
     StoryDeleteDialogComponent,
-    WhyInfoDialogContent,
     TeamFormDialogComponent,
     CheckpointDialogComponent,
     LoginComponent,
@@ -287,6 +285,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     RaceTypeComponent,
     RouteInfoComponent,
     TermsOfServiceComponent,
+    WhyBirthdayComponent,
   ] 
 })
 export class AppModule { 

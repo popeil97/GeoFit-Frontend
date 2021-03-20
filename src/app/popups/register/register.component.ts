@@ -22,6 +22,10 @@ import {
 } from '../../models';
 
 import {
+  WhyBirthdayComponent
+} from '../why-birthday/why-birthday.component';
+
+import {
   TermsOfServiceComponent
 } from '../terms-of-service/terms-of-service.component';
 
@@ -103,6 +107,14 @@ export class RegisterComponent implements OnInit {
   onKeyUpEvent(event:any) {
     const {target} = event;
    //  console.log(target.name,target.value);
+  }
+
+  openWhyBirthdayPopup = (e:any) => {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+    this.dialog.open(WhyBirthdayComponent,{
+      panelClass:"DefaultDialogContainer"
+    });
   }
 
   onCredentialsSubmit(event:any) {
