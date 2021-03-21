@@ -75,6 +75,10 @@
 .MapHeaderContainer {
   padding:16px;
 }
+.MapSidebar.collapsed .MapActionsContainer {
+  overflow:hidden;
+  padding:0px;
+}
 
 .MapSidebarWidthSmall{
    width:0%;

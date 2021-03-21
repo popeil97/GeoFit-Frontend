@@ -144,6 +144,10 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit,OnDestroy {
   }
 
   ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.raceName = params['params']['name'];
+      this.raceID = params['params']['id'];
+    });
     this.initializePage();
   }
   ngAfterViewInit(): void {
@@ -157,10 +161,6 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit,OnDestroy {
   
   initializePage = () => {
     this.loading = true;
-    this.route.paramMap.subscribe(params => {
-      this.raceName = params['params']['name'];
-      this.raceID = params['params']['id'];
-    });
     
     this.getRaceState();
     this.getActivities();
@@ -173,7 +173,7 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit,OnDestroy {
   }
   handleUserDataChange = (data:any) => {
     this.userData = data;
-    this.getRaceState();
+    this.initializePage();
   }
 
 
