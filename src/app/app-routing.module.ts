@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './views/landing/landing.component';
 import { ForRaceCreatorsComponent } from './views/for-race-creators/for-race-creators.component';
 import { ForRacersComponent } from './views/for-racers/for-racers.component';
-import { FaqPageComponent} from './faq-page/faq-page.component'
+import { FaqPageComponent} from './views/faq-page/faq-page.component'
 import { PublicRacesComponent } from './views/public-races/public-races.component';
 import { RaceAboutComponent } from './views/race-about/race-about.component';
 import { AboutTucanPageComponent} from './about-tucan-page/about-tucan-page.component'

@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-faq-page',
   templateUrl: './faq-page.component.html',
-  styleUrls: ['./faq-page.component.css']
+  styleUrls: [
+    './faq-page.component.css',
+    '../../../styles/dropdown.css'
+  ]
 })
-export class FaqPageComponent implements OnInit {
+export class FaqPageComponent {
 
   private questionsOpen = [];
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
   ToggleQuestion = (key:string = null) => {
     if (key == null) return;
