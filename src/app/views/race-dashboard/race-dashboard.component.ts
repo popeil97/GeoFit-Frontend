@@ -8,6 +8,7 @@ import {
   AuthService,
   RaceService,
   ItemService,
+  RouterService,
 } from '../../services';
 
 import { 
@@ -32,7 +33,7 @@ import { RaceMerchandiseSettingsComponent } from './race-merchandise-settings/ra
   templateUrl: './race-dashboard.component.html',
   styleUrls: ['./race-dashboard.component.css'],
 })
-export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
+export class RaceDashboardComponent implements OnInit, OnDestroy {
 
   // public loading:Boolean = true;
   private loggedInSubscription:any = null;
@@ -60,6 +61,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
   public childRaceData: ChildRaceData[] = [];
 
   private currentPageComponentRef:any = null;
+  private pageParams:any = {}
 
   private confirmationData:ConfirmationData = {
     header:"Warning",
@@ -83,11 +85,14 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
     private raceService: RaceService,
     private authService:AuthService,
     private itemService:ItemService,
+    private routerService:RouterService,
     private router:Router,
     private dialog:MatDialog,
   ) { }
 
   ngOnInit() {
+
+    console.log("INITIALIZING...");
 
     // We add a subscription to the login event
     this.loggedInSubscription = this.authService.getLoginStatus.subscribe(this.handleLoginChange);
@@ -104,6 +109,28 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
       this.page = (params['params']['page']) ? params['params']['page'] : "admin";
       if (this.raceID) {
         // there was a race ID in the URL
+        this.pageParams = {
+          "admin":{
+            url:"dashboard",
+            params:{id:this.raceID}
+          },
+          "basics":{
+            url:"dashboard",
+            params:{id:this.raceID,page:'basics'}
+          },
+          "settings":{
+            url:"dashboard",
+            params:{id:this.raceID,page:'settings'}
+          },
+          "map":{
+            url:"dashboard",
+            params:{id:this.raceID,page:'map'}
+          },
+          "merchandise":{
+            url:"dashboard",
+            params:{id:this.raceID,page:'merchandise'}
+          },
+        }
         if (this.authService.isLoggedIn()) {
           this.loadingSegments.navigation = false;
           this.getRaceData();     // We are logged in
@@ -188,12 +215,11 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
       sub.unsubscribe();
     })
   }
-  navigateTo(url:string = null, params:any = null) {
-    if (url != null) this.router.navigate([url,params]);
+  navigateTo(url:string, params:any = null) {
+    this.routerService.navigateTo(url,params);
   }
 
   saveCurrentPageRef = (ref:any) => {
-    console.log("NEW CURRENT PAGE");
     this.currentPageComponentRef = ref;
   }
 
@@ -306,86 +332,11 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
       if (callback) callback();
     })
   }
-  
-  navigateToAdmin = () => {
-    const changed = (this.currentPageComponentRef != null && this.currentPageComponentRef.changedValues != null && this.currentPageComponentRef.changedValues.length > 0);
-    if (changed) {
-      this.dialog.open(ConfirmationPopupComponent,{
-        panelClass:'DialogDefaultContainer',
-        data:{
-          confirmationData:this.confirmationData,
-        }
-      }).afterClosed().subscribe(result=>{
-        if (result.value) this.navigateTo('dashboard',{id:this.raceID})
-      });
-    } 
-    else {
-      this.navigateTo('dashboard',{id:this.raceID})
-    }
-  }
-  navigateToRaceBasics = () => {
-    const changed = (this.currentPageComponentRef != null && this.currentPageComponentRef.changedValues != null && this.currentPageComponentRef.changedValues.length > 0);
-    if (changed) {
-      this.dialog.open(ConfirmationPopupComponent,{
-        panelClass:'DialogDefaultContainer',
-        data:{
-          confirmationData:this.confirmationData,
-        }
-      }).afterClosed().subscribe(result=>{
-        if (result.value) this.navigateTo('dashboard',{id:this.raceID,page:'basics'});
-      });
-    } 
-    else {
-      this.navigateTo('dashboard',{id:this.raceID,page:'basics'});
-    }
-  }
-  navigateToSettings = () => {
-    const changed = (this.currentPageComponentRef != null && this.currentPageComponentRef.changedValues != null && this.currentPageComponentRef.changedValues.length > 0);
-    if (changed) {
-      this.dialog.open(ConfirmationPopupComponent,{
-        panelClass:'DialogDefaultContainer',
-        data:{
-          confirmationData:this.confirmationData,
-        }
-      }).afterClosed().subscribe(result=>{
-        if (result.value) this.navigateTo('dashboard',{id:this.raceID,page:'settings'});
-      });
-    } 
-    else {
-      this.navigateTo('dashboard',{id:this.raceID,page:'settings'});
-    }
-  }
-  navigateToMap = () => {
-    const changed = (this.currentPageComponentRef != null && this.currentPageComponentRef.changedValues != null && this.currentPageComponentRef.changedValues.length > 0);
-    if (changed) {
-      this.dialog.open(ConfirmationPopupComponent,{
-        panelClass:'DialogDefaultContainer',
-        data:{
-          confirmationData:this.confirmationData,
-        }
-      }).afterClosed().subscribe(result=>{
-        if (result.value) this.navigateTo('dashboard',{id:this.raceID,page:'map'});
-      });
-    } 
-    else {
-      this.navigateTo('dashboard',{id:this.raceID,page:'map'});
-    }
-  }
-  navigateToMerchandise = () => {
-    const changed = (this.currentPageComponentRef != null && this.currentPageComponentRef.changedValues != null && this.currentPageComponentRef.changedValues.length > 0);
-    if (changed) {
-      this.dialog.open(ConfirmationPopupComponent,{
-        panelClass:'DialogDefaultContainer',
-        data:{
-          confirmationData:this.confirmationData,
-        }
-      }).afterClosed().subscribe(result=>{
-        if (result.value) this.navigateTo('dashboard',{id:this.raceID,page:'merchandise'});
-      });
-    } 
-    else {
-      this.navigateTo('dashboard',{id:this.raceID,page:'merchandise'});
-    }
+
+  navigateToDashboardPage = (to:string) => {
+    const toParams = this.pageParams[to];
+    if (typeof toParams === "undefined") return;
+    this.navigateTo(toParams.url, toParams.params);
   }
 
   openNavItemContents(e:Event, to:string) {

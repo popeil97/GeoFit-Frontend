@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { 
   AuthService,
   RaceService,
+  RouterService,
   TucanValidators,
 } from '../../services';
 
@@ -57,11 +58,21 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
   public createResponse: any = null;
 
   loading:Boolean = false;
+  private initialValues:any = {
+    "name": "",
+    "description": "",
+    "startDate": "",
+    "endDate": "",
+    "bannerFile": null,
+    "raceType": ""
+  };
+  private formChangeSubscription:any = null;
 
   constructor(
     private authService:AuthService,
     private raceService:RaceService,
     private router:Router,
+    private routerService:RouterService,
     private dialog:MatDialog,
   ) {
     this.loginSubscription = this.authService.getLoginStatus.subscribe(this.handleLoginChange);
@@ -82,6 +93,7 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
     this.createResponse = null;
     this.loginSubscription.unsubscribe();
     this.loginSubscription = null;
+    this.formChangeSubscription = null;
   }
 
   handleLoginChange = (loggedIn:Boolean) => {
@@ -118,11 +130,11 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
     })
   }
   navigateTo(url:string = null) {
-    if (url != null) this.router.navigate([url]);
+    if (url != null) this.routerService.navigateTo(url);
   }
   navigateToDashboard() {
     if (this.createResponse == null) return;
-    this.router.navigate(['/dashboard',{id:this.createResponse.race_id}]);
+    this.routerService.navigateTo('/dashboard',{id:this.createResponse.race_id},true);
   }
 
   initializeRaceBasicsForm() {
@@ -153,6 +165,13 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
         Validators.required,
       ]),
     });
+    this.formChangeSubscription = this.raceBasicsForm.valueChanges.subscribe(this.valueChanged);
+  }
+  valueChanged = (values:any) => {
+    const changed = Object.keys(values).reduce((accumulator:Boolean,inputKey:string)=>{
+      return (accumulator ||  values[inputKey] != this.initialValues[inputKey]);
+    },false);
+    this.routerService.formHasChanged(changed);
   }
   validForm = () => {
     return TucanValidators.isFormValid(this.raceBasicsForm);

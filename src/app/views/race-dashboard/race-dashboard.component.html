@@ -56,10 +56,10 @@
         <div class="DashboardNavigation" *ngIf="!this.loadingSegments.navigation">
           <h1 class="RaceName">{{this.raceData.basics.name}}</h1>
           <ul class="DashboardNavigationList">
-            <li class="DashboardNavigationItem" (click)="this.navigateToAdmin();">
+            <li class="DashboardNavigationItem" (click)="this.navigateToDashboardPage('admin');">
               <h6 class="margin-bottom-0px">Admin</h6>
             </li>
-            <li class="DashboardNavigationItem" [ngClass]="{'opened':this.openedNavItem=='basics','selected':this.page=='basics'}" (click)="this.navigateToRaceBasics();">
+            <li class="DashboardNavigationItem" [ngClass]="{'opened':this.openedNavItem=='basics','selected':this.page=='basics'}" (click)="this.navigateToDashboardPage('basics');">
               <h6 class="margin-bottom-0px position-relative">
                 Race Basics
                 <div class="DashboardNavigationItemDropdownIndicator" (click)="this.openNavItemContents($event, 'basics')"></div>
@@ -91,7 +91,7 @@
                 </li>
               </ul>
             </li>
-            <li class="DashboardNavigationItem" [ngClass]="{'opened':this.openedNavItem=='settings','selected':this.page=='settings'}" (click)="this.navigateToSettings();">
+            <li class="DashboardNavigationItem" [ngClass]="{'opened':this.openedNavItem=='settings','selected':this.page=='settings'}" (click)="this.navigateToDashboardPage('settings');">
               <h6 class="margin-bottom-0px position-relative">
                 Settings
                 <div class="DashboardNavigationItemDropdownIndicator" (click)="this.openNavItemContents($event, 'settings')"></div>
@@ -111,7 +111,7 @@
                 </li>
               </ul>
             </li>
-            <li class="DashboardNavigationItem" [ngClass]="{'opened':this.openedNavItem=='map','selected':this.page=='map'}"  (click)="this.navigateToMap();">
+            <li class="DashboardNavigationItem" [ngClass]="{'opened':this.openedNavItem=='map','selected':this.page=='map'}"  (click)="this.navigateToDashboardPage('map');">
               <h6 class="margin-bottom-0px position-relative">
                 Map &amp; Route
                 <div class="DashboardNavigationItemDropdownIndicator" (click)="this.openNavItemContents($event, 'map')"></div>
@@ -139,7 +139,7 @@
                 </li>
               </ul>
             </li>
-            <li class="DashboardNavigationItem" [ngClass]="{'opened':this.openedNavItem=='merchandise','selected':this.page=='merchandise'}"  (click)="this.navigateToMerchandise();">
+            <li class="DashboardNavigationItem" [ngClass]="{'opened':this.openedNavItem=='merchandise','selected':this.page=='merchandise'}"  (click)="this.navigateToDashboardPage('merchandise');">
               <h6 class="margin-bottom-0px position-relative">
                 Merchandise &amp; Fees
                 <div class="DashboardNavigationItemDropdownIndicator" (click)="this.openNavItemContents($event, 'merchandise')"></div>

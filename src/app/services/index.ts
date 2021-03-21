@@ -23,6 +23,7 @@ import { ReportService } from './reportServices/report.service';
 import { LeaderboardService } from './leaderboardService/leaderboard.service';
 import { RaceDashboardService } from './raceDashboardService/race-dashboard.service';
 import { TokenInterceptorService } from './tokenInterceptorService/tokeninterceptorservice';
+import { RouterService } from './routerService/router-service.service';
 
 export {
     AuthService,
@@ -48,6 +49,7 @@ export {
     LeaderboardService,
     RaceDashboardService,
     TokenInterceptorService,
+    RouterService,
     
     TucanValidators,
 }

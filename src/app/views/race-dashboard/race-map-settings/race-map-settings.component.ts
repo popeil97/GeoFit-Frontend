@@ -4,6 +4,7 @@ import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { 
   RaceService,
   CoordinatesService,
+  RouterService,
   TucanValidators,
 } from '../../../services';
 
@@ -68,6 +69,7 @@ export class RaceMapSettingsComponent implements OnInit,AfterViewInit {
   constructor(
     private _coordinateService:CoordinatesService,
     private _raceService:RaceService,
+    private routerService:RouterService,
   ) { }
 
   ngOnInit() {
@@ -161,18 +163,22 @@ export class RaceMapSettingsComponent implements OnInit,AfterViewInit {
     },
       TucanValidators.notSameStartEndLocations,
     );
+
     this.loading = false;
+    this.routerService.formHasChanged(false);
   }
   valueChange(key:string) {
 
     const removeFromChanged = (k:string) => {
       const index = this.changedValues.indexOf(k);
       if (index > -1) this.changedValues.splice(index,1);
+      this.routerService.formHasChanged(this.changedValues.length > 0);
       //console.log(this.changedValues);
     }
     const addToChanged = (k:string) => {
       const index = this.changedValues.indexOf(k);
       if (index == -1) this.changedValues.push(k);
+      this.routerService.formHasChanged(this.changedValues.length > 0);
       //console.log(this.changedValues);
     }
 

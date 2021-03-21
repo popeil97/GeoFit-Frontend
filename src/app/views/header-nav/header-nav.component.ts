@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatDialog } from '@angular/material';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import {Observable} from 'rxjs/Rx';
@@ -10,6 +9,7 @@ import {
   AuthService,
   UserProfileService, 
   NotificationsService,
+  RouterService,
 } from '../../services';
 import {
   UserData,
@@ -42,7 +42,7 @@ export class HeaderNavComponent implements OnInit,OnDestroy {
     public _authService: AuthService,
     private _userProfileService: UserProfileService,
     private _bottomSheet: MatBottomSheet,
-    private router:Router,
+    private routerService:RouterService,
     private dialog : MatDialog,
   ) {}
 
@@ -121,8 +121,9 @@ export class HeaderNavComponent implements OnInit,OnDestroy {
   }
 
   NavItemClick(url:string = null) {
+    console.log(url);
     if (this.navigationOpen) this.ToggleNavigation();
-    if (url != null) this.router.navigate([url]);
+    if (url != null) this.routerService.navigateTo(url);
     window.scrollTo(0, 0);
   }
   NavDropdownItemClick = (url:any = null) => {

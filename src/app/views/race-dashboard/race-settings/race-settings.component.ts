@@ -3,7 +3,7 @@ import { FormControl,FormGroup, Validators } from '@angular/forms';
 
 import { 
   RaceService,
-
+  RouterService,
   TucanValidators,
 } from '../../../services'
 
@@ -33,6 +33,7 @@ export class RaceSettingsComponent implements OnInit,AfterViewInit {
 
   constructor(
     private _raceService:RaceService,
+    private routerService:RouterService,
   ) {}
 
   ngOnInit() {
@@ -59,7 +60,9 @@ export class RaceSettingsComponent implements OnInit,AfterViewInit {
       ),
       is_manual_entry:new FormControl(this.raceData.is_manual_entry),
     });
+
     this.loading = false;
+    this.routerService.formHasChanged(false);
   }
   valueChange(key:string) {
     let changed = false;
@@ -90,6 +93,7 @@ export class RaceSettingsComponent implements OnInit,AfterViewInit {
         if (index > -1) this.changedValues.splice(index, 1);
       }
     }
+    this.routerService.formHasChanged(this.changedValues.length > 0);
   }
   formValid = () => {
     return TucanValidators.isFormValid(this.form);

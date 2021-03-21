@@ -8,13 +8,14 @@ import {
   OnDestroy,
 } from '@angular/core';
 // import { MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { 
   AuthService,
   UserProfileService, 
+  RouterService,
   TucanValidators,
 } from '../../services';
 
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder, 
     private route: ActivatedRoute,
-    private router: Router,
+    private routerService:RouterService,
     private _authService: AuthService,
     private _userProfileService: UserProfileService,
 
@@ -80,7 +81,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   navigateTo(url:string = null) {
-    if (url != null) this.router.navigate([url]);
+    if (url != null) this.routerService.navigateTo(url);
     this.dialogRef.close();
   }
 

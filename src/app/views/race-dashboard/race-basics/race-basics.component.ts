@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Form, FormControl, FormGroup, Validators } from '@angular/forms';
 import { 
   RaceService,
+  RouterService,
   TucanValidators,
 } from '../../../services';
 import { Router } from '@angular/router';
@@ -56,6 +57,7 @@ export class RaceBasicsComponent implements OnInit {
 
   constructor(
     private raceService:RaceService,
+    private routerService:RouterService,
   ) {}
 
   ngOnInit() {
@@ -110,6 +112,7 @@ export class RaceBasicsComponent implements OnInit {
     });
 
     this.loading = false;
+    this.routerService.formHasChanged(this.changedValues.length > 0);
   }
   validForm = () => {
     return TucanValidators.isFormValid(this.raceBasicsForm);
@@ -239,6 +242,7 @@ export class RaceBasicsComponent implements OnInit {
           if (index > -1) this.changedValues.splice(index, 1);
         }
     }
+    this.routerService.formHasChanged(this.changedValues.length > 0);
   }
 
   onRaceBasicsFormSubmit() {
@@ -276,6 +280,7 @@ export class RaceBasicsComponent implements OnInit {
           this.getRaceDataCallback(()=>{
             this.resetForm();
             alert("Your race information has been successfully updated");
+
           });
         } 
         else throw(new Error('Unsuccessful Update'));
