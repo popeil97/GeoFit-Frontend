@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   loginForm: FormGroup = null;
   loading = false;
   submitted = false;
-  errors: any = [];
+  public error: any = null;
   public registerMe:boolean = false;
 
   @Output() loggedInAsUsernameEvent = new EventEmitter();
@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   ngOnDestroy() {
     this.loginForm = null;
-    this.errors = null;
+    this.error = null;
   }
 
   validForm = () => {
@@ -125,12 +125,12 @@ export class LoginComponent implements OnInit, OnDestroy {
         }).catch(uerr=>{
           console.error(uerr);
           this.loading = false;
-          this.errors = uerr['error'];
+          this.error = uerr['error'];
         });
       }
     }).catch(err => {
       this.loading = false;
-      this.errors = err['error'];
+      this.error = err['error']['non_field_errors'].join(', ');
     });
   }
 

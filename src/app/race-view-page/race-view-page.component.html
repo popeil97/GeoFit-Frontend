@@ -1,20 +1,19 @@
 <div class='TucanContainer'> 
-	<div class="MapContainer">
-		<div class="MapSidebar" [ngClass]="{MapSidebarWidthBig: isOpen, MapSidebarWidthSmall: !isOpen}">
-			<div class="MapHeaderContainer" *ngIf="isOpen">
+	<div class="MapSidebar" [ngClass]="{'collapsed':!this.isOpen}">
+		<div class="MapSidebarContainer">
+			<div class="MapSidebarToggle" (click)="this.toggleSidebar()"></div>
+			<div class="MapHeaderContainer">
 				<h3 class="MapHeaderTitle">{{this.raceName}}</h3>
-				<div class='MapHeaderButtonsContainer'>
-					<button class="smallButton" style="margin-right:3px;" (click)="viewAbout()">ABOUT</button>
-          			<span (click)="toggleMenu()" style="font-size:20px;" *ngIf="isOpen" class="material-icons">close</span>
-				</div>
+				<p class='a margin-bottom-0px margin-top-4px overflow-hidden' (click)="this.viewAbout()">More about this race</p>
 			</div>
-		    <div class="MapHeaderContainer" *ngIf="!isOpen">
-		       <button *ngIf="!isOpen" (click)="toggleMenu()"><span class="material-icons">menu</span></button>
-		    </div>
-			<button  class='LogContainer' *ngIf="this._authService.isLoggedIn() && this.userRegistered && isOpen" (click)="openLogActivity()" >LOG ACTIVITY </button>
-			<div class='MapActionsContainer' *ngIf="(!this._authService.isLoggedIn() || !this.userRegistered) && isOpen">
-				<p class='color-white'>Join the race and become a participant!</p>
-				<button class="lightButton wideButton" (click)="viewAbout()">JOIN</button>
+			<div class='MapActionsContainer'>
+				<ng-template [ngIf]="(!this._authService.isLoggedIn() || !this.userRegistered)" [ngIfElse]="LogBlock">
+					<p class='color-white margin-bottom-4px'>Join the race and become a participant!</p>
+					<button class="lightButton wideButton" (click)="this.viewAbout()">JOIN</button>
+				</ng-template>
+				<ng-template #LogBlock>
+					<button class='lightButton wideButton' (click)="this.openLogActivity()" >LOG ACTIVITY</button>
+				</ng-template>
 			</div>
 			<div class="Slideshow MapFeedContainer"  *ngIf="isOpen">
 				<div class="SlideshowHeader MapFeedSlideshowHeader" >
@@ -56,18 +55,18 @@
 									<button class="whiteButton smallButton" (click)="this.openRouteInfo()">?</button>
 								</div>
 							</div>
-							
+								
 							<div *ngIf="allowTeams" class="SlideshowHeader MapFeedSlideshowHeader">
 								<button class="SlideshowButton" (click)="SwitchLeaderboard('individual')" id="individual-leaderboard-btn">Individual</button>
 								<button class="SlideshowButton" (click)="SwitchLeaderboard('teams')" id="teams-leaderboard-btn">Teams</button>
 							</div>
-
+	
 							<app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0 && currentLeaderboard == 'individual'" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard> 
 							<app-leaderboard *ngIf="selectedTagFilterID != 0 && allowTeams && currentLeaderboard == 'teams'" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
 							<app-hybrid-leaderboard *ngIf="isHybrid && currentLeaderboard == 'individual'" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard>
 						</div>
 					</div>
-
+	
 					<div class="SlideshowSlide MapLeaderboardSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'teams'}">
 						<app-team-list *ngIf="allowTeams" [race_id]="raceID" [userStat]="userStat" (callback)="refreshAllComponents($event)"></app-team-list>
 					</div>
@@ -75,11 +74,11 @@
 				</div>
 			</div>
 		</div>
-		<div class='MapGreaterContainer'>
-			<app-map [raceIDs]="raceIDs" [parentRaceID]="raceID" [displayUsers]="true" [followedIDs]="followedIDs" [zoom]="false"></app-map>
-			<div *ngIf="this._authService.isLoggedIn() && this.userRegistered"[ngClass]="{searchContainer: isOpen, searchContainerSmall: !isOpen}">
-				<app-search [raceID]="raceID"></app-search>
-			</div>
+	</div>
+	<div class='MapGreaterContainer'>
+		<app-map [raceIDs]="raceIDs" [parentRaceID]="raceID" [displayUsers]="true" [followedIDs]="followedIDs" [zoom]="false"></app-map>
+		<div *ngIf="this._authService.isLoggedIn() && this.userRegistered"[ngClass]="{searchContainer: isOpen, searchContainerSmall: !isOpen}">
+			<app-search [raceID]="raceID"></app-search>
 		</div>
 	</div>
 </div>

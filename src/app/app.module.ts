@@ -78,7 +78,7 @@ import { TagSelectComponent } from './tag-select/tag-select.component';
 import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.component';
 
 import { WelcomeComponent } from './welcome/welcome.component';
-import { AboutTucanPageComponent } from './about-tucan-page/about-tucan-page.component';
+import { AboutTucanComponent } from './views/about-tucan/about-tucan.component';
 import { FaqPageComponent } from './views/faq-page/faq-page.component';
 import { ContactPageComponent } from './views/contact-page/contact-page.component';
 
@@ -187,7 +187,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     RaceDashboardComponent,
     RaceStoryManageComponent,
     WelcomeComponent,
-    AboutTucanPageComponent,
+    AboutTucanComponent,
     FaqPageComponent,
     ContactPageComponent,
     WhyBirthdayComponent,

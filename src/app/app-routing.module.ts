@@ -7,7 +7,7 @@ import { ForRacersComponent } from './views/for-racers/for-racers.component';
 import { FaqPageComponent} from './views/faq-page/faq-page.component'
 import { PublicRacesComponent } from './views/public-races/public-races.component';
 import { RaceAboutComponent } from './views/race-about/race-about.component';
-import { AboutTucanPageComponent} from './about-tucan-page/about-tucan-page.component'
+import { AboutTucanComponent} from './views/about-tucan/about-tucan.component'
 import {ContactPageComponent} from './views/contact-page/contact-page.component'
 
 import { RaceViewPageComponent } from './race-view-page/race-view-page.component';
@@ -34,7 +34,7 @@ const routes: Routes = [
   {path:'faqs', component:FaqPageComponent},
   {path:'races', component:PublicRacesComponent},
   {path:'about',component:RaceAboutComponent},
-  {path:'about-tucan', component:AboutTucanPageComponent},
+  {path:'about-tucan', component:AboutTucanComponent},
   {path:'contact', component:ContactPageComponent},
 
   {path:'race', component:RaceViewPageComponent},

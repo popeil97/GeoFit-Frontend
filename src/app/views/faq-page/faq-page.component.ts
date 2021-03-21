@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-faq-page',
@@ -8,11 +8,15 @@ import { Component } from '@angular/core';
     '../../../styles/dropdown.css'
   ]
 })
-export class FaqPageComponent {
+export class FaqPageComponent implements OnDestroy {
 
   private questionsOpen = [];
 
-  constructor() { }
+  constructor() {}
+
+  ngOnDestroy() {
+    this.questionsOpen = [];
+  }
 
   ToggleQuestion = (key:string = null) => {
     if (key == null) return;

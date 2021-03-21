@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AboutTucanPageComponent } from './about-tucan-page.component';
+import { AboutTucanComponent } from './about-tucan.component';
 
-describe('AboutTucanPageComponent', () => {
-  let component: AboutTucanPageComponent;
-  let fixture: ComponentFixture<AboutTucanPageComponent>;
+describe('AboutTucanComponent', () => {
+  let component: AboutTucanComponent;
+  let fixture: ComponentFixture<AboutTucanComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AboutTucanPageComponent ]
+      declarations: [ AboutTucanComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AboutTucanPageComponent);
+    fixture = TestBed.createComponent(AboutTucanComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

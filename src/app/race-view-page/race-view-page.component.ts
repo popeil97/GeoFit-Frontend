@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewChildren, QueryList, AfterViewChecked, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList, AfterViewInit, OnDestroy } from '@angular/core';
 import * as bootstrap from "bootstrap";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatDialog } from '@angular/material';
@@ -16,6 +16,7 @@ import {
   UserProfileService,
   ActivitiesService,
   StoryService,
+  RouterService,
 } from '../services';
 
 import {
@@ -38,6 +39,7 @@ import * as _ from 'lodash';
 import { RouteSelectComponent } from '../route-select/route-select.component';
 import { HybridLeaderboardComponent } from '../hybrid-leaderboard/hybrid-leaderboard.component';
 import { CheckpointDialogComponent } from '../checkpoint-list/checkpoint-dialog.component';
+import { times } from 'lodash';
 
 
 @Component({
@@ -45,7 +47,7 @@ import { CheckpointDialogComponent } from '../checkpoint-list/checkpoint-dialog.
   templateUrl: './race-view-page.component.html',
   styleUrls: ['./race-view-page.component.css'],
 })
-export class RaceViewPageComponent implements OnInit,AfterViewInit {
+export class RaceViewPageComponent implements OnInit,AfterViewInit,OnDestroy {
   @ViewChild(MapComponent) mapChild: MapComponent;
   @ViewChild(FeedComponent) feedChild: FeedComponent;
   @ViewChild(StoryModalComponent) storyModal: StoryModalComponent;
@@ -122,6 +124,8 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
   public currentLeaderboard = 'individual';
   public acceptedScreens = ['feed','leaderboard','teams'];
 
+  private userDataSubscription:any = null;
+
   constructor(
     private raceService:RaceService,
     private activitiesService:ActivitiesService,
@@ -130,24 +134,33 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     private router:Router,
     private storyService: StoryService,
     public _authService: AuthService,
+    private routerService:RouterService,
 
     private dialog : MatDialog,
   ) {
     this.modalData = {};
+    this.userData = this._authService.userData;
+    this.userDataSubscription = this._authService.userDataChange.subscribe(this.handleUserDataChange);
   }
 
   ngOnInit() {
+    this.initializePage();
+  }
+  ngAfterViewInit(): void {
+    this.setLeaderboardRouteFilter({id:this.raceID,name:'All'});
+  }
+  ngOnDestroy() {
+    this.userData = null;
+    this.userDataSubscription.unsubscribe();
+    this.userDataSubscription = null;
+  }
+  
+  initializePage = () => {
     this.loading = true;
     this.route.paramMap.subscribe(params => {
       this.raceName = params['params']['name'];
       this.raceID = params['params']['id'];
     });
-
-    if(this._authService.isLoggedIn()) {
-      this._userProfileService.requestUserProfile(this._authService.username).then((data) => {
-        this.userData = data as UserData;
-      });
-    }
     
     this.getRaceState();
     this.getActivities();
@@ -158,17 +171,19 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
       feedButton.style.color = "#FFFFFF";
     }
   }
-
-  ngAfterViewInit(): void {
-    this.setLeaderboardRouteFilter({id:this.raceID,name:'All'});
+  handleUserDataChange = (data:any) => {
+    this.userData = data;
+    this.getRaceState();
   }
+
+
 
   newStoryPosted(event: any) {
     console.log("new story");
     this.feedChild.refreshFeed();
   }
 
-  toggleMenu() {
+  toggleSidebar() {
     this.isOpen = !this.isOpen;
   }
 
@@ -229,8 +244,8 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     this.feedOptions = !this.feedOptions;
   }
 
-  viewAbout() {
-    this.router.navigate(['/about',{name:this.race.name,id:this.race.id}]);
+  viewAbout = () => {
+    this.routerService.navigateTo('/about',{name:this.race.name,id:this.race.id});
   }
 
   setLeaderboardRouteFilter(route:ChildRaceData) {
