@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, SimpleChanges, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, OnDestroy, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatDialog } from '@angular/material';
 
@@ -13,12 +13,24 @@ import {
 import { 
   LoginComponent,
   RegisterComponent,
+  ConfirmationPopupComponent,
+  RaceMerchandiseSettingsItemComponent,
 } from '../../popups';
+
+import {
+  Choice,
+  ConfirmationData,
+} from '../../models';
+
+import { RaceBasicsComponent } from './race-basics/race-basics.component';
+import { RaceSettingsComponent } from './race-settings/race-settings.component';
+import { RaceMapSettingsComponent } from './race-map-settings/race-map-settings.component';
+import { RaceMerchandiseSettingsComponent } from './race-merchandise-settings/race-merchandise-settings.component';
 
 @Component({
   selector: 'app-race-dashboard',
   templateUrl: './race-dashboard.component.html',
-  styleUrls: ['./race-dashboard.component.css']
+  styleUrls: ['./race-dashboard.component.css'],
 })
 export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
 
@@ -46,6 +58,25 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
 
   //Info of all child races if present (else just parent race)
   public childRaceData: ChildRaceData[] = [];
+
+  private currentPageComponentRef:any = null;
+
+  private confirmationData:ConfirmationData = {
+    header:"Warning",
+    prompt:"You've made changes to this form. Do you wish to discard changes and continue?",
+    choices:[
+      {
+        text:"Discard",
+        value:true,
+        buttonColor:"red",
+        textColor:"white",
+      } as Choice,
+      {
+        "text":"Cancel",
+        value:false,
+      } as Choice
+    ]
+  }
 
   constructor(
     private route: ActivatedRoute,
@@ -107,6 +138,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
     */
   }
 
+  /*
   ngOnChanges(changes: SimpleChanges) {
     for(const propName in changes) {
       if(changes.hasOwnProperty(propName)) {
@@ -124,6 +156,7 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
       }
     }
   }
+  */
 
   ngOnDestroy() {
     if (this.loggedInSubscription) this.loggedInSubscription.unsubscribe();
@@ -157,6 +190,11 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
   }
   navigateTo(url:string = null, params:any = null) {
     if (url != null) this.router.navigate([url,params]);
+  }
+
+  saveCurrentPageRef = (ref:any) => {
+    console.log("NEW CURRENT PAGE");
+    this.currentPageComponentRef = ref;
   }
 
   handleLoginChange = (loggedIn:Boolean) => {
@@ -268,20 +306,86 @@ export class RaceDashboardComponent implements OnInit, OnChanges, OnDestroy {
       if (callback) callback();
     })
   }
-  public navigateToAdmin() {
-    this.navigateTo('dashboard',{id:this.raceID})
+  
+  navigateToAdmin = () => {
+    const changed = (this.currentPageComponentRef != null && this.currentPageComponentRef.changedValues != null && this.currentPageComponentRef.changedValues.length > 0);
+    if (changed) {
+      this.dialog.open(ConfirmationPopupComponent,{
+        panelClass:'DialogDefaultContainer',
+        data:{
+          confirmationData:this.confirmationData,
+        }
+      }).afterClosed().subscribe(result=>{
+        if (result.value) this.navigateTo('dashboard',{id:this.raceID})
+      });
+    } 
+    else {
+      this.navigateTo('dashboard',{id:this.raceID})
+    }
   }
-  public navigateToRaceBasics() {
-    this.navigateTo('dashboard',{id:this.raceID,page:'basics'});
+  navigateToRaceBasics = () => {
+    const changed = (this.currentPageComponentRef != null && this.currentPageComponentRef.changedValues != null && this.currentPageComponentRef.changedValues.length > 0);
+    if (changed) {
+      this.dialog.open(ConfirmationPopupComponent,{
+        panelClass:'DialogDefaultContainer',
+        data:{
+          confirmationData:this.confirmationData,
+        }
+      }).afterClosed().subscribe(result=>{
+        if (result.value) this.navigateTo('dashboard',{id:this.raceID,page:'basics'});
+      });
+    } 
+    else {
+      this.navigateTo('dashboard',{id:this.raceID,page:'basics'});
+    }
   }
-  public navigateToSettings() {
-    this.navigateTo('dashboard',{id:this.raceID,page:'settings'});
+  navigateToSettings = () => {
+    const changed = (this.currentPageComponentRef != null && this.currentPageComponentRef.changedValues != null && this.currentPageComponentRef.changedValues.length > 0);
+    if (changed) {
+      this.dialog.open(ConfirmationPopupComponent,{
+        panelClass:'DialogDefaultContainer',
+        data:{
+          confirmationData:this.confirmationData,
+        }
+      }).afterClosed().subscribe(result=>{
+        if (result.value) this.navigateTo('dashboard',{id:this.raceID,page:'settings'});
+      });
+    } 
+    else {
+      this.navigateTo('dashboard',{id:this.raceID,page:'settings'});
+    }
   }
-  public navigateToMap() {
-    this.navigateTo('dashboard',{id:this.raceID,page:'map'});
+  navigateToMap = () => {
+    const changed = (this.currentPageComponentRef != null && this.currentPageComponentRef.changedValues != null && this.currentPageComponentRef.changedValues.length > 0);
+    if (changed) {
+      this.dialog.open(ConfirmationPopupComponent,{
+        panelClass:'DialogDefaultContainer',
+        data:{
+          confirmationData:this.confirmationData,
+        }
+      }).afterClosed().subscribe(result=>{
+        if (result.value) this.navigateTo('dashboard',{id:this.raceID,page:'map'});
+      });
+    } 
+    else {
+      this.navigateTo('dashboard',{id:this.raceID,page:'map'});
+    }
   }
-  public navigateToMerchandise() {
-    this.navigateTo('dashboard',{id:this.raceID,page:'merchandise'});
+  navigateToMerchandise = () => {
+    const changed = (this.currentPageComponentRef != null && this.currentPageComponentRef.changedValues != null && this.currentPageComponentRef.changedValues.length > 0);
+    if (changed) {
+      this.dialog.open(ConfirmationPopupComponent,{
+        panelClass:'DialogDefaultContainer',
+        data:{
+          confirmationData:this.confirmationData,
+        }
+      }).afterClosed().subscribe(result=>{
+        if (result.value) this.navigateTo('dashboard',{id:this.raceID,page:'merchandise'});
+      });
+    } 
+    else {
+      this.navigateTo('dashboard',{id:this.raceID,page:'merchandise'});
+    }
   }
 
   openNavItemContents(e:Event, to:string) {

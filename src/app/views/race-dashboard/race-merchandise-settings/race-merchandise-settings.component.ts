@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material';
 
 import { 
@@ -13,10 +13,11 @@ import {
     '../../../../styles/forms.css'
   ]
 })
-export class RaceMerchandiseSettingsComponent implements OnInit,OnDestroy {
+export class RaceMerchandiseSettingsComponent implements OnInit,AfterViewInit,OnDestroy {
 
   @Input() raceID:number = null;
   @Input() raceData:any = null;
+  @Input() loadedCallback: (ref:any) => void;
   @Input() getRaceDataCallback: (callback:any) => void;
 
   private debugMode:boolean = false;
@@ -68,6 +69,9 @@ export class RaceMerchandiseSettingsComponent implements OnInit,OnDestroy {
 
   ngOnInit() {
     this.initializeData();
+  }
+  ngAfterViewInit() {
+    this.loadedCallback(this);
   }
   ngOnDestroy() {
     this.merchandiseItems = null;

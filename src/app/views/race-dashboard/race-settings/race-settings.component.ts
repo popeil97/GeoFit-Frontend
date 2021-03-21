@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
 
 import { 
@@ -15,10 +15,11 @@ import {
     '../../../../styles/forms.css',
   ]
 })
-export class RaceSettingsComponent implements OnInit {
+export class RaceSettingsComponent implements OnInit,AfterViewInit {
 
   @Input() raceID:number;
   @Input() raceData:any = null;
+  @Input() loadedCallback: (ref:any) => void;
   @Input() getRaceDataCallback: (callback:any) => void;
 
   public form:FormGroup;
@@ -36,6 +37,9 @@ export class RaceSettingsComponent implements OnInit {
 
   ngOnInit() {
     this.initializeForm();
+  }
+  ngAfterViewInit() {
+    this.loadedCallback(this);
   }
 
   initializeForm() {

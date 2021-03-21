@@ -1,0 +1,18 @@
+.actionsContainer {
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.action {
+    flex-grow:0;
+    flex-shrink:0;
+    flex-basis:auto;
+
+    margin-left:16px;
+    margin-right:16px;
+}
+.action:only-child {
+    margin:0px;
+}

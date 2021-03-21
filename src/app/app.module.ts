@@ -102,6 +102,7 @@ import {
   WhyBirthdayComponent,
   ReportFormComponent,
   StoryDeleteFormComponent,
+  ConfirmationPopupComponent,
 } from './popups';
 
 import { RouteSelectComponent } from './route-select/route-select.component';
@@ -230,6 +231,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     RaceMapSettingsComponent,
     RaceMerchandiseSettingsComponent,
     RaceMerchandiseSettingsItemComponent,
+    ConfirmationPopupComponent,
   ],
 
   imports: [
@@ -283,6 +285,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     RouteInfoComponent,
     TermsOfServiceComponent,
     WhyBirthdayComponent,
+    ConfirmationPopupComponent,
   ] 
 })
 export class AppModule { 

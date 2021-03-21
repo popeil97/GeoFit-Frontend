@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { 
   RaceService,
@@ -19,6 +19,7 @@ export class RaceBasicsComponent implements OnInit {
   // We theoretically can pull the raceID from the raceData data, but we should be safe here and try to pass it via Angular Input instead
   @Input() raceID:number;
   @Input() raceData:any;
+  @Input() loadedCallback: (ref:any) => void;
   @Input() getRaceDataCallback: (callback:any) => void;
 
   // --- Initializing form groups ---
@@ -63,6 +64,7 @@ export class RaceBasicsComponent implements OnInit {
   }
   ngAfterViewInit() {
     this.bannerInput = document.getElementById("bannerPreviewInput");
+    this.loadedCallback(this);
   }
 
   initializeRaceBasicsForm() {

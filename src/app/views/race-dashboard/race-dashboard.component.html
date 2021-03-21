@@ -166,16 +166,16 @@
           <div class="DashboardContents" [ngSwitch]="this.page">
             <p *ngSwitchCase="'admin'">Admin</p>
             <div *ngSwitchCase="'basics'">
-              <app-race-basics [raceID]="this.raceID" [raceData]="this.raceData.basics" [getRaceDataCallback]="this.getRaceData"></app-race-basics>
+              <app-race-basics [raceID]="this.raceID" [raceData]="this.raceData.basics" [loadedCallback]="this.saveCurrentPageRef" [getRaceDataCallback]="this.getRaceData"></app-race-basics>
             </div>
             <div *ngSwitchCase="'settings'">
-              <app-race-settings [raceID]="this.raceID" [raceData]="this.raceData.settings" [getRaceDataCallback]="this.getRaceData"></app-race-settings>
+              <app-race-settings [raceID]="this.raceID" [raceData]="this.raceData.settings" [loadedCallback]="this.saveCurrentPageRef" [getRaceDataCallback]="this.getRaceData"></app-race-settings>
             </div>
             <div *ngSwitchCase="'map'">
-              <app-race-map-settings [raceID]="this.raceID" [raceData]="this.raceData.map" [getRaceDataCallback]="this.getRaceData"></app-race-map-settings>
+              <app-race-map-settings [raceID]="this.raceID" [raceData]="this.raceData.map" [loadedCallback]="this.saveCurrentPageRef" [getRaceDataCallback]="this.getRaceData"></app-race-map-settings>
             </div>
             <div *ngSwitchCase="'merchandise'">
-              <app-race-merchandise-settings [raceID]="this.raceID" [raceData]="this.raceData.merchandise" [getRaceDataCallback]="this.getRaceData"></app-race-merchandise-settings>
+              <app-race-merchandise-settings [raceID]="this.raceID" [raceData]="this.raceData.merchandise" [loadedCallback]="this.saveCurrentPageRef" [getRaceDataCallback]="this.getRaceData"></app-race-merchandise-settings>
             </div>
           </div>
         </ng-template>

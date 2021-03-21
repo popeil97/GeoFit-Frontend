@@ -22,6 +22,7 @@ export class RaceMapSettingsComponent implements OnInit,AfterViewInit {
 
   @Input() raceID:number = null;
   @Input() raceData:any = null;
+  @Input() loadedCallback: (ref:any) => void;
   @Input() getRaceDataCallback: (callback:any) => void;
 
   public loading:Boolean = true;
@@ -72,10 +73,9 @@ export class RaceMapSettingsComponent implements OnInit,AfterViewInit {
   ngOnInit() {
     this.initializeForm();
   }
-
   ngAfterViewInit() {
     this.mapFileInput = document.getElementById('MapFileUpload');
-    console.log(this.routeData);
+    this.loadedCallback(this);
   }
 
   // resetRouteDataFromCoords resets the preview map to show the existing route
