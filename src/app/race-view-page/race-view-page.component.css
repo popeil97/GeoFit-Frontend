@@ -1,7 +1,6 @@
 .TucanContainer {
-  position: fixed;
+  position:fixed;
   height: calc(100% - 80px);
-  width: 100%;
   overflow: hidden;
 
   display:flex;
@@ -10,6 +9,168 @@
   align-items: flex-start;
   flex-wrap: nowrap;
 }
+.MapContainer {
+  position:relative;
+  width:100%;
+  height:100%;
+}
+
+.MapTitleContainer {
+  position:absolute;
+  z-index: 1001;
+  bottom:0px;
+  left:50%;
+  transform:translateX(-50%);
+  width:auto;
+  max-width:600px;
+  height:auto;
+  box-shadow:0px 0px 20px 20px rgba(255,255,255,0.75);
+  background-color:rgba(255,255,255,0.75);
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  padding:8px 32px 16px 32px;
+  text-align:center;
+  opacity:0.5;
+  transition:opacity 0.25s ease-in-out, box-shadow 0.25s ease-in-out, background-color 0.25s ease-in-out;
+}
+.MapTitleContainer:hover {
+  opacity:1;
+  /* box-shadow:0px 0px 5px 2px rgba(0,0,0,0.5); */
+  /* background-color: rgb(255,255,255); */
+}
+.MapTitle {
+  margin-bottom:0px;
+}
+.MapLegend {
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+}
+  .MapLegendItem {
+    margin-bottom:8px;
+    padding-bottom:8px;
+    border-bottom:1px solid rgb(200,200,200);
+
+    display:flex;
+    flex-direction:row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+    .MapLegendItem:last-child {
+      margin-bottom:0px;
+      padding-bottom:0px;
+      border-bottom: none;
+    }
+    .MapLegendItemIcon {
+      width:32px;
+      height:32px;
+      margin-right:16px;
+      flex-shrink: 0;
+      flex-basis: 32px;
+      
+      background-position: center;
+      background-size:contain;
+      background-repeat: no-repeat;
+    }
+    .MapLegendItemContent {
+      flex-shrink: 1;
+      flex-basis: 100%;
+      font-size:var(--h7);
+    }
+      .MapLegendItemContent p {
+        margin-bottom:2px;
+      }
+      .MapLegendItemContent p:last-child {
+        margin-bottom:0px;
+      }
+.MapCommandCenter {
+  position: absolute;
+  top:16px;
+  left:16px;
+  z-index:50000;
+
+  width: auto;
+  max-width: 600px;
+  height:48px;
+  padding:8px;
+  border:1px solid var(--primary-lightgrey);
+  box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+  background-color:white;
+  border-radius: 20px;
+
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+    .MapCommandCenterAction {
+      position:relative;
+      height:32px;
+      min-width: 32px;
+      margin-right:8px;
+      display:flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+    .MapCommandCenterAction:first-child {
+      margin-left:0px;
+    }
+    .MapCommandCenterAction:last-child {
+      margin-right:0px;
+    }
+      .MapActionIcon {
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform:translate(-50%,-50%);
+        width:32px;
+        height:32px;
+        background-position: center;
+        background-size:contain;
+        background-repeat: no-repeat;
+        opacity:0.75;
+        transition:opacity 0.25s ease-in-out;
+      }
+      .MapActionIcon.AboutIcon, .MapLegendItemIcon.AboutIcon {
+        background-image:url('../../assets/icons/question-mark-icon-inactive.svg');
+      }
+      .MapActionIcon.AboutIcon.opened {
+        background-image:url('../../assets/icons/question-mark-icon.svg');
+      }
+      .MapActionIcon.SocialFeedIcon, .MapLegendItemIcon.SocialFeedIcon {
+        background-image:url('../../assets/icons/map-social-icon-inactive.svg');
+      }
+      .MapActionIcon.SocialFeedIcon.opened {
+        background-image:url('../../assets/icons/map-social-icon.svg');
+      }
+      .MapActionIcon.LeaderboardIcon, .MapLegendItemIcon.LeaderboardIcon {
+        background-image:url('../../assets/icons/map-leaderboard-icon-inactive.svg');
+      }
+      .MapActionIcon.LeaderboardIcon.opened {
+        background-image:url('../../assets/icons/map-leaderboard-icon.svg');
+      }
+      .MapActionIcon.SearchIcon, .MapLegendItemIcon.SearchIcon {
+        background-image:url('../../assets/icons/search-icon-inactive.svg');
+      }
+      .MapActionIcon.SearchIcon.opened {
+        background-image:url('../../assets/icons/search-icon.svg');
+      }
+      .MapActionIcon:hover, .MapActionIcon.opened {
+        cursor:pointer;
+        opacity:1;
+      }
+    .MapActionButton {
+      width:auto;
+      height:32px;
+      border-radius:16px !important;
+      font-size:var(--h7);
+    }
 
 .textControl{
   font-family:"Mulish";
@@ -18,24 +179,29 @@
 
 .MapSidebar {
   position: absolute;
-  top:16px;
+  top:80px;
   left:16px;
   z-index:50000;
 
-  width:20%;
-  min-width: 360px;
-  height: calc(100% - 32px);
+  width: 360px;
+  padding:16px;
+  height:auto;
+  max-height: calc(100% - 96px);
   border:1px solid var(--primary-lightgrey);
   box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
   background-color:white;
   border-radius: 16px;
-  transition:width 0.25s ease-in-out, box-shadow 0.25s ease-in-out, border-width 0.25s ease-in-out;
+  transition:width 0.25s ease-in-out, box-shadow 0.25s ease-in-out, border-width 0.25s ease-in-out, padding 0.25s ease-in-out;
 }
   .MapSidebar.collapsed {
     width:0px;
     min-width: 0px;
     border-width: 0px;
+    padding:0px;
     box-shadow: 0px 0px 5px 2px transparent;
+  }
+  .MapSidebar.fullHeightOpen {
+    height: calc(100% - 96px);
   }
   .MapSidebar .MapSidebarContainer {
     position:relative;
@@ -48,28 +214,27 @@
     align-items: stretch;
     flex-wrap: nowrap;
   }
-  .MapSidebarToggle {
+  .MapSidebarClose {
     position:absolute;
-    left: calc(100% + 16px);
-    top:0px;
+    right:-24px;
+    top:-24px;
 
     width:24px;
     height:24px;
-    padding:6px;
-    transform:rotate(-90deg);
-    transition:transform 0.25s ease-in-out;
-    border:1px solid var(--primary-lightgrey);
-    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
-    border-radius: 8px;
+    box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.2);
+    border-radius: 12px;
     
     background-color:white;
-    background-image: url(../../assets/icons/dropdown-icon.svg);
+    background-image: url(../../assets/icons/cancel-icon.svg);
     background-position: center;
-    background-size: 12px 12px;
+    background-size: contain;
     background-repeat: no-repeat;
   }
-  .MapSidebar.collapsed .MapSidebarToggle {
-    transform:rotate(90deg);
+  .MapSidebarClose:hover {
+    cursor:pointer;
+  }
+  .MapSidebar.collapsed .MapSidebarClose {
+    display:none;
   }
 
 .MapHeaderContainer {
@@ -100,7 +265,6 @@
   .buttonContainer {
     position: absolute;
   }
-    .MapFeedToggleButton {}
 
   .MapHeaderContainer, .MapActionsContainer {
     /* border-bottom:1px solid grey; */

@@ -98,7 +98,10 @@ export class HeaderNavComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.userDataSubscription) this.userDataSubscription.unsubscribe();
+    if (this.userDataSubscription) {
+      this.userDataSubscription.unsubscribe();
+      this.userDataSubscription = null;
+    }
     this.userData = null;
   }
 

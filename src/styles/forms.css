@@ -96,6 +96,15 @@
     .formTextInput.errorTextInput {
         border-color: red;
     }
+    textarea.formTextInput.noResize {
+        resize:none;
+    }
+    .formTextInputCharacterLimit {
+        margin:0px;
+        text-align: right;
+        font-size:var(--h7);
+        opacity:0.5;
+    }
 
 .formSelectInput {
     width:100%;
@@ -132,7 +141,7 @@
         background-color:red;
         color:white;
     }
-    .formButton:hover, .formButton.resetButton:hover {
+    .formButton:hover, .formButton.resetButton:hover, .formButton.highlightedButton {
         background-color: var(--main-background-color);
         color:white;
     }
@@ -141,6 +150,10 @@
         background-color: initial;
         color:initial;
     }
+
+.formButton.disabled, .disabledGroup {
+    opacity:0.5;
+}
 
 .uploadFileIcon {
     width:36px;
@@ -151,9 +164,24 @@
     background-position: center;
     background-repeat: no-repeat;
 }
+.imageIcon {
+    width:36px;
+    height:36px;
 
-.formButton.disabled, .disabledGroup {
-    opacity:0.5;
+    background-image:url('../assets/icons/image-icon.svg');
+    background-size:contain;
+    background-position:center;
+    background-repeat: no-repeat;
+}
+.cancelIcon {
+    width:36px;
+    height:36px;
+    border-radius: 50%;
+
+    background-image:url('../assets/icons/cancel-icon.svg');
+    background-size: contain;
+    background-position:center;
+    background-repeat: no-repeat;
 }
 
 @media only screen and (max-width:600px) {

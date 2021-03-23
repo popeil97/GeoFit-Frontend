@@ -25,10 +25,9 @@ import {
   PopUpService,
   LeaderboardService,
   TokenInterceptorService,
+  RaceFeedService,
 } from './services/';
 import { StravauthService } from './stravauth/stravauth.service';
-import { RaceFeedService } from './feed/race-feed.service';
-import { FeedComponent } from './feed/feed.component';
 
 import {
   HttpRequest,
@@ -52,7 +51,10 @@ import { NotificationComponent } from './notification/notification.component';
 import { StoryModalComponent } from './story-modal/story-modal.component';
 import { CommentsComponent } from './comments/comments.component';
 import { CommentsFormComponent } from './comments-form/comments-form.component';
-import { StoryFormComponent } from './story-form/story-form.component';
+import {
+  StoryFormComponent, 
+  FeedComponent,
+} from './components';
 
 import { PaypalComponent } from './paypal/paypal.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';

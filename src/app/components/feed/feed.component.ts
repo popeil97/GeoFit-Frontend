@@ -1,21 +1,23 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
-import { StoryModalComponent } from '../story-modal/story-modal.component';
+import { StoryModalComponent } from '../../story-modal/story-modal.component';
 import { MatTableDataSource } from '@angular/material/table';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
-import { RaceFeedService } from './race-feed.service';
-import { StoryFormComponent } from '../story-form/story-form.component';
+import { 
+  StoryFormComponent 
+} from '../story-form/story-form.component';
 
 import { 
   AuthService,
   UserProfileService,
-} from '../services';
+  RaceFeedService,
+} from '../../services';
 import {
   ReportFormComponent,
   StoryDeleteFormComponent,
-} from '../popups';
+} from '../../popups';
 
-import { StoryDialogComponent } from '../story-dialog/story-dialog.component';
-import { ModalService } from '../modalServices';
+import { StoryDialogComponent } from '../../story-dialog/story-dialog.component';
+import { ModalService } from '../../modalServices';
 
 declare var $: any
 
@@ -30,7 +32,6 @@ export class FeedComponent implements OnInit {
   */
 
   @ViewChild(StoryModalComponent) storyModalChild: StoryModalComponent;
-
   @ViewChild(StoryFormComponent) storyFormComponent: StoryFormComponent;
 
   //ID of race or user
@@ -73,11 +74,13 @@ export class FeedComponent implements OnInit {
 
   columns:string[] = ['ProfilePic','Data'];
 
-  constructor(private _userProfileService: UserProfileService, 
-              private _raceFeedService: RaceFeedService,
-              public _authService: AuthService,
-              public dialog: MatDialog,private modalService: ModalService,) {
-  }
+  constructor(
+    private _userProfileService: UserProfileService, 
+    private _raceFeedService: RaceFeedService,
+    public _authService: AuthService,
+    public dialog: MatDialog,
+    private modalService: ModalService,
+  ) {}
 
   ngOnInit() {
     if (this.use == 'race'){

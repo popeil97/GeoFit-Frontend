@@ -24,6 +24,7 @@ import { LeaderboardService } from './leaderboardService/leaderboard.service';
 import { RaceDashboardService } from './raceDashboardService/race-dashboard.service';
 import { TokenInterceptorService } from './tokenInterceptorService/tokeninterceptorservice';
 import { RouterService } from './routerService/router-service.service';
+import { RaceFeedService } from './raceFeedService/race-feed.service';
 
 export {
     AuthService,
@@ -50,6 +51,7 @@ export {
     RaceDashboardService,
     TokenInterceptorService,
     RouterService,
+    RaceFeedService,
     
     TucanValidators,
 }
