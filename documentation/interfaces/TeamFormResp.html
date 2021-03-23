@@ -1,0 +1,427 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>geo-fit documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">geo-fit documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Interfaces</li>
+  <li>TeamFormResp</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/team-form/team-form.component.ts</code>
+        </p>
+
+
+
+        <section>
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#message">message</a>
+                                </li>
+                                <li>
+                                        <a href="#success">success</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section>
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="message"></a>
+                                        <span class="name"><b>message</b><a href="#message"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>message:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="success"></a>
+                                        <span class="name"><b>success</b><a href="#success"><span class="icon ion-ios-link"></span></a></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>success:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, EventEmitter, Output, Input, AfterViewInit, OnChanges, SimpleChanges } from &#x27;@angular/core&#x27;;
+import { FormGroup, FormControl, Validators } from &#x27;@angular/forms&#x27;;
+import { TeamService } from &#x27;../team.service&#x27;;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;;
+import { UsersService } from &#x27;../users.service&#x27;;
+import { TeamEditBody } from &#x27;../race-view/race-view.component&#x27;;
+
+@Component({
+  selector: &#x27;app-team-form&#x27;,
+  templateUrl: &#x27;./team-form.component.html&#x27;,
+  styleUrls: [&#x27;./team-form.component.css&#x27;]
+})
+export class TeamFormComponent implements AfterViewInit,OnChanges {
+  @Input() teamEditForm:TeamEditBody;
+  @Output() callback:EventEmitter&lt;any&gt; &#x3D; new EventEmitter();
+
+  teamForm:FormGroup;
+  uploadedUrl:any;
+  raceName:string;
+  raceID:number;
+  followerOptions:any[];
+  followersInvited:any[] &#x3D; [];
+  errorMsg:string;
+  showError:Boolean &#x3D; false;
+
+  constructor(private _teamService:TeamService,private _userService:UsersService,private route: ActivatedRoute,private router:Router) {
+    this.teamForm &#x3D; new FormGroup({
+      name: new FormControl(&#x27;&#x27;,[
+        Validators.required,
+        Validators.maxLength(30)
+      ]),
+      teamImg: new FormControl(&#x27;&#x27;),
+      description: new FormControl(&#x27;&#x27;,[
+        Validators.required
+      ]),
+      invited: new FormControl(&#x27;&#x27;)
+    });
+  }
+  ngAfterViewInit(): void {
+    return;
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(&#x27;changes:&#x27;,changes);
+
+    for(const propName in changes) {
+      if(changes.hasOwnProperty(propName)) {
+
+        switch(propName) {
+          case &#x27;teamEditForm&#x27;:
+            console.log(&#x27;IS_EDIT CHANGED&#x27;);
+            if(changes.teamEditForm.currentValue !&#x3D; undefined) {
+              
+              if(this.teamEditForm.isEdit) {
+                // make API call to get team info and intitialize form
+                this.initForm();
+              }
+
+              // else do nothing
+              else {
+                this.teamForm.reset();
+              }
+
+            }
+        }
+      }
+    }
+
+  }
+
+  ngOnInit() {
+    this.route.paramMap.subscribe(params &#x3D;&gt; {
+      this.raceName &#x3D; params[&#x27;params&#x27;][&#x27;name&#x27;];
+      this.raceID &#x3D; params[&#x27;params&#x27;][&#x27;id&#x27;];
+    });
+
+    this._userService.getFollowersAndFollowed().then((resp:FollowersResp) &#x3D;&gt; {
+      console.log(&#x27;RESP:&#x27;,resp);
+      this.followerOptions &#x3D; resp.follwers_and_followed;
+    });
+  }
+
+  initForm(): void {
+
+    let teamState:any &#x3D; null;
+
+    this._teamService.getTeam(this.teamEditForm.team_id).then((resp:any) &#x3D;&gt; {
+      teamState &#x3D; resp.team;
+
+      console.log(&#x27;TEAM STATE:&#x27;,teamState);
+
+      this.teamForm &#x3D; new FormGroup({
+        name: new FormControl(teamState.name,[
+          Validators.required,
+          Validators.maxLength(30)
+        ]),
+        teamImg: new FormControl(&#x27;&#x27;),
+        description: new FormControl(teamState.description,[
+          Validators.required
+        ]),
+        invited: new FormControl(&#x27;&#x27;)
+      });
+    });
+
+    
+  }
+
+  createTeam(): void {
+    let formClean:TeamForm;
+
+      if(this.teamForm.valid) {
+        this.showError &#x3D; false;
+        formClean &#x3D; this.teamForm.value;
+        formClean.teamImg &#x3D; this.uploadedUrl;
+        formClean.invited &#x3D; this.followersInvited.map((follower) &#x3D;&gt; follower.user_id);
+
+        this._teamService.createTeam(formClean,this.raceID,false,null).then((resp:TeamFormResp) &#x3D;&gt; {
+          console.log(&#x27;TEAM FORM RESP:&#x27;,resp);
+          // this.router.navigate([&#x27;/race&#x27;,{id:this.raceID,name:this.raceName}]);
+
+          if(!resp.success) {
+            // display error message
+            this.showError &#x3D; true;
+            this.errorMsg &#x3D; resp.message;
+          }
+
+          this.callback.emit();
+        });
+      }
+  }
+
+  updateTeam() {
+    let team_id &#x3D; this.teamEditForm.team_id;
+
+    let formClean:TeamForm;
+
+    if(this.teamForm.valid) {
+      this.showError &#x3D; false;
+      formClean &#x3D; this.teamForm.value;
+      formClean.teamImg &#x3D; this.uploadedUrl;
+      formClean.invited &#x3D; this.followersInvited.map((follower) &#x3D;&gt; follower.user_id);
+
+      this._teamService.createTeam(formClean,this.raceID,true,team_id).then((resp:TeamFormResp) &#x3D;&gt; {
+        console.log(&#x27;TEAM FORM RESP:&#x27;,resp);
+        // this.router.navigate([&#x27;/race&#x27;,{id:this.raceID,name:this.raceName}]);
+
+        if(!resp.success) {
+          // display error message
+          this.showError &#x3D; true;
+          this.errorMsg &#x3D; resp.message;
+        }
+
+        this.callback.emit();
+      });
+    }
+
+  }
+
+  addFollower(option:any) {
+
+    if(this.followersInvited.some(follower &#x3D;&gt; follower.user_id &#x3D;&#x3D; option.user_id)) {
+      return;
+    }
+
+    console.log(&#x27;option:&#x27;,option);
+    this.followersInvited.push(option);
+
+    console.log(this.teamForm.value);
+    this.teamForm.controls[&#x27;invited&#x27;].setValue(&#x27;&#x27;);
+    console.log(this.teamForm.value);
+  }
+
+  removeFollower(id:number) {
+    this.followersInvited &#x3D; this.followersInvited.filter((follower) &#x3D;&gt; {
+      return follower.user_id !&#x3D; id;
+    });
+    console.log(this.followersInvited);
+  }
+
+  onSelectFile(event) {
+    if (event.target.files &amp;&amp; event.target.files[0]) {
+      var reader &#x3D; new FileReader();
+
+      reader.readAsDataURL(event.target.files[0]); // read file as data url
+
+      reader.onload &#x3D; (event) &#x3D;&gt; { // called once readAsDataURL is completed
+        this.uploadedUrl &#x3D; reader.result;
+      }
+    }
+  }
+
+}
+
+export interface TeamForm {
+  name:string,
+  description:string,
+  teamImg:any,
+  invited:any[]
+}
+
+interface TeamFormResp {
+  success:Boolean;
+  message:string;
+}
+
+interface FollowersResp {
+  follwers_and_followed:any[];
+}
+</code></pre>
+    </div>
+</div>
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'TeamFormResp.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

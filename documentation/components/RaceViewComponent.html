@@ -1,0 +1,3229 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>geo-fit documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">geo-fit documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>RaceViewComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#styleData" role="tab" id="styleData-tab" data-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/race-view/race-view.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="https://angular.io/api/core/OnInit" target="_blank" >OnInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-race-view</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./race-view.component.css</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./race-view.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#activities">activities</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#actsToImport">actsToImport</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#all_user_data">all_user_data</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#coords">coords</a>
+                            </li>
+                            <li>
+                                <a href="#feedChild">feedChild</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#followedIDs">followedIDs</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#followers">followers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#leaderboard">leaderboard</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#loading">loading</a>
+                            </li>
+                            <li>
+                                <a href="#mapChild">mapChild</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#modalData">modalData</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#progress">progress</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#raceID">raceID</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#raceName">raceName</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#raceSettings">raceSettings</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#showTeamForm">showTeamForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#storyImage">storyImage</a>
+                            </li>
+                            <li>
+                                <a href="#storyModal">storyModal</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#storyText">storyText</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#teamEditForm">teamEditForm</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#teams">teams</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#userRaceSettings">userRaceSettings</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#userStat">userStat</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addAct">addAct</a>
+                            </li>
+                            <li>
+                                <a href="#clearUserPins">clearUserPins</a>
+                            </li>
+                            <li>
+                                <a href="#createUserHeatPins">createUserHeatPins</a>
+                            </li>
+                            <li>
+                                <a href="#createUserPins">createUserPins</a>
+                            </li>
+                            <li>
+                                <a href="#editTeamForm">editTeamForm</a>
+                            </li>
+                            <li>
+                                <a href="#getRaceState">getRaceState</a>
+                            </li>
+                            <li>
+                                <a href="#goToTeamForm">goToTeamForm</a>
+                            </li>
+                            <li>
+                                <a href="#hideModal">hideModal</a>
+                            </li>
+                            <li>
+                                <a href="#importActs">importActs</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit">ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#panToUserMarker">panToUserMarker</a>
+                            </li>
+                            <li>
+                                <a href="#showModal">showModal</a>
+                            </li>
+                            <li>
+                                <a href="#showPinsByID">showPinsByID</a>
+                            </li>
+                            <li>
+                                <a href="#showStoryModal">showStoryModal</a>
+                            </li>
+                            <li>
+                                <a href="#toggleTeamForm">toggleTeamForm</a>
+                            </li>
+                            <li>
+                                <a href="#uploadManualEntry">uploadManualEntry</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(raceService: <a href="../injectables/RaceService.html">RaceService</a>, activitiesService: <a href="../injectables/ActivitiesService.html">ActivitiesService</a>, route: <a href="https://angular.io/api/router/ActivatedRoute" target="_blank">ActivatedRoute</a>, router: <a href="https://angular.io/api/router/Router" target="_blank">Router</a>, storyService: <a href="../injectables/StoryService.html">StoryService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/race-view/race-view.component.ts:50</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>raceService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/RaceService.html" target="_self" >RaceService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>activitiesService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/ActivitiesService.html" target="_self" >ActivitiesService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/ActivatedRoute" target="_blank" >ActivatedRoute</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="https://angular.io/api/router/Router" target="_blank" >Router</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>storyService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/StoryService.html" target="_self" >StoryService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section>
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addAct"></a>
+                    <span class="name">
+                        <b>
+                            addAct
+                        </b>
+                        <a href="#addAct"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addAct(act: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="127"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:127</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>act</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearUserPins"></a>
+                    <span class="name">
+                        <b>
+                            clearUserPins
+                        </b>
+                        <a href="#clearUserPins"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clearUserPins()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="183"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:183</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createUserHeatPins"></a>
+                    <span class="name">
+                        <b>
+                            createUserHeatPins
+                        </b>
+                        <a href="#createUserHeatPins"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createUserHeatPins()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="199"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:199</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createUserPins"></a>
+                    <span class="name">
+                        <b>
+                            createUserPins
+                        </b>
+                        <a href="#createUserPins"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createUserPins()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="193"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:193</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="editTeamForm"></a>
+                    <span class="name">
+                        <b>
+                            editTeamForm
+                        </b>
+                        <a href="#editTeamForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>editTeamForm(team_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="106"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:106</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>team_id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getRaceState"></a>
+                    <span class="name">
+                        <b>
+                            getRaceState
+                        </b>
+                        <a href="#getRaceState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getRaceState()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="141"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:141</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goToTeamForm"></a>
+                    <span class="name">
+                        <b>
+                            goToTeamForm
+                        </b>
+                        <a href="#goToTeamForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goToTeamForm()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="102"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:102</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="hideModal"></a>
+                    <span class="name">
+                        <b>
+                            hideModal
+                        </b>
+                        <a href="#hideModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>hideModal(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="98"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:98</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="importActs"></a>
+                    <span class="name">
+                        <b>
+                            importActs
+                        </b>
+                        <a href="#importActs"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>importActs()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="116"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:116</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <b>
+                            ngOnInit
+                        </b>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="60"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:60</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="panToUserMarker"></a>
+                    <span class="name">
+                        <b>
+                            panToUserMarker
+                        </b>
+                        <a href="#panToUserMarker"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>panToUserMarker(user_id)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="177"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:177</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>user_id</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showModal"></a>
+                    <span class="name">
+                        <b>
+                            showModal
+                        </b>
+                        <a href="#showModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showModal(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="89"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:89</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showPinsByID"></a>
+                    <span class="name">
+                        <b>
+                            showPinsByID
+                        </b>
+                        <a href="#showPinsByID"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showPinsByID(IDs)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="188"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:188</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>IDs</td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showStoryModal"></a>
+                    <span class="name">
+                        <b>
+                            showStoryModal
+                        </b>
+                        <a href="#showStoryModal"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showStoryModal(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="94"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:94</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>id</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggleTeamForm"></a>
+                    <span class="name">
+                        <b>
+                            toggleTeamForm
+                        </b>
+                        <a href="#toggleTeamForm"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggleTeamForm(action?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="80"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:80</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>action</td>
+                                    <td>
+                                                <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                    </td>
+
+                                    <td>
+                                        Yes
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uploadManualEntry"></a>
+                    <span class="name">
+                        <b>
+                            uploadManualEntry
+                        </b>
+                        <a href="#uploadManualEntry"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>uploadManualEntry(entry: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-line">Defined in <a href="" data-line="171"
+                            class="link-to-prism">src/app/race-view/race-view.component.ts:171</a></div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                    <div class="io-description">
+                        <b>Parameters :</b>
+                        <table class="params">
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Type</td>
+                                    <td>Optional</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>entry</td>
+                                    <td>
+                                                <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                    </td>
+
+                                    <td>
+                                        No
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                    </div>
+                    <div class="io-description">
+                        <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </div>
+                    <div class="io-description">
+                        
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="activities"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            activities</b>
+                            <a href="#activities"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>any[]</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/race-view/race-view.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="actsToImport"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            actsToImport</b>
+                            <a href="#actsToImport"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>number[]</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>[]</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/race-view/race-view.component.ts:33</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="all_user_data"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            all_user_data</b>
+                            <a href="#all_user_data"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Array&lt;FeedObj&gt;</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/race-view/race-view.component.ts:37</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="coords"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            coords</b>
+                            <a href="#coords"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="35" class="link-to-prism">src/app/race-view/race-view.component.ts:35</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="feedChild"></a>
+                        <span class="name">
+                            <b>
+                            feedChild</b>
+                            <a href="#feedChild"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../components/FeedComponent.html" target="_self" >FeedComponent</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(FeedComponent)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/race-view/race-view.component.ts:24</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="followedIDs"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            followedIDs</b>
+                            <a href="#followedIDs"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>number[]</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/race-view/race-view.component.ts:43</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="followers"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            followers</b>
+                            <a href="#followers"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>any[]</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/race-view/race-view.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="leaderboard"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            leaderboard</b>
+                            <a href="#leaderboard"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/LeaderboardItem.html" target="_self" >LeaderboardItem[]</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/race-view/race-view.component.ts:36</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loading"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            loading</b>
+                            <a href="#loading"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/race-view/race-view.component.ts:34</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="mapChild"></a>
+                        <span class="name">
+                            <b>
+                            mapChild</b>
+                            <a href="#mapChild"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../components/MapComponent.html" target="_self" >MapComponent</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(MapComponent)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="23" class="link-to-prism">src/app/race-view/race-view.component.ts:23</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="modalData"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            modalData</b>
+                            <a href="#modalData"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/race-view/race-view.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="progress"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            progress</b>
+                            <a href="#progress"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/Progress.html" target="_self" >Progress</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{} as Progress</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/race-view/race-view.component.ts:32</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="raceID"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            raceID</b>
+                            <a href="#raceID"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/race-view/race-view.component.ts:30</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="raceName"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            raceName</b>
+                            <a href="#raceName"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/race-view/race-view.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="raceSettings"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            raceSettings</b>
+                            <a href="#raceSettings"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/RaceSettings.html" target="_self" >RaceSettings</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/race-view/race-view.component.ts:40</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showTeamForm"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            showTeamForm</b>
+                            <a href="#showTeamForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean" target="_blank" >Boolean</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/race-view/race-view.component.ts:41</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="storyImage"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            storyImage</b>
+                            <a href="#storyImage"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/race-view/race-view.component.ts:49</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="storyModal"></a>
+                        <span class="name">
+                            <b>
+                            storyModal</b>
+                            <a href="#storyModal"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../components/StoryModalComponent.html" target="_self" >StoryModalComponent</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Decorators : </b>
+                            <br />
+                            <code>
+                                @ViewChild(StoryModalComponent)<br />
+                            </code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/race-view/race-view.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="storyText"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            storyText</b>
+                            <a href="#storyText"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/race-view/race-view.component.ts:50</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="teamEditForm"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            teamEditForm</b>
+                            <a href="#teamEditForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="../interfaces/TeamEditBody.html" target="_self" >TeamEditBody</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{
+    isEdit:false,
+    team_id:null
+  }</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/race-view/race-view.component.ts:44</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="teams"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            teams</b>
+                            <a href="#teams"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>any[]</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/race-view/race-view.component.ts:38</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="userRaceSettings"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            userRaceSettings</b>
+                            <a href="#userRaceSettings"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/race-view/race-view.component.ts:39</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="userStat"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            userStat</b>
+                            <a href="#userStat"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/race-view/race-view.component.ts:42</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, OnInit, ViewChild } from &#x27;@angular/core&#x27;;
+import * as bootstrap from &quot;bootstrap&quot;;
+import { RaceService } from &#x27;../race.service&#x27;;
+import { StoryService } from &#x27;../story.service&#x27;
+import { Router, ActivatedRoute, ParamMap } from &#x27;@angular/router&#x27;;
+import { Progress } from &#x27;../user-progress/user-progress.component&#x27;;
+import { ActivitiesService } from &#x27;../activities.service&#x27;;
+import { LeaderboardItem } from &#x27;../leaderboard/leaderboard.component&#x27;;
+import { MapComponent } from &#x27;../map/map.component&#x27;;
+import { FeedComponent } from &#x27;../feed/feed.component&#x27;;
+import { StoryModalComponent } from &#x27;../story-modal/story-modal.component&#x27;;
+import { RaceSettings } from &#x27;../race-about/race-about.component&#x27;;
+import { TeamFormComponent } from &#x27;../team-form/team-form.component&#x27;;
+
+declare var $: any
+
+@Component({
+  selector: &#x27;app-race-view&#x27;,
+  templateUrl: &#x27;./race-view.component.html&#x27;,
+  styleUrls: [&#x27;./race-view.component.css&#x27;]
+})
+export class RaceViewComponent implements OnInit {
+  @ViewChild(MapComponent) mapChild: MapComponent;
+  @ViewChild(FeedComponent) feedChild: FeedComponent;
+  @ViewChild(StoryModalComponent) storyModal: StoryModalComponent;
+
+  public followers:any[];
+  public activities:any[];
+  private raceName:string;
+  private raceID:number;
+  private modalData:any;
+  public progress:Progress &#x3D; {} as Progress;
+  public actsToImport:number[] &#x3D; [];
+  public loading:Boolean &#x3D; false;
+  public coords:any;
+  public leaderboard:LeaderboardItem[];
+  public all_user_data:Array&lt;FeedObj&gt;;
+  public teams:any[];
+  public userRaceSettings:any;
+  public raceSettings:RaceSettings;
+  public showTeamForm:Boolean &#x3D; false;
+  public userStat:any &#x3D; {};
+  public followedIDs:number[];
+  public teamEditForm:TeamEditBody &#x3D; {
+    isEdit:false,
+    team_id:null
+  };
+
+  private storyImage:string;
+  private storyText:string;
+
+  constructor(private raceService:RaceService,
+                  private activitiesService:ActivitiesService,
+                  private route: ActivatedRoute,
+                  private router:Router,
+                  private storyService: StoryService) {
+    this.modalData &#x3D; {};
+  }
+
+  ngOnInit() {
+    this.loading &#x3D; true;
+    this.route.paramMap.subscribe(params &#x3D;&gt; {
+      this.raceName &#x3D; params[&#x27;params&#x27;][&#x27;name&#x27;];
+      this.raceID &#x3D; params[&#x27;params&#x27;][&#x27;id&#x27;];
+    });
+
+    this.getRaceState();
+
+    this.followers &#x3D; [{
+      first_name:&#x27;Nathan&#x27;,
+      last_name:&#x27;Cunt&#x27;
+    },
+    {
+      first_name:&#x27;Katie&#x27;,
+      last_name:&#x27;DonaHOE&#x27;
+    }];
+
+  }
+
+  toggleTeamForm(action?:string) {
+    this.showTeamForm &#x3D; !this.showTeamForm;
+    console.log(&#x27;ACTION IS:&#x27;,action);
+    if(action &#x3D;&#x3D; &#x27;clear&#x27;) {
+      this.teamEditForm.isEdit &#x3D; false;
+    }
+    
+  }
+
+  showModal(id:string): void {
+    console.log(id);
+    ($(id) as any).modal(&#x27;show&#x27;);
+  }
+
+  showStoryModal(id:string): void {
+    this.storyModal.showModal(id);
+  }
+
+  hideModal(id:string): void {
+    ($(id) as any).modal(&#x27;hide&#x27;);
+  }
+
+  goToTeamForm(): void {
+    this.router.navigate([&#x27;/teams&#x27;,{name:this.raceName,id:this.raceID}]);
+  }
+
+  editTeamForm(team_id:number): void {
+    this.teamEditForm &#x3D; {
+      team_id:team_id,
+      isEdit:true
+    } as TeamEditBody
+    console.log(&#x27;TEAM BODY FORM:&#x27;,this.teamEditForm);
+    this.toggleTeamForm();
+    // this.teamEditForm.isEdit &#x3D; false;
+  }
+
+  importActs(): void {
+    console.log(this.actsToImport);
+    this.loading &#x3D; true;
+    this.activitiesService.importActivities(this.actsToImport,this.raceID).then((res) &#x3D;&gt; {
+      console.log(res);
+      this.getRaceState();
+      this.actsToImport &#x3D; [];
+    });
+    this.loading &#x3D; false;
+  }
+
+  addAct(act:any): void {
+    console.log(&#x27;IN ADD&#x27;);
+    let actID &#x3D; act.id;
+    let index &#x3D; this.actsToImport.indexOf(actID);
+    if(index &gt;&#x3D; 0) {
+      this.actsToImport.splice(index,1);
+    }
+    else {
+      this.actsToImport.push(actID);
+    }
+
+    console.log(this.actsToImport);
+  }
+
+  getRaceState(): void {
+    this.raceService.getRace(this.raceID).subscribe(data &#x3D;&gt; {
+
+      let raceData &#x3D; data as RaceData;
+      console.log(&#x27;RACE DATA:&#x27;,raceData);
+      this.progress &#x3D; raceData.progress;
+      this.activities &#x3D; raceData.activities;
+      this.coords &#x3D; {coords:raceData.coords};
+      this.leaderboard &#x3D; raceData.leaderboard;
+      this.all_user_data &#x3D; raceData.users_data as Array&lt;FeedObj&gt;;
+      this.followedIDs &#x3D; raceData.followedIDs;
+      this.teams &#x3D; raceData.users_data.filter((user_data) &#x3D;&gt; {
+        if(user_data.isTeam) {
+          return user_data;
+        }
+      });
+      this.userRaceSettings &#x3D; raceData.settings;
+      this.raceSettings &#x3D; raceData.race_settings;
+      this.userStat &#x3D; raceData.user_stat;
+      console.log(&#x27;TEAMS:&#x27;,this.teams);
+      console.log(&#x27;COORDS:&#x27;,this.coords);
+      console.log(&quot;ALL USER DATA&quot;, this.all_user_data);
+      console.log(&quot;LEADERBOARD ITEMS: &quot;, this.leaderboard);
+      console.log(&#x27;USER SETTINGS:&#x27;,this.userRaceSettings);
+      console.log(&quot;FOLLOWER IDS&quot;, this.followedIDs);
+
+      this.loading &#x3D; false;
+    });
+  }
+
+  uploadManualEntry(entry:any) {
+    this.activitiesService.uploadManualEntry(entry,this.raceID).then((resp) &#x3D;&gt; {
+      console.log(&#x27;RESP FROM MANUAL IMPORT:&#x27;,resp);
+      this.getRaceState();
+    });
+  }
+  panToUserMarker(user_id){
+    //Call map pan function
+    console.log(&quot;Clicked user id: &quot;, user_id);
+    this.mapChild.panToUserMarker(user_id);
+  }
+
+  clearUserPins(){
+    this.mapChild.clearUserPins();
+    console.log(&#x27;clearing pina&#x27;);
+  }
+
+  showPinsByID(IDs){
+    //Pass null to show all pins
+    this.mapChild.showPinsByID(IDs);
+  }
+
+  createUserPins(){
+    //Pass null to show all pins
+    this.mapChild.createUserPins();
+    console.log(&quot;creating new user pins...&quot;)
+  }
+
+  createUserHeatPins(){
+    //Pass null to show all pins
+    this.mapChild.createUserHeatPins();
+    console.log(&quot;Applying heat map...&quot;)
+  }
+}
+
+interface RaceData {
+  progress:any;
+  activities:any;
+  coords:any;
+  leaderboard:any;
+  users_data:any;
+  settings:any;
+  race_settings:RaceSettings;
+  user_stat:any;
+  followedIDs:number[];
+}
+
+interface FeedObj {
+  user_id: number;
+  display_name: string;
+  profile_url:string
+  joined: boolean;
+  traveled: boolean;
+  story: boolean;
+  story_image:string;
+  story_text:string;
+  total_distance:number;
+  last_distance:number;
+  message: string;
+  created_ts:number;
+}
+
+export interface TeamEditBody {
+  team_id:number;
+  isEdit:Boolean;
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;!-- &lt;app-map&gt;&lt;/app-map&gt; --&gt;
+&lt;div&gt;
+
+&lt;app-loader [isActive]&#x3D;&quot;loading&quot;&gt;&lt;/app-loader&gt;
+&lt;mat-sidenav-container&gt;
+  &lt;mat-sidenav md-disable-backdrop&#x3D;&#x27;true&#x27; #menu mode&#x3D;&quot;side&quot; style&#x3D;&quot;overflow-y: hidden;&quot;&gt;
+    &lt;mat-tab-group&gt;
+      &lt;mat-tab&gt;
+        &lt;ng-template mat-tab-label&gt;
+          &lt;mat-icon&gt;file_download&lt;/mat-icon&gt;
+        &lt;/ng-template&gt;
+        &lt;mat-tab-group&gt;
+          &lt;mat-tab&gt;
+            &lt;ng-template mat-tab-label&gt;
+              &lt;mat-icon&gt;cloud_download&lt;/mat-icon&gt;
+            &lt;/ng-template&gt;
+            &lt;app-activities-menu [activities]&#x3D;&quot;activities&quot; [distance_unit]&#x3D;&quot;progress.distance_type&quot; (addAct)&#x3D;&quot;addAct($event)&quot; (importActs)&#x3D;&quot;importActs($event)&quot;&gt;&lt;/app-activities-menu&gt;
+          &lt;/mat-tab&gt;
+          &lt;!---&lt;mat-tab *ngIf&#x3D;&quot;raceSettings.isManualEntry&quot;&gt;
+            &lt;ng-template mat-tab-label&gt;
+              &lt;mat-icon&gt;add_circle_outline&lt;/mat-icon&gt;
+            &lt;/ng-template&gt;
+            &lt;app-manual-entry (uploadManualEntry)&#x3D;&quot;uploadManualEntry($event)&quot;&gt;&lt;/app-manual-entry&gt;
+          &lt;/mat-tab&gt;---&gt;
+        &lt;/mat-tab-group&gt;
+
+      &lt;/mat-tab&gt;
+      &lt;mat-tab&gt;
+        &lt;ng-template mat-tab-label&gt;
+          &lt;mat-icon&gt;format_list_numbered_rtl&lt;/mat-icon&gt;
+        &lt;/ng-template&gt;
+        
+        &lt;mat-tab-group&gt;
+          &lt;mat-tab label&#x3D;&quot;Distance&quot;&gt;
+            &lt;app-leaderboard [leaderboard]&#x3D;&quot;leaderboard&quot;&gt;&lt;/app-leaderboard&gt;
+          &lt;/mat-tab&gt;
+          &lt;mat-tab label&#x3D;&quot;Pace&quot;&gt;
+
+          &lt;/mat-tab&gt;
+
+          &lt;mat-tab label&#x3D;&quot;Teams&quot;&gt;
+            &lt;button class&#x3D;&quot;btn btn-primary&quot; style&#x3D;&quot;width: 100%; text-align: center;&quot; mat-raised-button (click)&#x3D;&quot;toggleTeamForm()&quot; *ngIf&#x3D;&quot;!showTeamForm&quot;&gt;+ Team&lt;/button&gt;
+            &lt;button class&#x3D;&quot;btn btn-danger&quot; style&#x3D;&quot;width: 100%; text-align: center;&quot; mat-raised-button (click)&#x3D;&quot;toggleTeamForm(&#x27;clear&#x27;)&quot; *ngIf&#x3D;&quot;showTeamForm&quot;&gt;Cancel&lt;/button&gt;
+            &lt;div *ngIf&#x3D;&quot;!showTeamForm&quot;&gt;   
+              &lt;app-team-list [teams]&#x3D;&quot;teams&quot; [userStat]&#x3D;&quot;userStat&quot; (callback)&#x3D;&quot;getRaceState($event)&quot; (edit)&#x3D;&quot;editTeamForm($event)&quot;&gt;&lt;/app-team-list&gt;
+            &lt;/div&gt;
+
+            &lt;div *ngIf&#x3D;&quot;showTeamForm&quot;&gt;
+              &lt;app-team-form (callback)&#x3D;&quot;getRaceState($event)&quot; [teamEditForm]&#x3D;&quot;teamEditForm&quot;&gt;&lt;/app-team-form&gt;
+            &lt;/div&gt;
+          &lt;/mat-tab&gt;
+        &lt;/mat-tab-group&gt;
+
+      &lt;/mat-tab&gt;
+      &lt;mat-tab&gt;
+        &lt;ng-template mat-tab-label&gt;
+          &lt;mat-icon&gt;group&lt;/mat-icon&gt;
+        &lt;/ng-template&gt;
+        &lt;!----[feedItems]&#x3D;&quot;all_user_data&quot; if you wanna inject from initial bulk call--&gt;
+        &lt;button (click)&#x3D;&quot;clearUserPins()&quot;&gt;Clear User Pins!&lt;/button&gt;
+        &lt;button (click)&#x3D;&quot;showPinsByID(null)&quot;&gt;Show User Pins!&lt;/button&gt;
+        &lt;button (click)&#x3D;&quot;showPinsByID(followedIDs)&quot;&gt;Show Followers Only&lt;/button&gt;
+        &lt;app-feed [use]&#x3D;&quot;&#x27;race&#x27;&quot; [ID]&#x3D;&quot;raceID&quot; [hasStoryModalChild]&#x3D;&quot;false&quot; (feedItemClicked)&#x3D;&quot;panToUserMarker($event)&quot; (storyItemClicked)&#x3D;&quot;showStoryModal($event)&quot; [progress]&#x3D;progress&gt;&lt;/app-feed&gt;
+      &lt;/mat-tab&gt;
+      &lt;mat-tab&gt;
+        &lt;ng-template mat-tab-label&gt;
+          &lt;mat-icon&gt;settings&lt;/mat-icon&gt;
+        &lt;/ng-template&gt;
+        &lt;app-race-settings [userSettings]&#x3D;&quot;userRaceSettings&quot;&gt;&lt;/app-race-settings&gt;
+      &lt;/mat-tab&gt;
+    &lt;/mat-tab-group&gt;
+  &lt;/mat-sidenav&gt;
+  &lt;mat-sidenav-content&gt;
+    &lt;app-map [coordinates]&#x3D;&quot;coords&quot; [userData]&#x3D;&quot;all_user_data&quot; [displayUsers]&#x3D;&quot;true&quot; [followedIDs]&#x3D;&quot;followedIDs&quot;&gt;&lt;/app-map&gt;
+
+    &lt;a class&#x3D;&quot;btn btn-primary btn-customized open-menu&quot; role&#x3D;&quot;button&quot; (click)&#x3D;&quot;menu.toggle()&quot;&gt;
+      &lt;i class&#x3D;&quot;fas fa-align-left&quot;&gt;&lt;/i&gt; &lt;span&gt;Menu&lt;/span&gt;
+  &lt;/a&gt;
+
+
+&lt;!----&lt;a class&#x3D;&quot;btn btn-primary btn-customized inviteToggle&quot; data-toggle&#x3D;&quot;modal&quot; data-target&#x3D;&quot;#storyModal&quot; (click)&#x3D;&quot;showModal(&#x27;#storyModal&#x27;)&quot;&gt;
+  &lt;span style&#x3D;&quot;color:white&quot;&gt;Add a Story&lt;/span&gt;
+&lt;/a&gt;&gt;----&gt;
+
+&lt;a class&#x3D;&quot;btn btn-primary btn-customized inviteToggle&quot; (click)&#x3D;&quot;goToTeamForm()&quot;&gt;
+  &lt;span style&#x3D;&quot;color:white&quot;&gt;Create Team&lt;/span&gt;
+&lt;/a&gt;
+&lt;app-user-progress [progress]&#x3D;&quot;progress&quot;&gt;&lt;/app-user-progress&gt;
+  &lt;/mat-sidenav-content&gt;
+&lt;/mat-sidenav-container&gt;
+&lt;!-- Wrapper --&gt;
+
+    &lt;!-- open sidebar menu --&gt;
+
+&lt;/div&gt;
+
+&lt;!-----STORY MODAL--&gt;
+&lt;app-story-modal&gt;&lt;/app-story-modal&gt;
+
+&lt;!---&lt;div class&#x3D;&quot;modal fade&quot; id&#x3D;&quot;storyModal&quot;&gt;
+  &lt;div class&#x3D;&quot;modal-dialog&quot;&gt;
+    &lt;div class&#x3D;&quot;modal-content&quot;&gt;
+
+      &lt;div class&#x3D;&quot;modal-header&quot;&gt;
+        &lt;h4 class&#x3D;&quot;modal-title&quot;&gt;Add a Story to your activity!&lt;/h4&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;close&quot; (click)&#x3D;&quot;hideModal(&#x27;#activitiesModal&#x27;)&quot;&gt;&amp;times;&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;modal-body&quot;&gt;
+        &lt;h4&gt;Stories appear above your pin for 48 hours after upload&lt;/h4&gt;
+        &lt;div class&#x3D;&quot;container&quot;&gt;
+          &lt;label for&#x3D;&quot;storyImageField&quot;&gt;Upload an image!&lt;/label&gt;
+          &lt;input type&#x3D;&quot;file&quot; id&#x3D;&quot;storyImage&quot; name&#x3D;&quot;storyImageField&quot; accept&#x3D;&quot;image/*&quot;&gt;
+          &lt;label for&#x3D;&quot;storyImageCaptionField&quot;&gt;Enter a caption (max length is 100 chars):&lt;/label&gt;
+          &lt;input type&#x3D;&quot;text&quot; id&#x3D;&quot;storyImageCaption&quot; name&#x3D;&quot;storyImageCaptionField&quot; maxlength&#x3D;&quot;100&quot;&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class&#x3D;&quot;modal-footer&quot;&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; (click)&#x3D;&quot;uploadStory()&quot; &gt;Add Story&lt;/button&gt;
+        &lt;button type&#x3D;&quot;button&quot; id&#x3D;&quot;close-modal&quot; data-dismiss&#x3D;&quot;modal&quot; style&#x3D;&quot;display: none&quot;&gt;Close&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;---&gt;
+
+&lt;div class&#x3D;&quot;modal fade&quot; id&#x3D;&quot;activitiesModal&quot;&gt;
+  &lt;div class&#x3D;&quot;modal-dialog&quot;&gt;
+    &lt;div class&#x3D;&quot;modal-content&quot;&gt;
+
+      &lt;!-- Modal Header --&gt;
+      &lt;div class&#x3D;&quot;modal-header&quot;&gt;
+        &lt;h4 class&#x3D;&quot;modal-title&quot;&gt;Select Activities You&#x27;d Like to Apply Towards This Race&lt;/h4&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;close&quot; (click)&#x3D;&quot;hideModal(&#x27;#activitiesModal&#x27;)&quot;&gt;&amp;times;&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Modal body --&gt;
+      &lt;div class&#x3D;&quot;modal-body&quot;&gt;
+        &lt;table class&#x3D;&quot;actsTable table table-striped&quot; id&#x3D;&#x27;activities_table&#x27;&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th scope&#x3D;&quot;col&quot;&gt;&lt;/th&gt;
+              &lt;th scope&#x3D;&quot;col&quot;&gt;&lt;/th&gt;
+              &lt;th scope&#x3D;&quot;col&quot;&gt;&lt;/th&gt;
+
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+              &lt;tr class&#x3D;&quot;activityRow&quot; *ngFor&#x3D;&quot;let act of activities&quot; (click)&#x3D;&quot;addAct(act)&quot;&gt;
+                  &lt;td scope&#x3D;&quot;row&quot;&gt;{{act.name}}&lt;/td&gt;
+                  &lt;td&gt;{{act.converted_dist}} {{ progress.distance_type }}&lt;/td&gt;
+                  &lt;td&gt;{{act.start_date}}&lt;/td&gt;
+                &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Modal footer --&gt;
+      &lt;div class&#x3D;&quot;modal-footer&quot;&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; (click)&#x3D;&quot;importActs()&quot; &gt;Import&lt;/button&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-danger&quot; (click)&#x3D;&quot;hideModal(&#x27;#activitiesModal&#x27;)&quot;&gt;Close&lt;/button&gt;
+
+        &lt;!-- this button is hidden, used to close from typescript --&gt;
+        &lt;button type&#x3D;&quot;button&quot; id&#x3D;&quot;close-modal&quot; data-dismiss&#x3D;&quot;modal&quot; style&#x3D;&quot;display: none&quot;&gt;Close&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class&#x3D;&quot;modal fade&quot; id&#x3D;&quot;leaderboardModal&quot;&gt;
+  &lt;div class&#x3D;&quot;modal-dialog&quot;&gt;
+    &lt;div class&#x3D;&quot;modal-content&quot;&gt;
+
+      &lt;!-- Modal Header --&gt;
+      &lt;div class&#x3D;&quot;modal-header&quot;&gt;
+        &lt;h4 class&#x3D;&quot;modal-title&quot;&gt;Leaderboard&lt;/h4&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;close&quot; (click)&#x3D;&quot;hideModal(&#x27;#leaderboardModal&#x27;)&quot;&gt;&amp;times;&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Modal body --&gt;
+      &lt;div class&#x3D;&quot;modal-body&quot;&gt;
+        Modal body..
+      &lt;/div&gt;
+
+      &lt;!-- Modal footer --&gt;
+      &lt;div class&#x3D;&quot;modal-footer&quot;&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; (click)&#x3D;&quot;sendModal()&quot; &gt;Send&lt;/button&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-danger&quot; (click)&#x3D;&quot;hideModal(&#x27;#leaderboardModal&#x27;)&quot;&gt;Close&lt;/button&gt;
+
+        &lt;!-- this button is hidden, used to close from typescript --&gt;
+        &lt;button type&#x3D;&quot;button&quot; id&#x3D;&quot;close-modal&quot; data-dismiss&#x3D;&quot;modal&quot; style&#x3D;&quot;display: none&quot;&gt;Close&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class&#x3D;&quot;modal fade&quot; id&#x3D;&quot;inviteModal&quot;&gt;
+  &lt;div class&#x3D;&quot;modal-dialog&quot;&gt;
+    &lt;div class&#x3D;&quot;modal-content&quot;&gt;
+
+      &lt;!-- Modal Header --&gt;
+      &lt;div class&#x3D;&quot;modal-header&quot;&gt;
+        &lt;h4 class&#x3D;&quot;modal-title&quot;&gt;Invite Followers!&lt;/h4&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;close&quot; (click)&#x3D;&quot;hideModal(&#x27;#inviteModal&#x27;)&quot;&gt;&amp;times;&lt;/button&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Modal body --&gt;
+      &lt;div class&#x3D;&quot;modal-body&quot;&gt;
+        &lt;table class&#x3D;&quot;table table-striped&quot; id&#x3D;&#x27;invite_table&#x27;&gt;
+          &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th scope&#x3D;&quot;col&quot;&gt;&lt;/th&gt;
+              &lt;th scope&#x3D;&quot;col&quot;&gt;&lt;/th&gt;
+
+            &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+              &lt;tr *ngFor&#x3D;&quot;let follower of followers&quot;&gt;
+                  &lt;td&gt;&lt;img src&#x3D;&quot;#&quot; width&#x3D;&quot;50px&quot; height&#x3D;&quot;50px&quot;&gt;&lt;/td&gt;
+                  &lt;td scope&#x3D;&quot;row&quot;&gt;{{follower.first_name}} {{follower.last_name}}&lt;/td&gt;
+                  &lt;td&gt;&lt;/td&gt;
+                  &lt;td&gt;&lt;/td&gt;
+                &lt;/tr&gt;
+          &lt;/tbody&gt;
+        &lt;/table&gt;
+      &lt;/div&gt;
+
+      &lt;!-- Modal footer --&gt;
+      &lt;div class&#x3D;&quot;modal-footer&quot;&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-primary&quot; (click)&#x3D;&quot;sendModal()&quot; &gt;Send&lt;/button&gt;
+        &lt;button type&#x3D;&quot;button&quot; class&#x3D;&quot;btn btn-danger&quot; (click)&#x3D;&quot;hideModal(&#x27;#inviteModal&#x27;)&quot;&gt;Close&lt;/button&gt;
+
+        &lt;!-- this button is hidden, used to close from typescript --&gt;
+        &lt;button type&#x3D;&quot;button&quot; id&#x3D;&quot;close-modal&quot; data-dismiss&#x3D;&quot;modal&quot; style&#x3D;&quot;display: none&quot;&gt;Close&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+
+
+
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-styleData">
+                <p class="comment">
+                    <code>./race-view.component.css</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">
+body { font-family: &#x27;Roboto&#x27;, sans-serif; font-size: 16px; font-weight: 300; color: #888; line-height: 30px; text-align: center; }
+
+strong { font-weight: 500; }
+
+a { color: #f35b3f; border-bottom: 1px dashed #f35b3f; text-decoration: none; transition: all .3s; }
+a:hover, a:focus { color: #f35b3f; border: 0; text-decoration: none; }
+
+h1, h2 { margin-top: 10px; font-size: 38px; font-weight: 100; color: #555; line-height: 50px; }
+h3 { font-size: 22px; font-weight: 300; color: #555; line-height: 30px; }
+h4 { font-size: 18px; font-weight: 300; color: #555; line-height: 26px; }
+
+img { max-width: 100%; }
+
+.medium-paragraph { font-size: 18px; line-height: 34px; }
+
+::-moz-selection { background: #f35b3f; color: #fff; text-shadow: none; }
+::selection { background: #f35b3f; color: #fff; text-shadow: none; }
+
+/****** Leaflet Icons *****/
+.location-pin img {
+  width: 46px;
+  height: 46px;
+  margin: -26px 0 0 -28px;
+  z-index: 10;
+  position: absolute;
+  border-radius: 50%;
+  background: #32383e;
+}
+
+.pin {
+  width: 50px;
+  height: 50px;
+  border-radius: 50% 50% 50% 0;
+  background: #32383e;
+  position: absolute;
+  transform: rotate(-45deg);
+  left: 50%;
+  top: 50%;
+  margin: -43px 0 0 -30px;
+}
+
+.pin:after {
+  content: &#x27;&#x27;;
+  width: 26px;
+  height: 26px;
+  margin: 2px 0 0 2px;
+  position: absolute;
+  border-radius: 50%;
+}
+
+.pulse {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  height: 14px;
+  width: 14px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 15px 0px 0px -12px;
+  transform: rotateX(55deg);
+  z-index: -2;
+}
+
+.pulse:after {
+  content: &quot;&quot;;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  position: absolute;
+  margin: -16px 0 0 -13px;
+  animation: pulsate 2.5s ease-out;
+  animation-iteration-count: infinite;
+  opacity: 0;
+  background: rgba(94, 190, 255, 0.5);
+  box-shadow: 0 0 1px 2px #2d99d3;
+  animation-delay: 1.1s;
+}
+
+#floating-panel {
+    position: absolute;
+    bottom: 60px;
+    left: 25%;
+    z-index: 5;
+    background-color: #fff;
+    padding: 5px;
+    border: 1px solid #999;
+    text-align: center;
+    font-family: &#x27;Roboto&#x27;,&#x27;sans-serif&#x27;;
+    line-height: 30px;
+    padding-left: 100px;
+  }
+
+/****** NavBar *****/
+
+a.navbar-brand {
+       padding-top: 0px ;
+       padding-bottom: 0px ;
+    }
+
+.navbar a {border-bottom:none;}
+
+.navbar ul li a {border-bottom:none;}
+
+
+.navbar-nav {position: relative;
+}
+
+/***** Wrapper *****/
+
+.wrapper { display: block; }
+
+/***** Cards *****/
+
+
+/***** Loader *****/
+.loader-active {
+
+position: fixed;
+  border: 16px solid #cccccc; /* Light grey */
+  border-top: 16px solid #f35b3f; /* Blue */
+	border-bottom: 16px solid #f35b3f;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  animation: spin 2s linear infinite;
+	z-index: 999;
+	margin: auto;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+}
+
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/***** Unit Toggle *****/
+
+.onoffswitch {
+    position: relative; width: 85px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #FFFFFF; border-radius: 50px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 30px; padding: 0; line-height: 30px;
+    font-size: 14px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: &quot;Miles&quot;;
+    padding-left: 15px;
+    background-color: #F35B3F; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: &quot;KMs&quot;;
+    padding-right: 15px;
+    background-color: #545454; color: #FFFFFF;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 18px; margin: 6px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 51px;
+    border: 2px solid #FFFFFF; border-radius: 50px;
+    transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+}
+/***** Bottom Stats *****/
+
+
+/* .run-history-img img {
+  width: 100%;
+} */
+
+.stats-area{
+
+}
+
+.item-text{
+  padding-left: 15px;
+}
+
+.run-history-img{
+  padding-right: 15px;
+}
+
+.item-text h4{
+  margin-bottom: 0px;
+  padding-right: 15px;
+}
+
+.single-stats{
+	color: black;
+  text-align: center;
+}
+
+.single-stats i{
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top:10px;
+	padding-bottom:0px;
+	color: black;
+}
+
+.single-stats h2{
+  font-weight: bold;
+  font-size: 2.5vw;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top:0px;
+	padding-bottom:0px;
+	color: black;
+}
+
+.single-stats p{
+  font-size: 2.5vw;
+	color: black;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	padding-top:0px;
+	padding-bottom:10px;
+}
+
+/* .single-stats:hover{
+  background: #262626;
+  color: black;
+  transition: .6s;
+} */
+
+/***** Sidebar *****/
+
+
+
+.dismiss {
+	width: 35px; height: 35px; position: absolute; top: 10px; right: 10px; transition: all .3s;
+	background: #444; border-radius: 4px; text-align: center; line-height: 35px; cursor: pointer;
+}
+
+.dismiss:hover, .dismiss:focus { background: #555; color: #fff; }
+
+
+#user_name {
+  padding-left: 5px;
+  font-size: 15px;
+  color: white;
+}
+
+
+
+/***** Dark overlay *****/
+
+/* .overlay {
+    display: none; position: fixed; width: 100vw; height: 100vh;
+    background: rgba(51, 51, 51, 0.7); z-index: 998; opacity: 0; transition: all .5s ease-in-out;
+}
+.overlay.active { display: block; opacity: 1; } */
+
+
+/***** Content *****/
+
+.content { width: 100%; transition: all 0.3s; }
+
+.open-menu { position: relative; top: 10px; left: 10px; z-index: 997; box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.2); }
+
+.open-menu.btn-customized,
+.open-menu.btn-customized:hover,
+.open-menu.btn-customized:active,
+.open-menu.btn-customized:focus,
+.open-menu.btn-customized:active:focus,
+.open-menu.btn-customized.active:focus,
+.open-menu.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active,
+.open-menu.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
+	box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.2);
+}
+
+
+/***** Buttons *****/
+
+.streettoggle { position: fixed; top: 70px; left: 130px; z-index: 997; box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.2); }
+.streetoggle.btn-customized,
+.streetoggle.btn-customized:hover,
+.streetoggle.btn-customized:active,
+.streetoggle.btn-customized:focus,
+.streetoggle.btn-customized:active:focus,
+.streetoggle.btn-customized.active:focus,
+.streetoggle.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active,
+.streetoggle.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
+	box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.2);
+}
+.activitiestoggle {
+  position: relative;
+  top: 10px;
+  left: 20px;
+  z-index: 997;
+  box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.2);
+  margin-left: 5px; margin-right: 5px; padding: .75rem 1.5rem;
+	background: #f35b3f; border: 0; border-radius: 4px;
+	font-size: 16px; font-weight: 300; color: #fff; box-shadow: none;
+}
+
+.leaderboardtoggle {
+  position: relative;
+  top: 10px;
+  left: 20px;
+  z-index: 997;
+  box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.2);
+  margin-left: 5px; margin-right: 5px; padding: .75rem 1.5rem;
+	background: #f35b3f; border: 0; border-radius: 4px;
+	font-size: 16px; font-weight: 300; color: #fff; box-shadow: none;
+}
+
+.inviteToggle {
+  position: relative;
+  top: 10px;
+  left: 20px;
+  z-index: 997;
+  box-shadow: 3px 3px 3px rgba(51, 51, 51, 0.2);
+  margin-left: 5px; margin-right: 5px; padding: .75rem 1.5rem;
+	background: #f35b3f; border: 0; border-radius: 4px;
+	font-size: 16px; font-weight: 300; color: #fff; box-shadow: none;
+}
+
+
+a.btn-customized {
+	margin-left: 5px; margin-right: 5px; padding: .75rem 1.5rem;
+	background: #f35b3f; border: 0; border-radius: 4px;
+	font-size: 16px; font-weight: 300; color: #fff; box-shadow: none;
+}
+
+a.btn-customized:hover,
+a.btn-customized:active,
+a.btn-customized:focus,
+a.btn-customized:active:focus,
+a.btn-customized.active:focus,
+a.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active,
+a.btn-customized.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
+	outline: 0; background: #cd533d; background: rgba(243, 91, 63, 0.7); border: 0; color: #fff; box-shadow: none;
+}
+
+a.btn-customized-2 {
+	margin-left: 5px; margin-right: 5px; padding: .75rem 1.5rem;
+	background: #fff; border: 0; border-radius: 4px;
+	font-size: 16px; font-weight: 300; color: #555; box-shadow: none;
+}
+
+a.btn-customized-2:hover,
+a.btn-customized-2:active,
+a.btn-customized-2:focus,
+a.btn-customized-2:active:focus,
+a.btn-customized-2.active:focus,
+a.btn-customized-2.btn.btn-primary:not(:disabled):not(.disabled):active,
+a.btn-customized-2.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
+	outline: 0; background: #ccc; background: rgba(255, 255, 255, 0.5); border: 0; color: #555; box-shadow: none;
+}
+
+a.btn-customized-3 {
+	display: inline-block; width: 100%; margin: 0; padding: .75rem 1.5rem;
+	background: #444; border: 0; border-radius: 4px;
+	font-size: 16px; font-weight: 300; color: #fff; box-shadow: none;
+}
+
+a.btn-customized-3:hover,
+a.btn-customized-3:active,
+a.btn-customized-3:focus,
+a.btn-customized-3:active:focus,
+a.btn-customized-3.active:focus,
+a.btn-customized-3.btn.btn-primary:not(:disabled):not(.disabled):active,
+a.btn-customized-3.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
+	outline: 0; background: #555; border: 0; color: #fff; box-shadow: none;
+}
+
+a.btn-customized i,
+a.btn-customized-2 i,
+a.btn-customized-3 i { margin-right: 5px; }
+
+
+a.btn-customized-4 {
+	display: inline-block; width: 28px; height: 28px; margin: 0 3px; padding: 0;
+	background: #444; border: 0; border-radius: 50%;
+	font-size: 16px; font-weight: 300; color: #fff; box-shadow: none; text-indent: -999999px;
+}
+
+a.btn-customized-4.btn-customized-dark { background: #222; }
+a.btn-customized-4.btn-customized-light { background: #fff; }
+
+a.btn-customized-4.btn-customized-dark:hover,
+a.btn-customized-4.btn-customized-dark:active,
+a.btn-customized-4.btn-customized-dark:focus,
+a.btn-customized-4.btn-customized-dark:active:focus,
+a.btn-customized-4.btn-customized-dark.active:focus,
+a.btn-customized-4.btn-customized-dark.btn.btn-primary:not(:disabled):not(.disabled):active,
+a.btn-customized-4.btn-customized-dark.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
+	outline: 0; background: #555; border: 0; color: #fff; box-shadow: none;
+}
+
+a.btn-customized-4.btn-customized-light:hover,
+a.btn-customized-4.btn-customized-light:active,
+a.btn-customized-4.btn-customized-light:focus,
+a.btn-customized-4.btn-customized-light:active:focus,
+a.btn-customized-4.btn-customized-light.active:focus,
+a.btn-customized-4.btn-customized-light.btn.btn-primary:not(:disabled):not(.disabled):active,
+a.btn-customized-4.btn-customized-light.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
+	outline: 0; background: #555; border: 0; color: #fff; box-shadow: none;
+}
+
+
+/***** General style, all sections *****/
+
+.section-container { margin: 0 auto; padding-bottom: 80px; }
+
+.section-container-gray-bg { background: #f8f8f8; }
+
+.section-container-image-bg,
+.section-container-image-bg h2,
+.section-container-image-bg h3 { color: #fff; }
+
+.section-container-image-bg .divider-1 span { border-color: #fff; border-color: rgba(255, 255, 255, 0.8); }
+
+.section-description { margin-top: 60px; padding-bottom: 10px; }
+
+.section-description p { margin-top: 20px; padding: 0 120px; }
+.section-container-image-bg .section-description p { opacity: 0.8; }
+
+.section-bottom-button { padding-top: 20px; }
+
+
+/***** Divider *****/
+
+.divider-1 span { display: inline-block; width: 200px; border-bottom: 1px dotted #aaa; }
+
+
+/***** Top content *****/
+
+.top-content { width: 100%; padding: 60px 0 120px 0; }
+
+.top-content h1 { padding-top: 60px; color: #fff; }
+.top-content .description { margin: 30px 0 0 0; padding-bottom: 30px; }
+.top-content .description p { color: #fff; color: rgba(255, 255, 255, 0.8); }
+.top-content .description a { color: #fff; color: rgba(255, 255, 255, 0.8); border-color: #fff; border-color: rgba(255, 255, 255, 0.8); }
+.top-content .description a:hover,
+.top-content .description a:focus { color: #fff; color: rgba(255, 255, 255, 0.8); }
+
+
+/***** Section 1 *****/
+
+.section-1-box { padding-top: 30px; text-align: left; }
+
+.section-1-box .section-1-box-icon {
+	width: 80px; height: 80px; margin: 0 auto;
+	border: 1px solid #f35b3f;
+    font-size: 40px; color: #f35b3f; line-height: 78px; text-align: center;
+    border-radius: 50%;
+}
+
+.section-1-box h3 { margin-top: 0; padding: 0 0 10px 0; }
+
+
+/***** Section 2 *****/
+
+.section-2-box { margin-top: 30px; text-align: left; }
+.section-2-box h3 { margin-top: 0; }
+.section-2-box-text .medium-paragraph { margin-top: 20px; margin-bottom: 20px; }
+.section-2-box img { border-radius: 6px; }
+
+
+/***** Section 3 *****/
+
+.section-3-box { margin-top: 30px; text-align: left; }
+
+.section-3-box .section-3-box-icon {
+	width: 60px; height: 60px; margin: 0 auto;
+	background: #f35b3f;
+    font-size: 28px; color: #fff; line-height: 60px; text-align: center;
+    border-radius: 50%;
+}
+
+.section-3-box h3 { margin-top: 0; padding: 0 0 10px 0; }
+
+
+/***** Section 5 *****/
+
+.section-5-box { padding-top: 30px; text-align: left; }
+
+.section-5-box-image { overflow: hidden; border-radius: 6px; }
+.section-5-box-image img { transition: all .8s; }
+.section-5-box-image:hover img { transform: scale(1.25); }
+
+.section-5-box h3 { margin-top: 30px; }
+.section-5-box h3 a { color: #555; border: 0; }
+.section-5-box h3 a:hover, .section-5-box h3 a:focus { color: #f35b3f; }
+
+.section-5-box h3 i { padding-left: 10px; color: #ccc; transition: all .3s; }
+.section-5-box h3:hover i { padding-left: 15px; }
+
+.section-5-box-date { padding-bottom: 10px; font-size: 14px; color: #aaa; text-transform: uppercase; }
+
+.section-5-box-date i { padding-right: 5px; color: #ddd; }
+
+.section-5-container .section-bottom-button { padding-top: 40px; }
+
+
+/***** Section 6 *****/
+
+.section-6-box { padding-top: 30px; text-align: left; }
+
+.section-6-box h3 { margin-top: 0; }
+
+/* contact form */
+.section-6-form { padding-top: 20px; text-align: left; }
+
+.section-6-form input[type&#x3D;&quot;text&quot;],
+.section-6-form textarea {
+    background: none; border: 1px solid #fff;
+    font-family: &#x27;Roboto&#x27;, sans-serif; font-size: 16px; font-weight: 300; color: #fff;
+    box-shadow: none;
+    transition: all .3s;
+}
+
+.section-6-form textarea { height: 90px; }
+
+.section-6-form input[type&#x3D;&quot;text&quot;]:focus,
+.section-6-form textarea:focus { outline: 0; background: #fff; border: 1px solid #fff; color: #888; box-shadow: none; }
+
+.section-6-form input[type&#x3D;&quot;text&quot;].input-error,
+.section-6-form textarea.input-error { border-color: #f35b3f; }
+
+.section-6-form input[type&#x3D;&quot;text&quot;]::-moz-placeholder,
+.section-6-form textarea::-moz-placeholder { color: #ccc; font-style: italic; }
+
+.section-6-form input[type&#x3D;&quot;text&quot;]:-ms-input-placeholder,
+.section-6-form textarea:-ms-input-placeholder { color: #ccc; font-style: italic; }
+
+.section-6-form input[type&#x3D;&quot;text&quot;]::-webkit-input-placeholder,
+.section-6-form textarea::-webkit-input-placeholder { color: #ccc; font-style: italic; }
+
+.section-6-form button.btn-customized {
+	padding: .75rem 1.5rem;
+	background: #f35b3f; border: 0; border-radius: 4px;
+	font-family: &#x27;Roboto&#x27;, sans-serif;
+	font-size: 16px; font-weight: 300; color: #fff; box-shadow: none;
+}
+
+.section-6-form button.btn-customized:hover,
+.section-6-form button.btn-customized:active,
+.section-6-form button.btn-customized:focus,
+.section-6-form button.btn-customized:active:focus,
+.section-6-form button.btn-customized.active:focus,
+.section-6-form button.btn.btn-primary:not(:disabled):not(.disabled):active,
+.section-6-form button.btn.btn-primary:not(:disabled):not(.disabled):active:focus {
+	outline: 0; background: #cd533d; background: rgba(243, 91, 63, 0.7); border: 0; color: #fff; box-shadow: none;
+}
+
+.section-6-form button.btn-customized i { margin-right: 5px; }
+/* end contact form */
+
+.section-6-social { padding-top: 20px; }
+
+.section-6-social a {
+	display: inline-block; width: 46px; height: 46px; margin: 0 10px 10px 0;
+	background: #fff; border: 0; border-radius: 50%; color: #555; text-align: center; line-height: 46px;
+}
+.section-6-social a:hover,
+.section-6-social a:focus { background: #ccc; background: rgba(255, 255, 255, 0.5); border: 0; color: #555; }
+
+
+/***** Footer *****/
+
+.footer-container {
+   position: absolute;
+   left: 0;
+   margin-top: 200px;
+   bottom: 0;
+	 opacity: 0.8;
+   z-index: 500;
+   width: 100%;
+   background-color: white;
+   color: white;
+   text-align: center;
+}
+
+mat-sidenav-container {
+    position: fixed;
+    top: 6.5%;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    
+}
+
+mat-sidenav-content {
+    height: 100%;
+    width: 100%;
+    overflow-y: hidden;
+}
+
+mat-sidenav, mat-sidenav-content {
+}
+
+mat-sidenav {
+    background-color: #403D58;
+    opacity: 1;
+    width: 350px;
+    overflow-y: hidden;
+}
+
+.mat-drawer-backdrop.mat-drawer-shown {
+    background: none;
+}
+
+::ng-deep.mat-tab-link,  ::ng-deep.mat-tab-label, ::ng-deep.mat-tab-label-active{
+  min-width: 75px!important;
+}
+
+.mat-tab-label {
+  color: white;
+}</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><!-- <app-map></app-map> --><div><app-loader [isActive]="loading"></app-loader><mat-sidenav-container>  <mat-sidenav md-disable-backdrop=\'true\' #menu mode="side" style="overflow-y: hidden;">    <mat-tab-group>      <mat-tab>        <ng-template mat-tab-label>          <mat-icon>file_download</mat-icon>        </ng-template>        <mat-tab-group>          <mat-tab>            <ng-template mat-tab-label>              <mat-icon>cloud_download</mat-icon>            </ng-template>            <app-activities-menu [activities]="activities" [distance_unit]="progress.distance_type" (addAct)="addAct($event)" (importActs)="importActs($event)"></app-activities-menu>          </mat-tab>          <!---<mat-tab *ngIf="raceSettings.isManualEntry">            <ng-template mat-tab-label>              <mat-icon>add_circle_outline</mat-icon>            </ng-template>            <app-manual-entry (uploadManualEntry)="uploadManualEntry($event)"></app-manual-entry>          </mat-tab>--->        </mat-tab-group>      </mat-tab>      <mat-tab>        <ng-template mat-tab-label>          <mat-icon>format_list_numbered_rtl</mat-icon>        </ng-template>                <mat-tab-group>          <mat-tab label="Distance">            <app-leaderboard [leaderboard]="leaderboard"></app-leaderboard>          </mat-tab>          <mat-tab label="Pace">          </mat-tab>          <mat-tab label="Teams">            <button class="btn btn-primary" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm()" *ngIf="!showTeamForm">+ Team</button>            <button class="btn btn-danger" style="width: 100%; text-align: center;" mat-raised-button (click)="toggleTeamForm(\'clear\')" *ngIf="showTeamForm">Cancel</button>            <div *ngIf="!showTeamForm">                 <app-team-list [teams]="teams" [userStat]="userStat" (callback)="getRaceState($event)" (edit)="editTeamForm($event)"></app-team-list>            </div>            <div *ngIf="showTeamForm">              <app-team-form (callback)="getRaceState($event)" [teamEditForm]="teamEditForm"></app-team-form>            </div>          </mat-tab>        </mat-tab-group>      </mat-tab>      <mat-tab>        <ng-template mat-tab-label>          <mat-icon>group</mat-icon>        </ng-template>        <!----[feedItems]="all_user_data" if you wanna inject from initial bulk call-->        <button (click)="clearUserPins()">Clear User Pins!</button>        <button (click)="showPinsByID(null)">Show User Pins!</button>        <button (click)="showPinsByID(followedIDs)">Show Followers Only</button>        <app-feed [use]="\'race\'" [ID]="raceID" [hasStoryModalChild]="false" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>      </mat-tab>      <mat-tab>        <ng-template mat-tab-label>          <mat-icon>settings</mat-icon>        </ng-template>        <app-race-settings [userSettings]="userRaceSettings"></app-race-settings>      </mat-tab>    </mat-tab-group>  </mat-sidenav>  <mat-sidenav-content>    <app-map [coordinates]="coords" [userData]="all_user_data" [displayUsers]="true" [followedIDs]="followedIDs"></app-map>    <a class="btn btn-primary btn-customized open-menu" role="button" (click)="menu.toggle()">      <i class="fas fa-align-left"></i> <span>Menu</span>  </a><!----<a class="btn btn-primary btn-customized inviteToggle" data-toggle="modal" data-target="#storyModal" (click)="showModal(\'#storyModal\')">  <span style="color:white">Add a Story</span></a>>----><a class="btn btn-primary btn-customized inviteToggle" (click)="goToTeamForm()">  <span style="color:white">Create Team</span></a><app-user-progress [progress]="progress"></app-user-progress>  </mat-sidenav-content></mat-sidenav-container><!-- Wrapper -->    <!-- open sidebar menu --></div><!-----STORY MODAL--><app-story-modal></app-story-modal><!---<div class="modal fade" id="storyModal">  <div class="modal-dialog">    <div class="modal-content">      <div class="modal-header">        <h4 class="modal-title">Add a Story to your activity!</h4>        <button type="button" class="close" (click)="hideModal(\'#activitiesModal\')">&times;</button>      </div>      <div class="modal-body">        <h4>Stories appear above your pin for 48 hours after upload</h4>        <div class="container">          <label for="storyImageField">Upload an image!</label>          <input type="file" id="storyImage" name="storyImageField" accept="image/*">          <label for="storyImageCaptionField">Enter a caption (max length is 100 chars):</label>          <input type="text" id="storyImageCaption" name="storyImageCaptionField" maxlength="100">        </div>      </div>      <div class="modal-footer">        <button type="button" class="btn btn-primary" (click)="uploadStory()" >Add Story</button>        <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>      </div>    </div>  </div></div>---><div class="modal fade" id="activitiesModal">  <div class="modal-dialog">    <div class="modal-content">      <!-- Modal Header -->      <div class="modal-header">        <h4 class="modal-title">Select Activities You\'d Like to Apply Towards This Race</h4>        <button type="button" class="close" (click)="hideModal(\'#activitiesModal\')">&times;</button>      </div>      <!-- Modal body -->      <div class="modal-body">        <table class="actsTable table table-striped" id=\'activities_table\'>          <thead>            <tr>              <th scope="col"></th>              <th scope="col"></th>              <th scope="col"></th>            </tr>          </thead>          <tbody>              <tr class="activityRow" *ngFor="let act of activities" (click)="addAct(act)">                  <td scope="row">{{act.name}}</td>                  <td>{{act.converted_dist}} {{ progress.distance_type }}</td>                  <td>{{act.start_date}}</td>                </tr>          </tbody>        </table>      </div>      <!-- Modal footer -->      <div class="modal-footer">        <button type="button" class="btn btn-primary" (click)="importActs()" >Import</button>        <button type="button" class="btn btn-danger" (click)="hideModal(\'#activitiesModal\')">Close</button>        <!-- this button is hidden, used to close from typescript -->        <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>      </div>    </div>  </div></div><div class="modal fade" id="leaderboardModal">  <div class="modal-dialog">    <div class="modal-content">      <!-- Modal Header -->      <div class="modal-header">        <h4 class="modal-title">Leaderboard</h4>        <button type="button" class="close" (click)="hideModal(\'#leaderboardModal\')">&times;</button>      </div>      <!-- Modal body -->      <div class="modal-body">        Modal body..      </div>      <!-- Modal footer -->      <div class="modal-footer">        <button type="button" class="btn btn-primary" (click)="sendModal()" >Send</button>        <button type="button" class="btn btn-danger" (click)="hideModal(\'#leaderboardModal\')">Close</button>        <!-- this button is hidden, used to close from typescript -->        <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>      </div>    </div>  </div></div><div class="modal fade" id="inviteModal">  <div class="modal-dialog">    <div class="modal-content">      <!-- Modal Header -->      <div class="modal-header">        <h4 class="modal-title">Invite Followers!</h4>        <button type="button" class="close" (click)="hideModal(\'#inviteModal\')">&times;</button>      </div>      <!-- Modal body -->      <div class="modal-body">        <table class="table table-striped" id=\'invite_table\'>          <thead>            <tr>              <th scope="col"></th>              <th scope="col"></th>            </tr>          </thead>          <tbody>              <tr *ngFor="let follower of followers">                  <td><img src="#" width="50px" height="50px"></td>                  <td scope="row">{{follower.first_name}} {{follower.last_name}}</td>                  <td></td>                  <td></td>                </tr>          </tbody>        </table>      </div>      <!-- Modal footer -->      <div class="modal-footer">        <button type="button" class="btn btn-primary" (click)="sendModal()" >Send</button>        <button type="button" class="btn btn-danger" (click)="hideModal(\'#inviteModal\')">Close</button>        <!-- this button is hidden, used to close from typescript -->        <button type="button" id="close-modal" data-dismiss="modal" style="display: none">Close</button>      </div>    </div>  </div></div></div>'
+    var COMPONENTS = [{'name': 'ActivitiesMenuComponent', 'selector': 'app-activities-menu'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'CommentsComponent', 'selector': 'app-comments'},{'name': 'CommentsFormComponent', 'selector': 'app-comments-form'},{'name': 'FeedComponent', 'selector': 'app-feed'},{'name': 'LeaderboardComponent', 'selector': 'app-leaderboard'},{'name': 'LoaderComponent', 'selector': 'app-loader'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ManualEntryComponent', 'selector': 'app-manual-entry'},{'name': 'MapComponent', 'selector': 'app-map'},{'name': 'NavComponent', 'selector': 'app-nav'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'ProfileFormComponent', 'selector': 'app-profile-form'},{'name': 'RaceAboutComponent', 'selector': 'app-race-about'},{'name': 'RaceComponent', 'selector': 'app-race'},{'name': 'RaceCreateComponent', 'selector': 'app-race-create'},{'name': 'RaceMenuComponent', 'selector': 'app-race-menu'},{'name': 'RacesComponent', 'selector': 'app-races'},{'name': 'RaceSettingsComponent', 'selector': 'app-race-settings'},{'name': 'RaceViewComponent', 'selector': 'app-race-view'},{'name': 'RegisterComponent', 'selector': 'app-register'},{'name': 'StoryBtnComponent', 'selector': 'app-story-btn'},{'name': 'StoryFormComponent', 'selector': 'app-story-form'},{'name': 'StoryModalComponent', 'selector': 'app-story-modal'},{'name': 'StravauthComponent', 'selector': 'app-stravauth'},{'name': 'TeamFormComponent', 'selector': 'app-team-form'},{'name': 'TeamListComponent', 'selector': 'app-team-list'},{'name': 'UserFollowComponent', 'selector': 'app-user-follow'},{'name': 'UserPageComponent', 'selector': 'app-user-page'},{'name': 'UserProfileNavComponent', 'selector': 'app-user-profile-nav'},{'name': 'UserProgressComponent', 'selector': 'app-user-progress'},{'name': 'UsersComponent', 'selector': 'app-users'},{'name': 'UserStatsComponent', 'selector': 'app-user-stats'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'RaceViewComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+                   
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'RaceViewComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
