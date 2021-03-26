@@ -151,7 +151,7 @@ export class FeedComponent implements OnInit {
     });
   }
 
-  public refreshFeed(openStoryIDComments=null, getNextPage=false){
+  public refreshFeed = (openStoryIDComments=null, getNextPage=false):void => {
     var viewComponent = this;
     this.loading = true;
 
@@ -278,10 +278,17 @@ export class FeedComponent implements OnInit {
   }
 
   openStoryPopup = (element:FeedObj) => {
-    this.dialog.open(StoryPopupComponent,{
+    const d = this.dialog.open(StoryPopupComponent,{
       panelClass:"DialogDefaultContainer",
       data:element
     });
+    const sub = d.componentInstance.storyUpdated.subscribe(()=>{
+      console.log("Story was updated!");
+      this.refreshFeed();
+    });
+    d.afterClosed().subscribe(()=>{
+      sub.unsubscribe();
+    })
   }
 
   openModal(id: string,element) {

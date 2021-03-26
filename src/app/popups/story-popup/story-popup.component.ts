@@ -1,5 +1,6 @@
-import { NgModule, Component, OnInit, Inject } from '@angular/core';
+import { NgModule, Component, OnInit, Inject, Output, EventEmitter } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
 import { 
   AuthService,
   StoryService,
@@ -21,6 +22,7 @@ import {
 export class StoryPopupComponent implements OnInit {
 
   public storyData:FeedObj = null;
+  @Output() storyUpdated = new EventEmitter();
 
   constructor(
     private authService:AuthService,
@@ -37,6 +39,7 @@ export class StoryPopupComponent implements OnInit {
     console.log(e);
     this.storyService.getStoryModalData(this.storyData.story_id).then((updatedPost) => {
       this.storyData = updatedPost as FeedObj;
+      this.storyUpdated.emit();
     });
   }
 
