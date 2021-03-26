@@ -6,7 +6,7 @@ import {
 import { 
   Item, 
   ItemType 
-} from '../models';
+} from '../interfaces';
 
 @Component({
   selector: 'app-item-list',

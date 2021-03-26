@@ -9,7 +9,7 @@ import {
 import {
   UserData,
   CheckpointMapData,
-} from '../models';
+} from '../interfaces';
 //import * as L from 'leaflet';
 //import * as markercluster from 'leaflet.markercluster';
 import { UserFollowComponent } from '../user-follow/user-follow.component';

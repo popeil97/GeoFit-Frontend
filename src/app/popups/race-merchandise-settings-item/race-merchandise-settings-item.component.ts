@@ -9,7 +9,7 @@ import {
 
 import { 
   ItemState
-} from '../../models';
+} from '../../interfaces';
 
 @NgModule({
   imports:[MatDialogRef]

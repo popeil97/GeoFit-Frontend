@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../../environments/environment';
 import {
   Payment,
-} from '../../models';
+} from '../../interfaces';
 
 @Injectable({
   providedIn: 'root'

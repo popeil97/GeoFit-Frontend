@@ -6,7 +6,7 @@ import {
 } from '../services';
 import {
   FeedObj
-} from '../models';
+} from '../interfaces';
 
 @Component({
   selector: 'app-story-dialog',

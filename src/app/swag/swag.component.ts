@@ -9,7 +9,7 @@ import {
 import {
   Order,
   PaymentType,
-} from '../models';
+} from '../interfaces';
 
 interface SwagDialogData {
   price:string,

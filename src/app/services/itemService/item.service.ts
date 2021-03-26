@@ -4,7 +4,7 @@ import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { 
   ItemType 
-} from '../../models';
+} from '../../interfaces';
 
 @Injectable({
   providedIn: 'root'

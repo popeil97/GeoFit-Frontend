@@ -5,7 +5,7 @@ import {
 } from '../services/';
 import {
   Comment,
-} from '../models';
+} from '../interfaces';
 
 @Component({
   selector: 'app-comments',

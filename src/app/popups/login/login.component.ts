@@ -21,7 +21,7 @@ import {
 
 import {
   UserData,
-} from '../../models';
+} from '../../interfaces';
 
 @NgModule({
   imports:[MatDialogRef]

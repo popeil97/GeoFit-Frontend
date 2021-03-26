@@ -22,7 +22,7 @@ import {
   UserData,
   Tag,
   TagType,
-} from '../models'
+} from '../interfaces'
 
 import {
   RouteInfoComponent

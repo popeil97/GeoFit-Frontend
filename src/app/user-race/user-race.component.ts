@@ -5,7 +5,7 @@ import {
 } from '../services';
 import {
   UserData,
-} from '../models';
+} from '../interfaces';
 import * as _ from 'lodash';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 

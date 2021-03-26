@@ -21,7 +21,7 @@ import {
 import {
   Choice,
   ConfirmationData,
-} from '../../models';
+} from '../../interfaces';
 
 import { RaceBasicsComponent } from './race-basics/race-basics.component';
 import { RaceSettingsComponent } from './race-settings/race-settings.component';

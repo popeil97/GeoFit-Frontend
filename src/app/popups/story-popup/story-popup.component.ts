@@ -5,7 +5,7 @@ import {
 } from '../../services';
 import {
   FeedObj
-} from '../../models';
+} from '../../interfaces';
 
 @NgModule({
   imports:[MatDialogRef]

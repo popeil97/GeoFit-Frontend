@@ -6,7 +6,7 @@ import {
 import {
   Tag,
   TagType,
-} from '../models';
+} from '../interfaces';
 import { Control } from 'leaflet';
 
 @Component({

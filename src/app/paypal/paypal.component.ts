@@ -5,7 +5,7 @@ import {
 import {
   Payment, 
   PaymentType,
-} from '../models';
+} from '../interfaces';
 declare let paypal: any;
 
 @Component({

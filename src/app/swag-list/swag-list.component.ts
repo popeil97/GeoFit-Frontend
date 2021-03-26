@@ -6,7 +6,7 @@ import {
   Item, 
   Order, 
   Cart,
-} from '../models';
+} from '../interfaces';
 import * as _ from 'lodash';
 
 @Component({

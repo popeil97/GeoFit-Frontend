@@ -10,7 +10,7 @@ import {
 } from '../services';
 import {
   NotificationType,
-} from '../models';
+} from '../interfaces';
 
 @Component({
   selector: 'app-notification',

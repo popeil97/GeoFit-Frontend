@@ -12,7 +12,7 @@ import {
 
 import {
   UserData,
-} from '../../models'
+} from '../../interfaces'
 
 import {
   ProfileFormComponent,

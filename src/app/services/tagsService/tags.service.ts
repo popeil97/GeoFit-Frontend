@@ -5,7 +5,7 @@ import { env } from 'process';
 import { TagFormObj } from '../../tag-form/tag-form.component';
 import {
   Tag, TagType
-} from '../../models';
+} from '../../interfaces';
 
 @Injectable({
   providedIn: 'root'

@@ -19,7 +19,7 @@ import {
   TagType,
   Cart,
   PaymentType,
-} from '../../models';
+} from '../../interfaces';
 
 import { AboutData } from '../../views/race-about/race-about.component';
 

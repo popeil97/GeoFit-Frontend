@@ -18,7 +18,7 @@ import {
 } from '../../popups';
 import {
   Comment
-} from '../../models';
+} from '../../interfaces';
 
 import { StoryDialogComponent } from '../../story-dialog/story-dialog.component';
 import { ModalService } from '../../modalServices';

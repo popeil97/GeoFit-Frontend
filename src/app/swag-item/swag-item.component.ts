@@ -5,7 +5,7 @@ import {
 import {
   Item,
   Order,
-} from '../models';
+} from '../interfaces';
 
 @Component({
   selector: 'app-swag-item',

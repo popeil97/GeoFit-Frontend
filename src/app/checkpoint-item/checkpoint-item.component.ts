@@ -4,7 +4,7 @@ import {
 } from '../services';
 import {
   Checkpoint,
-} from '../models';
+} from '../interfaces';
 
 @Component({
   selector: 'app-checkpoint-item',

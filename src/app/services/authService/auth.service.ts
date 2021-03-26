@@ -4,7 +4,7 @@ import { environment } from './../../../environments/environment';
 import { UserProfileService } from "../userProfileService/userprofile.service";
 import {
   UserData
-} from '../../models';
+} from '../../interfaces';
 import { Observable, Observer, Subject, } from 'rxjs';
 
 @Injectable()

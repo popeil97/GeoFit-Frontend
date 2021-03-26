@@ -9,7 +9,7 @@ import {
 import {
   ConfirmationData,
   Choice,
-} from '../../models';
+} from '../../interfaces';
 
 @Injectable({
   providedIn: 'root'
