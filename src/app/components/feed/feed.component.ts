@@ -17,7 +17,8 @@ import {
   StoryPopupComponent,
 } from '../../popups';
 import {
-  Comment
+  Comment, 
+  FeedObj,
 } from '../../interfaces';
 
 import { StoryDialogComponent } from '../../story-dialog/story-dialog.component';
@@ -311,32 +312,6 @@ export class FeedComponent implements OnInit {
   
     
 
-}
-
-
-interface FeedObj {
-  user_id: number;
-  display_name: string;
-  username: string;
-  profile_url:string
-  joined: boolean;
-  traveled: boolean;
-  likes: boolean;
-  likes_count: number;
-  story: boolean;
-  story_image:string;
-  story_text:string;
-  story_id:number;
-  total_distance:number;
-  last_distance:number;
-  message: string;
-  created_ts:number;
-  is_mine:boolean;
-  comments: Comment[];
-  show_comments: boolean;
-  show_options: boolean;
-  follows: boolean;
-  hot: boolean;
 }
 
 interface FeedPayload {

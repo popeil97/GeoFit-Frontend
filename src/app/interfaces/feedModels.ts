@@ -41,7 +41,9 @@ interface FeedObj {
     comments: Comment[];
     show_comments: boolean;
     follows: boolean;
-  }
+    show_options: boolean;
+    hot: boolean;
+}
 
 export {
     Story,
