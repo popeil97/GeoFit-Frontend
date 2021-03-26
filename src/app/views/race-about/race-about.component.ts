@@ -12,6 +12,7 @@ import {
 
 import {
   UserData,
+  FeedObj,
 } from '../../interfaces';
 
 import { 
@@ -706,20 +707,4 @@ interface RaceData {
   is_mod_or_owner:boolean;
   race_IDs: number[];
   race:any;
-}
-
-interface FeedObj {
-  user_id: number;
-  display_name: string;
-  username: string;
-  profile_url:string
-  joined: boolean;
-  traveled: boolean;
-  story: boolean;
-  story_image:string;
-  story_text:string;
-  total_distance:number;
-  last_distance:number;
-  message: string;
-  created_ts:number;
 }

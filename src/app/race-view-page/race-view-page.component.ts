@@ -22,6 +22,7 @@ import {
   UserData,
   Tag,
   TagType,
+  FeedObj,
 } from '../interfaces'
 
 import {
@@ -562,22 +563,6 @@ interface RaceData {
 export interface ChildRaceData {
   id: number,
   name: string,
-}
-
-interface FeedObj {
-  user_id: number;
-  display_name: string;
-  username: string;
-  profile_url:string
-  joined: boolean;
-  traveled: boolean;
-  story: boolean;
-  story_image:string;
-  story_text:string;
-  total_distance:number;
-  last_distance:number;
-  message: string;
-  created_ts:number;
 }
 
 export interface TeamEditBody {
