@@ -4,6 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { 
   StoryService 
 } from '../services';
+import {
+  FeedObj
+} from '../models';
 
 @Component({
   selector: 'app-story-dialog',
@@ -30,27 +33,4 @@ export class StoryDialogComponent {
     });
   }
 
-}
-
-interface FeedObj {
-  user_id: number;
-  display_name: string;
-  username: string;
-  profile_url:string
-  joined: boolean;
-  traveled: boolean;
-  likes: boolean;
-  likes_count: number;
-  story: boolean;
-  story_image:string;
-  story_text:string;
-  story_id:number;
-  total_distance:number;
-  last_distance:number;
-  message: string;
-  created_ts:number;
-  is_mine:boolean;
-  comments: Comment[];
-  show_comments: boolean;
-  follows: boolean;
 }

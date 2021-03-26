@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { StoryModalComponent } from '../../story-modal/story-modal.component';
 import { MatTableDataSource } from '@angular/material/table';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { 
   StoryFormComponent 
 } from '../story-form/story-form.component';
@@ -14,7 +14,11 @@ import {
 import {
   ReportFormComponent,
   StoryDeleteFormComponent,
+  StoryPopupComponent,
 } from '../../popups';
+import {
+  Comment
+} from '../../models';
 
 import { StoryDialogComponent } from '../../story-dialog/story-dialog.component';
 import { ModalService } from '../../modalServices';
@@ -273,7 +277,14 @@ export class FeedComponent implements OnInit {
     });
   }
 
-    openModal(id: string,element) {
+  openStoryPopup = (element:FeedObj) => {
+    this.dialog.open(StoryPopupComponent,{
+      panelClass:"DialogDefaultContainer",
+      data:element
+    });
+  }
+
+  openModal(id: string,element) {
     var data = (id == 'story-popup') ? {element:element, callbackFunction:null} : {};
     console.log("ELEMENT passed", element);
     this.modalService.open(id,data);
@@ -324,12 +335,4 @@ interface FeedObj {
 interface FeedPayload {
   serialized_feed: FeedObj[];
   can_refresh: boolean;
-}
-
-interface Comment {
-  username: string;
-  display_name:string;
-  profile_url:string;
-  message:string;
-  created_ts:number;
 }

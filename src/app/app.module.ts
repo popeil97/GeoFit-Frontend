@@ -105,6 +105,7 @@ import {
   ReportFormComponent,
   StoryDeleteFormComponent,
   ConfirmationPopupComponent,
+  StoryPopupComponent,
 } from './popups';
 
 import { RouteSelectComponent } from './route-select/route-select.component';
@@ -116,7 +117,6 @@ import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/rac
 import { RaceDashboardRacerRowComponent } from './race-dashboard-racer-row/race-dashboard-racer-row.component';
 import { ActivityListComponent } from './activity-list/activity-list.component';
 import { ContactFormComponent } from './contact-form/contact-form.component';
-import { StoryPopupComponent } from './story-popup/story-popup.component';
 import { TeamFormDialogComponent } from './team-form/team-form-dialog.component';
 import { CheckpointListComponent } from './checkpoint-list/checkpoint-list.component';
 import { CheckpointItemComponent } from './checkpoint-item/checkpoint-item.component';
@@ -288,6 +288,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     TermsOfServiceComponent,
     WhyBirthdayComponent,
     ConfirmationPopupComponent,
+    StoryPopupComponent,
   ] 
 })
 export class AppModule { 

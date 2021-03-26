@@ -5,7 +5,7 @@ import { Item, Order, Cart, ItemState, ItemType } from './swagModels';
 import { Payment, PaymentType } from './paymentModels';
 import { ActivityItem } from './activityModels';
 import { Checkpoint, CheckpointContent, CheckpointMapData } from './checkpointModels';
-import { Story } from './storyModels';
+import { Story, Comment, FeedObj, } from './feedModels';
 import { Choice, ConfirmationData, } from './miscellaneousModels';
 
 export {
@@ -16,6 +16,6 @@ export {
     Payment,PaymentType,
     ActivityItem,
     Checkpoint, CheckpointContent, CheckpointMapData,
-    Story,
+    Story, Comment, FeedObj,
     Choice, ConfirmationData,
 }

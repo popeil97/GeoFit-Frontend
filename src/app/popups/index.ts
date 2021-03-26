@@ -11,6 +11,7 @@ import { WhyBirthdayComponent } from './why-birthday/why-birthday.component';
 import { ReportFormComponent } from './report-form/report-form.component';
 import { StoryDeleteFormComponent } from './story-delete-form/story-delete-form.component';
 import { ConfirmationPopupComponent } from './confirmation-popup/confirmation-popup.component';
+import { StoryPopupComponent } from './story-popup/story-popup.component';
 
 export {
     LoginComponent,
@@ -26,4 +27,5 @@ export {
     ReportFormComponent,
     StoryDeleteFormComponent,
     ConfirmationPopupComponent,
+    StoryPopupComponent,
 }

@@ -3,6 +3,9 @@ import {
   AuthService,
   StoryService,
 } from '../services';
+import {
+  Comment
+} from '../models';
 
 declare var $: any;
 
@@ -59,12 +62,4 @@ interface FeedObj {
   created_ts:number;
   is_mine:boolean;
   comments: Comment[];
-}
-
-interface Comment {
-  display_name:string;
-  username: string;
-  profile_url:string;
-  body:string;
-  created_ts:number;
 }
