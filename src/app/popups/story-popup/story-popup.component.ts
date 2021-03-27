@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { 
   AuthService,
   StoryService,
+  RaceFeedService,
 } from '../../services';
 import {
   FeedObj
@@ -22,16 +23,17 @@ import {
 export class StoryPopupComponent implements OnInit {
 
   public storyData:FeedObj = null;
-  @Output() storyUpdated = new EventEmitter();
 
   constructor(
     private authService:AuthService,
     private storyService:StoryService,
+    private raceFeedService:RaceFeedService,
     private dialogRef:MatDialogRef<StoryPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public data:FeedObj,
   ) {}
 
     ngOnInit() {
+      console.log('STORY POPUP DATA',this.data);
       this.storyData = this.data;
     }
 
@@ -39,7 +41,7 @@ export class StoryPopupComponent implements OnInit {
     console.log(e);
     this.storyService.getStoryModalData(this.storyData.story_id).then((updatedPost) => {
       this.storyData = updatedPost as FeedObj;
-      this.storyUpdated.emit();
+      this.raceFeedService.feedUpdated();
     });
   }
 

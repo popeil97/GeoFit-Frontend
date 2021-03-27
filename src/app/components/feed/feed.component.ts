@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild, OnDestroy } from '@angular/core';
 import { StoryModalComponent } from '../../story-modal/story-modal.component';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog } from '@angular/material/dialog';
@@ -31,7 +31,7 @@ declare var $: any
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
-export class FeedComponent implements OnInit {
+export class FeedComponent implements OnInit,OnChanges,OnDestroy {
   /*
   General Feed component that displays Race or User -specific events
   */
@@ -79,6 +79,8 @@ export class FeedComponent implements OnInit {
 
   columns:string[] = ['ProfilePic','Data'];
 
+  private feedUpdateSub:any = null;
+
   constructor(
     private _userProfileService: UserProfileService, 
     private _raceFeedService: RaceFeedService,
@@ -103,6 +105,11 @@ export class FeedComponent implements OnInit {
       this.resetFeed();
       this.refreshFeed();
     }
+
+    // Subscribe to feed updates
+    this.feedUpdateSub = this._raceFeedService.FeedUpdateSubscription.subscribe(()=>{
+      this.refreshFeed();
+    })
     
   }
 
@@ -128,6 +135,13 @@ export class FeedComponent implements OnInit {
       }
     }
 
+  }
+  
+  ngOnDestroy() {
+    if (this.feedUpdateSub) {
+      this.feedUpdateSub.unsubscribe();
+      this.feedUpdateSub = null;
+    }
   }
 
   showStoryModal(storyID): void {
@@ -161,6 +175,7 @@ export class FeedComponent implements OnInit {
     }
     console.log("getting feeditems");
     this._feedService.refreshFeed(this.page_number, this.items_per_page, !this.initialized).then(payload => {
+      console.log('PAYLOAD FROM REFRESH FEED:',payload);
       var newFeedObjs: Array<FeedObj> = [];
       var get_created_ts = this.get_created_ts;
       var data = payload.serialized_feed;
@@ -279,17 +294,10 @@ export class FeedComponent implements OnInit {
   }
 
   openStoryPopup = (element:FeedObj) => {
-    const d = this.dialog.open(StoryPopupComponent,{
+    this.dialog.open(StoryPopupComponent,{
       panelClass:"DialogDefaultContainer",
       data:element
     });
-    const sub = d.componentInstance.storyUpdated.subscribe(()=>{
-      console.log("Story was updated!");
-      this.refreshFeed();
-    });
-    d.afterClosed().subscribe(()=>{
-      sub.unsubscribe();
-    })
   }
 
   openModal(id: string,element) {

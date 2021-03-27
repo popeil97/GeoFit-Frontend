@@ -10,7 +10,11 @@ import {
 } from '../services';
 import {
   NotificationType,
+  FeedObj,
 } from '../interfaces';
+import {
+  StoryPopupComponent,
+} from '../popups';
 
 @Component({
   selector: 'app-notification',
@@ -79,14 +83,13 @@ export class NotificationComponent implements OnInit {
     // need to get story from API, then display in dialog
     let storyData = null;
     this._storyService.getStoryModalData(this.notification.context_id).then((storyData) => {
-     //  console.log("In dialogue function");
-      let dialogRef = this.dialog.open(StoryDialogComponent, {
-        data: { 
-          'element': storyData,
-          'showComments':true,
-        },
+      //  console.log("In dialogue function");
+      const story = storyData as FeedObj;
+      let dialogRef = this.dialog.open(StoryPopupComponent, {
+        panelClass:"DialogDefaultContainer",
+        data: story,
       });
-    })
+    });
     
   }
 
