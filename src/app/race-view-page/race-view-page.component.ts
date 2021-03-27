@@ -3,7 +3,6 @@ import * as bootstrap from "bootstrap";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatDialog } from '@angular/material';
 
-import { Progress } from '../user-progress/user-progress.component';
 import { MapComponent } from '../map/map.component';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
 import { RaceSettings } from '../views/race-about/race-about.component';
@@ -23,6 +22,7 @@ import {
   Tag,
   TagType,
   FeedObj,
+  Progress,
 } from '../interfaces'
 
 import {

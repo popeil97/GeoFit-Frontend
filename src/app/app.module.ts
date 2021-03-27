@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { PublicRacesComponent } from './views/public-races/public-races.component';
 import { MapComponent } from './map/map.component';
 import { RaceViewPageComponent } from './race-view-page/race-view-page.component';
-import { UserProgressComponent } from './user-progress/user-progress.component';
+//import { UserProgressComponent } from './user-progress/user-progress.component';
 //import { RaceMenuComponent } from './race-menu/race-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
@@ -144,7 +144,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     PublicRacesComponent,
     MapComponent,
     RaceViewPageComponent,
-    UserProgressComponent,
+    //UserProgressComponent,
     //RaceMenuComponent,
     RaceCreateComponent,
     LeaderboardComponent,

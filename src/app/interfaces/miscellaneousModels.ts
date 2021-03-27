@@ -11,6 +11,13 @@ interface ConfirmationData {
     choices:Array<Choice>;
 }
 
+interface Progress {
+    distance_remaining:number;
+    distance:number;
+    distance_type:string;
+    pace:string;
+  }
+
 export {
-    Choice, ConfirmationData,
+    Choice, ConfirmationData, Progress
 }

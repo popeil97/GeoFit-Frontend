@@ -6,7 +6,7 @@ import { Payment, PaymentType } from './paymentModels';
 import { ActivityItem } from './activityModels';
 import { Checkpoint, CheckpointContent, CheckpointMapData } from './checkpointModels';
 import { Story, Comment, FeedObj, } from './feedModels';
-import { Choice, ConfirmationData, } from './miscellaneousModels';
+import { Choice, ConfirmationData, Progress } from './miscellaneousModels';
 
 export {
     UserData,
@@ -17,5 +17,5 @@ export {
     ActivityItem,
     Checkpoint, CheckpointContent, CheckpointMapData,
     Story, Comment, FeedObj,
-    Choice, ConfirmationData,
+    Choice, ConfirmationData, Progress,
 }

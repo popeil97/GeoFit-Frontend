@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import {
+  Progress
+} from '../../interfaces';
 
 @Component({
   selector: 'app-user-progress',
@@ -19,13 +22,6 @@ export class UserProgressComponent implements OnInit {
     }
   }
 
-}
-
-export interface Progress {
-  distance_remaining:number;
-  distance:number;
-  distance_type:string;
-  pace:string;
 }
 
 
