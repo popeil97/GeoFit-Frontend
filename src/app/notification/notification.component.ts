@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import {MatSnackBar} from '@angular/material/snack-bar'
 import { SnackbarComponent } from '../snackbar/snackbar.component';
-import { StoryDialogComponent } from '../story-dialog/story-dialog.component';
+//import { StoryDialogComponent } from '../story-dialog/story-dialog.component';
 import { 
   TeamService,
   NotificationsService,

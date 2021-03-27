@@ -74,7 +74,7 @@ import { RoutePinDialogComponent } from './route-pin-dialog/route-pin-dialog.com
 import { OwlModule } from 'ngx-owl-carousel';
 import { NotificationPanelComponent } from './notification-panel/notification-panel.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
-import { StoryDialogComponent } from './story-dialog/story-dialog.component';
+//import { StoryDialogComponent } from './story-dialog/story-dialog.component';
 import { TagFormComponent } from './tag-form/tag-form.component';
 import { TagSelectComponent } from './tag-select/tag-select.component';
 import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.component';
@@ -181,7 +181,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     RoutePinDialogComponent,
     NotificationPanelComponent,
     SnackbarComponent,
-    StoryDialogComponent,
+    //StoryDialogComponent,
     TagFormComponent,
     TagSelectComponent,
     ReportFormComponent,
@@ -270,7 +270,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     RoutePinDialogComponent,
     NotificationPanelComponent,
     SnackbarComponent, 
-    StoryDialogComponent,
+    //StoryDialogComponent,
     ReportFormComponent,
     StoryDeleteFormComponent,
     TeamFormDialogComponent,

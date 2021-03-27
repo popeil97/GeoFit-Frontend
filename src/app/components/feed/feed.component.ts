@@ -21,7 +21,7 @@ import {
   FeedObj,
 } from '../../interfaces';
 
-import { StoryDialogComponent } from '../../story-dialog/story-dialog.component';
+//import { StoryDialogComponent } from '../../story-dialog/story-dialog.component';
 import { ModalService } from '../../modalServices';
 
 declare var $: any
@@ -157,6 +157,7 @@ export class FeedComponent implements OnInit,OnChanges,OnDestroy {
     }
   }
 
+  /*
   showStoryDialog(element: FeedObj){
   //  console.log("In dialogue function");
     let dialogRef = this.dialog.open(StoryDialogComponent, {
@@ -165,6 +166,7 @@ export class FeedComponent implements OnInit,OnChanges,OnDestroy {
       },
     });
   }
+  */
 
   public refreshFeed = (openStoryIDComments=null, getNextPage=false):void => {
     var viewComponent = this;
