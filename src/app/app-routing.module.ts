@@ -13,7 +13,7 @@ import {ContactPageComponent} from './views/contact-page/contact-page.component'
 import { RaceViewPageComponent } from './race-view-page/race-view-page.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { TeamFormComponent } from './team-form/team-form.component';
-import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
+//import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { PasswordRequestComponent } from './password-request/password-request.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import {WelcomeComponent} from './welcome/welcome.component'
@@ -40,7 +40,7 @@ const routes: Routes = [
   {path:'race', component:RaceViewPageComponent},
   {path:'profile',component:ProfileComponent},
   {path:'teams',component:TeamFormComponent},
-  {path:'shipping', component:ShippingAddressComponent },
+  //{path:'shipping', component:ShippingAddressComponent },
   {path:'password-request', component:PasswordRequestComponent},
   {path:'password-change', component:PasswordChangeComponent},
   {path:'welcome', component:WelcomeComponent},

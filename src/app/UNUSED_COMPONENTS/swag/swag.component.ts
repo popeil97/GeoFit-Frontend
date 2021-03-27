@@ -5,11 +5,11 @@ import { FormControl,FormGroup, Validators } from '@angular/forms';
 import { 
   SwagService,
   OrderService,
-} from '../services';
+} from '../../services';
 import {
   Order,
   PaymentType,
-} from '../interfaces';
+} from '../../interfaces';
 
 interface SwagDialogData {
   price:string,

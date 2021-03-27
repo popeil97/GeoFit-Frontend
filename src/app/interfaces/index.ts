@@ -1,5 +1,5 @@
 import { UserData } from './userModels';
-import { Tag, TagType } from './tagModels';
+import { Tag, TagType, TagFormObj, } from './tagModels';
 import { NotificationType } from './notificationsModels';
 import { Item, Order, Cart, ItemState, ItemType } from './swagModels';
 import { Payment, PaymentType } from './paymentModels';
@@ -10,7 +10,7 @@ import { Choice, ConfirmationData, } from './miscellaneousModels';
 
 export {
     UserData,
-    Tag,TagType,
+    Tag,TagType,TagFormObj,
     NotificationType,
     Item,Order,Cart,ItemState,ItemType,
     Payment,PaymentType,

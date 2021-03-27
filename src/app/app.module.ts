@@ -9,7 +9,7 @@ import { PublicRacesComponent } from './views/public-races/public-races.componen
 import { MapComponent } from './map/map.component';
 import { RaceViewPageComponent } from './race-view-page/race-view-page.component';
 import { UserProgressComponent } from './user-progress/user-progress.component';
-import { RaceMenuComponent } from './race-menu/race-menu.component';
+//import { RaceMenuComponent } from './race-menu/race-menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
@@ -58,12 +58,12 @@ import {
 
 import { PaypalComponent } from './paypal/paypal.component';
 import { UserStatsComponent } from './user-stats/user-stats.component';
-import { SwagComponent, SwagDialogContent } from './swag/swag.component';
+//import { SwagComponent, SwagDialogContent } from './swag/swag.component';
 
 import { createCustomElement } from '@angular/elements';
 import { PopupComponent } from './popup/popup.component';
-import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
-import { ShippingAddressFormComponent } from './shipping-address-form/shipping-address-form.component';
+//import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
+//import { ShippingAddressFormComponent } from './shipping-address-form/shipping-address-form.component';
 
 import { PasswordRequestComponent } from './password-request/password-request.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
@@ -75,7 +75,7 @@ import { OwlModule } from 'ngx-owl-carousel';
 import { NotificationPanelComponent } from './notification-panel/notification-panel.component';
 import { SnackbarComponent } from './snackbar/snackbar.component';
 //import { StoryDialogComponent } from './story-dialog/story-dialog.component';
-import { TagFormComponent } from './tag-form/tag-form.component';
+//import { TagFormComponent } from './tag-form/tag-form.component';
 import { TagSelectComponent } from './tag-select/tag-select.component';
 import { RaceStoryManageComponent } from './race-story-manage/race-story-manage.component';
 
@@ -116,7 +116,7 @@ import { SearchComponent } from './search/search.component';
 import { RaceDashboardRacerListComponent } from './race-dashboard-racer-list/race-dashboard-racer-list.component';
 import { RaceDashboardRacerRowComponent } from './race-dashboard-racer-row/race-dashboard-racer-row.component';
 import { ActivityListComponent } from './activity-list/activity-list.component';
-import { ContactFormComponent } from './contact-form/contact-form.component';
+//import { ContactFormComponent } from './contact-form/contact-form.component';
 import { TeamFormDialogComponent } from './team-form/team-form-dialog.component';
 import { CheckpointListComponent } from './checkpoint-list/checkpoint-list.component';
 import { CheckpointItemComponent } from './checkpoint-item/checkpoint-item.component';
@@ -145,7 +145,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     MapComponent,
     RaceViewPageComponent,
     UserProgressComponent,
-    RaceMenuComponent,
+    //RaceMenuComponent,
     RaceCreateComponent,
     LeaderboardComponent,
     StravauthComponent,
@@ -168,11 +168,11 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     ProfileFormComponent,
     PaypalComponent,
     UserStatsComponent,
-    SwagComponent,
-    SwagDialogContent,
+    //SwagComponent,
+    //SwagDialogContent,
     PopupComponent,
-    ShippingAddressComponent,
-    ShippingAddressFormComponent,
+    //ShippingAddressComponent,
+    //ShippingAddressFormComponent,
     TermsOfServiceComponent,
     PasswordRequestComponent,
     PasswordChangeComponent,
@@ -182,7 +182,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     NotificationPanelComponent,
     SnackbarComponent,
     //StoryDialogComponent,
-    TagFormComponent,
+    //TagFormComponent,
     TagSelectComponent,
     ReportFormComponent,
     StoryDeleteFormComponent,
@@ -213,7 +213,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     RaceDashboardRacerListComponent,
     RaceDashboardRacerRowComponent,
     ActivityListComponent,
-    ContactFormComponent,
+    //ContactFormComponent,
     StoryPopupComponent,
     TeamFormDialogComponent,
     CheckpointListComponent,
@@ -266,7 +266,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
   ],
   entryComponents:[
     PopupComponent,
-    SwagDialogContent,
+    //SwagDialogContent,
     RoutePinDialogComponent,
     NotificationPanelComponent,
     SnackbarComponent, 

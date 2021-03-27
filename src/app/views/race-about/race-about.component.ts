@@ -23,7 +23,7 @@ import {
 } from '../../popups';
 
 import { MapComponent } from '../../map/map.component';
-import { SwagComponent } from '../../swag/swag.component';
+//import { SwagComponent } from '../../swag/swag.component';
 
 declare var $: any
 
@@ -36,7 +36,7 @@ declare var $: any
 export class RaceAboutComponent implements OnInit,OnDestroy {
   
   @ViewChild(MapComponent) mapChild: MapComponent;
-  @ViewChild(SwagComponent) swagChild: SwagComponent;
+  //@ViewChild(SwagComponent) swagChild: SwagComponent;
 
   //Race info
   raceID:number;

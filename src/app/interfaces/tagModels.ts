@@ -9,9 +9,15 @@ enum TagType {
     OWNER=2,
 }
 
+interface TagFormObj {
+    name:string,
+    type:number,
+}
+
 export {
     Tag,
     TagType,
+    TagFormObj,
 }
 
   

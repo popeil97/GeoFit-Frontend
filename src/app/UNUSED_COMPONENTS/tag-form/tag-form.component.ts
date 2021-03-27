@@ -2,11 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormControl,FormGroup, Validators} from '@angular/forms';
 import { 
   TagsService,
-} from '../services';
+} from '../../services';
 import {
   Tag,
   TagType,
-} from '../interfaces';
+  TagFormObj
+} from '../../interfaces';
 import { Control } from 'leaflet';
 
 @Component({
@@ -88,11 +89,6 @@ export class TagFormComponent implements OnInit {
     }
   }
 
-}
-
-export interface TagFormObj {
-  name:string,
-  type:number,
 }
 
 
