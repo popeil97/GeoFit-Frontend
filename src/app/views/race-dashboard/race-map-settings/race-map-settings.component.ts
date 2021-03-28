@@ -13,7 +13,7 @@ import {
 } from '../../../components';
 
 import {
-  RouteData
+  RouteData, MapBoxPlaceResp, MapBoxPlace, MapBoxCoord, GraphHopperResp,
 } from '../../../interfaces'
 
 @Component({
@@ -495,21 +495,4 @@ export class RaceMapSettingsComponent implements OnInit,AfterViewInit {
     return km * 0.62137;
   }
   // --- END DISTANCE FUNCTIONS ---
-}
-
-interface MapBoxPlaceResp {
-  features: any[];
-}
-interface MapBoxPlace {
-  center:any;
-  place_name:string;
-}
-export interface MapBoxCoord {
-  lon:number;
-  lat:number;
-}
-interface GraphHopperResp {
-  coords:any[];
-  distance:number;
-  dist_unit:string;
 }

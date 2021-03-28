@@ -15,6 +15,10 @@ import {
   RegisterComponent,
 } from '../../popups';
 
+import {
+  MapBoxCoord
+} from '../../interfaces';
+
 @Component({
   selector: 'app-race-create',
   templateUrl: './race-create.component.html',
@@ -267,12 +271,6 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
     }
   }
 
-}
-
-
-export interface MapBoxCoord {
-  lon:number;
-  lat:number;
 }
 
 // --- All Race Form Interfaces ---

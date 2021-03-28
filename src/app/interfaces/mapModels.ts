@@ -10,7 +10,6 @@ interface PinSettings {
     maxAge: number;
     showOrgPins: boolean;
 }
-  
 interface RoutePins {
     title: string;
     desciption: string;
@@ -18,7 +17,6 @@ interface RoutePins {
     lat: number;
     image_urls: string[];
 }
-  
 interface RouteData {
     name: string;
     coords: any;
@@ -27,9 +25,25 @@ interface RouteData {
     org_pins: UserData[];
     checkpoints: CheckpointMapData[];
 }
-  
 interface OrgPinData {
     org_pins: UserData[];
+}
+
+interface MapBoxPlaceResp {
+    features: any[];
+}
+interface MapBoxPlace {
+    center:any;
+    place_name:string;
+}
+interface MapBoxCoord {
+    lon:number;
+    lat:number;
+}
+interface GraphHopperResp {
+    coords:any[];
+    distance:number;
+    dist_unit:string;
 }
 
 export {
@@ -37,4 +51,8 @@ export {
     RoutePins,
     RouteData,
     OrgPinData,
+    MapBoxPlaceResp,
+    MapBoxPlace,
+    MapBoxCoord,
+    GraphHopperResp,
 }
