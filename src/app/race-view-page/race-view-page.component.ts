@@ -3,7 +3,6 @@ import * as bootstrap from "bootstrap";
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { MatDialog } from '@angular/material';
 
-import { MapComponent } from '../map/map.component';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
 import { RaceSettings } from '../views/race-about/race-about.component';
 import { TeamFormComponent } from '../team-form/team-form.component';
@@ -23,6 +22,7 @@ import {
   TagType,
   FeedObj,
   Progress,
+  PinSettings,
 } from '../interfaces'
 
 import {
@@ -30,7 +30,8 @@ import {
 } from '../popups';
 
 import {
-  FeedComponent
+  FeedComponent,
+  MapComponent,
 } from '../components';
 
 import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
@@ -569,15 +570,3 @@ export interface TeamEditBody {
   team_id:number;
   isEdit:Boolean;
 }
-
-interface PinSettings {
-  followerPinsOnly: boolean;
-  malePinsOn: boolean;
-  femalePinsOn: boolean;
-  allAgesOn: boolean;
-  minAge: number;
-  maxAge: number;
-  showOrgPins: boolean;
-}
-
-

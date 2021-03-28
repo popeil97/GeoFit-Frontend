@@ -9,6 +9,7 @@ import {
 import {
   UserData,
   CheckpointMapData,
+  PinSettings, RoutePins, OrgPinData
 } from '../interfaces';
 //import * as L from 'leaflet';
 //import * as markercluster from 'leaflet.markercluster';
@@ -634,7 +635,7 @@ export class MapRouteComponent implements OnChanges {
   // clearMap clears map markers accessible only by the MapRoute component object
   // e.g. start/end markers
   public clearMap(){
-    if (this.map){
+    if (this.map && this.marker_start != null && this.marker_end != null){
       this.map.removeLayer(this.marker_start);
       this.map.removeLayer(this.marker_end);
     }
@@ -722,29 +723,7 @@ export class MapRouteComponent implements OnChanges {
 
 }
 
-interface PinSettings {
-  followerPinsOnly: boolean;
-  malePinsOn: boolean;
-  femalePinsOn: boolean;
-  allAgesOn: boolean;
-  minAge: number;
-  maxAge: number;
-  showOrgPins: boolean;
-}
-
-interface RoutePins {
-  title: string;
-  desciption: string;
-  lon: number;
-  lat: number;
-  image_urls: string[];
-}
-
 interface MapData {
   coords: any;
   route_pins: RoutePins[];
-}
-
-interface OrgPinData {
-  org_pins: UserData[];
 }

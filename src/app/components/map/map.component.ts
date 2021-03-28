@@ -4,17 +4,21 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular
 import { 
   UserProfileService,
   MapService,
+  RaceService,
   PopUpService,
-} from '../services';
+} from '../../services';
 import {
   UserData,
-  CheckpointMapData,
-} from '../interfaces';
+  PinSettings,
+  RoutePins,
+  RouteData,
+  OrgPinData,
+} from '../../interfaces';
 //import * as L from 'leaflet';
 //import * as markercluster from 'leaflet.markercluster';
-import { UserFollowComponent } from '../user-follow/user-follow.component';
-import { RoutePinDialogComponent } from '../route-pin-dialog/route-pin-dialog.component';
-import { MapRouteComponent } from '../map-route/map-route.component';
+import { UserFollowComponent } from '../../user-follow/user-follow.component';
+import { RoutePinDialogComponent } from '../../route-pin-dialog/route-pin-dialog.component';
+import { MapRouteComponent } from '../../map-route/map-route.component';
 
 import 'leaflet';
 import 'leaflet.markercluster';
@@ -26,9 +30,8 @@ var heat = window['heat']
 import * as _ from 'lodash';
 import * as turf from '@turf/turf';
 import { ListKeyManager } from '@angular/cdk/a11y';
-import { AppComponent } from '../app.component';
-import { PopupComponent } from '../popup/popup.component';
-import { RaceService } from '../services';
+import { AppComponent } from '../../app.component';
+import { PopupComponent } from '../../popup/popup.component';
 import { Route } from '@angular/router';
 
 @Component({
@@ -299,35 +302,4 @@ export class MapComponent implements AfterViewInit,OnChanges {
   }
 
 
-}
-
-interface PinSettings {
-  followerPinsOnly: boolean;
-  malePinsOn: boolean;
-  femalePinsOn: boolean;
-  allAgesOn: boolean;
-  minAge: number;
-  maxAge: number;
-  showOrgPins: boolean;
-}
-
-interface RoutePins {
-  title: string;
-  desciption: string;
-  lon: number;
-  lat: number;
-  image_urls: string[];
-}
-
-export interface RouteData {
-  name: string;
-  coords: any;
-  route_pins: RoutePins[];
-  userData: UserData[];
-  org_pins: UserData[];
-  checkpoints: CheckpointMapData[];
-}
-
-interface OrgPinData {
-  org_pins: UserData[];
 }

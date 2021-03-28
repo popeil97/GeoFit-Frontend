@@ -6,7 +6,6 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PublicRacesComponent } from './views/public-races/public-races.component';
-import { MapComponent } from './map/map.component';
 import { RaceViewPageComponent } from './race-view-page/race-view-page.component';
 //import { UserProgressComponent } from './user-progress/user-progress.component';
 //import { RaceMenuComponent } from './race-menu/race-menu.component';
@@ -53,6 +52,7 @@ import { CommentsComponent } from './comments/comments.component';
 import { CommentsFormComponent } from './comments-form/comments-form.component';
 import {
   StoryFormComponent, 
+  MapComponent,
   FeedComponent,
 } from './components';
 

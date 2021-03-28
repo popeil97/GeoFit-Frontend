@@ -21,6 +21,7 @@ import {
 import {
   Choice,
   ConfirmationData,
+  PinSettings, RoutePins, RouteData,
 } from '../../interfaces';
 
 import { RaceBasicsComponent } from './race-basics/race-basics.component';
@@ -378,29 +379,4 @@ interface RaceAboutData {
 }
 interface RaceItemData {
   items:any,
-}
-
-interface RouteData {
-  name: string;
-  coords: any;
-  //route_pins: RoutePins[];
-  //userData: UserData[];
-  //org_pins: UserData[];
-  //checkpoints: CheckpointMapData[];
-}
-interface PinSettings {
-  followerPinsOnly: boolean;
-  malePinsOn: boolean;
-  femalePinsOn: boolean;
-  allAgesOn: boolean;
-  minAge: number;
-  maxAge: number;
-  showOrgPins: boolean;
-}
-interface RoutePins {
-  title: string;
-  desciption: string;
-  lon: number;
-  lat: number;
-  image_urls: string[];
 }

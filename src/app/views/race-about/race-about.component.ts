@@ -13,6 +13,7 @@ import {
 import {
   UserData,
   FeedObj,
+  RouteData,
 } from '../../interfaces';
 
 import { 
@@ -22,7 +23,9 @@ import {
   RaceTypeComponent,
 } from '../../popups';
 
-import { MapComponent } from '../../map/map.component';
+import { 
+  MapComponent 
+} from '../../components';
 //import { SwagComponent } from '../../swag/swag.component';
 
 declare var $: any
@@ -661,9 +664,6 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
 
 interface Logo{
   raceLogos:string[];
-}
-interface RouteData {
-  name: string;
 }
 
 export interface AboutData {
