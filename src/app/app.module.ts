@@ -53,6 +53,7 @@ import { CommentsFormComponent } from './comments-form/comments-form.component';
 import {
   StoryFormComponent, 
   MapComponent,
+  MapRouteComponent,
   FeedComponent,
 } from './components';
 
@@ -87,7 +88,6 @@ import { ContactPageComponent } from './views/contact-page/contact-page.componen
 import { SwagListComponent } from './swag-list/swag-list.component';
 import { SwagItemComponent } from './swag-item/swag-item.component';
 import { CartEditComponent } from './cart-edit/cart-edit.component';
-import { MapRouteComponent } from './map-route/map-route.component';
 
 import { ShowFollowersComponent } from './show-followers/show-followers.component';
 import { ModalComponent } from './modal/modal.component';

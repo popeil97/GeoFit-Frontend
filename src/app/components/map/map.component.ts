@@ -18,7 +18,7 @@ import {
 //import * as markercluster from 'leaflet.markercluster';
 import { UserFollowComponent } from '../../user-follow/user-follow.component';
 import { RoutePinDialogComponent } from '../../route-pin-dialog/route-pin-dialog.component';
-import { MapRouteComponent } from '../../map-route/map-route.component';
+import { MapRouteComponent } from '../map-route/map-route.component';
 
 import 'leaflet';
 import 'leaflet.markercluster';

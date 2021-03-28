@@ -5,17 +5,18 @@ import {
   UserProfileService,
   MapService,
   PopUpService,
-} from '../services';
+  RaceService,
+} from '../../services';
 import {
   UserData,
   CheckpointMapData,
   PinSettings, RoutePins, OrgPinData
-} from '../interfaces';
+} from '../../interfaces';
 //import * as L from 'leaflet';
 //import * as markercluster from 'leaflet.markercluster';
-import { UserFollowComponent } from '../user-follow/user-follow.component';
-import { RoutePinDialogComponent } from '../route-pin-dialog/route-pin-dialog.component';
-import { ModalService } from '../modalServices';
+import { UserFollowComponent } from '../../user-follow/user-follow.component';
+import { RoutePinDialogComponent } from '../../route-pin-dialog/route-pin-dialog.component';
+import { ModalService } from '../../modalServices';
 
 import 'leaflet';
 import 'leaflet.markercluster';
@@ -27,9 +28,8 @@ var heat = window['heat']
 import * as _ from 'lodash';
 import * as turf from '@turf/turf';
 import { ListKeyManager } from '@angular/cdk/a11y';
-import { AppComponent } from '../app.component';
-import { PopupComponent } from '../popup/popup.component';
-import { RaceService } from '../services';
+import { AppComponent } from '../../app.component';
+import { PopupComponent } from '../../popup/popup.component';
 
 @Component({
   selector: 'app-map-route',

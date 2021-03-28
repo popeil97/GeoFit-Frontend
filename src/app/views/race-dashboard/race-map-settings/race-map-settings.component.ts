@@ -391,7 +391,6 @@ export class RaceMapSettingsComponent implements OnInit,AfterViewInit {
     };
 
     this._coordinateService.getCoordinates(start_coord,end_coord).then((resp:GraphHopperResp) => {
-      console.log("GETTING PAYLOAD FROM GET COORDINATES",resp);
       let distanceUnits = "miles";
       switch(resp.dist_unit) {
         case 'Mi':
