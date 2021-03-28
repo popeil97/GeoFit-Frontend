@@ -123,9 +123,11 @@ export class MapRouteComponent implements OnChanges {
     }
   }
 
-  public panToUserMarker(user_id, showPopUp=true){
+  public panToUserMarker = (user_id:number, showPopUp:Boolean=true) =>{
     //Do this to pan *and* zoom
     var markerBounds = L.latLngBounds([this.markersByUserID[user_id.toString()]['latLng']]);
+    const userPos = this.markersByUserID[user_id.toString()]['latLng'];
+    this.map.setView([userPos.lat, userPos.lng], 14);
   }
 
   private applyCoordinates():void {

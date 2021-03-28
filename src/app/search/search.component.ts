@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { 
   SearchService
 } from '../services';
@@ -13,6 +13,7 @@ export class SearchComponent implements OnInit {
   query:string;
   searchResults: any[];
   @Input() raceID: number;
+  @Input() userClickEvent:any;
 
   constructor(
     private _searchService:SearchService
@@ -26,6 +27,15 @@ export class SearchComponent implements OnInit {
       console.log('RESP FROM SEARCH:',resp);
       this.searchResults = resp['results'];
     })
+  }
+
+  userProfileClicked = (e:any, user_data:any):void => {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+    console.log("USER PROFILE CLICKED IN SEARCH",user_data);
+    if (user_data.user_id != null) {
+      this.userClickEvent(user_data.user_id);
+    }
   }
 
 }

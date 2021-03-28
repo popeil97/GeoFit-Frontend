@@ -300,6 +300,31 @@ export class MapComponent implements AfterViewInit,OnChanges {
     //An extract of address points from the LINZ bulk extract: http://www.linz.govt.nz/survey-titles/landonline-data/landonline-bde
 //Should be this data set: http://data.linz.govt.nz/#/layer/779-nz-street-address-electoral/
   }
+  
+  public panToUserMarker = (user_id:number):void => {
+    console.log("Panning to user marker with ID of ", user_id);
+    // Given a user_id, need to find which routeID they are on
+    if (this.routeData == null) return;
+    this.raceIDs.forEach(id => {
+      let route = this.routeData[id];
+      if (route != null && route.userData != null) {
+        var foundUser = route.userData.filter((obj:UserData)=> {
+          return obj.user_id === user_id
+        });
+        if (foundUser != null && foundUser.length == 1) {
+          console.log('FOUND USER:',foundUser[0])
+          let routeComp = this.mapRouteChildren.filter((mrc:MapRouteComponent)=>{
+            return mrc.raceID == foundUser[0].race_id;
+          });
+          if (routeComp != null && routeComp.length > 0) {
+            console.log('FOUND ROUTE COMP', routeComp[0]);
+            routeComp[0].panToUserMarker(foundUser[0].user_id);
+            return;
+          }
+        }
+      }
+    });
+  }
 
 
 }

@@ -545,6 +545,10 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit,OnDestroy {
     }
     let dialogRef = this.dialog.open(CheckpointDialogComponent,dialogPayload);
   }
+
+  panToUserMarker = (user_id:number):void => {
+    this.mapChild.panToUserMarker(user_id);
+  }
 }
 
 interface RaceData {
