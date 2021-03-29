@@ -188,7 +188,7 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
         var value =  (key == "image") ? this.merchandiseImageURL : itemValues[key];
         if (this.initialData.id == null || value != this.initialData[key]) this.formClean[keyToOriginalKey(key)] = value;
       });
-
+      console.log(this.formClean);
       if (this.initialData.id != null) {
         // We're editing, so we'll only be tracking changes
         if (Object.keys(this.formClean).length == 0) {

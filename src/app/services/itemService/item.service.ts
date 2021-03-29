@@ -19,8 +19,8 @@ export class ItemService {
     };
   }
 
-  public getRaceItems(raceID:number) {
-    return this.http.post(environment.apiUrl + '/orders/merch-items/',{race_id:raceID}).toPromise();
+  public getRaceItems(raceID:number,onlyActive:Boolean=true) {
+    return this.http.post(environment.apiUrl + '/orders/merch-items/',{race_id:raceID,only_active:onlyActive}).toPromise();
   }
 
   public getItemByID(itemID:number) {

@@ -254,7 +254,7 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
     Promise.all([
       this.raceService.getRacePromise(this.raceID), 
       this.raceService.getRaceAbout(this.raceID),
-      this.itemService.getRaceItems(this.raceID),
+      this.itemService.getRaceItems(this.raceID,false),
       //this._mapService.getMapData(this.raceID)
     ]).then(res=>{
       let d0 = res[0] as RaceData,
