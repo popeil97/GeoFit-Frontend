@@ -7,6 +7,10 @@ import {
   TucanValidators, 
 } from '../../services';
 
+import {
+  InactiveStateExplanationPopupComponent,
+} from '../inactive-state-explanation-popup/inactive-state-explanation-popup.component';
+
 import { 
   ItemState
 } from '../../interfaces';
@@ -262,6 +266,14 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
     this.merchandiseImageURL = this.initialData.image;
     this.merchandiseImageLoading = false;
     this.form.get('image').setValue(this.initialData.image);
+  }
+
+  openItemStateExplanation = (e:any):void => {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+    this.dialog.open(InactiveStateExplanationPopupComponent,{
+      panelClass:"DialogDefaultContainer"
+    });
   }
 
   closeDialog(passedFormData:any) {

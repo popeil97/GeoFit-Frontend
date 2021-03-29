@@ -91,11 +91,15 @@ export class RaceMerchandiseSettingsComponent implements OnInit,AfterViewInit,On
     this.openMerchandiseItem(null,null,1);
   }
   openMerchandiseItem(item:MerchandiseItem,itemIndex:number,type:number) {
+    const activeItems = this.merchandiseItems.filter(item=>{
+      return item.state == 1;
+    });
     const data = {
       raceID:this.raceID,
       itemData:item,
       itemIndex:itemIndex,
       itemType:type,
+      activeMerchItems:activeItems,
     }
     this.dialog.open(RaceMerchandiseSettingsItemComponent,{
       panelClass:"MerchandiseItemFormContainer",
