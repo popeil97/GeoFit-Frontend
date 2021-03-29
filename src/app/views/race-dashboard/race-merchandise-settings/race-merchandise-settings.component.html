@@ -24,6 +24,7 @@
           <div class="MerchandiseItemOverlay">
             <p class="margin-bottom-0px">Edit Item</p>
           </div>
+          <button class="formButton MerchandiseItemInactiveState h7" (click)="this.openInactiveExplanationPopup($event)" *ngIf="item.state == 2">Inactive</button>
           <div class="MerchandiseItemImage fullImage" [style.background-image]="'url('+item.image+')'"></div>
           <div class="MerchandiseItemText">
             <p class="margin-bottom-0px">{{item.name}}</p>
@@ -43,6 +44,7 @@
           <div class="MerchandiseItemOverlay">
             <p class="margin-bottom-0px">Edit Item</p>
           </div>
+          <button class="formButton MerchandiseItemInactiveState h7" (click)="this.openInactiveExplanationPopup($event)" *ngIf="item.state == 2">Inactive</button>
           <div class="MerchandiseItemImage fullImage" [style.background-image]="'url('+item.image+')'"></div>
           <div class="MerchandiseItemText">
             <p class="margin-bottom-0px">{{item.name}}</p>

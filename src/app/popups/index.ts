@@ -12,6 +12,7 @@ import { ReportFormComponent } from './report-form/report-form.component';
 import { StoryDeleteFormComponent } from './story-delete-form/story-delete-form.component';
 import { ConfirmationPopupComponent } from './confirmation-popup/confirmation-popup.component';
 import { StoryPopupComponent } from './story-popup/story-popup.component';
+import { InactiveStateExplanationPopupComponent } from './inactive-state-explanation-popup/inactive-state-explanation-popup.component';
 
 export {
     LoginComponent,
@@ -28,4 +29,5 @@ export {
     StoryDeleteFormComponent,
     ConfirmationPopupComponent,
     StoryPopupComponent,
+    InactiveStateExplanationPopupComponent,
 }
