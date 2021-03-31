@@ -54,108 +54,129 @@
       </ng-template>
       <ng-template #MainView>
         <div class="DashboardNavigation" *ngIf="!this.loadingSegments.navigation">
-          <h1 class="RaceName">{{this.raceData.basics.name}}</h1>
-          <ul class="DashboardNavigationList">
-            <li class="DashboardNavigationItem" (click)="this.navigateToDashboardPage('admin');">
-              <h6 class="margin-bottom-0px">Admin</h6>
-            </li>
-            <li class="DashboardNavigationItem" [ngClass]="{'opened':this.openedNavItem=='basics','selected':this.page=='basics'}" (click)="this.navigateToDashboardPage('basics');">
-              <h6 class="margin-bottom-0px position-relative">
-                Race Basics
-                <div class="DashboardNavigationItemDropdownIndicator" (click)="this.openNavItemContents($event, 'basics')"></div>
-              </h6>
-              <ul class="DashboardNavigationSubItem" *ngIf="this.raceData != null">
-                <li class="DashboardNavigationSubItemRow">
-                  Name
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.basics.name != null && this.raceData.basics.name.length > 0)}"></div>
-                </li>
-                <li class="DashboardNavigationSubItemRow">
-                  Description
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.basics.description != null && this.raceData.basics.description.length > 0)}"></div>
-                </li>
-                <li class="DashboardNavigationSubItemRow">
-                  Start Date
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.basics.startDate != null && this.raceData.basics.startDate.length > 0)}"></div>
-                </li>
-                <li class="DashboardNavigationSubItemRow">
-                  End Date
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.basics.endDate != null && this.raceData.basics.endDate.length > 0)}"></div>
-                </li>
-                <li class="DashboardNavigationSubItemRow">
-                  Banner Image
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.basics.bannerFile != null}"></div>
-                </li>
-                <li class="DashboardNavigationSubItemRow">
-                  Race Type
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.basics.raceType !+ null}"></div>
-                </li>
-              </ul>
-            </li>
-            <li class="DashboardNavigationItem" [ngClass]="{'opened':this.openedNavItem=='settings','selected':this.page=='settings'}" (click)="this.navigateToDashboardPage('settings');">
-              <h6 class="margin-bottom-0px position-relative">
-                Settings
-                <div class="DashboardNavigationItemDropdownIndicator" (click)="this.openNavItemContents($event, 'settings')"></div>
-              </h6>
-              <ul class="DashboardNavigationSubItem" *ngIf="this.raceData != null">
-                <li class="DashboardNavigationSubItemRow">
-                  Allow Teams
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.settings.allow_teams}"></div>
-                </li>
-                <li class="DashboardNavigationSubItemRow" [ngClass]="{'disabled':!this.raceData.settings.allow_teams}">
-                  Max Team Size
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.settings.allow_teams && this.raceData.settings.max_team_size > 0)}"></div>
-                </li>
-                <li class="DashboardNavigationSubItemRow">
-                  Allow Manual Entries
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.settings.is_manual_entry}"></div>
-                </li>
-              </ul>
-            </li>
-            <li class="DashboardNavigationItem" [ngClass]="{'opened':this.openedNavItem=='map','selected':this.page=='map'}"  (click)="this.navigateToDashboardPage('map');">
-              <h6 class="margin-bottom-0px position-relative">
-                Map &amp; Route
-                <div class="DashboardNavigationItemDropdownIndicator" (click)="this.openNavItemContents($event, 'map')"></div>
-              </h6>
-              <ul class="DashboardNavigationSubItem" *ngIf="this.raceData != null">
-                <li class="DashboardNavigationSubItemRow">
-                  Start Location
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.map.start_loc != null && this.raceData.map.start_loc.length > 0)}"></div>
-                </li>
-                <li class="DashboardNavigationSubItemRow">
-                  Start Coordinates (Lat &amp; Lon)
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.map.start_lat != null && this.raceData.map.start_lon != null)}"></div>
-                </li>
-                <li class="DashboardNavigationSubItemRow">
-                  End Location
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.map.end_loc != null && this.raceData.map.end_loc.length > 0)}"></div>
-                </li>
-                <li class="DashboardNavigationSubItemRow">
-                  End Coordinates (Lat &amp; Lon)
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.map.end_lat != null && this.raceData.map.end_lon != null)}"></div>
-                </li>
-                <li class="DashboardNavigationSubItemRow">
-                  Map Route
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.map.valid_route_file}"></div>
-                </li>
-              </ul>
-            </li>
-            <li class="DashboardNavigationItem" [ngClass]="{'opened':this.openedNavItem=='merchandise','selected':this.page=='merchandise'}"  (click)="this.navigateToDashboardPage('merchandise');">
-              <h6 class="margin-bottom-0px position-relative">
-                Merchandise &amp; Fees
-                <div class="DashboardNavigationItemDropdownIndicator" (click)="this.openNavItemContents($event, 'merchandise')"></div>
-              </h6>
-              <ul class="DashboardNavigationSubItem" *ngIf="this.raceData != null">
-                <li class="DashboardNavigationSubItemRow">
-                  Merchandise
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.merchandise.merchandise.length > 0}"></div>
-                </li>
-                <li class="DashboardNavigationSubItemRow">
-                  Registration Fees
-                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.merchandise.entries.length > 0}"></div>
-                </li>
-              </ul>
-            </li>
-          </ul>
+          <div>
+            <h1 class="RaceName">{{this.raceData.basics.name}}</h1>
+            <ul class="DashboardNavigationList">
+              <li class="DashboardNavigationItem dropdownContainer" [ngClass]="{'selected':this.page=='admin'}">
+                <div class='dropdownHeader'>
+                  <h6 class="margin-bottom-0px" (click)="this.navigateToDashboardPage('admin')">Admin</h6>
+                </div>
+              </li>
+              <li class="DashboardNavigationItem dropdownContainer" [ngClass]="{'open':this.openedNavItem=='basics','selected':this.page=='basics'}">
+                <div class="dropdownHeader">
+                  <h6 class="margin-bottom-0px" (click)="this.navigateToDashboardPage('basics')">Race Basics</h6>
+                  <div class="dropdownToggle" (click)="this.openNavItemContents($event, 'basics')"></div>
+                </div>
+                <ul class='dropdownContent DashboardNavigationSubItem'>
+                  <li class="DashboardNavigationSubItemRow">
+                    Name
+                    <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.basics.valid_status.name}"></div>
+                  </li>
+                  <li class="DashboardNavigationSubItemRow">
+                    Description
+                    <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.basics.valid_status.description}"></div>
+                  </li>
+                  <li class="DashboardNavigationSubItemRow">
+                    Start Date
+                    <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.basics.valid_status.startDate}"></div>
+                  </li>
+                  <li class="DashboardNavigationSubItemRow">
+                    End Date
+                    <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.basics.valid_status.endDate}"></div>
+                  </li>
+                  <li class="DashboardNavigationSubItemRow">
+                    Race Type
+                    <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.basics.valid_status.raceType}"></div>
+                  </li>
+                  <li class="DashboardNavigationSubItemRow">
+                    Banner Image
+                    <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.basics.valid_status.bannerFile}"></div>
+                  </li>
+                </ul>
+              </li>
+              <li class="DashboardNavigationItem dropdownContainer" [ngClass]="{'open':this.openedNavItem=='map','selected':this.page=='map'}">
+                <div class="dropdownHeader">
+                  <h6 class="margin-bottom-0px" (click)="this.navigateToDashboardPage('map')">Map &amp; Route</h6>
+                  <div class="dropdownToggle" (click)="this.openNavItemContents($event, 'map')"></div>
+                </div>
+                <ul class="dropdownContent DashboardNavigationSubItem">
+                  <li class="DashboardNavigationSubItemRow">
+                    Start Location
+                    <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.map.start_loc != null && this.raceData.map.start_loc.length > 0)}"></div>
+                  </li>
+                  <li class="DashboardNavigationSubItemRow">
+                    Start Coordinates (Lat &amp; Lon)
+                    <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.map.start_lat != null && this.raceData.map.start_lon != null)}"></div>
+                  </li>
+                  <li class="DashboardNavigationSubItemRow">
+                    End Location
+                    <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.map.end_loc != null && this.raceData.map.end_loc.length > 0)}"></div>
+                  </li>
+                  <li class="DashboardNavigationSubItemRow">
+                    End Coordinates (Lat &amp; Lon)
+                    <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.map.end_lat != null && this.raceData.map.end_lon != null)}"></div>
+                  </li>
+                  <li class="DashboardNavigationSubItemRow">
+                    Map Route
+                    <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.map.valid_route_file}"></div>
+                  </li>
+                </ul>
+              </li>
+              <li class="DashboardNavigationItem dropdownContainer" [ngClass]="{'open':this.openedNavItem=='merchandise','selected':this.page=='merchandise'}" >
+                <div class='dropdownHeader'>
+                  <h6 class="margin-bottom-0px" (click)="this.navigateToDashboardPage('merchandise')">Merchandise &amp; Fees</h6>
+                  <div class="dropdownToggle" (click)="this.openNavItemContents($event, 'merchandise')"></div>
+                </div>
+                <ul class="dropdownContent DashboardNavigationSubItem">
+                  <li class="DashboardNavigationSubItemRow">
+                    Merchandise
+                    <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.merchandise.merchandise.length > 0}"></div>
+                  </li>
+                  <li class="DashboardNavigationSubItemRow">
+                    Registration Fees
+                    <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.merchandise.entries.length > 0}"></div>
+                  </li>
+                </ul>
+              </li>
+              <li class="DashboardNavigationItem dropdownContainer" [ngClass]="{'open':this.openedNavItem=='settings','selected':this.page=='settings'}">
+                <div class="dropdownHeader">
+                  <h6 class="margin-bottom-0px" (click)="this.navigateToDashboardPage('settings')">Settings</h6>
+                  <div class="dropdownToggle" (click)="this.openNavItemContents($event, 'settings')"></div>
+                </div>
+                <ul class="dropdownContent DashboardNavigationSubItem">
+                  <li class="DashboardNavigationSubItemRow">
+                    Allow Teams
+                    <div class="DashboardNavigationSubItemRowStatusIcon status-icon" [ngClass]="{'valid':this.raceData.settings.allow_teams}"></div>
+                  </li>
+                  <li class="DashboardNavigationSubItemRow" [ngClass]="{'disabled':!this.raceData.settings.allow_teams}">
+                    Max Team Size
+                    <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':(this.raceData.settings.allow_teams && this.raceData.settings.max_team_size > 0)}"></div>
+                  </li>
+                  <li class="DashboardNavigationSubItemRow">
+                    Allow Manual Entries
+                    <div class="DashboardNavigationSubItemRowStatusIcon status-icon" [ngClass]="{'valid':this.raceData.settings.is_manual_entry}"></div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4>Status: <span class="publicStatus" [ngClass]="{'isPublic':this.raceData.public}">{{this.getRaceStatus()}}</span></h4>
+            <div class='dropdownContainer' [ngClass]="{'open':this.openedPublicChecklist}">
+              <div class='dropdownHeader' (click)="this.togglePublicChecklist($event)">
+                <p class="margin-bottom-0px">Public Race Checklist</p>
+                <div class='dropdownToggle'></div>
+              </div>
+              <div class="dropdownContent">
+                <p>hello</p>
+              </div>
+            </div>
+            <div class='formGroup margin-bottom-0px'>
+              <div class='formInputContainer'>
+                <button class='formButton width-100per' (click)="this.toggleRacePublicStatus($event)">{{this.getRaceStatusToggle()}}</button>
+              </div>
+            </div>
+          </div>
         </div>
         <ng-template [ngIf]="this.loadingSegments.content" [ngIfElse]="RaceDashboardContents">
           <div class="DashboardContents">

@@ -32,7 +32,11 @@ import { RaceMerchandiseSettingsComponent } from './race-merchandise-settings/ra
 @Component({
   selector: 'app-race-dashboard',
   templateUrl: './race-dashboard.component.html',
-  styleUrls: ['./race-dashboard.component.css'],
+  styleUrls: [
+    '../../../styles/dropdown.css',
+    '../../../styles/forms.css',
+    './race-dashboard.component.css',
+  ],
 })
 export class RaceDashboardComponent implements OnInit, OnDestroy {
 
@@ -44,8 +48,9 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
   }
   public raceID: number = null;
   public raceData: any = null;
-  public page: string;
+  public page: string = "admin";
   public openedNavItem:string = null;
+  public openedPublicChecklist:Boolean = false;
 
   public isOwnerOrMod:Boolean = false;
 
@@ -62,7 +67,7 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
   public childRaceData: ChildRaceData[] = [];
 
   private currentPageComponentRef:any = null;
-  private pageParams:any = {}
+  private pageParams:any = {};
 
   private confirmationData:ConfirmationData = {
     header:"Warning",
@@ -108,6 +113,7 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
       // Get the race ID from the URL
       this.raceID = params['params']['id'];
       this.page = (params['params']['page']) ? params['params']['page'] : "admin";
+      console.log(this.page);
       if (this.raceID) {
         // there was a race ID in the URL
         this.pageParams = {
@@ -270,6 +276,7 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
         return;
       }
 
+      const bannerFile = (d1.about_info.race_image != null && d1.about_info.race_image.indexOf('default-race-img.png')>-1) ? null : d1.about_info.race_image;
       this.raceData = {
         id:d0.race.id,
         is_mod_or_owner:d0.is_mod_or_owner,
@@ -287,13 +294,17 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
           description:d0.race.description,
           startDate:d0.race.start_date,
           endDate:d0.race.end_date,
-          bannerFile:(d1.about_info.race_image != null && d1.about_info.race_image.indexOf('default-race-img.png')>-1) ? null : d1.about_info.race_image,
           raceType:d0.race.race_type,
-        },
-        settings:{
-          allow_teams:d0.race_settings.allowTeams,
-          max_team_size:d0.race_settings.max_team_size,
-          is_manual_entry:d0.race_settings.isManualEntry,
+          bannerFile:bannerFile,
+
+          valid_status:{
+            name:(d0.race.name != null && d0.race.name.length > 0),
+            description:(d0.race.description != null && d0.race.description.length > 0),
+            startDate:(d0.race.start_date != null && d0.race.start_date.length > 0),
+            endDate:(d0.race.end_date != null && d0.race.end_date.length > 0),
+            raceType:(d0.race.race_type != null),
+            bannerFile:(bannerFile != null),
+          }
         },
         map:{
           name:d0.race.name,
@@ -321,6 +332,11 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
           merchandise:d2.items.filter((item:any)=>{return item.type==2}),
           entries:d2.items.filter((item:any)=>{return item.type==1}),
         },
+        settings:{
+          allow_teams:d0.race_settings.allowTeams,
+          max_team_size:d0.race_settings.max_team_size,
+          is_manual_entry:d0.race_settings.isManualEntry,
+        },
         public:d0.race.public,
         has_started:d1.hasStarted,
       }
@@ -345,6 +361,23 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
     e.stopPropagation();
     var t = (this.openedNavItem == to) ? null : to
     this.openedNavItem = t;
+  }
+
+  getRaceStatus = ():string => {
+    if (this.raceData == null) return null;
+    if (this.raceData.public) return "Public";
+    return "Private";
+  }
+  getRaceStatusToggle = ():string => {
+    if (this.raceData == null) return null;
+    if (this.raceData.public) return "Set to Private";
+    return "Set to Public";
+  }
+
+  togglePublicChecklist = (e:any):void => {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+    this.openedPublicChecklist = !this.openedPublicChecklist;
   }
 
 }

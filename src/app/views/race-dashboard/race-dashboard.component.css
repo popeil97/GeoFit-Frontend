@@ -3,6 +3,9 @@
 }
 
 .checkmark-icon {
+  flex-basis: 12px;
+  width:12px;
+
   background-image: url(../../../assets/icons/checkmark-invalid.svg);
   background-size: contain;
   background-repeat: no-repeat;
@@ -10,6 +13,18 @@
 }
 .checkmark-icon.valid {
   background-image:url(../../../assets/icons/checkmark-valid.svg);
+}
+.status-icon {
+  flex-basis: 24px;
+  width:24px;
+
+  background-image: url(../../../assets/icons/off-icon.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.status-icon.valid {
+  background-image: url(../../../assets/icons/on-icon.svg);
 }
 
 .DashboardInitialization {
@@ -78,10 +93,16 @@
     flex-basis: 320px;
     height:100%;
     background-color: rgb(230,230,230);
+
+    display:flex;
+    flex-direction:column;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: nowrap;
 }
   .DashboardNavigationList {
     list-style-type:none;
-    padding-left:16px;
+    padding-left:0px;
   }
     .DashboardNavigationItem {
       margin-bottom:8px;
@@ -115,19 +136,10 @@
         }
       
       .DashboardNavigationSubItem {
-        height:0;
-        overflow:hidden;
         list-style-type: none;
         font-size: var(--h7);
-      }
-      .DashboardNavigationItem.opened .DashboardNavigationSubItem {
-        height:auto;
-        padding-top:8px;
-        padding-bottom: 8px;
-        padding-left:8px;
-      }
-      .DashboardNavigationItem.opened .DashboardNavigationItemDropdownIndicator {
-        transform:translateY(-50%) rotate(0deg);
+        padding-left:8px !important;
+        padding-right:0px !important;
       }
       .DashboardNavigationSubItemRow {
         display:flex;
@@ -141,8 +153,6 @@
       }
       .DashboardNavigationSubItemRow .DashboardNavigationSubItemRowStatusIcon {
         flex-shrink: 0;
-        flex-basis: 12px;
-        width:12px;
         height:12px;
       }
 .DashboardContents {
@@ -169,4 +179,13 @@
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
+
+  margin-bottom:24px;
+}
+
+.publicStatus {
+  color: rgb(170,170,170);
+}
+.publicStatus.isPublic {
+  color: rgb(95,216,0);
 }
