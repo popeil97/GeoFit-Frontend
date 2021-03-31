@@ -26,6 +26,15 @@
 .status-icon.valid {
   background-image: url(../../../assets/icons/on-icon.svg);
 }
+.exclamation-icon {
+  display:inline-block;
+  width:12px;
+  height:12px;
+  background-image: url(../../../assets/icons/exclamation-icon.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
 .DashboardInitialization {
     position:relative;
@@ -111,30 +120,13 @@
       position:relative;
     }
     .DashboardNavigationItem:hover {
-      cursor:pointer;
       padding-left:4px;
     }
-    .DashboardNavigationItem.selected h6 {
+    .DashboardNavigationItem.selected h6, .DashboardNavigationItem h6:hover {
+      cursor:pointer;
       text-decoration: underline;
     }
-      .DashboardNavigationItemDropdownIndicator {
-        background-image: url(../../../assets/icons/dropdown-icon.svg);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: contain;
-        width:16px;
-        height:16px;
-        position:absolute;
-        top:50%;
-        right:0px;
-        transform:translateY(-50%) rotate(180deg);
-        margin-left:8px;
-        transition:transform 0.25s ease-in-out;
-      }
-        .DashboardNavigationItemDropdownIndicator:hover {
-          cursor:pointer;
-        }
-      
+
       .DashboardNavigationSubItem {
         list-style-type: none;
         font-size: var(--h7);

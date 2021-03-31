@@ -49,6 +49,9 @@
             transform:rotate(180deg);
             transition:transform 0.25s ease-in-out;
         }
+        .dropdownContainer .dropdownHeader .dropdownToggle:hover {
+            cursor:pointer;
+        }
     .dropdownContainer .dropdownContent {
         height:0px;
         overflow:hidden;

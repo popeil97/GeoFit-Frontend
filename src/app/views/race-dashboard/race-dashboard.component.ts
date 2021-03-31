@@ -277,6 +277,8 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
       }
 
       const bannerFile = (d1.about_info.race_image != null && d1.about_info.race_image.indexOf('default-race-img.png')>-1) ? null : d1.about_info.race_image;
+      const merchandiseItems = d2.items.filter((item:any)=>{return item.type==2});
+      const entryItems = d2.items.filter((item:any)=>{return item.type==1});
       this.raceData = {
         id:d0.race.id,
         is_mod_or_owner:d0.is_mod_or_owner,
@@ -304,6 +306,7 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
             endDate:(d0.race.end_date != null && d0.race.end_date.length > 0),
             raceType:(d0.race.race_type != null),
             bannerFile:(bannerFile != null),
+            all:true,
           }
         },
         map:{
@@ -321,6 +324,15 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
           race_IDs:d0.race_IDs,
           child_races:d0.child_race_dict,
           num_children:d1.about_info.num_children,
+
+          valid_status:{
+            start_loc:(d0.race.start_loc != null && d0.race.start_loc.length > 0),
+            start_coords:(d0.race.start_lat != null && d0.race.start_lon != null),
+            end_loc:(d0.race.end_loc != null && d0.race.end_loc.length > 0),
+            end_coords:(d0.race.end_lat != null && d0.race.end_lon != null),
+            valid_route_file:(d0.race.valid_route_file),
+            all:true,
+          },
         },
         finances:{
           payment_required:d0.race_settings.paymentRequired,
@@ -329,8 +341,14 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
           has_entry_tags:d0.race_settings.has_entry_tags,
         },
         merchandise:{
-          merchandise:d2.items.filter((item:any)=>{return item.type==2}),
-          entries:d2.items.filter((item:any)=>{return item.type==1}),
+          merchandise:merchandiseItems,
+          entries:entryItems,
+
+          valid_status:{
+            merchandise:(merchandiseItems.length > 0),
+            entries:(entryItems.length > 0),
+            all:true,
+          },
         },
         settings:{
           allow_teams:d0.race_settings.allowTeams,
@@ -340,6 +358,23 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
         public:d0.race.public,
         has_started:d1.hasStarted,
       }
+
+      this.raceData.basics.valid_status.all = (
+        this.raceData.basics.valid_status.name &&
+        this.raceData.basics.valid_status.description &&
+        this.raceData.basics.valid_status.startDate &&
+        this.raceData.basics.valid_status.endDate &&
+        this.raceData.basics.valid_status.raceType
+      );
+      this.raceData.map.valid_status.all = (
+        this.raceData.map.valid_status.start_loc &&
+        this.raceData.map.valid_status.start_coords &&
+        this.raceData.map.valid_status.end_loc &&
+        this.raceData.map.valid_status.end_coords &&
+        this.raceData.map.valid_status.valid_route_file
+      );
+      this.raceData.merchandise.valid_status.all = entryItems.filter((i:any)=>{return i.state == 1}).length > 0
+
     }).catch(errors=>{
       console.log(errors);
     }).finally(()=>{
