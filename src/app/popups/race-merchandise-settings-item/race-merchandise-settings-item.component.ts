@@ -56,7 +56,7 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
     price:"ex. 5.00",
     sizes:"ex. Small, Medium, Large"
   }
-  private confirmationPopupData:ConfirmationData = {
+  private confirmationPopupCloseData:ConfirmationData = {
     header:"Warning",
     prompt:"You've made changes to this form. Do you wish to discard changes and continue?",
     choices:[
@@ -64,6 +64,22 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
         text:"Discard",
         value:true,
         buttonColor:"red",
+        textColor:"white",
+      },
+      {
+        "text":"Cancel",
+        value:false,
+      }
+    ] as Array<Choice>
+  }
+  private confirmationPopupInactiveEntryData:ConfirmationData = {
+    header:"Warning",
+    prompt:"A race needs at least one ACTIVE registration fee, even if the registration fee costs $0.00. Are you sure you want to save this registration fee as INACTIVE?",
+    choices:[
+      {
+        text:"Save",
+        value:true,
+        buttonColor:"green",
         textColor:"white",
       },
       {
@@ -92,7 +108,7 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
       if (this.formHasChanged) {
         const d = this.dialog.open(ConfirmationPopupComponent,{
           panelClass:"DialogDefaultComponent",
-          data:{confirmationData:this.confirmationPopupData}
+          data:{confirmationData:this.confirmationPopupCloseData}
         });
         d.afterClosed().subscribe(callback);
       } 
@@ -246,19 +262,44 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
         var value =  (key == "image") ? this.merchandiseImageURL : itemValues[key];
         if (this.initialData.id == null || value != this.initialData[key]) this.formClean[keyToOriginalKey(key)] = value;
       });
-      if (this.initialData.id != null) {
-        // We're editing, so we'll only be tracking changes
-        if (Object.keys(this.formClean).length == 0) {
-          this.checkingValidityOfSubmission = false;
-          return;
+
+      const finalAction = ():void => {
+        if (this.initialData.id != null) {
+          // We're editing, so we'll only be tracking changes
+          if (Object.keys(this.formClean).length == 0) {
+            this.checkingValidityOfSubmission = false;
+            return;
+          }
+          this.updatingItem = true;
+          this._itemService.editItem(this.initialData.id,this.formClean).then(successResponse).catch(errorResponse).finally(finalResponse);
         }
-        this.updatingItem = true;
-        this._itemService.editItem(this.initialData.id,this.formClean).then(successResponse).catch(errorResponse).finally(finalResponse);
+        else {
+          // We're creating, so we just map everything
+          this.updatingItem = true;
+          this._itemService.createItem(this.data.raceID,this.formClean).then(successResponse).catch(errorResponse).finally(finalResponse);
+        }
+      }
+
+      // If we don't have any active registration fees, then we need to warn the race creator about it
+      if (
+        this.initialData.type == 1 &&
+        this.formClean.item_state == 2 &&
+        this.data.activeEntryItems.filter((item:any)=>{return item.id != this.initialData.id}).length == 0
+      ) {
+        this.dialog.open(ConfirmationPopupComponent,{
+          panelClass:'DialogDefaultContainer',
+          data:{
+            confirmationData:this.confirmationPopupInactiveEntryData
+          }
+        }).afterClosed().subscribe((result)=>{
+          if (result.value) finalAction();
+          else {
+            this.checkingValidityOfSubmission = false;
+          }
+        })
       }
       else {
-        // We're creating, so we just map everything
-        this.updatingItem = true;
-        this._itemService.createItem(this.data.raceID,this.formClean).then(successResponse).catch(errorResponse).finally(finalResponse);
+        finalAction();
       }
     } else {
       this.checkingValidityOfSubmission = false;

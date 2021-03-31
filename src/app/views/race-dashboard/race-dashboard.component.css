@@ -181,3 +181,8 @@
 .publicStatus.isPublic {
   color: rgb(95,216,0);
 }
+
+.formButton.disabled:hover {
+  background-color:white !important;
+  opacity:0.5 !important;
+}

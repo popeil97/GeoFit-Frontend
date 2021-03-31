@@ -124,7 +124,7 @@
               </li>
               <li class="DashboardNavigationItem dropdownContainer" [ngClass]="{'open':this.openedNavItem=='merchandise','selected':this.page=='merchandise'}" >
                 <div class='dropdownHeader'>
-                  <h6 class="margin-bottom-0px" (click)="this.navigateToDashboardPage('merchandise')">Merchandise &amp; Fees <span class="exclamation-icon" *ngIf="!this.raceData.merchandise.valid_status.all"></span></h6>
+                  <h6 class="margin-bottom-0px" (click)="this.navigateToDashboardPage('merchandise')">Fees &amp; Merchandise <span class="exclamation-icon" *ngIf="!this.raceData.merchandise.valid_status.all"></span></h6>
                   <div class="dropdownToggle" (click)="this.openNavItemContents($event, 'merchandise')"></div>
                 </div>
                 <ul class="dropdownContent DashboardNavigationSubItem">
@@ -164,16 +164,36 @@
             <h4>Status: <span class="publicStatus" [ngClass]="{'isPublic':this.raceData.public}">{{this.getRaceStatus()}}</span></h4>
             <div class='dropdownContainer' [ngClass]="{'open':this.openedPublicChecklist}">
               <div class='dropdownHeader' (click)="this.togglePublicChecklist($event)">
-                <p class="margin-bottom-0px">Public Race Checklist</p>
+                <p class="margin-bottom-0px">Public Race Checklist <span class="exclamation-icon" *ngIf="!this.racePublicValid"></span></p>
                 <div class='dropdownToggle'></div>
               </div>
-              <div class="dropdownContent">
-                <p>hello</p>
-              </div>
+              <ul class='dropdownContent DashboardNavigationSubItem'>
+                <li class='DashboardNavigationSubItemRow italics margin-bottom-8px'>
+                  To publicize a race, the three required qualities of a race listed below must be satisfied.
+                </li>
+                <li class="DashboardNavigationSubItemRow">
+                  <span>Race Basics</span>
+                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.basics.valid_status.all}"></div>
+                </li>
+                <li class="DashboardNavigationSubItemRow">
+                  <span>Map &amp; Route</span>
+                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.map.valid_status.all}"></div>
+                </li>
+                <li class="DashboardNavigationSubItemRow">
+                  <span>Fees &amp; Merch</span>
+                  <div class="DashboardNavigationSubItemRowStatusIcon checkmark-icon" [ngClass]="{'valid':this.raceData.merchandise.valid_status.all}"></div>
+                </li>
+              </ul>
             </div>
             <div class='formGroup margin-bottom-0px'>
               <div class='formInputContainer'>
-                <button class='formButton width-100per' (click)="this.toggleRacePublicStatus($event)">{{this.getRaceStatusToggle()}}</button>
+                <button 
+                  class='formButton formSubmitButton width-100per' 
+                  [ngClass]="{'disabled':!this.racePublicValid}"
+                  [disabled]="!this.racePublicValid"
+                  (click)="this.toggleRacePublicStatus($event)"
+                >{{this.getRaceStatusToggle()}}
+                </button>
               </div>
             </div>
           </div>

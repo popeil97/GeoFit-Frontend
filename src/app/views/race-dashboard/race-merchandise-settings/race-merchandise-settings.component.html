@@ -1,7 +1,7 @@
 
 <div class='PageContainer'>
   <div class='formGroup formGroupHeader'>
-    <h2>Update Race Merchandise &amp; <span class="nobr">Registration Fees</span></h2>
+    <h2>Update Race Registration Fees <span class="nobr">&amp; Merchandise</span></h2>
     <!--<button class="formButton resetButton" (click)="this.resetForm()">Reset Changes</button>-->
   </div>
 
@@ -10,32 +10,13 @@
   </ng-template>
   <ng-template #FormView>
     <ng-template [ngIf]="this.loading" [ngIfElse]="LoadedForm">
-      <p>Loading Race Merchandise &amp; Registration Fees form...</p>
+      <p>Loading Race Registration Fees &amp; Merchandise form...</p>
     </ng-template>
 
     <ng-template #LoadedForm>        
       <p>A Tucan Race is usually set up with at least one registration fee item and one piece <span class="nobr">of merchandise.</span></p>
-      <p class="margin-bottom-32px">The merchandise form is optional, but <strong>at least one registration fee item must be listed here</strong>, even if no fee is planned to be required for registering into <span class="nobr">the race.</span></p>
+      <p class="margin-bottom-32px">Merchandise are optional, but <strong>at least one registration fee item must be listed here</strong>, even if no fee is planned to be required for registering into the race; in such cases, an <strong>active</strong> registration fee of <strong>$0.00</strong> will <span class="nobr">be sufficient.</span></p>
 
-      <h6 class="margin-bottom-4px">Merchandise:</h6>
-      <p class="margin-bottom-16px"><strong>Merchandise</strong> items are optional and are purchasable alongside any registration fees you set up for your race.</p>
-      <div class="MerchandiseContainer">
-        <div class="MerchandiseItem" *ngFor="let item of this.merchandiseItems; let i = index" (click)="this.openMerchandiseItem(item,i,2)">
-          <div class="MerchandiseItemOverlay">
-            <p class="margin-bottom-0px">Edit Item</p>
-          </div>
-          <button class="formButton MerchandiseItemInactiveState h7" (click)="this.openInactiveExplanationPopup($event)" *ngIf="item.state == 2">Inactive</button>
-          <div class="MerchandiseItemImage fullImage" [style.background-image]="'url('+item.image+')'"></div>
-          <div class="MerchandiseItemText">
-            <p class="margin-bottom-0px">{{item.name}}</p>
-            <p class="margin-bottom-0px">${{item.price}}</p>
-          </div>
-        </div>
-        <div class="MerchandiseItem" (click)="this.createNewMerchandiseItem()">
-          <div class="MerchandiseItemImage AddItemImage"></div>
-          <p class="margin-bottom-0px">Add new Merchandise item</p>
-        </div>
-      </div>
       <h6 class="margin-bottom-4px">Registration Fees: <span class="redText">*</span></h6>
       <p class="margin-bottom-0px"><strong>Registration Fees</strong> are fees that racers must pay to participate in a race.</p>
       <p class="italics margin-bottom-16px">In the case where a registration fee is not required, adding an registration fee item with a price tag of $0 <span class="nobr">will suffice.</span></p>
@@ -56,6 +37,27 @@
           <p class="margin-bottom-0px">Add new Registration fee</p>
         </div>
       </div>
+
+      <h6 class="margin-bottom-4px">Merchandise:</h6>
+      <p class="margin-bottom-16px"><strong>Merchandise</strong> items are optional and are purchasable alongside any registration fees you set up for your race.</p>
+      <div class="MerchandiseContainer">
+        <div class="MerchandiseItem" *ngFor="let item of this.merchandiseItems; let i = index" (click)="this.openMerchandiseItem(item,i,2)">
+          <div class="MerchandiseItemOverlay">
+            <p class="margin-bottom-0px">Edit Item</p>
+          </div>
+          <button class="formButton MerchandiseItemInactiveState h7" (click)="this.openInactiveExplanationPopup($event)" *ngIf="item.state == 2">Inactive</button>
+          <div class="MerchandiseItemImage fullImage" [style.background-image]="'url('+item.image+')'"></div>
+          <div class="MerchandiseItemText">
+            <p class="margin-bottom-0px">{{item.name}}</p>
+            <p class="margin-bottom-0px">${{item.price}}</p>
+          </div>
+        </div>
+        <div class="MerchandiseItem" (click)="this.createNewMerchandiseItem()">
+          <div class="MerchandiseItemImage AddItemImage"></div>
+          <p class="margin-bottom-0px">Add new Merchandise item</p>
+        </div>
+      </div>
+
     </ng-template>
   </ng-template>
 

@@ -48,6 +48,7 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
   }
   public raceID: number = null;
   public raceData: any = null;
+  public racePublicValid:Boolean = false;
   public page: string = "admin";
   public openedNavItem:string = null;
   public openedPublicChecklist:Boolean = false;
@@ -374,7 +375,7 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
         this.raceData.map.valid_status.valid_route_file
       );
       this.raceData.merchandise.valid_status.all = entryItems.filter((i:any)=>{return i.state == 1}).length > 0
-
+      this.racePublicValid = this.isRacePublicValid();
     }).catch(errors=>{
       console.log(errors);
     }).finally(()=>{
@@ -408,11 +409,51 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
     if (this.raceData.public) return "Set to Private";
     return "Set to Public";
   }
+  isRacePublicValid = ():Boolean => {
+    const valid = (
+      this.raceData.basics.valid_status.all && 
+      this.raceData.map.valid_status.all && 
+      this.raceData.merchandise.valid_status.all
+    )
+    return valid;
+  }
 
   togglePublicChecklist = (e:any):void => {
     if (e.preventDefault) e.preventDefault();
     if (e.stopPropagation) e.stopPropagation();
     this.openedPublicChecklist = !this.openedPublicChecklist;
+  }
+
+  toggleRacePublicStatus = (e:any):void => {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+
+    const valid = this.isRacePublicValid();
+    const setTo = !this.raceData.public
+    if (!valid && setTo) {
+      alert("You cannot set your race to public while there are some missing info required for your race. Please check the \"Public Race Checklist \" to see which aspects of your race need to be updated.");
+      return;
+    }
+
+    const formClean = {
+      public:setTo,
+    }
+    this.raceService.updateRaceAbout(formClean,this.raceData.id).then((res:any)=>{
+      if (res.success) {
+        const message = (setTo) 
+          ? "Your race is now PUBLIC! Other racers can now view your race and register for it when it has started."
+          : "Your race is now PRIVATE. Other races cannot view your race, nor can they register for it."
+        alert(message);
+        this.reloadData();
+      } 
+      else {
+        throw new Error("Unable to update race public status");
+      }
+    }).catch(error=>{
+      console.error(error);
+      const message = (error.message) ? error.message : (error.error) ? error.error : JSON.stringify(error);
+      alert("An error was received when updating the public status of your race: " + message);
+    })
   }
 
 }
