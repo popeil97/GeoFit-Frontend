@@ -50,24 +50,35 @@ export class RouterService {
     this.formChangeEvent.next(value);
   }
 
+  hasFormChanged = ():Boolean => {
+    return this.formChangesExist;
+  }
+
+  resetFormChange = ():void => {
+    this.formHasChanged(false);
+  }
+
+  openConfirmationPopup = (callback:any, panelClass:string = "DialogDefaultContainer", confirmationData:ConfirmationData = this.formChangePopupData) => {
+    this.dialog.open(ConfirmationPopupComponent,{
+      panelClass:panelClass,
+      data:{
+        confirmationData:confirmationData,
+      }
+    }).afterClosed().subscribe(callback);
+  }
+
   navigateTo(url:string, params:any = null, bypassConfirmation:Boolean = false) {
     const to = (params != null) ? [url,params] : [url]
-    if (this.formChangesExist && !bypassConfirmation) {
-      this.dialog.open(ConfirmationPopupComponent,{
-        panelClass:'DialogDefaultContainer',
-        data:{
-          confirmationData:this.formChangePopupData,
-        }
-      }).afterClosed().subscribe(result=>{
-        if (result.value) {
-          this.router.navigate(to);
-          this.formHasChanged(false);
-        }
-      });
-    } 
-    else {
+    const reroute = ():void => {
       this.router.navigate(to);
       this.formHasChanged(false);
     }
+
+    if (this.formChangesExist && !bypassConfirmation) {
+      this.openConfirmationPopup((result:any)=>{
+        if (result.value) reroute();
+      });
+    } 
+    else reroute();
   }
 }
