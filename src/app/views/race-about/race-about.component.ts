@@ -12,7 +12,9 @@ import {
 
 import {
   UserData,
-} from '../../models';
+  FeedObj,
+  RouteData,
+} from '../../interfaces';
 
 import { 
   LoginComponent,
@@ -21,8 +23,10 @@ import {
   RaceTypeComponent,
 } from '../../popups';
 
-import { MapComponent } from '../../map/map.component';
-import { SwagComponent } from '../../swag/swag.component';
+import { 
+  MapComponent 
+} from '../../components';
+//import { SwagComponent } from '../../swag/swag.component';
 
 declare var $: any
 
@@ -35,7 +39,7 @@ declare var $: any
 export class RaceAboutComponent implements OnInit,OnDestroy {
   
   @ViewChild(MapComponent) mapChild: MapComponent;
-  @ViewChild(SwagComponent) swagChild: SwagComponent;
+  //@ViewChild(SwagComponent) swagChild: SwagComponent;
 
   //Race info
   raceID:number;
@@ -349,11 +353,13 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
       //user is NOT logged in
       const data = {
         register:true, 
+        /*
         price:this.raceData.raceSettings.price,
         race_id:this.raceData.raceID,
         hasJoined:this.raceData.userDetails.hasJoined,
         hasStarted:this.raceData.userDetails.hasStarted,
         hasTags: this.raceData.raceSettings.has_entry_tags,
+        */
       };
       const d = this.dialog.open(RegisterComponent,{
         panelClass:"RegisterContainer",
@@ -380,6 +386,8 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
       this.router.navigate(['/welcome']);
     } else {
       // We're now opening the official sign-up form
+      this.router.navigate(['/confirm-race-signup',{id:this.raceID}]);
+      /*
       const data = {
         price:this.raceData.raceSettings.price,
         race_id:this.raceData.raceID,
@@ -395,6 +403,7 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
         console.log("Closing Sign Up from Race About");
         if (typeof result !== "undefined") console.log(result);
       });
+      */
     }
   }
 
@@ -405,11 +414,14 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
     if(!this._authService.isLoggedIn()) {
       //user is NOT logged in
       const data = {
+        register:true,
+        /*
         price:this.raceData.raceSettings.price,
         race_id:this.raceData.raceID,
         hasJoined:this.raceData.userDetails.hasJoined,
         hasStarted:this.raceData.userDetails.hasStarted,
         hasTags: this.raceData.raceSettings.has_entry_tags,
+        */
       };
       const d = this.dialog.open(RegisterComponent,{
         panelClass:"RegisterContainer",
@@ -428,6 +440,10 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
         signUpSub.unsubscribe();
       });
     }
+    else {
+      this.router.navigate(['/confirm-race-signup',{id:this.raceID}]);
+    }
+    /*
     else if (this.raceData.raceSettings.price == 0) {
       //user is logged in and price = 0;
       //add race stat then...
@@ -453,6 +469,7 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
         if (typeof result !== "undefined") console.log(result);
       });
     }
+    */
   }
 
   openLogin = () => {
@@ -461,11 +478,13 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
       // User is NOT logged in
       const data = {
         register:true, 
+        /*
         price:this.raceData.raceSettings.price,
         race_id:this.raceData.raceID,
         hasJoined:this.raceData.userDetails.hasJoined,
         hasStarted:this.raceData.userDetails.hasStarted,
         hasTags: this.raceData.raceSettings.has_entry_tags,
+        */
       };
       const d = this.dialog.open(LoginComponent,{
         panelClass:"LoginContainer",
@@ -482,6 +501,7 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
         if (typeof result !== "undefined") console.log(result);
         subRegister.unsubscribe();
         subSignUp.unsubscribe();
+
       })
     }
   }
@@ -661,9 +681,6 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
 interface Logo{
   raceLogos:string[];
 }
-interface RouteData {
-  name: string;
-}
 
 export interface AboutData {
   name:string;
@@ -706,20 +723,4 @@ interface RaceData {
   is_mod_or_owner:boolean;
   race_IDs: number[];
   race:any;
-}
-
-interface FeedObj {
-  user_id: number;
-  display_name: string;
-  username: string;
-  profile_url:string
-  joined: boolean;
-  traveled: boolean;
-  story: boolean;
-  story_image:string;
-  story_text:string;
-  total_distance:number;
-  last_distance:number;
-  message: string;
-  created_ts:number;
 }

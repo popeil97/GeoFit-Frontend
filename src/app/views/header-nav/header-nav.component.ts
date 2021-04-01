@@ -13,7 +13,7 @@ import {
 } from '../../services';
 import {
   UserData,
-} from '../../models';
+} from '../../interfaces';
 
 import { 
   LoginComponent,

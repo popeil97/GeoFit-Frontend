@@ -1,4 +1,5 @@
 import {Injectable} from '@angular/core';
+import { Subject } from 'rxjs';
 import {HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { environment } from './../../../environments/environment';
@@ -18,6 +19,9 @@ export class RaceFeedService {
   // ID of race this service queries
   public ID: number;
 
+  public FeedUpdateSubscription:Subject<any> = new Subject<any>();
+
+
   constructor(private http: HttpClient) {
     this.httpOptions = {
       headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -34,6 +38,9 @@ export class RaceFeedService {
     this.refresh_ts = null;
   }
 
+  public feedUpdated = () => {
+    this.FeedUpdateSubscription.next();
+  }
 
   
 

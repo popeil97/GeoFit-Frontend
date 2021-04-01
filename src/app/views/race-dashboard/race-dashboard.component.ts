@@ -21,7 +21,8 @@ import {
 import {
   Choice,
   ConfirmationData,
-} from '../../models';
+  PinSettings, RoutePins, RouteData,
+} from '../../interfaces';
 
 import { RaceBasicsComponent } from './race-basics/race-basics.component';
 import { RaceSettingsComponent } from './race-settings/race-settings.component';
@@ -31,7 +32,11 @@ import { RaceMerchandiseSettingsComponent } from './race-merchandise-settings/ra
 @Component({
   selector: 'app-race-dashboard',
   templateUrl: './race-dashboard.component.html',
-  styleUrls: ['./race-dashboard.component.css'],
+  styleUrls: [
+    '../../../styles/dropdown.css',
+    '../../../styles/forms.css',
+    './race-dashboard.component.css',
+  ],
 })
 export class RaceDashboardComponent implements OnInit, OnDestroy {
 
@@ -43,8 +48,10 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
   }
   public raceID: number = null;
   public raceData: any = null;
-  public page: string;
+  public racePublicValid:Boolean = false;
+  public page: string = "admin";
   public openedNavItem:string = null;
+  public openedPublicChecklist:Boolean = false;
 
   public isOwnerOrMod:Boolean = false;
 
@@ -61,7 +68,7 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
   public childRaceData: ChildRaceData[] = [];
 
   private currentPageComponentRef:any = null;
-  private pageParams:any = {}
+  private pageParams:any = {};
 
   private confirmationData:ConfirmationData = {
     header:"Warning",
@@ -107,6 +114,7 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
       // Get the race ID from the URL
       this.raceID = params['params']['id'];
       this.page = (params['params']['page']) ? params['params']['page'] : "admin";
+      console.log(this.page);
       if (this.raceID) {
         // there was a race ID in the URL
         this.pageParams = {
@@ -253,7 +261,7 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
     Promise.all([
       this.raceService.getRacePromise(this.raceID), 
       this.raceService.getRaceAbout(this.raceID),
-      this.itemService.getRaceItems(this.raceID),
+      this.itemService.getRaceItems(this.raceID,false),
       //this._mapService.getMapData(this.raceID)
     ]).then(res=>{
       let d0 = res[0] as RaceData,
@@ -269,6 +277,9 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
         return;
       }
 
+      const bannerFile = (d1.about_info.race_image != null && d1.about_info.race_image.indexOf('default-race-img.png')>-1) ? null : d1.about_info.race_image;
+      const merchandiseItems = d2.items.filter((item:any)=>{return item.type==2});
+      const entryItems = d2.items.filter((item:any)=>{return item.type==1});
       this.raceData = {
         id:d0.race.id,
         is_mod_or_owner:d0.is_mod_or_owner,
@@ -286,13 +297,18 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
           description:d0.race.description,
           startDate:d0.race.start_date,
           endDate:d0.race.end_date,
-          bannerFile:(d1.about_info.race_image != null && d1.about_info.race_image.indexOf('default-race-img.png')>-1) ? null : d1.about_info.race_image,
           raceType:d0.race.race_type,
-        },
-        settings:{
-          allow_teams:d0.race_settings.allowTeams,
-          max_team_size:d0.race_settings.max_team_size,
-          is_manual_entry:d0.race_settings.isManualEntry,
+          bannerFile:bannerFile,
+
+          valid_status:{
+            name:(d0.race.name != null && d0.race.name.length > 0),
+            description:(d0.race.description != null && d0.race.description.length > 0),
+            startDate:(d0.race.start_date != null && d0.race.start_date.length > 0),
+            endDate:(d0.race.end_date != null && d0.race.end_date.length > 0),
+            raceType:(d0.race.race_type != null),
+            bannerFile:(bannerFile != null),
+            all:true,
+          }
         },
         map:{
           name:d0.race.name,
@@ -309,6 +325,15 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
           race_IDs:d0.race_IDs,
           child_races:d0.child_race_dict,
           num_children:d1.about_info.num_children,
+
+          valid_status:{
+            start_loc:(d0.race.start_loc != null && d0.race.start_loc.length > 0),
+            start_coords:(d0.race.start_lat != null && d0.race.start_lon != null),
+            end_loc:(d0.race.end_loc != null && d0.race.end_loc.length > 0),
+            end_coords:(d0.race.end_lat != null && d0.race.end_lon != null),
+            valid_route_file:(d0.race.valid_route_file),
+            all:true,
+          },
         },
         finances:{
           payment_required:d0.race_settings.paymentRequired,
@@ -317,12 +342,40 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
           has_entry_tags:d0.race_settings.has_entry_tags,
         },
         merchandise:{
-          merchandise:d2.items.filter((item:any)=>{return item.type==2}),
-          entries:d2.items.filter((item:any)=>{return item.type==1}),
+          merchandise:merchandiseItems,
+          entries:entryItems,
+
+          valid_status:{
+            merchandise:(merchandiseItems.length > 0),
+            entries:(entryItems.length > 0),
+            all:true,
+          },
+        },
+        settings:{
+          allow_teams:d0.race_settings.allowTeams,
+          max_team_size:d0.race_settings.max_team_size,
+          is_manual_entry:d0.race_settings.isManualEntry,
         },
         public:d0.race.public,
         has_started:d1.hasStarted,
       }
+
+      this.raceData.basics.valid_status.all = (
+        this.raceData.basics.valid_status.name &&
+        this.raceData.basics.valid_status.description &&
+        this.raceData.basics.valid_status.startDate &&
+        this.raceData.basics.valid_status.endDate &&
+        this.raceData.basics.valid_status.raceType
+      );
+      this.raceData.map.valid_status.all = (
+        this.raceData.map.valid_status.start_loc &&
+        this.raceData.map.valid_status.start_coords &&
+        this.raceData.map.valid_status.end_loc &&
+        this.raceData.map.valid_status.end_coords &&
+        this.raceData.map.valid_status.valid_route_file
+      );
+      this.raceData.merchandise.valid_status.all = entryItems.filter((i:any)=>{return i.state == 1}).length > 0
+      this.racePublicValid = this.isRacePublicValid();
     }).catch(errors=>{
       console.log(errors);
     }).finally(()=>{
@@ -344,6 +397,63 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
     e.stopPropagation();
     var t = (this.openedNavItem == to) ? null : to
     this.openedNavItem = t;
+  }
+
+  getRaceStatus = ():string => {
+    if (this.raceData == null) return null;
+    if (this.raceData.public) return "Public";
+    return "Private";
+  }
+  getRaceStatusToggle = ():string => {
+    if (this.raceData == null) return null;
+    if (this.raceData.public) return "Set to Private";
+    return "Set to Public";
+  }
+  isRacePublicValid = ():Boolean => {
+    const valid = (
+      this.raceData.basics.valid_status.all && 
+      this.raceData.map.valid_status.all && 
+      this.raceData.merchandise.valid_status.all
+    )
+    return valid;
+  }
+
+  togglePublicChecklist = (e:any):void => {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+    this.openedPublicChecklist = !this.openedPublicChecklist;
+  }
+
+  toggleRacePublicStatus = (e:any):void => {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+
+    const valid = this.isRacePublicValid();
+    const setTo = !this.raceData.public
+    if (!valid && setTo) {
+      alert("You cannot set your race to public while there are some missing info required for your race. Please check the \"Public Race Checklist \" to see which aspects of your race need to be updated.");
+      return;
+    }
+
+    const formClean = {
+      public:setTo,
+    }
+    this.raceService.updateRaceAbout(formClean,this.raceData.id).then((res:any)=>{
+      if (res.success) {
+        const message = (setTo) 
+          ? "Your race is now PUBLIC! Other racers can now view your race and register for it when it has started."
+          : "Your race is now PRIVATE. Other races cannot view your race, nor can they register for it."
+        alert(message);
+        this.reloadData();
+      } 
+      else {
+        throw new Error("Unable to update race public status");
+      }
+    }).catch(error=>{
+      console.error(error);
+      const message = (error.message) ? error.message : (error.error) ? error.error : JSON.stringify(error);
+      alert("An error was received when updating the public status of your race: " + message);
+    })
   }
 
 }
@@ -378,29 +488,4 @@ interface RaceAboutData {
 }
 interface RaceItemData {
   items:any,
-}
-
-interface RouteData {
-  name: string;
-  coords: any;
-  //route_pins: RoutePins[];
-  //userData: UserData[];
-  //org_pins: UserData[];
-  //checkpoints: CheckpointMapData[];
-}
-interface PinSettings {
-  followerPinsOnly: boolean;
-  malePinsOn: boolean;
-  femalePinsOn: boolean;
-  allAgesOn: boolean;
-  minAge: number;
-  maxAge: number;
-  showOrgPins: boolean;
-}
-interface RoutePins {
-  title: string;
-  desciption: string;
-  lon: number;
-  lat: number;
-  image_urls: string[];
 }

@@ -36,7 +36,7 @@
                 </div>
                 <div class='FeedMessageContent'>
                   <p class='margin-bottom-4px'>{{ element.story_text }}</p>
-                  <img *ngIf="element.story_image" src="{{ element.story_image }}" (click)="openModal('story-popup',element)" width="100px" class='margin-bottom-4px'>
+                  <img *ngIf="element.story_image" src="{{ element.story_image }}" (click)="this.openStoryPopup(element)" width="100px" class='margin-bottom-4px'>
                 </div>
               </ng-template>
           </div>

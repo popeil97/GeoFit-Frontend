@@ -3,7 +3,7 @@ import { SwagListComponent } from '../swag-list/swag-list.component';
 import * as _ from 'lodash';
 import { 
   ItemType 
-} from '../models';
+} from '../interfaces';
 
 @Component({
   selector: 'app-cart-edit',

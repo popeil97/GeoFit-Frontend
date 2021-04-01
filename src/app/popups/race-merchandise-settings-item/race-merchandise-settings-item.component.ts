@@ -7,9 +7,19 @@ import {
   TucanValidators, 
 } from '../../services';
 
+import {
+  ConfirmationPopupComponent,
+} from '../confirmation-popup/confirmation-popup.component';
+
+import {
+  InactiveStateExplanationPopupComponent,
+} from '../inactive-state-explanation-popup/inactive-state-explanation-popup.component';
+
 import { 
-  ItemState
-} from '../../models';
+  ItemState,
+  ConfirmationData,
+  Choice,
+} from '../../interfaces';
 
 @NgModule({
   imports:[MatDialogRef]
@@ -29,6 +39,9 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
   public initialData:any = null;
 
   public form:FormGroup = null;
+  private formChangeSubscription:any = null;
+  private formHasChanged:Boolean = false;
+
   public merchandiseImageURL:any = null;
   public merchandiseImageLoading:boolean = false;
   private merchandiseImageInput:any = null;
@@ -43,17 +56,64 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
     price:"ex. 5.00",
     sizes:"ex. Small, Medium, Large"
   }
+  private confirmationPopupCloseData:ConfirmationData = {
+    header:"Warning",
+    prompt:"You've made changes to this form. Do you wish to discard changes and continue?",
+    choices:[
+      {
+        text:"Discard",
+        value:true,
+        buttonColor:"red",
+        textColor:"white",
+      },
+      {
+        "text":"Cancel",
+        value:false,
+      }
+    ] as Array<Choice>
+  }
+  private confirmationPopupInactiveEntryData:ConfirmationData = {
+    header:"Warning",
+    prompt:"A race needs at least one ACTIVE registration fee, even if the registration fee costs $0.00. Are you sure you want to save this registration fee as INACTIVE?",
+    choices:[
+      {
+        text:"Save",
+        value:true,
+        buttonColor:"green",
+        textColor:"white",
+      },
+      {
+        "text":"Cancel",
+        value:false,
+      }
+    ] as Array<Choice>
+  }
 
   private formClean:any = null;
 
   constructor(
     private fb: FormBuilder,
     private _itemService:ItemService,
+    //private routerService:RouterService,
 
     public dialog : MatDialog,
     @Inject(MAT_DIALOG_DATA) public data:any,
     public dialogRef : MatDialogRef<RaceMerchandiseSettingsItemComponent>,
   ) {
+    this.dialogRef.disableClose= true;
+    this.dialogRef.backdropClick().subscribe(()=>{
+      const callback = (result:any):void => {
+        if (result.value) this.closeDialog(null);
+      }
+      if (this.formHasChanged) {
+        const d = this.dialog.open(ConfirmationPopupComponent,{
+          panelClass:"DialogDefaultComponent",
+          data:{confirmationData:this.confirmationPopupCloseData}
+        });
+        d.afterClosed().subscribe(callback);
+      } 
+      else this.closeDialog(null);
+    });
     this.itemStateList = Object.keys(ItemState).reduce((accumulator,state_key)=>{
       if (isNaN(parseInt(state_key))) {
         accumulator.push({
@@ -84,6 +144,10 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
   }
   ngOnDestroy() {
     this.form = null;
+    if (this.formChangeSubscription != null) {
+      this.formChangeSubscription.unsubscribe();
+      this.formChangeSubscription = null;
+    }
     this.initialData = null;
     this.merchandiseImageURL = null;
     this.merchandiseImageInput = null;
@@ -118,6 +182,16 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
       ])],
       sizes:[this.initialData.sizes],
     });
+    this.formChangeSubscription = this.form.valueChanges.subscribe((values)=>{
+      const changed = Object.keys(values).reduce((accumulator:Boolean,key:string)=>{
+        const c = (key == "image")
+          ? this.merchandiseImageURL != this.initialData.image_file
+          : values[key] != this.initialData[key]
+        return accumulator || c;
+      },false);
+      this.formHasChanged = changed;
+    })
+
     this.initializing = false;
     this.checkingValidityOfSubmission = false;
     this.updatingItem = false;
@@ -189,24 +263,80 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
         if (this.initialData.id == null || value != this.initialData[key]) this.formClean[keyToOriginalKey(key)] = value;
       });
 
-      if (this.initialData.id != null) {
-        // We're editing, so we'll only be tracking changes
-        if (Object.keys(this.formClean).length == 0) {
-          this.checkingValidityOfSubmission = false;
-          return;
+      const finalAction = ():void => {
+        if (this.initialData.id != null) {
+          // We're editing, so we'll only be tracking changes
+          if (Object.keys(this.formClean).length == 0) {
+            this.checkingValidityOfSubmission = false;
+            return;
+          }
+          this.updatingItem = true;
+          this._itemService.editItem(this.initialData.id,this.formClean).then(successResponse).catch(errorResponse).finally(finalResponse);
         }
-        this.updatingItem = true;
-        this._itemService.editItem(this.initialData.id,this.formClean).then(successResponse).catch(errorResponse).finally(finalResponse);
+        else {
+          // We're creating, so we just map everything
+          this.updatingItem = true;
+          this._itemService.createItem(this.data.raceID,this.formClean).then(successResponse).catch(errorResponse).finally(finalResponse);
+        }
+      }
+
+      // If we don't have any active registration fees, then we need to warn the race creator about it
+      if (
+        this.initialData.type == 1 &&
+        this.formClean.item_state == 2 &&
+        this.data.activeEntryItems.filter((item:any)=>{return item.id != this.initialData.id}).length == 0
+      ) {
+        this.dialog.open(ConfirmationPopupComponent,{
+          panelClass:'DialogDefaultContainer',
+          data:{
+            confirmationData:this.confirmationPopupInactiveEntryData
+          }
+        }).afterClosed().subscribe((result)=>{
+          if (result.value) finalAction();
+          else {
+            this.checkingValidityOfSubmission = false;
+          }
+        })
       }
       else {
-        // We're creating, so we just map everything
-        this.updatingItem = true;
-        this._itemService.createItem(this.data.raceID,this.formClean).then(successResponse).catch(errorResponse).finally(finalResponse);
+        finalAction();
       }
     } else {
       this.checkingValidityOfSubmission = false;
     }
   }
+
+  /*
+  setConfirmationPopupData = (values:any, submitting:Boolean = false):void => {
+    // We first check any changes in the user's data compared to our initial data and send it to router service
+    const changed = Object.keys(values).reduce((accumulator:Boolean,key:string)=>{
+      const c = (key == "image")
+        ? this.merchandiseImageURL != this.initialData.image_file
+        : values[key] != this.initialData[key]
+      return accumulator || c;
+    },false);
+    this.routerService.formHasChanged(changed);
+
+    // There are several conditions on which we determine some popup data to appear:
+    //  1) if we're involved with an entry item (aka type == 1), we are shown a warning if the expected outcome is that there are no active entries in the end
+    //    There are some subconditions:
+    //    1.1) if our list of active 
+    
+    if (values.type == 1 && this.data.activeEntryItems.length == 0 && parseInt(values.state) == 2) {
+      let prompt = (submitting) 
+        ? "A race requires at least one active entry item, even if the price is set to $0.00. Are you sure you wish to save this entry item as an inactive item?"
+        : "A race requires at least one active entry item, even if the price is set to $0.00. Are you sure you wish to discard this entry item?"
+      this.confirmationPopupData = {
+        header:"No active entry items",
+        prompt:"A race requires at least one active entry item, even if the price is set to $0.00. Are you sure you wish to discard this entry item?",
+        choices:[
+          { text:"Discard", value:true, buttonColor:"red", textColor:"white" },
+          { text:"Cancel", value:false }
+        ] as Array<Choice>
+      } as ConfirmationData;
+    }
+  }
+  */
 
   roundToCent() {
     const val = this.form.get('price').value;
@@ -264,17 +394,24 @@ export class RaceMerchandiseSettingsItemComponent implements OnInit,OnDestroy {
     this.form.get('image').setValue(this.initialData.image);
   }
 
-  closeDialog(passedFormData:any) {
+  openItemStateExplanation = (e:any):void => {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+    this.dialog.open(InactiveStateExplanationPopupComponent,{
+      panelClass:"DialogDefaultContainer"
+    });
+  }
+
+  closeDialog = (passedFormData:any):void => {
 
     var item = passedFormData;
-    item.itemIndex = this.initialData.itemIndex;
+    if (item != null) item.itemIndex = this.initialData.itemIndex;
 
     this.form.reset();
     this.form.markAsPristine();
     this.form.markAsUntouched();
     this.form.updateValueAndValidity();
     
-    //this.modalService.close(this.id);
     this.dialogRef.close(item);
   }
 

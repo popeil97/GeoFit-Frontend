@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import {MatSnackBar} from '@angular/material/snack-bar'
 import { SnackbarComponent } from '../snackbar/snackbar.component';
-import { StoryDialogComponent } from '../story-dialog/story-dialog.component';
+//import { StoryDialogComponent } from '../story-dialog/story-dialog.component';
 import { 
   TeamService,
   NotificationsService,
@@ -10,7 +10,11 @@ import {
 } from '../services';
 import {
   NotificationType,
-} from '../models';
+  FeedObj,
+} from '../interfaces';
+import {
+  StoryPopupComponent,
+} from '../popups';
 
 @Component({
   selector: 'app-notification',
@@ -79,14 +83,13 @@ export class NotificationComponent implements OnInit {
     // need to get story from API, then display in dialog
     let storyData = null;
     this._storyService.getStoryModalData(this.notification.context_id).then((storyData) => {
-     //  console.log("In dialogue function");
-      let dialogRef = this.dialog.open(StoryDialogComponent, {
-        data: { 
-          'element': storyData,
-          'showComments':true,
-        },
+      //  console.log("In dialogue function");
+      const story = storyData as FeedObj;
+      let dialogRef = this.dialog.open(StoryPopupComponent, {
+        panelClass:"DialogDefaultContainer",
+        data: story,
       });
-    })
+    });
     
   }
 

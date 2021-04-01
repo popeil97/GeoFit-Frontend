@@ -4,7 +4,7 @@ import {
 } from '../services';
 import {
   ActivityItem,
-} from '../models';
+} from '../interfaces';
 
 @Component({
   selector: 'app-race-dashboard-racer-list',

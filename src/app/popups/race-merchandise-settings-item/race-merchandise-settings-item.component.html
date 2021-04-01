@@ -99,11 +99,12 @@
               />
             </div>
           </div>
-      </ng-template>
+        </ng-template>
 
-        <div class="formGroup">
-          <div class='formInputContainer'></div>
-            <label class="margin-bottom-0px" for="itemState">Active?</label>
+        <h6>Active?</h6>
+        <button class='formButton h7 margin-bottom-8px' (click)="this.openItemStateExplanation($event)">What does ACTIVE and INACTIVE mean?</button>
+        <div class="formGroup formGroupColumn formGroupAlignedTop">
+          <div class='formInputContainer'>
             <select 
               id="itemState" 
               class='formSelectInput'
@@ -111,7 +112,7 @@
             >
               <option *ngFor="let option of this.itemStateList" [value]="option.value">{{option.name}}</option>
             </select>
-          <div class='formInputContainer'></div>
+          </div>
         </div>
 
         <div class='formGroup submitButtonGroup'>
@@ -124,7 +125,7 @@
             [readonly]="this.checkingValidityOfSubmission || !this._isFormValid()"
           />
           <div class="margin-top-16px" *ngIf="this.hasSubmitted">
-            <p class="italics margin-0px" *ngIf="this.validForm && this.updatingItem">Updating Race Settings...</p>
+            <p class="italics margin-0px" *ngIf="this.validForm && this.updatingItem">Updating Item...</p>
             <p class="italics redText margin-0px" *ngIf="!this.validForm">Errors have been found above. Check each of your inputs for errors.</p>
           </div>
         </div>

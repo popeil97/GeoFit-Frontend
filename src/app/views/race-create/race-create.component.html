@@ -114,6 +114,23 @@
               <p *ngIf="this.raceBasicsForm.get('startDate').hasError('required') && this.raceBasicsForm.get('endDate').hasError('required')" class="margin-0px">Your race needs both start and end dates.</p>
             </div>
           </div>
+          <h6>Race Type: <span class="color-red">*</span></h6>
+          <p class="italics">The race type determines what kind of activity you are allowing racers to perform for the race. For some races, you may allow only walking/running, others you may allow only biking, and some you may allow either.</p>
+          <div class='formGroup'>
+            <div class='formInputContainer'>
+              <select 
+                id="raceType" 
+                class='formSelectInput' 
+                formControlName="raceType" 
+                (change)="this.selectRaceTypeEvent($event.target.value)"
+              >
+                <option *ngFor="let option of raceTypeOptions" [value]="option.name">{{option.name}}</option>
+              </select>
+              <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('raceType').invalid && (this.raceBasicsForm.get('raceType').dirty || this.raceBasicsForm.get('raceType').touched)">
+                <p class="margin-0px">Please select an appropriate race type for your race.</p>
+              </div>
+            </div>
+          </div>
           <h6>Banner</h6>
           <p class="italics">The banner will accomodate the topmost section of your selected image when viewed on the "Public Races" page. It is recommended to use banner images that are horizontal and wide. Large files can potentially lag the browser when creating your race.</p>
           <div class='formGroup'>
@@ -137,23 +154,6 @@
               </div>
               <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('bannerFile').invalid && (this.raceBasicsForm.get('bannerFile').dirty || this.raceBasicsForm.get('bannerFile').touched)">
                 <p class="margin-0px">Your banner image is neither a PNG or JPG file. Please upoad a PNG or JPG file if you wish to use a banner image.</p>
-              </div>
-            </div>
-          </div>
-          <h6>Race Type: <span class="color-red">*</span></h6>
-          <p class="italics">The race type determines what kind of activity you are allowing racers to perform for the race. For some races, you may allow only walking/running, others you may allow only biking, and some you may allow either.</p>
-          <div class='formGroup'>
-            <div class='formInputContainer'>
-              <select 
-                id="raceType" 
-                class='formSelectInput' 
-                formControlName="raceType" 
-                (change)="this.selectRaceTypeEvent($event.target.value)"
-              >
-                <option *ngFor="let option of raceTypeOptions" [value]="option.name">{{option.name}}</option>
-              </select>
-              <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('raceType').invalid && (this.raceBasicsForm.get('raceType').dirty || this.raceBasicsForm.get('raceType').touched)">
-                <p class="margin-0px">Please select an appropriate race type for your race.</p>
               </div>
             </div>
           </div>

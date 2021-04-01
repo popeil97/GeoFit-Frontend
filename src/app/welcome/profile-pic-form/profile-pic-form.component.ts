@@ -9,7 +9,7 @@ import {
 } from '../../services';
 import {
   UserData,
-} from '../../models';
+} from '../../interfaces';
 
 @Component({
   selector: 'app-profile-pic-form',

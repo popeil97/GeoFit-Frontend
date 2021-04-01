@@ -6,7 +6,7 @@ import {
 import {
   Tag,
   TagType,
-} from '../models';
+} from '../interfaces';
 
 @Component({
   selector: 'app-tag-select',

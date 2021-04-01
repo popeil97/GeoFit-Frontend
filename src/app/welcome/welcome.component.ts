@@ -5,7 +5,7 @@ import {
 } from '../services';
 import {
   UserData,
-} from '../models';
+} from '../interfaces';
 
 @Component({
   selector: 'app-welcome',

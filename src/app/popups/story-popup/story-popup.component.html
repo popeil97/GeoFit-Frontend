@@ -1,0 +1,27 @@
+<div class="TucanContainer">
+  <div *ngIf="this.storyData != null; else loadingMessage">
+
+    <div class="storyImageContainer" *ngIf="this.storyData.story_image != null">
+      <div class="storyImage" [style.background-image]="'url(' + this.storyData.story_image + ')'"></div>
+    </div>
+    <div class="storyUploaderContainer">
+      <div class="storyUploaderIconContainer">
+        <div class="storyUploaderIcon" [style.background-image]="'url('+this.storyData.profile_url+')'"></div>
+      </div>
+      <div class="storyUploaderContent">
+        <p class='margin-bottom-0px bold-text'><app-user-profile-nav [username]=this.storyData.username [displayName]=this.storyData.display_name></app-user-profile-nav></p>
+        <p class="margin-bottom-0px">{{this.storyData.story_text}}</p>
+        <app-story-btn *ngIf="this.authService.isLoggedIn()" [use]="'like'" [storyID]=this.storyData.story_id [likes]=this.storyData.likes [likesCount]=this.storyData.likes_count></app-story-btn>
+      </div>
+    </div>
+    
+    <div class="storyCommentsContainer">
+      <app-comments [comments]="this.storyData.comments" [storyID]="this.storyData.story_id" (commentPosted)="this.newCommentPosted($event)"></app-comments>
+    </div>
+
+  </div>
+  <ng-template #loadingMessage>
+    <p>Loading post...</p>
+  </ng-template>
+  <button class="CloseLogin" (click)="this.closeDialog()">Close</button>
+</div>

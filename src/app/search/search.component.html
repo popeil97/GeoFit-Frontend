@@ -1,20 +1,32 @@
-<div class="form-group" style="text-align: left; padding: 5px;">
-  <div class="col-xs-9" style="margin-bottom:6px;">
-    <input class="form-control textInput" type="text" placeholder="Search Racer" (keyup)="filter()" [(ngModel)]="query" />
-    <button type="submit"><span class="material-icons">search</span></button>
-  </div>
+<div class='formGroup searchFormGroup'>
+    <div class="formInputContainer">
+      <input 
+        class="formTextInput searchTextInput" 
+        type="text" 
+        placeholder="Search Racer" 
+        (keyup)="this.filter()" 
+        [(ngModel)]="query" 
+      />
+      <button class='formButton submitFormButton searchSubmitButton'><span class="material-icons">search</span></button>
+    </div>
+</div>
 
-  <div *ngFor="let option of searchResults"  class="FeedItem">
-   	<div class="row">
-   		<div class="nameCol">
-   			 <app-user-profile-nav [username]=option.username [displayName]=option.display_name></app-user-profile-nav>
-   		</div>
-   		<div class="followCol" *ngIf="!option.isMe">
-   			<app-user-follow  [userID]=option.user_id [tempLight]="false" [follows]=option.follows></app-user-follow>
-   		</div>
-      <div class="followCol" *ngIf="option.isMe">
-        <app-user-follow  [userID]=option.user_id [tempLight]="false" [follows]=option.follows [disabled]="true"></app-user-follow>
+  <div *ngFor="let option of searchResults"  class="FeedItem" (click)="this.userProfileClicked($event, option)">
+    <div class='FeedProfile'>
+      <div class='FeedProfilePicContainer'>
+        <div class='FeedProfilePic' [style.background-image]="'url('+option.profile_url+')'"></div>
       </div>
+      <div class='FeedProfileNameContainer'>
+        <p class="margin-0px">{{option.first_name}} {{option.last_name}}</p>
+      </div>
+    </div>
+    <div class='FeedActions'>
+      <button class='formButton' (click)="this.navigateToUserProfile($event, option)">View Profile</button>
+      <ng-template [ngIf]="!option.isMe" [ngIfElse]="followIsMe">
+        <app-user-follow [userID]=option.user_id [tempLight]="false" [follows]=option.follows></app-user-follow>
+      </ng-template>
+      <ng-template #followIsMe>
+        <app-user-follow [userID]=option.user_id [tempLight]="false" [follows]=option.follows [disabled]="true"></app-user-follow>
+      </ng-template>
    	</div>
   </div>
-</div>

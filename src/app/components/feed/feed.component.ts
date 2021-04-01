@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges, ViewChild, OnDestroy } from '@angular/core';
 import { StoryModalComponent } from '../../story-modal/story-modal.component';
 import { MatTableDataSource } from '@angular/material/table';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { 
   StoryFormComponent 
 } from '../story-form/story-form.component';
@@ -14,9 +14,14 @@ import {
 import {
   ReportFormComponent,
   StoryDeleteFormComponent,
+  StoryPopupComponent,
 } from '../../popups';
+import {
+  Comment, 
+  FeedObj,
+} from '../../interfaces';
 
-import { StoryDialogComponent } from '../../story-dialog/story-dialog.component';
+//import { StoryDialogComponent } from '../../story-dialog/story-dialog.component';
 import { ModalService } from '../../modalServices';
 
 declare var $: any
@@ -26,7 +31,7 @@ declare var $: any
   templateUrl: './feed.component.html',
   styleUrls: ['./feed.component.css']
 })
-export class FeedComponent implements OnInit {
+export class FeedComponent implements OnInit,OnChanges,OnDestroy {
   /*
   General Feed component that displays Race or User -specific events
   */
@@ -74,6 +79,8 @@ export class FeedComponent implements OnInit {
 
   columns:string[] = ['ProfilePic','Data'];
 
+  private feedUpdateSub:any = null;
+
   constructor(
     private _userProfileService: UserProfileService, 
     private _raceFeedService: RaceFeedService,
@@ -98,6 +105,11 @@ export class FeedComponent implements OnInit {
       this.resetFeed();
       this.refreshFeed();
     }
+
+    // Subscribe to feed updates
+    this.feedUpdateSub = this._raceFeedService.FeedUpdateSubscription.subscribe(()=>{
+      this.refreshFeed();
+    })
     
   }
 
@@ -124,6 +136,13 @@ export class FeedComponent implements OnInit {
     }
 
   }
+  
+  ngOnDestroy() {
+    if (this.feedUpdateSub) {
+      this.feedUpdateSub.unsubscribe();
+      this.feedUpdateSub = null;
+    }
+  }
 
   showStoryModal(storyID): void {
   //  console.log("open story modal!");
@@ -138,6 +157,7 @@ export class FeedComponent implements OnInit {
     }
   }
 
+  /*
   showStoryDialog(element: FeedObj){
   //  console.log("In dialogue function");
     let dialogRef = this.dialog.open(StoryDialogComponent, {
@@ -146,8 +166,9 @@ export class FeedComponent implements OnInit {
       },
     });
   }
+  */
 
-  public refreshFeed(openStoryIDComments=null, getNextPage=false){
+  public refreshFeed = (openStoryIDComments=null, getNextPage=false):void => {
     var viewComponent = this;
     this.loading = true;
 
@@ -156,6 +177,7 @@ export class FeedComponent implements OnInit {
     }
     console.log("getting feeditems");
     this._feedService.refreshFeed(this.page_number, this.items_per_page, !this.initialized).then(payload => {
+      console.log('PAYLOAD FROM REFRESH FEED:',payload);
       var newFeedObjs: Array<FeedObj> = [];
       var get_created_ts = this.get_created_ts;
       var data = payload.serialized_feed;
@@ -273,7 +295,14 @@ export class FeedComponent implements OnInit {
     });
   }
 
-    openModal(id: string,element) {
+  openStoryPopup = (element:FeedObj) => {
+    this.dialog.open(StoryPopupComponent,{
+      panelClass:"DialogDefaultContainer",
+      data:element
+    });
+  }
+
+  openModal(id: string,element) {
     var data = (id == 'story-popup') ? {element:element, callbackFunction:null} : {};
     console.log("ELEMENT passed", element);
     this.modalService.open(id,data);
@@ -295,41 +324,7 @@ export class FeedComponent implements OnInit {
 
 }
 
-
-interface FeedObj {
-  user_id: number;
-  display_name: string;
-  username: string;
-  profile_url:string
-  joined: boolean;
-  traveled: boolean;
-  likes: boolean;
-  likes_count: number;
-  story: boolean;
-  story_image:string;
-  story_text:string;
-  story_id:number;
-  total_distance:number;
-  last_distance:number;
-  message: string;
-  created_ts:number;
-  is_mine:boolean;
-  comments: Comment[];
-  show_comments: boolean;
-  show_options: boolean;
-  follows: boolean;
-  hot: boolean;
-}
-
 interface FeedPayload {
   serialized_feed: FeedObj[];
   can_refresh: boolean;
-}
-
-interface Comment {
-  username: string;
-  display_name:string;
-  profile_url:string;
-  message:string;
-  created_ts:number;
 }

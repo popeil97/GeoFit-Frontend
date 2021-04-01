@@ -8,7 +8,13 @@ import {
   TucanValidators,
 } from '../../../services';
 
-import { MapComponent, RouteData } from '../../../map/map.component';
+import { 
+  MapComponent,
+} from '../../../components';
+
+import {
+  RouteData, MapBoxPlaceResp, MapBoxPlace, MapBoxCoord, GraphHopperResp,
+} from '../../../interfaces'
 
 @Component({
   selector: 'app-race-map-settings',
@@ -489,21 +495,4 @@ export class RaceMapSettingsComponent implements OnInit,AfterViewInit {
     return km * 0.62137;
   }
   // --- END DISTANCE FUNCTIONS ---
-}
-
-interface MapBoxPlaceResp {
-  features: any[];
-}
-interface MapBoxPlace {
-  center:any;
-  place_name:string;
-}
-export interface MapBoxCoord {
-  lon:number;
-  lat:number;
-}
-interface GraphHopperResp {
-  coords:any[];
-  distance:number;
-  dist_unit:string;
 }

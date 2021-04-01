@@ -21,7 +21,7 @@ import {
 
 import {
   UserData,
-} from '../../models';
+} from '../../interfaces';
 
 @NgModule({
   imports:[MatDialogRef]
@@ -56,7 +56,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private _userProfileService: UserProfileService,
 
     public dialog : MatDialog,
-    @Inject(MAT_DIALOG_DATA) data: any,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef : MatDialogRef<LoginComponent>,
   ) { }
 
@@ -121,7 +121,12 @@ export class LoginComponent implements OnInit, OnDestroy {
 
           // Continue
           //this.continueAsMe(loginData['username']);
-          this.closeDialog();
+          if (this.data != null && this.data.register) {
+            this.dialogRef.close();
+            this.SwitchToSignUp();
+          } else {
+            this.closeDialog();
+          }
         }).catch(uerr=>{
           console.error(uerr);
           this.loading = false;

@@ -20,7 +20,7 @@ import {
 
 import {
   UserData
-} from '../../models';
+} from '../../interfaces';
 
 import {
   WhyBirthdayComponent
@@ -201,7 +201,9 @@ export class RegisterComponent implements OnInit {
               else {
                 //console.log("WE'RE NOT REDIRECTING! YAY!", this.d)
                 if(this.d != null && this.d.register == true) {
-                  //console.log("I SHOUld Be OPENING SIGN UP NOW")
+                  //console.log("I SHOUld Be OPENING SIGN UP NOW");
+                  this.SwitchToSignUp();
+                  /*
                   if(this.d.price > 0) {
                     this.SwitchToSignUp();
                   }
@@ -213,6 +215,7 @@ export class RegisterComponent implements OnInit {
                     this._raceService.joinRace(registrationBody);
                     this.router.navigate(['/welcome']);
                   }
+                  */
                 }
                 else {
                   //console.log("I AM BEING WELCOMED?")

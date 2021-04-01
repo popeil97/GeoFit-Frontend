@@ -117,7 +117,7 @@
 									<app-search [raceID]="raceID"></app-search>
 								</div>
 								-->
-								<app-search [raceID]="raceID"></app-search>
+								<app-search [raceID]="raceID" [userClickEvent]="this.panToUserMarker"></app-search>
 							</ng-template>
 							<ng-template #UnableToShowSearch>
 								<p class='italics'>You must be logged in with an account as well as be a particiant of the race to perform a search on any other racers.</p>

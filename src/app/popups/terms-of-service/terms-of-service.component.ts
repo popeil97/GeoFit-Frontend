@@ -1,6 +1,6 @@
-import { NgModule, Component, Inject, } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @NgModule({
   imports:[MatDialogRef]
@@ -16,7 +16,6 @@ export class TermsOfServiceComponent {
 
   constructor(
     private router:Router,
-    @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<TermsOfServiceComponent>,
   ) {}
 

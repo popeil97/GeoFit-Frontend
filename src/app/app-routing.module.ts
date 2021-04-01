@@ -13,7 +13,7 @@ import {ContactPageComponent} from './views/contact-page/contact-page.component'
 import { RaceViewPageComponent } from './race-view-page/race-view-page.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { TeamFormComponent } from './team-form/team-form.component';
-import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
+//import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { PasswordRequestComponent } from './password-request/password-request.component';
 import { PasswordChangeComponent } from './password-change/password-change.component';
 import {WelcomeComponent} from './welcome/welcome.component'
@@ -26,6 +26,8 @@ import { RaceCreateComponent } from './views/race-create/race-create.component';
 import { RaceDashboardComponent } from './views/race-dashboard/race-dashboard.component';
 
 import { ItemPortalComponent } from './item-portal/item-portal.component';
+import { ConfirmSignupComponent } from './views/confirm-signup/confirm-signup.component';
+
 
 const routes: Routes = [
   {path:'',component:LandingComponent},
@@ -37,10 +39,11 @@ const routes: Routes = [
   {path:'about-tucan', component:AboutTucanComponent},
   {path:'contact', component:ContactPageComponent},
 
+  {path:'confirm-race-signup',component:ConfirmSignupComponent},
   {path:'race', component:RaceViewPageComponent},
   {path:'profile',component:ProfileComponent},
   {path:'teams',component:TeamFormComponent},
-  {path:'shipping', component:ShippingAddressComponent },
+  //{path:'shipping', component:ShippingAddressComponent },
   {path:'password-request', component:PasswordRequestComponent},
   {path:'password-change', component:PasswordChangeComponent},
   {path:'welcome', component:WelcomeComponent},

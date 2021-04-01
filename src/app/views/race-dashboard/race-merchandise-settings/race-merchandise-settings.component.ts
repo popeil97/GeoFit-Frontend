@@ -2,7 +2,8 @@ import { Component, OnInit, AfterViewInit, Input, OnDestroy } from '@angular/cor
 import { MatDialog } from '@angular/material';
 
 import { 
-  RaceMerchandiseSettingsItemComponent 
+  RaceMerchandiseSettingsItemComponent,
+  InactiveStateExplanationPopupComponent,
 } from '../../../popups';
 
 @Component({
@@ -90,11 +91,19 @@ export class RaceMerchandiseSettingsComponent implements OnInit,AfterViewInit,On
     this.openMerchandiseItem(null,null,1);
   }
   openMerchandiseItem(item:MerchandiseItem,itemIndex:number,type:number) {
+    const activeMerchItems = this.merchandiseItems.filter(item=>{
+      return item.state == 1;
+    });
+    const activeEntryItems = this.entryItems.filter(item=>{
+      return item.state == 1;
+    })
     const data = {
       raceID:this.raceID,
       itemData:item,
       itemIndex:itemIndex,
       itemType:type,
+      activeMerchItems:activeMerchItems,
+      activeEntryItems:activeEntryItems,
     }
     this.dialog.open(RaceMerchandiseSettingsItemComponent,{
       panelClass:"MerchandiseItemFormContainer",
@@ -106,6 +115,14 @@ export class RaceMerchandiseSettingsComponent implements OnInit,AfterViewInit,On
           this.initializeData();
         })
       }
+    });
+  }
+
+  openInactiveExplanationPopup = (e:any) => {
+    if (e.preventDefault) e.preventDefault();
+    if (e.stopPropagation) e.stopPropagation();
+    this.dialog.open(InactiveStateExplanationPopupComponent,{
+      panelClass:"DialogDefaultContainer"
     });
   }
 

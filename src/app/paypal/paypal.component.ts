@@ -1,11 +1,15 @@
 import { Component, AfterViewChecked, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import {
+  TermsOfServiceComponent 
+} from '../popups';
 import { 
   PaymentsService,
 } from '../services';
 import {
   Payment, 
   PaymentType,
-} from '../models';
+} from '../interfaces';
 declare let paypal: any;
 
 @Component({
@@ -24,6 +28,7 @@ export class PaypalComponent implements AfterViewChecked {
   paymentError:Boolean;
 
   constructor(
+    private dialog:MatDialog,
     public _paymentsService:PaymentsService
   ) {
     this.paypalConfig = {
@@ -93,6 +98,12 @@ export class PaypalComponent implements AfterViewChecked {
       script_tag.onload = resolve;
       document.body.appendChild(script_tag);
     })
+  }
+
+  openTermsOfServicePopup = () => {
+    this.dialog.open(TermsOfServiceComponent,{
+      panelClass:'DialogDefaultContainer'
+    });
   }
 
 

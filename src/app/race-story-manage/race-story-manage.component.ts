@@ -10,7 +10,7 @@ import {
 } from '../popups';
 import {
   Story
-} from '../models';
+} from '../interfaces';
 
 @Component({
   selector: 'app-race-story-manage',

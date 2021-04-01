@@ -1,3 +1,92 @@
+.formGroup.searchFormGroup {
+  position:relative;
+  z-index: 1;
+}
+.formTextInput.searchTextInput {
+  position:relative;
+  z-index: 1;
+  padding-right:40px;
+}
+.searchSubmitButton {
+  position:absolute;
+  right:12px;
+  top:50%;
+  transform:translateY(-50%);
+  z-index: 2;
+
+  width:24px;
+  height:24px;
+  padding:0px;
+}
+  .searchSubmitButton .material-icons {
+    font-size:16px;
+  }
+
+.FeedItem {
+  display:flex;
+  flex-direction:column;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+
+  background-color:#FFFFFF;
+  padding-bottom:8px;
+  border-bottom: 1px solid rgb(200,200,200);
+  margin-bottom:8px;
+}
+.FeedItem:last-child {
+  border-bottom:0px;
+  padding-bottom:0px;
+}
+.FeedItem:hover {
+  cursor:pointer;
+}
+  .FeedItem:hover .FeedProfileNameContainer {
+    text-decoration: underline;
+  }
+  .FeedItem .FeedProfile {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
+    .FeedItem .FeedProfile .FeedProfilePicContainer {
+      flex-shrink: 0;
+      flex-basis: 40px;
+      width:40px;
+      height:40px;
+      border-radius: 20px;
+      margin-right:16px;
+      overflow: hidden;
+      border: 1px solid rgb(200,200,200);
+    }
+      .FeedItem .FeedProfile .FeedProfilePicContainer .FeedProfilePic {
+        width:100%;
+        height:100%;
+        background-position: center;
+        background-size:contain;
+        background-repeat: no-repeat;
+      }
+      .FeedItem .FeedProfile .FeedProfileNameContainer {
+        flex-shrink: 1;
+        flex-basis: 100%;
+        height:auto;
+      }
+  .FeedActions {
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+
+    padding-left:56px;
+  }
+    .FeedActions button {
+      font-size:var(--h7);
+      margin-right:8px;
+    }
+
 .row {
   display: flex;
   flex-wrap: wrap;
@@ -35,14 +124,3 @@
     background-color: transparent;
     box-shadow: none;
 }
-
-.FeedItem {
-      
-      box-sizing: border-box;
-
-      font-size:12px;
-      background-color:#FFFFFF;
-    }
-    .FeedItem:nth-child(2n) {
-      background-color:#EBEBEB
-    }

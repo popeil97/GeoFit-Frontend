@@ -4,7 +4,7 @@ import { environment } from './../../../environments/environment';
 import { openStdin } from 'process';
 import {
   Order
-} from '../../models';
+} from '../../interfaces';
 
 @Injectable({
   providedIn: 'root'

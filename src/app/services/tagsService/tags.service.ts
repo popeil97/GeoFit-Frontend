@@ -2,10 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from './../../../environments/environment';
 import { env } from 'process';
-import { TagFormObj } from '../../tag-form/tag-form.component';
 import {
-  Tag, TagType
-} from '../../models';
+  Tag, TagType, TagFormObj,
+} from '../../interfaces';
 
 @Injectable({
   providedIn: 'root'

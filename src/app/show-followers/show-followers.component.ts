@@ -4,7 +4,7 @@ import {
 } from '../services';
 import {
   UserData
-} from '../models';
+} from '../interfaces';
 
 @Component({
   selector: 'app-show-followers',
