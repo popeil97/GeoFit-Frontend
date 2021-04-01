@@ -15,10 +15,6 @@ import {
   RegisterComponent,
 } from '../../popups';
 
-import {
-  MapBoxCoord
-} from '../../interfaces';
-
 @Component({
   selector: 'app-race-create',
   templateUrl: './race-create.component.html',
