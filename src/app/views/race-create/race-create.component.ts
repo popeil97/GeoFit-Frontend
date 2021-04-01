@@ -169,7 +169,7 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
         Validators.required,
       ]),
     });
-    this.formChangeSubscription = this.raceBasicsForm.valueChanges.subscribe(this.valueChanged);
+    if (this.formChangeSubscription == null) this.formChangeSubscription = this.raceBasicsForm.valueChanges.subscribe(this.valueChanged);
   }
   valueChanged = (values:any) => {
     const changed = Object.keys(values).reduce((accumulator:Boolean,inputKey:string)=>{
