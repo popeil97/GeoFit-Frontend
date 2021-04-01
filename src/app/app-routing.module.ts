@@ -26,6 +26,8 @@ import { RaceCreateComponent } from './views/race-create/race-create.component';
 import { RaceDashboardComponent } from './views/race-dashboard/race-dashboard.component';
 
 import { ItemPortalComponent } from './item-portal/item-portal.component';
+import { ConfirmSignupComponent } from './views/confirm-signup/confirm-signup.component';
+
 
 const routes: Routes = [
   {path:'',component:LandingComponent},
@@ -37,6 +39,7 @@ const routes: Routes = [
   {path:'about-tucan', component:AboutTucanComponent},
   {path:'contact', component:ContactPageComponent},
 
+  {path:'confirm-race-signup',component:ConfirmSignupComponent},
   {path:'race', component:RaceViewPageComponent},
   {path:'profile',component:ProfileComponent},
   {path:'teams',component:TeamFormComponent},

@@ -24,7 +24,7 @@ export class SwagService {
   }
 
   getItems(race_id:number) {
-    return this.http.post(environment.apiUrl + '/orders/merch-items/',{race_id:race_id}).toPromise();
+    return this.http.post(environment.apiUrl + '/orders/merch-items/',{race_id:race_id,only_active:true}).toPromise();
   }
 
   getCart(race_id:number) {

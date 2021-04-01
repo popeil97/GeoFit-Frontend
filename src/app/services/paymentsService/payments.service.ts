@@ -22,7 +22,7 @@ export class PaymentsService {
   }
 
   getOrderID(price:string) {
-    return this.http.post(environment.apiUrl + '/payments/order/',{price:price}).toPromise();
+    return this.http.post(environment.apiUrl + '/payments/create/',{price:price}).toPromise();
   }
 
   captureOrder(race_id:number,payment_id:string) {

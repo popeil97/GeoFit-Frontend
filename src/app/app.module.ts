@@ -137,6 +137,7 @@ import { RaceSettingsComponent } from './views/race-dashboard/race-settings/race
 import { RaceBasicsComponent } from './views/race-dashboard/race-basics/race-basics.component';
 import { RaceMapSettingsComponent } from './views/race-dashboard/race-map-settings/race-map-settings.component';
 import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-merchandise-settings/race-merchandise-settings.component';
+import { ConfirmSignupComponent } from './views/confirm-signup/confirm-signup.component';
 
 
 @NgModule({
@@ -236,6 +237,7 @@ import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-me
     RaceMerchandiseSettingsItemComponent,
     ConfirmationPopupComponent,
     InactiveStateExplanationPopupComponent,
+    ConfirmSignupComponent,
   ],
 
   imports: [

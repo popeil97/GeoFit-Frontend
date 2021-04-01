@@ -353,11 +353,13 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
       //user is NOT logged in
       const data = {
         register:true, 
+        /*
         price:this.raceData.raceSettings.price,
         race_id:this.raceData.raceID,
         hasJoined:this.raceData.userDetails.hasJoined,
         hasStarted:this.raceData.userDetails.hasStarted,
         hasTags: this.raceData.raceSettings.has_entry_tags,
+        */
       };
       const d = this.dialog.open(RegisterComponent,{
         panelClass:"RegisterContainer",
@@ -384,6 +386,8 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
       this.router.navigate(['/welcome']);
     } else {
       // We're now opening the official sign-up form
+      this.router.navigate(['/confirm-race-signup',{id:this.raceID}]);
+      /*
       const data = {
         price:this.raceData.raceSettings.price,
         race_id:this.raceData.raceID,
@@ -399,6 +403,7 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
         console.log("Closing Sign Up from Race About");
         if (typeof result !== "undefined") console.log(result);
       });
+      */
     }
   }
 
@@ -409,11 +414,14 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
     if(!this._authService.isLoggedIn()) {
       //user is NOT logged in
       const data = {
+        register:true,
+        /*
         price:this.raceData.raceSettings.price,
         race_id:this.raceData.raceID,
         hasJoined:this.raceData.userDetails.hasJoined,
         hasStarted:this.raceData.userDetails.hasStarted,
         hasTags: this.raceData.raceSettings.has_entry_tags,
+        */
       };
       const d = this.dialog.open(RegisterComponent,{
         panelClass:"RegisterContainer",
@@ -432,6 +440,10 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
         signUpSub.unsubscribe();
       });
     }
+    else {
+      this.router.navigate(['/confirm-race-signup',{id:this.raceID}]);
+    }
+    /*
     else if (this.raceData.raceSettings.price == 0) {
       //user is logged in and price = 0;
       //add race stat then...
@@ -457,6 +469,7 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
         if (typeof result !== "undefined") console.log(result);
       });
     }
+    */
   }
 
   openLogin = () => {
@@ -465,11 +478,13 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
       // User is NOT logged in
       const data = {
         register:true, 
+        /*
         price:this.raceData.raceSettings.price,
         race_id:this.raceData.raceID,
         hasJoined:this.raceData.userDetails.hasJoined,
         hasStarted:this.raceData.userDetails.hasStarted,
         hasTags: this.raceData.raceSettings.has_entry_tags,
+        */
       };
       const d = this.dialog.open(LoginComponent,{
         panelClass:"LoginContainer",
@@ -486,6 +501,7 @@ export class RaceAboutComponent implements OnInit,OnDestroy {
         if (typeof result !== "undefined") console.log(result);
         subRegister.unsubscribe();
         subSignUp.unsubscribe();
+
       })
     }
   }

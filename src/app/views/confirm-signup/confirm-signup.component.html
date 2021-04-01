@@ -1,0 +1,212 @@
+<div class="TucanContainer">
+
+  <ng-template [ngIf]="this.loading || !this.firstSuccessfulLoading" [ngIfElse]="LoadedBlock">
+    <p class="position_absolute_middle margin-0px">Loading Race Data...</p>
+  </ng-template>
+  <ng-template #LoadedBlock>
+    <ng-template [ngIf]="this.raceID==null || this.raceData == null || (this.raceData != null && !this.raceData.public)" [ngIfElse]="raceDataLoaded">
+      <div class='position_absolute_middle textAlignCenter'>
+        <h2 class='margin-top-0px'>Error: Race data not found</h2>
+        <p>This page will appear when you wish to confirm your race registration. However, no race data <span class='nobr'>was found.</span></p>
+        <p class='margin-bottom-0px'>Please return back to the previous page, or find new public races by <span class='nobr'>clicking <a href="#" (click)="this.navigateToPublicRaces($event)">here.</a></span></p>
+      </div>
+    </ng-template>
+    <ng-template #raceDataLoaded>
+      <ng-template [ngIf]="this.userData == null" [ngIfElse]="UserLoaded">
+        <div class='position_absolute_middle textAlignCenter'>
+          <h2 class='margin-top-0px'>Error: You must be logged in.</h2>
+          <p>This page will appear when you wish to confirm your race registration. You must be logged in to register for a race.</p>
+          <p>Please log into your Tucan Fitness account, or Sign Up for Tucan if you haven't created a Tucan Fitness account yet.</p>
+          <button class='formButton' (click)="this.openLogin()">Log In</button>
+        </div>
+      </ng-template>
+      <ng-template #UserLoaded>
+        <div class='PageContainer'>
+          <ng-template [ngIf]="this.raceData.hasJoined" [ngIfElse]="HasNotJoinedYet">
+            <h2 class="margin-bottom-8px">You've already registered to "{{this.raceData.name}}"!</h2>
+            <p>You've already registered to this race! No need to register once more.</p>
+            <button (click)="this.navigateToRaceView()">Go to the Race Map</button>
+          </ng-template>
+          <ng-template #HasNotJoinedYet>
+            <ng-template [ngIf]="this.registrationSuccessful" [ngIfElse]="RegistrationForm">
+              <h2 class="margin-bottom-8px">Race Registration Success!</h2>
+              <p>Congratulations, your registration was successful. You can now start uploading your activities into this race once it starts.</p>
+              <button (click)="this.navigateToRaceView()">Go to the Race Map</button>
+            </ng-template>
+            <ng-template #RegistrationForm>
+              <h2 class="margin-bottom-8px">Race Registration</h2>
+              <mat-dialog-content>
+                <mat-horizontal-stepper [linear]="true" #stepper>
+                  <mat-step [completed]="false" [editable]="true" [stepControl]="tagForm" *ngIf="this.raceData.hasEntryTags">
+                    <ng-template matStepLabel aria-disabled="true">Select Organizational/Athletic Tag</ng-template>
+                    <p>Select an athlete or organization type</p>
+                    <app-tag-select [raceID]="this.raceID" [tagType]="this.tType" (emitState)="stepCallback($event)"></app-tag-select>
+                  </mat-step>
+                  <mat-step *ngIf="this.raceData.merchandise.entries.length>0||this.raceData.merchandise.merchandise.length>0" [completed]="false" [editable]="true" [stepControl]="cartForm">
+                    <ng-template matStepLabel aria-disabled="true">Select Items</ng-template>
+                    <app-cart-edit [raceID]="this.raceID" (checkoutAlert)="stepCallback($event)"></app-cart-edit>
+                  </mat-step>
+                  <mat-step [completed]="false" [editable]="false" [stepControl]="paymentForm">
+                    <ng-template matStepLabel aria-disabled="true">Confirm Registration</ng-template>
+                    <ng-template [ngIf]="this.raceData.cart.price > 0" [ngIfElse]="JustConfirm">
+                      <app-paypal (transactionAlert)="stepCallback($event)" [price]="this.finalPrice" [race_id]="this.raceID"></app-paypal>
+                    </ng-template>
+                    <ng-template #JustConfirm>
+                      <h6>Order Total: ${{this.raceData.cart.price}}</h6>
+                      <p>By placing your order, you agree to Tucan's <span class='a' (click)="this.openTermsOfServicePopup()">Terms of Service</span>. If you have registration issues, email us at <a href="mailto:admin@tucan.fitness">admin@tucan.fitness</a></p>
+                      <button class="formButton width-100per" (click)="this.confirmSignup()">Confirm Race Registration</button>
+                    </ng-template>
+                  </mat-step>
+                </mat-horizontal-stepper>
+              </mat-dialog-content>
+            </ng-template>
+          </ng-template>
+        </div>
+      </ng-template>
+    </ng-template>
+    <!--
+    <div class='AboutRaceImageContainer'>
+      <div class="AboutRaceImage" *ngIf="this.raceData.race_image != null" [style.background]="'url('+this.raceData.race_image+')'"></div>
+    </div>
+  
+    <div class="PageContainer">
+    
+      <div class='PageSegment'>  
+        <a class="nav-link" routerLink='/races'><span class="material-icons" inline=true>keyboard_arrow_left</span> <span class="aligned-with-icon">Return to Public Races</span></a>
+        <ng-template [ngIf]="(this.raceData.headerInfo | json) == {}" [ngIfElse]="RaceHeaderBlock" >
+          <p>Loading race information</p>
+        </ng-template>
+        <ng-template #RaceHeaderBlock>
+          <div class='RaceHeader'>
+            <h1>{{this.raceData.headerInfo.name}}</h1>
+            <div class='CalendarDaysContainer' *ngIf="this.raceData.headerInfo.dates != null">
+              <div class='CalendarDay'>
+                <div class='CalendarDayM'><p class='h7'>{{this.raceData.headerInfo.dates.startDate.month}}</p></div>
+                <div class='CalendarDayD'><p>{{this.raceData.headerInfo.dates.startDate.day}}</p></div>
+              </div>
+              <div class='CalendarDaysLine'>
+                <p class='h7'>to</p>
+              </div>
+              <div class='CalendarDay'>
+                <div class='CalendarDayM'><p class='h7'>{{this.raceData.headerInfo.dates.endDate.month}}</p></div>
+                <div class='CalendarDayD'><p>{{this.raceData.headerInfo.dates.endDate.day}}</p></div>
+              </div>
+            </div>
+          </div>
+          <p [innerHTML]="this.raceData.headerInfo.description"></p>
+        </ng-template>
+      </div>
+  
+      <div class='PageSegment'>
+        <h3>Interested in participating?</h3>
+        <ng-template [ngIf]="(this.raceData.userDetails | json) == {} && (this.raceData.mapData | json) == {}" [ngIfElse]="RaceActionsBlock">
+          <p>Waiting for race data...</p>
+        </ng-template>
+        <ng-template #RaceActionsBlock>
+          <div class='RaceButtonsContainer'>
+            <button class="gradient-button" *ngIf="!this._authService.isLoggedIn() &&!this.raceData.userDetails.hasJoined" (click)="openRegister()">Register for race</button>
+            <button class="gradient-button" *ngIf="this._authService.isLoggedIn() &&!this.raceData.userDetails.hasJoined" (click)="openSignUp()">Register for race</button>
+  
+            <button (click)="this.viewAboutTucan()">Learn More about Tucan Fitness</button>
+  
+            <button (click)="this.viewRace()" *ngIf="this.raceData.mapData.hasStarted && this.raceData.userDetails.hasJoined">Go to race</button>
+            <button (click)="this.viewRace()" *ngIf="this.raceData.mapData.hasStarted && !this.raceData.userDetails.hasJoined">Preview race</button>
+            <button (click)="this.goToRaceDashboard()" *ngIf="this.raceData.userDetails.isOwner">Go to dashboard</button>      
+            <p *ngIf="this._authService.isLoggedIn() && this.raceData.userDetails.hasJoined" class='margin-bottom-8px'><b>You've registered for this race.</b></p>
+            <p *ngIf=" !this.raceData.mapData.hasStarted && this.raceData.userDetails.hasJoined" class='margin-bottom-8px italics'> Come back on race day ({{this.raceData.headerInfo.dates.startDate.month}}, {{this.raceData.headerInfo.dates.startDate.day}}).</p>
+            <p *ngIf=" !this.raceData.mapData.hasStarted && !this.raceData.userDetails.hasJoined" class='margin-bottom-8px italics'>Join by race day ({{this.raceData.headerInfo.dates.startDate.month}}, {{this.raceData.headerInfo.dates.startDate.day}}).</p>
+          </div>
+        </ng-template>
+      </div>
+        
+      <div class='PageSegment'>
+        <h3>Race Details</h3>
+  
+        <div class='Slideshow'>
+          <div class="SlideshowHeader">
+            <button class="SlideshowButton" [ngClass]="{'selected':this.currentScreen=='map'}" (click)="SwitchSlideshow('map')" id="map-btn">Route Details</button>
+            <button class="SlideshowButton" [ngClass]="{'selected':this.currentScreen=='logistics'}" (click)="SwitchSlideshow('logistics')" id="logistics-btn">Rules &amp; requirements</button>
+            <button class="SlideshowButton" [ngClass]="{'selected':this.currentScreen=='race_director'}" (click)="SwitchSlideshow('race_director')" id="race_director-btn">About the race director</button>
+          </div>
+          <div class="SlideshowContents RaceSlideshowContents">
+            <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'map'}">
+              
+              <ng-template [ngIf]="(this.raceData.mapData | json) == {}" [ngIfElse]="MapDataBlock">
+                <p class="h7 italics">Loading Map Data...</p>
+              </ng-template>
+              <ng-template #MapDataBlock>
+                <div class='MapContainer'>
+                  <app-map [raceIDs]="this.raceData.mapData.raceIDs" [parentRaceID]="this.raceData.raceID" [displayUsers]="false" zoom="true"></app-map>
+                </div>
+                
+                <p class="margin-bottom-4px"><strong>Starting Location:</strong> {{this.raceData.mapData.startLoc}}</p>
+                <p class="margin-bottom-4px"><strong>Ending Location:</strong> {{this.raceData.mapData.endLoc}}</p>
+                <p class='margin-bottom-16px'><strong>Distance:</strong> {{this.raceData.mapData.distance}}mi</p>
+
+                <div class='RaceRouteInfo margin-bottom-8px' *ngIf="this.raceData.mapData.num_children > 1">
+                  <h6 class='margin-bottom-4px'>Trails ({{this.raceData.mapData.num_children}} total):</h6>  
+                  <ng-template [ngIf]="this.raceData.mapData.trails == null" [ngIfElse]="TrailsLoadedBlock">
+                    <p class="h7 italics">Loading trails...</p>
+                  </ng-template>
+                  <ng-template #TrailsLoadedBlock>
+                    <div *ngFor="let trail of this.raceData.mapData.trails">           
+                      <p class='h7 margin-bottom-0px'>{{trail}}</p>
+                    </div> 
+                  </ng-template>         
+                </div>
+              </ng-template>
+            </div>
+  
+            <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'logistics'}">
+  
+              <ng-template [ngIf]="(this.raceData.raceSettings | json) == null" [ngIfElse]="RaceSettingsBlock">
+                <p class="h7 italics">Loading Race Info...</p>
+              </ng-template>
+              <ng-template #RaceSettingsBlock>
+              
+                <h6 class='margin-bottom-4px'>Race type <button class="smallButton" (click)="this.openRaceTypesPopup();">What does this mean?</button>:</h6>
+                <p class='h7 margin-bottom-16px'>{{this.raceData.raceSettings.typeText}}</p>
+      
+                <h6 class='margin-bottom-4px'>Race requirements:</h6>
+                <p class='h7 margin-bottom-16px'>{{this.raceData.raceSettings.requirementsText}}</p>
+      
+                <h6 class=margin-bottom-4px>Teams:</h6>
+                <p class='h7 margin-bottom-16px'>{{this.raceData.raceSettings.teamsText}}</p>
+      
+                <h6 class='margin-bottom-4px'>Entry fee</h6>
+                <p class='h7 margin-bottom-0px'>{{this.raceData.raceSettings.priceText}}</p>
+              </ng-template>
+            </div>
+  
+            <div class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'race_director'}">
+              <div class="RaceDirectorContainer">
+                <ng-template [ngIf]="(this.raceData.owner | json) == {}" [ngIfElse]="RaceOwnerLoaded">
+                  <p class="h7 italics">Loading race owner info...</p>
+                </ng-template>
+                <ng-template #RaceOwnerLoaded>
+                  <div class='RaceDirectorPicContainer'>
+                    <div class="RaceDirectorPic" [style.background-image]="'url('+this.raceData.owner.profile_url+')'"></div> 
+                  </div>
+                  <div class="RaceDirectorInfo">
+                    <div class='margin-bottom-16px'>
+                      <h6 class='margin-bottom-4px'>Race director:</h6>
+                      <p class='h7 margin-bottom-0px'>{{this.raceData.owner.first_name}} {{this.raceData.owner.last_name}}</p>
+                      <a [href]='this.raceData.owner.email_mailto' class='h7 margin-bottom-0px'>{{this.raceData.owner.email}}</a>
+                    </div>
+  
+                    <div class='margin-bottom-16px'>
+                      <h6 class='margin-bottom-4px'>About the director:</h6>
+                      <p class='h7 margin-bottom-0px'>{{this.raceData.owner.description}}</p>
+                    </div>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+      
+          </div>
+        </div>
+      </div>
+    </div>
+    -->
+  </ng-template>
+</div>
