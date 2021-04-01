@@ -1,0 +1,67 @@
+<div class="TucanContainer">
+  <ng-template [ngIf]="this.initializing" [ngIfElse]="FormBlock">
+    <p>Loading Profile Picture form...</p>
+  </ng-template>
+  <ng-template #FormBlock>
+    <ng-template [ngIf]="this.userData == null" [ngIfElse]="FormAccessible">
+      <p class="redText">Error: no user data provided!</p>
+    </ng-template>
+    <ng-template #FormAccessible>
+      <form class='EditProfileForm' [formGroup]="this.profileForm" (ngSubmit)="this.onFormSubmit($event)">
+        <div class="formGroup formGroupColumn formGroupAlignedTop margin-bottom-8px">
+          <div class='formInputContainer'>
+            <input 
+              id="ProfilePicInput"
+              type="file" 
+              class="hidden"
+              formControlName="ProfilePic" 
+              accept=".jpg,.jpeg,.png"
+              (change)="this.onSelectProfilePicFile($event)"
+            />
+            <div class="profilePictureContainer">
+              <div class="profilePicture" [style.background-image]="'url(' + this.profilePicURL + ')'"></div>
+              <div class="profilePictureUploadOverlay" [ngClass]="{'visible':this.profilePicURL == null}" *ngIf="!this.profilePicUploading" (click)="this.onClickProfilePicUpload($event)">
+                <img class='profilePictureUploadIcon' src="../../assets/icons/upload-icon-white.svg" alt="Upload Icon" />
+                <p class="h7 margin-bottom-0px">Upload new profile image</p>
+              </div>
+              <p class="profilePictureLoadingOverlay" *ngIf="this.profilePicUploading">Loading...</p>
+              <p class="profilePictureCancelOverlay" *ngIf="this.profilePicURL != this.defaultURL" (click)="this.cancelProfilePicUpload($event)">Cancel</p>
+            </div>
+          </div>
+        </div>
+
+        <div class='formGroup formGroupColumn formGroupAlignedTop submitButtonGroup' *ngIf="this.profilePicURL != this.defaultURL">
+          <input 
+            class="button formButton formSubmitButton"
+            [ngClass]="{'disabled':(this.checkingValidityOfSubmission || !this.validForm())}"
+            type="submit"
+            value="Upload Profile Picture"
+            [disabled]="this.checkingValidityOfSubmission || !this.validForm()"
+            [readonly]="this.checkingValidityOfSubmission || !this.validForm()"
+          />
+          <div class="margin-top-16px" *ngIf="this.hasSubmitted">
+            <p class="italics margin-0px" *ngIf="this.validForm() && this.updatingItem">Updating Profile Picture...</p>
+            <p class="italics redText margin-0px" *ngIf="!this.validForm()">Errors have been found above. Check each of your inputs for errors.</p>
+          </div>
+        </div>
+        <!--
+        <div class="form-group" style="text-align: left; padding: 5px;">
+          <input type="file" formControlName="ProfilePic" (change)="onSelectFile($event)" />
+          <i class="material-icons" *ngIf="profilePicURL" (click)="deleteProfilePic()">close</i>
+          <div class="wrapper" *ngIf="profilePicURL">
+            <img [src]="uploadedProfPicSrc()" width="300px">
+          </div>
+    
+          <div class="wrapper" *ngIf="!profilePicURL && this.userData.profile_url">
+            <img [src]="this.userData.profile_url" width="150px">
+          </div>
+        </div>
+        <div style="padding: 5px; position: relative; float: left;">
+          <button (click)="updateProfile()">Update</button>
+          <div *ngIf="this.profileUpdated"><br> Your info has been updated</div>
+        </div>
+        -->
+      </form>
+    </ng-template>
+  </ng-template>
+</div>

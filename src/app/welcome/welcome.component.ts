@@ -1,20 +1,30 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service';
-import { UserProfileService } from '../userprofile.service';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { 
+  AuthService,
+  UserProfileService, 
+} from '../services';
+import {
+  UserData,
+} from '../models';
 
 @Component({
   selector: 'app-welcome',
   templateUrl: './welcome.component.html',
   styleUrls: ['./welcome.component.css']
 })
-export class WelcomeComponent implements OnInit {
-  userData: UserData;
+export class WelcomeComponent implements OnInit,OnDestroy {
+  
+  public userData: UserData;
+  private userDataSubscription:any = null;
+  
   constructor(
     public _authService: AuthService,
     private _userProfileService: UserProfileService
   ) {}
 
   ngOnInit() {
+    this.userData = this._authService.userData;
+    this.userDataSubscription = this._authService.userDataChange.subscribe(this.handleUserDataChange);
 
   	if (localStorage.getItem('access_token')){
       this._authService.token = localStorage.getItem('access_token');
@@ -22,23 +32,27 @@ export class WelcomeComponent implements OnInit {
 
     if (localStorage.getItem('loggedInUsername')){
       this._authService.username = localStorage.getItem('loggedInUsername');
-      this._userProfileService.getUserProfile(this._authService.username).then((data) => {
+      /*
+      this._userProfileService.requestUserProfile(this._authService.username).then((data) => {
         this.userData = data as UserData;
       });
+      */
     }
   }
-}
 
-interface UserData {
-  user_id:number;
-  profile_url:string;
-  email:string;
-  description: string;
-  location:string;
-  first_name:string;
-  last_name:string;
-  follows:boolean;
-  distance_type: string;
-  is_me: boolean;
-}
+  ngOnDestroy() {
+    this.userData = null;
+    if (this.userDataSubscription != null) this.userDataSubscription.unsubscribe();
+  }
 
+  handleUserDataChange = (data:UserData) => {
+    this.userData = data;
+  }
+
+  updateProfile = () => {
+    this._userProfileService.requestUserProfile(this._authService.username).then((data) => {
+      var d = data as UserData;
+      this._authService.updateUserData(d);
+    });
+  }
+}

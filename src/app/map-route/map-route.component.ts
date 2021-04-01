@@ -1,13 +1,19 @@
-import { AfterViewInit, Component, Input, OnInit, OnChanges, SimpleChanges, ChangeDetectorRef, ComponentFactory, ComponentFactoryResolver, RendererFactory2, ViewContainerRef, ApplicationRef } from '@angular/core';
+import { AfterViewInit, Component, Input, Output, OnInit, OnChanges, EventEmitter, SimpleChanges, ChangeDetectorRef, ComponentFactory, ComponentFactoryResolver, RendererFactory2, ViewContainerRef, ApplicationRef } from '@angular/core';
 import { NgElement, WithProperties } from '@angular/elements';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
-import { UserProfileService } from '../userprofile.service';
+import { 
+  UserProfileService,
+  MapService,
+  PopUpService,
+} from '../services';
+import {
+  UserData,
+  CheckpointMapData,
+} from '../models';
 //import * as L from 'leaflet';
 //import * as markercluster from 'leaflet.markercluster';
-import { PopUpService } from '../pop-up.service';
 import { UserFollowComponent } from '../user-follow/user-follow.component';
 import { RoutePinDialogComponent } from '../route-pin-dialog/route-pin-dialog.component';
-import { MapService } from '../map.service';
 import { ModalService } from '../modalServices';
 
 import 'leaflet';
@@ -22,7 +28,7 @@ import * as turf from '@turf/turf';
 import { ListKeyManager } from '@angular/cdk/a11y';
 import { AppComponent } from '../app.component';
 import { PopupComponent } from '../popup/popup.component';
-import { RaceService } from '../race.service';
+import { RaceService } from '../services';
 
 @Component({
   selector: 'app-map-route',
@@ -42,8 +48,12 @@ export class MapRouteComponent implements OnChanges {
   @Input() userData: UserData[];
   @Input() routePins: RoutePins[];
   @Input() checkpoints: CheckpointMapData[];
+
+  // onLatLngBoundsChange fires after new coordinates have been applied and the bounds
+  // of route have changed
+  @Output() onLatLngBoundsChange: EventEmitter<L.LatLngBounds> = new EventEmitter();
   
-  private line:any;
+  private lines:any[];
   private coordsRoutes:any[];
   private myUserDataIdx: number;
 
@@ -72,9 +82,10 @@ export class MapRouteComponent implements OnChanges {
     private _mapService: MapService,
     private _raceService:RaceService,
     private modalService: ModalService,
-    public dialog: MatDialog) { 
-      this.coordsRoutes = [];
-    }
+    public dialog: MatDialog
+  ) { 
+    this.coordsRoutes = [];
+  }
 
 
   ngOnChanges(changes: SimpleChanges) {
@@ -170,19 +181,22 @@ export class MapRouteComponent implements OnChanges {
     
     var color = "#7FCC92";
 
-    //Add each path to map independently
+    //Add each path to map independently and store reference to polylines
+    this.lines = [];
     _.forEach(temp_routes_flipped,(route) => {
-      this.line = L.polyline(route,{
-        color: '#578a63',
-        weight: 8,
-        opacity: 0.8
-      }).addTo(this.map);
+      // this.line = L.polyline(route,{
+      //   color: '#578a63',
+      //   weight: 8,
+      //   opacity: 0.8
+      // }).addTo(this.map);
 
-       L.polyline(route,{
+       var line = L.polyline(route,{
         color: color,
         weight: 5,
         opacity: 1
       }).addTo(this.map);
+      this.lines.push(line);
+      this.onLatLngBoundsChange.emit(line.getBounds());
     });
 
 
@@ -239,13 +253,8 @@ export class MapRouteComponent implements OnChanges {
       }
       if (settings.femalePinsOn){
         femaleIDs = this.getIDsByGender('Female');
-      }
-
-   //   console.log("female IDs: ", femaleIDs);
-      
+      }      
       unionIDs = maleIDs.concat(femaleIDs);
-   //   console.log("Union IDs: ", unionIDs);
-
     }
 
     //Limit to only users we follow
@@ -268,9 +277,6 @@ export class MapRouteComponent implements OnChanges {
         unionIDs = ageIDs;
       }
     }
-
- //  console.log("Union IDs: ", unionIDs);
-
     this.showPinsByID(unionIDs, false);
   }
 
@@ -286,7 +292,6 @@ export class MapRouteComponent implements OnChanges {
         IDs.push(this.userData[i].user_id);
       }
     }
-
     return IDs;
   }
 
@@ -298,7 +303,6 @@ export class MapRouteComponent implements OnChanges {
         IDs.push(this.userData[i].user_id);
       }
     }
-
     return IDs;
   }
 
@@ -589,10 +593,6 @@ export class MapRouteComponent implements OnChanges {
       distanceTypeOptions = {units: 'kilometers'};
     }
 
-    console.log("USER ROUTE IDX IN CREATE PIN ", user_route_idx);
-    console.log("COORDS IN CREATE PIN ", this.coordsRoutes);
-    console.log("COORDS[] IN CREATE PIN ", this.coordsRoutes[user_route_idx]);
-
     var along_user = turf.along(this.coordsRoutes[user_route_idx], user_rel_miles, distanceTypeOptions);
 
     var lng_user = along_user.geometry.coordinates[0];
@@ -629,6 +629,15 @@ export class MapRouteComponent implements OnChanges {
     //Return leaflet id
     let user_leaflet_id = Object.keys(locMarker._layers)[0].toString()
     return user_leaflet_id;
+  }
+
+  // clearMap clears map markers accessible only by the MapRoute component object
+  // e.g. start/end markers
+  public clearMap(){
+    if (this.map){
+      this.map.removeLayer(this.marker_start);
+      this.map.removeLayer(this.marker_end);
+    }
   }
 
 
@@ -701,7 +710,13 @@ export class MapRouteComponent implements OnChanges {
     
   }
 
-
+  // fitBoundsByRouteIndex fits the map window to the subroute at given index
+  public fitBoundsByRouteIndex(index: number){
+    console.log("In fitBoundsByRouteIndex")
+    console.log("Lines: ", this.lines);
+    console.log("Bounds on lines :", this.lines[index].getBounds())
+    this.map.fitBounds(this.lines[index].getBounds());
+  }
 
 
 
@@ -730,33 +745,6 @@ interface MapData {
   route_pins: RoutePins[];
 }
 
-interface UserData {
-  user_id: number,
-  total_distance: number,
-  distance_type: string,
-  rel_distance: number,
-  route_idx: number,
-  display_name: string,
-  profile_url: string,
-  follows: boolean,
-  child_user_stats: any[],
-  isTeam: boolean,
-  isMe: boolean,
-  gender: string,
-  age: number,
-
-  email:string,
-  description: string,
-  location:string,
-}
-
 interface OrgPinData {
   org_pins: UserData[];
-}
-
-export interface CheckpointMapData {
-  marker:number;
-  name:string;
-  id:number;
-  distance_type:string;
 }

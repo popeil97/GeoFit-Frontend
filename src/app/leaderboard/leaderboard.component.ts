@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, SimpleChanges,OnChanges } from '@angular/core';
-import { LeaderboardService } from '../leaderboard.service';
+import { 
+  LeaderboardService 
+} from '../services';
 
 @Component({
   selector: 'app-leaderboard',

@@ -1,0 +1,9 @@
+<div class="TucanContainer">
+  <h2 *ngIf="this.header">{{this.header}}</h2>
+  <p *ngIf="this.prompt">{{this.prompt}}</p>
+  <div class="actionsContainer">
+    <div class="action" *ngFor="let action of this.choices">
+      <button class='formButton' [style.background-color]="action.buttonColor" [style.color]="action.textColor" (click)="this.closeDialog(action.value)">{{action.text}}</button>
+    </div>
+  </div>
+</div>

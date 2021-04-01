@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { SearchService } from '../search.service';
+import { 
+  SearchService
+} from '../services';
 
 @Component({
   selector: 'app-search',
@@ -12,7 +14,9 @@ export class SearchComponent implements OnInit {
   searchResults: any[];
   @Input() raceID: number;
 
-  constructor(private _searchService:SearchService) { }
+  constructor(
+    private _searchService:SearchService
+  ) {}
 
   ngOnInit() {
   }

@@ -1,0 +1,202 @@
+<div class="TucanContainer">
+  <div class='LoginSignupHeader'>
+    <button *ngIf="this.formSegmentIndex==0" (click)="this.closeDialog()">Close</button>
+    <button *ngIf="this.formSegmentIndex==1" (click)="this.ChangeFormSegment(0)">Back</button>
+    <button class="CloseLogin" (click)="SwitchToLogin()">Log In</button>
+  </div>
+  <form *ngIf="formSegmentIndex==0" class='form margin-top-24px' id='registerCredentialsForm' [formGroup]="credentialsForm" (ngSubmit)="onCredentialsSubmit($event)">
+    
+    <h2>Sign Up</h2>
+    <p>Your Credentials</p>
+  
+    <h6>Email <span class="redText">*</span></h6>
+    <div class="formGroup">
+      <div class='formInputContainer'>
+        <input 
+          type="email"
+          formControlName="email" 
+          class="formTextInput" 
+          [ngClass]="{'errorTextInput':(credentialsSubmitted && c.email.errors)}"
+          placeholder="ex. john.doe@email.com" 
+          (keyup)="onKeyUpEvent($event)"
+        />
+        <div class="redText h7 margin-top-4px" *ngIf="credentialsSubmitted && c.email.errors">
+          <p class="margin-bottom-0px" *ngIf="c.email.errors.required">Email address is required.</p>
+          <p class="margin-bottom-0px" *ngIf="c.email.errors.email">Please provide a valid email address.</p>
+        </div>
+      </div>
+    </div>
+    
+    <h6>Password <span class="redText">*</span></h6>
+    <div class="formGroup">
+      <div class='formInputContainer'>
+        <input 
+          type="password" 
+          formControlName="password" 
+          class="formTextInput" 
+          [ngClass]="{'errorTextInput':(credentialsSubmitted && c.password.errors)}" 
+          placeholder="Must be at least 6 characters long" 
+          (keyup)="onKeyUpEvent($event)"
+        />
+        <div class="redText h7 margin-top-4px" *ngIf="credentialsSubmitted && c.password.errors">
+          <p class='margin-bottom-0px' *ngIf="c.password.errors.required">Password is required.</p>
+          <p class='margin-bottom-0px' *ngIf="c.password.errors.minlength">Password must be at least 6 characters.</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="TucanFormSegment">
+      <h6 class="InputLabel">Confirm Password <sup class="redText">*</sup></h6>
+      <input 
+        type="password" 
+        formControlName="confirmPassword" 
+        class="formTextInput" 
+        [ngClass]="{'errorTextInput':(credentialsSubmitted && c.confirmPassword.errors)}" 
+        placeholder="Must match your chosen password" 
+        (keyup)="onKeyUpEvent($event)"
+      />
+      <div class="redText h7 margin-top-4px" *ngIf="credentialsSubmitted && c.confirmPassword.errors">
+        <p *ngIf="c.confirmPassword.errors.required">Confirm Password is required</p>
+        <p *ngIf="c.confirmPassword.errors.mustMatch">Passwords must match</p>
+      </div>
+    </div>
+    
+    <div class="formGroup submitButtonGroup">
+      <input 
+        type="submit"
+        form='registerCredentialsForm'
+        value='Next' 
+        class='button formButton formSubmitButton'
+        [disabled]="loading" 
+        [readonly]="loading"
+      />
+    </div>
+  </form>
+  
+  <form *ngIf="formSegmentIndex==1" class='form margin-top-24px' id='registerPersonalForm' [formGroup]='personalForm' (ngSubmit)="onPersonalSubmit($event)">
+    
+    <h2>Sign Up</h2>
+    <p>About Yourself</p>
+
+    <div class="formGroup formGroupAlignedTop">
+      <div class="formInputContainer">
+        <h6>First Name <span class="redText">*</span></h6>
+        <input 
+          type="text" 
+          formControlName="first_name" 
+          placeholder="ex. John" 
+          class="formTextInput" 
+          [ngClass]="{'errorTextInput':(personalSubmitted && p.first_name.errors)}"
+          (keyup)="onKeyUpEvent($event)"
+        />
+        <div class="redText h7 margin-top-4px" *ngIf="personalSubmitted && p.first_name.errors">
+          <p class='margin-bottom-0px' *ngIf="p.first_name.errors.required">First Name is required.</p>
+        </div>
+      </div>
+  
+      <div class="formInputContainer">
+        <h6>Last Name <span class="redText">*</span></h6>
+        <input 
+          type="text" 
+          formControlName="last_name" 
+          placeholder="ex. Doe"
+          class="formTextInput" 
+          [ngClass]="{'errorTextInput':(personalSubmitted && p.last_name.errors)}"
+          (keyup)="onKeyUpEvent($event)"
+        />
+        <div class="redText h7 margin-top-4px" *ngIf="personalSubmitted && p.last_name.errors">
+          <p class='margin-bottom-0px' *ngIf="p.last_name.errors.required">Last Name is required.</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class='formGroup formGroupHeader'>
+      <h6>Birthday <span class="redText">*</span></h6>
+      <button class='formButton margin-bottom-8px' (click)="this.openWhyBirthdayPopup($event)">Why my birthday?</button>
+    </div>
+    <div class="formGroup formGroupAlignedTop">
+      <div class="formInputContainer">
+        <input 
+          type="number" 
+          formControlName="month_of_birth" 
+          min="1"
+          max="12"
+          placeholder="MM" 
+          class="formTextInput" 
+          [ngClass]="{'errorTextInput':(personalSubmitted && p.month_of_birth.errors)}"
+          (keyup)="onKeyUpEvent($event)"
+        />
+        <div class="redText h7 margin-top-4px" *ngIf="personalSubmitted && p.month_of_birth.errors">
+          <p class='margin-bottom-0px' *ngIf="p.month_of_birth.errors.required">Month is required.</p>
+        </div>
+      </div>
+      <div class="formInputContainer">
+        <input 
+          type="number" 
+          formControlName="day_of_birth" 
+          min="1"
+          max="31"
+          placeholder="DD"
+          class="formTextInput" 
+          [ngClass]="{'errorTextInput':(personalSubmitted && p.day_of_birth.errors)}" 
+          (keyup)="onKeyUpEvent($event)"
+        />
+        <div class="redText h7 margin-top-4px" *ngIf="personalSubmitted && p.day_of_birth.errors">
+          <p class='margin-bottom-0px' *ngIf="p.day_of_birth.errors.required">Day is required.</p>
+        </div>
+      </div>
+      <div class="formInputContainer">
+        <input 
+          type="number" 
+          formControlName="year_of_birth" 
+          min="1990"
+          max={{this.currentYear}}
+          placeholder="YYYY" 
+          class="formTextInput" 
+          [ngClass]="{'errorTextInput':(personalSubmitted && p.year_of_birth.errors)}"
+          (keyup)="onKeyUpEvent($event)"
+        />
+        <div class="redText h7 margin-top-4px" *ngIf="personalSubmitted && p.year_of_birth.errors">
+          <p class="margin-bottom-0px" *ngIf="p.year_of_birth.errors.required">Year is required.</p>
+        </div>
+      </div>
+    </div>
+            
+    <h6>Gender <span class="redText">*</span></h6>
+    <div class="formGroup">
+      <div class='formInputContainer'>
+        <select
+          class="formSelectInput" 
+          formControlName="gender" 
+          [ngClass]="{'errorSelectInput':(personalSubmitted && p.gender.errors)}"
+        >
+        <option value="" label="- Select an option -" selected ></option>
+        <option *ngFor="let typeOption of genderOptions" [value]="typeOption">
+          {{ typeOption }}
+        </option>
+      </select>
+      <div class="redText h7 margin-top-4px" *ngIf="personalSubmitted && p.gender.errors">
+        <p class='margin-bottom-0px' *ngIf="p.gender.errors.required">Please select a gender.</p>
+      </div>
+      </div>
+    </div>
+  
+    <p>By signing up, you agree to our <button (click)="this.openTOS($event)">Terms of Service</button></p>
+  
+    <div class="container">
+      <span *ngFor="let error of errors">{{ error }}<br /></span>
+    </div>
+  
+    <div class="formGroup submitButtonGroup">
+      <input 
+        type="submit"
+        form='registerPersonalForm'
+        class="button formButton formSubmitButton"
+        [disabled]="loading"
+        [readonly]='loading'
+        value='Sign Up'
+      />
+      <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+    </div>
+  </form>
+</div>

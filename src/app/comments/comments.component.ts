@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { StoryService } from '../story.service';
-import { AuthService } from '../auth.service';
+import { 
+  AuthService,
+  StoryService,
+} from '../services/';
 
 @Component({
   selector: 'app-comments',
@@ -20,8 +22,10 @@ export class CommentsComponent implements OnInit {
   //Columns for tabulated comments
   columns:string[] = ['ProfilePic','Data'];
 
-  constructor(private _storyService: StoryService,
-              public _authService: AuthService) { }
+  constructor(
+    private _storyService: StoryService,
+    public _authService: AuthService
+  ) { }
 
   ngOnInit() {
   }

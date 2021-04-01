@@ -1,0 +1,73 @@
+<div class="FeedContainer">
+  <ng-template [ngIf]='feedItems && feedItems.length > 0' [ngIfElse]="NothingInFeedBlock">
+    <div class='Feed'>
+      <div *ngFor="let element of feedItems" class='FeedItem' [hidden]="(followOnly && !element.follows) || (storyOnly && !element.story)">
+        <div class='FeedProfileImgCell'>
+          <div class='FeedProfileImgContainer'>
+            <img class="FeedProfileImg" src="{{ element.profile_url }}">
+          </div>
+        </div>
+        <div class='FeedProfileContentCell'>
+          <div>
+              <ng-template [ngIf]='(element.message.includes("ran") || element.message.includes("walked") || element.message.includes("biked") || element.message.includes("cycled") )' [ngIfElse]="FeedMessageIsStoryBlock">
+                <!-- NO STORY : FITNESS UPDATE -->
+                <div class='FeedMessageHeader'>
+                  <p class='FeedMessageName'><app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav></p>
+                  
+                  <div class='FeedmessageOtherInfo'>
+                    <span class='small margin-right-4px'>{{ element.hot? '🔥🔥🔥' : ' ' }}</span>
+                    <span class='small'>{{ this.get_created_ts(element.created_ts) }}</span>
+
+                  </div>
+                </div>
+                <div class='FeedMessageContent'>
+                  <p>{{ element.message }}</p>
+                </div>
+              </ng-template>
+              <ng-template #FeedMessageIsStoryBlock>
+                <!-- STORY-->
+                <div class='FeedMessageHeader'>
+                  <p class='FeedMessageName'><app-user-profile-nav [username]=element.username [displayName]=element.display_name></app-user-profile-nav></p>
+                  <div class='FeedmessageOtherInfo'>
+                    <span class='small margin-right-4px'>{{ element.hot? '🔥🔥🔥' : ' ' }}</span>
+                    <span class='small'>{{ this.get_created_ts(element.created_ts) }}</span>
+
+                  </div>
+                </div>
+                <div class='FeedMessageContent'>
+                  <p class='margin-bottom-4px'>{{ element.story_text }}</p>
+                  <img *ngIf="element.story_image" src="{{ element.story_image }}" (click)="openModal('story-popup',element)" width="100px" class='margin-bottom-4px'>
+                </div>
+              </ng-template>
+          </div>
+          <div class='FeedMessageActionsContainer'>
+            <div class='FeedMessageActionsSocialContainer'>
+              <app-story-btn class="likeButton" *ngIf="this._authService.isLoggedIn()" [use]="'like'" [storyID]=element.story_id [likes]=element.likes [likesCount]=element.likes_count [likesUsers]=element.likes_users></app-story-btn>
+              <div class="commentButton" role="button" (click)="element.show_comments=!element.show_comments"> <i class="material-icons" >comment</i> {{ element.comments.length }}</div>
+            </div>
+            <div class="dropdown dropdownVisible FeedMessageOptionsDropdown" [ngClass]="{dropdownOpen : element.show_options}" (click)="ToggleStoryOptions(element.story_id)">
+              <span class="material-icons">more_horiz</span>
+              <div class="dropdownContents FeedMessageOptions">
+                <div class='FeedMessageOptionsContent'>
+                  <p class='FeedMessageOption' (click)="openReportDialog(element.story_id)">Report Post</p> 
+                  <p *ngIf="element.is_mine" class='FeedMessageOption' (click)="openDeleteStoryDialog(element.story_id)">Delete Post</p> 
+                </div>
+              </div>
+            </div>
+          </div>
+          <ng-template [ngIf]="element.show_comments">
+            <app-comments [comments]="element.comments" [storyID]="element.story_id" (commentPosted)="newCommentPosted($event)"></app-comments>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+  <ng-template #NothingInFeedBlock>
+    <p>Nothing yet!</p>
+  </ng-template>
+
+  <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+  <div *ngIf="canRefresh"class="refreshSection">
+    <button paginate-button mat-button (click)="refreshFeed(null, true)">Load more...</button>
+  </div>
+</div>

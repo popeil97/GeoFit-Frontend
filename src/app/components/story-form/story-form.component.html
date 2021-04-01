@@ -1,0 +1,45 @@
+<div class='StoryFormInputContainer'>
+	<form [formGroup]="this.form" novalidate>
+		<div class='formGroup margin-bottom-4px'>
+			<div class='formInputContainer'>
+				<textarea 
+					#input 
+					class='formTextInput noResize h7'
+					[ngClass]="{'errorTextInput':((this.c.storyText.dirty || this.c.storyText.touched) && this.c.storyText.errors != null)}"
+					id="storyTextInput" 
+					name="storyText" 
+					formControlName="storyText"
+					maxlength="100" 
+					placeholder="What's on your mind?"
+					required
+				></textarea>
+				<p class="formTextInputCharacterLimit">
+					{{this.form.get('storyText').value.length}}/100
+				</p>
+			</div>
+		</div>
+		<input 
+			id="storyImageInput" 
+			type="file" 
+			class="hidden"
+			name="storyImageField" 
+			formControlName="storyImage"
+			accept=".png,.jpg,.jpeg"
+			(change)="this.onSelectImageFile($event)" 
+		/>
+		<div class="StoryFormInputImageWrapper" *ngIf="storyImageURL != null">
+			<img [src]="this.storyImageURL" class='StoryFormInputImagePreview' />
+			<div class='cancelIcon StoryFormInputImageDeleteButton'></div>
+		</div>
+		<div class='StoryFormInputExtraButtonsContainer'>
+			<button class="formButton emojiButton margin-bottom-0px" [ngClass]="{'highlightedButton':this.emojis}" (click)="this.toggleEmojis()">😊</button>
+			<button class='formButton StoryFormImageButton' (click)="this.onSelectImageClick($event)">
+				<div class='imageIcon'></div>
+			</button>
+			<button class='button formButton formSubmitButton StoryFormPostButton' (click)="this.uploadStory()">POST</button>
+		</div>
+		<div class='StoryFormInputEmojisButtonsContainer' *ngIf="this.emojis">
+			<button *ngFor="let element of this.acceptedEmojis" class='formButton emojiButton' (click)="this.addText(element)">{{element}}</button>
+		</div>
+	</form>
+</div>

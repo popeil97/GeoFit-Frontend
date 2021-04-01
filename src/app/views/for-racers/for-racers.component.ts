@@ -1,10 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {AuthService} from '../../auth.service';
-
 import { MatDialog } from '@angular/material';
-import { LoginComponent } from '../../login/login.component';
-import { Register2Component } from '../../register2/register2.component';
+
+import { 
+  AuthService,
+} from '../../services';
+
+import { 
+  LoginComponent,
+  RegisterComponent,
+} from '../../popups';
 
 @Component({
   selector: 'app-for-racers',
@@ -31,23 +36,32 @@ export class ForRacersComponent implements OnInit {
   }
 
   openLogin = () => {
-    let d = this.dialog.open(LoginComponent,{
+    const d = this.dialog.open(LoginComponent,{
       panelClass:"LoginContainer",
-      data:{register:false}
     });
+    const sub = d.componentInstance.openRegister.subscribe(()=>{
+      this.openRegister();
+    })
     d.afterClosed().subscribe(result=>{
-      console.log("CLOSE LOGIN FROM to_race_creators", result);
+      console.log("Closing Login from For Racers");
+      if (typeof result !== "undefined") console.log(result);
+      sub.unsubscribe();
     })
   }
 
   openRegister = () => {
-    let d = this.dialog.open(Register2Component, {
-      panelClass:"RegisterContainer",
+    const d = this.dialog.open(RegisterComponent, {
+      panelClass: 'RegisterContainer',
       data:{register:false},
     });
+    const sub = d.componentInstance.openLogin.subscribe(() => {
+      this.openLogin();
+    });
     d.afterClosed().subscribe(result=>{
-      console.log("CLOSE REGISTER FROM to_race_creators", result);
-    })
+      console.log("Closing Register from For Racers");
+      if (typeof result !== "undefined") console.log(result);
+      sub.unsubscribe();
+    });
   }
 
   navigateTo(url:string = null) {

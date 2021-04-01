@@ -1,6 +1,12 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormControl,FormGroup, Validators} from '@angular/forms';
-import { Tag, TagType, TagsService } from '../tags.service';
+import { 
+  TagsService 
+} from '../services';
+import {
+  Tag,
+  TagType,
+} from '../models';
 
 @Component({
   selector: 'app-tag-select',
@@ -21,7 +27,9 @@ export class TagSelectComponent implements OnInit {
   noneTag = {id:-1,name:'None',type:TagType.ENTRY} as Tag;
   allTag = {id:0,name:'All',type:TagType.ENTRY} as Tag;
 
-  constructor(private _tagService:TagsService) { }
+  constructor(
+    private _tagService:TagsService
+  ) { }
 
   ngOnInit() {
     this.tagSelectForm = new FormGroup({

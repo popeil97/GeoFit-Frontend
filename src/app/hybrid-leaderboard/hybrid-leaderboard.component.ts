@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { LeaderboardService } from '../leaderboard.service';
+import { 
+  LeaderboardService,
+ } from '../services';
 
 @Component({
   selector: 'app-hybrid-leaderboard',
@@ -14,7 +16,9 @@ export class HybridLeaderboardComponent implements OnInit,OnChanges {
   private page:number = 1;
   public showMore = false;
 
-  constructor(private _leaderboardService:LeaderboardService) { }
+  constructor(
+    private _leaderboardService:LeaderboardService
+  ) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     for(const propName in changes) {

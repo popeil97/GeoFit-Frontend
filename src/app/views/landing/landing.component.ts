@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
-import {AuthService} from '../../auth.service';
-import {throwError} from 'rxjs';
-import $ from "jquery";
 
-import { LoginComponent } from '../../login/login.component';
-import { Register2Component } from '../../register2/register2.component';
+import { 
+  AuthService,
+} from '../../services';
+
+import { 
+  LoginComponent,
+  RegisterComponent,
+} from '../../popups';
 
 @Component({
   selector: 'app-landing',
@@ -15,10 +18,8 @@ import { Register2Component } from '../../register2/register2.component';
 })
 export class LandingComponent implements OnInit {
 
-  private testString = "From Parent";
-
   constructor(
-    public _authService: AuthService, 
+    public authService: AuthService, 
     public router : Router,
     public dialog : MatDialog,
   ) { }
@@ -26,32 +27,42 @@ export class LandingComponent implements OnInit {
   ngOnInit() {
     //If we already store a JWT locally, set it in memory
     if (localStorage.getItem('access_token')){
-      this._authService.token = localStorage.getItem('access_token');
+      this.authService.token = localStorage.getItem('access_token');
     }
-    console.log(this._authService.isLoggedIn());
+    console.log(this.authService.isLoggedIn());
 
   }
 
   logout() {
-    this._authService.logout();
+    this.authService.logout();
   }
 
   openLogin = () => {
-    let d = this.dialog.open(LoginComponent, {
+    const d = this.dialog.open(LoginComponent, {
       panelClass:"LoginContainer",
     });
+    const sub = d.componentInstance.openRegister.subscribe(()=>{
+      this.openRegister();
+    })
     d.afterClosed().subscribe(result=>{
-      console.log("CLOSING LOGIN FROM LANDING", result);
+      console.log("Closing login from Landing");
+      if (typeof result !== "undefined") console.log(result);
+      sub.unsubscribe();
     });
   }
 
   openRegister = () => {
-    let d = this.dialog.open(Register2Component,{
-      panelClass:"RegisterContainer",
+    const d = this.dialog.open(RegisterComponent, {
+      panelClass: 'RegisterContainer',
+    });
+    const sub = d.componentInstance.openLogin.subscribe(() => {
+      this.openLogin();
     });
     d.afterClosed().subscribe(result=>{
-      console.log('CLOSING REGISTER FROM LANDING', result);
-    })
+      console.log("Closing Register from Landing Page")
+      if (typeof result !== "undefined") console.log(result);
+      sub.unsubscribe();
+    });
   }
 
   goToUserProfile = () => {

@@ -1,0 +1,84 @@
+<div class='PageContainer'>
+
+  <div class='formGroup formGroupHeader'>
+    <h2>Update Race Settings</h2>
+    <div>
+      <button class="formButton resetButton" (click)="this.resetForm()">Reset Changes</button>
+    </div>
+  </div>
+
+  <ng-template [ngIf]="this.raceID == null || this.raceData == null" [ngIfElse]="FormView">
+    <p>MISSING RACE INFORMATION</p>
+  </ng-template>
+  <ng-template #FormView>
+
+    <ng-template [ngIf]="this.loading" [ngIfElse]="LoadedForm">
+      <p>Loading Race Settings form...</p>
+    </ng-template>
+
+    <ng-template #LoadedForm>
+      <form [formGroup]="this.form" class="form" name="SettingsForm" (ngSubmit)="this.onFormSubmit()">
+
+        <h6>Allow Teams:</h6>
+        <p class="italics">If racers are allowed to form teams in your race, you must designated a maximum limit of racers per team.</p>
+        <div class='formGroup'>
+          <div class='formInputContainer'>
+            <mat-slide-toggle 
+              formControlName="allow_teams" 
+              (change)="this.valueChange('allow_teams')"
+            ></mat-slide-toggle>
+          </div>
+        </div>
+        <div [ngClass]="{'disabledGroup':(!this.form.get('allow_teams').value)}">
+          <h6>Maximum Number of Racers per Team:</h6>
+          <div id="raceTeamSizeContainer" class='formGroup formGroupColumn formGroupAlignedTop'>
+            <div class='formInputContainer autoWidth'>
+              <input 
+                id="raceTeamSize" 
+                class='formTextInput' 
+                [ngClass]="{'errorTextInput':(this.form.get('max_team_size').dirty || this.form.get('max_team_size').touched) && this.form.controls.max_team_size.errors!=null}" 
+                type='number' 
+                min="1" 
+                formControlName="max_team_size" 
+                (keyup)="this.valueChange('max_team_size')"
+              />
+            </div>
+            <div class='formErrorMessage redText' *ngIf="this.form.get('max_team_size').invalid && (this.form.get('max_team_size').dirty || this.form.get('max_team_size').touched)">
+              <p *ngIf="this.form.get('max_team_size').hasError('missing')" class="margin-0px">Teams must have a maximum size limit.</p>
+              <p *ngIf="this.form.get('max_team_size').hasError('notNumber')" class="margin-0px">Please provide an integer to indicate the maximum number of racers per team.</p>
+              <p *ngIf="this.form.get('max_team_size').hasError('min')" class="margin-0px">A value less than 1 is not allowed.</p>
+            </div>
+          </div>
+        </div>
+        <h6>Allow Manual Entries:</h6>
+        <p class='italics'>By allowing manual entries, racers can enter distances and times without requiring Strava.</p>
+        <div class='formGroup'>
+          <div class='formInputContainer'>
+            <!-- <input id="raceManual" class='formCheckboxInput' type='checkbox' formControlName="manual" /> -->
+            <mat-slide-toggle 
+              formControlName="is_manual_entry"
+              (change)="this.valueChange('is_manual_entry')"
+            ></mat-slide-toggle>
+          </div>
+        </div>
+
+        <div class='formGroup submitButtonGroup'>
+          <input 
+            type="submit" 
+            class="button formButton formSubmitButton" 
+            [ngClass]="{'disabled':(this.changedValues.length==0 || this.changedValues.length==0 || !this.formValid())}"
+            value="Update Race Details" 
+            [disabled]="this.changedValues.length==0 || this.checkingValidityOfSubmission || !this.formValid()"
+            [readonly]="this.changedValues.length==0 || this.checkingValidityOfSubmission || !this.formValid()"
+          />
+          <div class="margin-top-16px" *ngIf="this.hasSubmitted">
+            <p class="italics margin-0px" *ngIf="this.validForm && this.updatingSettings">Updating Race Settings...</p>
+            <p class="italics redText margin-0px" *ngIf="!this.validForm">Errors have been found above. Check each of your inputs for errors.</p>
+          </div>
+        </div>
+        
+      </form>
+    </ng-template>
+  </ng-template>
+
+</div>

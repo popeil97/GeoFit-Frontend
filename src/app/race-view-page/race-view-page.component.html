@@ -1,88 +1,222 @@
 <div class='TucanContainer'> 
-	<div class="MapContainer">
-		<div class="MapSidebar" [ngClass]="{MapSidebarWidthBig: isOpen, MapSidebarWidthSmall: !isOpen}">
-			<div class="MapHeaderContainer" *ngIf="isOpen">
-				<h3 class="MapHeaderTitle">{{this.raceName}}</h3>
-				<div class='MapHeaderButtonsContainer'>
-					<button class="smallButton" style="margin-right:3px;" (click)="viewAbout()">ABOUT</button>
-          			<span (click)="toggleMenu()" style="font-size:20px;" *ngIf="isOpen" class="material-icons">close</span>
+	<ng-template [ngIf]="!this.initializing" [ngIfElse]="LoadingBlock">
+		<div class="MapContainer">
+			<ng-template [ngIf]="this.raceData != null" [ngIfElse]="GettingRaceDataBlock">
+				<div class="MapCommandCenter">
+					<div class="MapCommandCenterAction" title="About the Race">
+						<div class="MapActionIcon AboutIcon" [ngClass]="{'opened':this.aboutOpen}" (click)="this.toggleAbout()"></div>
+					</div>
+					<div class="MapCommandCenterAction" title="Social Feed">
+						<div class="MapActionIcon SocialFeedIcon" [ngClass]="{'opened':this.socialOpen}" (click)="this.toggleSocial()"></div>
+					</div>
+					<div class="MapCommandCenterAction" title="Leaderboard">
+						<div class="MapActionIcon LeaderboardIcon" [ngClass]="{'opened':this.leaderboardOpen}" (click)="this.toggleLeaderboard()"></div>
+					</div>
+					<div class="MapCommandCenterAction" title="Search Toggle">
+						<div class="MapActionIcon SearchIcon" [ngClass]="{'opened':this.searchOpen}" (click)="this.toggleSearch()"></div>
+					</div>
+					<div class="MapCommandCenterAction" title="Log Activity">
+						<ng-template [ngIf]="!this._authService.isLoggedIn() || !this.userRegistered" [ngIfElse]="LogActivityButton">
+							<button class="MapActionButton" (click)="this.viewAbout()">Register to the Race</button>
+						</ng-template>
+						<ng-template #LogActivityButton>
+							<button class='MapActionButton' (click)="this.openLogActivity()">Log Activity</button>
+						</ng-template>
+					</div>
 				</div>
-			</div>
-		    <div class="MapHeaderContainer" *ngIf="!isOpen">
-		       <button *ngIf="!isOpen" (click)="toggleMenu()"><span class="material-icons">menu</span></button>
-		    </div>
-			<!--<button  class='LogContainer' *ngIf="this._authService.isLoggedIn() && this.userRegistered && isOpen" (click)="openModal('custom-modal-5')" >LOG ACTIVITY </button>-->
-			<button  class='LogContainer' *ngIf="this._authService.isLoggedIn() && this.userRegistered && isOpen" (click)="openLogActivity()" >LOG ACTIVITY </button>
-			<div class='MapActionsContainer' *ngIf="(!this._authService.isLoggedIn() || !this.userRegistered) && isOpen">
-				<p class='color-white'>Join the race and become a participant!</p>
-				<button class="lightButton wideButton" (click)="viewAbout()">JOIN</button>
-			</div>
-			<div class="Slideshow MapFeedContainer"  *ngIf="isOpen">
-				<div class="SlideshowHeader MapFeedSlideshowHeader" >
-					<button class="SlideshowButton" (click)="SwitchSlideshow('feed')" id="feed-btn">Social Feed</button>
-					<button class="SlideshowButton" (click)="SwitchSlideshow('leaderboard')" id="leaderboard-btn">Leaderboard</button>
-					<button *ngIf="allowTeams" class="SlideshowButton" (click)="SwitchSlideshow('teams')" id="teams-btn">Teams</button>
+				
+				<div class='MapSidebar' [ngClass]="{'collapsed':(!this.aboutOpen && !this.socialOpen && !this.leaderboardOpen && !this.searchOpen),'fullHeightOpen':(this.socialOpen || this.leaderboardOpen)}">
+					<div class='MapSidebarContainer'>
+						<div class="MapSidebarClose" (click)="this.closeSidebar()"></div>
+						<ng-template [ngIf]="this.aboutOpen">
+							<h2 class="MapTitle" (click)="this.viewAbout()" title="Learn more about this race">{{this.raceData.name}}</h2>
+							<p class='a margin-top-4px margin-bottom-24px' (click)="this.viewAbout()">More about this race</p>
+							<h3 class='margin-bottom-8px'>Legend:</h3>
+							<div class="MapLegend">
+								<div class="MapLegendItem">
+									<div class='MapLegendItemIcon AboutIcon'></div>
+									<div class="MapLegendItemContent h7">
+										<p>This section. Learn more about specifics of this race.</p>
+									</div>
+								</div>
+								<div class="MapLegendItem">
+									<div class='MapLegendItemIcon SocialFeedIcon'></div>
+									<div class="MapLegendItemContent">
+										<p>Share your stories and read those of other racers partaking in the race.</p>
+										<p class="italics">(You must be logged in to share your stories or make comments.)</p>
+									</div>
+								</div>
+								<div class="MapLegendItem">
+									<div class='MapLegendItemIcon LeaderboardIcon'></div>
+									<div class="MapLegendItemContent">
+										<p>Compare your progress with other racers.</p>
+										<p class="italics">(You must be logged in and be a participant to see your own stats.)</p>
+									</div>
+								</div>
+								<div class="MapLegendItem">
+									<div class='MapLegendItemIcon SearchIcon'></div>
+									<div class="MapLegendItemContent">
+										<p>Search for other people participating in the race.</p>
+									</div>
+								</div>
+							</div>
+						</ng-template>
+						<ng-template [ngIf]="this.socialOpen">
+							<h3>Social Feed</h3>
+							<ng-template [ngIf]="this._authService.isLoggedIn()" [ngIfElse]="MustLogInToPostStory">
+								<div class="MapFeedInputContainer">
+									<div class="MapFeedInputProfileContainer">
+										<img class='MapFeedInputProfile' src="{{this.userData.profile_url}}" alt='Your Profile Picture'>
+									</div>
+									<div class='MapFeedInputTextContainer'>
+										<app-story-form  [raceID]="raceID" (logActivityEvent)="logActivity($event)" (storyPostedEvent)="newStoryPosted($event)"></app-story-form>
+									</div>
+								</div>
+							</ng-template>
+							<ng-template #MustLogInToPostStory>
+								<p class='italics'>You must be logged in with an account to post comments.</p>
+							</ng-template>
+							<div class='MapFeedSettingsButtonContainer'>
+								<div class='MapFeedSettingsContainer'>
+									<button class="strippedWhite h7" (click)="toggleOptions()">Filter Chat <span class="material-icons">filter_list</span></button>
+									<div *ngIf="feedOptions" class='MapFeedOptionsContainer'>
+										<p class="textControl">Only show people I follow <input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/></p>
+										<p class="textControl">Only show status updates <input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/> </p>
+									</div>
+								</div>
+							</div>
+							<div class='MapFeed'>
+								<app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
+							</div>
+						</ng-template>
+						<ng-template [ngIf]="this.leaderboardOpen">
+							<div class='LeaderboardFeed'>
+								<app-tag-select *ngIf="hasEntryTags && !isHybrid" [raceID]="raceID" [tagType]="entryTagType" [hasAll]="true" [title]="'Filter by Org'" (emitState)="setLeaderboardTagID($event)"></app-tag-select>
+								<div class="routeRow" *ngIf="isHybrid && childRaceData.length > 0">
+									<div class="routeCol">
+										<app-route-select  [routes]="childRaceData" [title]="'Filter by Route'" (routeChanged)="setLeaderboardRouteFilter($event)"></app-route-select>
+									</div>
+									<div class="qCol">
+										<button class="whiteButton smallButton" (click)="this.openRouteInfo()">?</button>
+									</div>
+								</div>				
+								<div *ngIf="allowTeams" class="SlideshowHeader MapFeedSlideshowHeader">
+									<button class="SlideshowButton" (click)="SwitchLeaderboard('individual')" id="individual-leaderboard-btn">Individual</button>
+									<button class="SlideshowButton" (click)="SwitchLeaderboard('teams')" id="teams-leaderboard-btn">Teams</button>
+								</div>
+								<app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0 && currentLeaderboard == 'individual'" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard> 
+								<app-leaderboard *ngIf="selectedTagFilterID != 0 && allowTeams && currentLeaderboard == 'teams'" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
+								<app-hybrid-leaderboard *ngIf="isHybrid && currentLeaderboard == 'individual'" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard>
+							</div>
+						</ng-template>
+						<ng-template [ngIf]="this.searchOpen">
+							<h3>Search</h3>
+							<ng-template [ngIf]="this._authService.isLoggedIn() && this.userRegistered" [ngIfElse]="UnableToShowSearch">
+								<!--
+								<div *ngIf=""[ngClass]="{searchContainer: isOpen, searchContainerSmall: !isOpen}">
+									<app-search [raceID]="raceID"></app-search>
+								</div>
+								-->
+								<app-search [raceID]="raceID"></app-search>
+							</ng-template>
+							<ng-template #UnableToShowSearch>
+								<p class='italics'>You must be logged in with an account as well as be a particiant of the race to perform a search on any other racers.</p>
+							</ng-template>
+						</ng-template>
+					</div>
 				</div>
-				<div class="SlideshowContents MapFeedSlideshowContents">
-					<div class="SlideshowSlide MapFeedSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'feed'}">
-						<div *ngIf="this._authService.isLoggedIn()" class="MapFeedInputContainer">
-							<div class="MapFeedInputProfileContainer">
-								<img class='MapFeedInputProfile' src="{{userData.profile_url}}" alt='Your Profile Picture'>
-							</div>
-							<div class='MapFeedInputTextContainer'>
-								<app-story-form  [raceID]="raceID" (logActivityEvent)="logActivity($event)" (storyPostedEvent)="newStoryPosted($event)"></app-story-form>
-							</div>
+				<!--
+				<div class="MapSidebar" [ngClass]="{'collapsed':!this.sidebarOpen}">
+					<div class="MapSidebarContainer">
+						<div class="MapSidebarToggle" (click)="this.toggleSidebar()"></div>
+						<div class="MapHeaderContainer">
+							<h3 class="MapHeaderTitle">{{this.raceName}}</h3>
+							<p class='a margin-bottom-0px margin-top-4px overflow-hidden' (click)="this.viewAbout()">More about this race</p>
 						</div>
-						<div class='MapFeedSettingsButtonContainer'>
-							<div class='MapFeedSettingsContainer'>
-								<button class="strippedWhite h7" (click)="toggleOptions()">Filter Chat <span class="material-icons">filter_list</span></button>
-								<div *ngIf="feedOptions" class='MapFeedOptionsContainer'>
-									<p class="textControl">Only show people I follow <input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/></p>
-									<p class="textControl">Only show status updates <input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/> </p>
-								</div>
-							</div>
+						<div class='MapActionsContainer'>
+							<ng-template [ngIf]="(!this._authService.isLoggedIn() || !this.userRegistered)" [ngIfElse]="LogBlock">
+								<p class='color-white margin-bottom-4px'>Join the race and become a participant!</p>
+								<button class="lightButton wideButton" (click)="this.viewAbout()">JOIN</button>
+							</ng-template>
+							<ng-template #LogBlock>
+								<button class='lightButton wideButton' (click)="this.openLogActivity()" >LOG ACTIVITY</button>
+							</ng-template>
 						</div>
-						<div class='MapFeed'>
-							<app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
-						</div>
-					</div>		
-					<div class="SlideshowSlide MapLeaderboardSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'leaderboard'}">
-						<div class='LeaderboardFeed'>
-							<app-tag-select *ngIf="hasEntryTags && !isHybrid" [raceID]="raceID" [tagType]="entryTagType" [hasAll]="true" [title]="'Filter by Org'" (emitState)="setLeaderboardTagID($event)"></app-tag-select>
-							<div class="routeRow" *ngIf="isHybrid && childRaceData.length > 0">
-								<div class="routeCol">
-									<app-route-select  [routes]="childRaceData" [title]="'Filter by Route'" (routeChanged)="setLeaderboardRouteFilter($event)"></app-route-select>
-								</div>
-								<div class="qCol">
-									<button class="whiteButton smallButton" (click)="openModal('route-info')">?</button>
-								</div>
+						<div class="Slideshow MapFeedContainer"  *ngIf="isOpen">
+							<div class="SlideshowHeader MapFeedSlideshowHeader" >
+								<button class="SlideshowButton" (click)="SwitchSlideshow('feed')" id="feed-btn">Social Feed</button>
+								<button class="SlideshowButton" (click)="SwitchSlideshow('leaderboard')" id="leaderboard-btn">Leaderboard</button>
+								<button *ngIf="allowTeams" class="SlideshowButton" (click)="SwitchSlideshow('teams')" id="teams-btn">Teams</button>
 							</div>
-							
-							<div *ngIf="allowTeams" class="SlideshowHeader MapFeedSlideshowHeader">
-								<button class="SlideshowButton" (click)="SwitchLeaderboard('individual')" id="individual-leaderboard-btn">Individual</button>
-								<button class="SlideshowButton" (click)="SwitchLeaderboard('teams')" id="teams-leaderboard-btn">Teams</button>
+							<div class="SlideshowContents MapFeedSlideshowContents">
+								<div class="SlideshowSlide MapFeedSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'feed'}">
+									<div *ngIf="this._authService.isLoggedIn()" class="MapFeedInputContainer">
+										<div class="MapFeedInputProfileContainer">
+											<img class='MapFeedInputProfile' src="{{userData.profile_url}}" alt='Your Profile Picture'>
+										</div>
+										<div class='MapFeedInputTextContainer'>
+											<app-story-form  [raceID]="raceID" (logActivityEvent)="logActivity($event)" (storyPostedEvent)="newStoryPosted($event)"></app-story-form>
+										</div>
+									</div>
+									<div class='MapFeedSettingsButtonContainer'>
+										<div class='MapFeedSettingsContainer'>
+											<button class="strippedWhite h7" (click)="toggleOptions()">Filter Chat <span class="material-icons">filter_list</span></button>
+											<div *ngIf="feedOptions" class='MapFeedOptionsContainer'>
+												<p class="textControl">Only show people I follow <input type="checkbox" [(ngModel)]="followerFeedOnly" [ngModelOptions]="{standalone: true}"/></p>
+												<p class="textControl">Only show status updates <input type="checkbox" [(ngModel)]="storyFeedOnly" [ngModelOptions]="{standalone: true}"/> </p>
+											</div>
+										</div>
+									</div>
+									<div class='MapFeed'>
+										<app-feed [use]="'race'" [ID]="raceID" [hasStoryModalChild]="false" [followOnly]="followerFeedOnly" [storyOnly]="storyFeedOnly" (feedItemClicked)="panToUserMarker($event)" (storyItemClicked)="showStoryModal($event)" [progress]=progress></app-feed>
+									</div>
+								</div>		
+								<div class="SlideshowSlide MapLeaderboardSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'leaderboard'}">
+									<div class='LeaderboardFeed'>
+										<app-tag-select *ngIf="hasEntryTags && !isHybrid" [raceID]="raceID" [tagType]="entryTagType" [hasAll]="true" [title]="'Filter by Org'" (emitState)="setLeaderboardTagID($event)"></app-tag-select>
+										<div class="routeRow" *ngIf="isHybrid && childRaceData.length > 0">
+											<div class="routeCol">
+												<app-route-select  [routes]="childRaceData" [title]="'Filter by Route'" (routeChanged)="setLeaderboardRouteFilter($event)"></app-route-select>
+											</div>
+											<div class="qCol">
+												<button class="whiteButton smallButton" (click)="this.openRouteInfo()">?</button>
+											</div>
+										</div>
+											
+										<div *ngIf="allowTeams" class="SlideshowHeader MapFeedSlideshowHeader">
+											<button class="SlideshowButton" (click)="SwitchLeaderboard('individual')" id="individual-leaderboard-btn">Individual</button>
+											<button class="SlideshowButton" (click)="SwitchLeaderboard('teams')" id="teams-leaderboard-btn">Teams</button>
+										</div>
+				
+										<app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0 && currentLeaderboard == 'individual'" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard> 
+										<app-leaderboard *ngIf="selectedTagFilterID != 0 && allowTeams && currentLeaderboard == 'teams'" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
+										<app-hybrid-leaderboard *ngIf="isHybrid && currentLeaderboard == 'individual'" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard>
+									</div>
+								</div>
+				
+								<div class="SlideshowSlide MapLeaderboardSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'teams'}">
+									<app-team-list *ngIf="allowTeams" [race_id]="raceID" [userStat]="userStat" (callback)="refreshAllComponents($event)"></app-team-list>
+								</div>
+								
 							</div>
-
-							<app-leaderboard *ngIf="!isHybrid && selectedTagFilterID != 0 && currentLeaderboard == 'individual'" [raceID]="raceID" [use]="'individual'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard> 
-							<app-leaderboard *ngIf="selectedTagFilterID != 0 && allowTeams && currentLeaderboard == 'teams'" [raceID]="raceID" [use]="'teams'" [allowFollow]="false" [tagID]="selectedTagFilterID"></app-leaderboard>
-							<app-hybrid-leaderboard *ngIf="isHybrid && currentLeaderboard == 'individual'" [raceID]="leaderboardRouteFilter.id"></app-hybrid-leaderboard>
 						</div>
 					</div>
-
-					<div class="SlideshowSlide MapLeaderboardSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'teams'}">
-						<app-team-list *ngIf="allowTeams" [race_id]="raceID" [userStat]="userStat" (callback)="refreshAllComponents($event)"></app-team-list>
-					</div>
-					
 				</div>
-			</div>
+				-->
+				<div class='MapGreaterContainer'>
+					<app-map [raceIDs]="raceIDs" [parentRaceID]="raceID" [displayUsers]="true" [followedIDs]="followedIDs" [zoom]="false"></app-map>
+				</div>
+			</ng-template>
+			<ng-template #GettingRaceDataBlock>
+				<div class='position-absolute-middle'>
+					<h1>Retrieving Race Data...</h1>
+				</div>
+			</ng-template>
 		</div>
-		<div class='MapGreaterContainer'>
-			<app-map [raceIDs]="raceIDs" [parentRaceID]="raceID" [displayUsers]="true" [followedIDs]="followedIDs" [zoom]="false"></app-map>
-			<div *ngIf="this._authService.isLoggedIn() && this.userRegistered"[ngClass]="{searchContainer: isOpen, searchContainerSmall: !isOpen}">
-				<app-search [raceID]="raceID"></app-search>
-			</div>
-		</div>
-	</div>
+	</ng-template>
+	<ng-template #LoadingBlock>
+		<h1 class="position-absolute-middle">Loading Race Info...</h1>
+	</ng-template>
 </div>
 
 <!-----STORY MODAL-->

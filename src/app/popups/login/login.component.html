@@ -1,0 +1,58 @@
+<div class="TucanContainer">
+
+    <div class='formGroup formGroupHeader margin-bottom-24px'>
+        <button class="formButton" (click)="closeDialog()">Cancel</button>
+        <button class="formButton" (click)="SwitchToRegister()">Sign Up</button>
+    </div>
+
+    <form class="form margin-top-24px" [formGroup]="loginForm" (ngSubmit)="this.onSubmit()" novalidate>
+        <h2>Log In</h2>
+        <h6>Email:</h6>
+        <div class="formGroup">
+            <div class='formInputContainer'>
+                <input 
+                    id="loginEmail"
+                    type="text" 
+                    formControlName="email" 
+                    class="formTextInput" 
+                    placeholder="Email" 
+                    [ngClass]="{'errorTextInput':(submitted && f.email.errors)}" 
+                />
+                <div class="inputErrorContainer" *ngIf="submitted && f.email.errors">
+                    <p *ngIf="f.email.errors.required">Email address is required.</p>
+                    <p *ngIf="f.email.errors.email">Please provide a valid email address.</p>
+                </div>
+            </div>
+        </div>  
+        <h6>Password</h6>
+        <div class="formGroup">
+            <div class='formInputContainer'>
+                <input 
+                    id="loginPassword" 
+                    type="password" 
+                    formControlName="password" 
+                    class="formTextInput" 
+                    [ngClass]="{'errorTextInput':(submitted && f.password.errors)}"
+                    placeholder="Password" 
+                />
+                <div class="inputErrorContainer" *ngIf="submitted && f.password.errors">
+                    <p *ngIf="f.password.errors.required">Password is required.</p>
+                </div>
+                <p class="a margin-top-4px" (click)="this.navigateTo('/password-request');">Forgot password?</p>
+            </div>
+        </div>
+        <div class="formGroup submitButtonGroup">
+            <input 
+                type="submit"
+                [disabled]="loading" 
+                [readonly]="loading"
+                class="button formButton formSubmitButton"
+                value="Login"
+            />
+            <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <div class='inputErrorContainer' *ngIf="submitted && ( this.validForm() || this.error != null)">
+                <p>{{this.error}}</p>
+            </div>
+        </div>
+    </form>
+</div>

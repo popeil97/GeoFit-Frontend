@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { StoryService } from '../story.service';
 import {MatTooltipModule} from '@angular/material';
+import { 
+  StoryService,
+} from '../services';
 
 @Component({
   selector: 'app-story-btn',

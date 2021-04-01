@@ -18,13 +18,15 @@
   --partial_mobile_width: 992px;
   --mobile_width: 600px;
 
-  --main-background-color: #36343C;
-  --primary-darkgrey: #36343C;
+  --main-background-color: rgb(54,52,60);
+  --submain-background-color: rgb(96,92,107);
+  --primary-darkgrey: rgb(54,52,60);
   --primary-lightgrey: rgb(200,200,200);
 
   --tucan-orange:#ed6a11;
   --tucan-green:#7FCC92;
   --slate-tint:#C4C4C4;
+
   --input-background-color: #EBEBEB;
 
   --common-box-shadow: 0px 0px 5px 2px rgb(200,200,200);
@@ -78,13 +80,24 @@ h6, .h6 {
 .h7 {
   font-size:12px;
 }
+a, .a {
+  color:blue;
+  margin:0px;
+}
+a:hover, .a:hover {
+  cursor:pointer;
+  text-decoration: underline;
+}
 
 .textAlignCenter {
   text-align: center;
 }
 
-.nobr {
+.nobr, .no-br {
   white-space: nowrap;
+}
+.hidden {
+  display:none;
 }
 
 input[type=text], input[type=password], input[type=email], input[type=number], input[type=date], input[type=url], input[type=time], input[type=tel], input[type=search], textarea {
@@ -173,8 +186,24 @@ button.wideButton, .button.wideButton {
 .color-red {
   color: red;
 }
+.color-blue {
+  color:blue;
+}
 .bold-text {
   font-weight: bold;
+}
+
+.position-relative {
+  position:relative;
+}
+.position-absolute {
+  position:absolute;
+}
+.position-absolute-middle {
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
 }
 
 .margin-0px, .margin-top-bottom-0px, .margin-top-0px      { margin-top:0px; }
@@ -451,6 +480,10 @@ h1.PageHeaderSegmentTitle {
   outline-width: 0;
   font-size:14px;
 }
+.SlideshowButton.selected {
+  background-color:#36343c;
+  color:white;
+}
 
 .SlideshowSlide {
   height:0;
@@ -722,10 +755,18 @@ h1.PageHeaderSegmentTitle {
 }
 
 
-
-.LoginContainer, .RegisterContainer, .SignUpContainer, .LogActivityContainer {
-  /* width:calc(600px - 48px); */
+.DialogDefaultContainer,
+.LoginContainer,
+.RegisterContainer,
+.SignUpContainer,
+.LogActivityContainer,
+.MerchandiseItemFormContainer,
+.ProfileFormContainer,
+.ViewFollowersContainer {
   width:600px;
+  height:auto;
+  max-height: calc(100vh - 64px);
+  overflow-y: auto;
 }
 
 

@@ -1,0 +1,125 @@
+<div class="TucanContainer">
+  <div class='formGroup formGroupHeader'>
+    <button (click)="this.closeDialog()">Cancel</button>
+    <button class="formButton resetButton" *ngIf="!this.initializing && this.profileForm != null" (click)="this.resetForm($event)">Reset</button>
+  </div>
+
+  <ng-template [ngIf]="this.initializing || this.profileForm == null" [ngIfElse]="FormBlock">
+    <p class='italics'>Loading User Data...</p>
+  </ng-template>
+
+  <ng-template #FormBlock>
+    <form class='form margin-top-24px' [formGroup]="this.profileForm" (ngSubmit)="this.onFormSubmit($event)" novalidate>
+      
+      <h2>Edit Profile Info</h2>
+
+      <div class="formGroup formGroupColumn">
+        <div class='formInputContainer'>
+          <input 
+            id="ProfilePicInput"
+            type="file" 
+            class="hidden"
+            formControlName="ProfilePic" 
+            accept=".jpg,.jpeg,.png"
+            (change)="onSelectProfilePicFile($event)"
+          />
+          <div class="profilePictureContainer">
+            <div class="profilePicture" [style.background-image]="'url(' + this.profilePicURL + ')'"></div>
+            <div class="profilePictureUploadOverlay" *ngIf="!this.profilePicUploading" (click)="this.onClickProfilePicUpload($event)">
+              <img class='profilePictureUploadIcon' src="../../assets/icons/upload-icon-white.svg" alt="Upload Icon" />
+              <p class="h7 margin-bottom-0px">Upload new profile image</p>
+            </div>
+            <p class="profilePictureLoadingOverlay" *ngIf="this.profilePicUploading">Loading...</p>
+            <p class="profilePictureCancelOverlay" *ngIf="this.profilePicURL != this.data.profile_url" (click)="this.cancelProfilePicUpload($event)">Cancel</p>
+          </div>
+        </div>
+      </div>
+  
+      <div class="formGroup formGroupAlignedTop">
+        <div class="formInputContainer">
+          <h6>First Name: <span class='redText'>*</span></h6>
+          <input 
+            class="formTextInput"
+            [ngClass]="{'errorTextInput':(this.profileForm.get('FirstName').invalid && (this.profileForm.get('FirstName').dirty || this.profileForm.get('FirstName').touched))}"
+            type="text" 
+            placeholder="First Name" 
+            formControlName="FirstName" 
+          />
+          <div *ngIf="this.profileForm.get('FirstName').invalid && (this.profileForm.get('FirstName').dirty || this.profileForm.get('FirstName').touched)">
+            <p *ngIf="this.profileForm.get('FirstName').hasError('required')" class='h7 redText margin-bottom-0px'>First name is required.</p>
+          </div>
+        </div>
+    
+        <div class="formInputContainer">
+          <h6>Last Name: <span class='redText'>*</span></h6>
+          <input 
+            class="formTextInput"
+            [ngClass]="{'errorTextInput':(this.profileForm.get('LastName').invalid && (this.profileForm.get('LastName').dirty || this.profileForm.get('LastName').touched))}"
+            type="text" 
+            placeholder="Last Name" 
+            formControlName="LastName" 
+          />
+          <div *ngIf="this.profileForm.get('LastName').invalid && (this.profileForm.get('LastName').dirty || this.profileForm.get('LastName').touched)">
+            <p *ngIf="this.profileForm.get('LastName').errors.required" class='h7 redText margin-bottom-0px'>Last Name is required.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class='formGroupHeader margin-bottom-0px'>
+        <h6>About</h6>
+        <mat-slide-toggle formControlName="aboutToggle">Show</mat-slide-toggle>
+      </div>
+      <div class="formGroup">
+        <div class='formInputContainer'>
+          <textarea 
+            class="formTextInput"
+            formControlName="About" 
+            rows="3" 
+            placeholder="Ex. I'm a runner that tries their best to exercise daily."
+          ></textarea>
+        </div>
+      </div>
+  
+      <div class="formGroup formGroupAlignedTop">
+        <div class="formInputContainer">
+          <div class='formGroupHeader margin-bottom-0px'>
+            <h6>Location:</h6>
+            <mat-slide-toggle formControlName="locationToggle">Show</mat-slide-toggle>
+          </div>
+          <input 
+            class="formTextInput"
+            [ngClass]="{'errorTextInput':(this.profileForm.get('Location').invalid && (this.profileForm.get('Location').dirty || this.profileForm.get('Location').touched))}"
+            type="text"
+            placeholder="Ex. Denver, Colorado, USA" 
+            formControlName="Location" 
+          />
+          <div *ngIf="this.profileForm.get('Location').invalid && (this.profileForm.get('Location').dirty || this.profileForm.get('Location').touched)">
+            <p *ngIf="this.profileForm.get('Location').errors.maxlength" class='h7 redText margin-bottom-0px'>This must be no more than 30 characters.</p>
+          </div>
+        </div>
+        <div class="formInputContainer">
+          <div class='formGroupHeader margin-bottom-0px'>
+            <h6>Email:</h6>
+            <mat-slide-toggle formControlName="emailToggle">Show</mat-slide-toggle>
+          </div>
+          <p class="disabledGroup margin-bottom-0px">{{this.data.email}}</p>
+        </div>
+      </div>
+
+      <div class='formGroup submitButtonGroup'>
+        <input 
+          class="button formButton formSubmitButton"
+          [ngClass]="{'disabled':this.checkingValidityOfSubmission || !this.validForm()}"
+          type="submit"
+          value="Update Info"
+          [disabled]="this.checkingValidityOfSubmission || !this.validForm()"
+          [readonly]="this.checkingValidityOfSubmission || !this.validForm()"
+        />
+        <div class="margin-top-16px" *ngIf="this.hasSubmitted">
+          <p class="italics margin-0px" *ngIf="this.validForm() && this.updatingItem">Updating Race Settings...</p>
+          <p class="italics redText margin-0px" *ngIf="!this.validForm()">Errors have been found above. Check each of your inputs for errors.</p>
+        </div>
+      </div>
+    </form>
+  </ng-template>
+</div>

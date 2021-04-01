@@ -1,31 +1,49 @@
-import { Component, OnInit, ViewChild, ViewChildren, QueryList, AfterViewChecked, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren, QueryList, AfterViewInit, OnDestroy } from '@angular/core';
 import * as bootstrap from "bootstrap";
-import { RaceService } from '../race.service';
-import { StoryService } from '../story.service'
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { MatDialog } from '@angular/material';
+
 import { Progress } from '../user-progress/user-progress.component';
-import { ActivitiesService } from '../activities.service';
 import { MapComponent } from '../map/map.component';
-import { FeedComponent } from '../feed/feed.component';
 import { StoryModalComponent } from '../story-modal/story-modal.component';
-import { RaceSettings } from '../race-about-page/race-about-page.component';
+import { RaceSettings } from '../views/race-about/race-about.component';
 import { TeamFormComponent } from '../team-form/team-form.component';
-import { AuthService } from '../auth.service';
-import { UserProfileService } from '../userprofile.service';
+
+import { 
+  AuthService,
+  RaceService,
+  UserProfileService,
+  ActivitiesService,
+  StoryService,
+  RouterService,
+} from '../services';
+
+import {
+  UserData,
+  Tag,
+  TagType,
+} from '../models'
+
+import {
+  RouteInfoComponent
+} from '../popups';
+
+import {
+  FeedComponent
+} from '../components';
+
 import { LeaderboardComponent } from '../leaderboard/leaderboard.component';
 import * as confetti from 'canvas-confetti';
-import { ModalService } from '../modalServices';
 
-import { MatDialog } from '@angular/material';
 import { LogActivityComponent } from '../log-activity/log-activity.component';
 
 declare var $: any;
 import * as _ from 'lodash';
-import { TagType, Tag } from '../tags.service';
 import { RouteSelectComponent } from '../route-select/route-select.component';
 import { HybridLeaderboardComponent } from '../hybrid-leaderboard/hybrid-leaderboard.component';
 import { CheckpointDialogComponent } from '../checkpoint-list/checkpoint-dialog.component';
-
+import { times } from 'lodash';
+import { ThrowStmt } from '@angular/compiler';
 
 
 @Component({
@@ -33,21 +51,25 @@ import { CheckpointDialogComponent } from '../checkpoint-list/checkpoint-dialog.
   templateUrl: './race-view-page.component.html',
   styleUrls: ['./race-view-page.component.css'],
 })
-export class RaceViewPageComponent implements OnInit,AfterViewInit {
+export class RaceViewPageComponent implements OnInit,AfterViewInit,OnDestroy {
   @ViewChild(MapComponent) mapChild: MapComponent;
   @ViewChild(FeedComponent) feedChild: FeedComponent;
   @ViewChild(StoryModalComponent) storyModal: StoryModalComponent;
   @ViewChildren(LeaderboardComponent) leaderboardChildren: QueryList<LeaderboardComponent>;
   @ViewChildren(HybridLeaderboardComponent) hybridLeaderboardChildren: QueryList<HybridLeaderboardComponent>;
 
+  public initializing:Boolean = true;
+  private raceID:number = null;
+  //public raceName:string;
+  public raceData:any = null;
+  public aboutOpen:Boolean = true
+  public socialOpen:Boolean = false;
+  public leaderboardOpen:Boolean = false;
+  public searchOpen:Boolean = false;
+
   public followers:any[];
   public activities:any[];
   public num_activities:any;
-
-  public raceName:string;
-
-  //Parent race ID
-  raceID:number;
 
   //Child race IDs (same as parent if no child IDs)
   public raceIDs:number[] = [];
@@ -110,6 +132,8 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
   public currentLeaderboard = 'individual';
   public acceptedScreens = ['feed','leaderboard','teams'];
 
+  private userDataSubscription:any = null;
+
   constructor(
     private raceService:RaceService,
     private activitiesService:ActivitiesService,
@@ -118,38 +142,141 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     private router:Router,
     private storyService: StoryService,
     public _authService: AuthService,
-    private modalService: ModalService,
+    private routerService:RouterService,
 
     private dialog : MatDialog,
   ) {
     this.modalData = {};
+    this.userData = this._authService.userData;
+    this.userDataSubscription = this._authService.userDataChange.subscribe(this.handleUserDataChange);
   }
 
   ngOnInit() {
-    this.loading = true;
     this.route.paramMap.subscribe(params => {
-      this.raceName = params['params']['name'];
+      //this.raceName = params['params']['name'];
       this.raceID = params['params']['id'];
+      this.initializePage();
     });
-
-    if(this._authService.isLoggedIn()) {
-      this._userProfileService.getUserProfile(this._authService.username).then((data) => {
-        this.userData = data as UserData;
-      });
-    }
-    
+  }
+  ngAfterViewInit(): void {
+    this.setLeaderboardRouteFilter({id:this.raceID,name:'All'});
+  }
+  ngOnDestroy() {
+    this.userData = null;
+    this.userDataSubscription.unsubscribe();
+    this.userDataSubscription = null;
+    this.raceData = null;
+  }
+  
+  initializePage = () => {
+    this.loading = true;
     this.getRaceState();
     this.getActivities();
-
     const feedButton = document.getElementById('feed-btn');
     if (feedButton) {
       feedButton.style.backgroundColor = "#36343c";
       feedButton.style.color = "#FFFFFF";
     }
   }
+  handleUserDataChange = (data:any) => {
+    this.userData = data;
+    this.initializePage();
+  }
 
-  ngAfterViewInit(): void {
-    this.setLeaderboardRouteFilter({id:this.raceID,name:'All'});
+  getRaceState = ():void => {
+    this.loading = true;
+    this.raceService.getRacePromise(this.raceID).then((data) => {
+      console.log('RACE DATA:',data);
+      this.showTeamForm=false;
+      let d = data as RaceData;
+
+      // the data will return `raceData.user_state` if the logged-in user has joined the race.
+      // if the user isn't logged in or hasn't joined, the `raceData.user_stat` object will be undefined
+      // therefore, the data will use this to check if someone has joined a race or not.
+      this.userRegistered = d.user_stat!=null;
+
+      this.raceData = {
+        name:d.race.name,
+        userStats:(typeof d.user_stat !== "undefined" && d.user_stat != null) ? d.user_stat : null
+      };
+
+
+      this.progress = d.progress;
+      this.race = d.race;
+
+      // if(this.progress.distance_remaining <= 0)
+      // {
+      //     confetti.create()({
+      //     particleCount: 5000,
+      //     spread: 900,
+          
+      //     origin: {
+      //         y: (1),
+      //         x: (0.5)
+      //     }
+      //   });
+      // }
+
+      this.num_activities = 0;
+
+      // Child race data
+      this.raceIDs = d.race_IDs;
+      this.childRaceData = d.child_race_dict;
+      this.childRaceData.unshift({id:this.raceID,name:'All'});
+      
+      // Race-specific info
+      this.raceSettings = d.race_settings;
+      this.raceType = d.race.race_type;
+      this.hasEntryTags = this.raceSettings.has_entry_tags;
+      this.isManualEntry = this.raceSettings.isManualEntry;
+      this.isHybrid = this.race.is_hybrid;
+      this.allowTeams = this.raceSettings.allowTeams;
+
+      // User specific-info
+      this.userRaceSettings = d.settings;
+      this.userStat = d.user_stat;
+      this.isOwnerOrModerator = d.is_mod_or_owner;
+
+      //Default to first race ID if not set
+      if (this.selectedRaceID == undefined){
+        this.selectedRaceID = this.raceIDs[0];
+      }
+    }).finally(()=>{
+      this.initializing = false;
+      this.loading = false;
+    })
+  }
+
+  toggleAbout = () => {
+    this.aboutOpen = !this.aboutOpen;
+    this.socialOpen = false;
+    this.leaderboardOpen = false;
+    this.searchOpen = false;
+  }
+  toggleSocial = () => {
+    this.socialOpen = !this.socialOpen;
+    this.aboutOpen = false;
+    this.leaderboardOpen = false;
+    this.searchOpen = false;
+  }
+  toggleLeaderboard = () => {
+    this.leaderboardOpen = !this.leaderboardOpen;
+    this.aboutOpen = false;
+    this.socialOpen = false;
+    this.searchOpen = false;
+  }
+  toggleSearch = () => {
+    this.searchOpen = !this.searchOpen;
+    this.aboutOpen = false;
+    this.socialOpen = false
+    this.leaderboardOpen = false;
+  
+  }
+  closeSidebar = () => {
+    this.aboutOpen = false;
+    this.socialOpen = false;
+    this.leaderboardOpen = false;
+    this.searchOpen = false;
   }
 
   newStoryPosted(event: any) {
@@ -157,34 +284,21 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     this.feedChild.refreshFeed();
   }
 
-  toggleMenu() {
-    this.isOpen = !this.isOpen;
+  toggleSidebar = () => {
+    //this.isOpen = !this.isOpen;
+    return;
   }
 
+  /*
   toggleSearch() {
     this.searchOn = !this.searchOn;
   }
+  */
 
-  openModal(id: string) {
-    var data = (id=='mapSettingsModal') 
-      ? {
-        userSettings:this.userRaceSettings,
-        callbackFunction:null
-      }
-      :(id == 'custom-modal-5') 
-        ? {
-          raceType:this.raceType, 
-          distance_unit: this.progress.distance_type, 
-          race_id:this.raceID, 
-          numActivities : this.num_activities, 
-          manualEntry:this.raceSettings.isManualEntry, 
-          automaticImport: this.userRaceSettings.isAutomaticImport, 
-          callbackFunction:null
-        } 
-        : {};
-    data.callbackFunction = this.uploadActivity;
-
-    this.modalService.open(id,data);
+  openRouteInfo = () => {
+    this.dialog.open(RouteInfoComponent,{
+      panelClass:"DialogDefaultContainer"
+    });
   }
 
   openLogActivity = () => {
@@ -234,13 +348,8 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     this.feedOptions = !this.feedOptions;
   }
 
-  closeModal(id: string) {
-    this.modalService.close(id);
-    console.log(this.modalService.getModalData(id));
-  }
-
-  viewAbout() {
-    this.router.navigate(['/about',{name:this.race.name,id:this.race.id}]);
+  viewAbout = () => {
+    this.routerService.navigateTo('/about',{name:this.race.name,id:this.race.id});
   }
 
   setLeaderboardRouteFilter(route:ChildRaceData) {
@@ -276,7 +385,7 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
   }
 
   goToTeamForm(): void {
-    this.router.navigate(['/teams',{name:this.raceName,id:this.raceID}]);
+    if (this.raceData && this.raceData.name) this.router.navigate(['/teams',{name:this.raceData.name,id:this.raceID}]);
   }
 
   editTeamForm(team_id:number): void {
@@ -332,59 +441,6 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     }
   }
 
-  getRaceState(): void {
-    this.loading = true;
-    this.raceService.getRace(this.raceID).subscribe((data) => {
-      console.log(data);
-      this.showTeamForm=false;
-      let raceData = data as RaceData;
-      this.userRegistered = raceData.user_stat!=null;
-      this.progress = raceData.progress;
-      this.race = raceData.race;
-
-      // if(this.progress.distance_remaining <= 0)
-      // {
-      //     confetti.create()({
-      //     particleCount: 5000,
-      //     spread: 900,
-          
-      //     origin: {
-      //         y: (1),
-      //         x: (0.5)
-      //     }
-      //   });
-      // }
-
-      this.num_activities = 0;
-
-      // Child race data
-      this.raceIDs = raceData.race_IDs;
-      this.childRaceData = raceData.child_race_dict;
-      this.childRaceData.unshift({id:this.raceID,name:'All'});
-      
-      // Race-specific info
-      this.raceSettings = raceData.race_settings;
-      this.raceType = raceData.race.race_type;
-      this.hasEntryTags = this.raceSettings.has_entry_tags;
-      this.isManualEntry = this.raceSettings.isManualEntry;
-      this.isHybrid = this.race.is_hybrid;
-      this.allowTeams = this.raceSettings.allowTeams;
-
-      // User specific-info
-      this.userRaceSettings = raceData.settings;
-      this.userStat = raceData.user_stat;
-      this.isOwnerOrModerator = raceData.is_mod_or_owner;
-
-      this.loading = false;
-
-      //Default to first race ID if not set
-      if (this.selectedRaceID == undefined){
-        this.selectedRaceID = this.raceIDs[0];
-      }
-
-    });
-  }
-
   uploadManualEntry(entry) {
     this.activitiesService.uploadManualEntry(entry,this.selectedRaceID).then((resp) => {
       console.log('GOT MANUAL ENTRY:',resp);
@@ -403,20 +459,9 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit {
     });
   }
 
-
-   panToUserMarker(user_id){
-  //   //Call map pan function
-  //   this.mapChild.panToUserMarker(user_id);
-   }
-
   clearUserPins(){
     this.mapChild.clearUserPins();
   }
-
-  // showPinsByID(IDs){
-  //   //Pass null to show all pins
-  //   this.mapChild.showPinsByID(IDs, false);
-  // }
 
   showAllPins(){
     this.mapChild.showAllPins();
@@ -548,20 +593,6 @@ interface PinSettings {
   minAge: number;
   maxAge: number;
   showOrgPins: boolean;
-}
-
-
-interface UserData {
-  user_id:number;
-  profile_url:string;
-  email:string;
-  description: string;
-  location:string;
-  first_name:string;
-  last_name:string;
-  follows:boolean;
-  distance_type: string;
-  is_me: boolean;
 }
 
 

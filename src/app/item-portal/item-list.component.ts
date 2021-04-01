@@ -1,9 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ItemService } from '../item.service';
-import { Item, ItemType } from '../swag.service';
 import { ItemDeleteDialogComponent } from './item-delete-dialog.component';
 import { ItemFormDialogComponent } from './item-form-dialog.component';
+import { 
+  RaceService,
+  ItemService,
+} from '../services';
+import { 
+  Item, 
+  ItemType 
+} from '../models';
 
 @Component({
   selector: 'app-item-list',

@@ -119,7 +119,7 @@
   position:sticky;
   z-index: 3;
   top:80px;
-  background-color:var(--main-background-color); 
+  background-color:var(--submain-background-color); 
   color:white;
   padding:16px;
   padding-left:126px;

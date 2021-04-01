@@ -1,8 +1,10 @@
 <div class="map-container">
-    <app-loader [isActive]="loading"></app-loader>
+    <ng-template [ngIf]="this.useLoader">
+        <app-loader [isActive]="loading"></app-loader>
+    </ng-template>
     <div id="map"></div>
 
-    <div *ngFor="let item of routeData | keyvalue ">           
-        <app-map-route [map]="map" [raceID]="item.key" [coordinates]="item.value.coords" [orgData]="item.value.org_pins" [userData]="item.value.userData" [routePins]="item.value.route_pins" [checkpoints]="item.value.checkpoints" [followedIDs]="followedIDs" [zoom]="zoom" [displayUsers]="displayUsers"></app-map-route>
+    <div *ngFor="let item of routeData | keyvalue; let i = index">           
+        <app-map-route [map]="map" [raceID]="item.key" [coordinates]="item.value.coords" [orgData]="item.value.org_pins" [userData]="item.value.userData" [routePins]="item.value.route_pins" [checkpoints]="item.value.checkpoints" [followedIDs]="followedIDs" [zoom]="zoom" [displayUsers]="displayUsers" (onLatLngBoundsChange)="this.onLatLngBoundsUpdate($event)"></app-map-route>
     </div>
 </div>

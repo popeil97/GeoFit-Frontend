@@ -1,6 +1,17 @@
 .PageContainer {
     margin-bottom:0px;
 }
+
+.checkmark-icon {
+  background-image: url(../../../assets/icons/checkmark-invalid.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.checkmark-icon.valid {
+  background-image:url(../../../assets/icons/checkmark-valid.svg);
+}
+
 .DashboardInitialization {
     position:relative;
     background-color: rgb(230,230,230);
@@ -68,6 +79,72 @@
     height:100%;
     background-color: rgb(230,230,230);
 }
+  .DashboardNavigationList {
+    list-style-type:none;
+    padding-left:16px;
+  }
+    .DashboardNavigationItem {
+      margin-bottom:8px;
+      padding-left:0px;
+      transition:padding-left 0.25s ease-in-out;
+      position:relative;
+    }
+    .DashboardNavigationItem:hover {
+      cursor:pointer;
+      padding-left:4px;
+    }
+    .DashboardNavigationItem.selected h6 {
+      text-decoration: underline;
+    }
+      .DashboardNavigationItemDropdownIndicator {
+        background-image: url(../../../assets/icons/dropdown-icon.svg);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        width:16px;
+        height:16px;
+        position:absolute;
+        top:50%;
+        right:0px;
+        transform:translateY(-50%) rotate(180deg);
+        margin-left:8px;
+        transition:transform 0.25s ease-in-out;
+      }
+        .DashboardNavigationItemDropdownIndicator:hover {
+          cursor:pointer;
+        }
+      
+      .DashboardNavigationSubItem {
+        height:0;
+        overflow:hidden;
+        list-style-type: none;
+        font-size: var(--h7);
+      }
+      .DashboardNavigationItem.opened .DashboardNavigationSubItem {
+        height:auto;
+        padding-top:8px;
+        padding-bottom: 8px;
+        padding-left:8px;
+      }
+      .DashboardNavigationItem.opened .DashboardNavigationItemDropdownIndicator {
+        transform:translateY(-50%) rotate(0deg);
+      }
+      .DashboardNavigationSubItemRow {
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: nowrap;
+      }
+      .DashboardNavigationSubItemRow.disabled {
+        opacity:0.5;
+      }
+      .DashboardNavigationSubItemRow .DashboardNavigationSubItemRowStatusIcon {
+        flex-shrink: 0;
+        flex-basis: 12px;
+        width:12px;
+        height:12px;
+      }
 .DashboardContents {
     flex-shrink: 1;
     flex-basis: 100%;

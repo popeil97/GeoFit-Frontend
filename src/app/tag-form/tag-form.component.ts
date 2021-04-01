@@ -1,6 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl,FormGroup, Validators} from '@angular/forms';
-import { TagsService, Tag, TagType } from '../tags.service';
+import { 
+  TagsService,
+} from '../services';
+import {
+  Tag,
+  TagType,
+} from '../models';
 import { Control } from 'leaflet';
 
 @Component({
@@ -16,7 +22,9 @@ export class TagFormComponent implements OnInit {
   @Input() raceID:number;
   @Input() tagType:TagType;
 
-  constructor(private _tagService:TagsService) { }
+  constructor(
+    private _tagService:TagsService
+  ) { }
 
   ngOnInit() {
     this.getTags();

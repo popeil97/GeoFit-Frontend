@@ -1,15 +1,6 @@
-<div class='PageContainer CreateRacePageContainer'>
+<div class='PageContainer'>
 
-  <!--
-  <app-loader [isActive]="loading"></app-loader>
-  -->
-  
-  <!--
-  <mat-sidenav-container>
-    <mat-sidenav md-disable-backdrop='true' #menu mode="side">
-  -->
-
-  <ng-template [ngIf]="this._authService.isLoggedIn()" [ngIfElse]="MustLogIn">
+  <ng-template [ngIf]="this.authService.isLoggedIn()" [ngIfElse]="MustLogIn">
 
     <h1>Create a New Race</h1>
 
@@ -40,7 +31,7 @@
 
       <p class="italics margin-bottom-16px">Inputs marked with <span class="color-red">*</span> are required.</p>
 
-      <form [formGroup]="this.raceBasicsForm" (ngSubmit)="this.onRaceBasicsFormSubmit()" class="CreateForm" name="RaceBasicsForm">
+      <form [formGroup]="this.raceBasicsForm" (ngSubmit)="this.onRaceBasicsFormSubmit()" class="form" name="RaceBasicsForm">
       
         <div class="formPanel">
           <div class='formGroupHeader'>
@@ -61,6 +52,7 @@
               />
               <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('name').invalid && (this.raceBasicsForm.get('name').dirty || this.raceBasicsForm.get('name').touched)">
                 <p *ngIf="this.raceBasicsForm.get('name').hasError('required')" class="margin-0px">Your race needs a name.</p>
+                <p *ngIf="this.raceBasicsForm.get('name').hasError('isEmpty')" class="margin-0px">Empty spaces are not valid for a race name.</p>
                 <p *ngIf="this.raceBasicsForm.get('name').hasError('maxlength')" class="margin-0px">Your race's name cannot exceed 30 characters.</p>
               </div>
             </div>
@@ -83,6 +75,7 @@
               ></textarea>
               <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('description').invalid && (this.raceBasicsForm.get('description').dirty || this.raceBasicsForm.get('description').touched)">
                 <p *ngIf="this.raceBasicsForm.get('description').hasError('required')" class="margin-0px">Your race needs a description.</p>
+                <p *ngIf="this.raceBasicsForm.get('description').hasError('isEmpty')" class="margin-0px">Empty spaces are not valid for a race description.</p>
               </div>
             </div>
           </div>
@@ -136,11 +129,11 @@
               />
               <div id="bannerPreview" class="bannerPreview" (click)="this.onSelectBannerTrigger();" [style.backgroundImage]="'url(' + this.bannerURL + ')'">
                 <div class="bannerPreviewOverlay" [ngClass]="{'noOverlay':this.bannerURL != null}">
-                  <img class="uploadFileIcon" src="../../../assets/icons/upload-icon-white.svg" alt="Upload File Icon" />
+                  <div class="uploadFileIcon"></div>
                   <p class="margin-0px color-white">Select an image file.</p>
                 </div>
                 <div class="bannerLoadingOverlay" *ngIf="this.bannerLoading"><p class="margin-0px color-white">Loading...</p></div>
-                <button class='bannerCancelButton' (click)="this.cancelBannerImage($event)" *ngIf="!this.bannerLoading && this.bannerURL!=null">Cancel Image Upload</button>
+                <button class='formButton resetButton bannerCancelButton' (click)="this.cancelBannerImage($event)" *ngIf="!this.bannerLoading && this.bannerURL!=null">Cancel Image Upload</button>
               </div>
               <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('bannerFile').invalid && (this.raceBasicsForm.get('bannerFile').dirty || this.raceBasicsForm.get('bannerFile').touched)">
                 <p class="margin-0px">Your banner image is neither a PNG or JPG file. Please upoad a PNG or JPG file if you wish to use a banner image.</p>
@@ -155,17 +148,10 @@
                 id="raceType" 
                 class='formSelectInput' 
                 formControlName="raceType" 
+                (change)="this.selectRaceTypeEvent($event.target.value)"
               >
-                <option *ngFor="let option of raceTypeOptions" [value]="option.name" (click)="selectRaceType(option)">{{option.name}}</option>
+                <option *ngFor="let option of raceTypeOptions" [value]="option.name">{{option.name}}</option>
               </select>
-              <!--
-              <input id="raceType" class="formTextInput" type="text" placeholder="Race Type" formControlName="raceType" [matAutocomplete]="raceTypeAuto" />
-              <mat-autocomplete #raceTypeAuto="matAutocomplete">
-                <mat-option *ngFor="let option of raceTypeOptions" [value]="option.name" (click)="selectRaceType(option)">
-                  {{ option.name }}
-                </mat-option>
-              </mat-autocomplete>
-              -->
               <div class='formErrorMessage redText' *ngIf="this.raceBasicsForm.get('raceType').invalid && (this.raceBasicsForm.get('raceType').dirty || this.raceBasicsForm.get('raceType').touched)">
                 <p class="margin-0px">Please select an appropriate race type for your race.</p>
               </div>
@@ -176,238 +162,19 @@
           <div class='formGroup submitButtonGroup'>
             <input 
               type="submit" 
-              class="button formButton createRaceSubmitButton" 
+              class="button formButton" 
+              [ngClass]="{'disabled':(this.verifyingFormSubmission || !this.validForm())}"
               value="Create New Race" 
-              [readonly]="this.hasSubmitted" 
+              [disabled]="this.verifyingFormSubmission || !this.validForm()" 
+              [readonly]="this.verifyingFormSubmission || !this.validForm()" 
             />
-            <p class="italics redText margin-top-16px" *ngIf="!this.raceBasicsForm.valid && this.hasSubmitted">Errors have been found above. Check each of your inputs for errors.</p>
+            <p class="italics margin-top-16px" *ngIf="this.verifyingFormSubmission">Updating race details...</p>
+            <p class="italics redText margin-top-16px" *ngIf="this.hasSubmitted && !this.validForm() && !this.verifyingFormSubmission">Errors have been found above. Check each of your inputs for errors.</p>
           </div>
         </div>
 
       </form>
 
-
-      <form [formGroup]="this.raceForm" class="CreateForm" name="CreateForm">
-        <div class="formPanel">
-          <div class='formGroup'>
-            <div class='formInputContainer'>
-              <label for="raceTeams">Allow Teams:</label>
-              <!-- <input id="raceTeams" class='formCheckboxInput' type='checkbox' formControlName="teams" /> -->
-              <mat-slide-toggle formControlName="teams"></mat-slide-toggle>
-            </div>
-            <div id="raceTeamSizeContainer" class='formInputContainer' *ngIf="this.raceForm.get('teams').value">
-              <label for="raceTeamSize">Number of Racers per Team:</label>
-              <input id="raceTeamSize" class='formTextInput' type='number' formControlName="teamSize" />
-            </div>
-          </div>
-          <div class='formGroup'>
-            <div class='formInputContainer'>
-              <label for="raceManual">Allow Manual Entries:</label>
-              <!-- <input id="raceManual" class='formCheckboxInput' type='checkbox' formControlName="manual" /> -->
-              <mat-slide-toggle formControlName="manual"></mat-slide-toggle>
-            </div>
-            <div class='formInputContainer'>
-              <p class='italics margin-0px'>By allowing manual entries, racers can enter distances and times without requiring Strava.</p>
-            </div>
-          </div>
-          <hr />
-          <div class='formGroup'>
-            <div class='formInputContainer'>
-              <label for="raceRegistrationFee">Registration Fee ($US):</label>
-              <input id="raceRegistrationFee" class='formTextInput autoWidth' type='number' formControlName="registrationFee" />
-            </div>
-            <div class='formInputContainer'>
-              <p class='italics margin-0px'>If you do not require a registration fee for your race, leave the value at "0".</p>
-            </div>
-          </div>
-        </div>
-  
-        <div class='formPanel'>
-          <h6>Race Map &amp; Route</h6>
-          <p class="italics">To generate a route for your race, you will need either:</p>
-          <ul class="italics">
-            <li>a pair of starting and ending locations (we can generate a route for you), or</li>
-            <li>a JSON / GPX file that contains a pre-built race.</li>
-          </ul>
-          <p class="italics">Note: if a JSON / GPX route is uploaded, it will override any generated route made using the start and end locations.</p>
-          <div class='formGroup formGroupWithLeftBorder'>
-            <div class='formInputContainer'>
-              <label for="startLoc">Starting Location</label>
-              <input 
-                id="startLoc" 
-                class='formTextInput'
-                [ngClass]="{'errorTextInput':this.raceForm.controls.startLoc.errors != null}"
-                type='text'
-                formControlName="startLoc" 
-                (keyup)="this.findClosestLocations('startLoc');"
-                autocomplete="off"
-              >
-              <div *ngIf="this.startOptions!=null" class='locationOptions'>
-                <div class='locationOptionsInnerContainer'>
-                  <div class="locationOptionsHeaderContainer">
-                    <p class="italics margin-0px locationOptionsHeader">Please select one of the options below:</p>
-                    <p class="italics h7 margin-left-8px locationOptionsClose" (click)="this.clearLocationOptions('startLoc');">Close Dropdown</p>
-                  </div>
-                  <option *ngFor="let option of this.startOptions" class='locationOption' [value]="option.place_name" (click)="selectLocationOption(option,'startLoc')">
-                    {{ option.place_name }}
-                  </option>
-                </div>
-              </div>
-              <p class="margin-0px italics h7" *ngIf="this.selectedStartLoc==null; else selectedStart"><span class="bold-text">Chosen location:</span> (not selected)</p>
-              <ng-template #selectedStart>
-                <p class="margin-0px italics h7"><span class="bold-text">Chosen location:</span> {{this.selectedStartLoc.place_name}}</p>
-              </ng-template>
-              <div class='formErrorMessage redText' *ngIf="this.raceForm.get('startLoc').invalid">
-                <p *ngIf="this.raceForm.get('startLoc').hasError('missing')" class="margin-0px">A race starting location is required.</p>
-                <p *ngIf="this.raceForm.get('startLoc').hasError('unselected')" class="margin-0px">A race starting location must be selected.</p>
-              </div>
-              <p class="margin-top-bottom-8px">to</p>
-              <label for="endLoc">Ending Location</label>
-              <input 
-                id="endLoc" 
-                class='formTextInput'
-                [ngClass]="{'errorTextInput':this.raceForm.controls.endLoc.errors != null}"
-                type='text' 
-                formControlName="endLoc" 
-                (keyup)="this.findClosestLocations('endLoc');"
-                autocomplete="off"
-              />
-              <div *ngIf="this.endOptions!=null" class='locationOptions'>
-                <div class='locationOptionsInnerContainer'>
-                  <div class="locationOptionsHeaderContainer">
-                    <p class="italics margin-0px locationOptionsHeader">Please select one of the options below:</p>
-                    <p class="italics h7 margin-left-8px locationOptionsClose" (click)="this.clearLocationOptions('endLoc');">Close Dropdown</p>
-                  </div>
-                  <option *ngFor="let option of this.endOptions" class='locationOption' [value]="option.place_name" (click)="selectLocationOption(option,'endLoc')">
-                    {{ option.place_name }}
-                  </option>
-                </div>
-              </div>
-              <p class="margin-0px italics h7" *ngIf="this.selectedEndLoc==null; else selectedEnd"><span class="bold-text">Chosen location:</span> (not selected)</p>
-              <ng-template #selectedEnd>
-                <p class="margin-0px italics h7"><span class="bold-text">Chosen location:</span> {{this.selectedEndLoc.place_name}}</p>
-              </ng-template>
-              <div class='formErrorMessage redText' *ngIf="this.raceForm.get('endLoc').invalid">
-                <p *ngIf="this.raceForm.get('endLoc').hasError('missing')" class="margin-0px">A race end location is required.</p>
-                <p *ngIf="this.raceForm.get('endLoc').hasError('unselected')" class="margin-0px">A race end location must be selected.</p>
-              </div>
-              <button class="formButton margin-top-8px" (click)="this.preview();">Generate Route</button>
-            </div>
-          </div>
-          <p class='margin-top-bottom-16px'>- OR -</p>
-          <div class='formGroup formGroupWithLeftBorder'>
-            <div class='formInputContainer'>
-              <label name="route_file">Route File(optional)</label>
-              <input type="file" formControlName="routeFile" (change)="onSelectFile($event)"/>
-            </div>
-          </div>
-          <hr />
-            <label>Race Map Preview:</label>
-            <div class="MapRoutePreview" *ngIf="this.coords!=null">
-              <!-- <app-map [useLoader]="false" [coordinates]="this.coords" [displayUsers]="false"></app-map> -->
-            </div>
-        </div>
-  
-        <!--
-        <div class="form-group" style="text-align: left; padding: 5px;">
-          <input class="form-control" type="text" placeholder="Name" formControlName="name"/>
-        </div>
-    
-        <div class="form-group" style="text-align: left; padding: 5px;">
-          <input class="form-control" type="text" placeholder="Race Type" formControlName="raceType" [matAutocomplete]="raceTypeAuto" />
-          <mat-autocomplete #raceTypeAuto="matAutocomplete">
-            <mat-option *ngFor="let option of raceTypeOptions" [value]="option.name" (click)="selectRaceType(option)">
-              {{ option.name }}
-            </mat-option>
-          </mat-autocomplete>
-        </div>
-    
-        <div class="form-group" style="text-align: left; padding: 5px;">
-          <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #startDatePicker></mat-datepicker>
-          <input class="form-control" placeholder="Start Date" [matDatepicker]="startDatePicker" formControlName="startDate">
-        </div>
-    
-        <div class="form-group" style="text-align: left; padding: 5px;">
-          <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
-          <mat-datepicker #endDatePicker></mat-datepicker>
-    
-          <input class="form-control" placeholder="End Date" [matDatepicker]="endDatePicker" formControlName="endDate">
-        </div>
-    
-        <div class="form-group" style="text-align: left; padding: 5px;">
-          <input class="form-control" type="text" placeholder="Start Location" formControlName="startLoc" [matAutocomplete]="startLocAuto" (keyup)="locationFilter('startLoc')" />
-          <mat-autocomplete #startLocAuto="matAutocomplete">
-            <mat-option *ngFor="let option of startOptions" [value]="option.place_name" (click)="selectOption(option,'startLoc')">
-              {{ option.place_name }}
-            </mat-option>
-          </mat-autocomplete>
-        </div>
-    
-        <div class="form-group" style="text-align: left; padding: 5px;">
-          <input class="form-control" type="text" placeholder="End Location" formControlName="endLoc" [matAutocomplete]="endLocAuto" (keyup)="locationFilter('endLoc')"/>
-          <mat-autocomplete #endLocAuto="matAutocomplete">
-            <mat-option *ngFor="let option of endOptions" [value]="option.place_name" (click)="selectOption(option,'endLoc')">
-              {{ option.place_name }}
-            </mat-option>
-          </mat-autocomplete>
-        </div>
-    
-        <div class="form-group" style="text-align: left; padding: 5px;">
-          <label name="route_file">Route File(optional)</label>
-          <input type="file" formControlName="routeFile" (change)="onSelectFile($event)"/>
-        </div>
-    
-        <div class="form-group" style="text-align: left; padding: 5px; float: left;">
-          <label name="public_check">Public</label>
-          <input class="form-control" type="checkbox" formControlName="public" />
-        </div>
-    
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-    
-        <div *ngIf="isPreviewMode" style="text-align: center; padding: 10px;" class="alert alert-primary">
-          {{previewDistance}}
-        </div>
-        
-        <div class="row">
-          <div class="column-main">
-            <div style="position: relative;">
-              <button class="btn btn-primary" mat-raised-button (click)="preview()">Preview</button>
-            </div>
-          </div>
-    
-          <div class="column-main">
-            <div style="position: relative;">
-              <button class="btn btn-primary" mat-raised-button (click)="submitRaceForm()">Submit</button>
-            </div>
-          </div>
-        </div>
-        -->
-           
-      </form>
-      
-      <!--
-      </mat-sidenav>
-      <mat-sidenav-content>
-      -->
-      
-      <!--
-      <app-map [coordinates]="coords" [displayUsers]="false"></app-map>
-    
-      <a class="btn btn-primary btn-customized open-menu" role="button" (click)="menu.toggle()">
-        <i class="fas fa-align-left"></i><span>Create</span>
-      </a>
-    
-      -->
-      <!--
-        </mat-sidenav-content>
-      </mat-sidenav-container>
-      -->
     </ng-template>
   </ng-template>
 

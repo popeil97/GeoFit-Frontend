@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MustMatch } from '../register/_helpers/must-match.validator';
-import { AuthService } from '../auth.service';
+import { TucanValidators } from '../services';
+import { AuthService } from '../services';
 
 @Component({
   selector: 'app-password-change',
@@ -21,12 +21,13 @@ export class PasswordChangeComponent implements OnInit {
     private formBuilder: FormBuilder,
     private router: Router,
     private route:ActivatedRoute,
-    private _authService: AuthService,) { 
+    private _authService: AuthService,
+  ) { 
       this.changeForm = this.formBuilder.group({
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', Validators.required]
       }, {
-          validator: MustMatch('password', 'confirmPassword')
+          validator: TucanValidators.MustMatch('password', 'confirmPassword')
       },
       
       );

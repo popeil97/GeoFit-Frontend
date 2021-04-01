@@ -1,0 +1,153 @@
+.locationOptions {
+    width:100%;
+    height:0px;
+    position:relative;
+  }
+    .locationOptionsInnerContainer {
+      position:absolute;
+      left:0;
+      top:-8px;
+      width:100%;
+      height:auto;
+      background-color: white;
+      padding:8px;
+      border-left: 2px solid rgb(200,200,200);
+      border-right: 2px solid rgb(200,200,200);
+      border-bottom: 2px solid rgb(200,200,200);
+      border-bottom-left-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+    .locationOptionsHeader {
+      height:100%;
+      padding-top:4px;
+      padding-bottom:4px;
+    }
+    .locationOptionsHeaderContainer {
+      display:flex;
+      flex-direction:row;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: nowrap;
+    }
+    .locationOptionsClose:hover {
+      cursor:pointer;
+      text-decoration: underline;
+    }
+    .locationOption {
+      width:100%;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow:hidden;
+      font-size: var(--h7);
+    }
+    .locationOption:hover {
+      cursor:pointer;
+      background-color: rgb(230,230,230);
+    }
+
+.coordinateInput {
+  width:100px !important;
+}
+
+.MapRoutePreview {
+  position:relative;
+  width: 100%;
+  max-width: 800px;
+  height:400px;
+  background-color:rgb(200,200,200);
+}
+.MapRoutePreviewUnavailable {
+  position:absolute;
+  width:auto;
+  height:auto;
+  max-width: 100%;
+  max-width: 100%;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+
+  padding:32px;
+  background-color: rgba(0,0,0,0.75);
+  box-shadow: 0px 0px 5px 2px rgba(0,0,0,0.5);
+  color:white;
+
+}
+.mapFileUpload {
+  display:none;
+}
+.mapUploadActions {
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+.mapFileUploadButton, .mapFileUploadedButton, .mapFileSmallUploadButton {
+  position:relative;
+  width:min-content;
+  min-width:280px;
+  height:112px;
+  padding:16px;
+  background-color:rgb(200,200,200);
+  color:white;
+  border-radius: 16px;
+  margin-bottom:8px;
+  transition: background-color 0.25s ease-in-out;
+
+  display:flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.mapFileUploadedButton {
+  margin-right:8px;
+}
+.mapFileSmallUploadButton {
+  height:48px;
+  padding:4px;
+}
+.mapFileUploadButton:hover, .mapFileUploadedButton:hover, .mapFileSmallUploadButton:hover {
+  cursor:pointer;
+  background-color: rgb(160, 160, 160);
+}
+  .uploadFileIcon {
+    flex-shrink: 0;
+    opacity:1;
+    transition:opacity 0.5s ease-in-out;
+  }
+  .mapFileUploadButton .uploadFileIcon {
+    flex-basis: 70px;
+    width:70px;
+    height:70px;
+  }
+  .mapFileUploadedButton .uploadFileIcon {
+    flex-basis: 80px;
+    width:80px;
+    height:80px;
+  }
+  .mapFileSmallUploadButton .uploadFileIcon {
+    flex-basis: 40px;
+    width:40px;
+    height:40px;
+  }
+  .uploadFileIcon:hover {
+    cursor:pointer;
+    opacity:0.5;
+  }
+  .mapFileActions {
+    flex-shrink: 1;
+    flex-basis: 100%;
+    margin-left:16px;
+  }
+  .mapFileDownloadLink:hover {
+    text-decoration: none;
+  }
+  .mapFileUploadedOtherActions {
+    width:min-content;
+    display:flex;
+    flex-direction: column;
+    justify-self: flex-start;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+  }

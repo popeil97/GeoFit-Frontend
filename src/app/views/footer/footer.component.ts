@@ -1,23 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
 
-import { TermsOfServiceDialogContent } from '../../terms-of-service/terms-of-service.component';
+import { 
+  TermsOfServiceComponent 
+} from '../../popups';
 
 @Component({
   selector: 'app-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.css']
 })
-export class FooterComponent implements OnInit {
+
+export class FooterComponent {
 
   constructor(
     public router : Router,
     public dialog : MatDialog,
-  ) { }
-
-  ngOnInit() {
-  }
+  ) {}
 
   navigateTo = (url:string = null) => {
     if (url == null) return;
@@ -26,12 +26,9 @@ export class FooterComponent implements OnInit {
   }
 
   openTOS = () => {
-    let d = this.dialog.open(TermsOfServiceDialogContent, {
-      panelClass:'TOSContainer',
+    this.dialog.open(TermsOfServiceComponent, {
+      panelClass:'DialogDefaultContainer',
     });
-    d.afterClosed().subscribe(result=>{
-      console.log('CLOSED TOS FROM FOOTER', result);
-    })
   }
 
 }

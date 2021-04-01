@@ -1,14 +1,20 @@
-import { AfterViewInit, Component, Input, OnInit, OnChanges, SimpleChanges, ViewChildren, QueryList, ChangeDetectorRef, ComponentFactory, ComponentFactoryResolver, RendererFactory2, ViewContainerRef, ApplicationRef } from '@angular/core';
+import { AfterViewInit, Component, Input, Output, EventEmitter, OnInit, OnChanges, SimpleChanges, ViewChildren, QueryList, ChangeDetectorRef, ComponentFactory, ComponentFactoryResolver, RendererFactory2, ViewContainerRef, ApplicationRef } from '@angular/core';
 import { NgElement, WithProperties } from '@angular/elements';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
-import { UserProfileService } from '../userprofile.service';
+import { 
+  UserProfileService,
+  MapService,
+  PopUpService,
+} from '../services';
+import {
+  UserData,
+  CheckpointMapData,
+} from '../models';
 //import * as L from 'leaflet';
 //import * as markercluster from 'leaflet.markercluster';
-import { PopUpService } from '../pop-up.service';
 import { UserFollowComponent } from '../user-follow/user-follow.component';
 import { RoutePinDialogComponent } from '../route-pin-dialog/route-pin-dialog.component';
-import { MapService } from '../map.service';
-import { CheckpointMapData, MapRouteComponent } from '../map-route/map-route.component';
+import { MapRouteComponent } from '../map-route/map-route.component';
 
 import 'leaflet';
 import 'leaflet.markercluster';
@@ -22,7 +28,7 @@ import * as turf from '@turf/turf';
 import { ListKeyManager } from '@angular/cdk/a11y';
 import { AppComponent } from '../app.component';
 import { PopupComponent } from '../popup/popup.component';
-import { RaceService } from '../race.service';
+import { RaceService } from '../services';
 import { Route } from '@angular/router';
 
 @Component({
@@ -33,7 +39,7 @@ import { Route } from '@angular/router';
 export class MapComponent implements AfterViewInit,OnChanges {
   @ViewChildren(MapRouteComponent) mapRouteChildren: QueryList<MapRouteComponent>;
 
-  @Input() coordinates;
+  @Input() useLoader:Boolean = true;
   @Input() draw:Boolean;
   @Input() displayUsers:Boolean;
   @Input() followedIDs:any;
@@ -47,12 +53,17 @@ export class MapComponent implements AfterViewInit,OnChanges {
   //More than one if this is a multi-route race
   @Input() raceIDs:number[] = [];
 
+  //Route data to use in route components
+  @Input() routeData = null;
+
+  // onLatLngBoundsChange emits when a child map-route boundaries have changed
+  // Note that the emitted LatLngBound does not represent the bounds for all child map routes,
+  // just the route from which this event originates
+  @Output() onLatLngBoundsChange: EventEmitter<L.LatLngBounds> = new EventEmitter();
+
   private orgData: UserData[];
   private userData: UserData[];
   private routePins: RoutePins[];
-
-  //Route data to use in route components
-  public routeData = {};
 
   //Leaflet map
   public map;
@@ -68,11 +79,13 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
   loading:boolean = false;
 
-  constructor(private popupService:PopUpService, 
-              private _profileService:UserProfileService,
-              private _mapService: MapService,
-              private _raceService:RaceService,
-              public dialog: MatDialog) {
+  constructor(
+    private popupService:PopUpService, 
+    private _profileService:UserProfileService,
+    private _mapService: MapService,
+    private _raceService:RaceService,
+    public dialog: MatDialog
+  ) {
     Window["mapComponent"] = this;
   }
 
@@ -86,6 +99,10 @@ export class MapComponent implements AfterViewInit,OnChanges {
               if (!_.isEqual(changes.raceIDs.currentValue, changes.raceIDs.previousValue)){
                 this.getMapData();
               }
+            case 'routeData':
+              if (!this.routeData){
+                this.getMapData();
+              }
           }
         }
       }
@@ -97,8 +114,8 @@ export class MapComponent implements AfterViewInit,OnChanges {
       this.initMap();
     }
 
-    //This ensures we can still use homepage coords if provided via Input
-    if (!this.coordinates){
+    // If RouteData dict not provided, we create it given race_id input
+    if (!this.routeData){
       this.getMapData();
     }
 
@@ -127,6 +144,11 @@ export class MapComponent implements AfterViewInit,OnChanges {
 
     //Pan to race start/end bounds
     this.panToRaceMarkerBounds();
+
+    // Set up routeData dict
+    if (!this.routeData){
+      this.routeData = {};
+    }
 
     for (let i = 0; i < this.raceIDs.length; i++) {
       let raceID = this.raceIDs[i];
@@ -165,7 +187,6 @@ export class MapComponent implements AfterViewInit,OnChanges {
         });
 
         this._mapService.getCheckpointMapData(raceID).then((resp) => {
-          console.log('GOT SOME CHECKPOINT MAP DATA:',resp);
           this.routeData[raceID].checkpoints = resp['checkpoints'];
         })
 
@@ -182,32 +203,32 @@ export class MapComponent implements AfterViewInit,OnChanges {
     }
   }
 
-
   public panToMarkerBounds(markerBounds){
     var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
     this.map.fitBounds(markerBounds, options);
   }
 
-
-  // public panToUserMarker(user_id, showPopUp=true){
-  //   //Do this to simply pan to user pin
-  //   //this.map.panTo(this.markersByUserID[user_id.toString()]['latLng']);
-
-  //   //Do this to pan *and* zoom
-  //   var markerBounds = L.latLngBounds([this.markersByUserID[user_id.toString()]['latLng']]);
-  //   var options = {'maxZoom': 15, 'animate': true, 'easeLinearity': 0.1}
-  //   this.map.fitBounds(markerBounds, options);
-  // }
-
-
-  // public clearMap(): void {
-  //   if(this.marker_start && this.marker_end && this.line) {
-  //     this.map.removeLayer(this.marker_start);
-  //     this.map.removeLayer(this.marker_end);
-  //     this.map.removeLayer(this.line);
-  //   }
-  // }
-
+  // Bit of a cheat by peeking into the _layers attribute, but this is the easiest
+  // way to completely clear the map
+  public clearMap(){
+    // Firstly we call each map route child's clearMap func
+    _.forEach(this.mapRouteChildren.toArray(),(child:MapRouteComponent) => {
+      child.clearMap();
+    });
+    // Then we clear up any remaining layers
+    if (this.map){
+      for(var i in this.map._layers) {
+        if(this.map._layers[i]._path != undefined) {
+            try {
+                this.map.removeLayer(this.map._layers[i]);
+            }
+            catch(e) {
+                console.log("problem with " + e + this.map._layers[i]);
+            }
+        }
+      }
+    }
+  }
 
   public showPinsFromSettings(settings: PinSettings){
     //for each map-route child, call their showPinsFromSettings func
@@ -247,6 +268,10 @@ export class MapComponent implements AfterViewInit,OnChanges {
         child.updateMyUserStatAndCreatePins();
       }
     });
+  }
+
+  public onLatLngBoundsUpdate(bounds: L.LatLngBounds){
+    this.onLatLngBoundsChange.emit(bounds);
   }
 
 
@@ -294,33 +319,13 @@ interface RoutePins {
   image_urls: string[];
 }
 
-interface RouteData {
+export interface RouteData {
   name: string;
   coords: any;
   route_pins: RoutePins[];
   userData: UserData[];
   org_pins: UserData[];
   checkpoints: CheckpointMapData[];
-}
-
-interface UserData {
-  user_id: number,
-  total_distance: number,
-  distance_type: string,
-  rel_distance: number,
-  route_idx: number,
-  display_name: string,
-  profile_url: string,
-  follows: boolean,
-  child_user_stats: any[],
-  isTeam: boolean,
-  isMe: boolean,
-  gender: string,
-  age: number,
-
-  email:string,
-  description: string,
-  location:string,
 }
 
 interface OrgPinData {

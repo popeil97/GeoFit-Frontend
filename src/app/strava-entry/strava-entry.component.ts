@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter,OnChanges } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { ActivitiesService } from '../activities.service';
+import { 
+  ActivitiesService,
+} from '../services';
 import { CheckpointDialogComponent } from '../checkpoint-list/checkpoint-dialog.component';
 import { ModalService } from '../modalServices';
 

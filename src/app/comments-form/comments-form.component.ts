@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { StoryService } from '../story.service';
+import { 
+  StoryService 
+} from '../services';
 
 @Component({
   selector: 'app-comments-form',
@@ -17,7 +19,9 @@ export class CommentsFormComponent implements OnInit {
 
   commentForm: FormGroup;
 
-  constructor(private _storyService: StoryService) {
+  constructor(
+    private _storyService: StoryService
+  ) {
     this.commentForm = new FormGroup({
       body: new FormControl('',[
         Validators.required,

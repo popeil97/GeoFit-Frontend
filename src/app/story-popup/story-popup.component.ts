@@ -1,7 +1,9 @@
 import { Component, OnInit,Input } from '@angular/core';
 import { ModalService } from '../modalServices';
-import { AuthService } from '../auth.service';
-import { StoryService } from '../story.service';
+import { 
+  AuthService,
+  StoryService, 
+} from '../services';
 
 @Component({
   selector: 'app-story-popup',
@@ -12,8 +14,11 @@ export class StoryPopupComponent implements OnInit {
 
   @Input() id: string;
 
-  constructor(private modalService: ModalService,private _storyService: StoryService,
-              private _authService: AuthService) { }
+  constructor(
+    private modalService: ModalService,
+    private _storyService: StoryService,
+    private _authService: AuthService
+  ) { }
 
   ngOnInit() {
   }

@@ -1,0 +1,167 @@
+<div class='UserProfileContainer'>
+  
+  <!-- user profile info -->
+  
+  <!-- Loading state if waiting for initialization -->
+  <ng-template [ngIf]="this.getLoadingStatus()" [ngIfElse]="LoadingComplete">
+    <h1 class="position-absolute-middle margin-0px">Loading...</h1>
+  </ng-template>
+
+  <ng-template #LoadingComplete>
+    
+    <!-- 
+      There are two states that we have to consider: 1) Are we looking at someone else's account, and 2) if we aren't, then are we logged in or not? 
+      The first is determined by checking for a username inside of the URL - this is done inside of the ngInit
+        - Someone might ask us if that's the best idea, since ngInit is only run once, but we'll work with it for now.
+    -->
+    
+    <ng-template [ngIf]="!this.getValidSessionStatus()" [ngIfElse]="UserProfileLoaded">
+      <div class="UserProfileMissingBlock">
+        <h1>Error: User not found</h1>
+        <p><i>A user profile with the given credentials has not been found.</i></p>
+        <p>Please navigate to the previous page, or log in to see your own account.</p>
+        <div *ngIf="!this.viewingElse && this._authService.isLoggedIn()" class="ForceUserProfileReloadBlock">
+          <p class="margin-0px">If you are logged in but are seeing this message, please reload the page</p>
+          <button (click)="this.initializePage()">Reload Page</button>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #UserProfileLoaded>
+      <div class="UserProfileUserInfoContainer">
+        <div class="TucanContainer UserProfileUserInfoInnerContainer">
+          <div *ngIf="this.userData != null; else profileLoadingMessage">
+            <div class="UserProfileIdentityContainer">
+              <img class="UserProfileImage img-responsive" src="{{this.userData.profile_url}}" alt=""> 
+              <h3 class="UserProfileName">{{userData.first_name}} {{userData.last_name}}</h3>
+              <ng-template [ngIf]="userData.email_visibility || userData.is_me">
+                <p class="h7 UserProfileEmail"><span *ngIf="!userData.email_visibility">(hidden) </span>{{ userData.email }}</p>
+              </ng-template>
+            </div>
+    
+            <div *ngIf="this._authService.isLoggedIn() && this.userData.is_me && !this.followersData.loading && this.followersData.valid" class='margin-bottom-16px'>
+                <button class='darkButton shadowButton FollowersButton' (click)="this.openFollowersDialog()">Followers: {{this.followersData.numFollowers}} | Following: {{this.followersData.numFollowing}}</button>
+            </div>
+    
+            <div *ngIf="userData.about_visibility||userData.location_visibility||userData.is_me" class='margin-bottom-16px'>
+              <ng-template [ngIf]="this.userData.about_visibility || userData.is_me">
+                <ng-template [ngIf]="this.userData.description!='N/A'" [ngIfElse]="descriptionDefault">
+                  <p class="h7 UserProfileDescription"><span *ngIf="!this.userData.about_visibility">(hidden) </span>{{this.userData.description}}</p> 
+                </ng-template>
+                <ng-template #descriptionDefault>
+                  <p class='italics h7 UserProfileDescription'>No description available</p>
+                </ng-template>
+              </ng-template>
+              <ng-template [ngIf]="userData.location_visibility || userData.is_me ">
+                <ng-template [ngIf]="userData.location != 'N/A'" [ngIfElse]="locationDefault">
+                  <p class='h7 UserProfileLocation'>
+                    <span *ngIf="!this.userData.location_visibility">(hidden) </span>
+                    {{ userData.location }}
+                  </p>  
+                </ng-template>
+                <ng-template #locationDefault>
+                  <p class='italics h7 UserProfileLocation'>No location info available</p>
+                </ng-template>
+              </ng-template>
+            </div>
+    
+            <ng-template [ngIf]="this._authService.isLoggedIn()">
+              <ng-template [ngIf]="this._authService.userData != null && this.userData.user_id == this._authService.userData.user_id" [ngIfElse]="NotMeActions">
+                <div class='UserProfileStravaContent margin-bottom-16px'>
+                  <h6 class='UserProfileStravaHeader'>Strava Authentication</h6>
+                  <div class='UserProfileStravaContainer'>
+                    <app-stravauth></app-stravauth>
+                  </div>
+                </div>
+                <div class='UserProfileActions'>
+                  <button class="darkButton" (click)="this.openProfileForm()" >Edit</button>
+                  <button class="darkButton" (click)="logout()">Log out</button>
+                </div>
+              </ng-template>
+              <ng-template #NotMeActions>
+                <app-user-follow [tempLight]="true" [userID]="this.userData.user_id" [follows]="this.userData.follows"></app-user-follow>
+              </ng-template>
+            </ng-template>
+          </div>
+          <ng-template #profileLoadingMessage><p>Loading...</p></ng-template>
+    
+    
+        </div>
+      </div>
+      <div class="UserProfileMainContentContainer">
+    
+        <div class="Slideshow">
+          <div class="SlideshowHeader">
+            <button class="SlideshowButton" (click)="SwitchSlideshow('home')" id="home-btn" style="background-color: #36343c; color: #FFFFFF;">Home</button>
+            <button *ngIf="!showEdit" class="SlideshowButton" (click)="SwitchSlideshow('races')" id="races-btn">Races</button>
+            <button *ngIf="!showEdit" class="SlideshowButton" (click)="SwitchSlideshow('feed')" id="feed-btn">Feed</button>
+          </div>
+          <div class="SlideshowContents">
+    
+            <div id='homeContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'home'}">
+              <ng-template [ngIf]="userData != null" [ngIfElse]="HomeLoadingMessage">
+    
+                <h2 *ngIf="userData.is_me; else otherHome">Home</h2>
+                <ng-template #otherHome><h2>{{userData.first_name}}'s Profile</h2></ng-template>
+    
+                <div class="HomeContainer">
+                  <div class='HomeColumnContainer'>
+                    <div class="HomeComponentContainer">
+                      <app-user-race [userData]="userData" [showCreateButton]="false"></app-user-race>
+                    </div>
+                  </div>
+                  <div class='HomeColumnContainer'>
+                    <div class='HomeComponentContainer'>
+                      <app-user-stats [userData]="userData" [userID]="userData.user_id"></app-user-stats>
+                    </div>
+    
+                  </div>
+                </div>
+              </ng-template>
+              <ng-template #HomeLoadingMessage><p>Retrieving user data...</p></ng-template>
+            </div>
+    
+            <div id='statsContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'stats'}">
+              <div *ngIf="userData != null; else StatsLoadingMessage">
+                <app-user-stats [userData]="userData" [userID]="userData.user_id"></app-user-stats>
+              </div>
+              <ng-template #StatsLoadingMessage><p>Retrieving user data...</p></ng-template>
+            </div>
+    
+            <div *ngIf="!showEdit" id='feedContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'feed'}">
+              <div *ngIf="userData != null; else FeedLoadingMessage">
+                <h2 *ngIf="userData.is_me; else otherUserFeed">Your Feed</h2>
+                <ng-template #otherUserFeed><h2>{{userData.first_name}}'s Feed</h2></ng-template>
+                <app-feed [use]="'user'" [ID]="username" [hasStoryModalChild]="true"></app-feed>
+              </div>
+              <ng-template #FeedLoadingMessage><p>Retrieving user data...</p></ng-template>
+            </div>
+    
+            <div id='raceContent' class="SlideshowSlide" [ngClass]="{'Slideshow-CurrentSlide' : currentScreen == 'races'}">
+              <app-user-race [userData]="userData" [showCreateButton]="userData.is_me"></app-user-race>
+              <!--
+              <div *ngIf="userData != null; else RaceLoadingMessage">
+                <h2 *ngIf="userData.is_me; else otherUserRaces">Your Races</h2>
+                <ng-template #otherUserRaces><h2>{{userData.first_name}}'s Races</h2></ng-template>
+                <div *ngIf="userRaces==null"></div>
+                <div *ngIf="userRaces!=null && userRaces.length>0; else noRacesDisplay">
+                  <app-user-race [userData]="userData"></app-user-race>
+                </div>
+                <ng-template #noRacesDisplay>
+                  <p>You currently do not have any races under your belt.</p>
+                  <p>Here are some things you can do:</p>
+                  <ul>
+                    <li>Head over to <a routerLink='/races'>Public Races</a> to sign up for a race.</li>
+                    <li><a routerLink='/'>Create your own race</a> and manage it from the comforts of your own home.</li>
+                  </ul>
+                </ng-template>
+              </div>
+              <ng-template #RaceLoadingMessage><p>Loading user data...</p></ng-template>
+              -->
+            </div>
+    
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ng-template>
+</div>

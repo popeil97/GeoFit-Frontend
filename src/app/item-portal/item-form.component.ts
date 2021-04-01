@@ -1,8 +1,12 @@
 import { Component, Input, OnChanges, OnInit, Output, SimpleChanges,EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm, FormControl } from '@angular/forms';
-import { ItemService } from '../item.service';
-import { RaceService } from '../race.service';
-import { Item, ItemType } from '../swag.service';
+import { 
+  ItemService 
+} from '../services';
+import { 
+  Item, 
+  ItemType
+} from '../models';
 
 @Component({
   selector: 'app-item-form',
@@ -28,7 +32,7 @@ export class ItemFormComponent implements OnInit,OnChanges {
       {name: "Merchandise", value:ItemType.SWAG}
   ];
 
-  constructor(private _itemService:ItemService, private formBuilder: FormBuilder, private _raceService:RaceService) { }
+  constructor(private _itemService:ItemService, private formBuilder: FormBuilder) { }
 
     ngOnChanges(changes: SimpleChanges): void {
         for(const propName in changes) {

@@ -2,9 +2,14 @@ import { Component, OnInit, EventEmitter, Output, Input, Inject, ViewChild } fro
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { FormControl,FormGroup, Validators } from '@angular/forms';
-import { SwagService } from '../swag.service';
-import { PaymentType } from '../payments.service';
-import { Order, OrderService } from '../order.service';
+import { 
+  SwagService,
+  OrderService,
+} from '../services';
+import {
+  Order,
+  PaymentType,
+} from '../models';
 
 interface SwagDialogData {
   price:string,
@@ -157,8 +162,11 @@ export class SwagDialogContent {
   })
 
 
-  constructor(public dialogRef: MatDialogRef<SwagDialogContent>,
-    @Inject(MAT_DIALOG_DATA) public data: SwagDialogData, private _orderService:OrderService) {
+  constructor(
+    public dialogRef: MatDialogRef<SwagDialogContent>,
+    @Inject(MAT_DIALOG_DATA) public data: SwagDialogData, 
+    private _orderService:OrderService
+  ) {
       this.price = data.price;
       this.race_id = data.race_id;
       this.completeOrder.race_id = this.race_id;

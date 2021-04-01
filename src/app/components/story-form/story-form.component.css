@@ -1,0 +1,136 @@
+.StoryFormInputContainer {
+	position: relative;
+	width:100%;
+	display:flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: stretch;
+	flex-wrap: nowrap;
+}
+.StoryFormInput:hover {
+	outline:none;
+}
+.StoryFormInputImageWrapper {
+	position: relative;
+	text-align: center;
+	width:100px;
+	margin-left:auto;
+	margin-right:auto;
+	margin-top:4px;
+	margin-bottom:8px;
+}	
+	.StoryFormInputImagePreview {
+		position: relative;
+		z-index: 1;
+		width:100%;
+	}
+	.StoryFormInputImageDeleteButton {
+		position: absolute;
+		z-index: 2;
+		right:0;
+		top:0;
+		transform:translate(50%,-50%);
+
+		width:20px !important;
+		height:20px !important;
+		box-shadow: var(--common-box-shadow);
+	}
+	.StoryFormInputImageDeleteButton:hover {
+		cursor:pointer;
+	}
+
+.StoryFormInputExtraButtonsContainer {
+	height:32px;
+
+	display:flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+	.StoryFormInputExtraButtonsContainer button {
+		height:32px;
+		min-width: 32px;
+	}
+	.StoryFormInputExtraButtonsContainer .emojiButton, .StoryFormInputExtraButtonsContainer .StoryFormImageButton {
+		margin-bottom:0px;
+		width:32px;
+		height:32px;
+		margin-right:4px;
+	}
+	.StoryFormInputExtraButtonsContainer .StoryFormImageButton .imageIcon {
+		width:100%;
+		height:100%;
+	}
+	.StoryFormPostButton  {
+		flex-shrink:1;
+		flex-basis: 100%;
+	}
+
+.StoryFormInputEmojisButtonsContainer {
+	margin-top:8px;
+	margin-bottom:8px;
+	font-size:12px;
+
+	display:flex;
+	flex-direction:row;
+	justify-content: flex-start;
+	align-items: flex-start;
+	flex-wrap:wrap;
+}
+.StoryFormInputSubmitButtonContainer {
+	display:flex;
+	flex-direction: row-reverse;
+	justify-content: flex-start;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+	.emojiButton {
+		margin-right:4px;
+		margin-bottom:4px;
+	}
+
+@media only screen and (max-width:1024px) {
+  	.btn-mobile {
+	 	font-size:50px;
+		padding-left:8px;
+		padding-right:8px
+	}
+}
+
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  background-color: #EBEBEB;
+}
+
+
+.status-col {
+  width:80%;
+}
+
+.pic-col {
+  width:20%;
+}
+
+.buttonContainer{
+	align-items:right;
+}
+
+.material-icons{
+  font-size:14px;
+}
+
+.StoryEmojisContainer {
+      position: absolute;
+      right:0;
+      top:100%;
+      width:max-content;
+      z-index: 2;
+
+      background-color:white;
+      padding:8px;
+      box-sizing: border-box;
+      border:0.5px solid black;
+    }

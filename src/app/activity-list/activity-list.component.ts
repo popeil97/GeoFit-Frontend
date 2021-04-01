@@ -1,5 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ActivitiesService } from '../activities.service';
+import { 
+  ActivitiesService,
+} from '../services';
+import {
+  ActivityItem
+} from '../models';
 
 @Component({
   selector: 'app-activity-list',
@@ -7,8 +12,8 @@ import { ActivitiesService } from '../activities.service';
   styleUrls: ['./activity-list.component.css']
 })
 export class ActivityListComponent implements OnInit {
-  @Input() activityData: ActivityItem;
 
+  @Input() activityData: ActivityItem;
   @Output() activityDeleted: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(
@@ -32,15 +37,4 @@ export class ActivityListComponent implements OnInit {
     });
   }
 
-}
-
-interface ActivityItem {
-  id:number;
-  name:string;
-  distance:number;
-  distance_type:string;
-  moving_time:number;
-  start_date:string;
-  type:string;
-  is_manual:boolean;
 }

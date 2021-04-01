@@ -1,8 +1,16 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { RaceService } from '../race.service';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA,MatDialogConfig} from '@angular/material/dialog';
-import { StoryDeleteDialogComponent } from '../story-delete-dialog/story-delete-dialog.component';
-import { ReportService } from '../report.service';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+
+import { 
+  RaceService,
+  ReportService,
+} from '../services';
+import {
+  StoryDeleteFormComponent
+} from '../popups';
+import {
+  Story
+} from '../models';
 
 @Component({
   selector: 'app-race-story-manage',
@@ -74,7 +82,8 @@ export class RaceStoryManageComponent implements OnChanges {
   }
 
   public openDeleteStoryDialog(storyID: number){
-    let dialogRef = this.dialog.open(StoryDeleteDialogComponent, {
+    let dialogRef = this.dialog.open(StoryDeleteFormComponent, {
+      panelClass:"DialogDefaultContainer",
       data: { 
         'storyID': storyID,
       },
@@ -93,16 +102,4 @@ export class RaceStoryManageComponent implements OnChanges {
     });
   }
 
-}
-
-interface Story {
-  user_id: number;
-  username: string;
-  display_name: string;
-  profile_url: string;
-  story_id: number;
-  story_text: string;
-  story_image: string;
-  created_ts: number;
-  report_count: number;
 }

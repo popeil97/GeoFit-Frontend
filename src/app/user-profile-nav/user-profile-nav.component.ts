@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { UserProfileService } from '../userprofile.service';
+import { UserProfileService } from '../services';
 
 declare var $: any;
 
@@ -15,7 +15,9 @@ export class UserProfileNavComponent implements OnInit {
 
   @Output() clickedOn: EventEmitter<void> = new EventEmitter();
 
-  constructor(private _userProfileService: UserProfileService) { }
+  constructor(
+    private _userProfileService: UserProfileService
+  ) {}
 
   private first:string;
   private last:string;

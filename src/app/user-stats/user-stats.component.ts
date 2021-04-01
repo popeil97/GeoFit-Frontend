@@ -1,5 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
-import { UsersService } from '../users.service';
+import { 
+  UsersService
+ } from '../services';
 import {Chart} from 'chart.js';
 
 @Component({
