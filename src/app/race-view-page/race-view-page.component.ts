@@ -443,13 +443,13 @@ export class RaceViewPageComponent implements OnInit,AfterViewInit,OnDestroy {
     }
   }
 
-  uploadManualEntry(entry) {
+  uploadManualEntry(entry:any):void {
     this.activitiesService.uploadManualEntry(entry,this.selectedRaceID).then((resp) => {
       console.log('GOT MANUAL ENTRY:',resp);
 
       // handle checkpoints
       this.openCheckpointDialog(resp['checkpoints_passed']);
-
+    }).finally(()=>{
       this.refreshStatComponents();
     });
   }
