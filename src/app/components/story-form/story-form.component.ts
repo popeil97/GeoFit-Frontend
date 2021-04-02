@@ -135,7 +135,7 @@ export class StoryFormComponent implements OnInit,AfterViewInit,OnDestroy {
     this.storyService.uploadStory(raceID, storyImage, storyText, withLastStory).then( data => {
       //Emit event to refresh feed
       this.storyPostedEvent.emit();
-
+      this.routerService.formHasChanged(false);
       //Clear input fields
       this.initializeForm();
     }).catch(error=>{
