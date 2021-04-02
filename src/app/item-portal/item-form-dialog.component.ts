@@ -11,13 +11,11 @@ export class ItemFormDialogComponent implements OnInit {
 
     itemID:number;
     raceID:number;
-    isEdit:boolean;
 
     constructor(public dialogRef: MatDialogRef<ItemFormDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
           this.itemID = data.itemID;
           this.raceID = data.raceID;
-          this.isEdit = data.isEdit;
          }
 
     ngOnInit() {

@@ -17,14 +17,11 @@ export class ItemFormComponent implements OnInit,OnChanges {
   
   @Input() raceID:number = 24;
   @Input() itemID:number;
-  @Input() isEdit: boolean = false;
   @Output() callback:EventEmitter<any> = new EventEmitter();
-
   itemForm:FormGroup;
   submitted:Boolean;
   loading:Boolean;
   uploadedUrl:any;
-  item:Item;
 
   itemTypes = [
       {name:"Entry",value:ItemType.ENTRY},
@@ -69,28 +66,24 @@ export class ItemFormComponent implements OnInit,OnChanges {
       // then fill form
 
       this._itemService.getItemByID(this.itemID).then((resp) => {
-        console.log("ITEM FROM GET ITEM BY ID:",resp);
-          this.item = resp['item'] as Item;
+          let item = resp['item'] as Item;
 
           // fill form
 
           let sizes = '';
-          if(this.item.sizes != null) {
-            for(var i = 0; i < this.item.sizes.length; i++) {
-              sizes += this.item.sizes[i];
+          for(var i = 0; i < item.sizes.length; i++) {
+              sizes += item.sizes[i];
 
-              if(i != this.item.sizes.length-1) {
+              if(i != item.sizes.length-1) {
                   sizes += ',';
               }
-            }
           }
-          
 
           this.itemForm = this.formBuilder.group({
-            name: [this.item.name,Validators.required],
-            description: [this.item.description,Validators.required],
-            price:[this.item.price,Validators.required],
-            item_type:[this.item.type,Validators.required],
+            name: [item.name,Validators.required],
+            description: [item.description,Validators.required],
+            price:[item.price,Validators.required],
+            item_type:[item.type,Validators.required],
             sizes: [sizes,Validators.nullValidator],
             image: new FormControl(''),
         });
@@ -98,17 +91,15 @@ export class ItemFormComponent implements OnInit,OnChanges {
         // get item type index
         let itemTypeIndex = 0;
         for(var i = 0; i < this.itemTypes.length; i++) {
-            if(this.itemTypes[i].value == this.item.type) {
+            if(this.itemTypes[i].value == item.type) {
                 itemTypeIndex = i;
                 break;
             }
         }
 
         // set item type dropdown
-        // let itemSelect = document.getElementById('itemTypeSelect') as any;
-        // itemSelect.selectedIndex = itemTypeIndex;
-
-        this.itemForm.controls.item_type.setValue(this.itemTypes[itemTypeIndex]);
+        let itemSelect = document.getElementById('itemTypeSelect') as any;
+        itemSelect.selectedIndex = itemTypeIndex;
 
       })
 
@@ -157,18 +148,7 @@ export class ItemFormComponent implements OnInit,OnChanges {
       console.log("CLEARN FORM: ",cleanForm);
 
       // submit item form
-
-      if(this.isEdit) {
-          this._itemService.editItem(this.item.id,cleanForm).then((resp) => {
-            if(resp['success']) {
-              console.log('successfully created item!');
-              this.callback.emit(); // tell dialog to close
-            }
-          });
-      }
-
-      else {
-        this._itemService.createItem(this.raceID,cleanForm).then((resp) => {
+      this._itemService.createItem(this.raceID,cleanForm).then((resp) => {
           console.log('CREATE ITEM RESP:',resp);
         if(resp['success']) {
             console.log('successfully created item!');
@@ -178,25 +158,7 @@ export class ItemFormComponent implements OnInit,OnChanges {
         
       });
 
-      let fakeForm = {
-        'name':'TestyBOIII',
-        'description': 'ANIME TIBBIES',
-        'startDate':'01/20/2020',
-        'endDate':'02/20/2020',
-        'startLoc':'REEEE',
-        'endLoc':'RE-ROO',
-        'raceImage':this.uploadedUrl
-      };
-
-      this._raceService.updateRaceAbout(fakeForm,this.raceID).then((resp) => {
-        console.log('RESP FROM RACE ABOUT UPDATE: ', resp);
-      });
-      }
-      
-
       this.submitted = false;
   }
 
 }
-
-

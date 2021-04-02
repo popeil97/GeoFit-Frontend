@@ -1,11 +1,10 @@
-import { Component, Input, OnChanges, OnInit, QueryList, SimpleChanges, ViewChildren } from '@angular/core';
+import { Component, Input, OnInit, } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { 
   RaceService,
   ItemService,
 } from '../services';
 import { ItemFormDialogComponent } from './item-form-dialog.component';
-import { ItemListComponent } from './item-list.component';
 
 @Component({
   selector: 'app-item-portal',
@@ -14,7 +13,6 @@ import { ItemListComponent } from './item-list.component';
 })
 export class ItemPortalComponent implements OnInit {
   
-  @ViewChildren(ItemListComponent) itemListChildren: QueryList<ItemListComponent>;
   @Input() raceID:number = 24;
 
   constructor(
@@ -38,13 +36,9 @@ export class ItemPortalComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
 
-      this.refreshItemLists();
-    });
-  }
-
-  refreshItemLists() {
-    this.itemListChildren.toArray().forEach(itemListChild => {
-      itemListChild.getItemList();
+      if(result != undefined && result == true) {
+        // refresh item list component
+      }
     });
   }
 
