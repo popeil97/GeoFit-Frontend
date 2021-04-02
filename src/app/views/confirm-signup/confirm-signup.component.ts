@@ -34,7 +34,7 @@ export class ConfirmSignupComponent implements OnInit,OnDestroy {
   @ViewChild('stepper') public stepper: MatStepper;
 
   private loadingPage:Boolean = true;
-  private firstSuccessfulLoading:Boolean = false;
+  public firstSuccessfulLoading:Boolean = false;
   private userProfileSubscription:any = null;
  
   private raceID:number = null;

@@ -90,7 +90,7 @@ export class RaceDashboardComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private raceService: RaceService,
-    private authService:AuthService,
+    public authService:AuthService,
     private itemService:ItemService,
     private routerService:RouterService,
     private router:Router,

@@ -1,6 +1,6 @@
 <div class="TucanContainer">
 
-  <ng-template [ngIf]="this.loading || !this.firstSuccessfulLoading" [ngIfElse]="LoadedBlock">
+  <ng-template [ngIf]="!this.firstSuccessfulLoading" [ngIfElse]="LoadedBlock">
     <p class="position_absolute_middle margin-0px">Loading Race Data...</p>
   </ng-template>
   <ng-template #LoadedBlock>

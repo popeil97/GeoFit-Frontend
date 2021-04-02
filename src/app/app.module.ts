@@ -63,7 +63,6 @@ import { UserStatsComponent } from './user-stats/user-stats.component';
 
 import { createCustomElement } from '@angular/elements';
 import { PopupComponent } from './popup/popup.component';
-//import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 //import { ShippingAddressFormComponent } from './shipping-address-form/shipping-address-form.component';
 
 import { PasswordRequestComponent } from './password-request/password-request.component';
@@ -138,6 +137,13 @@ import { RaceBasicsComponent } from './views/race-dashboard/race-basics/race-bas
 import { RaceMapSettingsComponent } from './views/race-dashboard/race-map-settings/race-map-settings.component';
 import { RaceMerchandiseSettingsComponent } from './views/race-dashboard/race-merchandise-settings/race-merchandise-settings.component';
 import { ConfirmSignupComponent } from './views/confirm-signup/confirm-signup.component';
+import { ShippingAddressComponent } from './UNUSED_COMPONENTS/shipping-address/shipping-address.component';
+import { ShippingAddressFormComponent } from './UNUSED_COMPONENTS/shipping-address-form/shipping-address-form.component';
+import { SwagComponent, SwagDialogContent } from './UNUSED_COMPONENTS/swag/swag.component';
+import { StoryDialogComponent } from './UNUSED_COMPONENTS/story-dialog/story-dialog.component';
+import { TagFormComponent } from './UNUSED_COMPONENTS/tag-form/tag-form.component';
+import { UserProgressComponent } from './UNUSED_COMPONENTS/user-progress/user-progress.component';
+import { ItemDeleteDialogComponent } from './item-portal/item-delete-dialog.component';
 
 
 @NgModule({
@@ -146,7 +152,7 @@ import { ConfirmSignupComponent } from './views/confirm-signup/confirm-signup.co
     PublicRacesComponent,
     MapComponent,
     RaceViewPageComponent,
-    //UserProgressComponent,
+    UserProgressComponent,
     //RaceMenuComponent,
     RaceCreateComponent,
     LeaderboardComponent,
@@ -170,11 +176,11 @@ import { ConfirmSignupComponent } from './views/confirm-signup/confirm-signup.co
     ProfileFormComponent,
     PaypalComponent,
     UserStatsComponent,
-    //SwagComponent,
-    //SwagDialogContent,
+    SwagComponent,
+    SwagDialogContent,
     PopupComponent,
-    //ShippingAddressComponent,
-    //ShippingAddressFormComponent,
+    ShippingAddressComponent,
+    ShippingAddressFormComponent,
     TermsOfServiceComponent,
     PasswordRequestComponent,
     PasswordChangeComponent,
@@ -183,8 +189,8 @@ import { ConfirmSignupComponent } from './views/confirm-signup/confirm-signup.co
     RoutePinDialogComponent,
     NotificationPanelComponent,
     SnackbarComponent,
-    //StoryDialogComponent,
-    //TagFormComponent,
+    StoryDialogComponent,
+    TagFormComponent,
     TagSelectComponent,
     ReportFormComponent,
     StoryDeleteFormComponent,
@@ -215,7 +221,7 @@ import { ConfirmSignupComponent } from './views/confirm-signup/confirm-signup.co
     RaceDashboardRacerListComponent,
     RaceDashboardRacerRowComponent,
     ActivityListComponent,
-    //ContactFormComponent,
+    // ContactFormComponent,
     StoryPopupComponent,
     TeamFormDialogComponent,
     CheckpointListComponent,
@@ -238,6 +244,7 @@ import { ConfirmSignupComponent } from './views/confirm-signup/confirm-signup.co
     ConfirmationPopupComponent,
     InactiveStateExplanationPopupComponent,
     ConfirmSignupComponent,
+    ItemDeleteDialogComponent, 
   ],
 
   imports: [

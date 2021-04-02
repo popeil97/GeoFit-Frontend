@@ -69,7 +69,7 @@ export class RaceCreateComponent implements OnInit,AfterViewInit,OnDestroy {
   private formChangeSubscription:any = null;
 
   constructor(
-    private authService:AuthService,
+    public authService:AuthService,
     private raceService:RaceService,
     private router:Router,
     private routerService:RouterService,

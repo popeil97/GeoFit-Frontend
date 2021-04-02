@@ -15,9 +15,9 @@ import {
 })
 export class ConfirmationPopupComponent implements OnInit {
 
-  private header:string = null;
-  private prompt:string = null;
-  private choices:Array<Choice> = [];
+  public header:string = null;
+  public prompt:string = null;
+  public choices:Array<Choice> = [];
 
   constructor(
     private dialogRef:MatDialogRef<ConfirmationPopupComponent>,
